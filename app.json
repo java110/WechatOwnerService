@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/circle/circle",
+    "pages/location/location",
     "pages/books/books",
     "pages/my/my",
     "pages/myBooks/myBooks",
@@ -42,5 +43,11 @@
   "networkTimeout": {
     "request": 3000
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
+  },
   "sitemapLocation": "sitemap.json"
+  
 }
