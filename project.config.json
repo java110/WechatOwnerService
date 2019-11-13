@@ -10,7 +10,10 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
 	"isGameTourist": false,
-	"appid": "/** this is your appid **/",
+	"appid": "wxf83d66b0e9f5964d",
+	"projectname": "WechatOwnerService",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

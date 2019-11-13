@@ -1,34 +1,46 @@
 {
-    "pages": [
-        "pages/books/books",
-        "pages/my/my",
-        "pages/myBooks/myBooks",
-        "pages/detail/detail",
-        "pages/comment/comment"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#f2f2f2",
-        "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": false
-    },
-    "tabBar": {
-        "list": [{
-            "pagePath": "pages/books/books",
-            "text": "书架",
-            "iconPath": "images/book.png",
-            "selectedIconPath": "images/bookSelected.png"
-        }, {
-            "pagePath": "pages/my/my",
-            "text": "我的",
-            "iconPath": "images/my.png",
-            "selectedIconPath": "images/mySelected.png"
-        }],
-        "color": "#bfbfbf",
-        "selectedColor": "#1AAD19"
-    },
-    "networkTimeout": {
-        "request": 3000
-    }
+  "pages": [
+    "pages/index/index",
+    "pages/circle/circle",
+    "pages/books/books",
+    "pages/my/my",
+    "pages/myBooks/myBooks",
+    "pages/detail/detail",
+    "pages/comment/comment"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#FFC640",
+    "navigationBarTitleText": "WeChat"
+  },
+  "tabBar": {
+    "color": "#272636",
+    "selectedColor": "#FFD161",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "images/home-selected.png"
+      },
+      {
+        "pagePath": "pages/circle/circle",
+        "text": "小区圈",
+        "iconPath": "images/book.png",
+        "selectedIconPath": "images/bookSelected.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/mySelected.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 3000
+  },
+  "sitemapLocation": "sitemap.json"
 }
