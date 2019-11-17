@@ -1,45 +1,6 @@
 <import src = "../common/sort_list.wxml"/>
-<view class="mask"
-hidden="{{mask1Hidden}}" bindtap="mask1Cancel">
-  <template is="sort_list" data="{{selected,sortSelected}}"/>
-  <view class="overall-sort-list">
-    <block wx:for="{{sortList}}" wx:key="">
-    <view class="overall-sort" data-index="{{index}}" 
-    bindtap="sortSelected">{{item.sort}}</view>
-    </block> 
-  </view>
-</view>
-<view class="mask"
-hidden="{{mask2Hidden}}" bindtap="mask2Cancel">
-  <template is="sort_list" data="{{selected,sortSelected}}"/>
-  <scroll-view class="filterList" scroll-y="true" >
-    <view class="filterList-characteristic-title">商家特色</view>
-    <view class="filterList-characteristic-items">
-      <block wx:for="{{characteristicList}}" wx:key="">
-        <view class="filterList-characteristic-item {{characteristicSelected[index]==true?'characteristic-selected':''}}"
-        catchtap="characteristicSelected" data-index="{{index}}">{{item.text}}</view>
-      </block>
-    </view>
-    <view class="filterList-discount-title">优惠活动(单选)</view>
-    <view class="filterList-discount-items">
-      <block wx:for="{{discountList}}" wx:key="">
-        <view class="filterList-discount-item {{discountSelected==index?'discount-selected':''}}"
-        catchtap="discountSelected" data-index="{{index}}">
-          <text class="filterList-discount-item-icon"
-          style="background:{{item.iconColor}}">{{item.icon}}</text>
-        {{item.text}}</view>
-      </block>
-    </view>
-  </scroll-view>
-  <view class="filterList-footer">
-    <view class="filterList-footer-delect"
-    catchtap="clearSelectedNumb">清除筛选</view>
-    <view class="filterList-footer-finish" bindtap="finish">完成 
-    <view class="filterList-footer-finish-number" hidden="{{selectedNumb==0}}">{{selectedNumb}}
-    </view>
-    </view>
-  </view>
-</view>
+
+
 <scroll-view bindscrolltolower="lower" 
 class="scroll-restaurants-list" 
 scroll-y="true" 
@@ -72,8 +33,23 @@ style="height:100%">
     </swiper-item>
     </block>
   </swiper>
-  <view class="header-title">附近商家</view>
-  <template is="sort_list" data="{{selected,sortSelected}}"/>
+
+  <swiper class="ad-swiper" indicator-dots="true" 
+  indicator-color="rgba(228,228,228,1)" 
+  indicator-active-color="#FECA49"
+   autoplay='true' 
+   interval='5000' 
+   duration='1000' 
+   circular='true'
+  >
+    <block wx:for="{{ad}}" wx:for-index="index">
+      <swiper-item>
+        <image src="{{item.imageUrl}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="header-title">最新动态</view>
     <view class="restaurantsList">
     <block wx:for="{{restaurant}}" wx:key="">
       <navigator url="/pages/menu/menu">

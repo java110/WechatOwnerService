@@ -196,6 +196,7 @@ page {
   line-height: 80rpx;
   font-size: 31rpx;
   font-weight: 600;
+  border: 1rpx solid #ECECEC;
 }
 .sort-list{
   justify-content: space-around;
@@ -274,4 +275,15 @@ page {
   position: fixed;
   z-index:999;
   background-color:rgba(15, 15, 26, 0.7);
+}
+
+.ad-swiper{
+  width: 100%;
+  height: 180rpx;
+  border-bottom:20rpx solid #f4f4f4; 
+}
+
+.ad-swiper image{
+  width: 100%;
+  height: inherit;
 }

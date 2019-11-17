@@ -5,62 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    characteristicList: [{
-      text: "免配送费"
-    }, {
-      text: "0元起送"
-    }, {
-      text: "新商家"
-    }, {
-      text: "品牌商家"
-    }, {
-      text: "跨天预定"
-    }],
-    sortList: [{
-      sort: "综合排序",
-      image: "",
-    }, {
-      sort: "速度最快",
-      image: "",
-    }, {
-      sort: "评分最高",
-      image: "",
-    }, {
-      sort: "起送价最低",
-      image: "",
-    }, {
-      sort: "配送费最低",
-      image: "",
-    }],
-    discountList: [{
-      icon: "减",
-      iconColor: "#FF635B",
-      text: "满减优惠"
-    }, {
-      icon: "领",
-      iconColor: "#FF7298",
-      text: "进店领券"
-    }, {
-      icon: "返",
-      iconColor: "#FB4343",
-      text: "满返代金券"
-    }, {
-      icon: "折",
-      iconColor: "#C183E2",
-      text: "折扣商品"
-    }, {
-      icon: "订",
-      iconColor: "#6FDF64",
-      text: "提前下单优惠"
-    }, {
-      icon: "赠",
-      iconColor: "#FDC41E",
-      text: "满赠活动"
-    }, {
-      icon: "免",
-      iconColor: "#43B697",
-      text: "满免配送"
-    }],
+    ad:[
+      {
+        imageUrl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
+        url:"http://www.homecommunity.cn/"
+      },
+      {
+        imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
+        url: "http://www.homecommunity.cn/"
+      }
+    ],
     categoryList: {
       pageone: [{
         name: "物业费",
@@ -83,35 +37,8 @@ Page({
       }, {
         name: "公告",
         src: "/images/7.png"
-      }, {
-        name: "附近超时",
-        src: "/images/8.png"
-      }],
-      pagetwo: [{
-        name: "美食",
-        src: "/images/1.png"
-      }, {
-        name: "甜点饮品",
-        src: "/images/2.png"
-      }, {
-        name: "美团超市",
-        src: "/images/3.png"
-      }, {
-        name: "正餐精选",
-        src: "/images/4.png"
-      }, {
-        name: "生鲜果蔬",
-        src: "/images/5.png"
-      }, {
-        name: "全部商家",
-        src: "/images/6.png"
-      }, {
-        name: "免配送费",
-        src: "/images/7.png"
-      }, {
-        name: "新商家",
-        src: "/images/8.png"
       }]
+    
     },
     selected: 0,
     mask1Hidden: true,
