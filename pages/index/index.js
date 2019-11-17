@@ -1,4 +1,5 @@
 // pages/index/index.js
+const {appInfo} = require("../../config/config.js")
 Page({
 
   /**
@@ -13,6 +14,20 @@ Page({
       {
         imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
         url: "http://www.homecommunity.cn/"
+      }
+    ],
+    notices:[
+      {
+        name:"今日8:00-00:00 停电，请各位知晓",
+        src:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
+      },
+      {
+        name: "今日8:00-00:00 停电，请各位知晓,测试测试测测人吃吃吃吃吃吃吃吃吃吃吃吃吃吃",
+        src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
+      },
+      {
+        name: "今日8:00-00:00 停电，请各位知晓",
+        src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
       }
     ],
     categoryList: {
@@ -52,28 +67,19 @@ Page({
   },
   finish: function () {
     var that = this;
-    wx.request({
-      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/filter",
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          restaurant: res.data.data.restaurant,
-        })
-      }
-    });
   },
   sortSelected: function (e) {
     var that = this;
-    wx.request({
-      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/overAll",
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          restaurant: res.data.data.restaurant,
-          sortSelected: that.data.sortList[e.currentTarget.dataset.index].sort
-        })
-      }
-    });
+    // wx.request({
+    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/overAll",
+    //   method: "GET",
+    //   success: function (res) {
+    //     that.setData({
+    //       restaurant: res.data.data.restaurant,
+    //       sortSelected: that.data.sortList[e.currentTarget.dataset.index].sort
+    //     })
+    //   }
+    // });
   },
   clearSelectedNumb: function () {
     this.setData({
@@ -133,7 +139,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(appInfo);
   },
 
   /**
@@ -148,16 +154,20 @@ Page({
    */
   onShow: function () {
     var that = this;
-    wx.request({
-      url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/info",
-      method: "GET",
-      success: function (res) {
-        that.setData({
-          restaurant: res.data.data.restaurant,
-          location: wx.getStorageSync('location')
-        })
-      }
-    });
+    // wx.request({
+    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/info",
+    //   method: "GET",
+    //   success: function (res) {
+    //     that.setData({
+    //       restaurant: res.data.data.restaurant,
+    //       location: wx.getStorageSync('location')
+    //     })
+    //   }
+    // });
+
+    that.setData({
+      location: wx.getStorageSync('location')
+    })
   },
 
   /**

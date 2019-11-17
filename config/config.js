@@ -12,6 +12,11 @@ const loginUrl 			= baseUrl + 'login';
 const getBoughtBooksUrl = baseUrl + 'api/user/getBoughtBooks';
 // 兑换书籍接口
 const buyBookUrl = baseUrl + 'api/order/buy';
+const appInfo = {
+  baseUrl: "https://api.demo.winqi.cn",
+  appId: "992019111758490006",
+  appSecurity: "",
+};
 
 
 module.exports = {
@@ -20,5 +25,6 @@ module.exports = {
 	queryBookUrl: 		queryBookUrl,
 	loginUrl: 			loginUrl,
 	getBoughtBooksUrl: 	getBoughtBooksUrl,
-	buyBookUrl: 		buyBookUrl
+	buyBookUrl: 		buyBookUrl,
+  appInfo:appInfo
 };

@@ -232,7 +232,7 @@ page {
   color: black;
   font-weight: 800;
 }
-.restaurants-list{
+.noticesList-list{
   font-size: 25rpx;
   display: flex;
   width: 100%;
@@ -241,44 +241,46 @@ page {
   color: #6D6D6D;
   justify-content: space-between;
 }
-.restaurants-info-name{
+.notices-info-name{
+  margin-top: 10rpx;
   color: black;
   font-size: 30rpx;
-  margin-bottom: 10rpx;
+  display: -webkit-box;  /*设置为弹性盒子*/
+  -webkit-line-clamp: 2;  /*最多显示5行*/
+  overflow: hidden;  /*超出隐藏*/
+  text-overflow: ellipsis;  /*超出显示为省略号*/
+  -webkit-box-orient: vertical;
+  word-break: break-all;  /*强制英文单词自动换行*/
 }
-.restaurants-image{
+.notices-info-image image{
   width: 200rpx;
-  height: 125rpx;
-  margin: 20rpx;
+  height: 150rpx;
+  margin: 10rpx 20rpx 0rpx 20rpx;
 }
-.restaurants-info{
-  margin: 15rpx;
-  flex: 1;
-}
-.restaurants-distribution{
-  display: flex;
-  width: 100rpx;
-  margin-right:20rpx; 
-}
-.restaurants-info-rating{
-  display: flex;
-  width: 300rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-}
-.restaurants-info-rating-stars{
-  color: #FFD161;
-  width: 130rpx;
-  height: 50rpx;
-}
-.restaurants-info-rating-sales{
-  width: 150rpx;
-  height: 50rpx;
-}
-.restaurants-distribution{
+.notices-info{
+  margin: 10rpx 0rpx 0rpx 20rpx;
+  height: 150rpx;
   flex-direction: column;
-  text-align: right;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
+}
+.notice-bottom{
+  display: flex;
+  text-align: left;
+}
+.notice-bottom view{
+  margin-right: 20rpx;
+}
+
+.notice-bottom icon{
+  color: #8a8a8a;
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+}
+.notice-bottom view text{
+  font-size: 25rpx;
+  line-height: 40rpx;
 }
 .mask{
   width:100%;

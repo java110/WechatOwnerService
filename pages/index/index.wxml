@@ -1,47 +1,32 @@
-<import src = "../common/sort_list.wxml"/>
+<import src="../common/sort_list.wxml" />
 
 
-<scroll-view bindscrolltolower="lower" 
-class="scroll-restaurants-list" 
-scroll-y="true" 
-style="height:100%">
+<scroll-view bindscrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
   <view class="heard">
     <navigator url="/pages/location/location">
       <view class="heard-location">
-        <image src="/images/location.png" 
-        class="heard-location-icon"/>
+        <image src="/images/location.png" class="heard-location-icon" />
         <text class="heard-location-text">{{location}}</text>
       </view>
     </navigator>
     <view class="heard-search">
-      <image src="/images/search.png" class="heard-search-icon"/>
-      搜索小区
+      <image src="/images/search.png" class="heard-search-icon" /> 搜索小区
     </view>
   </view>
-  <swiper class="categoryList" indicator-dots="true" 
-  indicator-color="rgba(228,228,228,1)" 
-  indicator-active-color="#FECA49">
+  <swiper class="categoryList" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
     <block wx:for="{{categoryList}}" wx:key="">
-    <swiper-item>
-    <block wx:for="{{item}}" wx:key="">
-      <view class="category-info">
-        <image src="{{item.src}}" 
-        class="category-image"></image>
-        <view class="category-text">{{item.name}}</view>
-      </view>
-    </block>
-    </swiper-item>
+      <swiper-item>
+        <block wx:for="{{item}}" wx:key="">
+          <view class="category-info">
+            <image src="{{item.src}}" class="category-image"></image>
+            <view class="category-text">{{item.name}}</view>
+          </view>
+        </block>
+      </swiper-item>
     </block>
   </swiper>
 
-  <swiper class="ad-swiper" indicator-dots="true" 
-  indicator-color="rgba(228,228,228,1)" 
-  indicator-active-color="#FECA49"
-   autoplay='true' 
-   interval='5000' 
-   duration='1000' 
-   circular='true'
-  >
+  <swiper class="ad-swiper" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay='true' interval='5000' duration='1000' circular='true'>
     <block wx:for="{{ad}}" wx:key="">
       <swiper-item>
         <image src="{{item.imageUrl}}"></image>
@@ -53,36 +38,32 @@ style="height:100%">
     <text class="new">最新动态</text>
     <text class="iconfont icongengduo1 gd"></text>
   </view>
-    <view class="restaurantsList">
-    <block wx:for="{{restaurant}}" wx:key="">
+  <view class="noticesList">
+    <block wx:for="{{notices}}" wx:key="">
       <navigator url="/pages/menu/menu">
-        <view class="restaurants-list">
-          <view class="restaurants-info-image">
-            <image src="{{item.src}}" class="restaurants-image"/>
-          </view>
-          <view class="restaurants-info">
-            <view class="restaurants-info-name">{{item.name}}</view>
-            <view class="restaurants-info-rating">
-              <view
-              class="restaurants-info-rating-stars">★ ★ ★ ★</view>
-              <view 
-              class="restaurants-info-rating-sales">月售 {{item.sales}}单</view>
+        <view class="noticesList-list">
+          <view class="notices-info">
+            <view class="notices-info-name">{{item.name}}</view>
+            
+            <view class="notice-bottom">
+              <view>
+                <icon class="iconfont iconaccount1"></icon>
+                <text>wuxw</text>
+              </view>
+              <view>
+                <icon class="iconfont iconyuedu"></icon>
+                <text>1179</text>
+              </view>
+              <view>
+                <icon class="iconfont icongood-fill"></icon>
+                <text>37</text>
+              </view>
             </view>
-            <view class="restaurants-info-price">
-              起送 {{item.initial_price}}¥ | 配送 {{item.distribution_price}}¥
-            </view>
-        </view>
-        <view class="restaurants-distribution">
-          <view 
-          class="restaurants-distribution-distance">
-            {{item.distance}}
           </view>
-          <view 
-          class="restaurants-distribution-time">
-            {{item.time}} 分钟
+          <view class="notices-info-image">
+            <image src="{{item.src}}" />
           </view>
         </view>
-       </view>
       </navigator>
     </block>
   </view>

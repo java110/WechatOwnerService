@@ -1,6 +1,7 @@
 //app.js
 const api = require('./config/config.js');
-
+const QQMapWX = require('./lib/qqmap-wx-jssdk.min.js');
+var qqmapsdk;
 App({
     // 小程序启动生命周期
     onLaunch: function () {
@@ -8,31 +9,53 @@ App({
         // 检查登录状态
         that.checkLoginStatus();
 
+      // 实例化API核心类
+      qqmapsdk = new QQMapWX({
+        key: 'AWIBZ-M62LQ-7ND5S-GHM45-AGKU7-R5BU5'
+      });
         // 获取用户地理位置
         this.getUserLocation();
+
+     
       
     },
     //获取地理位置
     getUserLocation:function(){
+     
       wx.getLocation({
         type: 'gcj02',
         success: function (res) {
           var latitude = res.latitude
-          var longitude = res.longitude
-          wx.request({
-            url: 'http://api.map.baidu.com/geocoder/v2/?ak=btsVVWf0TM1zUBEbzFz6QqWF&coordtype=gcj02ll&location=' + latitude + ',' + longitude + '&output=json&pois=0',
-            method: "get",
-            success: function (res) {
-              console.log(res.data.result.formatted_address)
-              wx.setStorageSync('location', res.data.result.formatted_address.substr(res.data.result.formatted_address.indexOf('市') + 1, 10))
+          var longitude = res.longitude;
+          console.log("latitude"+latitude);
+          
+          qqmapsdk.reverseGeocoder({
+            location:{
+              latitude: latitude,
+              longitude: longitude
+            },
+            coord_type: 1,
+            get_poi: 1,
+            success: function (res, data){
+              console.log(data);
+              wx.setStorageSync('location', data.pois[0].title);
             }
-          })
+
+          });
+          // wx.request({
+          //   url: 'http://api.map.baidu.com/geocoder/v2/?ak=btsVVWf0TM1zUBEbzFz6QqWF&coordtype=gcj02ll&location=' + latitude + ',' + longitude + '&output=json&pois=0',
+          //   method: "get",
+          //   success: function (res) {
+          //     console.log(res.data.result.formatted_address)
+          //     wx.setStorageSync('location', res.data.result.formatted_address.substr(res.data.result.formatted_address.indexOf('市') + 1, 10))
+          //   }
+          // })
         }
       })
       //调用API从本地缓存中获取数据
-      var logs = wx.getStorageSync('logs') || []
-      logs.unshift(Date.now())
-      wx.setStorageSync('logs', logs)
+      //var logs = wx.getStorageSync('logs') || []
+      // logs.unshift(Date.now())
+      // wx.setStorageSync('logs', logs)
     },
 
     // 检查本地 storage 中是否有登录态标识
