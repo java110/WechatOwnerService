@@ -1,3 +1,4 @@
+@import "../../style/iconfont.wxss";
 page {
   background-color: #ffffff;
 }
@@ -114,7 +115,7 @@ page {
   display: flex;
   width: 100%;
   height: 80rpx;
-  background: #FFC640;
+  background: #00AA00;
 }
 .heard-location-icon{
   position: absolute;
@@ -137,7 +138,7 @@ page {
   margin: 10rpx;
   width: 250rpx;
   height: 40rpx;
-  background: #B38B2D;
+  background: #008800;
   color: white;
   border-radius: 20rpx;
 }
@@ -190,13 +191,23 @@ page {
   line-height: 30rpx
 }
 .header-title{
-  text-align: center;
   width: 100%;
   height: 80rpx;
+  justify-content: space-between;
+  display: flex;
   line-height: 80rpx;
   font-size: 31rpx;
   font-weight: 600;
   border: 1rpx solid #ECECEC;
+}
+
+.header-title .new{
+  margin-left: 20rpx;
+}
+
+.header-title .gd{
+  margin-right: 20rpx;
+  color: #8a8a8a
 }
 .sort-list{
   justify-content: space-around;

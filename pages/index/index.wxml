@@ -42,14 +42,17 @@ style="height:100%">
    duration='1000' 
    circular='true'
   >
-    <block wx:for="{{ad}}" wx:for-index="index">
+    <block wx:for="{{ad}}" wx:key="">
       <swiper-item>
         <image src="{{item.imageUrl}}"></image>
       </swiper-item>
     </block>
   </swiper>
 
-  <view class="header-title">最新动态</view>
+  <view class="header-title">
+    <text class="new">最新动态</text>
+    <text class="iconfont icongengduo1 gd"></text>
+  </view>
     <view class="restaurantsList">
     <block wx:for="{{restaurant}}" wx:key="">
       <navigator url="/pages/menu/menu">

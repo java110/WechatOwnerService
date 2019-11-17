@@ -11,12 +11,12 @@
   ],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#FFC640",
+    "navigationBarBackgroundColor": "#00AA00",
     "navigationBarTitleText": "WeChat"
   },
   "tabBar": {
     "color": "#272636",
-    "selectedColor": "#FFD161",
+    "selectedColor": "#00AA00",
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "list": [
@@ -29,8 +29,8 @@
       {
         "pagePath": "pages/circle/circle",
         "text": "小区圈",
-        "iconPath": "images/book.png",
-        "selectedIconPath": "images/bookSelected.png"
+        "iconPath": "images/circle.png",
+        "selectedIconPath": "images/circleSelected.png"
       },
       {
         "pagePath": "pages/my/my",
