@@ -108,7 +108,7 @@ App({
 
                                 data: {
                                     code: loginRes.code,                    // 临时登录凭证
-                                    rawData: infoRes.rawData,               // 用户非敏感信息
+                                    userInfo: infoRes.rawData,               // 用户非敏感信息
                                     signature: infoRes.signature,           // 签名
                                     encryptedData: infoRes.encryptedData,   // 用户敏感信息
                                     iv: infoRes.iv                          // 解密算法的向量
