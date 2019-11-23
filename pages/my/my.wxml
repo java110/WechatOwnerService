@@ -19,14 +19,12 @@
 
 <view class="tab-container bg-white">
 
-    <view class="tab-item border-bottom">
+    <view class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="enterCommunity">
         <view>
-            <image src="../../images/luckyCoin.png" mode="aspectFit" class="tab-icon"></image>
-            <text class="tab-text">积分</text>
+            <text class="iconfont iconaccount icon"></text>
+            <text class="tab-text">加入小区</text>
         </view>
-        
-        <text class="tab-text" wx:if="{{hasLogin}}">{{userInfo.balance}}</text>
-        <text class="tab-text" wx:else></text>
+        <view class="tab-arrow"></view>
     </view>
 
     <view class="tab-item" hover-class="tab-item-hover" catchtap="goMyBooks">

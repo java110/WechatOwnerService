@@ -47,7 +47,7 @@
 
 .tab-text {
 	display: inline-block;
-	margin-left: 20rpx;
+	margin-left: 10rpx;
 	color: #1e1e1e;
 }
 
@@ -61,4 +61,9 @@
 	border-bottom: none;
 
 	transform: rotate(45deg);
+}
+
+.border-bottom .icon{
+  font-size: 38rpx;
+  line-height: 38rpx;
 }

@@ -93,5 +93,10 @@ Page({
         that.setData({
             userInfo: app.globalData.userInfo
         });
+    },
+    enterCommunity:function(){
+      wx.navigateTo({
+        url: '../enterCommunity/enterCommunity',
+      })
     }
 })

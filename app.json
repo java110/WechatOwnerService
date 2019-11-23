@@ -5,6 +5,7 @@
     "pages/location/location",
     "pages/books/books",
     "pages/my/my",
+    "pages/enterCommunity/enterCommunity",
     "pages/myBooks/myBooks",
     "pages/detail/detail",
     "pages/comment/comment"

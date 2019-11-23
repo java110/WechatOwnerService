@@ -47,15 +47,15 @@
             
             <view class="notice-bottom">
               <view>
-                <icon class="iconfont iconaccount1"></icon>
+                <text class="iconfont iconaccount1"></text>
                 <text>wuxw</text>
               </view>
               <view>
-                <icon class="iconfont iconyuedu"></icon>
+                <text class="iconfont iconyuedu"></text>
                 <text>1179</text>
               </view>
               <view>
-                <icon class="iconfont icongood-fill"></icon>
+                <text class="iconfont icongood-fill"></text>
                 <text>37</text>
               </view>
             </view>
