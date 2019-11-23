@@ -1,1 +1,206 @@
-/* pages/circle/circle.wxss */
+/* pages/CircleFriends/CircleFriends.wxss */
+page{
+  background: whitesmoke;
+}
+
+.page{
+  width: 100%;
+  /* overflow-x: hidden */
+}
+
+/* 列表 */
+.CircleList{
+  background: white;
+  margin-bottom: 1px;
+  border-bottom: 1px solid whitesmoke;
+  border-top: 1px solid whitesmoke;
+}
+
+.body-view{
+  display: flex;
+}
+
+/* .left-view{
+  width: 150rpx;
+  /* background: rebeccapurple; 
+} */
+
+.right-view{
+  /* background: red; */
+  padding: 0rpx 40rpx 0rpx 40prx;
+}
+
+/* 头像 */
+.user-icon{
+  /* display: flex; */
+  width:100rpx;
+  height: 100rpx;
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+}
+
+.user-name-view{
+  display: flex;
+  direction: row;
+}
+
+.user-name-view image{
+   width: 80rpx;
+   height: 80rpx;
+   border-radius: 80rpx;
+}
+
+/* 昵称 */
+.user-name{
+  display: flex;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 18px;
+  color: rgb(88, 103, 138);
+  margin-top: 30rpx;
+  margin-left: 10rpx;
+}
+
+.user-name label{
+  line-height: 80rpx;
+}
+
+/* 内容 */
+.user-content{
+  display: flex;
+  font-size: 18px;
+  line-height: 50rpx;
+  margin-left: 10rpx;
+}
+
+/* 图片 */
+.photo-view{
+  background: rebeccapurple;
+  margin-left: 10rpx;
+  margin-bottom: 20rpx;
+}
+.photo{
+  background: rgb(255, 166, 0);  
+  float: left;
+  margin-right: 10rpx;
+  margin-top: 10rpx;
+}
+
+/* 地理位置 */
+.user-address-view{
+  display: flex;
+  margin-top: 20rpx;
+  width: 100%;
+}
+.user-address-view label{
+  font-size: 12px;
+  margin: 10rpx;
+}
+
+/* 时间、删除、点赞评论 */
+.TDD-view{
+  width: 100%;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+.TDD-view label{
+  font-size: 13px;
+  margin-left: 10rpx;
+}
+.TDD-view button{
+  font-size: 13px;
+  margin-left: 20rpx;
+  color: black;
+  background: white;
+}
+.TDD-view button::after{
+  border: white;
+}
+.TDD-view image{
+  width: 50rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+/* 点赞 */
+.zan-view {
+  width: 100%;
+  background: white;
+  margin-bottom: 20rpx;
+}
+.trigon-view{
+  /* height: 20rpx; */
+  margin-bottom: -15rpx;
+}
+.trigon{
+  display: flex;
+  width: 40rpx;
+  height: 20rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+.zan-bg-view{
+  display: inline-block;
+  width: 97%;
+  background: rgb(235, 235, 235);
+  margin-right: 20rpx;
+  margin-bottom: -11rpx;
+  border-top-left-radius: 7rpx;
+  border-top-right-radius: 7rpx;
+}
+.zan-user-view{
+  display: flex;
+  float: left;
+  height: 40rpx;
+  margin-left: 10rpx;
+  /* margin-top: 5rpx; */
+  align-content: center;
+}
+.zan-user{
+  font-size: 12px;
+  line-height: 40rpx;
+  height: 40rpx;
+  color: rgb(88, 103, 138);
+}
+
+.line{
+  width: 97%;
+  height: 1px;
+  background: white;
+}
+
+/* 评论 */
+.discuss-view{
+  background: white;
+  width: 97%;
+}
+
+.discuss{
+  background: rgb(235, 235, 235);
+  line-height: 35rpx;
+}
+
+.discuss label{
+  font-size: 12px;
+}
+
+.discuss-user{
+  color: rgb(88, 103, 138);
+  margin-left: 10rpx;
+}
+
+.content{
+  margin-left: 10rpx;
+}
+
+/* 弹出框 */
+.pop-up-box{
+  position: absolute;
+  height: 60rpx;
+  border-radius: 10rpx;
+  right: 90rpx;
+  background: rgba(0, 0, 0, 0.7)
+}

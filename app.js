@@ -105,10 +105,13 @@ App({
                             // 请求服务端的登录接口
                             wx.request({
                                 url: api.loginUrl,
-
+                                method: 'post',
+                                header:{
+                                  APP_ID: api.appInfo.appId
+                                },
                                 data: {
                                     code: loginRes.code,                    // 临时登录凭证
-                                    userInfo: infoRes.rawData,               // 用户非敏感信息
+                                    userInfo: JSON.parse(infoRes.rawData),               // 用户非敏感信息
                                     signature: infoRes.signature,           // 签名
                                     encryptedData: infoRes.encryptedData,   // 用户敏感信息
                                     iv: infoRes.iv                          // 解密算法的向量
@@ -121,7 +124,7 @@ App({
                                     if (res.result == 0) {
                                         that.globalData.userInfo = res.userInfo;
                                         wx.setStorageSync('userInfo', JSON.stringify(res.userInfo));
-                                        wx.setStorageSync('loginFlag', res.skey);
+                                      wx.setStorageSync('loginFlag', res.sessionKey);
                                         callback();
                                     } else {
                                         that.showInfo(res.errmsg);

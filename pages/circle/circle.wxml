@@ -1,2 +1,63 @@
-<!--pages/circle/circle.wxml-->
-<text>pages/circle/circle.wxml</text>
+<!-- 小区圈 -->
+<scroll-view class='page'>
+  <!-- 列表 -->
+  <view class='CircleList' wx:for='{{DataSource}}'>
+    <!-- 头像、昵称、内容 -->
+    <view class='body-view'>
+      <!-- 头像 -->
+      <view class='right-view'>
+        <!-- 昵称 -->
+        <view class='user-name-view'>
+          <image class='user-icon' src='{{icon}}'></image>
+          <label class='user-name'>宣志强</label>
+        </view>
+        <!-- 内容 -->
+        <view class='user-content-view'>
+          <text class='user-content'>{{content}}</text>
+        </view>
+        <!-- 图片 -->
+        <view class='photo-view'>
+          <view class='photo' wx:for='{{resource}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'>
+            <image bindtap='LookPhoto' data-photUrl='{{item}}' src='{{item}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'></image>
+          </view>
+        </view>
+        
+
+        <!-- 时间、删除按钮、点赞评论按钮 -->
+        <view class='TDD-view'>
+          <label>2018-07-25 10:14:23</label>
+          <button bindtap='delete'>删除</button>
+          <image data-isShow='{{isShow}}' bindtap='TouchDiscuss' src='/images/wxdiscuss.png'></image>
+        </view>
+
+        <!-- 点赞 -->
+        <view class='zan-view'>
+          <view class='trigon-view'>
+            <image mode='aspectFill' class='trigon' src='/images/trigon.png'></image>
+          </view>
+
+          <!-- 点赞 -->
+          <view class='zan-bg-view'>
+            <view class='zan-user-view' wx:for='{{zanSource}}'>
+              <label bindtap='TouchZanUser' data-name='{{item}}' class='zan-user'>{{item}},</label>
+            </view>
+          </view>
+          <view class='line'></view>
+          <!-- 评论 -->
+          <view class='discuss-view'>
+            <view class='discuss' wx:for='{{contnet}}'>
+              <label bindtap='TouchZanUser' data-name='{{item.firstname}}' class='discuss-user'>{{item.firstname}}：</label>
+              <label class='content'>{{item.content}}</label>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 评论按钮弹出框 -->
+<view animation="{{animation}}" class='pop-up-box' style='top:{{popTop}}px;width: {{popWidth}}px;'>
+
+</view>
