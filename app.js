@@ -41,7 +41,7 @@ App({
             success: function (res, data){
               console.log(data);
               wx.setStorageSync('location', data.pois[0].title);
-              wx.setStorageSync('currentLocation', data.reverseGeocoderResult.address_component);
+              wx.setStorageSync('currentLocation', data.reverseGeocoderSimplify);
             }
 
           });

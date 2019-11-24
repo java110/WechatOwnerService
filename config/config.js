@@ -18,7 +18,7 @@ const appInfo = {
 };
 
 const urlInfo = {
-  areaUrl: baseUrl +"appApi/app.listAreas"
+  areaUrl: baseUrl +"appApi/area.listAreas"
 }
 
 

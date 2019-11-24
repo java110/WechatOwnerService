@@ -42,7 +42,7 @@
     ]
   },
   "networkTimeout": {
-    "request": 3000
+    "request": 10000
   },
   "permission": {
     "scope.userLocation": {
