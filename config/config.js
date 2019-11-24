@@ -17,6 +17,10 @@ const appInfo = {
   appSecurity: "",
 };
 
+const urlInfo = {
+  areaUrl: baseUrl +"appApi/app.listAreas"
+}
+
 
 module.exports = {
 	getBooksUrl: 		getBooksUrl,
@@ -25,5 +29,6 @@ module.exports = {
 	loginUrl: 			loginUrl,
 	getBoughtBooksUrl: 	getBoughtBooksUrl,
 	buyBookUrl: 		buyBookUrl,
-  appInfo:appInfo
+  appInfo:appInfo,
+  urlInfo:urlInfo
 };

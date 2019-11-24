@@ -1,5 +1,7 @@
 //app.js
 const api = require('./config/config.js');
+const util = require('./utils/util.js');
+
 const QQMapWX = require('./lib/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 App({
@@ -39,6 +41,7 @@ App({
             success: function (res, data){
               console.log(data);
               wx.setStorageSync('location', data.pois[0].title);
+              wx.setStorageSync('currentLocation', data.reverseGeocoderResult.address_component);
             }
 
           });
