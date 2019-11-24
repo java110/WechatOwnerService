@@ -1,61 +1,54 @@
-### HC微信端小程序
+### HC智慧家园小程序
+
+hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要给业主使用，其中包括缴物业费，缴停车费，投诉建议，家庭成员维护，房屋保修
+房屋出租，公告查看，小区圈等功能。
+
+### 官网
+
+[http://www.homecommunity.cn](http://www.homecommunity.cn)
+
+### 演示环境
+
+1、 HC小区物业系统：
+
+[http://www.homecommunity.cn](http://www.homecommunity.cn)
+
+物业 账号/密码：wuxw/admin
+
+代理商 账号/密码：dails/admin
+
+运维团队 账号/密码：admin/admin
+
+开发团队 账号/密码：dev/(由于开发者权限较大，删除数据会影响稳定性，查看具体功能，可以单独部署查看)
+
+2、HC智慧家园
+
+暂未上线，请下载代码后用微信开发者工具查看
 
 
-#### 目录结构
+### 分支说明
 
-    ├── config
-    │    └── config.js
-    ├── images
-    ├── pages
-    │    ├── books
-    │    │    ├── books.js
-    │    │    ├── books.json
-    │    │    ├── books.wxml
-    │    │    └── books.wxss
-    │    ├── comment
-    │    │    ├── comment.js
-    │    │    ├── comment.js
-    │    │    ├── comment.js
-    │    │    └── comment.wxss
-    │    ├── detail
-    │    │    ├── detail.js
-    │    │    ├── detail.js
-    │    │    ├── detail.js
-    │    │    └── detail.wxss
-    │    ├── my
-    │    │    ├── my.js
-    │    │    ├── my.js
-    │    │    ├── my.js
-    │    │    └── my.wxss
-    │    └── myBooks   
-    │         ├── myBooks.js
-    │         ├── myBooks.js
-    │         ├── myBooks.js
-    │         └── myBooks.wxss
-    ├── utils
-    │    └── util.js
-    ├── app.js
-    ├── app.json
-    ├── app.wxss
-    └── project.config.json
+分支管理说明，test为最新代码未测试代码（主要为了防止本地代码遗失），master 为最新测试过代码（待产品化），product 为产品化代码
 
-#### 各页面模块
 
-| 页面 | 描述 |
-| --- | --- |
-| books | 首页/书籍列表页 |
-| comment | 评论页面 |
-| detail | 书籍详情页 |
-| my | 个人中心页 |
-| myBooks | 已购书籍页 |
+### 相关文档
 
-#### 页面用到的服务端CGI
+[http://www.homecommunity.cn/document/#/](http://www.homecommunity.cn/document/#/)
 
-| 地址 | 入参 | 描述 |
-| --- | --- | --- |
-| http://127.0.0.1:3003/login | code: 用户登录凭证, rawData, signature, encryptedData, iv | 用户登录 |
-| http://127.0.0.1:3003/api/book/getBooks | is_all: [0 -> 单个, 1 -> 所有], bookid: 书籍id,单个书籍时需传入| 获取书籍详情 |
-| http://127.0.0.1:3003/api/book/queryBook | bookid: 书籍id，skey: 用户登录标识 | 查询当前用户是否已经购买该书籍并返回评论列表 |
-| http://127.0.0.1:3003/api/user/getBoughtBooks | skey: 用户登录标识 | 获取当前用户已购书籍 |
-| http://127.0.0.1:3003/api/comment/write| skey: 用户登录标识, bookid: 书籍id, content: 评论内容, formid: 提交表单id[用于发送模板消息] | 写评论 |
-| http://127.0.0.1:3003/api/order/buy | bookid: 书籍id，skey: 用户登录标识 | 兑换书籍 |
+### 二次开发视频
+
+[https://space.bilibili.com/403702784](https://space.bilibili.com/403702784)
+
+### 运行效果
+
+![image](index.png)
+![image](circle.png)
+![image](my.png)
+
+### 加入我们
+
+加入微小区交流群随时了解项目进度，和java110开发者零距离沟通 qq群号 827669685
+
+### 成为开发者
+
+如果您对小区 物业 有较深的理解，也致力于开发一套系统方便与物业，业主沟通交流，如果您还有空闲的时间，不怕吃苦，hc小区开发团队欢迎您的加入！ qq群号 992420128 微信：syj15309714817 （添加时请备注HC小区开发）
