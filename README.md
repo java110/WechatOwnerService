@@ -30,6 +30,13 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 分支管理说明，test为最新代码未测试代码（主要为了防止本地代码遗失），master 为最新测试过代码（待产品化），product 为产品化代码
 
+### 系统功能（function） 
+
+   ![image](hc_function.png)
+   
+   主要系统功能请查看
+     
+   [http://www.homecommunity.cn/document/#/func/funcation](http://www.homecommunity.cn/document/#/func/funcation)
 
 ### 相关文档
 
