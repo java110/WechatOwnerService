@@ -53,7 +53,16 @@ Page({
         });
         app.doLogin(that.getUserInfo);
     },
+    /**
+     *  获取用户昵称，头像等信息
+     * @param {*} e 
+     */
+    onGotUserInfo: function (e) {
+        console.log(e.detail.userInfo);
+        console.log(e.detail.rawData)
 
+        // TODO 调用api更新
+    },
     /**
      * 跳转已购书籍页面
      */
