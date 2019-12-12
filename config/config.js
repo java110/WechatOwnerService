@@ -12,13 +12,16 @@ const loginUrl = baseUrl + 'app/loginWx';
 const getBoughtBooksUrl = baseUrl + 'api/user/getBoughtBooks';
 // 兑换书籍接口
 const buyBookUrl = baseUrl + 'api/order/buy';
+
 const appInfo = {
   appId: "992019111758490006",
   appSecurity: "",
 };
 
 const urlInfo = {
-  areaUrl: baseUrl +"appApi/area.listAreas"
+  areaUrl: baseUrl +"appApi/area.listAreas",
+  GetNoticeListUrl: baseUrl + 'appApi/api.queryNotices'
+
 }
 
 
@@ -29,6 +32,6 @@ module.exports = {
 	loginUrl: 			loginUrl,
 	getBoughtBooksUrl: 	getBoughtBooksUrl,
 	buyBookUrl: 		buyBookUrl,
-  appInfo:appInfo,
-  urlInfo:urlInfo
+  	appInfo: appInfo,
+  	urlInfo: urlInfo
 };

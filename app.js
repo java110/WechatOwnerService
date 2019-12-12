@@ -7,50 +7,48 @@ var qqmapsdk;
 App({
     // 小程序启动生命周期
     onLaunch: function () {
+
         let that = this;
         // 检查登录状态
         that.checkLoginStatus();
 
-      // 实例化API核心类
-      qqmapsdk = new QQMapWX({
-        key: 'AWIBZ-M62LQ-7ND5S-GHM45-AGKU7-R5BU5'
-      });
+        // 实例化API核心类
+        qqmapsdk = new QQMapWX({
+            key: 'AWIBZ-M62LQ-7ND5S-GHM45-AGKU7-R5BU5'
+        });
         // 获取用户地理位置
         this.getUserLocation();
-
-     
-      
     },
     //获取地理位置
-    getUserLocation:function(){
-     
-      wx.getLocation({
-        type: 'gcj02',
-        success: function (res) {
-          var latitude = res.latitude
-          var longitude = res.longitude;
-          console.log("latitude"+latitude);
-          
-          qqmapsdk.reverseGeocoder({
-            location:{
-              latitude: latitude,
-              longitude: longitude
-            },
-            coord_type: 1,
-            get_poi: 1,
-            success: function (res, data){
-              console.log(data);
-              wx.setStorageSync('location', data.pois[0].title);
-              wx.setStorageSync('currentLocation', data.reverseGeocoderSimplify);
-            }
+    getUserLocation: function () {
 
-          });
-        }
-      })
-      //调用API从本地缓存中获取数据
-      //var logs = wx.getStorageSync('logs') || []
-      // logs.unshift(Date.now())
-      // wx.setStorageSync('logs', logs)
+        wx.getLocation({
+            type: 'gcj02',
+            success: function (res) {
+                var latitude = res.latitude
+                var longitude = res.longitude;
+                console.log("latitude" + latitude);
+
+                qqmapsdk.reverseGeocoder({
+                    location: {
+                        latitude: latitude,
+                        longitude: longitude
+                    },
+                    coord_type: 1,
+                    get_poi: 1,
+                    success: function (res, data) {
+                        console.log(data);
+                        wx.setStorageSync('location', data.pois[0].title);
+                        wx.setStorageSync('currentLocation', data.reverseGeocoderSimplify);
+                    }
+
+                });
+            }
+        })
+        //调用API从本地缓存中获取数据
+        //var logs = wx.getStorageSync('logs') || []
+        // logs.unshift(Date.now())
+        // wx.setStorageSync('logs', logs)
     },
 
     // 检查本地 storage 中是否有登录态标识
@@ -64,6 +62,7 @@ App({
                 success: function () {
                     // 直接从Storage中获取用户信息
                     let userStorageInfo = wx.getStorageSync('userInfo');
+
                     if (userStorageInfo) {
                         that.globalData.userInfo = JSON.parse(userStorageInfo);
                     } else {
@@ -90,6 +89,44 @@ App({
         wx.login({
             success: function (loginRes) {
                 if (loginRes.code) {
+                    // TODO
+                    let defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}';
+                     // 请求服务端的登录接口
+                     wx.request({
+                        url: api.loginUrl,
+                        method: 'post',
+                        header: {
+                            APP_ID: api.appInfo.appId
+                        },
+                        data: {
+                            code: loginRes.code, // 临时登录凭证
+                            userInfo: JSON.parse(defaultRawData), // 用户非敏感信息
+                            signature: '', // 签名
+                            encryptedData: '', // 用户敏感信息
+                            iv: '' // 解密算法的向量
+                        },
+                        success: function (res) {
+                            console.log('login success...:');
+                            res = res.data;
+
+                            if (res.result == 0) {
+                                that.globalData.userInfo = res.userInfo;
+                                console.log(res.userInfo);
+                                wx.setStorageSync('userInfo', JSON.stringify(res.userInfo));
+                                wx.setStorageSync('loginFlag', res.sessionKey);
+                                callback();
+                            } else {
+                                that.showInfo(res.errmsg);
+                            }
+                        },
+
+                        fail: function (error) {
+                            // 调用服务端登录接口失败
+                            that.showInfo('调用接口失败');
+                            console.log(error);
+                        }
+                    });
+                    return;
                     /* 
                      * @desc: 获取用户信息 期望数据如下 
                      *
@@ -104,20 +141,21 @@ App({
                         withCredentials: true, // 非必填, 默认为true
 
                         success: function (infoRes) {
-                            console.log(infoRes,'>>>')
+                            console.log(infoRes, '>>>')
+
                             // 请求服务端的登录接口
                             wx.request({
                                 url: api.loginUrl,
                                 method: 'post',
-                                header:{
-                                  APP_ID: api.appInfo.appId
+                                header: {
+                                    APP_ID: api.appInfo.appId
                                 },
                                 data: {
-                                    code: loginRes.code,                    // 临时登录凭证
-                                    userInfo: JSON.parse(infoRes.rawData),               // 用户非敏感信息
-                                    signature: infoRes.signature,           // 签名
-                                    encryptedData: infoRes.encryptedData,   // 用户敏感信息
-                                    iv: infoRes.iv                          // 解密算法的向量
+                                    code: loginRes.code, // 临时登录凭证
+                                    userInfo: JSON.parse(infoRes.rawData), // 用户非敏感信息
+                                    signature: infoRes.signature, // 签名
+                                    encryptedData: infoRes.encryptedData, // 用户敏感信息
+                                    iv: infoRes.iv // 解密算法的向量
                                 },
 
                                 success: function (res) {
@@ -127,7 +165,7 @@ App({
                                     if (res.result == 0) {
                                         that.globalData.userInfo = res.userInfo;
                                         wx.setStorageSync('userInfo', JSON.stringify(res.userInfo));
-                                      wx.setStorageSync('loginFlag', res.sessionKey);
+                                        wx.setStorageSync('loginFlag', res.sessionKey);
                                         callback();
                                     } else {
                                         that.showInfo(res.errmsg);
@@ -165,7 +203,7 @@ App({
     },
 
     // 检查用户信息授权设置
-    checkUserInfoPermission: function (callback = () => { }) {
+    checkUserInfoPermission: function (callback = () => {}) {
         wx.getSetting({
             success: function (res) {
                 if (!res.authSetting['scope.userInfo']) {

@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.94",
+	"libVersion": "2.9.4",
 	"isGameTourist": false,
 	"appid": "wxf83d66b0e9f5964d",
 	"projectname": "WechatOwnerService",
