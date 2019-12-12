@@ -51,7 +51,8 @@ Page({
         src: "/images/6.png"
       }, {
         name: "公告",
-        src: "/images/7.png"
+        src: "/images/7.png",
+        href: "/pages/notice/index"
       }]
     
     },
@@ -80,6 +81,11 @@ Page({
     //     })
     //   }
     // });
+  },
+  onGotUserInfo: function (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.userInfo)
+    console.log(e.detail.rawData)
   },
   clearSelectedNumb: function () {
     this.setData({

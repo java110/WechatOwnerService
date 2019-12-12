@@ -1,6 +1,5 @@
 <import src="../common/sort_list.wxml" />
 
-
 <scroll-view bindscrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
   <view class="heard">
     <navigator url="/pages/location/location">
@@ -17,10 +16,14 @@
     <block wx:for="{{categoryList}}" wx:key="">
       <swiper-item>
         <block wx:for="{{item}}" wx:key="">
+        <!-- <navigator url="{{item.href}}"> -->
           <view class="category-info">
+           <navigator url="{{item.href}}">
             <image src="{{item.src}}" class="category-image"></image>
             <view class="category-text">{{item.name}}</view>
+            </navigator> 
           </view>
+          <!-- </navigator> -->
         </block>
       </swiper-item>
     </block>
@@ -35,7 +38,7 @@
   </swiper>
 
   <view class="header-title">
-    <text class="new">最新动态</text>
+    <text class="new"> 最新动态</text>
     <text class="iconfont icongengduo1 gd"></text>
   </view>
   <view class="noticesList">
