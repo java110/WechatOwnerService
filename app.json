@@ -9,9 +9,11 @@
     "pages/myBooks/myBooks",
     "pages/detail/detail",
     "pages/comment/comment",
-
     "pages/notice/index",
-    "pages/notice/detail/detail"
+    "pages/notice/detail/detail",
+    "pages/repairList/repairList",
+    "pages/repair/repair",
+    "pages/repairList/detail/detail"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -49,9 +51,8 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
   "sitemapLocation": "sitemap.json"
-  
 }

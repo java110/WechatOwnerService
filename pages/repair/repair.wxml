@@ -1,0 +1,118 @@
+<view class="page">
+  <view class="weui-form">
+    <view class="">
+      <view class="weui-cells__group weui-cells__group_form">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell_select weui-cell ">
+            <view class="weui-cell__hd ">
+              <label class="weui-label" style="margin-left:64rpx">报修类型</label>
+            </view>
+            <view class="weui-cell__bd">
+
+              <picker bindchange="bindTypeChange" value="{{repairTypeIndex}}" range="{{typeArr}}" range-key="label">
+                <view class="weui-select" style="margin-left:-48rpx">
+                  {{typeArr[repairTypeIndex].label}}
+                </view>
+              </picker>
+
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">报
+                <text decode="{{true}}">&nbsp;</text>修
+                <text decode="{{true}}">&nbsp;</text>人</label>
+            </view>
+            <view class="weui-cell__bd">
+              <input bindinput="bindRepairName" class="weui-input" type="text" placeholder="请输入报修人" value="{{repairName}}" />
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">
+                联系方式
+              </label>
+            </view>
+            <view class="weui-cell__bd">
+              <input bindinput="bindTel" class="weui-input" type="text" placeholder="请输入联系方式" value="{{tel}}" />
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">
+                小区信息
+              </label>
+            </view>
+            <view class="weui-cell__bd">
+              <input bindinput="bindCommunity" class="weui-input" type="text" placeholder="请输入小区信息" value="{{communityId}}" />
+            </view>
+          </view>
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">
+                房屋信息
+              </label>
+            </view>
+            <view class="weui-cell__bd">
+              <input bindinput="bindRoom" class="weui-input" type="text" placeholder="请输入房屋信息" value="{{roomId}}" />
+            </view>
+          </view>
+
+          <view class="weui-cell_select weui-cell ">
+            <view class="weui-cell__hd ">
+              <label class="weui-label" style="margin-left:64rpx">预约日期</label>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" bindchange="bindDateChange" value="{{date}}">
+                <view class="weui-select" style="margin-left:-48rpx">
+                  {{date}}
+                </view>
+              </picker>
+            </view>
+          </view>
+          <view class="weui-cell_select weui-cell ">
+            <view class="weui-cell__hd ">
+              <label class="weui-label" style="margin-left:64rpx">预约时间</label>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="time" bindchange="bindTimeChange" value="{{time}}">
+                <view class="weui-select" style="margin-left:-48rpx">
+                  {{time}}
+                </view>
+              </picker>
+            </view>
+          </view>
+
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">
+                报修内容
+              </label>
+            </view>
+            <view class="weui-cell__bd">
+              <textarea bindblur="bindContent" class="repair_textarea" value="{{content}}" rows="3" placeholder="报修内容" />
+            </view>
+          </view>
+
+
+          <view class="weui-cell">
+            <view class="weui-cell__hd">
+              <label class="weui-label">
+                上传图片
+              </label>
+            </view>
+            <view class="weui-cell__bd">
+              <image wx:if="{{imgUrl.length!=0}}" src="{{imgUrl}}" class="repair_image" catchtap="uploadImg"></image>
+              <image src="/images/upload.png" class="repair_image" catchtap="uploadImg"></image>
+            </view>
+          </view>
+
+
+        </view>
+      </view>
+    </view>
+    <view class="">
+      <button type="primary" catchtap="submitRepair">确认报修</button>
+    </view>
+  </view>
+</view>

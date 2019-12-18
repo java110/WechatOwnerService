@@ -20,8 +20,11 @@ const appInfo = {
 
 const urlInfo = {
   areaUrl: baseUrl +"appApi/area.listAreas",
-  GetNoticeListUrl: baseUrl + 'appApi/api.queryNotices'
-
+  GetNoticeListUrl: baseUrl + 'appApi/api.queryNotices',
+    //报修接口
+  saveOwnerRepair: baseUrl + 'appApi/ownerRepair.saveOwnerRepair',
+  //查看报修
+  listOwnerRepairs: baseUrl + 'appApi/ownerRepair.listOwnerRepairs'
 }
 
 
