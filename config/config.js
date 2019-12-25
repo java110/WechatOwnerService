@@ -24,7 +24,9 @@ const urlInfo = {
     //报修接口
   saveOwnerRepair: baseUrl + 'appApi/ownerRepair.saveOwnerRepair',
   //查看报修
-  listOwnerRepairs: baseUrl + 'appApi/ownerRepair.listOwnerRepairs'
+  listOwnerRepairs: baseUrl + 'appApi/ownerRepair.listOwnerRepairs',
+  //家庭成员
+  saveOwner: baseUrl + 'appApi/owner.saveOwner',
 }
 
 
