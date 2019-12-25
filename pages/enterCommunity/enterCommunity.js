@@ -16,11 +16,11 @@ Page({
       areas:[],
       currentArea:{},
       
-        communityName:'',
-        ownerName:'',
-        idCard:'',
-        tel:'',
-        validateCode:''
+        "communityName":"",
+    "ownerName": "",
+    "idCard": "",
+    "tel": "",
+    "validateCode": ""
       
   },
 
@@ -29,10 +29,7 @@ Page({
    */
   onLoad: function (options) {
     //查询省级地区
-    let pros = this._loadArea('','');
-
-    
-    
+    let pros = this._loadArea('',''); 
   },
 
   /**
@@ -49,13 +46,7 @@ Page({
     let curLocation = wx.getStorageSync("currentLocation");
     this.setData({
       province: curLocation.province,
-      city: curLocation.city,
-     
-        communityName: '',
-        ownerName: '',
-        idCard: '',
-        tel: '',
-        validateCode: ''
+      city: curLocation.city
       
     })
   },
@@ -229,7 +220,7 @@ Page({
       this.setData(data);
   },
   enterCommunity:function(e){
-    this.data.areaCode = this.data.currentArea.areaCode;
+    //this.data.areaCode = this.data.currentArea.areaCode;
     console.log("提交数据",this.data);
   }
 })
