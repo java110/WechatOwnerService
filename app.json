@@ -34,7 +34,7 @@
       },
       {
         "pagePath": "pages/circle/circle",
-        "text": "小区圈",
+        "text": "开门",
         "iconPath": "images/circle.png",
         "selectedIconPath": "images/circleSelected.png"
       },
