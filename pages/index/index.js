@@ -42,7 +42,8 @@ Page({
         src: "/images/3.png"
       }, {
         name: "家庭成员",
-        src: "/images/4.png"
+        src: "/images/4.png",
+        href: "/pages/family/family"
       }, {
         name: "报修",
         src: "/images/5.png",

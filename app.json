@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/family/family",
     "pages/circle/circle",
     "pages/location/location",
     "pages/books/books",
