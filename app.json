@@ -9,7 +9,6 @@
     "pages/enterCommunity/enterCommunity",
     "pages/myBooks/myBooks",
     "pages/detail/detail",
-    "pages/comment/comment",
     "pages/notice/index",
     "pages/notice/detail/detail",
     "pages/repairList/repairList",

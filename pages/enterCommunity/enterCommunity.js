@@ -46,8 +46,7 @@ Page({
     let curLocation = wx.getStorageSync("currentLocation");
     this.setData({
       province: curLocation.province,
-      city: curLocation.city
-      
+      city: curLocation.city   
     })
   },
 

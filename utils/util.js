@@ -58,10 +58,11 @@ const getHeaders = function(){
      transaction_id: wxuuid(),
      req_time: getDateYYYYMMDDHHMISS(),
      sign:'1234567',
-     user_id:'-1'
-
+     user_id:'-1',
+     cookie: '_java110_token_=' + wx.getStorageSync('token')
    }
 }
+
 
 module.exports = {
   formatTime: formatTime,

@@ -62,7 +62,7 @@ App({
                 success: function () {
                     // 直接从Storage中获取用户信息
                     let userStorageInfo = wx.getStorageSync('userInfo');
-
+                    console.log('用户信息',userStorageInfo);
                     if (userStorageInfo) {
                         that.globalData.userInfo = JSON.parse(userStorageInfo);
                     } else {
@@ -114,6 +114,7 @@ App({
                                 console.log(res.userInfo);
                                 wx.setStorageSync('userInfo', JSON.stringify(res.userInfo));
                                 wx.setStorageSync('loginFlag', res.sessionKey);
+                              wx.setStorageSync('token', res.token);
                                 callback();
                             } else {
                                 that.showInfo(res.errmsg);

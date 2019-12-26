@@ -19,14 +19,14 @@ const appInfo = {
 };
 
 const urlInfo = {
-  areaUrl: baseUrl +"appApi/area.listAreas",
-  GetNoticeListUrl: baseUrl + 'appApi/api.queryNotices',
+  areaUrl: baseUrl +"app/area.listAreas",
+  GetNoticeListUrl: baseUrl + 'app/api.queryNotices',
     //报修接口
-  saveOwnerRepair: baseUrl + 'appApi/ownerRepair.saveOwnerRepair',
+  saveOwnerRepair: baseUrl + 'app/ownerRepair.saveOwnerRepair',
   //查看报修
-  listOwnerRepairs: baseUrl + 'appApi/ownerRepair.listOwnerRepairs',
+  listOwnerRepairs: baseUrl + 'app/ownerRepair.listOwnerRepairs',
   //家庭成员
-  saveOwner: baseUrl + 'appApi/owner.saveOwner',
+  saveOwner: baseUrl + 'app/owner.saveOwner',
 }
 
 
