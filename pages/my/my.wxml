@@ -28,7 +28,7 @@
     <view class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="enterCommunity">
         <view>
             <text class="iconfont iconaccount icon"></text>
-            <text class="tab-text">加入小区</text>
+            <text class="tab-text">绑定业主</text>
         </view>
         <view class="tab-arrow"></view>
     </view>

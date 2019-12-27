@@ -1,0 +1,26 @@
+{
+  "name": "wechatownerservice",
+  "version": "1.0.0",
+  "description": "hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要给业主使用，其中包括缴物业费，缴停车费，投诉建议，家庭成员维护，房屋保修\r 房屋出租，公告查看，小区圈等功能。",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "vant-weapp": "^0.5.27"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/java110/WechatOwnerService.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/java110/WechatOwnerService/issues"
+  },
+  "homepage": "https://github.com/java110/WechatOwnerService#readme"
+}

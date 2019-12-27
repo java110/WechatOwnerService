@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/bingOwner/bingOwner",
     "pages/index/index",
     "pages/family/family",
     "pages/circle/circle",
     "pages/location/location",
     "pages/books/books",
     "pages/my/my",
-    "pages/enterCommunity/enterCommunity",
+    
     "pages/myBooks/myBooks",
     "pages/detail/detail",
     "pages/notice/index",
@@ -53,6 +54,11 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "usingComponents": {
+      "van-button": "lib/button/index",
+      "van-toast":"lib/toast/index",
+      "van-field": "lib/field/index"
   },
   "sitemapLocation": "sitemap.json"
 }

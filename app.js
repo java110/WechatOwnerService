@@ -228,15 +228,15 @@ App({
     },
 
 
-    // 封装 wx.showToast 方法
-    showInfo: function (info = 'error', icon = 'none') {
-        wx.showToast({
-            title: info,
-            icon: icon,
-            duration: 1500,
-            mask: true
-        });
-    },
+  // 封装 wx.showToast 方法
+  showInfo: function (info = 'error', icon = 'none') {
+    wx.showToast({
+      title: info,
+      icon: icon,
+      duration: 1500,
+      mask: true
+    });
+  },
 
     // 获取书籍已下载路径
     getDownloadPath: function (key) {
