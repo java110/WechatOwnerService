@@ -13,9 +13,9 @@
     </view>
   </view>
   <swiper class="categoryList" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
-    <block wx:for="{{categoryList}}" wx:key="">
+    <block wx:for="{{categoryList}}" wx:key="index">
       <swiper-item>
-        <block wx:for="{{item}}" wx:key="">
+        <block wx:for="{{item}}" wx:key="index">
         <!-- <navigator url="{{item.href}}"> -->
           <view class="category-info">
            <navigator url="{{item.href}}">
@@ -30,7 +30,7 @@
   </swiper>
 
   <swiper class="ad-swiper" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay='true' interval='5000' duration='1000' circular='true'>
-    <block wx:for="{{ad}}" wx:key="">
+    <block wx:for="{{ad}}" wx:key="index">
       <swiper-item>
         <image src="{{item.imageUrl}}"></image>
       </swiper-item>
@@ -42,7 +42,7 @@
     <text class="iconfont icongengduo1 gd"></text>
   </view>
   <view class="noticesList">
-    <block wx:for="{{notices}}" wx:key="">
+    <block wx:for="{{notices}}" wx:key="index">
       <navigator url="/pages/menu/menu">
         <view class="noticesList-list">
           <view class="notices-info">

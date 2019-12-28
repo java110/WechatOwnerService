@@ -24,10 +24,39 @@ const getHeaders = function () {
   }
 }
 
+/**
+ * 获取位置
+ * add by wuxw 2019-12-28
+ */
+const getLocation = function(){
+  return wx.getStorageSync('location');
+}
+
+/**
+ * 获取用户信息
+ * 
+ * add by wuxw 2019-12-28
+ */
+const getUserInfo = function(){
+  let _userInfo = wx.getStorageSync(constant.mapping.USER_INFO);
+  return JSON.parse(_userInfo);
+}
+
+/**
+ * 登录标记
+ * add  by wuxw 2019-12-28
+ */
+const getLoginFlag = function(){
+  let _loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG)
+  return _loginFlag;
+}
 
 module.exports = {
   constant: constant,
   util: util,
   factory:factory,
-  getHeaders: getHeaders
+  getHeaders: getHeaders,
+  getLocation: getLocation,
+  getUserInfo: getUserInfo,
+  getLoginFlag: getLoginFlag
 };

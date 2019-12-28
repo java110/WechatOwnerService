@@ -18,23 +18,14 @@ class LoginFactory {
   }
 
   // 检查本地 storage 中是否有登录态标识
-   checkLoginStatus() {
+  checkLoginStatus(callback = () => { }) {
     let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
     if (loginFlag) {
       // 检查 session_key 是否过期
       wx.checkSession({
         // session_key 有效(为过期)
         success: function () {
-          // 直接从Storage中获取用户信息
-          let userStorageInfo = wx.getStorageSync('userInfo');
-          console.log('用户信息', userStorageInfo);
-          if (userStorageInfo) {
-            //that.globalData.userInfo = JSON.parse(userStorageInfo);
-          } else {
-            coreUtil.showInfo('缓存信息缺失');
-            console.error('登录成功后将用户信息存在Storage的userStorageInfo字段中，该字段丢失');
-          }
-
+          callback();
         },
         // session_key 过期
         fail: function () {
@@ -44,7 +35,7 @@ class LoginFactory {
       });
     } else {
       // 无登录态
-      this.doLogin();
+      this.doLogin(callback);
     }
   }
 
