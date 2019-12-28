@@ -1,7 +1,7 @@
 <view>
   <view class="block__title">小区信息</view>
   <van-cell-group>
-    <van-field value="{{ username }}" required clearable label="市/区" icon="question-o" placeholder="请选择市/区" />
+    <van-field value="{{ areaName }}" required readonly label="市/区" icon="arrow" catchtap="chooseArea" placeholder="请选择市/区" />
 
     <van-field value="{{ communityName }}" bindinput="bindInput" data-name="communityName" label="小区名称" placeholder="请输入小区名称" required border="{{ false }}" />
   </van-cell-group>
@@ -12,7 +12,7 @@
     <van-field value="{{ idCard }}" bindinput="bindInput" data-name="idCard" type="idcard" label="身份证" placeholder="请输入身份证" required  />
     <van-field value="{{ link }}" bindinput="bindInput" data-name="link" type="number" label="手机号" placeholder="请输入手机号" required />
     <van-field value="{{ msgCode }}" bindinput="bindInput" data-name="msgCode" center clearable label="验证码" placeholder="请输入短信验证码" required use-button-slot>
-      <van-button slot="button" size="small" type="primary" catchtap="sendMsgCode">发送验证码</van-button>
+      <van-button slot="button" type="number" size="small" type="primary" catchtap="sendMsgCode">发送验证码</van-button>
     </van-field>
   </van-cell-group>
 
@@ -20,4 +20,18 @@
 
   <van-button type="primary"  size="large" catchtap="bindOwner">绑定业主</van-button>
 
+ 
+
+  <van-popup
+    show="{{ areaShow }}"
+    position="bottom"
+    custom-style="height: 40%;"
+
+  >
+    <van-area area-list="{{ areaList }}" 
+              bind:confirm="onConfirm"
+              bind:change="onChange"
+              bind:cancel="onCancel"
+    />
+  </van-popup>
 </view>

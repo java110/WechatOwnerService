@@ -1,8 +1,8 @@
 {
-  "pages": [
-    
+  "pages": [ 
     "pages/index/index",
     "pages/bindOwner/bindOwner",
+    "pages/viewBindOwner/viewBindOwner",
     "pages/family/family",
     "pages/circle/circle",
     "pages/location/location",
@@ -55,7 +55,14 @@
   "usingComponents": {
       "van-button": "lib/button/index",
       "van-toast":"lib/toast/index",
-      "van-field": "lib/field/index"
+      "van-field": "lib/field/index",
+      "van-area": "lib/area/index",
+      "van-popup": "lib/popup/index",
+      "van-panel": "lib/panel/index",
+      "van-steps": "lib/steps/index",
+      "van-cell": "lib/cell/index",
+      "van-cell-group": "lib/cell-group/index"
+            
   },
   "sitemapLocation": "sitemap.json"
 }

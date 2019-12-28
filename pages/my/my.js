@@ -7,9 +7,6 @@ const app = getApp();
 Page({
     data: {
         userInfo: {},   // 用户信息
-      hasLogin: context.getLoginFlag()
-            ? true 
-            : false     // 是否登录，根据后台返回的skey判断
     },
     onLoad: function() {
       let _that = this;

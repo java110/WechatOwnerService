@@ -51,6 +51,66 @@ const getLoginFlag = function(){
   return _loginFlag;
 }
 
+const _loadArea = function (_level, _parentAreaCode, callBack = (_areaList)=>{}) {
+  let areaList = wx.getStorageSync(constant.mapping.AREA_INFO);
+  if (areaList){
+    callBack(areaList);
+    return ;
+  }
+  wx.request({
+    url: constant.url.areaUrl,
+    header: getHeaders(),
+    data: {
+      areaLevel: _level,                    // 临时登录凭证
+      parentAreaCode: _parentAreaCode
+    },
+    success: function (res) {
+      console.log('login success');
+      res = res.data;
+      var province = [], city = [], area = [];
+      var _currentArea = [];
+      province = res.areas.filter(item => {
+        return item.areaLevel == '101';
+      })
+      city = res.areas.filter(item => {
+        return item.areaLevel == '202';
+      })
+      area = res.areas.filter(item => {
+        return item.areaLevel == '303';
+      });
+      var provinceList = {};
+      province.forEach(function(item){
+        provinceList[item.areaCode] = item.areaName;
+      });
+
+      var cityList = {};
+      city.forEach(function (item) {
+        cityList[item.areaCode] = item.areaName;
+      });
+      var quyuList  = {};
+      area.forEach(function (item) {
+        quyuList[item.areaCode] = item.areaName;
+      });
+      let areaList = {
+        province_list: provinceList,
+        city_list: cityList,
+        county_list: quyuList
+      };
+      callBack(areaList);
+      //将 地区信息存储起来
+      wx.setStorageSync(constant.mapping.AREA_INFO, areaList);
+    },
+
+    fail: function (error) {
+      // 调用服务端登录接口失败
+      wx.showToast({
+        title: '调用接口失败',
+      });
+      console.log(error);
+    }
+  })
+}
+
 module.exports = {
   constant: constant,
   util: util,
@@ -58,5 +118,6 @@ module.exports = {
   getHeaders: getHeaders,
   getLocation: getLocation,
   getUserInfo: getUserInfo,
-  getLoginFlag: getLoginFlag
+  getLoginFlag: getLoginFlag,
+  _loadArea: _loadArea
 };

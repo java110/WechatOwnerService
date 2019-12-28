@@ -1,6 +1,7 @@
 // pages/enterCommunity/enterCommunity.js
 const context = require('../../context/Java110Context.js')
 
+
 Page({
 
   /**
@@ -8,17 +9,37 @@ Page({
    */
   data: {
     areaCode:'',
+    areaName:'',
     communityName:'',
     appUserName:'',
     idCard:'',
     link:'',
-    msgCode:'' 
+    msgCode:'',
+    areaShow:false,
+    areaList:{
+      province_list: {
+        
+      },
+      city_list: {
+        
+      },
+      county_list: {
+        
+      }
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let _that = this;
+    //加载省份
+    context._loadArea('','',function(_areaList){
+      _that.setData({
+        areaList: _areaList
+      });
+    });
 
   },
 
@@ -51,7 +72,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -92,6 +113,35 @@ Page({
   },
   bindOwner:function(){
       console.log(this.data);
-  }
+      //成功情况下跳转
+      wx.navigateTo({
+        url: "/pages/viewBindOwner/viewBindOwner"
+      })
+  },
+  onConfirm:function(e){
+    console.log("onConfirm",e);
+    let _areaCode = e.detail.values[2].code;
+    let _areaName = e.detail.values[1].name + e.detail.values[2].name;
+    this.setData({
+      areaCode: _areaCode,
+      areaName: _areaName,
+      areaShow: false
+    });
+  },
+  onChange:function(e){
+      console.log(e);
+  },
+  chooseArea:function(e){
+    this.setData({
+      areaShow:true
+    });
+  },
+  onCancel:function(e){
+    this.setData({
+      areaShow: false
+    });
+  },
+
+ 
 
 })
