@@ -23,12 +23,12 @@ Page({
     onShow: function() {
         let that = this;
         that.setData({
-            userInfo: app.globalData.userInfo
+            userInfo: context.getUserInfo()
         });
     },
-    enterCommunity:function(){
+    bindingOwner:function(){
       wx.navigateTo({
-        url: '../enterCommunity/enterCommunity',
+        url: '../bindOwner/bindOwner',
       })
     }
 })

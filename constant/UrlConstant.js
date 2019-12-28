@@ -7,7 +7,8 @@
 
 
   // 服务器域名
-  const baseUrl = 'http://hc.demo.winqi.cn:8012/';
+const baseUrl = 'https://app.demo.winqi.cn/';
+//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 
   // 登录接口
   const loginUrl=baseUrl + 'app/loginWx';

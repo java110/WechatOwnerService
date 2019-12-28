@@ -56,7 +56,7 @@ class LoginFactory {
       },
       fail: function (error) {
         // 调用 wx.login 接口失败
-        that.coreUtil.showInfo('接口调用失败');
+        that.coreUtil.showInfo('接口调用失败' + error);
         console.log(error);
       }
     }); 
@@ -87,7 +87,7 @@ class LoginFactory {
         res = res.data;
 
         if (res.result == 0) {
-          that.globalData.userInfo = res.userInfo;
+          //that.globalData.userInfo = res.userInfo;
           console.log(res.userInfo);
           wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(res.userInfo));
           wx.setStorageSync(constant.mapping.LOGIN_FLAG, res.sessionKey);
@@ -108,7 +108,7 @@ class LoginFactory {
 
 
   // 获取用户登录标示 供全局调用
-  static getLoginFlag() {
+   getLoginFlag() {
     return wx.getStorageSync(constant.mapping.LOGIN_FLAG);
   }
 

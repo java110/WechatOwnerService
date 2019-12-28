@@ -7,7 +7,6 @@
     "pages/circle/circle",
     "pages/location/location",
     "pages/my/my",
-    "pages/detail/detail",
     "pages/notice/index",
     "pages/notice/detail/detail",
     "pages/repairList/repairList",

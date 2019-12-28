@@ -2,7 +2,7 @@
   "pages": [
     
     "pages/index/index",
-    "pages/bingOwner/bingOwner",
+    "pages/bindOwner/bindOwner",
     "pages/family/family",
     "pages/circle/circle",
     "pages/location/location",
