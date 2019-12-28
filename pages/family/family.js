@@ -1,9 +1,7 @@
 // pages/enterCommunity/enterCommunity.js
-const {
-  appInfo,
-  urlInfo
-} = require("../../config/config.js");
-const util = require('../../utils/util.js');
+const context = require('../../context/Java110Context.js');
+
+const constant = context.constant;
 
 Page({
 
@@ -120,8 +118,8 @@ Page({
     } else {
       console.log("提交数据", obj);
       wx.request({
-        url: urlInfo.saveOwner, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-        header: util.getHeaders(),
+        url: constant.url.saveOwner, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+        header: context.getHeaders(),
         method: "POST",
         data: {
           "sex": "1",

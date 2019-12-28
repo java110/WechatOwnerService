@@ -1,9 +1,6 @@
 /** index.js **/
-const {
-  appInfo,
-  urlInfo
-} = require("../../config/config.js");
-const util = require('../../utils/util.js');
+const context = require('../../context/Java110Context.js');
+const constant = context.constant;
 //获取app实例
 const app = getApp();
 
@@ -66,8 +63,8 @@ Page({
   request: function(data) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: urlInfo.listOwnerRepairs,
-        header: util.getHeaders(),
+        url: constant.url.listOwnerRepairs,
+        header: context.getHeaders(),
         method: "GET",
         data: data,
         success: function(res) {

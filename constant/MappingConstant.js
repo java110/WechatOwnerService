@@ -6,7 +6,9 @@
 
 
 class MappingConstant{
-  static LOGIN_FLAG = 'loginFlag';
+  static LOGIN_FLAG = 'loginFlag'; //登录标识
+  static TOKEN = "token"; // token 标识
+  static USER_INFO = "userInfo"; // 用户信息
 }
 
 

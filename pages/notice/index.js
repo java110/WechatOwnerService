@@ -1,6 +1,6 @@
 /** index.js **/
-const { appInfo, urlInfo } = require("../../config/config.js");
-const util = require('../../utils/util.js');
+const context = require('../../context/Java110Context.js');
+const constant = context.constant;
 //获取app实例
 const app = getApp();
 
@@ -13,8 +13,8 @@ Page({
     onLoad: function() {
         let that = this
         wx.request({
-            header: util.getHeaders(),
-            url: urlInfo.GetNoticeListUrl,
+            header: context.getHeaders(),
+            url: constant.url.GetNoticeListUrl,
             method: "GET",
             data: {
                 pageIndex: 0,

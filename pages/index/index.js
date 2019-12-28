@@ -1,9 +1,7 @@
 // pages/index/index.js
-const {
-  appInfo
-} = require("../../config/config.js")
-Page({
+const context = require("../../context/Java110Context.js");
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -55,7 +53,7 @@ Page({
         name: "公告",
         src: "/images/7.png",
         href: "/pages/notice/index"
-      }]
+        }]
 
     },
     selected: 0,
@@ -73,16 +71,6 @@ Page({
   },
   sortSelected: function(e) {
     var that = this;
-    // wx.request({
-    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/overAll",
-    //   method: "GET",
-    //   success: function (res) {
-    //     that.setData({
-    //       restaurant: res.data.data.restaurant,
-    //       sortSelected: that.data.sortList[e.currentTarget.dataset.index].sort
-    //     })
-    //   }
-    // });
   },
   onGotUserInfo: function(e) {
     console.log(e.detail.errMsg)
@@ -147,7 +135,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(appInfo);
+    console.log(context);
   },
 
   /**
@@ -162,16 +150,6 @@ Page({
    */
   onShow: function() {
     var that = this;
-    // wx.request({
-    //   url: "https://www.easy-mock.com/mock/596257bc9adc231f357c4664/restaurant/info",
-    //   method: "GET",
-    //   success: function (res) {
-    //     that.setData({
-    //       restaurant: res.data.data.restaurant,
-    //       location: wx.getStorageSync('location')
-    //     })
-    //   }
-    // });
 
     that.setData({
       location: wx.getStorageSync('location')

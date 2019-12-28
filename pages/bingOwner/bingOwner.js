@@ -1,6 +1,5 @@
 // pages/enterCommunity/enterCommunity.js
-const { appInfo, urlInfo } = require("../../config/config.js");
-const util = require('../../utils/util.js');
+const context = require('../../context/Java110Context.js')
 
 Page({
 

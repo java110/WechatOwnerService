@@ -1,5 +1,4 @@
 //app.js
-const api = require('../config/config.js');
 /**
  * @desc: 格式化时间
  * @return: eg: '2018/04/09 21:31:00'
