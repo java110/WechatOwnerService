@@ -21,6 +21,8 @@ const baseUrl = 'https://app.demo.winqi.cn/';
     //家庭成员
   const saveOwner=baseUrl + 'app/owner.saveOwner';
 
+  const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner';
+
 
 
 module.exports = {
@@ -30,5 +32,6 @@ module.exports = {
   GetNoticeListUrl: GetNoticeListUrl,
   saveOwnerRepair: saveOwnerRepair,
   listOwnerRepairs: listOwnerRepairs,
-  saveOwner: saveOwner
+  saveOwner: saveOwner,
+  appUserBindingOwner: appUserBindingOwner
 };

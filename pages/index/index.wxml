@@ -2,7 +2,8 @@
 
 <scroll-view bindscrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
   <view class="heard">
-    <navigator url="/pages/location/location">
+  <!-- url="/pages/location/location" -->
+    <navigator >
       <view class="heard-location">
         <image src="/images/location.png" class="heard-location-icon" />
         <text class="heard-location-text">{{location}}</text>

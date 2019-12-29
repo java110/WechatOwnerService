@@ -3,7 +3,7 @@
   <van-cell-group>
     <van-field value="{{ areaName }}" required readonly label="市/区" icon="arrow" catchtap="chooseArea" placeholder="请选择市/区" />
 
-    <van-field value="{{ communityName }}" bindinput="bindInput" data-name="communityName" label="小区名称" placeholder="请输入小区名称" required border="{{ false }}" />
+    <van-field value="{{ communityName }}" bindinput="bindInput" data-name="communityName" label="小区名称" placeholder="请输入小区名称" required border="{{ false }}" required clearable />
   </van-cell-group>
   <view class="block__title">业主信息</view>
   <van-cell-group>

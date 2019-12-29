@@ -32,6 +32,10 @@ const getLocation = function(){
   return wx.getStorageSync('location');
 }
 
+const getCurrentLocation = function(){
+  return wx.getStorageSync('currentLocation');
+}
+
 /**
  * 获取用户信息
  * 
@@ -119,5 +123,6 @@ module.exports = {
   getLocation: getLocation,
   getUserInfo: getUserInfo,
   getLoginFlag: getLoginFlag,
-  _loadArea: _loadArea
+  _loadArea: _loadArea,
+  getCurrentLocation: getCurrentLocation
 };

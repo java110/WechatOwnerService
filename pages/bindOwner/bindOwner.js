@@ -1,5 +1,6 @@
 // pages/enterCommunity/enterCommunity.js
 const context = require('../../context/Java110Context.js')
+const constant = context.constant;
 
 
 Page({
@@ -34,10 +35,17 @@ Page({
    */
   onLoad: function (options) {
     let _that = this;
+    let _location = context.getLocation();
+    let _currentLocation = context.getCurrentLocation();
+    let _areaName = _currentLocation.city + _currentLocation.district;
+    let _areaCode = _currentLocation.adcode;
     //加载省份
     context._loadArea('','',function(_areaList){
       _that.setData({
-        areaList: _areaList
+        areaList: _areaList,
+        communityName: _location,
+        areaCode: _areaCode,
+        areaName: _areaName
       });
     });
 
@@ -54,10 +62,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let curLocation = wx.getStorageSync("currentLocation");
+    let _currentLocation = context.getCurrentLocation();
+    let _areaName = _currentLocation.city + _currentLocation.district;
+    let _areaCode = _currentLocation.adcode;
     this.setData({
-      province: curLocation.province,
-      city: curLocation.city   
+       areaCode:_areaCode,
+       areaName:_areaName
     })
   },
 
@@ -111,12 +121,60 @@ Page({
   sendMsgCode:function(){
 
   },
-  bindOwner:function(){
-      console.log(this.data);
-      //成功情况下跳转
-      wx.navigateTo({
-        url: "/pages/viewBindOwner/viewBindOwner"
+  bindOwner: function (e) {
+
+    let obj = {
+      "areaCode": this.data.areaCode,
+      "communityName": this.data.communityName,
+      "appUserName": this.data.appUserName,
+      "idCard": this.data.idCard,
+      "link": this.data.link,
+      "msgCode": this.data.msgCode
+    }
+    let msg = "";
+    if (obj.areaCode == "") {
+      msg = "请选择地区";
+    } else if (obj.communityName == "") {
+      msg = "请填写小区名称";
+    } else if (obj.appUserName == "") {
+      msg = "请填写业主名称";
+    } else if (obj.idCard == "") {
+      msg = "请填写身份证";
+    } else if (obj.link == ""){
+      msg = "请填写手机号";
+    } else if (obj.msgCode == "") {
+      msg = "请填写验证码";
+    }
+    if (msg != "") {
+      wx.showToast({
+        title: msg,
+        icon: 'none',
+        duration: 2000
       })
+    } else {
+      console.log("提交数据", obj);
+      wx.request({
+        url: constant.url.appUserBindingOwner,
+        header: context.getHeaders(),
+        method: "POST",
+        data:obj, //动态数据
+        success: function (res) {
+          console.log(res);
+          //成功情况下跳转
+          wx.navigateTo({
+            url: "/pages/viewBindOwner/viewBindOwner"
+          });
+        },
+        fail:function(e){
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      });
+    }
+
   },
   onConfirm:function(e){
     console.log("onConfirm",e);
