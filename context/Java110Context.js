@@ -115,6 +115,56 @@ const _loadArea = function (_level, _parentAreaCode, callBack = (_areaList)=>{})
   })
 }
 
+const getOwner = function(callBack = (_ownerInfo)=>{}){
+  // 从硬盘中获取 业主信息
+  let _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
+  if (_ownerInfo){
+    callBack(_ownerInfo);
+  }else{
+      wx.request({
+        url: constant.url.queryAppUserBindingOwner,
+        header: getHeaders(),
+        data: {
+          
+        },
+        success: function (res) {
+          console.log('login success');
+          let data = res.data;
+          console.log(res);
+          if(res.statusCode == 200){
+            _ownerInfo = data.auditAppUserBindingOwners[0];
+            if (_ownerInfo.state == '12000'){
+              wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
+              let _currentCommunityInfo = {
+                communityId: _ownerInfo.communityId,
+                communityName: _ownerInfo.communityName
+              }
+              wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+            }
+            callBack(data.auditAppUserBindingOwners[0]);
+          }
+        },
+
+        fail: function (error) {
+          // 调用服务端登录接口失败
+          wx.showToast({
+            title: '调用接口失败',
+          });
+          console.log(error);
+        }
+      }) 
+  }
+
+}
+
+/**
+ * 获取当前小区信息
+ */
+const getCurrentCommunity = function(){
+  let communityInfo = wx.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
+  return communityInfo;
+}
+
 module.exports = {
   constant: constant,
   util: util,
@@ -124,5 +174,7 @@ module.exports = {
   getUserInfo: getUserInfo,
   getLoginFlag: getLoginFlag,
   _loadArea: _loadArea,
-  getCurrentLocation: getCurrentLocation
+  getCurrentLocation: getCurrentLocation,
+  getOwner: getOwner,
+  getCurrentCommunity: getCurrentCommunity
 };

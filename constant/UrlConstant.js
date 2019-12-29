@@ -21,7 +21,11 @@ const baseUrl = 'https://app.demo.winqi.cn/';
     //家庭成员
   const saveOwner=baseUrl + 'app/owner.saveOwner';
 
+  //绑定业主
   const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner';
+
+  //查询绑定业主
+  const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners';
 
 
 
@@ -33,5 +37,6 @@ module.exports = {
   saveOwnerRepair: saveOwnerRepair,
   listOwnerRepairs: listOwnerRepairs,
   saveOwner: saveOwner,
-  appUserBindingOwner: appUserBindingOwner
+  appUserBindingOwner: appUserBindingOwner,
+  queryAppUserBindingOwner: queryAppUserBindingOwner
 };

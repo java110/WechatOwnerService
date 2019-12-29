@@ -25,10 +25,18 @@
 
 <view class="tab-container bg-white">
 
-    <view class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="bindingOwner">
+    <view wx:if="{{ownerFlag== false}}" class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="bindingOwner">
         <view>
             <text class="iconfont iconaccount icon"></text>
             <text class="tab-text">绑定业主</text>
+        </view>
+        <view class="tab-arrow"></view>
+    </view>
+
+    <view wx:else class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="viewOwner">
+        <view>
+            <text class="iconfont iconaccount icon"></text>
+            <text class="tab-text">业主信息</text>
         </view>
         <view class="tab-arrow"></view>
     </view>

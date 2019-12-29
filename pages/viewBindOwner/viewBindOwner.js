@@ -1,4 +1,5 @@
 // pages/viewBindOwner/viewBindOwner.js
+const context = require("../../context/Java110Context.js");
 Page({
 
   /**
@@ -34,17 +35,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      areaName: '西宁市城东区',
-      communityId:'7020181217000001',
-      communityName: '格兰小镇',
-      appUserName: '吴学文',
-      appUserId: '772019092507000013',
-      idCard: '632126199109162011',
-      link: '17797173942',
-      active: 1
-    });
-
+    
+    this.loadOwnerInfo();
   },
 
   /**
@@ -94,5 +86,27 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+/**
+ * 加载业主信息
+ */
+  loadOwnerInfo:function(){
+    let _that = this;
+    context.getOwner(function(_ownerInfo){
+      if(_ownerInfo){
+        let _active = _ownerInfo.state == '10000'?1:2
+        _that.setData({
+          areaName: '西宁市城东区',
+          communityId: _ownerInfo.communityId,
+          communityName: _ownerInfo.communityName,
+          appUserName: _ownerInfo.appUserName,
+          appUserId: _ownerInfo.appUserId,
+          idCard: _ownerInfo.idCard,
+          link: _ownerInfo.link,
+          active: _active
+        });
+      }
+    });
   }
 })
