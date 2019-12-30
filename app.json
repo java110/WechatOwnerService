@@ -4,7 +4,7 @@
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
     "pages/family/family",
-    "pages/circle/circle",
+    "pages/applicationKey/applicationKey",
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",
@@ -31,7 +31,7 @@
         "selectedIconPath": "images/home-selected.png"
       },
       {
-        "pagePath": "pages/circle/circle",
+        "pagePath": "pages/applicationKey/applicationKey",
         "text": "开门",
         "iconPath": "images/circle.png",
         "selectedIconPath": "images/circleSelected.png"
