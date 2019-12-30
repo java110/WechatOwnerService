@@ -1,5 +1,6 @@
 // pages/viewBindOwner/viewBindOwner.js
 const context = require("../../context/Java110Context.js");
+const constant = context.constant;
 Page({
 
   /**
@@ -132,9 +133,17 @@ Page({
         data: obj, //动态数据
         success: function (res) {
           console.log(res);
+          if(res.statusCode != 200){
+            wx.showToast({
+              title: '解绑失败',
+              icon:'none',
+              duration:2000
+            });
+            return ;
+          }
           //成功情况下跳转
-          wx.navigateTo({
-            url: "/pages/viewBindOwner/viewBindOwner"
+          wx.redirectTo({
+            url: "/pages/bindOwner/bindOwner"
           });
         },
         fail: function (e) {
@@ -146,6 +155,4 @@ Page({
         }
       });
     }
-
-  }
 })
