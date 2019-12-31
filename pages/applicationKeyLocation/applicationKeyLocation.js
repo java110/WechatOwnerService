@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    locations:[]
+    locations:[],
+    communityName:''
   },
 
   /**
@@ -79,6 +80,9 @@ Page({
         memberId: _owner.memberId,
         communityId: _owner.communityId
       }
+      _that.setData({
+        communityName: _owner.communityName
+      });
       wx.request({
         url: constant.url.listOwnerMachines,
         header: context.getHeaders(),

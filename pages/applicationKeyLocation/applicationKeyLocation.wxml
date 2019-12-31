@@ -1,7 +1,7 @@
 <view>
   <view class="akl_community">
     <van-cell-group>
-      <van-cell title="当前小区" value="格兰小镇" size="large" />
+      <van-cell title="当前小区" value="{{communityName}}" size="large" />
     </van-cell-group>
   </view>
 
