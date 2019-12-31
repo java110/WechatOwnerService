@@ -36,8 +36,8 @@
       {
         "pagePath": "pages/applicationKey/applicationKey",
         "text": "开门",
-        "iconPath": "images/circle.png",
-        "selectedIconPath": "images/circleSelected.png"
+        "iconPath": "images/applicationKey.png",
+        "selectedIconPath": "images/applicationKey-selected.png"
       },
       {
         "pagePath": "pages/my/my",
@@ -56,6 +56,7 @@
     }
   },
   "usingComponents": {
+
     "van-button": "lib/button/index",
     "van-toast": "lib/toast/index",
     "van-field": "lib/field/index",
@@ -68,7 +69,11 @@
     "van-radio": "lib/radio/index",
     "van-radio-group": "lib/radio-group/index",
     "van-picker": "lib/picker/index",
-    "van-uploader": "lib/uploader/index"
+    "van-uploader": "lib/uploader/index",
+
+      "van-row": "lib/row/index",
+      "van-col": "lib/col/index"
+    
   },
   "sitemapLocation": "sitemap.json"
 }

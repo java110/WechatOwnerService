@@ -1,2 +1,10 @@
-<!--pages/applicationKey/applicationKey.wxml-->
-<text>pages/applicationKey/applicationKey.wxml</text>
+<view>
+  <view>
+    申请门禁钥匙
+  </view>
+  <van-row>
+    <van-col span="8">span: 8</van-col>
+    <van-col span="8">span: 8</van-col>
+    <van-col span="8">span: 8</van-col>
+  </van-row>
+</view>
