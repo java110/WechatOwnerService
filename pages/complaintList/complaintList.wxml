@@ -4,14 +4,14 @@
   </view>
   <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
     <view class="title">
-      <view>{{item.repairName}}</view>
-      <view>{{item.appointmentTime}}</view>
+      <view>{{item.complaintName}}</view>
+      <view>{{item.tel}}</view>
     </view>
     <view class="main">
       <view>
-        <view class="text"> 性别: {{item.repairTypeName}}</view>
-        <view class="text"> 年龄: {{item.stateName}}</view>
-        <view class="text"> 电话: {{item.tel}}</view>
+        <view class="text"> 状态: {{item.stateName}}</view>
+        <view class="text"> 房间: {{item.roomId}}</view>
+        <view class="text"> 类型: {{item.typeCdName}}</view>
       </view>
       <view>
         <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">修改</button>

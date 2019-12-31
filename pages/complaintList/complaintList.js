@@ -4,7 +4,40 @@ const constant = context.constant;
 
 Page({
   data: {
-    tableData: [],
+    tableData: [{
+      "complaintId": "882019110351910002",
+      "complaintName": "测试工作流",
+      "context": "测试工作流",
+      "roomId": "752019100965690010",
+      "state": "10001",
+      "stateName": "处理中",
+      "storeId": "402019032924930007",
+      "tel": "17797173945",
+      "typeCd": "809001",
+      "typeCdName": "投诉"
+    }, {
+      "complaintId": "882019110394400002",
+      "complaintName": "测试工作流",
+      "context": "测试工作流",
+      "roomId": "752019100758260005",
+      "state": "10001",
+      "stateName": "处理中",
+      "storeId": "402019032924930007",
+      "tel": "18909874444",
+      "typeCd": "809001",
+      "typeCdName": "投诉"
+    }, {
+      "complaintId": "882019110312520003",
+      "complaintName": "吴学文",
+      "context": "测试工作流",
+      "roomId": "752019102597030030",
+      "state": "10001",
+      "stateName": "处理中",
+      "storeId": "402019032924930007",
+      "tel": "18909782345",
+      "typeCd": "809001",
+      "typeCdName": "投诉"
+    }],
     page: 1,
     totalPage: 0,
     loading: false
@@ -38,7 +71,7 @@ Page({
     }).then(res => {
       console.log(res,9999999999999)
       that.setData({
-        tableData: override ? res.data.ownerRepairs : this.data.tableData.concat(res.data.ownerRepairs),
+        tableData: override ? res.data.complaints : this.data.tableData.concat(res.data.complaints),
         totalPage: res.data.records,
         page: page,
         loading: false
@@ -47,7 +80,7 @@ Page({
   },
   goAdd: function (e) {
     wx.navigateTo({
-      url: "/pages/family/family"
+      url: "/pages/complaint/complaint"
     })
   },
   gotoDetail: function (e) {
@@ -74,23 +107,19 @@ Page({
   },
   //封装请求
   request: function (data) {
-    console.log(222222);
     return new Promise((resolve, reject) => {
       wx.request({
         url: constant.url.listComplaints,
         header: context.getHeaders(),
-        method: "POST",
+        method: "GET",
         data: data,
         success: function (res) {
-          console.log(33333);
-
           if (res.statusCode == 200) {
             resolve(res);
           }
         },
         fail:function(req){
           console.log(constant.url.listComplaints,req);
-
         }
       })
     })

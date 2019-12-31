@@ -3,12 +3,7 @@
     "pages/index/index",
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
-<<<<<<< HEAD
-    "pages/circle/circle",
-=======
-    "pages/family/family",
     "pages/applicationKey/applicationKey",
->>>>>>> 8eed88e047398c9f4379ae227aca34fa09bb9461
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",
@@ -69,7 +64,11 @@
     "van-panel": "lib/panel/index",
     "van-steps": "lib/steps/index",
     "van-cell": "lib/cell/index",
-    "van-cell-group": "lib/cell-group/index"
+    "van-cell-group": "lib/cell-group/index",
+    "van-radio": "lib/radio/index",
+    "van-radio-group": "lib/radio-group/index",
+    "van-picker": "lib/picker/index",
+    "van-uploader": "lib/uploader/index"
   },
   "sitemapLocation": "sitemap.json"
 }
