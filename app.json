@@ -33,8 +33,8 @@
       {
         "pagePath": "pages/applicationKey/applicationKey",
         "text": "开门",
-        "iconPath": "images/circle.png",
-        "selectedIconPath": "images/circleSelected.png"
+        "iconPath": "images/applicationKey.png",
+        "selectedIconPath": "images/applicationKey-selected.png"
       },
       {
         "pagePath": "pages/my/my",
@@ -61,7 +61,10 @@
       "van-panel": "lib/panel/index",
       "van-steps": "lib/steps/index",
       "van-cell": "lib/cell/index",
-      "van-cell-group": "lib/cell-group/index"
+      "van-cell-group": "lib/cell-group/index",
+      "van-row": "lib/row/index",
+      "van-col": "lib/col/index"
+      
             
   },
   "sitemapLocation": "sitemap.json"
