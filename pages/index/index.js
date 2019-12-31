@@ -37,11 +37,12 @@ Page({
         src: "/images/2.png"
       }, {
         name: "投诉建议",
-        src: "/images/3.png"
+        src: "/images/3.png",
+        href:"/pages/complaintList/complaintList"
       }, {
         name: "家庭成员",
         src: "/images/4.png",
-        href: "/pages/family/family"
+        href: "/pages/familyList/familyList"
       }, {
         name: "报修",
         src: "/images/5.png",
