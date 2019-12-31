@@ -4,6 +4,7 @@
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
     "pages/applicationKey/applicationKey",
+    "pages/applicationKeyLocation/applicationKeyLocation",
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",

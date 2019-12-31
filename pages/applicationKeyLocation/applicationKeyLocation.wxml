@@ -1,0 +1,22 @@
+<view>
+  <view class="akl_community">
+    <van-cell-group>
+      <van-cell title="当前小区" value="格兰小镇" size="large" />
+    </van-cell-group>
+  </view>
+
+  <view class="akl_community_location">
+    <van-cell-group>
+      <van-cell title="东大门" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="南大门" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="1号楼1单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="1号楼2单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="2号楼1单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="2号楼2单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="3号楼1单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="3号楼2单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="4号楼1单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell title="4号楼2单元" value="" is-link label="ff:99:00:99"/>
+    </van-cell-group>
+  </view>
+</view>

@@ -25,6 +25,24 @@
 .ak_row_black_01{
   height: 80rpx;
 }
+.ak_row_black_02{
+  height: 100rpx;
+}
+.ak_row_black_03{
+  height: 140rpx;
+}
+.ak_row_black_04{
+  height: 40rpx;
+}
 .ak_icon_text{
-  font-size: 80rpx;
+  font-size: 100rpx;
+  color: #00AA00;
+}
+.ak_row_col_t text{
+  font-size: 30rpx;
+  color: #8a8a8a;
+}
+.ak_btn{
+  width: 80%;
+  margin:0 auto;
 }
