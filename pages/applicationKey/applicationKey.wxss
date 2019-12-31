@@ -3,6 +3,7 @@
 }
 .ak_context .ak_row{
   background-color: #fff;
+  overflow:hidden;
 }
 
 .ak_row_black{
@@ -17,4 +18,13 @@
 }
 .ak_row_col{
   text-align: center;
+}
+.ak_row_top{
+  margin-top: 60rpx;
+}
+.ak_row_black_01{
+  height: 80rpx;
+}
+.ak_icon_text{
+  font-size: 80rpx;
 }
