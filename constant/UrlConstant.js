@@ -36,6 +36,9 @@ const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners';
   //解绑业主
   const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner';
 
+//查询业主门禁
+const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines';
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -49,5 +52,6 @@ module.exports = {
   queryAppUserBindingOwner: queryAppUserBindingOwner,
   queryOwnerMembers: queryOwnerMembers,
   listComplaints: listComplaints,
-  appUserUnBindingOwner: appUserUnBindingOwner
+  appUserUnBindingOwner: appUserUnBindingOwner,
+  listOwnerMachines: listOwnerMachines
 };

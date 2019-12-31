@@ -27,3 +27,5 @@ class CoreFactory{
     });
   }
 }
+
+module.exports = new CoreFactory();

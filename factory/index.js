@@ -9,11 +9,13 @@
 const loginFactory = require("LoginFactory.js");
 const userFactory = require("UserFactory.js");
 const fileFactory = require("FileFactory.js");
+const coreFactory = require("CoreFactory.js");
 
 
 module.exports = {
   login: loginFactory,
   user: userFactory,
-  file: fileFactory
+  file: fileFactory,
+  core: coreFactory
 
 }

@@ -7,16 +7,16 @@
 
   <view class="akl_community_location">
     <van-cell-group>
-      <van-cell title="东大门" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="南大门" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="1号楼1单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="1号楼2单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="2号楼1单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="2号楼2单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="3号楼1单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="3号楼2单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="4号楼1单元" value="" is-link label="ff:99:00:99"/>
-      <van-cell title="4号楼2单元" value="" is-link label="ff:99:00:99"/>
+      <van-cell wx:for="{{locations}}" 
+        wx:for-index="idx" 
+        wx:key="index"
+        wx:for-item="item" 
+        data-item="{{item}}"
+        bind:click="gotoApplyApplicationKeyPage" 
+        title="{{item.locationObjName}}" 
+        value="" 
+        is-link 
+        label="{{item.machineCode}}"/>
     </van-cell-group>
   </view>
 </view>
