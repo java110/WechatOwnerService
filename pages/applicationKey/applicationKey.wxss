@@ -1,1 +1,20 @@
-/* pages/applicationKey/applicationKey.wxss */
+.ak_context{
+  padding: 30rpx 20rpx;
+}
+.ak_context .ak_row{
+  background-color: #fff;
+}
+
+.ak_row_black{
+  height: 40rpx;
+}
+
+.ak_row_title{
+  padding-left: 40rpx;
+  font-size: 31rpx;
+  font-weight: 700;
+
+}
+.ak_row_col{
+  text-align: center;
+}

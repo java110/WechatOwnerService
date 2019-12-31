@@ -1,10 +1,41 @@
-<view>
-  <view>
-    申请门禁钥匙
+<view class="ak_context">
+  <view class="ak_row">
+    <view class="ak_row_black">
+    </view>
+    <view class="ak_row_title">
+      <text>申请门禁钥匙</text>
+    </view>
+    <van-row gutter="40">
+      <van-col span="12" class="ak_row_col">
+          <view>
+              <text class="iconfont iconshenqing"></text>
+          </view>
+          <view>
+              <text>提交申请钥匙</text>
+          </view>
+      </van-col>
+      <van-col span="12" class="ak_row_col">
+          <view>
+              <text class="iconfont icondengdai"></text>
+          </view>
+          <view>
+              <text>物业人员审核</text>
+          </view>
+      </van-col>
+    </van-row>
+
+
+
+    <van-row>
+      <van-col span="24" class="ak_row_col">
+           <view>
+            <text class="iconfont iconshenqingtongguo"></text>
+          </view>
+          <view>
+            <text>审核通过后生成电子钥匙</text>
+          </view>
+      </van-col>
+    </van-row>
+   
   </view>
-  <van-row>
-    <van-col span="8">span: 8</van-col>
-    <van-col span="8">span: 8</van-col>
-    <van-col span="8">span: 8</van-col>
-  </van-row>
 </view>
