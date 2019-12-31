@@ -1,5 +1,6 @@
 // pages/viewBindOwner/viewBindOwner.js
 const context = require("../../context/Java110Context.js");
+const constant = context.constant;
 Page({
 
   /**
@@ -108,5 +109,50 @@ Page({
         });
       }
     });
-  }
+  },
+  unbindOwner:function(){
+    //调用解绑业主，并且删除本地缓存
+    let obj = {
+      "appUserId": this.data.appUserId,
+      "communityId": this.data.communityId
+    }
+    let msg = "";
+    if (obj.appUserId == "" || obj.communityId == "") {
+      msg = "数据异常";
+      wx.showToast({
+        title: msg,
+        icon: 'none',
+        duration: 2000
+      });
+      return ;
+    } 
+      wx.request({
+        url: constant.url.appUserUnBindingOwner,
+        header: context.getHeaders(),
+        method: "POST",
+        data: obj, //动态数据
+        success: function (res) {
+          console.log(res);
+          if(res.statusCode != 200){
+            wx.showToast({
+              title: '解绑失败',
+              icon:'none',
+              duration:2000
+            });
+            return ;
+          }
+          //成功情况下跳转
+          wx.redirectTo({
+            url: "/pages/bindOwner/bindOwner"
+          });
+        },
+        fail: function (e) {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      });
+    }
 })

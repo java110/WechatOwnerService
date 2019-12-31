@@ -161,7 +161,7 @@ Page({
         success: function (res) {
           console.log(res);
           //成功情况下跳转
-          wx.navigateTo({
+          wx.redirectTo({
             url: "/pages/viewBindOwner/viewBindOwner"
           });
         },

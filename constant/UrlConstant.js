@@ -33,6 +33,9 @@ const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners';
 
 
 
+  //解绑业主
+  const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner';
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -45,5 +48,6 @@ module.exports = {
   appUserBindingOwner: appUserBindingOwner,
   queryAppUserBindingOwner: queryAppUserBindingOwner,
   queryOwnerMembers: queryOwnerMembers,
-  listComplaints: listComplaints
+  listComplaints: listComplaints,
+  appUserUnBindingOwner: appUserUnBindingOwner
 };

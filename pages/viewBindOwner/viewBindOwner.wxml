@@ -21,6 +21,6 @@
    <view class="button_up_blank"></view>
 
   <block wx:if="{{active == 1}}">
-    <van-button type="danger"  size="large" catchtap="bindOwner">解绑业主</van-button>
+    <van-button type="danger"  size="large" catchtap="unbindOwner">解绑业主</van-button>
   </block>
 </view>

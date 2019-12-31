@@ -3,7 +3,12 @@
     "pages/index/index",
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
+<<<<<<< HEAD
     "pages/circle/circle",
+=======
+    "pages/family/family",
+    "pages/applicationKey/applicationKey",
+>>>>>>> 8eed88e047398c9f4379ae227aca34fa09bb9461
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",
@@ -34,7 +39,7 @@
         "selectedIconPath": "images/home-selected.png"
       },
       {
-        "pagePath": "pages/circle/circle",
+        "pagePath": "pages/applicationKey/applicationKey",
         "text": "开门",
         "iconPath": "images/circle.png",
         "selectedIconPath": "images/circleSelected.png"

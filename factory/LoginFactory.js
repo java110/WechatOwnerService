@@ -19,23 +19,25 @@ class LoginFactory {
 
   // 检查本地 storage 中是否有登录态标识
   checkLoginStatus(callback = () => { }) {
+    let _that = this;
     let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
     if (loginFlag) {
       // 检查 session_key 是否过期
       wx.checkSession({
         // session_key 有效(为过期)
         success: function () {
+          console.log('判断用户是否登录');
           callback();
         },
         // session_key 过期
         fail: function () {
           // session_key过期
-          this.doLogin();
+          _that.doLogin();
         }
       });
     } else {
       // 无登录态
-      this.doLogin(callback);
+      _that.doLogin(callback);
     }
   }
 

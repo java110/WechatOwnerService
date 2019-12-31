@@ -21,10 +21,14 @@ Page({
     },
 
     onShow: function() {
-        let that = this;
-        that.setData({
+      console.log('show 方法被调用');
+      let _that = this;
+      //查询用户信息
+      _that.loadOwenrInfo();
+      _that.setData({
             userInfo: context.getUserInfo()
         });
+      
     },
     bindingOwner:function(){
       wx.navigateTo({
