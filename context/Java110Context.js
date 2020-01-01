@@ -23,6 +23,15 @@ const getHeaders = function () {
     cookie: '_java110_token_=' + wx.getStorageSync('token')
   }
 }
+/**
+ * http 请求 加入是否登录判断
+ */
+const request = function (_reqObj) {
+  //检查是否登录成功
+  factory.login.checkLoginStatus(function () {
+    wx.request(_reqObj);
+  });
+}
 
 /**
  * 获取位置
@@ -61,7 +70,7 @@ const _loadArea = function (_level, _parentAreaCode, callBack = (_areaList)=>{})
     callBack(areaList);
     return ;
   }
-  wx.request({
+  request({
     url: constant.url.areaUrl,
     header: getHeaders(),
     data: {
@@ -121,7 +130,7 @@ const getOwner = function(callBack = (_ownerInfo)=>{}){
   if (_ownerInfo){
     callBack(_ownerInfo);
   }else{
-      wx.request({
+        request({
         url: constant.url.queryAppUserBindingOwner,
         header: getHeaders(),
         data: {
@@ -157,6 +166,8 @@ const getOwner = function(callBack = (_ownerInfo)=>{}){
 
 }
 
+
+
 /**
  * 获取当前小区信息
  */
@@ -176,5 +187,6 @@ module.exports = {
   _loadArea: _loadArea,
   getCurrentLocation: getCurrentLocation,
   getOwner: getOwner,
-  getCurrentCommunity: getCurrentCommunity
+  getCurrentCommunity: getCurrentCommunity,
+  request: request
 };

@@ -83,7 +83,7 @@ Page({
       _that.setData({
         communityName: _owner.communityName
       });
-      wx.request({
+      context.request({
         url: constant.url.listOwnerMachines,
         header: context.getHeaders(),
         method: "GET",

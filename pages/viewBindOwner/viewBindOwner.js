@@ -126,7 +126,7 @@ Page({
       });
       return ;
     } 
-      wx.request({
+      context.request({
         url: constant.url.appUserUnBindingOwner,
         header: context.getHeaders(),
         method: "POST",

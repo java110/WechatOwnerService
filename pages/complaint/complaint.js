@@ -157,7 +157,7 @@ Page({
       })
     } else {
       console.log("提交数据", obj);
-      wx.request({
+      context.request({
         url: constant.url.appUserBindingOwner,
         header: context.getHeaders(),
         method: "POST",

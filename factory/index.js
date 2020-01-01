@@ -10,12 +10,14 @@ const loginFactory = require("LoginFactory.js");
 const userFactory = require("UserFactory.js");
 const fileFactory = require("FileFactory.js");
 const coreFactory = require("CoreFactory.js");
+const httpFactory = require("HttpFactory.js");
 
 
 module.exports = {
   login: loginFactory,
   user: userFactory,
   file: fileFactory,
-  core: coreFactory
+  core: coreFactory,
+  http: httpFactory
 
 }
