@@ -11,6 +11,7 @@ const userFactory = require("UserFactory.js");
 const fileFactory = require("FileFactory.js");
 const coreFactory = require("CoreFactory.js");
 const httpFactory = require("HttpFactory.js");
+const base64Factory = require("Base64Factory.js");
 
 
 module.exports = {
@@ -18,6 +19,6 @@ module.exports = {
   user: userFactory,
   file: fileFactory,
   core: coreFactory,
-  http: httpFactory
-
+  http: httpFactory,
+  base64: base64Factory
 }

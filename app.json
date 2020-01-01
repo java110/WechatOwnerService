@@ -5,6 +5,7 @@
     "pages/viewBindOwner/viewBindOwner",
     "pages/applicationKey/applicationKey",
     "pages/applicationKeyLocation/applicationKeyLocation",
+    "pages/applicationKeyUser/applicationKeyUser",
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",
@@ -71,9 +72,9 @@
     "van-radio-group": "lib/radio-group/index",
     "van-picker": "lib/picker/index",
     "van-uploader": "lib/uploader/index",
-
       "van-row": "lib/row/index",
-      "van-col": "lib/col/index"
+      "van-col": "lib/col/index",
+      "van-datetime-picker": "lib/datetime-picker/index"
     
   },
   "sitemapLocation": "sitemap.json"

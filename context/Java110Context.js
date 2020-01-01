@@ -29,6 +29,9 @@ const getHeaders = function () {
 const request = function (_reqObj) {
   //检查是否登录成功
   factory.login.checkLoginStatus(function () {
+    //重写token
+    _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
+    //console.log("_reqObj",_reqObj);
     wx.request(_reqObj);
   });
 }

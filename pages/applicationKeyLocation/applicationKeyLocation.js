@@ -9,7 +9,8 @@ Page({
    */
   data: {
     locations:[],
-    communityName:''
+    communityName:'',
+    communityId:''
   },
 
   /**
@@ -81,7 +82,8 @@ Page({
         communityId: _owner.communityId
       }
       _that.setData({
-        communityName: _owner.communityName
+        communityName: _owner.communityName,
+        communityId: _owner.communityId
       });
       context.request({
         url: constant.url.listOwnerMachines,
@@ -110,13 +112,21 @@ Page({
     });
     
   },
-  gotoApplyApplicationKeyPage:function(e){
+  gotoApplyApplicationKeyPage:function(){
     // 跳转至 填写信息页面
-    let _item = e.currentTarget.dataset.item;
-    console.log('gotoApplyApplicationKeyPage', _item);
-    // wx.navigateTo({
-    //   url: "/pages/repairList/detail/detail?item=" + JSON.stringify(e.currentTarget.dataset.item)
-    // })
+    console.log('gotoApplyApplicationKeyPage', this.data.locations);
+
+    if (this.data.locations.length < 1){
+        wx.showToast({
+          title: '没有相应门禁供您申请',
+        })
+    }
+
+
+    wx.navigateTo({
+      url: "/pages/applicationKeyUser/applicationKeyUser?locations=" + JSON.stringify(this.data.locations)
+        +"&communityId="+this.data.communityId
+    })
   }
 
 })
