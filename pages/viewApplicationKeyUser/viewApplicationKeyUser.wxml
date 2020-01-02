@@ -5,6 +5,8 @@
   />
   <view class="block__title">业主信息</view>
     <van-cell-group>
+      <van-cell title="申请编码" value="{{applicationKeyId}}" />
+      <van-cell title="状态" value="{{stateName}}" />
       <van-cell title="姓名" value="{{name}}" />
       <van-cell title="年龄" value="{{age}}" />
       <van-cell title="性别" value="{{sex}}" />
@@ -14,17 +16,9 @@
   <van-cell-group>
     <van-cell title="身份" value="{{typeCdName}}" />
     <van-cell title="身份证" value="{{idCard}}" />
-    <van-cell title="有效期" value="{{expiry}}" />
+    <van-cell title="开始时间" value="{{startTime}}" />
+    <van-cell title="结束时间" value="{{endTime}}" />
     <van-cell title="手机号" value="{{tel}}" />
   </van-cell-group>
-
-  <view class="block__title">证件照片</view>
-
-  <view class="aku_photo_view">
-    <van-uploader file-list="{{ photoList }}" max-count="2" bind:after-read="afterRead" bind:delete="removePhoto" />
-    <view>
-       <text>身份证正反面</text>
-    </view>
-  </view>
 
 </text>

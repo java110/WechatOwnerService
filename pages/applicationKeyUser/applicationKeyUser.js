@@ -3,6 +3,7 @@
 const context = require('../../context/Java110Context.js');
 const util = context.util;
 const factory = context.factory;
+const constant = context.constant;
 
 Page({
 
@@ -234,9 +235,17 @@ Page({
       startTime: this.data.startTime,
       endTime: this.data.endTime,
       tel: this.data.tel,
-      photos: this.data.photos,
-      msgCode: this.data.msgCode
+      photos: [],
+      msgCode: this.data.msgCode,
+      communityId: this.data.communityId,
+      machineIds:[],
+      typeFlag:'1100102'
     };
+    let _photos = this.data.photos;
+    _photos.forEach(function (_item) {
+      _objData.photos.push({ "photo": _item });
+    });
+
     let msg = '';
     if(_objData.name == ''){
       msg = '请填写名称';
@@ -271,6 +280,10 @@ Page({
       msg = "请填写验证码"
     }
 
+    if (this.data.locations == null || this.data.locations.length <1){
+        msg = "没有设备可申请钥匙";
+    }
+
     if(msg != ''){
       wx.showToast({
         title: msg,
@@ -279,6 +292,12 @@ Page({
       });
       return ;
     }
+   
+    this.data.locations.forEach(function(_item){
+      _objData.machineIds.push({"machineId":_item.machineId});
+    });
+
+
 
     console.log(_objData);
     
@@ -292,7 +311,7 @@ Page({
         if(res.resultCode == 200){
           //成功情况下跳转
           wx.redirectTo({
-            url: "/pages/viewApplicationKeyUser/viewApplicationKeyUser"
+            url: "/pages/viewApplicationKeyUser/viewApplicationKeyUser?idCard=" + _objData.idCard
           });
           return ;
         }
