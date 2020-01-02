@@ -222,6 +222,23 @@ Page({
   },
   removePhoto:function(e){
     console.log(e.detail.index);
+    let _photoList = [];
+    this.data.photoList.forEach(function(item,index){
+      if (index != e.detail.index){
+        _photoList.push(item);
+      }
+    });
+    let _photos = [];
+    this.data.photos.forEach(function (item, index) {
+      if (index != e.detail.index) {
+        _photos.push(item);
+      }
+    });
+
+    this.setData({
+      photos: _photos,
+      photoList: _photoList
+    });
   },
   saveApplicationKey:function(){
     //保存钥匙信息
@@ -308,7 +325,7 @@ Page({
       data: _objData, //动态数据
       success: function (res) {
         console.log(res);
-        if(res.resultCode == 200){
+        if(res.statusCode == 200){
           //成功情况下跳转
           wx.redirectTo({
             url: "/pages/viewApplicationKeyUser/viewApplicationKeyUser?idCard=" + _objData.idCard
