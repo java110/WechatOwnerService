@@ -22,7 +22,14 @@ Page({
         desc: ''
       }
     ],
-
+    name:'',
+    age:0,
+    sex:'',
+    typeCdName:'',
+    idCard:'',
+    expiry:'',
+    tel:'',
+    photoList:[]
   },
 
   /**

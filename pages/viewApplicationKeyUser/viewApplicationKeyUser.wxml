@@ -13,7 +13,7 @@
   <view class="block__title">身份信息</view>
   <van-cell-group>
     <van-cell title="身份" value="{{typeCdName}}" />
-    <van-cell title="身份证" value="{{typeCdName}}" />
+    <van-cell title="身份证" value="{{idCard}}" />
     <van-cell title="有效期" value="{{expiry}}" />
     <van-cell title="手机号" value="{{tel}}" />
   </van-cell-group>
@@ -23,7 +23,7 @@
   <view class="aku_photo_view">
     <van-uploader file-list="{{ photoList }}" max-count="2" bind:after-read="afterRead" bind:delete="removePhoto" />
     <view>
-       <text>请上传身份证正反面</text>
+       <text>身份证正反面</text>
     </view>
   </view>
 
