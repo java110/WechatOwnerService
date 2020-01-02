@@ -24,12 +24,13 @@ Page({
     name:'',
     age: null,
     sex: '男',
-    typeCd: 0,
+    typeCd: "10004",
     idCard:'',
     startTime: null,
     endTime:null,
     tel:'',
     photos: [],
+    msgCode:''
   },
 
   /**
@@ -223,17 +224,18 @@ Page({
   },
   saveApplicationKey:function(){
     //保存钥匙信息
-    console.log(this.data);
+    
     let _objData = {
       name: this.data.name,
       age: this.data.age,
-      sex: this.data.sex,
+      sex: this.data.sex == '男'?1:0,
       typeCd: this.data.typeCd,
       idCard: this.data.idCard,
       startTime: this.data.startTime,
       endTime: this.data.endTime,
       tel: this.data.tel,
       photos: this.data.photos,
+      msgCode: this.data.msgCode
     };
     let msg = '';
     if(_objData.name == ''){
@@ -242,16 +244,72 @@ Page({
     if (_objData.age == null){
       msg = "请填写年龄"
     }
-    if (_objData.sex == null) {
+    if (_objData.sex == '') {
       msg = "请选择性别"
     }
-    if (_objData.typeCd == null) {
+    if (_objData.typeCd == '') {
       msg = "请选择身份"
     }
-    if (_objData.idCard == null) {
+    if (_objData.idCard == '') {
       msg = "请填写身份证"
     }
+
+    if (_objData.startTime == null) {
+      msg = "请选择有效期"
+    }
+    if (_objData.endTime == null) {
+      msg = "请选择有效期"
+    }
+    if (_objData.tel == '') {
+      msg = "请选择填写手机号"
+    }
+    if (_objData.photos == null || _objData.photos.length <2) {
+      msg = "请选择证件照片"
+    }
+
+    if (_objData.msgCode ==''){
+      msg = "请填写验证码"
+    }
+
+    if(msg != ''){
+      wx.showToast({
+        title: msg,
+        icon: 'none',
+        duration: 2000
+      });
+      return ;
+    }
+
+    console.log(_objData);
     
+    context.request({
+      url: constant.url.applyApplicationKey,
+      header: context.getHeaders(),
+      method: "POST",
+      data: _objData, //动态数据
+      success: function (res) {
+        console.log(res);
+        if(res.resultCode == 200){
+          //成功情况下跳转
+          wx.redirectTo({
+            url: "/pages/viewApplicationKeyUser/viewApplicationKeyUser"
+          });
+          return ;
+        }
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    });
 
   }
 })

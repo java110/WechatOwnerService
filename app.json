@@ -16,7 +16,8 @@
     "pages/family/family",
     "pages/familyList/familyList",
     "pages/complaint/complaint",
-    "pages/complaintList/complaintList"
+    "pages/complaintList/complaintList",
+    "pages/viewApplicationKeyUser/viewApplicationKeyUser"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -74,7 +75,8 @@
     "van-uploader": "lib/uploader/index",
       "van-row": "lib/row/index",
       "van-col": "lib/col/index",
-      "van-datetime-picker": "lib/datetime-picker/index"
+      "van-datetime-picker": "lib/datetime-picker/index",
+      "van-image": "lib/image/index"
     
   },
   "sitemapLocation": "sitemap.json"
