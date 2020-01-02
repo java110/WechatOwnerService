@@ -14,24 +14,38 @@ Page({
     communityId:'',
     showTypeCd:false,
     typeCdList: ['业主', '家庭成员','租客'],
-    typeCd:0,
     typeCdName:'业主',
-    age:null,
-    sex:'男',
     sexList:['男','女'],
     showSex:false,
     showExpiry: false,
     expiryList:['一个月','半年','一年'],
+    
+    photoList:[],
+    name:'',
+    age: null,
+    sex: '男',
+    typeCd: 0,
+    idCard:'',
     startTime: null,
-    photos:[],
-    photoList:[]
-
+    endTime:null,
+    tel:'',
+    photos: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    let _that = this;
+    context.getOwner(function(_owner){
+        _that.setData({
+          name:_owner.appUserName,
+          idCard:_owner.idCard,
+          tel:_owner.link
+        });
+
+    });
 
     this.setData({
       locations: JSON.parse(options.locations),
@@ -206,5 +220,38 @@ Page({
   },
   removePhoto:function(e){
     console.log(e.detail.index);
+  },
+  saveApplicationKey:function(){
+    //保存钥匙信息
+    console.log(this.data);
+    let _objData = {
+      name: this.data.name,
+      age: this.data.age,
+      sex: this.data.sex,
+      typeCd: this.data.typeCd,
+      idCard: this.data.idCard,
+      startTime: this.data.startTime,
+      endTime: this.data.endTime,
+      tel: this.data.tel,
+      photos: this.data.photos,
+    };
+    let msg = '';
+    if(_objData.name == ''){
+      msg = '请填写名称';
+    }
+    if (_objData.age == null){
+      msg = "请填写年龄"
+    }
+    if (_objData.sex == null) {
+      msg = "请选择性别"
+    }
+    if (_objData.typeCd == null) {
+      msg = "请选择身份"
+    }
+    if (_objData.idCard == null) {
+      msg = "请填写身份证"
+    }
+    
+
   }
 })

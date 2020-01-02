@@ -25,13 +25,16 @@
 
   <view class="aku_photo_view">
     <van-uploader file-list="{{ photoList }}" max-count="2" bind:after-read="afterRead" bind:delete="removePhoto" />
+    <view>
+       <text>请上传身份证正反面</text>
+    </view>
   </view>
 
 
 
   <view class="button_up_blank"></view>
 
-  <van-button type="primary"  size="large" catchtap="bindOwner">提交申请</van-button>
+  <van-button type="primary"  size="large" catchtap="saveApplicationKey">提交申请</van-button>
 <view class="button_up_blank"></view>
 
   <van-popup show="{{ showTypeCd }}" position="bottom" custom-style="height: 40%;">
