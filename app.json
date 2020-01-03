@@ -13,8 +13,9 @@
     "pages/repairList/detail/detail",
     "pages/family/family",
     "pages/familyList/familyList",
+    "pages/complaintList/complaintList",
     "pages/complaint/complaint",
-    "pages/complaintList/complaintList"
+    "pages/viewComplaint/viewComplaint"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -10,9 +10,17 @@ Page({
    */
   data: {
     columns: ['投诉', '建议'],
-    typeName:'',
-    typeCd:'',
-    typeShow:false,
+    typeName: '',
+    typeCd: '',
+    typeShow: false,
+    fileList: [],
+    tel: '',
+    context: '',
+    complaintName: '',
+    roomId: '',
+    userId: '',
+    storeId: '',
+
     areaCode: '',
     areaName: '',
     communityName: '',
@@ -37,14 +45,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let _that = this;
     let _location = context.getLocation();
     let _currentLocation = context.getCurrentLocation();
     let _areaName = _currentLocation.city + _currentLocation.district;
     let _areaCode = _currentLocation.adcode;
     //加载省份
-    context._loadArea('', '', function (_areaList) {
+    context._loadArea('', '', function(_areaList) {
       _that.setData({
         areaList: _areaList,
         communityName: _location,
@@ -58,14 +66,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let _currentLocation = context.getCurrentLocation();
     let _areaName = _currentLocation.city + _currentLocation.district;
     let _areaCode = _currentLocation.adcode;
@@ -78,39 +86,39 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  bindInput: function (e) {
+  bindInput: function(e) {
     console.log('数据监听', e);
     let _that = this;
     let dataset = e.currentTarget.dataset;
@@ -122,32 +130,38 @@ Page({
     //  });
     console.log(this.data);
   },
-  sendMsgCode: function () {
+  sendMsgCode: function() {
 
   },
-  bindOwner: function (e) {
+  bindOwner: function(e) {
+
+
+    // context.getOwner(function(_ownerInfo) {
+    // console.log(_ownerInfo, 888888888);
+    // if (_ownerInfo) {
 
     let obj = {
-      "areaCode": this.data.areaCode,
-      "communityName": this.data.communityName,
-      "appUserName": this.data.appUserName,
-      "idCard": this.data.idCard,
-      "link": this.data.link,
-      "msgCode": this.data.msgCode
+      "typeCd": this.data.typeCd,
+      "complaintName": this.data.complaintName,
+      "tel": this.data.tel,
+      // "roomId": _ownerInfo.roomId,
+      "context": this.data.context,
+      "userId": this.data.userId,
+      "storeId": this.data.storeId
     }
     let msg = "";
     if (obj.areaCode == "") {
       msg = "请选择地区";
     } else if (obj.communityName == "") {
       msg = "请填写小区名称";
-    } else if (obj.appUserName == "") {
-      msg = "请填写业主名称";
-    } else if (obj.idCard == "") {
-      msg = "请填写身份证";
-    } else if (obj.link == "") {
+    } else if (obj.typeCd == "") {
+      msg = "请选择投诉类型";
+    } else if (obj.complaintName == "") {
+      msg = "请填写投诉人";
+    } else if (obj.tel == "") {
       msg = "请填写手机号";
-    } else if (obj.msgCode == "") {
-      msg = "请填写验证码";
+    } else if (obj.context == "") {
+      msg = "请填写投诉内容";
     }
     if (msg != "") {
       wx.showToast({
@@ -158,18 +172,28 @@ Page({
     } else {
       console.log("提交数据", obj);
       wx.request({
-        url: constant.url.appUserBindingOwner,
+        url: constant.url.saveComplaint,
         header: context.getHeaders(),
         method: "POST",
-        data: obj, //动态数据
-        success: function (res) {
+        data: {
+          "typeCd": "809001",
+          "roomId": "752019100758260005",
+          "complaintName": "吴学文",
+          "tel": "17797173942",
+          "context": "服务太差",
+          "userId": "1292827282727",
+          "storeId": "402019032924930007",
+        },
+        // data: obj, //动态数据
+        success: function(res) {
           console.log(res);
           //成功情况下跳转
-          wx.redirectTo({
-            url: "/pages/viewBindOwner/viewBindOwner"
-          });
+          // wx.redirectTo({
+          //   url: "/pages/viewComplaint/viewComplaint"
+          // });
         },
-        fail: function (e) {
+        fail: function(e) {
+          console.log(e);
           wx.showToast({
             title: "服务器异常了",
             icon: 'none',
@@ -177,10 +201,23 @@ Page({
           })
         }
       });
+
     }
 
+
+
+    // } else {
+
+    // }
+    // });
+
+
+
+
+
+
   },
-  onConfirm: function (e) {
+  onConfirm: function(e) {
     console.log("onConfirm", e);
     let _areaCode = e.detail.values[2].code;
     let _areaName = e.detail.values[1].name + e.detail.values[2].name;
@@ -190,39 +227,52 @@ Page({
       areaShow: false
     });
   },
-  onChange: function (e) {
+  onChange: function(e) {
     console.log(e);
   },
-  chooseArea: function (e) {
+  chooseArea: function(e) {
     this.setData({
       areaShow: true
     });
   },
-  onCancel: function (e) {
+  onCancel: function(e) {
     this.setData({
       areaShow: false
     });
   },
 
 
-  onTypeConfirm: function (e) {
+  onTypeConfirm: function(e) {
     console.log("onConfirm", e);
     this.setData({
       typeName: e.detail.value,
-      typeCd: e.detail.index,
+      typeCd: e.detail.index ? '809001' : '809002',
       typeShow: false
     });
   },
-  onTypeCancel: function (e) {
+  onTypeCancel: function(e) {
     this.setData({
       typeShow: false
     });
   },
-  
-  chooseType: function (e) {
+
+  chooseType: function(e) {
     this.setData({
       typeShow: true
     });
   },
+
+  afterRead: function(e) {
+    console.log(e);
+    wx.getFileSystemManager().readFile({
+      filePath: e.detail.file.path, //选择图片返回的相对路径
+      encoding: "base64", //这个是很重要的
+      success: res => { //成功的回调
+        //返回base64格式
+        console.log('data:image/png;base64,' + res.data)
+        // photos[x] = res.data;
+      }
+    })
+  }
 
 })

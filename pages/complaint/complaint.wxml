@@ -1,22 +1,27 @@
 <view>
-  <view class="block__title">小区信息</view>
+  <!-- <view class="block__title">小区信息</view>
   <van-cell-group>
     <van-field value="{{ areaName }}" required readonly label="市/区" icon="arrow" catchtap="chooseArea" placeholder="请选择市/区" />
 
     <van-field value="{{ communityName }}" bindinput="bindInput" data-name="communityName" label="小区名称" placeholder="请输入小区名称" required border="{{ false }}" required clearable />
-  </van-cell-group>
+  </van-cell-group> -->
 
   <view class="block__title">投诉信息</view>
   <van-cell-group>
     <van-field value="{{ typeName }}" label="投诉类型" placeholder="请选择投诉类型" catchtap="chooseType" required readonly icon="arrow" />
-    <van-field value="{{ idCard }}" bindinput="bindInput" data-name="idCard" type="idcard" label="投诉人" placeholder="请输入投诉人" required />
-    <van-field value="{{ link }}" bindinput="bindInput" data-name="link" type="number" label="手机号" placeholder="请输入手机号" required />
-    <van-field value="{{ message }}" label="投诉内容" type="textarea" placeholder="请输入投诉内容" autosize border="{{ false }}" required />
+    <van-field value="{{ complaintName }}" bindinput="bindInput" data-name="complaintName" label="投诉人" placeholder="请输入投诉人" required />
+    <van-field value="{{ tel }}" bindinput="bindInput" data-name="tel" type="number" label="手机号" placeholder="请输入手机号" required />
+    <van-field value="{{ context }}" bindinput="bindInput" data-name="context" label="投诉内容" type="textarea" placeholder="请输入投诉内容" autosize border="{{ false }}" required />
   </van-cell-group>
-<van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
+
+  <view class="block__title">相关图片</view>
+  <view class="uploader-container">
+    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" />
+  </view>
+
   <view class="button_up_blank"></view>
 
-  <van-button type="primary" size="large" catchtap="bindOwner">绑定业主</van-button>
+  <van-button type="primary" size="large" catchtap="bindOwner">提交</van-button>
 
 
 

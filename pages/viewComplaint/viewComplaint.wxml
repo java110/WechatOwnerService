@@ -1,0 +1,26 @@
+<view>
+  <van-steps
+    steps="{{ steps }}"
+    active="{{ active }}"
+  />
+  <view class="block__title">小区信息</view>
+  <van-cell-group>
+    <van-cell title="市/区" value="{{areaName}}" />
+    <van-cell title="小区编码" value="{{communityId}}" />
+    <van-cell title="小区名称" value="{{communityName}}" />
+  </van-cell-group>
+
+  <view class="block__title">业主信息</view>
+  <van-cell-group>
+    <van-cell title="业主编码" value="{{appUserId}}" />
+    <van-cell title="姓名" value="{{appUserName}}" />
+    <van-cell title="身份证" value="{{idCard}}" />
+    <van-cell title="手机号" value="{{link}}" />
+  </van-cell-group>
+
+   <view class="button_up_blank"></view>
+
+  <block wx:if="{{active == 1}}">
+    <van-button type="danger"  size="large" catchtap="unbindOwner">解绑业主</van-button>
+  </block>
+</view>

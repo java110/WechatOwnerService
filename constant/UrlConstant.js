@@ -24,6 +24,9 @@ const saveOwner = baseUrl + 'app/owner.saveOwner';
 const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers';
 //投诉建议列表
 const listComplaints = baseUrl + 'app/complaint.listComplaints';
+//添加投诉建议
+const saveComplaint = baseUrl + 'app/complaint.saveComplaint';
+
 
 //绑定业主
 const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner';
@@ -49,5 +52,6 @@ module.exports = {
   queryAppUserBindingOwner: queryAppUserBindingOwner,
   queryOwnerMembers: queryOwnerMembers,
   listComplaints: listComplaints,
+  saveComplaint: saveComplaint,
   appUserUnBindingOwner: appUserUnBindingOwner
 };

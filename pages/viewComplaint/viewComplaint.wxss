@@ -1,4 +1,4 @@
-@import '../../lib/common/index.wxss';
+/* pages/viewBindOwner/viewBindOwner.wxss */
 
 .block__title {
   margin: 0;
@@ -8,10 +8,7 @@
   padding: 60rpx 30rpx 20rpx;
 }
 
+
 .button_up_blank{
   height: 40rpx;
-}
-
-.uploader-container{
-  margin: 0 10px;
 }
