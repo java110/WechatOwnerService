@@ -1,0 +1,30 @@
+<view>
+  <van-grid clickable column-num="2">
+  <van-grid-item
+    icon="like-o"
+    link-type="navigateTo"
+    url="/pages/applicationKey/applicationKey"
+    text="申请钥匙"
+  />
+  <van-grid-item
+    icon="search"
+    link-type="reLaunch"
+    url="/pages/viewApplicationKeyUser/viewApplicationKeyUser"
+    text="我的钥匙"
+  />
+</van-grid>
+<van-grid clickable column-num="2">
+  <van-grid-item
+    icon="home-o"
+    link-type="navigateTo"
+    url="/pages/applicationKey/applicationKey"
+    text="访客钥匙"
+  />
+  <van-grid-item
+    icon="search"
+    link-type="reLaunch"
+    url="/pages/viewApplicationKeyUser/viewApplicationKeyUser"
+    text="上传人脸"
+  />
+</van-grid>
+</view>

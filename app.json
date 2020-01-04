@@ -7,6 +7,7 @@
     "pages/applicationKeyLocation/applicationKeyLocation",
     "pages/applicationKeyUser/applicationKeyUser",
     "pages/location/location",
+    "pages/openDoor/openDoor",
     "pages/my/my",
     "pages/notice/index",
     "pages/notice/detail/detail",
@@ -37,7 +38,7 @@
         "selectedIconPath": "images/home-selected.png"
       },
       {
-        "pagePath": "pages/applicationKey/applicationKey",
+        "pagePath": "pages/openDoor/openDoor",
         "text": "开门",
         "iconPath": "images/applicationKey.png",
         "selectedIconPath": "images/applicationKey-selected.png"
@@ -75,7 +76,9 @@
     "van-uploader": "lib/uploader/index",
       "van-row": "lib/row/index",
       "van-col": "lib/col/index",
-      "van-datetime-picker": "lib/datetime-picker/index"
+      "van-datetime-picker": "lib/datetime-picker/index",
+      "van-grid": "lib/grid/index",
+      "van-grid-item": "lib/grid-item/index"
     
   },
   "sitemapLocation": "sitemap.json"
