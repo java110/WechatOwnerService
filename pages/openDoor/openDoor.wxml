@@ -27,7 +27,7 @@
   <van-grid-item
     icon="search"
     link-type="navigateTo"
-    url="/pages/viewApplicationKeyUser/viewApplicationKeyUser"
+    url="/pages/visitorApplicationKey/visitorApplicationKey"
     text="访客钥匙"
   />
 </van-grid>
@@ -36,7 +36,7 @@
     icon="home-o"
     link-type="navigateTo"
     url="/pages/applicationKey/applicationKey"
-    text="上传人脸"
+    text="采集人脸"
   />
   <van-grid-item
     icon="home-o"

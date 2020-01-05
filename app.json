@@ -8,6 +8,7 @@
     "pages/applicationKeyUser/applicationKeyUser",
     "pages/applicationKeyProgress/applicationKeyProgress",
     "pages/myApplicationKey/myApplicationKey",
+    "pages/visitorApplicationKey/visitorApplicationKey",
     "pages/location/location",
     "pages/openDoor/openDoor",
     "pages/my/my",
