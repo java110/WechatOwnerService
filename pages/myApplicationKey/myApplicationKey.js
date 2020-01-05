@@ -84,7 +84,8 @@ Page({
       page: 1,
       row: 10,
       idCard: this.data.idCard,
-      communityId: this.data.communityId
+      communityId: this.data.communityId,
+      typeFlag: '1100102'
     }
     context.request({
       url: constant.url.listApplicationKeys,
