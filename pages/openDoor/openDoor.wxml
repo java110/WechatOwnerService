@@ -21,7 +21,7 @@
   <van-grid-item
     icon="home-o"
     link-type="navigateTo"
-    url="/pages/applicationKey/applicationKey"
+    url="/pages/myApplicationKey/myApplicationKey"
     text="我的钥匙"
   />
   <van-grid-item
