@@ -43,7 +43,7 @@ const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines';
 const applyApplicationKey = baseUrl +"app/applicationKey.applyApplicationKey";
 
 //查询钥匙
-const listApplicationKeys = baseUrl +"applicationKey.listApplicationKeys";
+const listApplicationKeys = baseUrl +"app/applicationKey.listApplicationKeys";
 
 
 module.exports = {

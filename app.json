@@ -6,6 +6,7 @@
     "pages/applicationKey/applicationKey",
     "pages/applicationKeyLocation/applicationKeyLocation",
     "pages/applicationKeyUser/applicationKeyUser",
+    "pages/applicationKeyProgress/applicationKeyProgress",
     "pages/location/location",
     "pages/openDoor/openDoor",
     "pages/my/my",

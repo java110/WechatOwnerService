@@ -13,8 +13,8 @@
     <van-grid-item
       icon="search"
       link-type="navigateTo"
-      url="/pages/viewApplicationKeyUser/viewApplicationKeyUser"
-      text="我的钥匙"
+      url="/pages/applicationKeyProgress/applicationKeyProgress"
+      text="申请进度"
     />
 </van-grid>
 <van-grid clickable column-num="2">
@@ -22,16 +22,22 @@
     icon="home-o"
     link-type="navigateTo"
     url="/pages/applicationKey/applicationKey"
-    text="访客钥匙"
+    text="我的钥匙"
   />
   <van-grid-item
     icon="search"
     link-type="navigateTo"
     url="/pages/viewApplicationKeyUser/viewApplicationKeyUser"
-    text="上传人脸"
+    text="访客钥匙"
   />
 </van-grid>
 <van-grid clickable column-num="2">
+  <van-grid-item
+    icon="home-o"
+    link-type="navigateTo"
+    url="/pages/applicationKey/applicationKey"
+    text="上传人脸"
+  />
   <van-grid-item
     icon="home-o"
     link-type="navigateTo"
