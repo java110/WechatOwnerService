@@ -108,7 +108,7 @@ Page({
   //封装请求
   request: function (data) {
     return new Promise((resolve, reject) => {
-      wx.request({
+      context.request({
         url: constant.url.listComplaints,
         header: context.getHeaders(),
         method: "GET",

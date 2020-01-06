@@ -4,6 +4,8 @@
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
     "pages/applicationKey/applicationKey",
+    "pages/applicationKeyLocation/applicationKeyLocation",
+    "pages/applicationKeyUser/applicationKeyUser",
     "pages/location/location",
     "pages/my/my",
     "pages/notice/index",
@@ -15,7 +17,8 @@
     "pages/familyList/familyList",
     "pages/complaintList/complaintList",
     "pages/complaint/complaint",
-    "pages/viewComplaint/viewComplaint"
+    "pages/viewComplaint/viewComplaint",
+    "pages/viewApplicationKeyUser/viewApplicationKeyUser"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -37,8 +40,8 @@
       {
         "pagePath": "pages/applicationKey/applicationKey",
         "text": "开门",
-        "iconPath": "images/circle.png",
-        "selectedIconPath": "images/circleSelected.png"
+        "iconPath": "images/applicationKey.png",
+        "selectedIconPath": "images/applicationKey-selected.png"
       },
       {
         "pagePath": "pages/my/my",
@@ -69,7 +72,12 @@
     "van-radio": "lib/radio/index",
     "van-radio-group": "lib/radio-group/index",
     "van-picker": "lib/picker/index",
-    "van-uploader": "lib/uploader/index"
+    "van-uploader": "lib/uploader/index",
+    "van-row": "lib/row/index",
+    "van-col": "lib/col/index",
+    "van-datetime-picker": "lib/datetime-picker/index",
+    "van-tab": "lib/tab/index",
+    "van-tabs": "lib/tabs/index"
   },
   "sitemapLocation": "sitemap.json"
 }

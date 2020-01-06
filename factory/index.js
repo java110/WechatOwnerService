@@ -9,11 +9,16 @@
 const loginFactory = require("LoginFactory.js");
 const userFactory = require("UserFactory.js");
 const fileFactory = require("FileFactory.js");
+const coreFactory = require("CoreFactory.js");
+const httpFactory = require("HttpFactory.js");
+const base64Factory = require("Base64Factory.js");
 
 
 module.exports = {
   login: loginFactory,
   user: userFactory,
-  file: fileFactory
-
+  file: fileFactory,
+  core: coreFactory,
+  http: httpFactory,
+  base64: base64Factory
 }

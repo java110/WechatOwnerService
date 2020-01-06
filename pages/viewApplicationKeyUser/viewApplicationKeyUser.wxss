@@ -1,5 +1,3 @@
-@import '../../lib/common/index.wxss';
-
 .block__title {
   margin: 0;
   font-weight: 400;
@@ -12,12 +10,9 @@
   height: 40rpx;
 }
 
-.uploader-container{
-  margin: 0 10px;
-}
-
 .aku_photo_view{
   background-color: #FFF;
+  height: 250rpx;
   padding: 40rpx 0 40rpx 40rpx;
 }
 

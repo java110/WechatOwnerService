@@ -1,2 +1,50 @@
-<!--pages/applicationKey/applicationKey.wxml-->
-<text>pages/applicationKey/applicationKey.wxml</text>
+<view class="ak_context">
+  <view class="ak_row">
+    <view class="ak_row_black">
+    </view>
+    <view class="ak_row_title">
+      <text>申请门禁钥匙</text>
+    </view>
+    <view class="ak_row_black_01"/>
+    <van-row gutter="20" >
+      <van-col span="12" class="ak_row_col">
+          <view>
+              <text class="iconfont iconshenqing ak_icon_text"></text>
+          </view>
+          <view class="ak_row_col_t">
+              <text>1.提交申请钥匙</text>
+          </view>
+      </van-col>
+      <van-col span="12" class="ak_row_col">
+          <view>
+              <text class="iconfont icondengdai ak_icon_text"></text>
+          </view>
+          <view class="ak_row_col_t">
+              <text>2.物业人员审核</text>
+          </view>
+      </van-col>
+    </van-row>
+
+    <view class="ak_row_black_02"/>
+
+    <van-row>
+      <van-col span="24" class="ak_row_col">
+           <view>
+            <text class="iconfont iconshenqingtongguo ak_icon_text"></text>
+          </view>
+          <view class="ak_row_col_t">
+            <text>3.审核通过后生成电子钥匙</text>
+          </view>
+      </van-col>
+    </van-row>
+
+     <view class="ak_row_black_03"/>
+
+      <view  class="ak_btn">
+            <van-button type="primary" block bind:click="applyApplicationKey">申请钥匙</van-button>
+      </view>
+
+     <view class="ak_row_black_04"/>
+   
+  </view>
+</view>

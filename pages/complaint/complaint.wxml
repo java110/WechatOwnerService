@@ -1,10 +1,8 @@
 <view>
-  <!-- <view class="block__title">小区信息</view>
+  <view class="block__title">房屋信息</view>
   <van-cell-group>
-    <van-field value="{{ areaName }}" required readonly label="市/区" icon="arrow" catchtap="chooseArea" placeholder="请选择市/区" />
-
-    <van-field value="{{ communityName }}" bindinput="bindInput" data-name="communityName" label="小区名称" placeholder="请输入小区名称" required border="{{ false }}" required clearable />
-  </van-cell-group> -->
+    <van-field value="{{ typeName }}" label="房屋" placeholder="请选择房屋" catchtap="chooseType" required readonly icon="arrow" />
+  </van-cell-group>
 
   <view class="block__title">投诉信息</view>
   <van-cell-group>
@@ -15,12 +13,12 @@
   </van-cell-group>
 
   <view class="block__title">相关图片</view>
-  <view class="uploader-container">
-    <van-uploader file-list="{{ fileList }}" max-count="3" bind:after-read="afterRead" />
+  <view class="aku_photo_view">
+    <van-uploader file-list="{{ photoList }}" max-count="3" bind:after-read="afterRead" bind:delete="removePhoto" />
   </view>
 
   <view class="button_up_blank"></view>
-
+  
   <van-button type="primary" size="large" catchtap="bindOwner">提交</van-button>
 
 

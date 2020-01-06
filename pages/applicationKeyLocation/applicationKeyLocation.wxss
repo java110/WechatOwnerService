@@ -1,0 +1,12 @@
+.akl_community{
+  padding: 10rpx 0;
+}
+.akl_wirte_btn{
+  padding-top: 60rpx;
+  padding-bottom: 60rpx;
+  background-color: #fff;
+}
+.akl_wirte_btn .akl_wirte_btn_small{
+  width: 80%;
+   margin:0 auto;
+}

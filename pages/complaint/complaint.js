@@ -13,7 +13,7 @@ Page({
     typeName: '',
     typeCd: '',
     typeShow: false,
-    fileList: [],
+    photoList: [],
     tel: '',
     context: '',
     complaintName: '',
@@ -171,8 +171,9 @@ Page({
       })
     } else {
       console.log("提交数据", obj);
-      wx.request({
-        url: constant.url.saveComplaint,
+      
+      context.request({
+        url: constant.url.appUserBindingOwner,
         header: context.getHeaders(),
         method: "POST",
         data: {

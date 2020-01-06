@@ -21,7 +21,9 @@ class LoginFactory {
   checkLoginStatus(callback = () => { }) {
     let _that = this;
     let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
-    if (loginFlag) {
+    console.log("afterOneHourDate", loginFlag);
+    let nowDate = new Date();
+    if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
       // 检查 session_key 是否过期
       wx.checkSession({
         // session_key 有效(为过期)
@@ -92,7 +94,18 @@ class LoginFactory {
           //that.globalData.userInfo = res.userInfo;
           console.log(res.userInfo);
           wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(res.userInfo));
-          wx.setStorageSync(constant.mapping.LOGIN_FLAG, res.sessionKey);
+          let date = new Date();
+          let year = date.getFullYear(); //获取当前年份
+          let mon = date.getMonth(); //获取当前月份
+          let da = date.getDate(); //获取当前日
+          let h = date.getHours()+1; //获取小时
+          let m = date.getMinutes(); //获取分钟
+          let s = date.getSeconds(); //获取秒
+          console.log("获取过去时间",year, mon, da, h, m, s)
+          //将时间格式转化为时间戳
+          let afterOneHourDate = new Date(year, mon, da, h, m, s);  //30s之后的时间
+          console.log("afterOneHourDate", afterOneHourDate)
+          wx.setStorageSync(constant.mapping.LOGIN_FLAG, { sessionKey: res.sessionKey, expireTime: afterOneHourDate.getTime()});
           wx.setStorageSync(constant.mapping.TOKEN, res.token);
           callback();
         } else {

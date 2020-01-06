@@ -1,22 +1,48 @@
 <view class="user-container">
-  <view class="add_button">
+  <!-- <view class="add_button">
     <button size="mini" type="primary" catchtap="goAdd" data-item="{{item}}">+ 添加</button>
-  </view>
-  <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
-    <view class="title">
-      <view>{{item.complaintName}}</view>
-      <view>{{item.tel}}</view>
-    </view>
-    <view class="main">
-      <view>
-        <view class="text"> 状态: {{item.stateName}}</view>
-        <view class="text"> 房间: {{item.roomId}}</view>
-        <view class="text"> 类型: {{item.typeCdName}}</view>
+  </view> -->
+
+  <van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="正在处理">
+      <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
+        <view class="title">
+          <view>{{item.complaintName}}</view>
+          <view>{{item.tel}}</view>
+        </view>
+        <view class="main">
+          <view>
+            <view class="text"> 状态: {{item.stateName}}</view>
+            <view class="text"> 房间: {{item.roomId}}</view>
+            <view class="text"> 类型: {{item.typeCdName}}</view>
+          </view>
+          <view>
+            <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">修改</button>
+            <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">删除</button>
+          </view>
+        </view>
       </view>
-      <view>
-        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">修改</button>
-        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">删除</button>
+    </van-tab>
+    <van-tab title="处理完成">
+      <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
+        <view class="title">
+          <view>{{item.complaintName}}</view>
+          <view>{{item.tel}}</view>
+        </view>
+        <view class="main">
+          <view>
+            <view class="text"> 状态: {{item.stateName}}</view>
+            <view class="text"> 房间: {{item.roomId}}</view>
+            <view class="text"> 类型: {{item.typeCdName}}</view>
+          </view>
+          <view>
+            <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">修改</button>
+            <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">删除</button>
+          </view>
+        </view>
       </view>
-    </view>
-  </view>
+    </van-tab>
+  </van-tabs>
+
+
 </view>

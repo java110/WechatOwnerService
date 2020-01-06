@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+/**
+ * 申请钥匙
+ */
+  applyApplicationKey:function(){
+      wx.navigateTo({
+        url: '/pages/applicationKeyLocation/applicationKeyLocation',
+      });
   }
 })

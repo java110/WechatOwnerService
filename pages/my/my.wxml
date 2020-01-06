@@ -41,6 +41,15 @@
         <view class="tab-arrow"></view>
     </view>
 
+        
+    <view class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="myComplaint">
+        <view>
+            <text class="iconfont iconaccount icon"></text>
+            <text class="tab-text">我的投诉单</text>
+        </view>
+        <view class="tab-arrow"></view>
+    </view>
+
     <!-- <view class="tab-item" hover-class="tab-item-hover" catchtap="goMyBooks">
         <view>
             <image src="../../images/bought.png" mode="aspectFit" class="tab-icon"></image>

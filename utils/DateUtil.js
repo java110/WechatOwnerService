@@ -19,7 +19,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 
@@ -59,7 +59,87 @@ const getDateYYYYMMDDHHMISS = function () {
   return year + "" + month + "" + day + "" + hour + "" + minute + "" + second;
 }
 
+const addYear = function(_date,_year){
+
+  let year = _date.getFullYear() + _year; //获取当前年份
+  let mon = _date.getMonth(); //获取当前月份
+  let da = _date.getDate(); //获取当前日
+  let h = _date.getHours(); //获取小时
+  let m = _date.getMinutes(); //获取分钟
+  let s = _date.getSeconds(); //获取秒
+  let newDate = new Date(year, mon, da, h, m, s); 
+  return newDate;
+}
+
+const addMonth = function (_date, _month) {
+
+  let year = _date.getFullYear(); //获取当前年份
+  let mon = _date.getMonth() + _month; //获取当前月份
+  let da = _date.getDate(); //获取当前日
+  let h = _date.getHours(); //获取小时
+  let m = _date.getMinutes(); //获取分钟
+  let s = _date.getSeconds(); //获取秒
+  let newDate = new Date(year, mon, da, h, m, s);
+  return newDate;
+}
+
+const addDay = function (_date, _day) {
+
+  let year = _date.getFullYear(); //获取当前年份
+  let mon = _date.getMonth(); //获取当前月份
+  let da = _date.getDate() + _day; //获取当前日
+  let h = _date.getHours(); //获取小时
+  let m = _date.getMinutes(); //获取分钟
+  let s = _date.getSeconds(); //获取秒
+  let newDate = new Date(year, mon, da, h, m, s);
+  return newDate;
+}
+
+const addHour = function (_date, _hour) {
+
+  let year = _date.getFullYear(); //获取当前年份
+  let mon = _date.getMonth(); //获取当前月份
+  let da = _date.getDate(); //获取当前日
+  let h = _date.getHours() + _hour; //获取小时
+  let m = _date.getMinutes(); //获取分钟
+  let s = _date.getSeconds(); //获取秒
+  let newDate = new Date(year, mon, da, h, m, s);
+  return newDate;
+}
+
+
+const addMinutes = function (_date, _minute) {
+
+  let year = _date.getFullYear(); //获取当前年份
+  let mon = _date.getMonth(); //获取当前月份
+  let da = _date.getDate(); //获取当前日
+  let h = _date.getHours(); //获取小时
+  let m = _date.getMinutes() + _minute; //获取分钟
+  let s = _date.getSeconds(); //获取秒
+  let newDate = new Date(year, mon, da, h, m, s);
+  return newDate;
+}
+
+const addSeconds = function (_date, _second) {
+
+  let year = _date.getFullYear(); //获取当前年份
+  let mon = _date.getMonth(); //获取当前月份
+  let da = _date.getDate(); //获取当前日
+  let h = _date.getHours(); //获取小时
+  let m = _date.getMinutes(); //获取分钟
+  let s = _date.getSeconds() + _second; //获取秒
+  let newDate = new Date(year, mon, da, h, m, s);
+  return newDate;
+}
+
+
 module.exports = {
   formatTime: formatTime,
-  getDateYYYYMMDDHHMISS: getDateYYYYMMDDHHMISS
+  getDateYYYYMMDDHHMISS: getDateYYYYMMDDHHMISS,
+  addYear: addYear,
+  addMonth: addMonth,
+  addDay: addDay,
+  addHour: addHour,
+  addMinutes: addMinutes,
+  addSeconds: addSeconds
 }
