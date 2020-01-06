@@ -1,0 +1,16 @@
+.controls {
+  position: relative;
+  display: flex;
+}
+.cf_text_na{
+
+  font-size: 48rpx;
+  text-align: center;
+  margin:80rpx 0rpx;
+  font-display: 700;
+}
+.noticeTXT{
+  font-size: 10PX;
+  color: rgb(12, 242, 240);
+  text-align: center
+}
