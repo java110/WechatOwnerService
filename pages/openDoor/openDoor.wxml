@@ -1,0 +1,48 @@
+<view>
+  <view>
+     <image src="/images/openDoorTop.png" class="heard-location-icon" />
+  </view>
+
+  <van-grid clickable column-num="2">
+    <van-grid-item
+      icon="like-o"
+      link-type="navigateTo"
+      url="/pages/applicationKey/applicationKey"
+      text="申请钥匙"
+    />
+    <van-grid-item
+      icon="search"
+      link-type="navigateTo"
+      url="/pages/applicationKeyProgress/applicationKeyProgress"
+      text="申请进度"
+    />
+</van-grid>
+<van-grid clickable column-num="2">
+  <van-grid-item
+    icon="home-o"
+    link-type="navigateTo"
+    url="/pages/myApplicationKey/myApplicationKey"
+    text="我的钥匙"
+  />
+  <van-grid-item
+    icon="search"
+    link-type="navigateTo"
+    url="/pages/visitorApplicationKey/visitorApplicationKey"
+    text="访客钥匙"
+  />
+</van-grid>
+<van-grid clickable column-num="2">
+  <van-grid-item
+    icon="home-o"
+    link-type="navigateTo"
+    url="/pages/applicationKey/applicationKey"
+    text="采集人脸"
+  />
+  <van-grid-item
+    icon="home-o"
+    link-type="navigateTo"
+    url="/pages/applicationKey/applicationKey"
+    text="二维码开门"
+  />
+</van-grid>
+</view>

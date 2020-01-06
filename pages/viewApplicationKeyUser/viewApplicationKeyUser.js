@@ -32,7 +32,8 @@ Page({
     startTime:null,
     endTime: null,
     tel:'',
-    stateName:''
+    stateName:'',
+    communityId:''
   },
 
   /**
@@ -40,8 +41,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      idCard: options.idCard
+      applicationKeyId: options.applicationKeyId,
+      communityId: options.communityId,
     });
+    this.showApplicationKey();
 
   },
 
@@ -93,14 +96,13 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  loadApplicationKey:function(){
-
+  showApplicationKey:function(){
     let _that = this;
     let _objData = {
-      page : 1,
-      row : 1,
-      idCard : this.data.idCard
+      page: 1,
+      row: 1,
+      applicationKeyId: this.data.applicationKeyId,
+      communityId: this.data.communityId
     }
     context.request({
       url: constant.url.listApplicationKeys,
@@ -109,44 +111,57 @@ Page({
       data: _objData, //动态数据
       success: function (res) {
         console.log(res);
-        if (res.resultCode == 200) {
+        if (res.statusCode == 200) {
           //成功情况下跳转
           let _applicationKeys = res.data.applicationKeys;
-          if (_applicationKeys.length == 0){
+          if (_applicationKeys.length == 0) {
             wx.showToast({
               title: "未查询到钥匙",
               icon: 'none',
               duration: 2000
             });
-            return ;
+            return;
           }
+
+          console.log('钥匙信息：', _applicationKeys);
 
           let _applicationKey = _applicationKeys[0];
           let _active = '0';
-          if (_applicationKey.state == '10001'){
+          let _sex = "女";
+          let _typeCd = "";
+          if (_applicationKey.state == '10001') {
             _active = '2';
           } else if (_applicationKey.state == '10002') {
             _active = '2';
-          }else{
+          } else {
             _active = '1';
           }
+
+          if (_applicationKey.sex == '0') {
+            _sex = '男';
+          }
+
+          if (_applicationKey.typeCd == "10004") {
+            _typeCd = "业主";
+          } else if (_applicationKey.typeCd == "10005") {
+            _typeCd = "家庭成员";
+          } else {
+            _typeCd = "租客";
+          }
+
           _that.setData({
             applicationKeyId: _applicationKey.applicationKeyId,
             name: _applicationKey.name,
             age: _applicationKey.age,
-            sex: _applicationKey.sex,
-            typeCdName: _applicationKey.typeCd,
+            sex: _sex,
+            typeCdName: _typeCd,
             idCard: _applicationKey.idCard,
             startTime: _applicationKey.startTime,
             endTime: _applicationKey.endTime,
             tel: _applicationKey.tel,
             active: _active,
-            stateName: stateName
+            stateName: _applicationKey.stateName
           });
-          
-
-
-          
         }
       },
       fail: function (e) {

@@ -1,4 +1,4 @@
-<text>
+<view>
   <van-steps
     steps="{{ steps }}"
     active="{{ active }}"
@@ -21,4 +21,4 @@
     <van-cell title="手机号" value="{{tel}}" />
   </van-cell-group>
 
-</text>
+</view>

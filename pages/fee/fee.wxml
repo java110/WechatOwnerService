@@ -1,0 +1,24 @@
+<!-- <view>
+  <block wx:for="{{items}}" wx:for-item="item" wx:key="index">
+    <view>{{index}}:{{item.name}}:{{item.fee}}</view>
+  </block>
+</view> -->
+<view class="user-container">
+  <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
+    <view class="title">
+      <view>{{item.fee_type_cd}}</view>
+    </view>
+    <view class="main">
+      <view>
+        <view class="text"> 小区ID: {{item.community_id}}</view>
+        <view class="text"> 开始时间: {{item.start_time}}</view>
+        <view class="text"> 结束时间: {{item.end_time}}</view>
+        <view class="text"> 总金额: {{item.amount}}</view>
+      </view>
+      <view>
+        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">付款</button>
+        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">反馈</button>
+      </view>
+    </view>
+  </view>
+</view>

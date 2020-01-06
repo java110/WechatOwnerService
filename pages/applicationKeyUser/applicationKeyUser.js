@@ -328,7 +328,7 @@ Page({
         if(res.statusCode == 200){
           //成功情况下跳转
           wx.redirectTo({
-            url: "/pages/viewApplicationKeyUser/viewApplicationKeyUser?idCard=" + _objData.idCard
+            url: "/pages/applicationKeyProgress/applicationKeyProgress"
           });
           return ;
         }

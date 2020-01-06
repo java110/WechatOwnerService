@@ -46,7 +46,10 @@ const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines';
 const applyApplicationKey = baseUrl +"app/applicationKey.applyApplicationKey";
 
 //查询钥匙
-const listApplicationKeys = baseUrl +"applicationKey.listApplicationKeys";
+const listApplicationKeys = baseUrl +"app/applicationKey.listApplicationKeys";
+
+//申请访客钥匙
+const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey";
 
 
 module.exports = {
@@ -65,5 +68,6 @@ module.exports = {
   appUserUnBindingOwner: appUserUnBindingOwner,
   listOwnerMachines: listOwnerMachines,
   applyApplicationKey: applyApplicationKey,
-  listApplicationKeys: listApplicationKeys
+  listApplicationKeys: listApplicationKeys,
+  applyVisitorApplicationKey: applyVisitorApplicationKey
 };
