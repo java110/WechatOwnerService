@@ -51,6 +51,11 @@ const listApplicationKeys = baseUrl +"app/applicationKey.listApplicationKeys";
 //申请访客钥匙
 const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey";
 
+//上传业主照片
+const uploadOwnerPhoto = baseUrl +"app/owner.uploadOwnerPhoto";
+
+const getOwnerPhotoPath = "https://hc.demo.winqi.cn/callComponent/download/getFile/fileByObjId";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -69,5 +74,7 @@ module.exports = {
   listOwnerMachines: listOwnerMachines,
   applyApplicationKey: applyApplicationKey,
   listApplicationKeys: listApplicationKeys,
-  applyVisitorApplicationKey: applyVisitorApplicationKey
+  applyVisitorApplicationKey: applyVisitorApplicationKey,
+  uploadOwnerPhoto: uploadOwnerPhoto,
+  getOwnerPhotoPath: getOwnerPhotoPath
 };

@@ -1,4 +1,6 @@
 // pages/viewPersonFace/viewPersonFace.js
+const context = require("../../context/Java110Context.js");
+const constant = context.constant;
 Page({
 
   /**
@@ -77,6 +79,12 @@ Page({
    * 查询业主人脸
    */
   loadOwnerFace:function(){
-
+    let _that = this;
+    context.getOwner(function(_owner){
+      let _face = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId+"&communityId="+_owner.communityId+"&fileTypeCd=10000&time=" + new Date();
+      _that.setData({
+        face: _face
+      });
+    });
   }
 })

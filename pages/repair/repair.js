@@ -159,7 +159,7 @@ Page({
       })
     } else {
       console.log("提交数据", obj);
-      wx.request({
+      context.request({
         url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
         header: context.getHeaders(),
         method: "POST",

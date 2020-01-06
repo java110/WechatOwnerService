@@ -1,10 +1,19 @@
-<view>
-  <camera mode="normal" device-position="front" flash="auto" binderror="error" style="width: 100%; height: 800rpx;">
-    <cover-view class="controls">
-        <cover-image class="img" src="../../images/camera.png" style="width:100%; height:100%"/>
+ <view>
+  <camera mode="normal" device-position="front" flash="off" binderror="error" style="width: 100%; height: 800rpx;">
+    <cover-view >
+        <cover-image class="img" src="../../images/camera.png" style="width:100%; height:800rpx"/>
     </cover-view>
-
     <cover-view class="cf_text_na">拿起手机，面向手机</cover-view>
   </camera>
-  <button type="primary" bindtap="takePhoto">人脸采集</button>
+
+  <view class="cf_btn">
+    <view class="cf_btn_v" wx:if="{{uploadFlag == false}}">
+      <van-button  type="primary" block  bind:click="takePhoto">人脸采集</van-button>
+    </view>
+    <view class="cf_btn_v" wx:else>
+      <van-button loading type="primary" block loading-text="人像采集中..."/>
+    </view>
+  </view>
+   
+  
 </view>

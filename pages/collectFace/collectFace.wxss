@@ -5,9 +5,24 @@
 .cf_text_na{
 
   font-size: 48rpx;
-  text-align: center;
   margin:80rpx 0rpx;
   font-display: 700;
+  position: absolute;
+  top: 0rpx;
+   text-align: center;
+   width: 100%;
+}
+
+.cf_btn{
+   text-align: center;
+   width: 100%;
+   padding:40rpx 0;
+   background-color: #f8f8f8;
+}
+
+.cf_btn .cf_btn_v{
+  width: 80%;
+  margin: 0 auto;
 }
 .noticeTXT{
   font-size: 10PX;
