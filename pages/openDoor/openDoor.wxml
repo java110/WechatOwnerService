@@ -35,7 +35,7 @@
   <van-grid-item
     icon="home-o"
     link-type="navigateTo"
-    url="/pages/applicationKey/applicationKey"
+    url="/pages/viewPersonFace/viewPersonFace"
     text="采集人脸"
   />
   <van-grid-item

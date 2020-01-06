@@ -21,7 +21,8 @@
     "pages/familyList/familyList",
     "pages/complaint/complaint",
     "pages/complaintList/complaintList",
-    "pages/viewApplicationKeyUser/viewApplicationKeyUser"
+    "pages/viewApplicationKeyUser/viewApplicationKeyUser",
+    "pages/viewPersonFace/viewPersonFace"
   ],
   "window": {
     "navigationBarTextStyle": "white",
