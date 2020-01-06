@@ -59,5 +59,8 @@ Page({
     wx.navigateTo({
       url: '../complaintList/complaintList',
     })
+  },
+  onGotUserInfo: function (e) {
+    console.log("nickname=" + JSON.stringify(e.detail.userInfo));
   }
 })

@@ -161,8 +161,16 @@ Page({
         success: function (res) {
           console.log(res);
           //成功情况下跳转
-          wx.redirectTo({
-            url: "/pages/viewBindOwner/viewBindOwner"
+          if (res.statusCode == 200) {
+              wx.redirectTo({
+                url: "/pages/viewBindOwner/viewBindOwner"
+              });
+              return;
+          }
+          wx.showToast({
+            title: res.data,
+            icon: 'none',
+            duration: 2000
           });
         },
         fail:function(e){

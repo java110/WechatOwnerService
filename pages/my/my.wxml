@@ -3,12 +3,12 @@
     
     <view class="userinfo">
         
-        <block wx:if="{{!userInfo.userName}}">
+        <!-- <block wx:if="{{!userInfo.userName}}">
             <image class="userinfo-avatar" src="../../images/login.png" background-size="cover" ></image>
             <button  class="userinfo-nickname" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">点击获取昵称</button>
-        </block>
-        
-        <block wx:else>
+        </block> -->
+        <!--  wx:else -->
+        <block>
             <view class="userinfo-avatar"  >
                 <open-data type="userAvatarUrl"   lang="zh_CN"/>
             </view>

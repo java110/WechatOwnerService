@@ -324,7 +324,7 @@ Page({
       method: "POST",
       data: _objData, //动态数据
       success: function (res) {
-        console.log(res);
+        console.log("请求返回信息：",res);
         if(res.statusCode == 200){
           //成功情况下跳转
           wx.redirectTo({
