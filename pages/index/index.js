@@ -39,7 +39,7 @@ Page({
       }, {
         name: "投诉建议",
         src: "/images/3.png",
-        href:"/pages/complaintList/complaintList"
+        href:"/pages/complaint/complaint"
       }, {
         name: "家庭成员",
         src: "/images/4.png",

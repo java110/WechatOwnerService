@@ -11,3 +11,17 @@
 .button_up_blank{
   height: 40rpx;
 }
+
+.uploader-container{
+  margin: 0 10px;
+}
+
+.aku_photo_view{
+  background-color: #FFF;
+  padding: 40rpx 0 40rpx 40rpx;
+}
+
+.aku_photo_view text{
+  font-size: 30rpx;
+  color: #8a8a8a
+}

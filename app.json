@@ -19,10 +19,12 @@
     "pages/repairList/detail/detail",
     "pages/family/family",
     "pages/familyList/familyList",
-    "pages/complaint/complaint",
     "pages/complaintList/complaintList",
     "pages/viewApplicationKeyUser/viewApplicationKeyUser",
-    "pages/viewPersonFace/viewPersonFace"
+    "pages/viewPersonFace/viewPersonFace",
+    "pages/complaint/complaint",
+    "pages/viewComplaint/viewComplaint"
+
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -64,7 +66,6 @@
     }
   },
   "usingComponents": {
-
     "van-button": "lib/button/index",
     "van-toast": "lib/toast/index",
     "van-field": "lib/field/index",
@@ -78,13 +79,14 @@
     "van-radio-group": "lib/radio-group/index",
     "van-picker": "lib/picker/index",
     "van-uploader": "lib/uploader/index",
-      "van-row": "lib/row/index",
-      "van-col": "lib/col/index",
-      "van-datetime-picker": "lib/datetime-picker/index",
-      "van-grid": "lib/grid/index",
-      "van-grid-item": "lib/grid-item/index",
-      "van-divider": "lib/divider/index"
-    
+    "van-row": "lib/row/index",
+    "van-col": "lib/col/index",
+    "van-datetime-picker": "lib/datetime-picker/index",
+    "van-tab": "lib/tab/index",
+    "van-tabs": "lib/tabs/index",
+    "van-grid": "lib/grid/index",
+    "van-grid-item": "lib/grid-item/index",
+    "van-divider": "lib/divider/index"
   },
   "sitemapLocation": "sitemap.json"
 }
