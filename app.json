@@ -86,7 +86,8 @@
     "van-tabs": "lib/tabs/index",
     "van-grid": "lib/grid/index",
     "van-grid-item": "lib/grid-item/index",
-    "van-divider": "lib/divider/index"
+    "van-divider": "lib/divider/index",
+    "van-image": "lib/image/index"
   },
   "sitemapLocation": "sitemap.json"
 }

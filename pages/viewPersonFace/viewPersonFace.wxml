@@ -1,2 +1,27 @@
-<!--pages/viewPersonFace/viewPersonFace.wxml-->
-<text>pages/viewPersonFace/viewPersonFace.wxml</text>
+<view class="vpf_context">
+  <view class="vpf_row">
+    <view class="vpf_row_black">
+    </view>
+    <view class="vpf_row_title">
+      <text>人脸信息</text>
+    </view>
+    <view class="vpf_row_black_01"/>
+
+    <view class="vpf_image">
+      <van-image
+        round
+        width="15rem"
+        height="15rem"
+        src="{{face}}"
+      />
+    </view>
+     <view class="vpf_row_black_03"/>
+
+      <view  class="vpf_btn">
+            <van-button type="primary" block bind:click="collectFace">{{btnValue}}</van-button>
+      </view>
+
+     <view class="vpf_row_black_04"/>
+   
+  </view>
+</view>
