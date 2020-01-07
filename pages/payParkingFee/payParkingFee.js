@@ -1,23 +1,23 @@
-// pages/viewPersonFace/viewPersonFace.js
-const context = require("../../context/Java110Context.js");
-const constant = context.constant;
+// pages/payParkingFee/payParkingFee.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      face:null,
-      btnValue:"采集人脸"
+    showFeeMonth:false,
+    feeMonthList:['一个月','半年','一年','两年'],
+    feeMonthName:'一个月',
+    feeMonth:1,
+    endTime:'2020-01-07'
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.setData({
-        face:''
-      });
+
   },
 
   /**
@@ -31,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.loadOwnerFace();
+
   },
 
   /**
@@ -68,23 +68,27 @@ Page({
   onShareAppMessage: function () {
 
   },
-  collectFace:function(){
-    //采集人脸
-    console.log('采集人脸');
-    wx.navigateTo({
-      url: '/pages/collectFace/collectFace',
+  chooseMonth:function(){
+    this.setData({
+      showFeeMonth:true
     })
   },
-  /**
-   * 查询业主人脸
-   */
-  loadOwnerFace:function(){
-    let _that = this;
-    context.getOwner(function(_owner){
-      let _face = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId+"&communityId="+_owner.communityId+"&fileTypeCd=10000&time=" + new Date();
-      _that.setData({
-        face: _face
-      });
+  onFeeMonthConfirm: function (e) {
+    console.log("onConfirm", e);
+    let _feeMonthName = null;
+    _feeMonthName = e.detail.value;
+
+    this.setData({
+      showFeeMonth: false,
+      feeMonthName: _feeMonthName
     });
-  }
+  },
+  onFeeMonthChange: function (e) {
+    console.log(e);
+  },
+  onFeeMonthCancel: function (e) {
+    this.setData({
+      showFeeMonth: false
+    });
+  },
 })

@@ -35,7 +35,8 @@ Page({
         href: "/pages/fee/fee"
       }, {
         name: "停车费",
-        src: "/images/2.png"
+        src: "/images/2.png",
+          href:"/pages/payParkingFeeList/payParkingFeeList"
       }, {
         name: "投诉建议",
         src: "/images/3.png",

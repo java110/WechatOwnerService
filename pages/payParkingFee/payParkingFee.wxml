@@ -1,0 +1,42 @@
+<view>
+
+  <view class="ppf_c">
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="小区" value="格兰小镇" />
+      </van-cell-group>
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="车位编号" value="6号车位" />
+      </van-cell-group>
+
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="车牌号" value="青AGK916" />
+      </van-cell-group>
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="费用编号" value="902019103018590010" />
+      </van-cell-group>
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="周期" value="{{feeMonthName}}" bind:click="chooseMonth" is-link/>
+      </van-cell-group>
+    </view>
+
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="到期时间" value="{{endTime}}" />
+      </van-cell-group>
+    </view>
+  </view>
+
+
+  <van-popup show="{{ showFeeMonth }}" position="bottom" custom-style="height: 40%;">
+    <van-picker show-toolbar title="" columns="{{ feeMonthList }}" bind:change="onFeeMonthChange" bind:cancel="onFeeMonthCancel" bind:confirm="onFeeMonthConfirm" />
+  </van-popup>
+</view>

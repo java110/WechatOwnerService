@@ -1,0 +1,6 @@
+.ppf_c{
+  padding-top: 20rpx;
+}
+.ppf_item{
+  padding: 20rpx 0rpx 0rpx 0rpx;
+}

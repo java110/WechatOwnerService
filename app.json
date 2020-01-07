@@ -24,7 +24,9 @@
     "pages/viewPersonFace/viewPersonFace",
     "pages/collectFace/collectFace",
     "pages/complaint/complaint",
-    "pages/viewComplaint/viewComplaint"
+    "pages/viewComplaint/viewComplaint",
+    "pages/payParkingFeeList/payParkingFeeList",
+    "pages/payParkingFee/payParkingFee"
 
   ],
   "window": {
@@ -88,7 +90,8 @@
     "van-grid": "lib/grid/index",
     "van-grid-item": "lib/grid-item/index",
     "van-divider": "lib/divider/index",
-    "van-image": "lib/image/index"
+    "van-image": "lib/image/index",
+    "van-submit-bar": "lib/submit-bar/index"
   },
   "sitemapLocation": "sitemap.json"
 }

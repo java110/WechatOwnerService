@@ -1,23 +1,18 @@
-// pages/viewPersonFace/viewPersonFace.js
-const context = require("../../context/Java110Context.js");
-const constant = context.constant;
+// pages/payParkingFeeList/payParkingFeeList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      face:null,
-      btnValue:"采集人脸"
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.setData({
-        face:''
-      });
+
   },
 
   /**
@@ -31,7 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.loadOwnerFace();
+
   },
 
   /**
@@ -68,23 +63,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-  collectFace:function(){
-    //采集人脸
-    console.log('采集人脸');
+  payFee:function(){
     wx.navigateTo({
-      url: '/pages/collectFace/collectFace',
+      url: '/pages/payParkingFee/payParkingFee',
     })
-  },
-  /**
-   * 查询业主人脸
-   */
-  loadOwnerFace:function(){
-    let _that = this;
-    context.getOwner(function(_owner){
-      let _face = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId+"&communityId="+_owner.communityId+"&fileTypeCd=10000&time=" + new Date();
-      _that.setData({
-        face: _face
-      });
-    });
   }
 })

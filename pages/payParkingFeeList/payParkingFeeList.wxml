@@ -1,0 +1,32 @@
+<view>
+
+  <view class="block__title">停车费信息</view>
+  <view class="ppfl_c">
+    <van-panel title="0012号停车位" desc="" status="欠费状态" use-footer-slot>
+      <view class="ppfl_context">
+        <van-row >
+          <van-col span="6">费用编号:</van-col>
+          <van-col span="8">1234567890</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="6">车位类型:</van-col>
+          <van-col span="8">地上停车位</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="6">到期时间:</van-col>
+          <van-col span="8">2020-01-07</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="6">每月金额:</van-col>
+          <van-col span="8">80元</van-col>
+        </van-row>
+      </view>
+      <view slot="footer" class="ppfl_footer">
+        <van-button size="small" class="ppfl_footer_his">缴费历史</van-button>
+        <van-button size="small" type="primary" bind:click="payFee">缴费</van-button>
+      </view>
+    </van-panel>
+
+  </view>
+
+</view>
