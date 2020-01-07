@@ -1,4 +1,9 @@
 // pages/payParkingFee/payParkingFee.js
+const context = require('../../context/Java110Context.js');
+
+const constant = context.constant;
+
+const util = context.util;
 Page({
 
   /**
@@ -9,7 +14,9 @@ Page({
     feeMonthList:['一个月','半年','一年','两年'],
     feeMonthName:'一个月',
     feeMonth:1,
-    endTime:'2020-01-07'
+    endTime:'2020-01-07',
+    amount:80,
+    receivableAmount:0.00
 
   },
 
@@ -17,7 +24,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let _receivableAmount = this.data.feeMonth * this.data.amount * 100;
+    this.setData({
+      receivableAmount: _receivableAmount
+    })
   },
 
   /**
@@ -77,10 +87,30 @@ Page({
     console.log("onConfirm", e);
     let _feeMonthName = null;
     _feeMonthName = e.detail.value;
+    let _feeMonth = 1;
+    if (_feeMonthName == '一个月'){
+      _feeMonth = 1;
+    } else if (_feeMonthName == '半年'){
+      _feeMonth = 6;
+    } else if (_feeMonthName == '一年') {
+      _feeMonth = 12;
+    } else if (_feeMonthName == '两年') {
+      _feeMonth = 24;
+    }else{
+      return ;
+    }
+
+    let _receivableAmount = _feeMonth * this.data.amount * 100;
+
+    // let _lastDate = util.date.getDate(this.data.endTime);
+    // let _newDate = util.date.addMonth(_lastDate, _feeMonth);
 
     this.setData({
       showFeeMonth: false,
-      feeMonthName: _feeMonthName
+      feeMonthName: _feeMonthName,
+      receivableAmount: _receivableAmount,
+      feeMonth: _feeMonth,
+     // endTime: util.date.formatTime(_newDate)
     });
   },
   onFeeMonthChange: function (e) {
