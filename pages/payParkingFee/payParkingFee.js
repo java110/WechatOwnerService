@@ -91,4 +91,12 @@ Page({
       showFeeMonth: false
     });
   },
+  onPayFee:function(){
+    wx.showToast({
+      title: '缴费成功',
+    });
+    wx.navigateBack({
+      
+    });
+  }
 })

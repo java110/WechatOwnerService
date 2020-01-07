@@ -10,7 +10,11 @@
       <van-cell-group>
         <van-cell title="车位编号" value="6号车位" />
       </van-cell-group>
-
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="车位类型" value="地上停车位" />
+      </van-cell-group>
     </view>
     <view class="ppf_item">
       <van-cell-group>
@@ -20,6 +24,11 @@
     <view class="ppf_item">
       <van-cell-group>
         <van-cell title="费用编号" value="902019103018590010" />
+      </van-cell-group>
+    </view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="金额" value="80元/月" bind:click="chooseMonth" is-link/>
       </van-cell-group>
     </view>
     <view class="ppf_item">
@@ -34,6 +43,8 @@
       </van-cell-group>
     </view>
   </view>
+
+  <van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="onPayFee" />
 
 
   <van-popup show="{{ showFeeMonth }}" position="bottom" custom-style="height: 40%;">
