@@ -22,6 +22,16 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+//字符串转日期格式，strDate要转为日期格式的字符串 
+const getDate = function getDate(strDate) {
+  var st = strDate;
+  var a = st.split(" "); //这个根据你的字符串决定，如果中间为T则改T
+  var b = a[0].split("-");
+  var c = a[1].split(":");
+  var date = new Date(b[0], b[1], b[2], c[0], c[1], c[2]);
+  return date;
+} 
+
 
 /**
  * @desc: 格式化数字
@@ -141,5 +151,6 @@ module.exports = {
   addDay: addDay,
   addHour: addHour,
   addMinutes: addMinutes,
-  addSeconds: addSeconds
+  addSeconds: addSeconds,
+  getDate: getDate
 }
