@@ -58,6 +58,11 @@ const uploadOwnerPhoto = baseUrl +"app/owner.uploadOwnerPhoto";
 
 const getOwnerPhotoPath = "https://hc.demo.winqi.cn/callComponent/download/getFile/fileByObjId";
 
+//查询业主车位信息
+const queryParkingSpacesByOwner = baseUrl+"app/parkingSpace.queryParkingSpacesByOwner";
+
+const queryFeeByParkingSpace = baseUrl+"app/fee.queryFeeByParkingSpace";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -79,5 +84,7 @@ module.exports = {
   applyVisitorApplicationKey: applyVisitorApplicationKey,
   uploadOwnerPhoto: uploadOwnerPhoto,
   getOwnerPhotoPath: getOwnerPhotoPath,
-  queryRoomsByOwner: queryRoomsByOwner
+  queryRoomsByOwner: queryRoomsByOwner,
+  queryParkingSpacesByOwner: queryParkingSpacesByOwner,
+  queryFeeByParkingSpace: queryFeeByParkingSpace
 };

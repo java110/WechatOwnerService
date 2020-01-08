@@ -6,7 +6,7 @@
 }
 
 .ppfl_c{
-  padding: 0 20rpx;
+  padding: 0rpx 20rpx 20rpx 20rpx;
 }
 
 .block__title {
@@ -14,7 +14,7 @@
   font-weight: 400;
   font-size: 14px;
   color: rgba(69,90,100,.6);
-  padding: 60rpx 30rpx 20rpx;
+  padding: 40rpx 30rpx 20rpx;
 }
 
 .ppfl_context{
