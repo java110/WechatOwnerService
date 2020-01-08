@@ -46,21 +46,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let _that = this;
-    let _location = context.getLocation();
-    let _currentLocation = context.getCurrentLocation();
-    let _areaName = _currentLocation.city + _currentLocation.district;
-    let _areaCode = _currentLocation.adcode;
-    //加载省份
-    context._loadArea('', '', function(_areaList) {
-      _that.setData({
-        areaList: _areaList,
-        communityName: _location,
-        areaCode: _areaCode,
-        areaName: _areaName
-      });
-    });
-
+    context.getOwner(function (_owner) {
+      console.log(_owner,99999999);
+    })
   },
 
   /**
@@ -74,13 +62,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let _currentLocation = context.getCurrentLocation();
-    let _areaName = _currentLocation.city + _currentLocation.district;
-    let _areaCode = _currentLocation.adcode;
-    this.setData({
-      areaCode: _areaCode,
-      areaName: _areaName
-    })
+
   },
 
   /**
