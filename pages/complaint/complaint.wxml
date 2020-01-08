@@ -1,7 +1,7 @@
 <view>
   <view class="block__title">房屋信息</view>
   <van-cell-group>
-    <van-field value="{{ typeName }}" label="房屋" placeholder="请选择房屋" catchtap="chooseType" required readonly icon="arrow" />
+    <van-field value="{{ roomName }}" label="房屋" placeholder="请选择房屋" catchtap="chooseRoom" required readonly icon="arrow" />
   </van-cell-group>
 
   <view class="block__title">投诉信息</view>
@@ -21,11 +21,10 @@
   
   <van-button type="primary" size="large" catchtap="bindOwner">提交</van-button>
 
-
-
-  <van-popup show="{{ areaShow }}" position="bottom" custom-style="height: 40%;">
-    <van-area area-list="{{ areaList }}" bind:confirm="onConfirm" bind:change="onChange" bind:cancel="onCancel" />
+<van-popup show="{{ roomShow }}" position="bottom" custom-style="height: 40%;">
+    <van-picker show-toolbar title="" columns="{{ roomCloums }}" bind:change="onChange" bind:cancel="onRoomCancel" bind:confirm="onRoomConfirm" />
   </van-popup>
+
 
   <van-popup show="{{ typeShow }}" position="bottom" custom-style="height: 40%;">
     <van-picker show-toolbar title="" columns="{{ columns }}" bind:change="onChange" bind:cancel="onTypeCancel" bind:confirm="onTypeConfirm" />

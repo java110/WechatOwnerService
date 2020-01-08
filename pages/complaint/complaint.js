@@ -1,7 +1,7 @@
 // pages/enterCommunity/enterCommunity.js
 const context = require('../../context/Java110Context.js')
 const constant = context.constant;
-
+const factory = context.factory;
 
 Page({
 
@@ -9,6 +9,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    roomCloums:[],
+    roomIdArr:[],
+    roomName:"",
+    roomId: '',
+    roomShow:false,
     columns: ['投诉', '建议'],
     typeName: '',
     typeCd: '',
@@ -17,37 +22,30 @@ Page({
     tel: '',
     context: '',
     complaintName: '',
-    roomId: '',
     userId: '',
     storeId: '',
-
-    areaCode: '',
-    areaName: '',
-    communityName: '',
-    appUserName: '',
-    idCard: '',
-    link: '',
-    msgCode: '',
-    areaShow: false,
-    areaList: {
-      province_list: {
-
-      },
-      city_list: {
-
-      },
-      county_list: {
-
-      }
-    }
+    photos: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    context.getOwner(function (_owner) {
-      console.log(_owner,99999999);
+    let that = this;
+    context.getRooms().then(res=>{
+      console.log(res)
+      let arr = res.data.rooms;
+      let roomCloums = [];
+      let roomIdArr = [];
+      arr.map(item => {
+        roomCloums.push(item.floorNum + "号楼" + item.unitNum + "单元" + item.roomNum + "室");
+        roomIdArr.push(item.roomId);
+      })
+      that.setData({
+        roomCloums: roomCloums,
+        roomIdArr: roomIdArr,
+        userId: res.data.owner.appUserId
+      })
     })
   },
 
@@ -112,9 +110,7 @@ Page({
     //  });
     console.log(this.data);
   },
-  sendMsgCode: function() {
 
-  },
   bindOwner: function(e) {
 
 
@@ -126,17 +122,23 @@ Page({
       "typeCd": this.data.typeCd,
       "complaintName": this.data.complaintName,
       "tel": this.data.tel,
-      // "roomId": _ownerInfo.roomId,
+      "roomId": this.data.roomId,
+      "photos": [],
       "context": this.data.context,
       "userId": this.data.userId,
       "storeId": this.data.storeId
     }
+
+    let _photos = this.data.photos;
+    _photos.forEach(function(_item) {
+      obj.photos.push({ "photo": _item });
+    });
+
+    console.log(obj,3333333333333);
+
     let msg = "";
-    if (obj.areaCode == "") {
-      msg = "请选择地区";
-    } else if (obj.communityName == "") {
-      msg = "请填写小区名称";
-    } else if (obj.typeCd == "") {
+
+    if (obj.typeCd == "") {
       msg = "请选择投诉类型";
     } else if (obj.complaintName == "") {
       msg = "请填写投诉人";
@@ -153,21 +155,21 @@ Page({
       })
     } else {
       console.log("提交数据", obj);
-      
+
       context.request({
-        url: constant.url.appUserBindingOwner,
+        url: constant.url.saveComplaint,
         header: context.getHeaders(),
         method: "POST",
-        data: {
-          "typeCd": "809001",
-          "roomId": "752019100758260005",
-          "complaintName": "吴学文",
-          "tel": "17797173942",
-          "context": "服务太差",
-          "userId": "1292827282727",
-          "storeId": "402019032924930007",
-        },
-        // data: obj, //动态数据
+        // data: {
+        //   "typeCd": "809001",
+        //   "roomId": "752019100758260005",
+        //   "complaintName": "吴学文",
+        //   "tel": "17797173942",
+        //   "context": "服务太差",
+        //   "userId": "1292827282727",
+        //   "storeId": "402019032924930007",
+        // },
+        data: obj, //动态数据
         success: function(res) {
           console.log(res);
           //成功情况下跳转
@@ -186,43 +188,11 @@ Page({
       });
 
     }
-
-
-
-    // } else {
-
-    // }
-    // });
-
-
-
-
-
-
-  },
-  onConfirm: function(e) {
-    console.log("onConfirm", e);
-    let _areaCode = e.detail.values[2].code;
-    let _areaName = e.detail.values[1].name + e.detail.values[2].name;
-    this.setData({
-      areaCode: _areaCode,
-      areaName: _areaName,
-      areaShow: false
-    });
   },
   onChange: function(e) {
     console.log(e);
   },
-  chooseArea: function(e) {
-    this.setData({
-      areaShow: true
-    });
-  },
-  onCancel: function(e) {
-    this.setData({
-      areaShow: false
-    });
-  },
+
 
 
   onTypeConfirm: function(e) {
@@ -238,24 +208,70 @@ Page({
       typeShow: false
     });
   },
-
   chooseType: function(e) {
     this.setData({
       typeShow: true
     });
   },
 
-  afterRead: function(e) {
-    console.log(e);
-    wx.getFileSystemManager().readFile({
-      filePath: e.detail.file.path, //选择图片返回的相对路径
-      encoding: "base64", //这个是很重要的
-      success: res => { //成功的回调
-        //返回base64格式
-        console.log('data:image/png;base64,' + res.data)
-        // photos[x] = res.data;
-      }
-    })
-  }
 
+  onRoomConfirm: function (e) {
+    console.log("onConfirm", e);
+    this.setData({
+      roomName: e.detail.value,
+      roomId: this.data.roomIdArr[e.detail.index],
+      roomShow: false
+    });
+  },
+  onRoomCancel: function (e) {
+    this.setData({
+      roomShow: false
+    });
+  },
+  chooseRoom: function (e) {
+    this.setData({
+      roomShow: true
+    });
+  },
+
+  afterRead: function(event) {
+
+    const {
+      file
+    } = event.detail;
+    let _that = this;
+    const {
+      photoList = []
+    } = this.data;
+    photoList.push(file);
+    this.setData({
+      photoList
+    });
+
+    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
+      _that.data.photos.push(_baseInfo);
+    });
+    console.log("data信息：", this.data);
+  },
+  removePhoto: function (e) {
+    console.log(e.detail.index);
+    let _photoList = [];
+    this.data.photoList.forEach(function (item, index) {
+      if (index != e.detail.index) {
+        _photoList.push(item);
+      }
+    });
+    let _photos = [];
+    this.data.photos.forEach(function (item, index) {
+      if (index != e.detail.index) {
+        _photos.push(item);
+      }
+    });
+
+    this.setData({
+      photos: _photos,
+      photoList: _photoList
+    });
+  },
 })
