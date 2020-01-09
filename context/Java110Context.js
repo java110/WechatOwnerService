@@ -198,6 +198,7 @@ const getRooms = function() {
         },
         success: function(res) {
           if (res.statusCode == 200) {
+            //将业主信息和房屋信息一起返回
             res.data['owner'] = _owner;
             resolve(res);
           }

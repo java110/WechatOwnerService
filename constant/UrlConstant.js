@@ -25,7 +25,7 @@ const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers';
 //投诉建议列表
 const listComplaints = baseUrl + 'app/complaint.listComplaints';
 //添加投诉建议
-const saveComplaint = baseUrl + 'app/complaint.saveComplaint';
+const saveComplaint = baseUrl + 'app/complaint';
 //查询业主房间
 const queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner';
 

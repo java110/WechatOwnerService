@@ -49,35 +49,62 @@ Page({
   onShow: function () {
     let that = this;
   },
-  getTable: function (page, override) {
-    console.log(888888888);
-    let that = this;
-    this.setData({
-      loading: true
-    })
-    return this.request({
-      storeTypeCd: '800900000003',
-      storeId: '402019032924930007',
-      userName: 'wuxw',
-      userId: '30518940136629616640',
-      complaintId: '111',
-      typeCd: '809002',
-      complaintName: '111',
-      page: '1',
-      row: '10',
-      communityId: '7020181217000001'
-      // "page": page,
-      // "row": 10
-    }).then(res => {
-      console.log(res,9999999999999)
-      that.setData({
-        tableData: override ? res.data.complaints : this.data.tableData.concat(res.data.complaints),
-        totalPage: res.data.records,
-        page: page,
-        loading: false
+  getTable:function(){
+    context.getRooms().then(res=>{
+      console.log(res,898989);
+      context.request({
+        url: constant.url.listComplaints,
+        header: context.getHeaders(),
+        method: "GET",
+        // data: data,
+        data: {
+          // state: 10001,
+          roomId: res.data.rooms[0].roomId,
+          page: 1,
+          row: 10,
+          communityId: res.data.owner.communityId
+        },
+        success: function (res) {
+          if (res.statusCode == 200) {
+            console.log(res, 88888888888);
+          }
+        },
+        fail: function (req) {
+          console.log(constant.url.listComplaints, req);
+        }
       })
     })
+
   },
+  // getTable: function (page, override) {
+  //   console.log(888888888);
+  //   let that = this;
+  //   this.setData({
+  //     loading: true
+  //   })
+  //   return this.request({
+  //     storeTypeCd: '800900000003',
+  //     storeId: '402019032924930007',
+  //     userName: 'wuxw',
+  //     userId: '30518940136629616640',
+  //     complaintId: '111',
+  //     typeCd: '809002',
+  //     complaintName: '111',
+  //     page: '1',
+  //     row: '10',
+  //     communityId: '7020181217000001'
+  //     // "page": page,
+  //     // "row": 10
+  //   }).then(res => {
+  //     console.log(res,9999999999999)
+  //     that.setData({
+  //       tableData: override ? res.data.complaints : this.data.tableData.concat(res.data.complaints),
+  //       totalPage: res.data.records,
+  //       page: page,
+  //       loading: false
+  //     })
+  //   })
+  // },
   goAdd: function (e) {
     wx.navigateTo({
       url: "/pages/complaint/complaint"

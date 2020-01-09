@@ -25,6 +25,7 @@ Page({
     userId: '',
     storeId: '',
     photos: [],
+    communityId:""
   },
 
   /**
@@ -33,7 +34,6 @@ Page({
   onLoad: function(options) {
     let that = this;
     context.getRooms().then(res=>{
-      console.log(res)
       let arr = res.data.rooms;
       let roomCloums = [];
       let roomIdArr = [];
@@ -44,7 +44,8 @@ Page({
       that.setData({
         roomCloums: roomCloums,
         roomIdArr: roomIdArr,
-        userId: res.data.owner.appUserId
+        userId: res.data.owner.appUserId,
+        communityId: res.data.owner.communityId
       })
     })
   },
@@ -126,7 +127,7 @@ Page({
       "photos": [],
       "context": this.data.context,
       "userId": this.data.userId,
-      "storeId": this.data.storeId
+      "communityId": this.data.communityId
     }
 
     let _photos = this.data.photos;
