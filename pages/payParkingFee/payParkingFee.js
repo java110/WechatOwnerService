@@ -14,9 +14,13 @@ Page({
     feeMonthList:['一个月','半年','一年','两年'],
     feeMonthName:'一个月',
     feeMonth:1,
-    endTime:'2020-01-07',
-    amount:80,
-    receivableAmount:0.00
+    endTime:'',
+    amount:0,
+    receivableAmount:0.00,
+    additionalAmount:0,
+
+    communityId:'',
+    communityName:''
 
   },
 
@@ -24,9 +28,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _receivableAmount = this.data.feeMonth * this.data.amount * 100;
+    let _fee = JSON.parse(options.fee);
+    console.log('_fee',_fee);
+    let _receivableAmount = this.data.feeMonth * _fee.additionalAmount * 100;
+    let _communityInfo = context.getCurrentCommunity();
     this.setData({
-      receivableAmount: _receivableAmount
+      receivableAmount: _receivableAmount,
+      communityId: _communityInfo.communityId,
+      communityName:_communityInfo.communityName,
+      num:_fee.num,
+      typeCdName:_fee.typeCdName,
+      carNum: _fee.carNum,
+      feeId:_fee.feeId,
+      additionalAmount: _fee.additionalAmount,
+      endTime: _fee.endTime
     })
   },
 
@@ -100,17 +115,17 @@ Page({
       return ;
     }
 
-    let _receivableAmount = _feeMonth * this.data.amount * 100;
+    let _receivableAmount = _feeMonth * this.data.additionalAmount * 100;
 
-    // let _lastDate = util.date.getDate(this.data.endTime);
-    // let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+    let _lastDate = new Date(this.data.endTime);
+    let _newDate = util.date.addMonth(_lastDate, _feeMonth);
 
     this.setData({
       showFeeMonth: false,
       feeMonthName: _feeMonthName,
       receivableAmount: _receivableAmount,
       feeMonth: _feeMonth,
-     // endTime: util.date.formatTime(_newDate)
+      endTime: util.date.formatDate(_newDate)
     });
   },
   onFeeMonthChange: function (e) {

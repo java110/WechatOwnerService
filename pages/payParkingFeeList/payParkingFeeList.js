@@ -73,9 +73,10 @@ Page({
   onShareAppMessage: function () {
 
   },
-  payFee:function(){
+  payFee:function(e){
+    let _item = e.target.dataset.item;
     wx.navigateTo({
-      url: '/pages/payParkingFee/payParkingFee',
+      url: '/pages/payParkingFee/payParkingFee?fee=' + JSON.stringify(_item),
     })
   },
   _loadParkingSpace:function(_owner){
@@ -120,6 +121,8 @@ Page({
                 }else{
                   _parkingSpaces[_psIndex].feeStateName = '欠费'
                 }
+                _parkingSpaces[_psIndex].additionalAmount = _fee.additionalAmount;
+                _parkingSpaces[_psIndex].feeId = _fee.feeId;
                 _that.setData({
                   parkingSpaces: _parkingSpaces
                 });
