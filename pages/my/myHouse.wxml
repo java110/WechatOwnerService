@@ -1,0 +1,17 @@
+<view class="tab-container bg-white">        
+
+    <view  wx:if="{{rooms.length > 0}}" wx:for="{{rooms}}" wx:key="key" wx:for-item="item" data-item="{{item}}" class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="myHouseDetail">
+        <view>
+            <text class="iconfont iconaccount icon"></text>
+            <text class="tab-text" > {{item.floorNum}}# {{item.unitNum}}单元{{item.roomNum}}</text>
+        </view>
+        <view class="tab-arrow"></view>
+    </view>
+
+    <view  wx:if="{{rooms.length === 0}}" class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="">
+        <view>
+            <text class="iconfont iconemail icon"></text>
+            <text class="tab-text">暂无房屋信息</text>
+        </view>
+    </view>
+</view>

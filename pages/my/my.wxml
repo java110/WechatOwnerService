@@ -49,6 +49,13 @@
         </view>
         <view class="tab-arrow"></view>
     </view>
+    <view class="tab-item border-bottom" hover-class="tab-item-hover" catchtap="myHouse">
+        <view>
+            <text class="iconfont iconaccount icon"></text>
+            <text class="tab-text">我的房屋</text>
+        </view>
+        <view class="tab-arrow"></view>
+    </view>
 
     <!-- <view class="tab-item" hover-class="tab-item-hover" catchtap="goMyBooks">
         <view>
