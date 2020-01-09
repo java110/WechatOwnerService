@@ -108,9 +108,18 @@ Page({
             for (let _psIndex = 0; _psIndex < _parkingSpaces.length; _psIndex++){
               _that._loadParkingSpaceFee(_parkingSpaces[_psIndex],function(_fee){
 
-                _parkingSpaces[_psIndex].endTime = _fee.endTime;
+                let _endTime = new Date(_fee.endTime);
+
+                _parkingSpaces[_psIndex].endTime = util.date.formatDate(_endTime);
+
                 
-                _parkingSpaces[_psIndex].stateName = '欠费'
+                let _now = new Date();
+                
+                if (_endTime > _now){
+                  _parkingSpaces[_psIndex].feeStateName = '正常'
+                }else{
+                  _parkingSpaces[_psIndex].feeStateName = '欠费'
+                }
                 _that.setData({
                   parkingSpaces: _parkingSpaces
                 });

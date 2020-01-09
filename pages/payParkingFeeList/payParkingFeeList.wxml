@@ -2,7 +2,7 @@
 
   <view class="block__title">停车费信息</view>
   <view class="ppfl_c"  wx:for="{{parkingSpaces}}" wx:for-index="idx" wx:for-item="item"  >
-    <van-panel title="{{item.num}}号停车位" desc="" status="{{item.stateName}}状态" use-footer-slot>
+    <van-panel title="{{item.num}}号停车位" desc="" status="{{item.feeStateName}}状态" use-footer-slot>
       <view class="ppfl_context">
         <van-row >
           <van-col span="5">车牌号码:</van-col>

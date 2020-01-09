@@ -22,6 +22,20 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+/**
+ * @desc: 格式化日期
+ * @return: eg: '2018/04/09 21:31:00'
+ * @param {Date对象} date 
+ */
+const formatDate = date => {
+
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  return [year, month, day].map(formatNumber).join('-')
+}
+
 //字符串转日期格式，strDate要转为日期格式的字符串 
 const getDate = function getDate(strDate) {
   var st = strDate;
@@ -152,5 +166,6 @@ module.exports = {
   addHour: addHour,
   addMinutes: addMinutes,
   addSeconds: addSeconds,
-  getDate: getDate
+  getDate: getDate,
+  formatDate: formatDate
 }
