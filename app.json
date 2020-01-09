@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/myHouse",
     "pages/bindOwner/bindOwner",
     "pages/viewBindOwner/viewBindOwner",
     "pages/applicationKey/applicationKey",
@@ -26,8 +27,8 @@
     "pages/complaint/complaint",
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
-    "pages/payParkingFee/payParkingFee"
-
+    "pages/payParkingFee/payParkingFee",
+    "pages/my/myHouseDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",

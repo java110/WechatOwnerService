@@ -62,5 +62,10 @@ Page({
   },
   onGotUserInfo: function (e) {
     console.log("nickname=" + JSON.stringify(e.detail.userInfo));
+  },
+  myHouse() {
+    wx.navigateTo({
+      url: '../my/myHouse',
+    })
   }
 })
