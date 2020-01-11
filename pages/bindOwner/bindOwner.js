@@ -62,13 +62,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let _currentLocation = context.getCurrentLocation();
-    let _areaName = _currentLocation.city + _currentLocation.district;
-    let _areaCode = _currentLocation.adcode;
-    this.setData({
-       areaCode:_areaCode,
-       areaName:_areaName
-    })
+    if(this.data.areaCode == ''|| this.data.areaCode == undefined){
+      let _currentLocation = context.getCurrentLocation();
+      let _areaName = _currentLocation.city + _currentLocation.district;
+      let _areaCode = _currentLocation.adcode;
+      this.setData({
+        areaCode: _areaCode,
+        areaName: _areaName
+      });
+    }
+   
   },
 
   /**
@@ -153,6 +156,9 @@ Page({
       })
     } else {
       console.log("提交数据", obj);
+      wx.showLoading({
+        title: '绑定中',
+      });
       context.request({
         url: constant.url.appUserBindingOwner,
         header: context.getHeaders(),
@@ -162,11 +168,13 @@ Page({
           console.log(res);
           //成功情况下跳转
           if (res.statusCode == 200) {
+             wx.hideLoading();
               wx.redirectTo({
                 url: "/pages/viewBindOwner/viewBindOwner"
               });
               return;
           }
+          wx.hideLoading();
           wx.showToast({
             title: res.data,
             icon: 'none',
@@ -174,6 +182,7 @@ Page({
           });
         },
         fail:function(e){
+          wx.hideLoading();
           wx.showToast({
             title: "服务器异常了",
             icon: 'none',
@@ -207,6 +216,23 @@ Page({
       areaShow: false
     });
   },
+
+/**
+ * 选择小区
+ */
+  chooseCommunity:function(e){
+   
+    if (this.data.areaCode == '' || this.data.areaCode == undefined){
+      wx.showToast({
+        title: '请先选择地区',
+        icon:'none'
+      });
+      return;
+    }
+      wx.navigateTo({
+        url: '/pages/viewCommunitys/viewCommunitys?areaCode='+this.data.areaCode,
+      })
+  }
 
  
 

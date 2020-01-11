@@ -108,8 +108,9 @@ Page({
 
             for (let _psIndex = 0; _psIndex < _parkingSpaces.length; _psIndex++){
               _that._loadParkingSpaceFee(_parkingSpaces[_psIndex],function(_fee){
-
-                let _endTime = new Date(_fee.endTime);
+                
+                let _tmpEndTime = _fee.endTime.replace(/\-/g, "/") 
+                let _endTime = new Date(_tmpEndTime);
 
                 _parkingSpaces[_psIndex].endTime = util.date.formatDate(_endTime);
 
