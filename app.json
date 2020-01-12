@@ -94,7 +94,8 @@
     "van-divider": "lib/divider/index",
     "van-image": "lib/image/index",
     "van-submit-bar": "lib/submit-bar/index",
-    "van-search": "lib/search/index"
+    "van-search": "lib/search/index",
+    "van-notice-bar": "lib/notice-bar/index"
   },
   "sitemapLocation": "sitemap.json"
 }
