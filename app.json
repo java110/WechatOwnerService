@@ -95,7 +95,8 @@
     "van-image": "lib/image/index",
     "van-submit-bar": "lib/submit-bar/index",
     "van-search": "lib/search/index",
-    "van-notice-bar": "lib/notice-bar/index"
+    "van-notice-bar": "lib/notice-bar/index",
+    "van-dialog": "lib/dialog/index"
   },
   "sitemapLocation": "sitemap.json"
 }
