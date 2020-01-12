@@ -47,7 +47,7 @@
   </swiper>
 
   <view class="header-title">
-    <text class="new"> 最新动态</text>
+    <text class="new">小区文化</text>
     <text class="iconfont icongengduo1 gd"></text>
   </view>
   <view class="noticesList">
