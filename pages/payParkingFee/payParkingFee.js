@@ -14,9 +14,15 @@ Page({
     feeMonthList:['一个月','半年','一年','两年'],
     feeMonthName:'一个月',
     feeMonth:1,
-    endTime:'2020-01-07',
-    amount:80,
-    receivableAmount:0.00
+    endTime:'',
+    ordEndTime:'',
+    amount:0,
+    receivableAmount:0.00,
+    additionalAmount:0,
+
+    communityId:'',
+    communityName:'',
+    feeId:''
 
   },
 
@@ -24,9 +30,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _receivableAmount = this.data.feeMonth * this.data.amount * 100;
+    let _fee = JSON.parse(options.fee);
+    console.log('_fee',_fee);
+    let _receivableAmount = this.data.feeMonth * _fee.additionalAmount * 100;
+    let _communityInfo = context.getCurrentCommunity();
+    let _lastDate = new Date(_fee.endTime);
+    let _endTime = util.date.addMonth(_lastDate, this.data.feeMonth);
+    
     this.setData({
-      receivableAmount: _receivableAmount
+      receivableAmount: _receivableAmount,
+      communityId: _communityInfo.communityId,
+      communityName:_communityInfo.communityName,
+      num:_fee.num,
+      typeCdName:_fee.typeCdName,
+      carNum: _fee.carNum,
+      feeId:_fee.feeId,
+      additionalAmount: _fee.additionalAmount,
+      endTime: util.date.formatDate(_endTime),
+      ordEndTime: _fee.endTime
     })
   },
 
@@ -100,17 +121,17 @@ Page({
       return ;
     }
 
-    let _receivableAmount = _feeMonth * this.data.amount * 100;
+    let _receivableAmount = _feeMonth * this.data.additionalAmount * 100;
 
-    // let _lastDate = util.date.getDate(this.data.endTime);
-    // let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+    let _lastDate = new Date(this.data.ordEndTime);
+    let _newDate = util.date.addMonth(_lastDate, _feeMonth);
 
     this.setData({
       showFeeMonth: false,
       feeMonthName: _feeMonthName,
       receivableAmount: _receivableAmount,
       feeMonth: _feeMonth,
-     // endTime: util.date.formatTime(_newDate)
+      endTime: util.date.formatDate(_newDate)
     });
   },
   onFeeMonthChange: function (e) {
@@ -122,11 +143,62 @@ Page({
     });
   },
   onPayFee:function(){
-    wx.showToast({
-      title: '缴费成功',
+    let _receivedAmount = this.data.receivableAmount/100;
+    wx.showLoading({
+      title: '支付中',
     });
-    wx.navigateBack({
-      
+    let _objData = {
+      cycles: this.data.feeMonth,
+      communityId: this.data.communityId,
+      feeId: this.data.feeId,
+      receivedAmount: _receivedAmount
+    }
+    
+    context.request({
+      url: constant.url.preOrder,
+      header: context.getHeaders(),
+      method: "POST",
+      data: _objData, //动态数据
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.code == '0') {
+          let data = res.data;
+          //成功情况下跳转
+          wx.requestPayment({
+            'timeStamp': data.timeStamp,
+            'nonceStr': data.nonceStr,
+            'package': data.package,
+            'signType': data.signType,
+            'paySign': data.sign,
+            'success': function (res) { 
+              wx.showToast({
+                title: "支付成功",
+                duration: 2000
+              });
+              wx.navigateBack({ });
+            },
+            'fail': function (res) {
+              console.log('fail:' + JSON.stringify(res));
+            }
+          });
+          wx.hideLoading();
+          return;
+        }
+        wx.hideLoading();
+        wx.showToast({
+          title: "缴费失败",
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail: function (e) {
+        wx.hideLoading();
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
     });
   }
 })

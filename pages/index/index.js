@@ -1,5 +1,7 @@
 // pages/index/index.js
 const context = require("../../context/Java110Context.js");
+const constant = context.constant;
+import Dialog from '../../lib/dialog/dialog';
 
 Page({
   /**
@@ -156,7 +158,36 @@ Page({
 
     that.setData({
       location: wx.getStorageSync('location')
-    })
+    });
+    that._judgeBindOwner();
+  },
+
+  _judgeBindOwner:function(){
+    context.getOwner(function(_owner){
+      if(_owner == null){
+        Dialog.confirm({
+          title: '温馨提示',
+          message: '您还没有绑定业主，请先绑定业主或取消查看演示环境'
+        }).then(() => {
+          // on confirm
+          wx.navigateTo({
+            url: '../bindOwner/bindOwner',
+          })
+        }).catch(() => {
+          // on cancel
+          //这里写死 演示数据
+          let _ownerInfo = { "appUserId": "982020011296320035", "appUserName": "吴学文", "communityId": "7020181217000001", "communityName": "万博家博园（城西区）", "idCard": "632126199109162011", "link": "18999999999", "memberId": "772019092507000013", "state": "12000", "stateName": "审核成功" };
+
+          wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
+          let _currentCommunityInfo = {
+            communityId: _ownerInfo.communityId,
+            communityName: _ownerInfo.communityName
+          }
+          wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+        });
+      } 
+    });
+   
   },
 
   /**

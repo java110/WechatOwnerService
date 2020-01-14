@@ -1,0 +1,27 @@
+<view>
+  <view class="vc_community_search">
+      <van-search
+        value="{{ value }}"
+        placeholder="请输入小区名称"
+        use-action-slot
+        bind:change="onChange"
+        bind:search="onSearch"
+      >
+        <view slot="action" bind:tap="onSearch">搜索</view>
+      </van-search>
+  </view>
+
+  <view class="vc_communitys">
+    <van-cell-group>
+      <van-cell 
+          wx:for="{{communitys}}"
+          wx:for-index="idx"
+          wx:key= "idx"
+          wx:for-item="community"
+          title="{{community.name}}"
+          label="{{community.address}}"
+          data-item="{{community}}"
+          bind:click="chooseCommunity"  />
+    </van-cell-group>
+  </view>
+</view>

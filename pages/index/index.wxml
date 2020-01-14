@@ -1,9 +1,17 @@
 <import src="../common/sort_list.wxml" />
 
+<view>
+  <van-notice-bar
+      left-icon="volume-o"
+      text="HC智慧家园是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"
+      speed="30"
+    />
+</view>
+
 <scroll-view bindscrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
-  <view class="heard">
-  <!-- url="/pages/location/location" -->
-    <navigator >
+  <view >
+  <!-- class="heard" url="/pages/location/location" -->
+    <!-- <navigator >
       <view class="heard-location">
         <image src="/images/location.png" class="heard-location-icon" />
         <text class="heard-location-text">{{location}}</text>
@@ -11,7 +19,7 @@
     </navigator>
     <view class="heard-search">
       <image src="/images/search.png" class="heard-search-icon" /> 搜索小区
-    </view>
+    </view> -->
   </view>
   <swiper class="categoryList" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
     <block wx:for="{{categoryList}}" wx:key="index">
@@ -39,7 +47,7 @@
   </swiper>
 
   <view class="header-title">
-    <text class="new"> 最新动态</text>
+    <text class="new">小区文化</text>
     <text class="iconfont icongengduo1 gd"></text>
   </view>
   <view class="noticesList">
@@ -72,3 +80,5 @@
     </block>
   </view>
 </scroll-view>
+
+<van-dialog id="van-dialog" />

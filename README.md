@@ -32,7 +32,7 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 ### 系统功能（function） 
 
-   ![image](hc_function.png)
+   ![image](readme/hc_function.png)
    
    主要系统功能请查看
      
@@ -48,9 +48,9 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 ### 运行效果
 
-![image](index.png)
-![image](circle.png)
-![image](my.png)
+![image](readme/index.png)
+![image](readme/circle.png)
+![image](readme/my.png)
 
 ### 加入我们
 

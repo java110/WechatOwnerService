@@ -1,0 +1,8 @@
+/* pages/viewCommunitys/viewCommunitys.wxss */
+.vc_community_search{
+ 
+}
+
+.vc_communitys{
+  margin-top: 20rpx;
+}
