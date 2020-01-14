@@ -4,40 +4,8 @@ const constant = context.constant;
 
 Page({
   data: {
-    tableData: [{
-      "complaintId": "882019110351910002",
-      "complaintName": "测试工作流",
-      "context": "测试工作流",
-      "roomId": "752019100965690010",
-      "state": "10001",
-      "stateName": "处理中",
-      "storeId": "402019032924930007",
-      "tel": "17797173945",
-      "typeCd": "809001",
-      "typeCdName": "投诉"
-    }, {
-      "complaintId": "882019110394400002",
-      "complaintName": "测试工作流",
-      "context": "测试工作流",
-      "roomId": "752019100758260005",
-      "state": "10001",
-      "stateName": "处理中",
-      "storeId": "402019032924930007",
-      "tel": "18909874444",
-      "typeCd": "809001",
-      "typeCdName": "投诉"
-    }, {
-      "complaintId": "882019110312520003",
-      "complaintName": "吴学文",
-      "context": "测试工作流",
-      "roomId": "752019102597030030",
-      "state": "10001",
-      "stateName": "处理中",
-      "storeId": "402019032924930007",
-      "tel": "18909782345",
-      "typeCd": "809001",
-      "typeCdName": "投诉"
-    }],
+    tableData: [],
+    active:"10001",
     page: 1,
     totalPage: 0,
     loading: false
@@ -50,6 +18,7 @@ Page({
     let that = this;
   },
   getTable:function(){
+    let that = this;
     context.getRooms().then(res=>{
       console.log(res,898989);
       context.request({
@@ -58,7 +27,7 @@ Page({
         method: "GET",
         // data: data,
         data: {
-          // state: 10001,
+          state: that.data.active,
           roomId: res.data.rooms[0].roomId,
           page: 1,
           row: 10,
@@ -67,6 +36,9 @@ Page({
         success: function (res) {
           if (res.statusCode == 200) {
             console.log(res, 88888888888);
+            that.setData({
+              tableData: res.data.complaints
+            })
           }
         },
         fail: function (req) {
@@ -105,6 +77,14 @@ Page({
   //     })
   //   })
   // },
+  onChange(e){
+    console.log(e.detail.name);
+    this.setData({
+      active: e.detail.name,
+      tableData:[]
+    })
+    this.getTable();
+  },
   goAdd: function (e) {
     wx.navigateTo({
       url: "/pages/complaint/complaint"
@@ -112,7 +92,7 @@ Page({
   },
   gotoDetail: function (e) {
     wx.navigateTo({
-      url: "/pages/repairList/detail/detail?item=" + JSON.stringify(e.currentTarget.dataset.item)
+      url: "/pages/complaint/complaint?row=" + JSON.stringify(e.currentTarget.dataset.item)
     })
   },
   onPullDownRefresh: function () {
