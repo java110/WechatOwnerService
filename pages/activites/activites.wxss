@@ -1,0 +1,11 @@
+.act{
+  background-color: #fff;
+}
+.act .act_title{
+  padding: 10rpx 80rpx 10rpx 20rpx;
+}
+
+.headImg{
+  width: 100%;
+  height: 400rpx;
+}
