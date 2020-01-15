@@ -30,6 +30,7 @@
     "pages/payParkingFeeList/payParkingFeeList",
     "pages/payParkingFee/payParkingFee",
     "pages/my/myHouseDetail"
+    "pages/my/myHouseDetail",
   ],
   "window": {
     "navigationBarTextStyle": "white",
