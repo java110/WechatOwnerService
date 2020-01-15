@@ -1,99 +1,18 @@
 <view class="page">
-  <view class="weui-form">
-    <view class="">
-      <view class="weui-cells__group weui-cells__group_form">
-        <view class="weui-cells weui-cells_after-title">
-        
+  <view class="block__title">成员信息</view>
+  <van-cell-group>
+    <van-field value="{{ name }}" bindinput="bindInput" data-name="name" label="姓名" placeholder="请输入姓名" required />
+    <van-field value="{{ sexValue }}" label="性别" placeholder="请选择性别" catchtap="chooseSex" required readonly icon="arrow" />
+     <van-field value="{{ idCard }}" bindinput="bindInput" data-name="idCard" label="身份证" placeholder="请输入身份证" required />
+    <van-field value="{{ age }}" bindinput="bindInput" data-name="age" type="number" label="年龄" placeholder="请输入年龄" required />
+    <van-field value="{{ link }}" bindinput="bindInput" data-name="link" type="number" label="电话" placeholder="请输入电话" required />
+    <van-field value="{{ remark }}" bindinput="bindInput" data-name="remark" label="备注" type="textarea" placeholder="请输入备注" autosize border="{{ false }}" />
+  </van-cell-group>
+  <view class="button_up_blank"></view>
+  
+  <van-button type="primary" size="large" catchtap="submit">提交</van-button>
 
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">业
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text> 主
-              </label>
-            </view>
-            <view class="weui-cell__bd">
-              <input bindinput="bindOwnerId" class="weui-input" type="text" placeholder="请输入业主" value="{{ownerId}}" />
-            </view>
-          </view>
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">姓
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text> 名
-              </label>
-            </view>
-            <view class="weui-cell__bd">
-              <input bindinput="bindName" class="weui-input" type="text" placeholder="请输入姓名" value="{{name}}" />
-            </view>
-          </view>
-
-
-           <view class="weui-cell_select weui-cell ">
-            <view class="weui-cell__hd ">
-              <label class="weui-label" style="margin-left:64rpx">性
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text> 别</label>
-            </view>
-            <view class="weui-cell__bd">
-
-              <picker bindchange="bindSexChange" value="{{index}}" range="{{sexArr}}">
-                <view class="weui-select" style="margin-left:-48rpx">
-                  {{sexArr[sex]}}
-                </view>
-              </picker>
-
-            </view>
-          </view>
-
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">
-                年
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text> 龄
-              </label>
-            </view>
-            <view class="weui-cell__bd">
-              <input bindinput="bindAge" class="weui-input" type="text" placeholder="请输入年龄" value="{{age}}" />
-            </view>
-          </view>
-       
-
-    
-
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">
-                备<text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text>
-                <text decode="{{true}}">&nbsp;</text> 注
-              </label>
-            </view>
-            <view class="weui-cell__bd">
-              <textarea bindblur="bindRemark" class="repair_textarea" value="{{remark}}" rows="3" placeholder="备注" />
-            </view>
-          </view>
-
-        </view>
-      </view>
-    </view>
-    <view class="">
-      <button type="primary" catchtap="submitRepair">确认报修</button>
-    </view>
-  </view>
+  <van-popup show="{{ sexShow }}" position="bottom" custom-style="height: 40%;">
+    <van-picker show-toolbar title="" columns="{{ columns }}" bind:change="onChange" bind:cancel="onSexCancel" bind:confirm="onSexConfirm" />
+  </van-popup>
 </view>
