@@ -130,7 +130,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let _that = this;
     console.log(context);
+    context.getOwner(function (_owner) {
+      let _communityId = '';
+      if (_owner == null) {
+        _communityId = '7020181217000001'
+      } else {
+        _communityId = _owner.communityId;
+      }
+      _that.setData({
+        communityId: _communityId
+      });
+
+      //查询小区文化
+      _that._loadActivites();
+
+    });
   },
 
   /**
@@ -150,23 +166,6 @@ Page({
       location: wx.getStorageSync('location')
     });
     _that._judgeBindOwner();
-
-    context.getOwner(function (_owner) {
-      let _communityId = '';
-      if(_owner == null ){
-        _communityId = '7020181217000001'
-      }else{
-        _communityId = _owner.communityId;
-      }
-      _that.setData({
-        communityId: _communityId
-      });
-
-      //查询小区文化
-      _that._loadActivites();
-
-      
-    });
   },
 
   _judgeBindOwner:function(){
