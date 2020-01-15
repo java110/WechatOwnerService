@@ -40,8 +40,8 @@ Page({
       loading: true
     })
     return this.request({
-      "ownerId": that.communityId,
-      "communityId": that.ownerId
+      "ownerId": that.data.ownerId,
+      "communityId": that.data.communityId
       // "page": page,
       // "row": 10
     }).then(res => {
