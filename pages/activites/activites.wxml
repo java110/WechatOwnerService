@@ -1,0 +1,22 @@
+<!--pages/activites/activites.wxml-->
+<view class="act">
+  <block wx:for="{{activities}}" wx:key="index">
+    <navigator url="/pages/activitesDetail/activitesDetail?activitiesId={{item.activitiesId}}&title={{item.title}}&communityId={{item.communityId}}">
+      <view class="act_title">
+        <van-row>
+          <van-col span="20">
+            <text>{{item.title}}</text>
+          </van-col>
+          <van-col span="4">
+            <text>{{item.userName}}</text>
+          </van-col>
+        </van-row>
+      </view>
+
+      <view class="act_img">
+        <image class="headImg" src="{{item.src}}"></image>
+      </view>
+    </navigator>
+  </block>
+
+</view>

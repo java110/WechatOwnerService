@@ -29,7 +29,9 @@
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
     "pages/payParkingFee/payParkingFee",
-    "pages/my/myHouseDetail"
+    "pages/my/myHouseDetail",
+    "pages/activites/activites",
+    "pages/activitesDetail/activitesDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",
