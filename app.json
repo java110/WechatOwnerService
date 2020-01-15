@@ -31,6 +31,7 @@
     "pages/payParkingFee/payParkingFee",
     "pages/my/myHouseDetail"
     "pages/my/myHouseDetail",
+    "pages/repair/repair2"
   ],
   "window": {
     "navigationBarTextStyle": "white",
