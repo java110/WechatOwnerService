@@ -1,0 +1,54 @@
+<view>
+  <view class="block__title">房屋信息</view>
+  <van-cell-group>
+    <van-field value="{{ roomName }}" label="房屋" placeholder="请选择房屋" catchtap="chooseRoom" required readonly icon="arrow" />
+  </van-cell-group>
+
+  <view class="block__title">投诉信息</view>
+  <van-cell-group>
+    <van-field value="{{ typeName }}" label="报修类型" placeholder="请选择报修类型" catchtap="chooseType" required readonly icon="arrow" />
+    <van-field value="{{ bindRepairName }}" bindinput="bindInput" data-name="bindRepairName" label="报修人" placeholder="请输入报修人" required />
+    <van-field value="{{ bindTel }}" bindinput="bindInput" data-name="bindTel" type="number" label="手机号" placeholder="请输入手机号" required />
+    <van-field value="{{ bindDate }}" bindinput="bindInput" data-name="bindDate"  catchtap="chooseDate" label="预约日期" placeholder="请选择日期" required/>
+    <van-field value="{{ bindTime }}" bindinput="bindInput" data-name="bindTime"  catchtap="chooseTime" label="预约时间" placeholder="请选择时间" required />
+    <van-field value="{{ context }}" bindinput="bindInput" data-name="context" label="报修内容" type="textarea" placeholder="请输入报修内容" autosize border="{{ false }}" required />
+  </van-cell-group>
+
+  <view class="block__title">相关图片</view>
+  <view class="aku_photo_view">
+    <van-uploader file-list="{{ photoList }}" max-count="3" bind:after-read="afterRead" bind:delete="removePhoto" />
+  </view>
+
+  <view class="button_up_blank"></view>
+  
+  <van-button type="primary" size="large" catchtap="bindOwner">提交</van-button>
+
+<van-popup show="{{ roomShow }}" position="bottom" custom-style="height: 40%;">
+    <van-picker show-toolbar title="" columns="{{ roomCloums }}" bind:change="onChange" bind:cancel="onRoomCancel" bind:confirm="onRoomConfirm" />
+  </van-popup>
+
+
+  <van-popup show="{{ typeShow }}" position="bottom" custom-style="height: 40%;">
+    <van-picker show-toolbar title="" columns="{{ columns }}" bind:change="onChange" bind:cancel="onTypeCancel" bind:confirm="onTypeConfirm" />
+  </van-popup>
+
+<van-popup show="{{ dateShow }}" position="bottom" custom-style="height: 40%;">
+  <van-datetime-picker show-toolbar  bind:change="onChange" bind:cancel="onDateCancel" bind:confirm="onDateConfirm"
+      type="date"
+      value="{{ date }}"
+      min-date="{{ minDate }}"
+      formatter="{{ formatter }}"
+    />
+  </van-popup>
+
+
+ <van-popup show="{{ timeShow }}" position="bottom" custom-style="height: 40%;">
+  <van-datetime-picker show-toolbar  bind:change="onChange" bind:cancel="onTimeCancel" bind:confirm="onTimeConfirm"
+      type="time"
+      value="{{ time }}"
+    />
+  </van-popup>
+ 
+
+
+</view>
