@@ -41,7 +41,7 @@
   <swiper class="ad-swiper" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay='true' interval='5000' duration='1000' circular='true'>
     <block wx:for="{{ad}}" wx:key="index">
       <swiper-item>
-        <image src="{{item.imageUrl}}"></image>
+        <image src="{{item.url}}"></image>
       </swiper-item>
     </block>
   </swiper>

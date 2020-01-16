@@ -9,15 +9,7 @@ Page({
    */
   data: {
     communityId:'',
-    ad: [{
-        imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
-        url: "http://www.homecommunity.cn/"
-      },
-      {
-        imageUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573966727205&di=66965e182c0d2efd0818a7d9b8c2629a&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fcf482ffb4f3fc6d941664e1cba8ca3ca6e9c0a9443f84-AsGU9b_fw658",
-        url: "http://www.homecommunity.cn/"
-      }
-    ],
+    ad: [],
     notices: [
     ],
     categoryList: {
@@ -146,6 +138,9 @@ Page({
       //查询小区文化
       _that._loadActivites();
 
+      //查询小区广告
+      _that._loadCommunityAdvertPhoto();
+
     });
   },
 
@@ -263,6 +258,50 @@ Page({
             notices: _acts
           });
           
+          return;
+        }
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    });
+  },
+  _loadCommunityAdvertPhoto:function(){
+    let _that = this;
+    let _objData = {
+      page: 1,
+      row: 5,
+      communityId: this.data.communityId
+    };
+    context.request({
+      url: constant.url.listAdvertPhoto,
+      header: context.getHeaders(),
+      method: "GET",
+      data: _objData, //动态数据
+      success: function (res) {
+        console.log("请求返回信息：", res);
+        if (res.statusCode == 200) {
+
+          let _advertPhotos = res.data;
+          let _aPhotos = [];
+          _advertPhotos.forEach(function (_item) {
+            _item.url = constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
+            _aPhotos.push(_item);
+          });
+
+          _that.setData({
+            ad: _aPhotos
+          });
+
           return;
         }
         wx.showToast({
