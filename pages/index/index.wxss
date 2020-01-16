@@ -256,7 +256,6 @@ page {
   width: 200rpx;
   height: 150rpx;
   margin: 10rpx 20rpx 0rpx 20rpx;
-  border-radius: 10rpx;
 }
 .notices-info{
   margin: 10rpx 0rpx 0rpx 20rpx;

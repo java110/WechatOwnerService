@@ -29,6 +29,7 @@
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
     "pages/payParkingFee/payParkingFee",
+    "pages/my/myHouseDetail"
     "pages/my/myHouseDetail",
     "pages/repair/repair2"
   ],

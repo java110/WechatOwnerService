@@ -1,13 +1,13 @@
 {
 	"description": "项目配置文件。",
-	"packOptions": {
-		"ignore": [
-			{
-				"type": "folder",
-				"value": "readme"
-			}
-		]
-	},
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "readme"
+      }
+    ]
+  },
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
