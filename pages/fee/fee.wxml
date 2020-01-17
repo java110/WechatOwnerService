@@ -1,22 +1,34 @@
-<view class="user-container">
-  <view wx:for="{{rooms}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
-    <view class="title">
-      <view>{{item.fee_type_cd}}</view>
-    </view>
-    <view class="main">
-      <view>
-        <view class="text"> 小区名字: {{communityName}}</view>
-        <view class="text"> 小区ID: {{communityId}}</view>
-        <view class="text"> 房间ID: {{item.roomId}}</view>
-        <view class="text"> 房间号: {{item.roomNum}}</view>
-        <view class="text"> 单元ID: {{item.unitId}}</view>
-        <view class="text"> 总金额: {{item.amount}}</view>        
+<view>
+
+  <view class="block__title">物业费信息</view>
+  <view class="ppfl_c"  wx:for="{{rooms}}" wx:for-index="idx" wx:for-item="item"  >
+    <van-panel title="{{item.unitNum}}单元{{item.roomNum}}号房间" desc="" status="{{item.feeStateName}}状态" use-footer-slot>
+      <view class="ppfl_context">    
+        <van-row >
+          <van-col span="5">小区:</van-col>
+          <van-col span="15">{{communityName}}</van-col>
+        </van-row>
+        <van-row >
+          <van-col span="5">业主:</van-col>
+          <van-col span="7">{{item.ownerName}}</van-col>
+        </van-row>
+        <van-row >          
+          <van-col span="5">总金额:</van-col>
+          <van-col span="7">{{item.additionalAmount}}</van-col>
+        </van-row>
+        <van-row >
+          <van-col span="5">到期时间:</van-col>
+          <van-col span="7">{{item.endTime}}</van-col>
+        </van-row>
       </view>
-      <text>{{}}</text>
-      <view>
+      <!-- <view>
         <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">付款</button>
         <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">反馈</button>
+      </view> -->
+      <view slot="footer" class="ppfl_footer">
+        <van-button size="small" class="ppfl_footer_his" data-item="{{item}}">缴费历史</van-button>
+        <van-button size="small" type="primary" wx:if="{{item.state == 'Y'}}" bind:click="payFee" data-item="{{item}}">缴费</van-button>
       </view>
-    </view>
+    </van-panel>
   </view>
 </view>
