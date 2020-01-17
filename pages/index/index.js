@@ -34,10 +34,6 @@ Page({
         src: "/images/5.png",
         href: "/pages/repair/repair"
       }, {
-        name: "报修新",
-        src: "/images/5.png",
-        href: "/pages/repair/repair2"
-      }, {
         name: "房屋出租",
         src: "/images/6.png"
       }, {
@@ -126,6 +122,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let _that = this;
     console.log(context);
     context.getOwner(function (_owner) {
       let _communityId = '';
@@ -158,12 +155,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
+    var _that = this;
 
-    that.setData({
+    _that.setData({
       location: wx.getStorageSync('location')
     });
-    that._judgeBindOwner();
+    _that._judgeBindOwner();
   },
 
   _judgeBindOwner:function(){
