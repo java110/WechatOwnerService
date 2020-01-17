@@ -31,7 +31,9 @@
     "pages/payParkingFee/payParkingFee",
     "pages/my/myHouseDetail",
     "pages/activites/activites",
-    "pages/activitesDetail/activitesDetail"
+    "pages/activitesDetail/activitesDetail",
+    "pages/roomFeeList/roomFeeList",
+    "pages/roomFee/roomFee"
   ],
   "window": {
     "navigationBarTextStyle": "white",

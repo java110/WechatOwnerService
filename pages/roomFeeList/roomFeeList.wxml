@@ -1,0 +1,28 @@
+<view>
+
+  <view class="block__title">物业费信息</view>
+  <view class="ppfl_c"  wx:for="{{rooms}}" wx:for-index="idx" wx:for-item="item"  >
+    <van-panel title="{{item.floorNum}}号楼{{item.unitNum}}单元{{item.roomNum}}室" desc="" status="{{item.feeStateName}}状态" use-footer-slot>
+      <view class="ppfl_context">
+        <van-row >
+          <van-col span="5">小区名称:</van-col>
+          <van-col span="8">{{item.communityName}}</van-col>
+         <van-col span="3" offset="1">楼层:</van-col>
+          <van-col span="7">{{item.layer}}层</van-col>  
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="5">每月金额:</van-col>
+          <van-col span="8">{{item.amount}}元</van-col>
+          <van-col span="3" offset="1">到期:</van-col>
+          <van-col span="7">{{item.endTime}}</van-col>
+        </van-row>
+      </view>
+      <view slot="footer" class="ppfl_footer">
+        <van-button size="small" class="ppfl_footer_his" data-item="{{item}}">缴费历史</van-button>
+        <van-button size="small" type="primary" bind:click="payFee" data-item="{{item}}">缴费</van-button>
+      </view>
+    </van-panel>
+
+  </view>
+
+</view>

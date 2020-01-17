@@ -16,7 +16,7 @@ Page({
       pageone: [{
         name: "物业费",
         src: "/images/1.png",
-        href: "/pages/fee/fee"
+        href: "/pages/roomFeeList/roomFeeList"
       }, {
         name: "停车费",
         src: "/images/2.png",

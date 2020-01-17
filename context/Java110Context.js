@@ -204,7 +204,20 @@ const getRooms = function() {
           if (res.statusCode == 200) {
             //将业主信息和房屋信息一起返回
             res.data['owner'] = _owner;
+            if (res.data.rooms.length == 0) {
+              wx.showToast({
+                title: "未查询到房屋信息",
+                icon: 'none',
+                duration: 2000
+              });
+            }
             resolve(res);
+          }else{
+            wx.showToast({
+              title: '未查询到房屋信息', 
+              icon: 'none',
+              duration: 2000
+            });
           }
         },
         fail: function(res) {
