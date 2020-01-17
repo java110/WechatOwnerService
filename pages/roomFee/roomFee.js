@@ -158,6 +158,7 @@ Page({
       cycles: this.data.feeMonth,
       communityId: this.data.communityId,
       feeId: this.data.feeId,
+      feeName:'物业费',
       receivedAmount: _receivedAmount
     }
 
