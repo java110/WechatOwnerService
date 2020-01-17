@@ -14,3 +14,7 @@
 .button_up_blank{
   height: 40rpx;
 }
+
+.block__bottom{
+  height: 180rpx;
+}

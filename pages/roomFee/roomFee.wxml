@@ -21,7 +21,7 @@
       </van-cell-group>
     </view>
   </view>
-  <view class="block__title"></view>
+  <view class="block__bottom"></view>
 
   <van-submit-bar price="{{ receivableAmount }}" button-text="提交订单" bind:submit="onPayFee" />
 
