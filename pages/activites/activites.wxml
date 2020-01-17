@@ -1,6 +1,6 @@
 <!--pages/activites/activites.wxml-->
 <view class="act">
-  <block wx:for="{{activities}}" wx:key="index">
+  <block wx:for="{{activities}}" wx:key="index" >
     <navigator url="/pages/activitesDetail/activitesDetail?activitiesId={{item.activitiesId}}&title={{item.title}}&communityId={{item.communityId}}">
       <view class="act_item">
         <view class="act_img">

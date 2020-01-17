@@ -2,7 +2,7 @@
   background-color: #fff;
 } */
 
-.act .act_item{
+.act .act_item{ 
   background-color: #fff;
   margin: 30rpx 0rpx;
   padding: 30rpx 20rpx 15rpx 20rpx;
