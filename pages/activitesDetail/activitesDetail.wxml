@@ -1,4 +1,4 @@
-<!--pages/detail/detail.wxml-->
+<!--pages/detail/detail.wxml -->
 <view class="detailContainer">
   <image class="headImg" src="{{src}}"></image>
   <view class="ad_titile">

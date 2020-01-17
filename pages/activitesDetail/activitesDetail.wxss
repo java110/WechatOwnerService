@@ -1,4 +1,4 @@
-.detailContainer{
+.detailContainer{ 
   background-color: #fff;
 }
 .detailContainer .headImg{

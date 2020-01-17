@@ -59,6 +59,7 @@ const uploadOwnerPhoto = baseUrl +"app/owner.uploadOwnerPhoto";
 
 const getOwnerPhotoPath = hcBaseUrl +"/callComponent/download/getFile/fileByObjId";
 
+
 const filePath = hcBaseUrl +"/callComponent/download/getFile/file";
 
 //查询业主车位信息
@@ -74,14 +75,13 @@ const queryFeeByOwner = baseUrl + "app/fee.queryFee";
 const preOrder = baseUrl +"/app/payment/toPay";
 
 //查询小区
+
 const listCommunitys = baseUrl + "/app/community.listCommunitys";
 //查询小区文化
 const listActivitiess = baseUrl + "/app/activities.listActivitiess";
 
 //查询小区广告
 const listAdvertPhoto = baseUrl +"/app/advert.listAdvertPhoto";
-
-
 
 
 module.exports = {
@@ -110,6 +110,7 @@ module.exports = {
   queryFeeByParkingSpace: queryFeeByParkingSpace,
   queryFeeByOwner: queryFeeByOwner,
   preOrder: preOrder,
+
   listCommunitys: listCommunitys,
   listActivitiess: listActivitiess,
   filePath: filePath,

@@ -1,5 +1,7 @@
 <view class="user-container">
-  
+  <view class="add_button">
+    <button size="mini" type="primary" catchtap="goAdd" data-item="{{item}}">+ 添加</button>
+  </view>
   <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
     <view class="title">
       <view>{{item.repairName}}</view>
@@ -18,4 +20,3 @@
     </view>
   </view>
 </view>
-<van-button  class="add_button" type="primary" size="large" catchtap="goAdd">添加</van-button>

@@ -30,8 +30,11 @@
     "pages/payParkingFeeList/payParkingFeeList",
     "pages/payParkingFee/payParkingFee",
     "pages/my/myHouseDetail",
+    "pages/repair/repair2",
     "pages/activites/activites",
-    "pages/activitesDetail/activitesDetail"
+    "pages/activitesDetail/activitesDetail",
+    "pages/roomFeeList/roomFeeList",
+    "pages/roomFee/roomFee"
   ],
   "window": {
     "navigationBarTextStyle": "white",
