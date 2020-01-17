@@ -128,7 +128,7 @@ Page({
       return;
     }
 
-    let _receivableAmount = _feeMonth * this.data.additionalAmount * 100;
+    let _receivableAmount = _feeMonth * this.data.amount * 100;
 
     let _lastDate = new Date(this.data.ordEndTime);
     let _newDate = util.date.addMonth(_lastDate, _feeMonth);
