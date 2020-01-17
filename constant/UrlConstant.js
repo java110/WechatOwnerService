@@ -64,6 +64,9 @@ const queryParkingSpacesByOwner = baseUrl+"app/parkingSpace.queryParkingSpacesBy
 //查询停车位费用
 const queryFeeByParkingSpace = baseUrl+"app/fee.queryFeeByParkingSpace";
 
+//查询物业费用
+const queryFeeByOwner = baseUrl + "app/fee.queryFee";
+
 //预下单
 const preOrder = baseUrl +"/app/payment/toPay";
 
@@ -94,6 +97,7 @@ module.exports = {
   queryRoomsByOwner: queryRoomsByOwner,
   queryParkingSpacesByOwner: queryParkingSpacesByOwner,
   queryFeeByParkingSpace: queryFeeByParkingSpace,
+  queryFeeByOwner: queryFeeByOwner,
   preOrder: preOrder,
   listCommunitys: listCommunitys
 };
