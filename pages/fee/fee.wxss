@@ -4,8 +4,6 @@
 
 	/*border: 1px solid black;*/
 }
-.add_button{
-}
 .notice {
     margin: 10rpx 7rpx;
     padding: 25rpx;

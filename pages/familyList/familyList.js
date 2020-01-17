@@ -9,8 +9,16 @@ Page({
     totalPage: 0,
     loading: false
   },
-  onLoad: function () {
-    this.getTable(1);
+  onLoad: function() {
+    let that = this;
+    context.getOwner(function(_owner) {
+      console.log(_owner.communityId,99999999);
+      that.setData({
+        communityId: _owner.communityId,
+        ownerId: _owner.memberId
+      })
+      that.getTable(1);
+    })
   },
 
   onShow: function () {
@@ -22,8 +30,8 @@ Page({
       loading: true
     })
     return this.request({
-      "ownerId": "772019122036600002",
-      "communityId": "702019120393220007",
+      "ownerId": that.data.communityId,
+      "communityId": that.data.ownerId
       // "page": page,
       // "row": 10
     }).then(res => {

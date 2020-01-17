@@ -9,6 +9,7 @@
 // 服务器域名
 const baseUrl = 'https://app.demo.winqi.cn/';
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
+const hcBaseUrl = 'https://hc.demo.winqi.cn';
 
 // 登录接口
 const loginUrl = baseUrl + 'app/loginWx';
@@ -56,7 +57,10 @@ const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApp
 //上传业主照片
 const uploadOwnerPhoto = baseUrl +"app/owner.uploadOwnerPhoto";
 
-const getOwnerPhotoPath = "https://hc.demo.winqi.cn/callComponent/download/getFile/fileByObjId";
+const getOwnerPhotoPath = hcBaseUrl +"/callComponent/download/getFile/fileByObjId";
+
+
+const filePath = hcBaseUrl +"/callComponent/download/getFile/file";
 
 //查询业主车位信息
 const queryParkingSpacesByOwner = baseUrl+"app/parkingSpace.queryParkingSpacesByOwner";
@@ -64,15 +68,25 @@ const queryParkingSpacesByOwner = baseUrl+"app/parkingSpace.queryParkingSpacesBy
 //查询停车位费用
 const queryFeeByParkingSpace = baseUrl+"app/fee.queryFeeByParkingSpace";
 
+//查询物业费用
+const queryFeeByOwner = baseUrl + "app/fee.queryFee";
+
 //预下单
 const preOrder = baseUrl +"/app/payment/toPay";
 
 //查询小区
-const listCommunitys = baseUrl +"/app/community.listCommunitys"
+
+const listCommunitys = baseUrl + "/app/community.listCommunitys";
+//查询小区文化
+const listActivitiess = baseUrl + "/app/activities.listActivitiess";
+
+//查询小区广告
+const listAdvertPhoto = baseUrl +"/app/advert.listAdvertPhoto";
 
 
 module.exports = {
   baseUrl: baseUrl,
+  hcBaseUrl: hcBaseUrl,
   loginUrl: loginUrl,
   areaUrl: areaUrl,
   GetNoticeListUrl: GetNoticeListUrl,
@@ -94,6 +108,11 @@ module.exports = {
   queryRoomsByOwner: queryRoomsByOwner,
   queryParkingSpacesByOwner: queryParkingSpacesByOwner,
   queryFeeByParkingSpace: queryFeeByParkingSpace,
+  queryFeeByOwner: queryFeeByOwner,
   preOrder: preOrder,
-  listCommunitys: listCommunitys
+
+  listCommunitys: listCommunitys,
+  listActivitiess: listActivitiess,
+  filePath: filePath,
+  listAdvertPhoto: listAdvertPhoto
 };
