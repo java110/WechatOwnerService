@@ -12,15 +12,15 @@ Page({
     ownerId: ""
   },
   onLoad: function() {
-    // let that = this;
-    // context.getOwner(function(_owner) {
-    //   console.log(_owner);
-    //   that.setData({
-    //     communityId: _owner.communityId,
-    //     ownerId: _owner.memberId
-    //   })
-    //   that.getTable(1);
-    // })
+    let that = this;
+    context.getOwner(function(_owner) {
+      console.log(_owner.communityId,99999999);
+      that.setData({
+        communityId: _owner.communityId,
+        ownerId: _owner.memberId
+      })
+      that.getTable(1);
+    })
   },
 
   onShow: function() {
@@ -40,8 +40,8 @@ Page({
       loading: true
     })
     return this.request({
-      "ownerId": that.communityId,
-      "communityId": that.ownerId
+      "ownerId": that.data.communityId,
+      "communityId": that.data.ownerId
       // "page": page,
       // "row": 10
     }).then(res => {
