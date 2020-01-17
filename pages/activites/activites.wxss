@@ -1,0 +1,33 @@
+/* .act{
+  background-color: #fff;
+} */
+
+.act .act_item{
+  background-color: #fff;
+  margin: 30rpx 0rpx;
+  padding: 30rpx 20rpx 15rpx 20rpx;
+}
+
+.act .act_item .headImg{
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  width: 100%;
+  height: 400rpx;
+}
+
+.act .act_title{
+  margin-top: 10rpx;
+  width: 100%;
+  overflow: hidden;
+}
+
+.act .act_title van-col view{
+  overflow: hidden;
+}
+
+.act .act_title text{
+  overflow: hidden;
+  font-size: 28rpx;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}

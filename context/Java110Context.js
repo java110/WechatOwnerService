@@ -147,6 +147,10 @@ const getOwner = function(callBack = (_ownerInfo) => {}) {
         console.log(res);
         if (res.statusCode == 200) {
           _ownerInfo = data.auditAppUserBindingOwners[0];
+          if (_ownerInfo == null || _ownerInfo == undefined){
+            callBack(null);
+            return ;
+          }
           if (_ownerInfo.state == '12000') {
             wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
             let _currentCommunityInfo = {

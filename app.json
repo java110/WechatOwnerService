@@ -29,7 +29,9 @@
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
     "pages/payParkingFee/payParkingFee",
-    "pages/my/myHouseDetail"
+    "pages/my/myHouseDetail",
+    "pages/activites/activites",
+    "pages/activitesDetail/activitesDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -95,7 +97,8 @@
     "van-image": "lib/image/index",
     "van-submit-bar": "lib/submit-bar/index",
     "van-search": "lib/search/index",
-    "van-notice-bar": "lib/notice-bar/index"
+    "van-notice-bar": "lib/notice-bar/index",
+    "van-dialog": "lib/dialog/index"
   },
   "sitemapLocation": "sitemap.json"
 }

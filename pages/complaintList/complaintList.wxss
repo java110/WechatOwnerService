@@ -28,7 +28,16 @@
   font-size: 30rpx;
 }
 .main{
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-end; */
+  position: relative;
+}
+.main_right{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+.button{
+  margin-right: 10px;
 }

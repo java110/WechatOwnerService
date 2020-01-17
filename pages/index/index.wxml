@@ -41,34 +41,34 @@
   <swiper class="ad-swiper" indicator-dots="true" indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay='true' interval='5000' duration='1000' circular='true'>
     <block wx:for="{{ad}}" wx:key="index">
       <swiper-item>
-        <image src="{{item.imageUrl}}"></image>
+        <image src="{{item.url}}"></image>
       </swiper-item>
     </block>
   </swiper>
 
   <view class="header-title">
     <text class="new">小区文化</text>
-    <text class="iconfont icongengduo1 gd"></text>
+    <text class="iconfont icongengduo1 gd" catchtap="_moreActivities"></text>
   </view>
   <view class="noticesList">
     <block wx:for="{{notices}}" wx:key="index">
-      <navigator url="/pages/menu/menu">
-        <view class="noticesList-list">
+      <navigator url="/pages/activitesDetail/activitesDetail?activitiesId={{item.activitiesId}}&title={{item.title}}&communityId={{item.communityId}}">
+        <view class="noticesList-list" >
           <view class="notices-info">
-            <view class="notices-info-name">{{item.name}}</view>
+            <view class="notices-info-name">{{item.title}}</view>
             
             <view class="notice-bottom">
               <view>
                 <text class="iconfont iconaccount1"></text>
-                <text>wuxw</text>
+                <text>{{item.userName}}</text>
               </view>
               <view>
                 <text class="iconfont iconyuedu"></text>
-                <text>1179</text>
+                <text>{{item.readCount}}</text>
               </view>
               <view>
                 <text class="iconfont icongood-fill"></text>
-                <text>37</text>
+                <text>{{item.likeCount}}</text>
               </view>
             </view>
           </view>
@@ -80,3 +80,5 @@
     </block>
   </view>
 </scroll-view>
+
+<van-dialog id="van-dialog" />
