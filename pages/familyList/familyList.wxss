@@ -1,34 +1,40 @@
-.user-container {
-    padding: 25rpx 10rpx;
-    background-color: #F0F0F0;
+.ppfl_footer{
+  text-align: right;
+}
+.ppfl_footer .ppfl_footer_his{
+  margin-right: 20rpx;
+}
 
-	/*border: 1px solid black;*/
+.ppfl_c{
+  padding: 0rpx 20rpx 20rpx 20rpx;
 }
-.add_button{
+
+.block__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(69,90,100,.6);
+  padding: 40rpx 30rpx 20rpx;
 }
-.notice {
-    margin: 10rpx 7rpx;
-    padding: 25rpx;
-    background-color: #ffffff;
-    border-radius: 7rpx;
-    /* display: flex;
-    justify-content: space-between;
-    align-items: flex-end; */
+
+.ppfl_context{
+  padding: 20rpx 40rpx 40rpx 40rpx;
+  font-size: 28rpx;
+  color: #8a8a8a;
 }
-.title {
-    border-bottom: 1rpx solid #dedede;
-    font-weight: 700;
-    font-size: 34rpx;
-    color: #5f5e5e;
-    display: flex;
-    justify-content: space-between;
+
+.ppfl_context .ppfl_context_row{
+  margin-top: 30rpx;
 }
-.text{
-  padding: 4rpx 0;
-  font-size: 30rpx;
+
+
+.button_up_blank{
+  height: 40rpx;
 }
-.main{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+
+.block__bottom{
+  height: 160rpx;
+}
+.van-submit-bar__tip{
+  background-color: #e8e8e8;
 }

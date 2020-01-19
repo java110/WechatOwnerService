@@ -4,43 +4,58 @@ const constant = context.constant;
 
 Page({
   data: {
-    tableData: [],
+    owners: [],
     page: 1,
     totalPage: 0,
-    loading: false
+    loading: false,
+    communityId:'',
+    ownerId:''
   },
   onLoad: function() {
     let that = this;
-    context.getOwner(function(_owner) {
-      console.log(_owner.communityId,99999999);
+  },
+
+  onShow: function () {
+    let that = this;
+    context.getOwner(function (_owner) {
+      console.log(_owner.communityId, 99999999);
       that.setData({
         communityId: _owner.communityId,
         ownerId: _owner.memberId
       })
       that.getTable(1);
-    })
-  },
-
-  onShow: function () {
-    let that = this;
+    });
   },
   getTable: function (page, override) {
     let that = this;
     this.setData({
       loading: true
-    })
-    return this.request({
-      "ownerId": that.data.communityId,
-      "communityId": that.data.ownerId
-      // "page": page,
-      // "row": 10
-    }).then(res => {
-      that.setData({
-        tableData: override ? res.data.ownerRepairs : this.data.tableData.concat(res.data.ownerRepairs),
-        totalPage: res.data.records,
-        page: page,
-        loading: false
-      })
+    });
+    let _paramIn = {
+      "communityId": that.data.communityId,
+      "ownerId": that.data.ownerId
+    };
+    context.request({
+      url: constant.url.queryOwnerMembers,
+      header: context.getHeaders(),
+      method: "GET",
+      data: _paramIn,
+      success: function (res) {
+        if (res.statusCode == 200) {
+          let _owners = res.data.owners;
+          that.setData({
+            owners : _owners,
+            loading: false
+          })
+        }
+      },
+      fail:function(e){
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
   }, 
   goAdd: function (e) {
@@ -69,21 +84,5 @@ Page({
     if (!this.data.loading && this.data.page < this.data.totalPage) {
       this.getTable(this.data.page + 1)
     }
-  },
-  //封装请求
-  request: function (data) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: constant.url.queryOwnerMembers,
-        header: context.getHeaders(),
-        method: "POST",
-        data: data,
-        success: function (res) {
-          if (res.statusCode == 200) {
-            resolve(res);
-          }
-        }
-      })
-    })
-  },
+  }
 })

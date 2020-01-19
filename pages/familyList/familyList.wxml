@@ -1,22 +1,35 @@
 <view class="user-container">
-  <view class="add_button">
-    <button size="mini" type="primary" catchtap="goAdd" data-item="{{item}}">+ 添加</button>
-  </view>
-  <view wx:for="{{tableData}}" wx:for-index="idx" wx:for-item="item" class="notice" data-item="{{item}}" bindtap="gotoDetail">
-    <view class="title">
-      <view>{{item.repairName}}</view>
-      <view>{{item.appointmentTime}}</view>
-    </view>
-    <view class="main">
-      <view>
-        <view class="text"> 性别: {{item.repairTypeName}}</view>
-        <view class="text"> 年龄: {{item.stateName}}</view>
-        <view class="text"> 电话: {{item.tel}}</view>
+  <view class="block__title">成员信息</view>
+  <view class="ppfl_c"  wx:for="{{owners}}" wx:for-index="idx" wx:for-item="item"  >
+    <van-panel title="{{item.name}}" desc="" status="{{item.link}}" >
+      <view class="ppfl_context">
+        <van-row >
+          <van-col span="8">成员编号:</van-col>
+          <van-col span="16">{{item.memberId}}</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="8">身份证号:</van-col>
+          <van-col span="16">{{item.idCard}}</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="8">成员年龄:</van-col>
+          <van-col span="16">{{item.age}}岁</van-col>
+        </van-row>
+        <van-row class="ppfl_context_row">
+          <van-col span="8">成员性别:</van-col>
+          <van-col span="16">{{item.sex == 0? '男': '女'}}</van-col>
+        </van-row>
       </view>
-      <view>
-        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">修改</button>
-        <button class="button" size="mini" type="default" catchtap="gotoDetail" data-item="{{item}}">删除</button>
-      </view>
-    </view>
+    </van-panel>
   </view>
+  <view class="block__bottom"></view>
+  <van-submit-bar
+    button-type="primary"
+    button-text="添加成员"
+    bind:submit="goAdd"
+  >
+  <view slot="tip">
+    
+  </view>
+  </van-submit-bar>
 </view>

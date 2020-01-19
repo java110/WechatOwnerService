@@ -1,1 +1,4 @@
-{}
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "添加成员"
+}
