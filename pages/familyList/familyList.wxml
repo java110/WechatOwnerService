@@ -28,8 +28,5 @@
     button-text="添加成员"
     bind:submit="goAdd"
   >
-  <view slot="tip">
-    
-  </view>
   </van-submit-bar>
 </view>

@@ -9,8 +9,8 @@
     <van-field value="{{ typeName }}" label="报修类型" placeholder="请选择报修类型" catchtap="chooseType" required readonly icon="arrow" />
     <van-field value="{{ bindRepairName }}" bindinput="bindInput" data-name="bindRepairName" label="报修人" placeholder="请输入报修人" required />
     <van-field value="{{ bindTel }}" bindinput="bindInput" data-name="bindTel" type="number" label="手机号" placeholder="请输入手机号" required />
-    <van-field value="{{ bindDate }}" bindinput="bindInput" data-name="bindDate"  catchtap="chooseDate" label="预约日期" placeholder="请选择日期" required icon="arrow"/>
-    <van-field value="{{ bindTime }}" bindinput="bindInput" data-name="bindTime"  catchtap="chooseTime" label="预约时间" placeholder="请选择时间" required icon="arrow" />
+    <van-field value="{{ bindDate }}" bindinput="bindInput" data-name="bindDate"  catchtap="chooseDate" label="预约日期" placeholder="请选择日期" required readonly icon="arrow"/>
+    <van-field value="{{ bindTime }}" bindinput="bindInput" data-name="bindTime"  catchtap="chooseTime" label="预约时间" placeholder="请选择时间" required readonly icon="arrow" />
     <van-field value="{{ context }}" bindinput="bindInput" data-name="context" label="报修内容" type="textarea" placeholder="请输入报修内容" autosize border="{{ false }}" required />
   </van-cell-group>
 

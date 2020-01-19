@@ -178,12 +178,18 @@ Page({
         data:obj, //动态数据
         success: function(res) {
           if (res.statusCode == 200) {
-
             wx.redirectTo({
               url: '/pages/myRepair/myRepair',
             });
             return;
           }
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000
+          })
+        },
+        fail:function(e){
           wx.showToast({
             title: "服务器异常了",
             icon: 'none',

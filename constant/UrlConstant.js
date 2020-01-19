@@ -83,6 +83,9 @@ const listActivitiess = baseUrl + "/app/activities.listActivitiess";
 //查询小区广告
 const listAdvertPhoto = baseUrl +"/app/advert.listAdvertPhoto";
 
+//查询报修单
+const listMyRepair = baseUrl + "/app/ownerRepair.listOwnerRepairs";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -114,5 +117,6 @@ module.exports = {
   listCommunitys: listCommunitys,
   listActivitiess: listActivitiess,
   filePath: filePath,
-  listAdvertPhoto: listAdvertPhoto
+  listAdvertPhoto: listAdvertPhoto,
+  listMyRepair: listMyRepair
 };
