@@ -6,6 +6,10 @@ import Dialog from '../../lib/dialog/dialog';
 Page({
   /**
    * 页面的初始数据
+   * {
+        name: "房屋出租",
+        src: "/images/6.png"
+      },
    */
   data: {
     communityId:'',
@@ -33,9 +37,6 @@ Page({
         name: "报修",
         src: "/images/5.png",
         href: "/pages/repair/repair2"
-      }, {
-        name: "房屋出租",
-        src: "/images/6.png"
       }, {
         name: "公告",
         src: "/images/7.png",

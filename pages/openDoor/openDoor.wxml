@@ -38,11 +38,11 @@
     url="/pages/viewPersonFace/viewPersonFace"
     text="采集人脸"
   />
-  <van-grid-item
+  <!-- <van-grid-item
     icon="home-o"
     link-type="navigateTo"
     url="/pages/applicationKey/applicationKey"
     text="二维码开门"
-  />
+  /> -->
 </van-grid>
 </view>
