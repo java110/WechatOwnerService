@@ -11,9 +11,10 @@
   <view class="block__title">房屋信息</view> 
   <van-cell-group>
     <van-cell title="房屋ID" value="{{roomDetail.roomId}}" />
-    <van-cell title="房屋编号" value="{{roomDetail.roomNum}}" />
-    <van-cell title="单元" value="{{roomDetail.unitNum}}" />
-    <van-cell title="楼层" value="{{roomDetail.layer+'层'}}" />
+    <van-cell title="楼栋" value="{{roomDetail.floorNum}}号楼" />
+    <van-cell title="单元" value="{{roomDetail.unitNum}}单元" />
+    <van-cell title="楼层" value="{{roomDetail.layer}}层" />
+    <van-cell title="房屋编号" value="{{roomDetail.roomNum}}室" />
     <van-cell title="房间数" value="{{roomDetail.section}}" />
     <van-cell title="户型" value="{{roomDetail.apartment}}" />
     <van-cell title="建筑面积" value="{{roomDetail.builtUpArea+'平方米'}}" />

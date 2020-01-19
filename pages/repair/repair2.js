@@ -125,13 +125,8 @@ Page({
     console.log(this.data);
   },
 
-  bindOwner: function(e) {
-
-
-    // context.getOwner(function(_ownerInfo) {
-    // console.log(_ownerInfo, 888888888);
-    // if (_ownerInfo) {
-
+  doRepair: function(e) {
+  
     let obj = {
       "repairName": this.data.bindRepairName,
       "repairType": this.data.typeId,
@@ -150,8 +145,6 @@ Page({
     _photos.forEach(function(_item) {
       obj.photos.push({ "photo": _item });
     });
-
-    console.log(obj,3333333333333);
 
     let msg = "";
     if (obj.roomId == "") {
@@ -178,24 +171,24 @@ Page({
         duration: 2000
       })
     } else {
-      console.log("提交数据", obj);
       context.request({
         url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
         header: context.getHeaders(),
         method: "POST",
-        data: {
-          "repairType": "10001",
-          "roomId": "752019100758260005",
-          "communityId": "7020181217000001",
-          "repairName": "吴学文",
-          "tel": "17797173942",
-          "context": "服务太差",
-          "appointmentTime": "2019-12-14 18:30:30",
-          "photos": ['base64....']
-        },
-        // data:obj, //动态数据
+        data:obj, //动态数据
         success: function(res) {
-          console.log(res, 99999);
+          if (res.statusCode == 200) {
+
+            wx.redirectTo({
+              url: '/pages/myRepair/myRepair',
+            });
+            return;
+          }
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000
+          })
         }
       });
 

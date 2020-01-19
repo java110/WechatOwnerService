@@ -29,12 +29,8 @@ Page({
         name: "家庭成员",
         src: "/images/4.png",
         href: "/pages/familyList/familyList"
-      }, {
+      },{
         name: "报修",
-        src: "/images/5.png",
-        href: "/pages/repair/repair"
-      }, {
-        name: "报修2",
         src: "/images/5.png",
         href: "/pages/repair/repair2"
       }, {

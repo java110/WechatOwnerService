@@ -17,7 +17,6 @@
     "pages/notice/index",
     "pages/notice/detail/detail",
     "pages/repairList/repairList",
-    "pages/repair/repair",
     "pages/repairList/detail/detail",
     "pages/family/family",
     "pages/familyList/familyList",
@@ -34,7 +33,8 @@
     "pages/activites/activites",
     "pages/activitesDetail/activitesDetail",
     "pages/roomFeeList/roomFeeList",
-    "pages/roomFee/roomFee"
+    "pages/roomFee/roomFee",
+    "pages/myRepair/myRepair"
   ],
   "window": {
     "navigationBarTextStyle": "white",

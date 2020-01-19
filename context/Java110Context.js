@@ -27,12 +27,16 @@ const getHeaders = function() {
  * http 请求 加入是否登录判断
  */
 const request = function(_reqObj) {
+  wx.showLoading({
+    title: '加载中',
+  });
   //检查是否登录成功
   factory.login.checkLoginStatus(function() {
     //重写token
     _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
     //console.log("_reqObj",_reqObj);
     wx.request(_reqObj);
+    wx.hideLoading();
   });
 }
 

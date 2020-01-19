@@ -1,0 +1,9 @@
+<view>
+
+    <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tab title="待处理">内容 1</van-tab>
+      <van-tab title="接单中">内容 2</van-tab>
+      <van-tab title="完成">内容 3</van-tab>
+    </van-tabs>
+
+</view>

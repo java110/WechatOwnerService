@@ -63,9 +63,14 @@ Page({
   onGotUserInfo: function (e) {
     console.log("nickname=" + JSON.stringify(e.detail.userInfo));
   },
-  myHouse() {
+  myHouse:function() {
     wx.navigateTo({
       url: '../my/myHouse',
     })
+  },
+  myRepair:function(){
+    wx.navigateTo({
+      url: '/pages/myRepair/myRepair',
+    });
   }
 })

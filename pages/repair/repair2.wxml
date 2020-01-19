@@ -4,13 +4,13 @@
     <van-field value="{{ roomName }}" label="房屋" placeholder="请选择房屋" catchtap="chooseRoom" required readonly icon="arrow" />
   </van-cell-group>
 
-  <view class="block__title">投诉信息</view>
+  <view class="block__title">报修信息</view>
   <van-cell-group>
     <van-field value="{{ typeName }}" label="报修类型" placeholder="请选择报修类型" catchtap="chooseType" required readonly icon="arrow" />
     <van-field value="{{ bindRepairName }}" bindinput="bindInput" data-name="bindRepairName" label="报修人" placeholder="请输入报修人" required />
     <van-field value="{{ bindTel }}" bindinput="bindInput" data-name="bindTel" type="number" label="手机号" placeholder="请输入手机号" required />
-    <van-field value="{{ bindDate }}" bindinput="bindInput" data-name="bindDate"  catchtap="chooseDate" label="预约日期" placeholder="请选择日期" required/>
-    <van-field value="{{ bindTime }}" bindinput="bindInput" data-name="bindTime"  catchtap="chooseTime" label="预约时间" placeholder="请选择时间" required />
+    <van-field value="{{ bindDate }}" bindinput="bindInput" data-name="bindDate"  catchtap="chooseDate" label="预约日期" placeholder="请选择日期" required icon="arrow"/>
+    <van-field value="{{ bindTime }}" bindinput="bindInput" data-name="bindTime"  catchtap="chooseTime" label="预约时间" placeholder="请选择时间" required icon="arrow" />
     <van-field value="{{ context }}" bindinput="bindInput" data-name="context" label="报修内容" type="textarea" placeholder="请输入报修内容" autosize border="{{ false }}" required />
   </van-cell-group>
 
@@ -21,7 +21,7 @@
 
   <view class="button_up_blank"></view>
   
-  <van-button type="primary" size="large" catchtap="bindOwner">提交</van-button>
+  <van-button type="primary" size="large" catchtap="doRepair">提交</van-button>
 
 <van-popup show="{{ roomShow }}" position="bottom" custom-style="height: 40%;">
     <van-picker show-toolbar title="" columns="{{ roomCloums }}" bind:change="onChange" bind:cancel="onRoomCancel" bind:confirm="onRoomConfirm" />
