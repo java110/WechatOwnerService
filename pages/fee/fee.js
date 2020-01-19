@@ -2,6 +2,7 @@ const context = require('../../context/Java110Context.js');
 
 const constant = context.constant;
 
+const util = context.util;
 Page({
   data: {
     rooms: [],
@@ -123,20 +124,24 @@ Page({
             let _tmpEndTime = _fee.endTime.replace(/\-/g, "/")
             let _endTime = new Date(_tmpEndTime);
 
-            _parkingSpaces[_psIndex].endTime = util.date.formatDate(_endTime);
+            _room[_psIndex].endTime = util.date.formatDate(_endTime);
 
 
             let _now = new Date();
 
             if (_endTime > _now) {
-              _parkingSpaces[_psIndex].feeStateName = '正常'
+              _room[_psIndex].feeStateName = '正常'
+              _room[_psIndex].state = 'N'
             } else {
-              _parkingSpaces[_psIndex].feeStateName = '欠费'
+              _room[_psIndex].feeStateName = '欠费'
+              _room[_psIndex].state = 'Y'
             }
-            _parkingSpaces[_psIndex].additionalAmount = _fee.additionalAmount;
-            _parkingSpaces[_psIndex].feeId = _fee.feeId;
+            _room[_psIndex].additionalAmount = _fee.additionalAmount;
+            _room[_psIndex].feeId = _fee.feeId;
+            _room[_psIndex].ownerName = _fee.ownerName;
+            console.log("_room[_psIndex]=", _room[_psIndex])
             _that.setData({
-              parkingSpaces: _parkingSpaces
+              rooms: _room
             });
           });
         }
@@ -152,7 +157,8 @@ Page({
       page: 1,
       row: 10,
       roomId: _room.roomId,
-      communityId: _owner.communityId
+      communityId: _owner.communityId,
+      feeTypeCd: '888800010001'
     }
     context.request({
       url: constant.url.queryFeeByOwner,
@@ -160,7 +166,7 @@ Page({
       method: "GET",
       data: _objData, //动态数据
       success: function (res) {
-        console.log(res);
+        console.log("res====>>>",res);
         if (res.statusCode == 200) {
           //成功情况下跳转
           let _roomFee = res.data;

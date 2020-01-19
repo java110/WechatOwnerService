@@ -151,6 +151,7 @@ Page({
       cycles: this.data.feeMonth,
       communityId: this.data.communityId,
       feeId: this.data.feeId,
+      feeName: '停车费',
       receivedAmount: _receivedAmount
     }
     
