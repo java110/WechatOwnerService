@@ -133,16 +133,19 @@ Page({
     // if (_ownerInfo) {
 
     let obj = {
-      "typeId": this.data.typeId,
-      "bindRepairName": this.data.bindRepairName,
-      "bindTel": this.data.bindTel,
+      "repairName": this.data.bindRepairName,
+      "repairType": this.data.typeId,
+      "appointmentTime": this.data.bindDate + " " + this.data.bindTime + ":00",
+      "tel": this.data.bindTel,
       "roomId": this.data.roomId,
       "photos": [],
       "context": this.data.context,
       "userId": this.data.userId,
-      "communityId": this.data.communityId
+      "communityId": this.data.communityId,
+      "bindDate": this.data.bindDate,
+      "bindTime": this.data.bindTime
     }
-
+  
     let _photos = this.data.photos;
     _photos.forEach(function(_item) {
       obj.photos.push({ "photo": _item });
@@ -153,11 +156,11 @@ Page({
     let msg = "";
     if (obj.roomId == "") {
       msg = "请选择房屋";
-    } else if (obj.typeId == "") {
+    } else if (obj.repairType == "") {
       msg = "请选择报修类型";
     } else if (obj.bindRepairName == "") {
       msg = "请填写报修人";
-    } else if (obj.bindTel == "") {
+    } else if (obj.tel == "") {
       msg = "请填写手机号";
     } else if (obj.bindDate == "") {
       msg = "请选择预约日期";

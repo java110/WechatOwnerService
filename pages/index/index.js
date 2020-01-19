@@ -34,6 +34,10 @@ Page({
         src: "/images/5.png",
         href: "/pages/repair/repair"
       }, {
+        name: "报修2",
+        src: "/images/5.png",
+        href: "/pages/repair/repair2"
+      }, {
         name: "房屋出租",
         src: "/images/6.png"
       }, {
