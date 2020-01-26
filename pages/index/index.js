@@ -41,6 +41,10 @@ Page({
         name: "公告",
         src: "/images/7.png",
         href: "/pages/notice/index"
+        }, {
+          name: "智慧停车",
+          src: "/images/8.png",
+          href: "/pages/tempParkingFee/tempParkingFee"
         }]
 
     },

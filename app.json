@@ -34,12 +34,14 @@
     "pages/activitesDetail/activitesDetail",
     "pages/roomFeeList/roomFeeList",
     "pages/roomFee/roomFee",
-    "pages/myRepair/myRepair"
+    "pages/myRepair/myRepair",
+    "pages/tempParkingFee/tempParkingFee",
+    "pages/tempParkingFeePay/tempParkingFeePay"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00AA00",
-    "navigationBarTitleText": "WeChat"
+    "navigationBarTitleText": "HC智慧小区"
   },
   "tabBar": {
     "color": "#272636",

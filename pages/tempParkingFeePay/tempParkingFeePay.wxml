@@ -1,0 +1,24 @@
+<view>
+  <view class="ppf_c">
+  <view class="block__title">车辆信息</view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="小区" value="{{communityName}}" />
+        <van-cell title="车牌号" value="{{carNum}}" />
+        <van-cell title="进场时间" value="{{inTime}}" />
+        <van-cell title="停车时间" value="{{ingTime}}" />
+      </van-cell-group>
+    </view>
+    <view class="block__title">费用说明</view>
+    <view class="ppf_item">
+      <van-cell-group>
+        <van-cell title="前两小时" value="{{additionalAmount}}元" />
+        <van-cell title="每小时" value="{{squarePrice}}元"/>
+      </van-cell-group>
+    </view>
+  </view>
+  <view class="block__title">请在15分钟内离场否则重新计费</view>
+
+  <van-submit-bar price="{{ money }}" button-text="缴费" bind:submit="onPayFee" />
+
+</view>

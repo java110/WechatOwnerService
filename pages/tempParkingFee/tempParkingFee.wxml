@@ -1,0 +1,153 @@
+<view class="pages">
+  <view class="plate-context">
+    <!-- <view class='pages_header'>
+    <view class='pages_header_top'>
+    </view>
+    <view class='pages_header_btm'>
+      <text>{{communityName}}</text>
+    </view>
+  </view> -->
+  <view class="ak_row_black">
+    </view>
+    <view class="ak_row_title">
+      <text>{{communityName}}</text>
+    </view>
+
+    <view class="tips_block">
+    </view>
+
+    <view class='tips'>
+      <text>点击方框输入车牌号</text>
+    </view>
+    <view class="plate-input-body">
+      <view class="plate-input-content" wx:if="{{flag}}">
+        <view bindtap="inputClick" data-id="0" class="{{inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index0}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="1" class="{{inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index1}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="2" class="{{inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index2}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="3" class="{{inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index3}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="4" class="{{inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index4}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="5" class="{{inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index5}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="6" class="{{inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index6}}</text>
+        </view>
+      </view>
+      <view class="new-plate-input-content" wx:else="">
+        <view bindtap="inputClick" data-id="0" class="{{inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index0}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="1" class="{{inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index1}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="2" class="{{inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index2}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="3" class="{{inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index3}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="4" class="{{inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index4}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="5" class="{{inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index5}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="6" class="{{inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index6}}</text>
+        </view>
+        <view bindtap="inputClick" data-id="7" class="{{inputOnFocusIndex=='7'?'plate-nums-foc':'plate-nums-first'}}">
+          <text class="plate-num-text">{{inputPlates.index7}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='plate-input-flag' bindtap='changeplate'>
+      <text>{{carNumBtn}}</text>
+    </view>
+
+    <view class="plat-btn-black"></view>
+
+    <view class="plat-btn">
+      <van-button type="primary" disabled="{{carNumBtnDisable}}" bind:click="queryCarNum" block>立即查询</van-button>
+
+    </view>
+  </view>
+  <!--键盘-->
+  <view class="keyboard" wx:if="{{isKeyboard}}">
+    <view class="kb_top">
+      <text catchtap="tapSpecBtn" data-index="1" style="position:absolute;right:0;display:block;height:74rpx;padding:0 34rpx; color:#03BF70;line-height:74rpx; font-size: 30rpx;">关闭</text>
+    </view>
+    <view style="width:100%; text-align:center;" wx:if="{{!isNumberKB}}">
+      <view style="width:99%;display:flex;text-align:center;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_nor" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx<=9}}" wx:for="{{keyboard1}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="display:flex;text-align:center; width:90%;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_nor" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx<=18&&idx>9}}" wx:for="{{keyboard1}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="display:flex;text-align:center; width:70%;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_nor" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx<=25&&idx>18}}" wx:for="{{keyboard1}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="display:flex; width:50%;margin:0 auto;text-align:center;">
+        <view catchtap="tapKeyboard" class="td td_nor" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx>25}}" wx:for="{{keyboard1}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view bindtap="tapSpecBtn" class="del-first" data-index="0" hoverClass="del-hover" hoverStartTime="0" hoverStayTime="80">
+        <!-- <image class="del-img" data-index="0" mode="scaleToFill" src="../../images/delete.png"></image> -->
+        <text data-index="0" class="iconfont iconiconfonttuige2"></text>
+      </view>
+    </view>
+    <view style="width:100%; text-align:center;" wx:if="{{isNumberKB}}">
+      <view style="width:99%;display:flex;text-align:center;margin:0 auto">
+        <view class="td td_num board_bg" wx:if="{{!tapNum&&idx<=9}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="width:99%;display:flex;text-align:center;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_num" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{tapNum&&idx<=9}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="width:99%;display:flex;text-align:center;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_num" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx>9&&idx<=19}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="width:99%;display:flex;text-align:center;margin:0 auto">
+        <view catchtap="tapKeyboard" class="td td_num" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx>19&&idx<=29}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view style="width:69%;display:flex;text-align:left; margin-left:5rpx;">
+        <view catchtap="tapKeyboard" class="td td_num" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{idx>29&&idx<=33}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+        <view class="td td_num board_bg" wx:if="{{!tapNum&&idx>33}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+        <view catchtap="tapKeyboard" class="td td_num" data-index="{{idx}}" data-val="{{itemName}}" hoverClass="board_bg" hoverStartTime="0" hoverStayTime="80" wx:if="{{tapNum&&idx>33}}" wx:for="{{keyboardNumber}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{itemName}}">
+          {{itemName}}
+        </view>
+      </view>
+      <view bindtap="tapSpecBtn" class="del-first" data-index="0" hoverClass="del-hover" hoverStartTime="0" hoverStayTime="80">
+        <text data-index="0" class="iconfont iconiconfonttuige2"></text>
+
+      </view>
+    </view>
+  </view>
+</view>

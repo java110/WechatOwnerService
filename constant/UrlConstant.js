@@ -86,6 +86,11 @@ const listAdvertPhoto = baseUrl +"/app/advert.listAdvertPhoto";
 //查询报修单
 const listMyRepair = baseUrl + "/app/ownerRepair.listOwnerRepairs";
 
+//查询在场车辆
+const listCarIn = baseUrl +"/app/carInout.listCarInouts";
+
+const queryConfigFee = baseUrl + "/app/fee.queryFeeConfig";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -118,5 +123,7 @@ module.exports = {
   listActivitiess: listActivitiess,
   filePath: filePath,
   listAdvertPhoto: listAdvertPhoto,
-  listMyRepair: listMyRepair
+  listMyRepair: listMyRepair,
+  listCarIn: listCarIn,
+  queryConfigFee: queryConfigFee
 };
