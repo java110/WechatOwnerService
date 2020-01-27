@@ -17,7 +17,8 @@ Page({
     squarePrice:'',
     money:0.00,
     ingTime:'',
-    inoutId:''
+    inoutId:'',
+    feeId:''
   },
 
   /**
@@ -38,7 +39,7 @@ Page({
       ingTime: _ingTime
     });
 
-    this._loadTempParkingFeeConfig();
+    this._loadTempParkingFee();
   },
 
   /**
@@ -92,15 +93,15 @@ Page({
   onPayFee:function(){
 
   },
-  _loadTempParkingFeeConfig:function(){
+  _loadTempParkingFee:function(){
     let _that = this;
     let _objData = {
       communityId: this.data.communityId,
-      feeTypeCd: '888800010007'
+      state: '2008001',
+      inoutId: this.data.inoutId
     }
-
     context.request({
-      url: constant.url.queryConfigFee,
+      url: constant.url.queryFeeByCarInout,
       header: context.getHeaders(),
       method: "GET",
       data: _objData, //动态数据
@@ -108,15 +109,14 @@ Page({
         console.log("请求返回信息：", res);
         if (res.statusCode == 200) {
           //let _carInouts = res.data.carInouts;
-          let tempParkingSpaceFeeConfig = res.data[0];
-         
+          let tempParkingSpaceFeeConfig = res.data;
           _that.setData({
             additionalAmount: tempParkingSpaceFeeConfig.additionalAmount,
-            squarePrice: tempParkingSpaceFeeConfig.squarePrice
-          
+            squarePrice: tempParkingSpaceFeeConfig.squarePrice,
+            feeId: tempParkingSpaceFeeConfig.feeId,
           });
-          
-          return ;
+
+          return;
         }
         wx.showToast({
           title: "服务器异常了",
@@ -132,6 +132,64 @@ Page({
         })
       }
     })
-  
+  },
+  onPayFee: function () {
+    let _receivedAmount = this.data.money / 100;
+    wx.showLoading({
+      title: '支付中',
+    });
+    let _objData = {
+      communityId: this.data.communityId,
+      feeId: this.data.feeId,
+      feeName: this.data.carNum+'临时停车费',
+      receivedAmount: _receivedAmount
+    }
+
+    context.request({
+      url: constant.url.preOrderTempCarInout,
+      header: context.getHeaders(),
+      method: "POST",
+      data: _objData, //动态数据
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200 && res.data.code == '0') {
+          let data = res.data;
+          //成功情况下跳转
+          wx.requestPayment({
+            'timeStamp': data.timeStamp,
+            'nonceStr': data.nonceStr,
+            'package': data.package,
+            'signType': data.signType,
+            'paySign': data.sign,
+            'success': function (res) {
+              wx.showToast({
+                title: "支付成功",
+                duration: 2000
+              });
+              wx.navigateBack({});
+            },
+            'fail': function (res) {
+              console.log('fail:' + JSON.stringify(res));
+            }
+          });
+          wx.hideLoading();
+          return;
+        }
+        wx.hideLoading();
+        wx.showToast({
+          title: "缴费失败",
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail: function (e) {
+        wx.hideLoading();
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    });
   }
 })

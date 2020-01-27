@@ -71,8 +71,14 @@ const queryFeeByParkingSpace = baseUrl+"app/fee.queryFeeByParkingSpace";
 //查询物业费用
 const queryFeeByOwner = baseUrl + "app/fee.queryFee";
 
+//查询车辆进场费用
+const queryFeeByCarInout = baseUrl + "app/fee.queryFeeByCarInout";
+
 //预下单
 const preOrder = baseUrl +"/app/payment/toPay";
+
+//临时车缴费
+const preOrderTempCarInout = baseUrl + "/app/payment/toPayTempCarInout";
 
 //查询小区
 
@@ -125,5 +131,7 @@ module.exports = {
   listAdvertPhoto: listAdvertPhoto,
   listMyRepair: listMyRepair,
   listCarIn: listCarIn,
-  queryConfigFee: queryConfigFee
+  queryConfigFee: queryConfigFee,
+  queryFeeByCarInout: queryFeeByCarInout,
+  preOrderTempCarInout: preOrderTempCarInout
 };
