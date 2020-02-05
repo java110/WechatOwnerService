@@ -10,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    parkingSpaces:[]
+    parkingSpaces:[],
+    moreParkingSpaces:[]
 
   },
 
@@ -81,6 +82,9 @@ Page({
   },
   _loadParkingSpace:function(_owner){
       let _that = this;
+      _that.setData({
+        moreParkingSpaces:[]
+      });
       let _objData = {
         page: 1,
         row: 10,
@@ -107,25 +111,31 @@ Page({
             }
 
             for (let _psIndex = 0; _psIndex < _parkingSpaces.length; _psIndex++){
-              _that._loadParkingSpaceFee(_parkingSpaces[_psIndex],function(_fee){
-                
-                let _tmpEndTime = _fee.endTime.replace(/\-/g, "/") 
-                let _endTime = new Date(_tmpEndTime);
+              let _tmpParkingSpace = JSON.parse(JSON.stringify(_parkingSpaces[_psIndex]));
+              _that._loadParkingSpaceFee(_tmpParkingSpace, function (_tmpParkingSpace,_fees){
 
-                _parkingSpaces[_psIndex].endTime = util.date.formatDate(_endTime);
+                _fees.forEach(function (_fee) {
+                  let _tmpEndTime = _fee.endTime.replace(/\-/g, "/")
+                  let _endTime = new Date(_tmpEndTime);
 
-                
-                let _now = new Date();
-                
-                if (_endTime > _now){
-                  _parkingSpaces[_psIndex].feeStateName = '正常'
-                }else{
-                  _parkingSpaces[_psIndex].feeStateName = '欠费'
-                }
-                _parkingSpaces[_psIndex].additionalAmount = _fee.additionalAmount;
-                _parkingSpaces[_psIndex].feeId = _fee.feeId;
+                  _tmpParkingSpace.endTime = util.date.formatDate(_endTime);
+
+
+                  let _now = new Date();
+
+                  if (_endTime > _now) {
+                    _tmpParkingSpace.feeStateName = '正常'
+                  } else {
+                    _tmpParkingSpace.feeStateName = '欠费'
+                  }
+                  _tmpParkingSpace.feePrice = _fee.feePrice;
+                  _tmpParkingSpace.feeTypeCdName = _fee.feeTypeCdName;
+                  _tmpParkingSpace.feeName = _fee.feeName;
+                  _tmpParkingSpace.feeId = _fee.feeId;
+                  _that.data.moreParkingSpaces.push(_tmpParkingSpace);
+                });
                 _that.setData({
-                  parkingSpaces: _parkingSpaces
+                  moreParkingSpaces: _that.data.moreParkingSpaces
                 });
               });
             }
@@ -145,12 +155,12 @@ Page({
     let _that = this;
     let _objData = {
       page: 1,
-      row: 10,
-      psId: _parkingSpace.psId,
+      row: 30,
+      payerObjId: _parkingSpace.psId,
       communityId: _parkingSpace.communityId
     }
     context.request({
-      url: constant.url.queryFeeByParkingSpace,
+      url: constant.url.queryFeeByOwner,
       header: context.getHeaders(),
       method: "GET",
       data: _objData, //动态数据
@@ -158,8 +168,8 @@ Page({
         console.log(res);
         if (res.statusCode == 200) {
           //成功情况下跳转
-          let _parkingSpaceFee = res.data; 
-          callBack(_parkingSpaceFee);
+          let _parkingSpaceFees = res.data.fees; 
+          callBack(_parkingSpace,_parkingSpaceFees);
           
         }
       },
@@ -170,6 +180,12 @@ Page({
           duration: 2000
         })
       }
+    });
+  },
+  payFeeDetail: function (e){
+    let _item = e.target.dataset.item;
+    wx.navigateTo({
+      url: '/pages/payFeeDetail/payFeeDetail?fee=' + JSON.stringify(_item),
     });
   }
 })

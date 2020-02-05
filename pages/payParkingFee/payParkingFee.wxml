@@ -5,7 +5,7 @@
       <van-cell-group>
         <van-cell title="小区" value="{{communityName}}" />
         <van-cell title="车位编号" value="{{num}}号车位" />
-        <van-cell title="车位类型" value="{{typeCdName}}" />
+        <van-cell title="车位类型" value="{{feeTypeCdName}}" />
         <van-cell title="车牌号" value="{{carNum}}" />
       </van-cell-group>
     </view>
@@ -13,7 +13,7 @@
     <view class="ppf_item">
       <van-cell-group>
         <van-cell title="费用编号" value="{{feeId}}" />
-        <van-cell title="金额" value="{{additionalAmount}}元/月"/>
+        <van-cell title="金额" value="{{feePrice}}元/月"/>
         <van-cell title="周期" value="{{feeMonthName}}" bind:click="chooseMonth" is-link/>
         <van-cell title="到期时间" value="{{endTime}}" />
       </van-cell-group>

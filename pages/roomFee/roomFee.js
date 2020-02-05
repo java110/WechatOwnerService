@@ -21,6 +21,7 @@ Page({
     communityId: '',
     communityName: '',
     feeId: '',
+    feeName:'',
     floorNum: '',
     unitNum: '',
     roomNum: '',
@@ -35,7 +36,7 @@ Page({
   onLoad: function (options) {
     let _fee = JSON.parse(options.fee);
     console.log('_fee', _fee);
-    let _amount = (_fee.builtUpArea * _fee.squarePrice) + parseFloat(_fee.additionalAmount);
+    let _amount = _fee.amount;
     let _receivableAmount = _amount* 100;
     let _communityInfo = context.getCurrentCommunity();
     let _lastDate = new Date(_fee.endTime);
@@ -51,6 +52,7 @@ Page({
       layer:_fee.layer,
       builtUpArea: _fee.builtUpArea,
       feeId: _fee.feeId,
+      feeName: _fee.feeName,
       amount: _amount,
       additionalAmount: _fee.additionalAmount,
       endTime: util.date.formatDate(_endTime),

@@ -36,7 +36,8 @@
     "pages/roomFee/roomFee",
     "pages/myRepair/myRepair",
     "pages/tempParkingFee/tempParkingFee",
-    "pages/tempParkingFeePay/tempParkingFeePay"
+    "pages/tempParkingFeePay/tempParkingFeePay",
+    "pages/payFeeDetail/payFeeDetail"
   ],
   "window": {
     "navigationBarTextStyle": "white",

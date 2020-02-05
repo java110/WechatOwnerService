@@ -32,7 +32,7 @@ Page({
   onLoad: function (options) {
     let _fee = JSON.parse(options.fee);
     console.log('_fee',_fee);
-    let _receivableAmount = this.data.feeMonth * _fee.additionalAmount * 100;
+    let _receivableAmount = this.data.feeMonth * _fee.feePrice * 100;
     let _communityInfo = context.getCurrentCommunity();
     let _lastDate = new Date(_fee.endTime);
     let _endTime = util.date.addMonth(_lastDate, this.data.feeMonth);
@@ -42,10 +42,10 @@ Page({
       communityId: _communityInfo.communityId,
       communityName:_communityInfo.communityName,
       num:_fee.num,
-      typeCdName:_fee.typeCdName,
+      feeTypeCdName: _fee.feeTypeCdName,
       carNum: _fee.carNum,
       feeId:_fee.feeId,
-      additionalAmount: _fee.additionalAmount,
+      feePrice: _fee.feePrice,
       endTime: util.date.formatDate(_endTime),
       ordEndTime: _fee.endTime
     })
@@ -121,7 +121,7 @@ Page({
       return ;
     }
 
-    let _receivableAmount = _feeMonth * this.data.additionalAmount * 100;
+    let _receivableAmount = _feeMonth * this.data.feePrice * 100;
 
     let _lastDate = new Date(this.data.ordEndTime);
     let _newDate = util.date.addMonth(_lastDate, _feeMonth);

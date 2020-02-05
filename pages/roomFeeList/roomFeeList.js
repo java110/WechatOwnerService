@@ -10,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rooms: []
+    rooms: [],
+    moreRooms:[],
 
   },
 
@@ -36,6 +37,9 @@ Page({
     context.getRooms().then(res => {
       let _rooms = res.data.rooms;
       let _owner = res.data.owner;
+      _that.setData({
+        moreRooms: []
+      });
       _rooms.forEach(function(_room) {
         _room.communityId = _owner.communityId;
         _room.communityName = _owner.communityName;
@@ -89,8 +93,8 @@ Page({
     let _that = this;
     let _objData = {
       page: 1,
-      row: 10,
-      roomId: _room.roomId,
+      row: 30,
+      payerObjId: _room.roomId,
       feeTypeCd: '888800010001',
       communityId: _room.communityId
     }
@@ -103,26 +107,29 @@ Page({
         console.log(res);
         if (res.statusCode == 200) {
           //成功情况下跳转
-          let _roomFee = res.data;
-          let _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/")
-          let _endTime = new Date(_tmpEndTime);
+          let _roomFees = res.data.fees;
+          _roomFees.forEach(function(_roomFee){
+            let _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/")
+            let _endTime = new Date(_tmpEndTime);
+            let _tmpRoom = JSON.parse(JSON.stringify(_room));
+            _tmpRoom.endTime = util.date.formatDate(_endTime);
 
-          _room.endTime = util.date.formatDate(_endTime);
+            let _now = new Date();
 
-          let _now = new Date();
-
-          if (_endTime > _now) {
-            _room.feeStateName = '正常'
-          } else {
-            _room.feeStateName = '欠费'
-          }
-          _room.additionalAmount = _roomFee.additionalAmount;
-          _room.squarePrice = _roomFee.squarePrice;
-          _room.amount = (_roomFee.builtUpArea * _roomFee.squarePrice) + parseFloat(_roomFee.additionalAmount);
-          _room.feeId = _roomFee.feeId;
-
+            if (_endTime > _now) {
+              _tmpRoom.feeStateName = '正常'
+            } else {
+              _tmpRoom.feeStateName = '欠费'
+            }
+            _tmpRoom.additionalAmount = _roomFee.additionalAmount;
+            _tmpRoom.squarePrice = _roomFee.squarePrice;
+            _tmpRoom.amount = _roomFee.feePrice;
+            _tmpRoom.feeId = _roomFee.feeId;
+            _tmpRoom.feeName = _roomFee.feeName;
+            _that.data.moreRooms.push(_tmpRoom);
+          });
           _that.setData({
-            rooms: _rooms
+            moreRooms: _that.data.moreRooms
           });
         }
       },
@@ -133,6 +140,12 @@ Page({
           duration: 2000
         })
       }
+    });
+  },
+  payFeeDetail: function (e) {
+    let _item = e.target.dataset.item;
+    wx.navigateTo({
+      url: '/pages/payFeeDetail/payFeeDetail?fee=' + JSON.stringify(_item),
     });
   }
 })

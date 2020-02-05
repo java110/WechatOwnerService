@@ -1,0 +1,15 @@
+.pfd_top{
+  height: 20rpx;
+}
+.ppfl_c{
+  padding:  0rpx 20rpx 20rpx 20rpx;
+}
+
+.ppfl_context{
+  padding: 20rpx 40rpx 40rpx 40rpx;
+  font-size: 28rpx;
+  color: #8a8a8a;
+}
+.pfd_text_right{
+  text-align: right;
+}
