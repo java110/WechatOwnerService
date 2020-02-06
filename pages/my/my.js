@@ -72,5 +72,11 @@ Page({
     wx.navigateTo({
       url: '/pages/myRepair/myRepair',
     });
+  },
+  mySettings:function(){
+    wx.navigateTo({
+      url: '/pages/settings/settings',
+    });
+
   }
 })

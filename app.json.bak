@@ -1,22 +1,49 @@
 {
   "pages": [
-    
     "pages/index/index",
-    "pages/bingOwner/bingOwner",
-    "pages/family/family",
-    "pages/circle/circle",
+    "pages/my/myHouse",
+    "pages/bindOwner/bindOwner",
+    "pages/viewBindOwner/viewBindOwner",
+    "pages/viewCommunitys/viewCommunitys",
+    "pages/applicationKey/applicationKey",
+    "pages/applicationKeyLocation/applicationKeyLocation",
+    "pages/applicationKeyUser/applicationKeyUser",
+    "pages/applicationKeyProgress/applicationKeyProgress",
+    "pages/myApplicationKey/myApplicationKey",
+    "pages/visitorApplicationKey/visitorApplicationKey",
     "pages/location/location",
+    "pages/openDoor/openDoor",
     "pages/my/my",
     "pages/notice/index",
     "pages/notice/detail/detail",
     "pages/repairList/repairList",
-    "pages/repair/repair",
-    "pages/repairList/detail/detail"
+    "pages/repairList/detail/detail",
+    "pages/family/family",
+    "pages/familyList/familyList",
+    "pages/complaintList/complaintList",
+    "pages/viewApplicationKeyUser/viewApplicationKeyUser",
+    "pages/viewHeadImg/viewHeadImg",
+    "pages/collectFace/collectFace",
+    "pages/complaint/complaint",
+    "pages/viewComplaint/viewComplaint",
+    "pages/payParkingFeeList/payParkingFeeList",
+    "pages/payParkingFee/payParkingFee",
+    "pages/my/myHouseDetail",
+    "pages/repair/repair2",
+    "pages/activites/activites",
+    "pages/activitesDetail/activitesDetail",
+    "pages/roomFeeList/roomFeeList",
+    "pages/roomFee/roomFee",
+    "pages/myRepair/myRepair",
+    "pages/tempParkingFee/tempParkingFee",
+    "pages/tempParkingFeePay/tempParkingFeePay",
+    "pages/payFeeDetail/payFeeDetail",
+    "pages/settings/settings"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00AA00",
-    "navigationBarTitleText": "WeChat"
+    "navigationBarTitleText": "HC智慧小区"
   },
   "tabBar": {
     "color": "#272636",
@@ -31,10 +58,10 @@
         "selectedIconPath": "images/home-selected.png"
       },
       {
-        "pagePath": "pages/circle/circle",
+        "pagePath": "pages/openDoor/openDoor",
         "text": "开门",
-        "iconPath": "images/circle.png",
-        "selectedIconPath": "images/circleSelected.png"
+        "iconPath": "images/applicationKey.png",
+        "selectedIconPath": "images/applicationKey-selected.png"
       },
       {
         "pagePath": "pages/my/my",
@@ -53,9 +80,33 @@
     }
   },
   "usingComponents": {
-      "van-button": "lib/button/index",
-      "van-toast":"lib/toast/index",
-      "van-field": "lib/field/index"
+    "van-button": "lib/button/index",
+    "van-toast": "lib/toast/index",
+    "van-field": "lib/field/index",
+    "van-area": "lib/area/index",
+    "van-popup": "lib/popup/index",
+    "van-panel": "lib/panel/index",
+    "van-steps": "lib/steps/index",
+    "van-cell": "lib/cell/index",
+    "van-cell-group": "lib/cell-group/index",
+    "van-radio": "lib/radio/index",
+    "van-radio-group": "lib/radio-group/index",
+    "van-picker": "lib/picker/index",
+    "van-uploader": "lib/uploader/index",
+    "van-row": "lib/row/index",
+    "van-col": "lib/col/index",
+    "van-datetime-picker": "lib/datetime-picker/index",
+    "van-tab": "lib/tab/index",
+    "van-tabs": "lib/tabs/index",
+    "van-grid": "lib/grid/index",
+    "van-grid-item": "lib/grid-item/index",
+    "van-divider": "lib/divider/index",
+    "van-image": "lib/image/index",
+    "van-submit-bar": "lib/submit-bar/index",
+    "van-search": "lib/search/index",
+    "van-notice-bar": "lib/notice-bar/index",
+    "van-dialog": "lib/dialog/index",
+    "van-icon": "lib/icon/index"
   },
   "sitemapLocation": "sitemap.json"
 }

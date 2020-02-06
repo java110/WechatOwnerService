@@ -22,8 +22,8 @@
     "pages/familyList/familyList",
     "pages/complaintList/complaintList",
     "pages/viewApplicationKeyUser/viewApplicationKeyUser",
-    "pages/viewPersonFace/viewPersonFace",
-    "pages/collectFace/collectFace",
+    "pages/viewHeadImg/viewHeadImg",
+    "pages/collectHeaderImg/collectHeaderImg",
     "pages/complaint/complaint",
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
@@ -37,7 +37,8 @@
     "pages/myRepair/myRepair",
     "pages/tempParkingFee/tempParkingFee",
     "pages/tempParkingFeePay/tempParkingFeePay",
-    "pages/payFeeDetail/payFeeDetail"
+    "pages/payFeeDetail/payFeeDetail",
+    "pages/settings/settings"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -104,7 +105,8 @@
     "van-submit-bar": "lib/submit-bar/index",
     "van-search": "lib/search/index",
     "van-notice-bar": "lib/notice-bar/index",
-    "van-dialog": "lib/dialog/index"
+    "van-dialog": "lib/dialog/index",
+    "van-icon": "lib/icon/index"
   },
   "sitemapLocation": "sitemap.json"
 }

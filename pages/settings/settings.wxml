@@ -1,0 +1,9 @@
+<view>
+  <van-cell-group>
+    <van-cell title="设置头像" value="" bind:click = "settingHeadImg" is-link/>
+  </van-cell-group>
+  <view class="group_black"></view>
+  <van-cell-group>
+    <van-cell title="版本号" value="V0.1.0"/>
+  </van-cell-group>
+</view>

@@ -1,4 +1,4 @@
-// pages/viewPersonFace/viewPersonFace.js
+// pages/viewPersonHeaderImg/viewPersonHeaderImg.js
 const context = require("../../context/Java110Context.js");
 const constant = context.constant;
 Page({
@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-      face:null,
-      btnValue:"采集人脸"
+      headerImg:null,
+      btnValue:"上传头像"
   },
 
   /**
@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
       this.setData({
-        face:''
+        headerImg:''
       });
   },
 
@@ -31,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.loadOwnerFace();
+    this.loadOwnerHeaderImg();
   },
 
   /**
@@ -68,22 +68,22 @@ Page({
   onShareAppMessage: function () {
 
   },
-  collectFace:function(){
-    //采集人脸
-    console.log('采集人脸');
+  collectHeadImg:function(){
+    //上传头像
+    console.log('上传头像');
     wx.navigateTo({
-      url: '/pages/collectFace/collectFace',
+      url: '/pages/collectHeaderImg/collectHeaderImg',
     })
   },
   /**
    * 查询业主人脸
    */
-  loadOwnerFace:function(){
+  loadOwnerHeaderImg:function(){
     let _that = this;
     context.getOwner(function(_owner){
-      let _face = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId+"&communityId="+_owner.communityId+"&fileTypeCd=10000&time=" + new Date();
+      let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId+"&communityId="+_owner.communityId+"&fileTypeCd=10000&time=" + new Date();
       _that.setData({
-        face: _face
+        headerImg: _headerImg
       });
     });
   }

@@ -12,6 +12,7 @@ Page({
   data: {
     rooms: [],
     moreRooms:[],
+    needFefresh:true,
 
   },
 
@@ -34,6 +35,12 @@ Page({
    */
   onShow: function() {
     let _that = this;
+    if (!this.data.needFefresh){
+      this.setData({
+        needFefresh: true,
+      });
+      return ;
+    }
     context.getRooms().then(res => {
       let _rooms = res.data.rooms;
       let _owner = res.data.owner;
@@ -46,7 +53,7 @@ Page({
         _that._loadRoomFee(_rooms,_room);
       });
     });
-
+    
   },
 
   /**

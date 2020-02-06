@@ -115,7 +115,7 @@ Page({
             console.log(res);
             if (res.statusCode != 200) {
               wx.showToast({
-                title: '人脸上传失败',
+                title: '头像上传失败',
                 icon: 'none',
                 duration: 2000
               });

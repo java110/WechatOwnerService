@@ -48,7 +48,14 @@ Page({
       feePrice: _fee.feePrice,
       endTime: util.date.formatDate(_endTime),
       ordEndTime: _fee.endTime
-    })
+    });
+
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      needFefresh: false
+    });
   },
 
   /**
@@ -175,6 +182,12 @@ Page({
               wx.showToast({
                 title: "支付成功",
                 duration: 2000
+              });
+              let pages = getCurrentPages();
+              let prevPage = pages[pages.length - 2]; //上一个页面
+              //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+              prevPage.setData({
+                needFefresh: true
               });
               wx.navigateBack({ });
             },

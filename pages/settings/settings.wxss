@@ -1,0 +1,4 @@
+/* pages/settings/settings.wxss */
+.group_black{
+  height: 20rpx;
+}
