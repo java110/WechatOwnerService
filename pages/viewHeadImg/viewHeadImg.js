@@ -8,7 +8,7 @@ Page({
    */
   data: {
       headerImg:null,
-      btnValue:"上传头像"
+      btnValue:"上传人脸"
   },
 
   /**

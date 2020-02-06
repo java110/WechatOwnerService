@@ -1,13 +1,15 @@
 /** index.js **/
 const context = require('../../context/Java110Context.js');
 const factory = context.factory;
+const constant = context.constant;
 //获取app实例
 const app = getApp();
 
 Page({
   data: {
     userInfo: {}, // 用户信息
-    ownerFlag: false // 是否有业主信息 标记 如果有为 true  没有为false
+    ownerFlag: false, // 是否有业主信息 标记 如果有为 true  没有为false
+    headerImg:''
   },
   onLoad: function() {
     let _that = this;
@@ -17,7 +19,9 @@ Page({
       });
       //查询用户信息
       _that.loadOwenrInfo();
+      
     });
+    
   },
 
   onShow: function() {
@@ -28,7 +32,21 @@ Page({
     _that.setData({
       userInfo: context.getUserInfo()
     });
+    console.log('查询头像');
+    _that.loadOwnerHeaderImg();
 
+  },
+  /**
+  * 查询业主头像
+  */
+  loadOwnerHeaderImg: function () {
+    let _that = this;
+    context.getOwner(function (_owner) {
+      let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId + "&communityId=" + _owner.communityId + "&fileTypeCd=10000&time=" + new Date();
+      _that.setData({
+        headerImg: _headerImg
+      });
+    });
   },
   bindingOwner: function() {
     wx.navigateTo({
@@ -77,6 +95,5 @@ Page({
     wx.navigateTo({
       url: '/pages/settings/settings',
     });
-
   }
 })

@@ -3,7 +3,7 @@
     <view class="vpf_row_black">
     </view>
     <view class="vpf_row_title">
-      <text>头像信息</text>
+      <text>人脸信息</text>
     </view>
     <view class="vpf_row_black_01"/>
 

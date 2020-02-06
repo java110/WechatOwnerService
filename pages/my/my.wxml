@@ -9,7 +9,10 @@
         </block> -->
     <!--  wx:else -->
     <block>
-      <view class="userinfo-avatar">
+      <view wx:if="{{headerImg !=''}}">
+         <van-image width="6rem" height="6rem" round fit="cover" src="{{headerImg}}" />
+      </view>
+      <view class="userinfo-avatar" wx:else>
         <open-data type="userAvatarUrl" lang="zh_CN" />
       </view>
       <view class="userinfo-nickname">

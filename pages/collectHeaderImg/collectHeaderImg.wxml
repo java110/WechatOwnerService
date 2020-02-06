@@ -3,15 +3,15 @@
     <cover-view >
         <cover-image class="img" src="../../images/camera.png" style="width:100%; height:800rpx"/>
     </cover-view>
-    <cover-view class="cf_text_na">拿起手机，设置头像</cover-view>
+    <cover-view class="cf_text_na">拿起手机，面向手机</cover-view>
   </camera>
 
   <view class="cf_btn">
     <view class="cf_btn_v" wx:if="{{uploadFlag == false}}">
-      <van-button  type="primary" block  bind:click="takePhoto">头像上传</van-button>
+      <van-button  type="primary" block  bind:click="takePhoto">采集人脸</van-button>
     </view>
     <view class="cf_btn_v" wx:else>
-      <van-button loading type="primary" block loading-text="头像上传中..."/>
+      <van-button loading type="primary" block loading-text="人脸上传中..."/>
     </view>
   </view>
    
