@@ -98,6 +98,7 @@ Page({
     let _objData = {
       communityId: this.data.communityId,
       state: '2008001',
+      isDefault:'T',
       inoutId: this.data.inoutId
     }
     context.request({
