@@ -22,8 +22,6 @@
     "pages/familyList/familyList",
     "pages/complaintList/complaintList",
     "pages/viewApplicationKeyUser/viewApplicationKeyUser",
-    "pages/viewHeadImg/viewHeadImg",
-    "pages/collectHeaderImg/collectHeaderImg",
     "pages/complaint/complaint",
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",

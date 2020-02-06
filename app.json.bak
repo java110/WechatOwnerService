@@ -23,7 +23,7 @@
     "pages/complaintList/complaintList",
     "pages/viewApplicationKeyUser/viewApplicationKeyUser",
     "pages/viewHeadImg/viewHeadImg",
-    "pages/collectFace/collectFace",
+    "pages/collectHeaderImg/collectHeaderImg",
     "pages/complaint/complaint",
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
