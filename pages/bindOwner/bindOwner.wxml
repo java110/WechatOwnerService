@@ -12,7 +12,7 @@
     <van-field value="{{ idCard }}" bindinput="bindInput" data-name="idCard" type="idcard" label="身份证" placeholder="请输入身份证" required />
     <van-field value="{{ link }}" bindinput="bindInput" data-name="link" type="number" label="手机号" placeholder="请输入手机号" required />
     <van-field value="{{ msgCode }}" bindinput="bindInput" data-name="msgCode" center clearable label="验证码" placeholder="请输入短信验证码" required use-button-slot>
-      <van-button slot="button" type="number" size="small" type="primary" catchtap="sendMsgCode">发送验证码</van-button>
+      <van-button slot="button" type="number" size="small" type="primary" catchtap="sendMsgCode" disabled='{{btnDisabled}}'>{{btnValue}}</van-button>
     </van-field>
   </van-cell-group>
 

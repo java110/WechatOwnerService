@@ -129,6 +129,7 @@ Page({
   onLoad: function(options) {
     let _that = this;
     console.log(context);
+    this._loadHCEnv();
     context.getOwner(function (_owner) {
       let _communityId = '';
       if (_owner == null) {
@@ -169,11 +170,16 @@ Page({
   },
 
   _judgeBindOwner:function(){
+    let env = wx.getStorageSync(constant.mapping.HC_ENV);
+    let _msg = '您还没有绑定业主，请先绑定业主';
+    if (env == 'DEV' || env == 'TEST'){
+      _msg = '您还没有绑定业主，请先绑定业主或取消查看演示环境';
+    }
     context.getOwner(function(_owner){
       if(_owner == null){
         Dialog.confirm({
           title: '温馨提示',
-          message: '您还没有绑定业主，请先绑定业主或取消查看演示环境'
+          message: _msg
         }).then(() => {
           // on confirm
           wx.navigateTo({
@@ -181,6 +187,9 @@ Page({
           })
         }).catch(() => {
           // on cancel
+          if (env != 'DEV' && env != 'TEST'){ //生产环境 不做处理
+            return ;
+          }
           //这里写死 演示数据
           let _ownerInfo = { "appUserId": "982020011296320035", "appUserName": "吴学文", "communityId": "7020181217000001", "communityName": "万博家博园（城西区）", "idCard": "632126199109162011", "link": "18999999999", "memberId": "772019092507000013", "state": "12000", "stateName": "审核成功" };
 
@@ -307,6 +316,37 @@ Page({
             ad: _aPhotos
           });
 
+          return;
+        }
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    });
+  },
+
+  _loadHCEnv: function () {
+    let _that = this;
+    let _objData = {
+    };
+    context.request({
+      url: constant.url.getEnv,
+      header: context.getHeaders(),
+      method: "GET",
+      data: _objData, //动态数据
+      success: function (res) {
+        console.log("请求返回信息：", res);
+        if (res.statusCode == 200) {
+          wx.setStorageSync(constant.mapping.HC_ENV, res.data);
           return;
         }
         wx.showToast({

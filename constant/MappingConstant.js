@@ -13,6 +13,7 @@ class MappingConstant{
   static CURRENT_COMMUNITY_INFO = "currentCommunityInfo"; // 小区信息
   static OWNER_INFO = "ownerInfo"; // 当前业主信息
   static CURRENT_COMMUNITY_INFO = "currentCommunityInfo"; //业主当前小区信息
+  static HC_ENV = "_HC_ENV"
 }
 
 
