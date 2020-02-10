@@ -11,6 +11,8 @@ const baseUrl = 'https://app.demo.winqi.cn/';
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn';
 
+//获取环境
+const getEnv = baseUrl + 'app/env/getEnv';
 // 登录接口
 const loginUrl = baseUrl + 'app/loginWx';
 const areaUrl = baseUrl + "app/area.listAreas";
@@ -100,8 +102,12 @@ const queryConfigFee = baseUrl + "/app/fee.queryFeeConfig";
 //缴费历史查询
 const queryFeeDetail = baseUrl +"/app/fee.queryFeeDetail";
 
+//发送验证码
+const userSendSms = baseUrl +"/app/user.userSendSms";
+
 
 module.exports = {
+  getEnv:getEnv,
   baseUrl: baseUrl,
   hcBaseUrl: hcBaseUrl,
   loginUrl: loginUrl,
@@ -137,5 +143,6 @@ module.exports = {
   queryConfigFee: queryConfigFee,
   queryFeeByCarInout: queryFeeByCarInout,
   preOrderTempCarInout: preOrderTempCarInout,
-  queryFeeDetail: queryFeeDetail
+  queryFeeDetail: queryFeeDetail,
+  userSendSms: userSendSms
 };
