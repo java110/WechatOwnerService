@@ -96,9 +96,10 @@ Page({
     let _that = this;
     context.getOwner(function(_ownerInfo){
       if(_ownerInfo){
-        let _active = _ownerInfo.state == '10000'?1:2
+        let _active = _ownerInfo.state == '10000'?1:2;
+        let _areaName = _ownerInfo.parentAreaName + _ownerInfo.areaName;
         _that.setData({
-          areaName: '西宁市城东区',
+          areaName: _areaName,
           communityId: _ownerInfo.communityId,
           communityName: _ownerInfo.communityName,
           appUserName: _ownerInfo.appUserName,

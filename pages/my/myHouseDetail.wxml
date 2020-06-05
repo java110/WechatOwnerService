@@ -5,8 +5,8 @@
     <van-cell title="名称" value="{{ownerInfo.appUserName}}" />
     <van-cell title="身份证" value="{{ownerInfo.idCard}}" />
     <van-cell title="联系方式" value="{{ownerInfo.link}}" />
-    <van-cell title="年龄" value="{{userInfo.age}}" />
-    <van-cell title="性别" value="{{userInfo.sex == '0' ? '女' : '男'}}" />
+    <!-- <van-cell title="年龄" value="{{userInfo.age}}" /> -->
+    <van-cell title="性别" value="{{userInfo.sex == '0' ? '男' : '女'}}" />
   </van-cell-group>
   <view class="block__title">房屋信息</view> 
   <van-cell-group>
