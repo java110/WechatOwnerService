@@ -138,6 +138,7 @@ Page({
                 _tmpParkingSpace.feeTypeCdName = _fee.feeTypeCdName;
                 _tmpParkingSpace.feeName = _fee.feeName;
                 _tmpParkingSpace.feeId = _fee.feeId;
+                _tmpParkingSpace.paymentCycle = _fee.paymentCycle;
                 _that.data.moreParkingSpaces.push(_tmpParkingSpace);
               });
               _that.setData({

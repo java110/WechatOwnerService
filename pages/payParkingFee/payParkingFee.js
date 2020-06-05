@@ -11,9 +11,9 @@ Page({
    */
   data: {
     showFeeMonth:false,
-    feeMonthList:['一个月','半年','一年','两年'],
-    feeMonthName:'一个月',
-    feeMonth:1,
+    feeMonthList:[],
+    feeMonthName:'',
+    feeMonth:0,
     endTime:'',
     ordEndTime:'',
     amount:0,
@@ -22,7 +22,8 @@ Page({
 
     communityId:'',
     communityName:'',
-    feeId:''
+    feeId:'',
+    paymentCycles: []
 
   },
 
@@ -32,11 +33,19 @@ Page({
   onLoad: function (options) {
     let _fee = JSON.parse(options.fee);
     console.log('_fee',_fee);
-    let _receivableAmount = this.data.feeMonth * _fee.feePrice * 100;
+    
     let _communityInfo = context.getCurrentCommunity();
     let _lastDate = new Date(_fee.endTime);
-    let _endTime = util.date.addMonth(_lastDate, this.data.feeMonth);
-    
+    let _paymentCycle = _fee.paymentCycle;
+    let _paymentCycles = [];
+    let _feeMonthList = [];
+    let _receivableAmount = _paymentCycle * _fee.feePrice * 100;
+    let _endTime = util.date.addMonth(_lastDate, _paymentCycle);
+
+    for (let _index = 1; _index < 6; _index++) {
+      _paymentCycles.push(_index * parseInt(_paymentCycle));
+      _feeMonthList.push((_index * parseInt(_paymentCycle)) + "个月");
+    }
     this.setData({
       receivableAmount: _receivableAmount,
       communityId: _communityInfo.communityId,
@@ -47,7 +56,11 @@ Page({
       feeId:_fee.feeId,
       feePrice: _fee.feePrice,
       endTime: util.date.formatDate(_endTime),
-      ordEndTime: _fee.endTime
+      ordEndTime: _fee.endTime,
+      feeMonth: _paymentCycle,
+      feeMonthName: _paymentCycle + '个月',
+      paymentCycles: _paymentCycles,
+      feeMonthList: _feeMonthList,
     });
 
     var pages = getCurrentPages();
@@ -115,18 +128,18 @@ Page({
     console.log("onConfirm", e);
     let _feeMonthName = null;
     _feeMonthName = e.detail.value;
-    let _feeMonth = 1;
-    if (_feeMonthName == '一个月'){
-      _feeMonth = 1;
-    } else if (_feeMonthName == '半年'){
-      _feeMonth = 6;
-    } else if (_feeMonthName == '一年') {
-      _feeMonth = 12;
-    } else if (_feeMonthName == '两年') {
-      _feeMonth = 24;
-    }else{
-      return ;
-    }
+    let _feeMonth = this.data.paymentCycles[e.detail.index];
+    // if (_feeMonthName == '一个月'){
+    //   _feeMonth = 1;
+    // } else if (_feeMonthName == '半年'){
+    //   _feeMonth = 6;
+    // } else if (_feeMonthName == '一年') {
+    //   _feeMonth = 12;
+    // } else if (_feeMonthName == '两年') {
+    //   _feeMonth = 24;
+    // }else{
+    //   return ;
+    // }
 
     let _receivableAmount = _feeMonth * this.data.feePrice * 100;
 
@@ -159,7 +172,8 @@ Page({
       communityId: this.data.communityId,
       feeId: this.data.feeId,
       feeName: '停车费',
-      receivedAmount: _receivedAmount
+      receivedAmount: _receivedAmount, 
+      tradeType: 'JSAPI'
     }
     
     context.request({

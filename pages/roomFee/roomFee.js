@@ -11,7 +11,7 @@ Page({
    */
   data: {
     showFeeMonth: false,
-    feeMonthList: ['一个月', '半年', '一年', '两年'],
+    feeMonthList: [],
     feeMonthName: '一个月',
     feeMonth: 1,
     endTime: '',
@@ -26,7 +26,8 @@ Page({
     unitNum: '',
     roomNum: '',
     layer: '',
-    builtUpArea: ''
+    builtUpArea: '',
+    paymentCycles: []
 
   },
 
@@ -37,10 +38,21 @@ Page({
     let _fee = JSON.parse(options.fee);
     console.log('_fee', _fee);
     let _amount = _fee.amount;
-    let _receivableAmount = _amount* 100;
+    
     let _communityInfo = context.getCurrentCommunity();
+    
+    let _paymentCycle = _fee.paymentCycle;
+    let _paymentCycles = [];
+    let _feeMonthList = [];
+    let _receivableAmount = _paymentCycle * _amount * 100;
     let _lastDate = new Date(_fee.endTime);
-    let _endTime = util.date.addMonth(_lastDate, this.data.feeMonth);
+    let _endTime = util.date.addMonth(_lastDate, _paymentCycle);
+    console.log(_paymentCycle)
+
+    for(let _index = 1;_index < 6 ;_index++){
+      _paymentCycles.push(_index * parseInt(_paymentCycle));
+      _feeMonthList.push((_index * parseInt(_paymentCycle))+"个月");
+    }
 
     this.setData({
       receivableAmount: _receivableAmount,
@@ -56,7 +68,11 @@ Page({
       amount: _amount,
       additionalAmount: _fee.additionalAmount,
       endTime: util.date.formatDate(_endTime),
-      ordEndTime: _fee.endTime
+      ordEndTime: _fee.endTime,
+      paymentCycles: _paymentCycles,
+      feeMonthList: _feeMonthList,
+      feeMonth: _paymentCycle,
+      feeMonthName: _paymentCycle +'个月'
     });
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2]; //上一个页面
@@ -123,18 +139,18 @@ Page({
     console.log("onConfirm", e);
     let _feeMonthName = null;
     _feeMonthName = e.detail.value;
-    let _feeMonth = 1;
-    if (_feeMonthName == '一个月') {
-      _feeMonth = 1;
-    } else if (_feeMonthName == '半年') {
-      _feeMonth = 6;
-    } else if (_feeMonthName == '一年') {
-      _feeMonth = 12;
-    } else if (_feeMonthName == '两年') {
-      _feeMonth = 24;
-    } else {
-      return;
-    }
+    let _feeMonth = this.data.paymentCycles[e.detail.index];
+    // if (_feeMonthName == '一个月') {
+    //   _feeMonth = 1;
+    // } else if (_feeMonthName == '半年') {
+    //   _feeMonth = 6;
+    // } else if (_feeMonthName == '一年') {
+    //   _feeMonth = 12;
+    // } else if (_feeMonthName == '两年') {
+    //   _feeMonth = 24;
+    // } else {
+    //   return;
+    // }
 
     let _receivableAmount = _feeMonth * this.data.amount * 100;
 

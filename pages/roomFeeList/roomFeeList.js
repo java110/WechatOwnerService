@@ -133,6 +133,7 @@ Page({
             _tmpRoom.amount = _roomFee.feePrice;
             _tmpRoom.feeId = _roomFee.feeId;
             _tmpRoom.feeName = _roomFee.feeName;
+            _tmpRoom.paymentCycle = _roomFee.paymentCycle;
             _that.data.moreRooms.push(_tmpRoom);
           });
           _that.setData({
