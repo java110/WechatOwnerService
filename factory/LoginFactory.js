@@ -77,7 +77,7 @@ class LoginFactory {
       url: constant.url.loginUrl,
       method: 'post',
       header: {
-        APP_ID: constant.app.appId
+        'APP-ID': constant.app.appId
       },
       data: {
         code: loginRes.code, // 临时登录凭证

@@ -207,9 +207,17 @@ Page({
       wx.showLoading({
         title: '绑定中',
       });
+
+      let _userInfo = context.getUserInfo();
+      let userId = '-1';
+      if (_userInfo != null && _userInfo != undefined) {
+        userId = _userInfo.userId;
+      }
+      let _header = context.getHeaders();
+      _header['user-id'] = userId;
       context.request({
         url: constant.url.appUserBindingOwner,
-        header: context.getHeaders(),
+        header: _header,
         method: "POST",
         data: obj, //动态数据
         success: function(res) {

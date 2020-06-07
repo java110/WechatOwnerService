@@ -3,7 +3,7 @@
 <view>
   <van-notice-bar
       left-icon="volume-o"
-      text="HC智慧家园是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"
+      text="融生活智慧社区欢迎您"
       speed="30"
     />
 </view>

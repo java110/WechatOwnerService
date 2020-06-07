@@ -7,9 +7,9 @@
 
 
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/';
+const baseUrl = 'https://xq.rshenstar.com/';
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-const hcBaseUrl = 'https://hc.demo.winqi.cn';
+const hcBaseUrl = 'https://xq.rshenstar.com';
 
 //获取环境
 const getEnv = baseUrl + 'app/env/getEnv';
