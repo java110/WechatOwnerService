@@ -14,12 +14,17 @@ const factory = require('../factory/index.js');
  * 获取请后台服务时的头信息
  */
 const getHeaders = function() {
+  let _userInfo = getUserInfo();
+  let userId = '-1';
+  if (_userInfo != null || _userInfo != undefined){
+    userId = _userInfo.userId;
+  }
   return {
     app_id: constant.app.appId,
     transaction_id: util.core.wxuuid(),
     req_time: util.date.getDateYYYYMMDDHHMISS(),
     sign: '1234567',
-    user_id: '-1',
+    user_id: userId,
     cookie: '_java110_token_=' + wx.getStorageSync('token')
   }
 }
