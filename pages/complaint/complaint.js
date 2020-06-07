@@ -174,9 +174,9 @@ Page({
         success: function(res) {
           console.log(res);
           //成功情况下跳转
-          // wx.redirectTo({
-          //   url: "/pages/viewComplaint/viewComplaint"
-          // });
+          wx.redirectTo({
+            url: "/pages/viewComplaint/viewComplaint"
+          });
         },
         fail: function(e) {
           console.log(e);
