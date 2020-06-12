@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "业主信息",
+  "usingComponents": {
+    "van-steps": "/wxcomponents/vant/steps/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-button": "/wxcomponents/vant/button/index"
+  }
+}

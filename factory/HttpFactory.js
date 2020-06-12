@@ -4,42 +4,49 @@
  * 
  * java110团队
  */
+class HttpFactory {
+  constructor() {}
 
-class HttpFactory{
-  constructor(){}
-
-  getSync(_httpHead,_url,_data){
+  getSync(_httpHead, _url, _data) {
     return new Promise((resolve, reject) => {
       wx.request({
         url: _url,
         header: _httpHead,
         method: 'GET',
         data: _data,
+
         success(res) {
-          resolve(res)
+          resolve(res);
         },
+
         fail(err) {
-          reject(err)
+          reject(err);
         }
+
       });
     });
   }
-  postSync(_httpHead, _url, _data){
+
+  postSync(_httpHead, _url, _data) {
     return new Promise((resolve, reject) => {
       wx.request({
         url: _url,
         header: _httpHead,
         method: 'POST',
         data: _data,
+
         success(res) {
-          resolve(res)
+          resolve(res);
         },
+
         fail(err) {
-          reject(err)
+          reject(err);
         }
+
       });
     });
   }
+
 }
 
 module.exports = new HttpFactory();

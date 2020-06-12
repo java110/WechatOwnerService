@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "家庭成员",
+  "usingComponents": {
+    "no-data-page": "/components/no-data-page/no-data-page"
+  }
+}

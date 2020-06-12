@@ -1,0 +1,9 @@
+
+.no-data-icon{
+	font-size: 200rpx;
+}
+.margin-top-100{
+	margin-top: 200rpx;
+}
+
+

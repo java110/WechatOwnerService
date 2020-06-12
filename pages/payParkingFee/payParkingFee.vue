@@ -1,0 +1,384 @@
+<template>
+	<view>
+
+		<scroll-view scroll-y>
+			<view class="block__title">车位信息</view>
+			<view class="cu-list menu">
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">小区</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{communityName}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">车位编号</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{num + '号车位'}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">车位类型</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{feeTypeCdName}}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">车牌号</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{carNum}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="block__title">费用信息</view>
+			<view class="cu-list menu fee-last">
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">费用编号</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{feeId }}</text>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">金额</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{feePrice + '元/月' }}</text>
+					</view>
+				</view>
+				<view class="cu-item arrow">
+					<view class="content">
+						<text class="text-grey">周期</text>
+					</view>
+					<view class="action">
+						<picker bindchange="PickerChange" :value="index" :range="feeMonthList" @change="dateChange">
+							<view class="picker">
+								{{feeMonthName}}
+							</view>
+						</picker>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">到期时间</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{endTime }}</text>
+					</view>
+				</view>
+
+			</view>
+		</scroll-view>
+		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+
+			<view class="action text-orange margin-right line-height">
+				合计：{{receivableAmount}}元
+			</view>
+			<view class="btn-group">
+				<!-- #ifdef H5 || MP-WEIXIN -->
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
+				<!-- #endif -->
+				<!-- #ifdef APP-PLUS -->
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
+				<!-- #endif -->
+			</view>
+		</view>
+	</view>
+
+	</view>
+</template>
+
+<script>
+	// pages/payParkingFee/payParkingFee.js
+	const context = require("../../context/Java110Context.js");
+	const constant = context.constant;
+	const util = context.util;
+
+	export default {
+		data() {
+			return {
+				showFeeMonth: false,
+				feeMonthList: ['一个月', '半年', '一年', '两年'],
+				feeMonthName: '一个月',
+				feeMonth: 1,
+				endTime: '',
+				ordEndTime: '',
+				amount: 0,
+				receivableAmount: 0.00,
+				additionalAmount: 0,
+				num:'',
+				feeTypeCdName:'',
+				carNum:'',
+				feePrice: 0.00,
+				communityId: '',
+				communityName: '',
+				feeId: ''
+			};
+		},
+
+		/**
+		 * 生命周期函数--监听页面加载
+		 */
+		onLoad: function(options) {
+			let _fee = JSON.parse(options.fee);
+			console.log('_fee', _fee);
+			let _receivableAmount = this.feeMonth * _fee.feePrice;
+			let _communityInfo = context.getCurrentCommunity();
+			let _lastDate = new Date(_fee.endTime);
+			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);
+
+			this.receivableAmount = _receivableAmount;
+			this.communityId = _communityInfo.communityId;
+			this.communityName = _communityInfo.communityName;
+			this.num = _fee.num;
+			this.feeTypeCdName = _fee.feeTypeCdName;
+			this.carNum = _fee.carNum;
+			this.feeId = _fee.feeId;
+			this.feePrice = _fee.feePrice;
+			this.endTime = util.date.formatDate(_endTime);
+			this.ordEndTime = _fee.endTime;
+
+			var pages = getCurrentPages();
+			var prevPage = pages[pages.length - 2]; //上一个页面
+			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+			prevPage.needFefresh = false;
+		},
+
+		/**
+		 * 生命周期函数--监听页面初次渲染完成
+		 */
+		onReady: function() {},
+
+		/**
+		 * 生命周期函数--监听页面显示
+		 */
+		onShow: function() {},
+
+		/**
+		 * 生命周期函数--监听页面隐藏
+		 */
+		onHide: function() {},
+
+		/**
+		 * 生命周期函数--监听页面卸载
+		 */
+		onUnload: function() {},
+
+		/**
+		 * 页面相关事件处理函数--监听用户下拉动作
+		 */
+		onPullDownRefresh: function() {},
+
+		/**
+		 * 页面上拉触底事件的处理函数
+		 */
+		onReachBottom: function() {},
+
+		/**
+		 * 用户点击右上角分享
+		 */
+		onShareAppMessage: function() {},
+		methods: {
+
+			dateChange: function(e) {
+				console.log("onConfirm", e);
+				let _feeMonthName = null;
+				_feeMonthName = this.feeMonthList[e.detail.value];
+				let _feeMonth = 1;
+
+				if (_feeMonthName == '一个月') {
+					_feeMonth = 1;
+				} else if (_feeMonthName == '半年') {
+					_feeMonth = 6;
+				} else if (_feeMonthName == '一年') {
+					_feeMonth = 12;
+				} else if (_feeMonthName == '两年') {
+					_feeMonth = 24;
+				} else {
+					return;
+				}
+
+				let _receivableAmount = _feeMonth * this.feePrice ;
+
+				let _lastDate = new Date(this.ordEndTime);
+				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+
+				this.showFeeMonth = false;
+				this.feeMonthName = _feeMonthName;
+				this.receivableAmount = _receivableAmount;
+				this.feeMonth = _feeMonth;
+				this.endTime = util.date.formatDate(_newDate);
+			},
+			onFeeMonthCancel: function(e) {
+				this.showFeeMonth = false;
+			},
+			_payWxApp:function(_data){
+				let _receivedAmount = this.receivableAmount ;
+				wx.showLoading({
+					title: '支付中'
+				});
+				let _tradeType = 'APP';
+				let _objData = {
+					cycles: this.feeMonth,
+					communityId: this.communityId,
+					feeId: this.feeId,
+					feeName: '停车费',
+					receivedAmount: _receivedAmount,
+					tradeType:_tradeType
+				};
+				context.request({
+					url: constant.url.preOrder,
+					header: context.getHeaders(),
+					method: "POST",
+					data: _objData,
+					//动态数据
+					success: function(res) {
+			
+						if (res.statusCode == 200 && res.data.code == '0') {
+							let data = res.data; //成功情况下跳转
+							let obj = {
+								appid: data.appId,
+								noncestr: data.nonceStr,
+								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
+								partnerid: data.partnerid,
+								prepayid: data.prepayid,
+								timestamp: data.timeStamp,
+								sign: data.sign // 根据签名算法生成签名
+							}
+							// 第二种写法，传对象字符串
+							let orderInfo = JSON.stringify(obj)
+							uni.requestPayment({
+							    provider: 'wxpay',
+							    orderInfo: orderInfo, //微信、支付宝订单数据
+							    success: function (res) {
+							       uni.showToast({
+							       	title: "支付成功",
+							       	duration: 2000
+							       });
+							       uni.navigateBack({});
+							    },
+							    fail: function (err) {
+							        console.log('fail:' + JSON.stringify(err));
+							    }
+							});
+							wx.hideLoading();
+							return;
+						}
+			
+						wx.hideLoading();
+						wx.showToast({
+							title: "缴费失败",
+							icon: 'none',
+							duration: 2000
+						});
+					},
+					fail: function(e) {
+						wx.hideLoading();
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			onPayFee: function() {
+				let _receivedAmount = this.receivableAmount;
+				wx.showLoading({
+					title: '支付中',
+				});
+				let _tradeType = 'JSAPI';
+				let _objData = {
+					cycles: this.feeMonth,
+					communityId: this.communityId,
+					feeId: this.feeId,
+					feeName: '停车费',
+					receivedAmount: _receivedAmount,
+					tradeType:_tradeType
+				}
+
+				context.request({
+					url: constant.url.preOrder,
+					header: context.getHeaders(),
+					method: "POST",
+					data: _objData, //动态数据
+					success: function(res) {
+						console.log(res);
+						if (res.statusCode == 200 && res.data.code == '0') {
+							let data = res.data;
+							//成功情况下跳转
+							uni.requestPayment({
+								'timeStamp': data.timeStamp,
+								'nonceStr': data.nonceStr,
+								'package': data.package,
+								'signType': data.signType,
+								'paySign': data.sign,
+								'success': function(res) {
+									uni.showToast({
+										title: "支付成功",
+										duration: 2000
+									});
+									let pages = getCurrentPages();
+									let prevPage = pages[pages.length - 2]; //上一个页面
+									//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+									prevPage.needFefresh = true;
+									uni.navigateBack({});
+								},
+								'fail': function(res) {
+									console.log('fail:' + JSON.stringify(res));
+								}
+							});
+							uni.hideLoading();
+							return;
+						}
+						uni.hideLoading();
+						uni.showToast({
+							title: "缴费失败",
+							icon: 'none',
+							duration: 2000
+						})
+					},
+					fail: function(e) {
+						uni.hideLoading();
+						uni.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
+					}
+				});
+			}
+		}
+	};
+</script>
+<style>
+	@import "./payParkingFee.css";
+
+	.fee-last {
+		margin-bottom: 200upx;
+	}
+
+	.cu-btn.lgplus {
+		padding: 0 20px;
+		font-size: 18px;
+		height: 100upx;
+
+	}
+
+	.cu-btn.sharp {
+		border-radius: 0upx;
+	}
+
+	.line-height {
+		line-height: 100upx;
+	}
+</style>

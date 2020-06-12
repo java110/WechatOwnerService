@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "投诉建议",
+  "usingComponents": {
+    "no-data-page": "/components/no-data-page/no-data-page"
+  }
+}

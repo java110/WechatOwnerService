@@ -1,0 +1,107 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/myHouse",
+    "pages/bindOwner/bindOwner",
+    "pages/viewBindOwner/viewBindOwner",
+    "pages/viewCommunitys/viewCommunitys",
+    "pages/applicationKey/applicationKey",
+    "pages/applicationKeyLocation/applicationKeyLocation",
+    "pages/applicationKeyUser/applicationKeyUser",
+    "pages/applicationKeyProgress/applicationKeyProgress",
+    "pages/myApplicationKey/myApplicationKey",
+    "pages/visitorApplicationKey/visitorApplicationKey",
+    "pages/location/location",
+    "pages/openDoor/openDoor",
+    "pages/my/my",
+    "pages/notice/index",
+    "pages/notice/detail/detail",
+    "pages/repairList/repairList",
+    "pages/repair/repair",
+    "pages/repairList/detail/detail",
+    "pages/family/family",
+    "pages/familyList/familyList",
+    "pages/complaintList/complaintList",
+    "pages/viewApplicationKeyUser/viewApplicationKeyUser",
+    "pages/viewPersonFace/viewPersonFace",
+    "pages/collectFace/collectFace",
+    "pages/complaint/complaint",
+    "pages/viewComplaint/viewComplaint",
+    "pages/payParkingFeeList/payParkingFeeList",
+    "pages/payParkingFee/payParkingFee",
+    "pages/my/myHouseDetail",
+    "pages/repair/repair2",
+    "pages/activites/activites",
+    "pages/activitesDetail/activitesDetail",
+    "pages/roomFeeList/roomFeeList",
+    "pages/roomFee/roomFee",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#00AA00",
+    "navigationBarTitleText": "WeChat"
+  },
+  "tabBar": {
+    "color": "#272636",
+    "selectedColor": "#00AA00",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home-selected.png"
+      },
+      {
+        "pagePath": "pages/openDoor/openDoor",
+        "text": "开门",
+        "iconPath": "static/images/applicationKey.png",
+        "selectedIconPath": "static/images/applicationKey-selected.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/images/my.png",
+        "selectedIconPath": "static/images/mySelected.png"
+      }
+    ]
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "wechatownerservice",
+  "compilerVersion": "2.5.1",
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/button/index",
+    "van-toast": "/wxcomponents/vant/toast/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-area": "/wxcomponents/vant/area/index",
+    "van-popup": "/wxcomponents/vant/popup/index",
+    "van-panel": "/wxcomponents/vant/panel/index",
+    "van-steps": "/wxcomponents/vant/steps/index",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-radio": "/wxcomponents/vant/radio/index",
+    "van-radio-group": "/wxcomponents/vant/radio-group/index",
+    "van-picker": "/wxcomponents/vant/picker/index",
+    "van-uploader": "/wxcomponents/vant/uploader/index",
+    "van-row": "/wxcomponents/vant/row/index",
+    "van-col": "/wxcomponents/vant/col/index",
+    "van-datetime-picker": "/wxcomponents/vant/datetime-picker/index",
+    "van-tab": "/wxcomponents/vant/tab/index",
+    "van-tabs": "/wxcomponents/vant/tabs/index",
+    "van-grid": "/wxcomponents/vant/grid/index",
+    "van-grid-item": "/wxcomponents/vant/grid-item/index",
+    "van-divider": "/wxcomponents/vant/divider/index",
+    "van-image": "/wxcomponents/vant/image/index",
+    "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+    "van-search": "/wxcomponents/vant/search/index",
+    "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+    "van-dialog": "/wxcomponents/vant/dialog/index"
+  }
+}

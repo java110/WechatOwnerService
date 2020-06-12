@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的钥匙",
+  "usingComponents": {
+    "van-steps": "/wxcomponents/vant/steps/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-cell": "/wxcomponents/vant/cell/index"
+  }
+}

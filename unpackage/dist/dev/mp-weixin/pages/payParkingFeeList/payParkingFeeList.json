@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "停车费",
+  "usingComponents": {
+    "no-data-page": "/components/no-data-page/no-data-page"
+  }
+}

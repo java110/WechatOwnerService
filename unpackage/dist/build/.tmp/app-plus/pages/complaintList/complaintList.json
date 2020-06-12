@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "投诉建议",
+  "usingComponents": {
+    "van-tabs": "/wxcomponents/vant/tabs/index",
+    "van-tab": "/wxcomponents/vant/tab/index"
+  }
+}

@@ -23,7 +23,7 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 2、HC智慧家园
 
-![image](readme/hcOwner.png)
+暂未上线，请下载代码后用微信开发者工具查看
 
 
 ### 分支说明
@@ -32,7 +32,7 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 ### 系统功能（function） 
 
-   ![image](readme/hc_function.png)
+   ![image](doc/readme/hc_function.png)
    
    主要系统功能请查看
      
@@ -48,14 +48,10 @@ hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要�
 
 ### 运行效果
 
-![image](readme/index.png)
-![image](readme/circle.png)
-![image](readme/my.png)
+![image](doc/readme/index.png)
+![image](doc/readme/circle.png)
+![image](doc/readme/my.png)
 
 ### 加入我们
 
 加入HC小区交流群随时了解项目进度，和java110开发者零距离沟通 qq群号 827669685
-
-### 成为开发者
-
-如果您对小区 物业 有较深的理解，也致力于开发一套系统方便与物业，业主沟通交流，如果您还有空闲的时间，不怕吃苦，hc小区开发团队欢迎您的加入！ qq群号 992420128 微信：syj15309714817 （添加时请备注HC小区开发）

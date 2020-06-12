@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "采集人脸",
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/button/index"
+  }
+}

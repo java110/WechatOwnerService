@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "HC智慧家园",
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "van-notice-bar": "/wxcomponents/vant/notice-bar/index",
+    "van-dialog": "/wxcomponents/vant/dialog/index"
+  }
+}

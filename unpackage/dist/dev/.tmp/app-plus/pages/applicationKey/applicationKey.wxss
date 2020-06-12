@@ -1,0 +1,46 @@
+.ak_context{
+  padding: 30rpx 20rpx;
+}
+.ak_context .ak_row{
+  background-color: #fff;
+  overflow:hidden;
+}
+.ak_row_black{
+  height: 40rpx;
+}
+.ak_row_title{
+  padding-left: 40rpx;
+  font-size: 31rpx;
+  font-weight: 700;
+}
+.ak_row_col{
+  text-align: center;
+}
+.ak_row_top{
+  margin-top: 60rpx;
+}
+.ak_row_black_01{
+  height: 80rpx;
+}
+.ak_row_black_02{
+  height: 100rpx;
+}
+.ak_row_black_03{
+  height: 140rpx;
+}
+.ak_row_black_04{
+  height: 40rpx;
+}
+.ak_icon_text{
+  font-size: 100rpx;
+  color: #00AA00;
+}
+.ak_row_col_t text{
+  font-size: 30rpx;
+  color: #8a8a8a;
+}
+.ak_btn{
+  width: 80%;
+  margin:0 auto;
+}
+

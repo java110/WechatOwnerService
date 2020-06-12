@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "相关门禁",
+  "usingComponents": {
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-button": "/wxcomponents/vant/button/index"
+  }
+}

@@ -30,7 +30,7 @@
 	"libVersion": "2.9.4",
 	"isGameTourist": false,
 	"appid": "wxf83d66b0e9f5964d",
-	"projectname": "WechatOwnerService",
+	"projectname": "OwnerApp",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

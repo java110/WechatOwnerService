@@ -1,0 +1,22 @@
+.detailContainer{ 
+  background-color: #fff;
+}
+.detailContainer .headImg{
+  width: 100%;
+  height: 400rpx;
+}
+
+.detailContainer .ad_titile{
+  text-align: center;
+  padding-top: 30rpx;
+  margin-bottom: 30rpx;
+  font-size: 44rpx;
+}
+
+.detailContainer .ad_au_text{
+  font-size: 32rpx;
+  color: #8e8e8e
+}
+.detailContainer .ad_context{
+  padding: 0rpx 40rpx 40rpx 40rpx;
+}

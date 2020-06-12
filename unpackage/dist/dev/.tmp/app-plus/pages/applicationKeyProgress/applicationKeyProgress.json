@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "钥匙进度",
+  "usingComponents": {
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-cell": "/wxcomponents/vant/cell/index"
+  }
+}

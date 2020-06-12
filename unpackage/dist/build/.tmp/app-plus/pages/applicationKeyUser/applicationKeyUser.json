@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "填写信息",
+  "usingComponents": {
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-button": "/wxcomponents/vant/button/index",
+    "van-uploader": "/wxcomponents/vant/uploader/index",
+    "van-popup": "/wxcomponents/vant/popup/index",
+    "van-picker": "/wxcomponents/vant/picker/index"
+  }
+}

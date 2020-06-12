@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "跳蚤市场",
+  "usingComponents": {
+    "flixedadd": "/components/flixedadd/flixedadd"
+  }
+}

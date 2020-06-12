@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "小区文化",
+  "usingComponents": {
+    "van-row": "/wxcomponents/vant/row/index",
+    "van-col": "/wxcomponents/vant/col/index"
+  }
+}

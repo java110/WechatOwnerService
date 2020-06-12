@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "登录",
+  "usingComponents": {
+    "van-image": "/wxcomponents/vant/image/index",
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-field": "/wxcomponents/vant/field/index",
+    "van-button": "/wxcomponents/vant/button/index"
+  }
+}

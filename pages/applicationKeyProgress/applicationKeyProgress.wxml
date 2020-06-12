@@ -1,8 +1,0 @@
-<view>
-
-  <view class="block__title">钥匙审核信息</view>
-  <van-cell-group>
-    <van-cell wx:for="{{applicationKeys}}" wx:for-index="idx" wx:for-item="item" title="{{item.locationObjName}}" label="{{item.applicationKeyId}}" value="{{item.stateName}}" bindtap="gotoDetail" data-item="{{item}}" is-link/>
-  </van-cell-group>
-
-</view>

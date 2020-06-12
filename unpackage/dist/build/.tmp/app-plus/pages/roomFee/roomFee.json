@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "缴物业费",
+  "usingComponents": {
+    "van-cell-group": "/wxcomponents/vant/cell-group/index",
+    "van-cell": "/wxcomponents/vant/cell/index",
+    "van-submit-bar": "/wxcomponents/vant/submit-bar/index",
+    "van-popup": "/wxcomponents/vant/popup/index",
+    "van-picker": "/wxcomponents/vant/picker/index"
+  }
+}

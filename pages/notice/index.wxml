@@ -1,9 +1,0 @@
-<view class="user-container">
-    <view wx:for="{{notices}}" wx:for-index="idx" wx:for-item="notice" class="notice" data-index="{{idx}}" bindtap="gotoDetail">
-        <view class="title"> {{notice.title}} </view>
-        <view  class="content">
-            <rich-text class="txt" nodes="{{notice.context}}"></rich-text>
-        </view>
-        <view class="footer"> 时间: {{notice.timeStr}}</view>
-    </view>
-</view>

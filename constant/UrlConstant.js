@@ -3,146 +3,146 @@
  * 
  * add by wuxw 2019-12-28
  */
-
-
-
 // 服务器域名
+//const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 const baseUrl = 'https://app.demo.winqi.cn/';
-//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-const hcBaseUrl = 'https://hc.demo.winqi.cn';
+//const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
+const hcBaseUrl = 'https://app.demo.winqi.cn/';
 
-//获取环境
-const getEnv = baseUrl + 'app/env/getEnv';
-// 登录接口
 const loginUrl = baseUrl + 'app/loginWx';
+const loginOwnerUrl = baseUrl + 'app/loginOwner';
 const areaUrl = baseUrl + "app/area.listAreas";
-const GetNoticeListUrl = baseUrl + 'app/api.queryNotices';
-//报修接口
-const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair';
-//查看报修
-const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs';
-//家庭成员
-const saveOwner = baseUrl + 'app/owner.saveOwner';
-//家庭成员列表
-const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers';
-//投诉建议列表
-const listComplaints = baseUrl + 'app/complaint.listComplaints';
-//添加投诉建议
-const saveComplaint = baseUrl + 'app/complaint';
-//查询业主房间
-const queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner';
+const GetNoticeListUrl = baseUrl + 'app/notice.listNotices'; //公告接口
 
+const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //报修
 
-//绑定业主
-const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner';
+const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //查询报修
 
-//查询绑定业主
-const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners';
+const saveOwner = baseUrl + 'app/owner.saveOwner'; //家庭成员列表
 
+const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers'; //投诉建议列表
 
+const listComplaints = baseUrl + 'app/complaint.listComplaints'; //添加投诉建议
 
-  //解绑业主
-  const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner';
+const saveComplaint = baseUrl + 'app/complaint'; //查询业主房间
 
-//查询业主门禁
-const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines';
+const queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner'; //绑定业主
 
-// 申请钥匙
-const applyApplicationKey = baseUrl +"app/applicationKey.applyApplicationKey";
+const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner'; //查询绑定业主
 
-//查询钥匙
-const listApplicationKeys = baseUrl +"app/applicationKey.listApplicationKeys";
+const ownerRegiter = baseUrl + 'app/owner.ownerRegister'; //业主注册
 
-//申请访客钥匙
-const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey";
+const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners'; //解绑业主
 
-//上传业主照片
-const uploadOwnerPhoto = baseUrl +"app/owner.uploadOwnerPhoto";
+const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner'; //查询业主门禁
 
-const getOwnerPhotoPath = hcBaseUrl +"/callComponent/download/getFile/fileByObjId";
+const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines'; // 申请钥匙
 
+const applyApplicationKey = baseUrl + "app/applicationKey.applyApplicationKey"; //查询钥匙
 
-const filePath = hcBaseUrl +"/callComponent/download/getFile/file";
+const listApplicationKeys = baseUrl + "app/applicationKey.listApplicationKeys"; //申请访客钥匙
 
-//查询业主车位信息
-const queryParkingSpacesByOwner = baseUrl+"app/parkingSpace.queryParkingSpacesByOwner";
+const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey"; //上传业主照片
 
-//查询停车位费用
-const queryFeeByParkingSpace = baseUrl+"app/fee.queryFeeByParkingSpace";
+const uploadOwnerPhoto = baseUrl + "app/owner.uploadOwnerPhoto";
+const getOwnerPhotoPath = hcBaseUrl + "callComponent/download/getFile/fileByObjId";
+const filePath = hcBaseUrl + "callComponent/download/getFile/file"; //查询业主车位信息
 
-//查询物业费用
-const queryFeeByOwner = baseUrl + "app/fee.listFee";
+const queryParkingSpacesByOwner = baseUrl + "app/parkingSpace.queryParkingSpacesByOwner"; //查询停车位费用
 
-//查询车辆进场费用
-const queryFeeByCarInout = baseUrl + "app/fee.queryFeeByCarInout";
+const queryFeeByParkingSpace = baseUrl + "app/fee.queryFeeByParkingSpace"; //查询物业费用
 
-//预下单
-const preOrder = baseUrl +"/app/payment/toPay";
+const queryFeeByOwner = baseUrl + "app/fee.listFee"; //预下单
+
+const preOrder = baseUrl + "app/payment/toPay"; //查询小区
 
 //临时车缴费
 const preOrderTempCarInout = baseUrl + "/app/payment/toPayTempCarInout";
 
-//查询小区
+const listCommunitys = baseUrl + "app/community.listCommunitys"; //查询小区文化
 
-const listCommunitys = baseUrl + "/app/community.listCommunitys";
-//查询小区文化
-const listActivitiess = baseUrl + "/app/activities.listActivitiess";
+const listActivitiess = baseUrl + "app/activities.listActivitiess"; //查询小区广告
 
-//查询小区广告
-const listAdvertPhoto = baseUrl +"/app/advert.listAdvertPhoto";
+const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
+
+//查询车辆进场费用
+const queryFeeByCarInout = baseUrl + "app/fee.queryFeeByCarInout";
+
+
 
 //查询报修单
-const listMyRepair = baseUrl + "/app/ownerRepair.listOwnerRepairs";
+const listMyRepair = baseUrl + "app/ownerRepair.listOwnerRepairs";
 
 //查询在场车辆
-const listCarIn = baseUrl +"/app/carInout.listCarInouts";
+const listCarIn = baseUrl + "app/carInout.listCarInouts";
 
-const queryConfigFee = baseUrl + "/app/fee.queryFeeConfig";
+const queryConfigFee = baseUrl + "app/fee.queryFeeConfig";
 
 //缴费历史查询
-const queryFeeDetail = baseUrl +"/app/fee.queryFeeDetail";
+const queryFeeDetail = baseUrl + "app/fee.queryFeeDetail";
 
 //发送验证码
-const userSendSms = baseUrl +"/app/user.userSendSms";
+const userSendSms = baseUrl + "app/user.userSendSms";
 
+const userLogout = baseUrl + 'app/user.service.logout'; //绑定业主
+
+const listStore = baseUrl + 'app/store.listStoresByCommunity'; // 查询小区商户
+
+//发布需求信息
+const saveJunkRequirement = baseUrl + 'app/junkRequirement.saveJunkRequirement';
+
+//查询需求信息
+const listJunkRequirements = baseUrl + 	'app/junkRequirement.listJunkRequirements';
+
+//删除 需求信息
+const deleteJunkRequirement = baseUrl +'app/junkRequirement.deleteJunkRequirement';
+
+//标记为已完成
+const updateJunkRequirement = baseUrl +'app/junkRequirement.updateJunkRequirement';
 
 module.exports = {
-  getEnv:getEnv,
-  baseUrl: baseUrl,
-  hcBaseUrl: hcBaseUrl,
-  loginUrl: loginUrl,
-  areaUrl: areaUrl,
-  GetNoticeListUrl: GetNoticeListUrl,
-  saveOwnerRepair: saveOwnerRepair,
-  listOwnerRepairs: listOwnerRepairs,
-  saveOwner: saveOwner,
-  appUserBindingOwner: appUserBindingOwner,
-  queryAppUserBindingOwner: queryAppUserBindingOwner,
-  queryOwnerMembers: queryOwnerMembers,
-  listComplaints: listComplaints,
-  saveComplaint: saveComplaint,
-  appUserUnBindingOwner: appUserUnBindingOwner,
-  listOwnerMachines: listOwnerMachines,
-  applyApplicationKey: applyApplicationKey,
-  listApplicationKeys: listApplicationKeys,
-  applyVisitorApplicationKey: applyVisitorApplicationKey,
-  uploadOwnerPhoto: uploadOwnerPhoto,
-  getOwnerPhotoPath: getOwnerPhotoPath,
-  queryRoomsByOwner: queryRoomsByOwner,
-  queryParkingSpacesByOwner: queryParkingSpacesByOwner,
-  queryFeeByParkingSpace: queryFeeByParkingSpace,
-  queryFeeByOwner: queryFeeByOwner,
-  preOrder: preOrder,
-
-  listCommunitys: listCommunitys,
-  listActivitiess: listActivitiess,
-  filePath: filePath,
-  listAdvertPhoto: listAdvertPhoto,
-  listMyRepair: listMyRepair,
-  listCarIn: listCarIn,
-  queryConfigFee: queryConfigFee,
-  queryFeeByCarInout: queryFeeByCarInout,
-  preOrderTempCarInout: preOrderTempCarInout,
-  queryFeeDetail: queryFeeDetail,
-  userSendSms: userSendSms
+	baseUrl: baseUrl,
+	hcBaseUrl: hcBaseUrl,
+	loginUrl: loginUrl,
+	loginOwnerUrl: loginOwnerUrl,
+	areaUrl: areaUrl,
+	GetNoticeListUrl: GetNoticeListUrl,
+	saveOwnerRepair: saveOwnerRepair,
+	listOwnerRepairs: listOwnerRepairs,
+	saveOwner: saveOwner,
+	appUserBindingOwner: appUserBindingOwner,
+	queryAppUserBindingOwner: queryAppUserBindingOwner,
+	queryOwnerMembers: queryOwnerMembers,
+	listComplaints: listComplaints,
+	saveComplaint: saveComplaint,
+	appUserUnBindingOwner: appUserUnBindingOwner,
+	listOwnerMachines: listOwnerMachines,
+	applyApplicationKey: applyApplicationKey,
+	listApplicationKeys: listApplicationKeys,
+	applyVisitorApplicationKey: applyVisitorApplicationKey,
+	uploadOwnerPhoto: uploadOwnerPhoto,
+	getOwnerPhotoPath: getOwnerPhotoPath,
+	queryRoomsByOwner: queryRoomsByOwner,
+	queryParkingSpacesByOwner: queryParkingSpacesByOwner,
+	queryFeeByParkingSpace: queryFeeByParkingSpace,
+	queryFeeByOwner: queryFeeByOwner,
+	preOrder: preOrder,
+	listCommunitys: listCommunitys,
+	listActivitiess: listActivitiess,
+	filePath: filePath,
+	listAdvertPhoto: listAdvertPhoto,
+	listMyRepair: listMyRepair,
+	listCarIn: listCarIn,
+	queryConfigFee: queryConfigFee,
+	queryFeeByCarInout: queryFeeByCarInout,
+	preOrderTempCarInout: preOrderTempCarInout,
+	queryFeeDetail: queryFeeDetail,
+	userSendSms: userSendSms,
+	userLogout: userLogout,
+	ownerRegiter: ownerRegiter,
+	listStore:listStore,
+	saveJunkRequirement:saveJunkRequirement,
+	listJunkRequirements:listJunkRequirements,
+	deleteJunkRequirement:deleteJunkRequirement,
+	updateJunkRequirement:updateJunkRequirement
 };

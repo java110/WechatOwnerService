@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"akl_community{ padding: ",[0,10]," 0; }\n.",[1],"akl_wirte_btn{ padding-top: ",[0,60],"; padding-bottom: ",[0,60],"; background-color: #fff; }\n.",[1],"akl_wirte_btn .",[1],"akl_wirte_btn_small{ width: 80%; margin:0 auto; }\n",],undefined,{path:"./pages/applicationKeyLocation/applicationKeyLocation.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/applicationKeyLocation/applicationKeyLocation.wxml') } }));

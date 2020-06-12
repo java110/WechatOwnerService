@@ -1,0 +1,72 @@
+<template>
+<view class="user-container">
+	<view class="flex-sub text-center bg-white">
+		<view class="solid-bottom text-xl padding">
+			<text class="text-black text-bold">{{notice.title}}</text>
+		</view>
+		  <view class="footer">时间: {{notice.timeStr}}</view>
+	</view>
+	<view class="flex-sub bg-white">
+		<view class="content">
+		    <rich-text class="solid-bottom text-df padding" :nodes="notice.context"></rich-text>
+		</view>
+	</view>
+</view>
+</template>
+
+<script>
+	/** detail.js **/
+	const context = require("../../../context/Java110Context.js");
+	const constant = context.constant; //获取app实例
+	//获取app实例
+	const app = getApp().globalData;
+
+	export default {
+		data() {
+			return {
+				notice: {},
+				noticeId: ''
+			};
+		},
+
+		onLoad: function(options) {
+
+			let _noticeId = options.noticeId;
+			this.noticeId = _noticeId;
+			this._loadNoticeDetail();
+		},
+		onShow: function() {
+			let that = this; // that.setData({
+			//     userInfo: app.globalData.userInfo
+			// });
+		},
+		methods: {
+			_loadNoticeDetail: function() {
+				let that = this;
+				that.communityId = context.getUserInfo().communityId;
+				context.request({
+					header: context.getHeaders(),
+					url: constant.url.GetNoticeListUrl,
+					method: "GET",
+					data: {
+						communityId: that.communityId,
+						page: 1,
+						row: 10,
+						noticeId: that.noticeId
+					},
+					success: function(res) {
+						// TODO 判断
+						console.log(res);
+						let notice = res.data.notices[0]
+						notice.timeStr = notice.startTime.replace(/:\d{1,2}$/, ' ');
+
+						that.notice = notice;
+					}
+				});
+			}
+		}
+	};
+</script>
+<style>
+	@import "./detail.css";
+</style>

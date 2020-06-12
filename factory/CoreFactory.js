@@ -4,19 +4,17 @@
  * 
  * 
  */
+class CoreFactory {
+  constructor() {} // 检查用户信息授权设置
 
-class CoreFactory{
 
-  constructor(){}
-
-  // 检查用户信息授权设置
-  checkUserInfoPermission(callback = () => { }) {
+  checkUserInfoPermission(callback = () => {}) {
     wx.getSetting({
       success: function (res) {
         if (!res.authSetting['scope.userInfo']) {
           wx.openSetting({
             success: function (authSetting) {
-              console.log(authSetting)
+              console.log(authSetting);
             }
           });
         }
@@ -26,6 +24,7 @@ class CoreFactory{
       }
     });
   }
+
 }
 
 module.exports = new CoreFactory();

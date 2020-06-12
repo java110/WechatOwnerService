@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"user-container { padding: ",[0,25]," ",[0,10],"; background-color: #F0F0F0; }\n.",[1],"form{ background-color: #fff; margin: ",[0,10]," ",[0,7],"; }\n.",[1],"repair_textarea{ width: 100%; height: ",[0,150],"; }\n.",[1],"repair_image{ width: ",[0,150],"; height: ",[0,150],"; }\n",],undefined,{path:"./pages/family/family.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/family/family.wxml') } }));

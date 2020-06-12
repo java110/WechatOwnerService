@@ -1,0 +1,6 @@
+
+.solid-bottom::after {
+	border-bottom: 2rpx solid rgba(0, 0, 0, 0.1);
+}
+
+

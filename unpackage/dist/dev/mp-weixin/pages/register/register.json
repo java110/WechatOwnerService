@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "请注册",
+  "usingComponents": {
+    "picker-address": "/components/pickerAddress/pickerAddress"
+  }
+}
