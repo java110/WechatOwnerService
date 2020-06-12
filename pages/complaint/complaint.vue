@@ -156,11 +156,13 @@
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
 						console.log(res);
-						if (that.$data.imgList.length) {
-							that.$data.imgList.push(res.tempFilePaths[0]);
-						} else {
-							that.$data.imgList = res.tempFilePaths;
-						}
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						let _base64Photo = '';
+						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							_base64Photo = _res;
+							console.log('base64', _base64Photo);
+							that.photos.push(_base64Photo);
+						});
 					}
 				});
 			},
@@ -211,8 +213,6 @@
 						"photo": _item
 					});
 				});
-
-				console.log(obj, 3333333333333);
 				let msg = "";
 
 				if (obj.typeCd == "") {

@@ -142,12 +142,14 @@
 				"navigationBarTitleText": "我的钥匙"
 			}
 		},
+		// #ifndef MP-WEIXIN 
 		{
 			"path": "pages/viewPersonFace/viewPersonFace",
 			"style": {
 				"navigationBarTitleText": "人脸"
 			}
 		},
+		// #endif
 		{
 			"path": "pages/complaint/complaint",
 			"style": {

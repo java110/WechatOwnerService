@@ -757,7 +757,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1561,9 +1561,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 12:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/context/Java110Context.js ***!
-  \***********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/context/Java110Context.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1909,9 +1909,9 @@ module.exports = {
 /***/ }),
 
 /***/ 13:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/constant/index.js ***!
-  \***************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/constant/index.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1937,9 +1937,9 @@ module.exports = {
 /***/ }),
 
 /***/ 14:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/constant/AppConstant.js ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/constant/AppConstant.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1961,9 +1961,9 @@ module.exports = AppConstant;
 /***/ }),
 
 /***/ 15:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/constant/UrlConstant.js ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/constant/UrlConstant.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2118,9 +2118,9 @@ module.exports = {
 /***/ }),
 
 /***/ 16:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/constant/MappingConstant.js ***!
-  \*************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/constant/MappingConstant.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2155,9 +2155,9 @@ module.exports = MappingConstant;
 /***/ }),
 
 /***/ 17:
-/*!************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/utils/index.js ***!
-  \************************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/utils/index.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2175,9 +2175,9 @@ module.exports = {
 /***/ }),
 
 /***/ 18:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/utils/CoreUtil.js ***!
-  \***************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/utils/CoreUtil.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2227,9 +2227,9 @@ module.exports = CoreUtil;
 /***/ }),
 
 /***/ 19:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/utils/DateUtil.js ***!
-  \***************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/utils/DateUtil.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8006,7 +8006,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8027,14 +8027,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8110,7 +8110,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8505,9 +8505,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/index.js ***!
-  \**************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/index.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8541,9 +8541,9 @@ module.exports = {
 /***/ }),
 
 /***/ 21:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/LoginFactory.js ***!
-  \*********************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/LoginFactory.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8733,9 +8733,9 @@ module.exports = new LoginFactory();
 /***/ }),
 
 /***/ 22:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/UserFactory.js ***!
-  \********************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/UserFactory.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8788,9 +8788,9 @@ module.exports = new UserFactory();
 /***/ }),
 
 /***/ 23:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/lib/qqmap-wx-jssdk.min.js ***!
-  \***********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8799,9 +8799,9 @@ function _classCallCheck(instance, Constructor) {if (!(instance instanceof Const
 /***/ }),
 
 /***/ 24:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/FileFactory.js ***!
-  \********************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/FileFactory.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8845,9 +8845,9 @@ module.exports = FileFactory;
 /***/ }),
 
 /***/ 25:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/CoreFactory.js ***!
-  \********************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/CoreFactory.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8885,9 +8885,9 @@ module.exports = new CoreFactory();
 /***/ }),
 
 /***/ 26:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/HttpFactory.js ***!
-  \********************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/HttpFactory.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8947,9 +8947,9 @@ module.exports = new HttpFactory();
 /***/ }),
 
 /***/ 27:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/factory/Base64Factory.js ***!
-  \**********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/factory/Base64Factory.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9213,9 +9213,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 4:
-/*!********************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/pages.json ***!
-  \********************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/pages.json ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9223,10 +9223,10 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 421:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/components/uni-icons/icons.js ***!
-  \***************************************************************************************************/
+/***/ 413:
+/*!******************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/components/uni-icons/icons.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10253,9 +10253,9 @@ main();
 /***/ }),
 
 /***/ 58:
-/*!******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/components/pickerAddress/data.js ***!
-  \******************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/components/pickerAddress/data.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20536,21 +20536,21 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ }),
 
 /***/ 7:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/pages.json?{"type":"style"} ***!
-  \*************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/pages.json?{"type":"style"} ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC智慧家园", "backgroundColor": "#ffffff", "usingComponents": { "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar" }, "usingAutoImportComponents": { "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar" } }, "pages/my/myHouse": { "navigationBarTitleText": "我的房屋", "enablePullDownRefresh": true, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/bindOwner/bindOwner": { "navigationBarTitleText": "绑定业主", "usingComponents": {}, "usingAutoImportComponents": { "picker-address": "/components/pickerAddress/pickerAddress" } }, "pages/viewBindOwner/viewBindOwner": { "navigationBarTitleText": "业主信息", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/viewCommunitys/viewCommunitys": { "navigationBarTitleText": "选择小区", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/applicationKey/applicationKey": { "navigationBarTitleText": "申请钥匙", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/applicationKeyLocation/applicationKeyLocation": { "navigationBarTitleText": "相关门禁", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/applicationKeyUser/applicationKeyUser": { "navigationBarTitleText": "填写信息", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/applicationKeyProgress/applicationKeyProgress": { "navigationBarTitleText": "钥匙进度", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": {} }, "pages/myApplicationKey/myApplicationKey": { "navigationBarTitleText": "我的钥匙", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/visitorApplicationKey/visitorApplicationKey": { "navigationBarTitleText": "访客钥匙", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/location/location": { "navigationBarTitleText": "选择小区", "navigationBarTextStyle": "white", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/openDoor/openDoor": { "navigationBarTitleText": "智慧门禁", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/my/my": { "navigationBarTitleText": "我", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/notice/index": { "navigationBarTitleText": "公告", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/notice/detail/detail": { "navigationBarTitleText": "公告详情", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/repairList/repairList": { "enablePullDownRefresh": true, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/repair/repair": { "navigationBarTitleText": "报修", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/repairList/detail/detail": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/family/family": { "navigationBarTitleText": "添加成员", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/familyList/familyList": { "enablePullDownRefresh": true, "navigationBarTitleText": "家庭成员", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/complaintList/complaintList": { "enablePullDownRefresh": true, "navigationBarTitleText": "投诉建议", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/viewApplicationKeyUser/viewApplicationKeyUser": { "navigationBarTitleText": "我的钥匙", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/viewPersonFace/viewPersonFace": { "navigationBarTitleText": "人脸", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/complaint/complaint": { "navigationBarTitleText": "投诉建议", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/viewComplaint/viewComplaint": { "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/payParkingFeeList/payParkingFeeList": { "navigationBarTitleText": "停车费", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/payParkingFee/payParkingFee": { "navigationBarTitleText": "缴停车费", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/my/myHouseDetail": { "navigationBarTitleText": "我的房屋明细", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/activites/activites": { "navigationBarTitleText": "小区文化", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/activitesDetail/activitesDetail": { "navigationBarTitleText": "小区文化", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/roomFeeList/roomFeeList": { "navigationBarTitleText": "物业费", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/roomFee/roomFee": { "navigationBarTitleText": "缴物业费", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/login/login": { "navigationBarTitleText": "请登录", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/myRepair/myRepair": { "navigationBarTitleText": "我的报修单", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/settings/settings": { "navigationBarTitleText": "设置", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/register/register": { "navigationBarTitleText": "请注册", "usingComponents": { "picker-address": "/components/pickerAddress/pickerAddress" }, "usingAutoImportComponents": { "picker-address": "/components/pickerAddress/pickerAddress" } }, "pages/payFeeDetail/payFeeDetail": { "navigationBarTitleText": "缴费历史", "usingComponents": { "no-data-page": "/components/no-data-page/no-data-page" }, "usingAutoImportComponents": { "no-data-page": "/components/no-data-page/no-data-page" } }, "pages/myProperty/myProperty": { "navigationBarTitleText": "我的物业", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/viewAdmin/viewAdmin": { "navigationBarTitleText": "技术支持", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/market/market": { "navigationBarTitleText": "跳蚤市场", "usingComponents": { "flixedadd": "/components/flixedadd/flixedadd" }, "usingAutoImportComponents": { "flixedadd": "/components/flixedadd/flixedadd" } }, "pages/newJunk/newJunk": { "navigationBarTitleText": "发布信息", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/myJunk/myJunk": { "navigationBarTitleText": "我的发布", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/showlogin/showlogin": { "navigationBarTitleText": "温馨提示", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarBackgroundColor": "#00AA00", "navigationBarTitleText": "HC智慧家园" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC智慧家园", "backgroundColor": "#ffffff" }, "pages/my/myHouse": { "navigationBarTitleText": "我的房屋", "enablePullDownRefresh": true }, "pages/bindOwner/bindOwner": { "navigationBarTitleText": "绑定业主" }, "pages/viewBindOwner/viewBindOwner": { "navigationBarTitleText": "业主信息" }, "pages/viewCommunitys/viewCommunitys": { "navigationBarTitleText": "选择小区" }, "pages/applicationKey/applicationKey": { "navigationBarTitleText": "申请钥匙" }, "pages/applicationKeyLocation/applicationKeyLocation": { "navigationBarTitleText": "相关门禁" }, "pages/applicationKeyUser/applicationKeyUser": { "navigationBarTitleText": "填写信息" }, "pages/applicationKeyProgress/applicationKeyProgress": { "navigationBarTitleText": "钥匙进度" }, "pages/myApplicationKey/myApplicationKey": { "navigationBarTitleText": "我的钥匙" }, "pages/visitorApplicationKey/visitorApplicationKey": { "navigationBarTitleText": "访客钥匙" }, "pages/location/location": { "navigationBarTitleText": "选择小区", "navigationBarTextStyle": "white" }, "pages/openDoor/openDoor": { "navigationBarTitleText": "智慧门禁" }, "pages/my/my": { "navigationBarTitleText": "我" }, "pages/notice/index": { "navigationBarTitleText": "公告" }, "pages/notice/detail/detail": { "navigationBarTitleText": "公告详情" }, "pages/repairList/repairList": { "enablePullDownRefresh": true }, "pages/repair/repair": { "navigationBarTitleText": "报修" }, "pages/repairList/detail/detail": {}, "pages/family/family": { "navigationBarTitleText": "添加成员" }, "pages/familyList/familyList": { "enablePullDownRefresh": true, "navigationBarTitleText": "家庭成员" }, "pages/complaintList/complaintList": { "enablePullDownRefresh": true, "navigationBarTitleText": "投诉建议" }, "pages/viewApplicationKeyUser/viewApplicationKeyUser": { "navigationBarTitleText": "我的钥匙" }, "pages/complaint/complaint": { "navigationBarTitleText": "投诉建议" }, "pages/viewComplaint/viewComplaint": {}, "pages/payParkingFeeList/payParkingFeeList": { "navigationBarTitleText": "停车费" }, "pages/payParkingFee/payParkingFee": { "navigationBarTitleText": "缴停车费" }, "pages/my/myHouseDetail": { "navigationBarTitleText": "我的房屋明细" }, "pages/activites/activites": { "navigationBarTitleText": "小区文化" }, "pages/activitesDetail/activitesDetail": { "navigationBarTitleText": "详情" }, "pages/roomFeeList/roomFeeList": { "navigationBarTitleText": "物业费" }, "pages/roomFee/roomFee": { "navigationBarTitleText": "缴物业费" }, "pages/login/login": { "navigationBarTitleText": "请登录" }, "pages/myRepair/myRepair": { "navigationBarTitleText": "我的报修单" }, "pages/settings/settings": { "navigationBarTitleText": "设置" }, "pages/register/register": { "navigationBarTitleText": "请注册" }, "pages/payFeeDetail/payFeeDetail": { "navigationBarTitleText": "缴费历史" }, "pages/myProperty/myProperty": { "navigationBarTitleText": "我的物业" }, "pages/viewAdmin/viewAdmin": { "navigationBarTitleText": "技术支持" }, "pages/market/market": { "navigationBarTitleText": "跳蚤市场" }, "pages/newJunk/newJunk": { "navigationBarTitleText": "发布信息" }, "pages/myJunk/myJunk": { "navigationBarTitleText": "我的发布" }, "pages/showlogin/showlogin": { "navigationBarTitleText": "温馨提示" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarBackgroundColor": "#00AA00", "navigationBarTitleText": "HC智慧家园" } };exports.default = _default;
 
 /***/ }),
 
 /***/ 8:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/OwnerApp/ownerApp/pages.json?{"type":"stat"} ***!
-  \************************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/pages.json?{"type":"stat"} ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

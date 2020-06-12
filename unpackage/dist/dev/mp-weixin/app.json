@@ -23,7 +23,6 @@
     "pages/familyList/familyList",
     "pages/complaintList/complaintList",
     "pages/viewApplicationKeyUser/viewApplicationKeyUser",
-    "pages/viewPersonFace/viewPersonFace",
     "pages/complaint/complaint",
     "pages/viewComplaint/viewComplaint",
     "pages/payParkingFeeList/payParkingFeeList",
@@ -83,5 +82,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap84.json"
+  "sitemapLocation": "sitemap17.json"
 }

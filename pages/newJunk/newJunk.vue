@@ -115,8 +115,6 @@
 			},
 			submitJunk: function() {
 
-				console.log('submitJunk this', this);
-
 				let obj = {
 					"typeCd": this.typeCd,
 					"classification": this.classification,
