@@ -13,8 +13,6 @@ const factory = require("../factory/index.js");
 /**
  * 获取请后台服务时的头信息
  */
-
-
 const getHeaders = function() {
 	return {
 		"app-id": constant.app.appId,
@@ -29,7 +27,6 @@ const getHeaders = function() {
 /**
  * http 请求 加入是否登录判断
  */
-
 const request = function(_reqObj) {
 	//这里判断只有在 post 方式时 放加载框
 	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
@@ -38,31 +35,44 @@ const request = function(_reqObj) {
 			mask: true
 		});
 		_reqObj.complete = function() {
-			console.log('complete')
 			uni.hideLoading();
 		}
 	}
-	//请求白名单
-	let white_url = [
-		constant.url.listActivitiess,
-		constant.url.listAdvertPhoto,
-		constant.url.queryAppUserBindingOwner,
-		constant.url.listJunkRequirements
-	];
-	var index = white_url.indexOf(_reqObj.url);
+
 	//白名单直接跳过检查登录
-	if(white_url.includes(_reqObj.url)){
-		_reqObj.communityId = "7020181217000001";
+	if (constant.url.NEED_NOT_LOGIN_URL.includes(_reqObj.url)) {
+		_reqObj.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
 		uni.request(_reqObj);
 		return;
 	}
-	//检查是否登录成功
-	factory.login.checkLoginStatus(function() {
-		console.log('factory.login.checkLoginStatus');
+	//校验是否登录，如果没有登录跳转至温馨提示页面
+	factory.login.checkSession().then(function() {
+		//有回话 跳转至相应页面
 		//重写token
-		_reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token'); //console.log("_reqObj",_reqObj);
+		_reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
+	}, function(error) { //回话过期
+		// #ifdef H5
+		//先微信登录
+		factory.login.wechatRefreshToken();
+		// #endif
 
-		uni.request(_reqObj);
+		//小程序登录
+		// #ifdef MP-WEIXIN
+		factory.login.doLogin();
+		// #endif
+
+		// #ifdef APP-PLUS
+		//查询临时钥匙
+		let _key = wx.getStorageSync(constant.mapping.OWNER_KEY);
+		if (_key) {
+			factory.login._doLoginOwnerByKey(_key);
+		} else {
+			uni.navigateTo({
+				url: '/pages/showlogin/showlogin'
+			});
+			return;
+		}
+		// #endif
 	});
 };
 /**
@@ -83,33 +93,27 @@ const getCurrentLocation = function() {
  * 
  * add by wuxw 2019-12-28
  */
-
-
 const getUserInfo = function() {
 	let _userInfo = wx.getStorageSync(constant.mapping.USER_INFO);
 
 	return JSON.parse(_userInfo);
 };
+
 /**
  * 登录标记
  * add  by wuxw 2019-12-28
  */
-
-
 const getLoginFlag = function() {
 	let _loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
-
 	return _loginFlag;
 };
 
 const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) {
 	let areaList = wx.getStorageSync(constant.mapping.AREA_INFO);
-
 	if (areaList) {
 		callBack(areaList);
 		return;
 	}
-
 	uni.request({
 		url: constant.url.areaUrl,
 		header: getHeaders(),
@@ -119,7 +123,6 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
 			parentAreaCode: _parentAreaCode
 		},
 		success: function(res) {
-			console.log('login success');
 			res = res.data;
 			var province = [],
 				city = [],
@@ -307,7 +310,7 @@ const getRooms = function() {
 };
 
 //判断当前登录状态，不调跳转登录界面
-const checkLoginStatus = function(){
+const checkLoginStatus = function() {
 	let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
 	let nowDate = new Date();
 	if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
@@ -317,7 +320,65 @@ const checkLoginStatus = function(){
 	}
 };
 
+/**
+ * 跳转功能封装
+ * @param {Object} _param 跳转入参
+ */
+const navigateTo = function(_param) {
+	let _url = _param.url;
+	let _tempUrl = _url.indexOf('?') > 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+	//是否需要登录
+	constant.url.NEED_NOT_LOGIN_PAGE.forEach(item => {
+		if (item == _tempUrl) {
+			uni.navigateTo(_param);
+			return;
+		}
+	});
+	console.log('跳转参数', _param);
+	//校验是否登录，如果没有登录跳转至温馨提示页面
+	factory.login.checkSession().then(function() {
+		//有回话 跳转至相应页面
 
+		uni.navigateTo(_param);
+	}, function(error) { //回话过期
+		// #ifdef H5
+		//先微信登录
+		factory.login.wechatRefreshToken();
+		// #endif
+
+		//小程序登录
+		// #ifdef MP-WEIXIN
+		factory.login.doLogin();
+		// #endif
+
+		// #ifdef APP-PLUS
+		//查询临时钥匙
+		let _key = wx.getStorageSync(constant.mapping.OWNER_KEY);
+		if (_key) {
+			factory.login._doLoginOwnerByKey(_key);
+		} else {
+			uni.navigateTo({
+				url: '/pages/showlogin/showlogin'
+			});
+			return;
+		}
+		// #endif
+	});
+};
+
+const onLoad = function(_option) {
+
+	// #ifdef H5
+	let _key = _option.key;
+
+	if (_key == null || _key == undefined || _key == '') {
+		return;
+	}
+
+	//根据key 去做登录
+	factory.login._doLoginOwnerByKey(_key);
+	// #endif
+}
 
 module.exports = {
 	constant: constant,
@@ -334,5 +395,7 @@ module.exports = {
 	request: request,
 	getRooms: getRooms,
 	getProperty: getProperty,
-	checkLoginStatus:checkLoginStatus
+	checkLoginStatus: checkLoginStatus,
+	onLoad: onLoad,
+	navigateTo: navigateTo
 };

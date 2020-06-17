@@ -43,6 +43,7 @@
 		methods: {
 			_loadNoticeDetail: function() {
 				let that = this;
+				context.onLoad(options);
 				that.communityId = context.getUserInfo().communityId;
 				context.request({
 					header: context.getHeaders(),

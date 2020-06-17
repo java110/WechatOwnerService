@@ -49,6 +49,8 @@ export default {
    */
   onLoad: function (options) {
     let _that = this;
+	
+	context.onLoad(options);
 
     context.getOwner(function (_owner) {
       let _communityId = '';

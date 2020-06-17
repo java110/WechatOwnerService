@@ -75,6 +75,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
+			 context.onLoad(options);
 			context.getOwner(function(_owner) {
 				_that.ownerId = _owner.memberId;
 				_that.communityId = _owner.communityId;

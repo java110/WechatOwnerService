@@ -35,7 +35,7 @@
 			<view class="title">房屋编号</view>
 			{{roomDetail.roomNum}}室
 		</view>
-		
+
 		<view class="cu-form-group">
 			<view class="title">楼层</view>
 			{{roomDetail.layer+'层'}}
@@ -88,7 +88,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			console.log('options',options);
+			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
 
 			factory.login.checkLoginStatus(function() {

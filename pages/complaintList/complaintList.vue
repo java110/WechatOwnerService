@@ -117,6 +117,7 @@
 		},
 		onLoad: function() {
 			let that = this;
+			 context.onLoad(options);
 			context.getRooms().then(function(res) {
 				let _owner = res.data.owner;
 

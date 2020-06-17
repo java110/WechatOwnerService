@@ -10,15 +10,15 @@
 				</view>
 			</scroll-view>
 			<scroll-view v-if="rooms.length >4" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
-				<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms" :key="index"
-				 @tap="switchRoom(item)" :data-id="index">
+				<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms"
+				 :key="index" @tap="switchRoom(item)" :data-id="index">
 					{{item.floorNum}}栋{{item.roomNum}}室
 				</view>
 			</scroll-view>
 		</view>
 		<view v-if="rooms.length == 1" class="block__title">{{rooms[0].floorNum}}栋{{rooms[0].roomNum}}室</view>
 		<view v-if="rooms.length > 1" class="margin-header-top"></view>
-		<view v-if="noData == false" >
+		<view v-if="noData == false">
 			<view v-for="(item,index) in moreRooms" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
 				<view class="flex padding-bottom-xs solid-bottom justify-between">
 					<view>{{item.feeName}}</view>
@@ -78,7 +78,9 @@
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
-		onLoad: function(options) {},
+		onLoad: function(options) {
+			context.onLoad(options);
+		},
 
 		/**
 		 * 生命周期函数--监听页面初次渲染完成
@@ -165,7 +167,7 @@
 						if (res.statusCode == 200) {
 							//成功情况下跳转
 							let _roomFees = res.data.fees;
-							if(_roomFees.length < 1){
+							if (_roomFees.length < 1) {
 								_that.noData = true;
 							}
 							_roomFees.forEach(function(_roomFee) {
@@ -208,7 +210,7 @@
 			switchRoom: function(_room) {
 				this.curRoom = _room;
 				this.noData = false;
-				this._loadRoomFee();	
+				this._loadRoomFee();
 			}
 		}
 	};
@@ -227,6 +229,7 @@
 	.margin-header-top {
 		height: 100upx;
 	}
+
 	/*  #ifdef  APP-PLUS || MP-WEIXIN  */
 	.header_fixed {
 		position: fixed;
@@ -235,6 +238,7 @@
 		width: 100%;
 		z-index: 2;
 	}
+
 	/*  #endif  */
 	/*  #ifdef  H5  */
 	.header_fixed {
@@ -244,5 +248,6 @@
 		width: 100%;
 		z-index: 2;
 	}
+
 	/*  #endif  */
 </style>

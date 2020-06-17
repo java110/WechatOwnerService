@@ -3,17 +3,8 @@
 		<view class="block__title">小区信息</view>
 		<view class="cu-form-group">
 			<view class="title">市/区</view>
-			<!-- <picker mode="multiSelector" @change="MultiChange" @columnchange="MultiColumnChange" :value="areaName" :range="multiArray">
-				<view class="picker">
-					{{multiArray[0][areaName[0]]}}，{{multiArray[1][areaName[1]]}}，{{multiArray[2][areaName[2]]}}
-				</view>
-			</picker> -->
 			<pickerAddress @change="change">{{areaName}}</pickerAddress>
 		</view>
-
-		<!-- <van-popup :show="areaShow" position="bottom" custom-style="height: 40%;">
-			<van-area :area-list="areaList" @confirm="onConfirm" @change="onChange" @cancel="onCancel"></van-area>
-		</van-popup> -->
 		<view class="cu-form-group">
 			<view class="title">小区名称</view>
 			<input :value="communityName" @input="bindInput" data-name="communityName" required readonly label="小区名称"
@@ -89,6 +80,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
+			 context.onLoad(options);
 
 			let _location = context.getLocation();
 

@@ -83,6 +83,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			context.onLoad(options);
 			const userInfo = uni.getStorageSync(constant.mapping.OWNER_INFO);
 			if(userInfo == null || userInfo == ''){
 				this.login = false;

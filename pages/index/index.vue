@@ -177,8 +177,8 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
+			context.onLoad(options);
 			let loginStatus = context.checkLoginStatus();
-			
 			if(!loginStatus){
 				//HC测试小区id
 				_that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
@@ -186,7 +186,7 @@
 				context.getOwner(function(_owner) {
 					let _communityId = '';
 					if (_owner == null) {
-						_communityId = '7020181217000001';
+						_communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
 					} else {
 						_communityId = _owner.communityId;
 					}
@@ -210,8 +210,7 @@
 			_that.location = wx.getStorageSync('location');
 			if(context.checkLoginStatus()){
 				_that.judgeBindOwnerFun();
-			}
-			
+			}	
 		},
 
 		/**
@@ -250,7 +249,6 @@
 					
 				});
 			},
-
 			/**
 			 * 加载活动
 			 * 第一次加载是可能没有小区 则直接下载固定小区
@@ -258,7 +256,6 @@
 			 */
 			loadActivitesFun: function() {
 				let _that = this;
-
 				let _objData = {
 					page: this.page,
 					row: this.row,
@@ -347,12 +344,12 @@
 				});
 			},
 			moreActivitiesFun: function() {
-				wx.navigateTo({
+				context.navigateTo({
 					url: '/pages/activites/activites'
 				});
 			},
 			showModal: function(e) {
-				uni.navigateTo({
+				context.navigateTo({
 					url: '../bindOwner/bindOwner'
 				});
 			},
@@ -378,8 +375,6 @@
 					data: _objData,
 					//动态数据
 					success: function(res) {
-						console.log("请求返回信息：", res);
-
 						if (res.statusCode == 200) {
 							_that.property = res.data.stores[0];
 							_that.callPropertyModal = true;
@@ -435,14 +430,7 @@
 				this.loadActivitesFun();
 			},
 			toPage:function(pageUrl){
-				let loginStatus = context.checkLoginStatus();
-				if(!loginStatus){
-					uni.navigateTo({
-						url: '../showlogin/showlogin'
-					});
-					return;
-				}
-				uni.navigateTo({
+				context.navigateTo({
 					url: pageUrl
 				});
 			}, 

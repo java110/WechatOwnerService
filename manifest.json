@@ -82,7 +82,7 @@
                 }
             }
         },
-        "domain" : "www.b.com",
+        "domain" : "owner.demo.winqi.cn",
         "publicPath" : "./"
     }
 }

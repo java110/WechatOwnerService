@@ -129,8 +129,8 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			context.onLoad(options);
 			let _fee = JSON.parse(options.fee);
-			console.log('_fee', _fee);
 			let _receivableAmount = this.feeMonth * _fee.feePrice;
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);

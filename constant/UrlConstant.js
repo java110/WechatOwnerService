@@ -3,11 +3,18 @@
  * 
  * add by wuxw 2019-12-28
  */
+
+const constant = require("../constant/index.js");
+
 // 服务器域名
 //const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-const baseUrl = 'https://app.demo.winqi.cn/';
+const baseUrl = '/';
 //const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
 const hcBaseUrl = 'https://app.demo.winqi.cn/';
+
+const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
+
+const loginOwnerByKey = baseUrl + "app/loginOwnerByKey"; // 根据临时秘钥登录
 
 const loginUrl = baseUrl + 'app/loginWx';
 const loginOwnerUrl = baseUrl + 'app/loginOwner';
@@ -68,8 +75,6 @@ const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
 //查询车辆进场费用
 const queryFeeByCarInout = baseUrl + "app/fee.queryFeeByCarInout";
 
-
-
 //查询报修单
 const listMyRepair = baseUrl + "app/ownerRepair.listOwnerRepairs";
 
@@ -92,13 +97,32 @@ const listStore = baseUrl + 'app/store.listStoresByCommunity'; // 查询小区�
 const saveJunkRequirement = baseUrl + 'app/junkRequirement.saveJunkRequirement';
 
 //查询需求信息
-const listJunkRequirements = baseUrl + 	'app/junkRequirement.listJunkRequirements';
+const listJunkRequirements = baseUrl + 'app/junkRequirement.listJunkRequirements';
 
 //删除 需求信息
-const deleteJunkRequirement = baseUrl +'app/junkRequirement.deleteJunkRequirement';
+const deleteJunkRequirement = baseUrl + 'app/junkRequirement.deleteJunkRequirement';
 
 //标记为已完成
-const updateJunkRequirement = baseUrl +'app/junkRequirement.updateJunkRequirement';
+const updateJunkRequirement = baseUrl + 'app/junkRequirement.updateJunkRequirement';
+
+/**
+ * 不需要登录页面
+ */
+const NEED_NOT_LOGIN_PAGE = [
+	'/pages/login/login',
+	'/pages/register/register',
+	'/pages/my/my',
+	'/pages/index/index',
+	'/pages/market/market',
+	'/pages/showlogin/showlogin'
+];
+
+const NEED_NOT_LOGIN_URL = [
+	listActivitiess,
+	listAdvertPhoto,
+	queryAppUserBindingOwner,
+	listJunkRequirements
+];
 
 module.exports = {
 	baseUrl: baseUrl,
@@ -140,9 +164,13 @@ module.exports = {
 	userSendSms: userSendSms,
 	userLogout: userLogout,
 	ownerRegiter: ownerRegiter,
-	listStore:listStore,
-	saveJunkRequirement:saveJunkRequirement,
-	listJunkRequirements:listJunkRequirements,
-	deleteJunkRequirement:deleteJunkRequirement,
-	updateJunkRequirement:updateJunkRequirement
+	listStore: listStore,
+	saveJunkRequirement: saveJunkRequirement,
+	listJunkRequirements: listJunkRequirements,
+	deleteJunkRequirement: deleteJunkRequirement,
+	updateJunkRequirement: updateJunkRequirement,
+	wechatRefrashToken: wechatRefrashToken,
+	loginOwnerByKey: loginOwnerByKey,
+	NEED_NOT_LOGIN_URL:NEED_NOT_LOGIN_URL,
+	NEED_NOT_LOGIN_PAGE:NEED_NOT_LOGIN_PAGE
 };

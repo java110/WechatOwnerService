@@ -12,32 +12,106 @@ const util = require("../utils/index.js");
 
 const constant = require("../constant/index.js");
 
+const context = require("../context/Java110Context.js");
+
 class LoginFactory {
 	constructor() {
 		this.coreUtil = util.core;
 	} // 检查本地 storage 中是否有登录态标识
+	
+	getHeaders() {
+		return {
+			"app-id": constant.app.appId,
+			"transaction-id": util.core.wxuuid(),
+			"req-time": util.date.getDateYYYYMMDDHHMISS(),
+			"sign": '1234567',
+			"user-id": '-1',
+			"cookie": '_java110_token_=' + wx.getStorageSync('token'),
+			"Accept": '*/*'
+		};
+	};
 
+	//检查当前是否有回话
+	checkSession() {
+		return new Promise((resolve, reject) => {
+			let _that = this;
+			let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
+			let nowDate = new Date();
+			//判断如果是APP
+			// #ifdef APP-PLUS
+			if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+				resolve();
+			} else {
+				// 无登录态
+				reject();
+				return;
+			}
+			// #endif
+			//判断如果是H5
+			// #ifdef H5
+			if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+				resolve();
+			} else {
+				reject();
+				return;
+			}
+			
+			// #endif
+			
+			// #ifdef MP-WEIXIN
+			if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+				// 检查 session_key 是否过期
+				wx.checkSession({
+					// session_key 有效(为过期)
+					success: function() {
+						resolve();
+					},
+					// session_key 过期
+					fail: function() {
+						// session_key过期
+						reject();
+					}
+				});
+			} else {
+				// 无登录态
+				reject();
+			}
+			// #endif
+		});
+	}
 
 	checkLoginStatus(callback = () => {}) {
 		let _that = this;
 
 		let loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
-		
+
 		let nowDate = new Date();
 
-		// #ifdef APP-PLUS || H5
+		// #ifdef APP-PLUS
 		//判断如果是APP
-			if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+		if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
 
-				callback();
-			} else {
-				// 无登录态
-				uni.reLaunch({
-					url: '/pages/login/login'
-				});
-				return;
-			}
-		
+			callback();
+		} else {
+			// 无登录态
+			uni.reLaunch({
+				url: '/pages/login/login'
+			});
+			return;
+		}
+
+		// #endif
+
+		// #ifdef H5
+		//判断如果是APP
+		if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+
+			callback();
+		} else {
+			_that.wechatRefreshToken();
+			return;
+		}
+
 		// #endif
 
 		// #ifdef MP-WEIXIN
@@ -85,19 +159,47 @@ class LoginFactory {
 		});
 	}
 	/**
+	 * h5刷新 token
+	 */
+	wechatRefreshToken(errorUrl) {
+		let _errorUrl = errorUrl;
+		if(errorUrl == null || errorUrl == undefined || errorUrl == null){
+			_errorUrl = '/#/pages/showlogin/showlogin';
+		}
+		uni.request({
+			url: constant.url.wechatRefrashToken,
+			method: 'get',
+			header: this.getHeaders(),
+			data: {
+				redirectUrl: window.location.href, // 当前页地址
+				errorUrl: _errorUrl
+			},
+			success: function(res) {
+				let _param = res.data;
+				if (_param.code == 0) {
+					window.location.href = _param.data.openUrl;
+					return;
+				}
+			},
+			fail: function(error) {
+				// 调用服务端登录接口失败
+				if (error.statusCode == 401) {
+					return;
+				}
+			}
+		});
+	}
+
+	/**
 	 * 请求 HC服务 登录
 	 */
-
-
 	requsetHcServerToLogin(loginRes, callback = () => {}) {
 		let defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}'; // 请求服务端的登录接口
 		console.log('返回信息', loginRes);
 		wx.request({
 			url: constant.url.loginUrl,
 			method: 'post',
-			header: {
-				'APP-ID': constant.app.appId
-			},
+			header: this.getHeaders(),
 			data: {
 				code: loginRes.code,
 				// 临时登录凭证
@@ -111,13 +213,12 @@ class LoginFactory {
 
 			},
 			success: function(res) {
-				console.log('login success123...:', res);
 
 				if (res.statusCode == '401') {
 					let data = res.data;
 					uni.setStorageSync(constant.mapping.CURRENT_OPEN_ID, data.openId);
 					wx.reLaunch({
-						url: '/pages/login/login'
+						url: '/pages/showlogin/showlogin'
 					});
 					return;
 				}
@@ -174,7 +275,57 @@ class LoginFactory {
 	getLoginFlag() {
 		return wx.getStorageSync(constant.mapping.LOGIN_FLAG);
 	}
-
+	
+	_doLoginOwnerByKey(_key){
+		uni.request({
+			url: constant.url.loginOwnerByKey,
+			method: 'post',
+			header: this.getHeaders(),
+			data: {
+				key: _key // 当前页地址
+			},
+			success: function(res) {
+				let _param = res.data;
+				if (_param.code != 0) {
+					uni.navigateTo({
+						url:'/pages/showlogin/showlogin'
+					});
+					return;
+				}
+				
+				let _ownerInfo = _data.owner;
+				wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
+				wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(_ownerInfo));
+				let _currentCommunityInfo = {
+					communityId: _ownerInfo.communityId,
+					communityName: _ownerInfo.communityName
+				};
+				wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+				
+				let date = new Date();
+				let year = date.getFullYear(); //获取当前年份
+				let mon = date.getMonth(); //获取当前月份
+				let da = date.getDate(); //获取当前日
+				let h = date.getHours() + 1; //获取小时
+				let m = date.getMinutes(); //获取分钟
+				let s = date.getSeconds(); //获取秒
+				let afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
+				wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
+					sessionKey: _ownerInfo.userId,
+					expireTime: afterOneHourDate.getTime()
+				});
+				wx.setStorageSync(constant.mapping.TOKEN, _data.token);
+				//保存临时 钥匙
+				wx.setStorageSync(constant.mapping.OWNER_KEY, _data.key);
+			},
+			fail: function(error) {
+				// 调用服务端登录接口失败
+				uni.navigateTo({
+					url:'/pages/showlogin/showlogin'
+				});
+			}
+		});
+	}
 }
 
 ;

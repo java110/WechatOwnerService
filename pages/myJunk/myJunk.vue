@@ -163,6 +163,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
+			context.onLoad(options);
 			context.getOwner(res => {
 				console.log('_ownerInfo', res);
 				_that.communityId = res.communityId;

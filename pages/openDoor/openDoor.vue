@@ -35,6 +35,9 @@
 </template>
 
 <script>
+	const context = require('../../context/Java110Context.js');
+	const factory = context.factory;;
+	const constant = context.constant;
 	export default {
 		data() {
 			return {};
@@ -46,7 +49,9 @@
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
-		onLoad: function(options) {},
+		onLoad: function(options) {
+			context.onLoad(options);
+		},
 
 		/**
 		 * 生命周期函数--监听页面初次渲染完成

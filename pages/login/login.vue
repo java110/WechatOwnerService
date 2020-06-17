@@ -36,28 +36,31 @@
 				logoUrl: '',
 				username: 'test001',
 				password: 'wuxw2015',
-				appId: ""
+				appId: "",
+				code: ""
 			};
 		},
-		mounted() {
+		onLoad(option) {
+			// #ifdef H5
+			this.code = option.code;
+			let _key = option.key;
+			if(_key){
+				context.onLoad(option);
+			}else{
+				if (this.code == '' || this.code == undefined) {
+					//跳转鉴权
+					factory.login.wechatRefreshToken(window.location.href);
+				}
+			}
+			// #endif
 			_this = this;
 			this.logoUrl = constant.url.baseUrl + 'logo.png';
+			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
+			// #endif
 		},
 		methods: {
-			bindInput: function(e) {
-				console.log('数据监听', e);
-
-				let _that = this;
-
-				let dataset = e.currentTarget.dataset;
-				let value = e.detail;
-				let name = dataset.name;
-				_that[name] = value;
-
-				console.log(this);
-			},
 			_doLogin: function() {
 				let _that = this;
 				//先微信登录
@@ -80,8 +83,14 @@
 					}
 				});
 				// #endif
-				// #ifdef APP-PLUS || H5
+				// #ifdef APP-PLUS
 				_that._doMyLogin({});
+				// #endif
+
+				// #ifdef H5
+				_that._doMyLogin({
+					code: this.code
+				});
 				// #endif
 			},
 			_doMyLogin: function(_wxLoginRes) {
@@ -107,7 +116,7 @@
 					code: _code,
 					appId: this.appId
 				};
-				
+
 				uni.showLoading({
 					title: '加载中',
 					mask: true
@@ -164,6 +173,8 @@
 							expireTime: afterOneHourDate.getTime()
 						});
 						wx.setStorageSync(constant.mapping.TOKEN, _data.token);
+						//保存临时 钥匙
+						wx.setStorageSync(constant.mapping.OWNER_KEY, _data.key);
 						wx.switchTab({
 							url: "/pages/index/index"
 						})
@@ -181,10 +192,15 @@
 				})
 			},
 			_doRegister: function() {
+				let _url = '/pages/register/register';
+				// #ifdef H5
+				_url += ('?code=' + this.code);
+				// #endif
 				uni.navigateTo({
-					url: '/pages/register/register'
+					url: _url
 				})
 			}
+
 		}
 	}
 </script>

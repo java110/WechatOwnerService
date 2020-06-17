@@ -61,7 +61,7 @@
 			noDataPage
 		},
 		onLoad: function() {
-
+			context.onLoad(options);
 		},
 		onShow: function() {
 			let that = this;

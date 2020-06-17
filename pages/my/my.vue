@@ -98,6 +98,7 @@
 		components: {},
 		props: {},
 		onLoad: function() {
+			context.onLoad(options);
 			let _that = this;
 			let login = context.checkLoginStatus();
 			if (login) {

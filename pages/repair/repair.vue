@@ -120,6 +120,7 @@
 		 */
 		onLoad: function(options) {
 			let that = this;
+			context.onLoad(options);
 			context.getRooms().then(res => {
 				let arr = res.data.rooms;
 				let roomCloums = [];

@@ -133,7 +133,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-
+			context.onLoad(options);
 			context.getOwner(function(_owner) {
 				_that.name = _owner.appUserName;
 				_that.idCard = _owner.idCard;

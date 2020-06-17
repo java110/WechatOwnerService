@@ -96,6 +96,7 @@
 		 */
 		onLoad: function(options) {
 			let that = this;
+			context.onLoad(options);
 			context.getRooms().then(res => {
 				console.log(res);
 				let arr = res.data.rooms;
@@ -151,19 +152,19 @@
 			ChooseImage: function(e) {
 				let that = this;
 				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
-					success: (res) => {
-						console.log(res);
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						let _base64Photo = '';
-						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							_base64Photo = _res;
-							console.log('base64', _base64Photo);
-							that.photos.push(_base64Photo);
-						});
-					}
+						count: 4, //默认9
+						sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+						sourceType: ['album'], //从相册选择
+						success: (res) => {
+							console.log(res);
+							that.$data.imgList.push(res.tempFilePaths[0]);
+							let _base64Photo = '';
+							factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+								_base64Photo = _res;
+								console.log('base64', _base64Photo);
+								that.photos.push(_base64Photo);
+							});
+						}
 				});
 			},
 			deleteImage: function(e) {

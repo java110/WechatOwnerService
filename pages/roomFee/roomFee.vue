@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<scroll-view scroll-y >
+		<scroll-view scroll-y>
 			<view class="block__title">房屋信息</view>
 			<view class="cu-list menu">
 				<view class="cu-item">
@@ -94,7 +94,7 @@
 			</view>
 		</scroll-view>
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
-		
+
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
 			</view>
@@ -106,8 +106,8 @@
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
 				<!-- #endif -->
 			</view>
-			
-			
+
+
 		</view>
 	</view>
 
@@ -147,7 +147,7 @@
 				builtUpArea: '',
 				costList: [{}, {}], //费用清单
 				additionalAmount: "",
-				appId:''
+				appId: ''
 			};
 		},
 
@@ -158,14 +158,14 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			
+			context.onLoad(options);
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
 
 			let _fee = JSON.parse(options.fee);
 			console.log('_fee', _fee);
 			let _amount = _fee.amount;
-			let _receivableAmount = _amount ;
+			let _receivableAmount = _amount;
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);
@@ -220,8 +220,8 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-		
-		
+
+
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
@@ -240,7 +240,7 @@
 					return;
 				}
 
-				let _receivableAmount = _feeMonth * this.amount ;
+				let _receivableAmount = _feeMonth * this.amount;
 
 				let _lastDate = new Date(this.ordEndTime);
 
@@ -258,12 +258,12 @@
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
 			},
-			_payWxApp:function(_data){
-				let _receivedAmount = this.receivableAmount ;
+			_payWxApp: function(_data) {
+				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
 					title: '支付中'
 				});
-				
+
 				let _tradeType = 'APP';
 				let _objData = {
 					cycles: this.feeMonth,
@@ -271,8 +271,8 @@
 					feeId: this.feeId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType,
-					appId:this.appId
+					tradeType: _tradeType,
+					appId: this.appId
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -297,18 +297,18 @@
 							// 第二种写法，传对象字符串
 							let orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
-							    provider: 'wxpay',
-							    orderInfo: orderInfo, //微信、支付宝订单数据
-							    success: function (res) {
-							       uni.showToast({
-							       	title: "支付成功",
-							       	duration: 2000
-							       });
-							       uni.navigateBack({});
-							    },
-							    fail: function (err) {
-							        console.log('fail:' + JSON.stringify(err));
-							    }
+								provider: 'wxpay',
+								orderInfo: orderInfo, //微信、支付宝订单数据
+								success: function(res) {
+									uni.showToast({
+										title: "支付成功",
+										duration: 2000
+									});
+									uni.navigateBack({});
+								},
+								fail: function(err) {
+									console.log('fail:' + JSON.stringify(err));
+								}
 							});
 							wx.hideLoading();
 							return;
@@ -332,7 +332,7 @@
 				});
 			},
 			onPayFee: function() {
-				let _receivedAmount = this.receivableAmount ;
+				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
 					title: '支付中'
 				});
@@ -343,8 +343,8 @@
 					feeId: this.feeId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType,
-					appId:this.appId
+					tradeType: _tradeType,
+					appId: this.appId
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -400,19 +400,23 @@
 </script>
 <style>
 	@import "./roomFee.css";
-	.fee-last{
+
+	.fee-last {
 		margin-bottom: 200upx;
 	}
+
 	.cu-btn.lgplus {
-	    padding: 0 20px;
-	    font-size: 18px;
-	    height: 100upx;
-		
+		padding: 0 20px;
+		font-size: 18px;
+		height: 100upx;
+
 	}
-	.cu-btn.sharp{
+
+	.cu-btn.sharp {
 		border-radius: 0upx;
 	}
-	.line-height{
+
+	.line-height {
 		line-height: 100upx;
 	}
 </style>

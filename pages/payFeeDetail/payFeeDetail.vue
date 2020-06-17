@@ -63,6 +63,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			context.onLoad(options);
 			let _fee = JSON.parse(options.fee);
 			this.feeId = _fee.feeId;
 			this.feeName = _fee.feeName;
