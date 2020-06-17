@@ -64,6 +64,7 @@ class LoginFactory {
 				wx.checkSession({
 					// session_key 有效(为过期)
 					success: function() {
+						
 						resolve();
 					},
 					// session_key 过期

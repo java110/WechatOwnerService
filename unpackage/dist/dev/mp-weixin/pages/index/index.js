@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   "uni-notice-bar": function() {
-    return __webpack_require__.e(/*! import() | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/components/uni-notice-bar/uni-notice-bar.vue */ 387))
+    return __webpack_require__.e(/*! import() | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/components/uni-notice-bar/uni-notice-bar.vue */ 131))
   }
 }
 var render = function() {
@@ -225,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 12);
 var constant = context.constant;
 // import Dialog from '../../wxcomponents/vant/dialog/dialog';
-var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 387));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.ensure | components/uni-notice-bar/uni-notice-bar */ "components/uni-notice-bar/uni-notice-bar").then((function () {return resolve(__webpack_require__(/*! @/components/uni-notice-bar/uni-notice-bar.vue */ 131));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   data: function data() {
     return {
@@ -313,8 +313,8 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
                                    */
   onLoad: function onLoad(options) {
     var _that = this;
+    context.onLoad(options);
     var loginStatus = context.checkLoginStatus();
-
     if (!loginStatus) {
       //HC测试小区id
       _that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
@@ -322,7 +322,7 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
       context.getOwner(function (_owner) {
         var _communityId = '';
         if (_owner == null) {
-          _communityId = '7020181217000001';
+          _communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
         } else {
           _communityId = _owner.communityId;
         }
@@ -347,7 +347,6 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
     if (context.checkLoginStatus()) {
       _that.judgeBindOwnerFun();
     }
-
   },
 
   /**
@@ -386,7 +385,6 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
 
       });
     },
-
     /**
         * 加载活动
         * 第一次加载是可能没有小区 则直接下载固定小区
@@ -394,7 +392,6 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
         */
     loadActivitesFun: function loadActivitesFun() {
       var _that = this;
-
       var _objData = {
         page: this.page,
         row: this.row,
@@ -483,12 +480,12 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
 
     },
     moreActivitiesFun: function moreActivitiesFun() {
-      wx.navigateTo({
+      context.navigateTo({
         url: '/pages/activites/activites' });
 
     },
     showModal: function showModal(e) {
-      uni.navigateTo({
+      context.navigateTo({
         url: '../bindOwner/bindOwner' });
 
     },
@@ -514,8 +511,6 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
         data: _objData,
         //动态数据
         success: function success(res) {
-          console.log("请求返回信息：", res);
-
           if (res.statusCode == 200) {
             _that.property = res.data.stores[0];
             _that.callPropertyModal = true;
@@ -571,14 +566,7 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
       this.loadActivitesFun();
     },
     toPage: function toPage(pageUrl) {
-      var loginStatus = context.checkLoginStatus();
-      if (!loginStatus) {
-        uni.navigateTo({
-          url: '../showlogin/showlogin' });
-
-        return;
-      }
-      uni.navigateTo({
+      context.navigateTo({
         url: pageUrl });
 
     } } };exports.default = _default;

@@ -182,11 +182,13 @@ var constant = context.constant;var _default =
   /**
               * 生命周期函数--监听页面加载
               */
-  onLoad: function onLoad(options) {},
+  onLoad: function onLoad(options) {
+    context.onLoad(options);
+  },
 
   /**
-                                        * 生命周期函数--监听页面初次渲染完成
-                                        */
+      * 生命周期函数--监听页面初次渲染完成
+      */
   onReady: function onReady() {},
 
   /**
@@ -233,7 +235,8 @@ var constant = context.constant;var _default =
   onShareAppMessage: function onShareAppMessage() {
     return {
       title: this.owner.appUserName + '分享的访客钥匙',
-      path: '/pages/visitorApplicationKey/visitorApplicationKey?idCard=' + this.owner.idCard + '&communityId=' + this.owner.communityId,
+      path: '/pages/visitorApplicationKey/visitorApplicationKey?idCard=' + this.owner.idCard + '&communityId=' + this.owner.
+      communityId,
       success: function success(res) {
         console.log('成功', res);
       } };

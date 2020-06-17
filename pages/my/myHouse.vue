@@ -45,6 +45,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			console.log('123123')
 			this.loadOwnerHouse();
 		},
 

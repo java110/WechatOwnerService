@@ -97,7 +97,7 @@
 
 		components: {},
 		props: {},
-		onLoad: function() {
+		onLoad: function(options) {
 			context.onLoad(options);
 			let _that = this;
 			let login = context.checkLoginStatus();

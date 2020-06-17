@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "HC智慧家园",
+  "navigationBarTitleText": "益掌通",
   "backgroundColor": "#ffffff",
   "usingComponents": {
     "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar"

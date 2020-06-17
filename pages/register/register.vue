@@ -266,9 +266,10 @@
 						data: obj, //动态数据
 						success: function(res) {
 							console.log(res);
+							let _data = res.data;
 							//成功情况下跳转
 							wx.hideLoading();
-							if (res.statusCode == 200) {
+							if (_data.code == 0) {
 								wx.hideLoading();
 								wx.redirectTo({
 									url: "/pages/login/login"
@@ -277,7 +278,7 @@
 							}
 							
 							wx.showToast({
-								title: res.data,
+								title: _data.msg,
 								icon: 'none',
 								duration: 2000
 							});

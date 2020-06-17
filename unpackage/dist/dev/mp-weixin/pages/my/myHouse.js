@@ -176,6 +176,8 @@ var constant = context.constant;var _default =
               * 生命周期函数--监听页面加载
               */
   onLoad: function onLoad(options) {
+    context.onLoad(options);
+    console.log('123123');
     this.loadOwnerHouse();
   },
 

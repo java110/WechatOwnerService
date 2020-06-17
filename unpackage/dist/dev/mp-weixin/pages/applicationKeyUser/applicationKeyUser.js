@@ -278,7 +278,7 @@ var constant = context.constant;var _default =
               */
   onLoad: function onLoad(options) {
     var _that = this;
-
+    context.onLoad(options);
     context.getOwner(function (_owner) {
       _that.name = _owner.appUserName;
       _that.idCard = _owner.idCard;

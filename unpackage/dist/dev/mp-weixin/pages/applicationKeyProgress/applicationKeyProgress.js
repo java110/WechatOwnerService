@@ -182,11 +182,13 @@ var constant = context.constant;var noDataPage = function noDataPage() {__webpac
   /**
               * 生命周期函数--监听页面加载
               */
-  onLoad: function onLoad(options) {},
+  onLoad: function onLoad(options) {
+    context.onLoad(options);
+  },
 
   /**
-                                        * 生命周期函数--监听页面初次渲染完成
-                                        */
+      * 生命周期函数--监听页面初次渲染完成
+      */
   onReady: function onReady() {},
 
   /**

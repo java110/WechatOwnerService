@@ -178,25 +178,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
-
-
-
 var _pickerAddress = _interopRequireDefault(__webpack_require__(/*! ../../components/pickerAddress/pickerAddress.vue */ 53));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -240,18 +222,28 @@ var _pickerAddress = _interopRequireDefault(__webpack_require__(/*! ../../compon
 // pages/enterCommunity/enterCommunity.js
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 12);var constant = context.constant;var _default = { data: function data() {return { areaCode: '', communityName: '', appUserName: '', idCard: '', link: '', msgCode: '', areaShow: false, areaList: { province_list: {}, city_list: {}, county_list: {} }, province_list: {}, city_list: {}, county_list: {}, multiArray: [['安徽', '湖北'], ['合肥', '淮南', '六安'], ['蜀山', '高新']], areaName: null };}, components: {}, props: {}, /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * 生命周期函数--监听页面加载
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */onLoad: function onLoad(options) {var _that = this;var _location = context.getLocation();var _currentLocation = context.getCurrentLocation();console.log(_currentLocation + "    444444");var _areaName = _currentLocation.city + _currentLocation.district; // console.log(_areaName);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */onLoad: function onLoad(options) {var _that = this;context.onLoad(options);var _location = context.getLocation();var _currentLocation = context.getCurrentLocation();console.log(_currentLocation + "    444444");var _areaName = _currentLocation.city + _currentLocation.district;
+    // console.log(_areaName);
     // let _areaCode = _currentLocation.adcode; //加载省份
-    context._loadArea('', '', function (_areaList) {_that.areaList = _areaList, console.log("地址列表", _areaList);_that.communityName = _location; // _that.areaCode = _areaCode,
-      _that.areaName = _areaName; // _that.setData({
+
+    context._loadArea('', '', function (_areaList) {
+      _that.areaList = _areaList,
+      console.log("地址列表", _areaList);
+      _that.communityName = _location;
+      // _that.areaCode = _areaCode,
+      _that.areaName = _areaName;
+      // _that.setData({
       //   areaList: _areaList,
       //   communityName: _location,
       //   areaCode: _areaCode,
       //   areaName: _areaName
       // });
-    });}, /**
-           * 生命周期函数--监听页面初次渲染完成
-           */
+    });
+  },
+
+  /**
+      * 生命周期函数--监听页面初次渲染完成
+      */
   onReady: function onReady() {},
 
   /**

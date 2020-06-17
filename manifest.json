@@ -1,5 +1,5 @@
 {
-    "name" : "HC智慧家园",
+    "name" : "益掌通",
     "appid" : "__UNI__18DB294",
     "description" : "hc智慧家园小程序 是 HC小区开源项目的一个分支项目，主要给业主使用，其中包括缴物业费，缴停车费，投诉建议，家庭成员维护，房屋保修\r 房屋出租，公告查看，小区圈等功能。",
     "versionName" : "1.0.0",
@@ -59,7 +59,7 @@
     "quickapp" : {},
     "mp-weixin" : {
         "usingComponents" : true,
-        "appid" : "wxf83d66b0e9f5964d",
+        "appid" : "wx983aec19363db64d",
         "setting" : {
             "urlCheck" : false,
             "es6" : false

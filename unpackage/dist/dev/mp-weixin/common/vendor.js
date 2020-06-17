@@ -1582,8 +1582,6 @@ var factory = __webpack_require__(/*! ../factory/index.js */ 20);
 /**
                                                * 获取请后台服务时的头信息
                                                */
-
-
 var getHeaders = function getHeaders() {
   return {
     "app-id": constant.app.appId,
@@ -1598,8 +1596,8 @@ var getHeaders = function getHeaders() {
 /**
     * http 请求 加入是否登录判断
     */
-
 var request = function request(_reqObj) {
+
   //这里判断只有在 post 方式时 放加载框
   if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
     uni.showLoading({
@@ -1607,31 +1605,45 @@ var request = function request(_reqObj) {
       mask: true });
 
     _reqObj.complete = function () {
-      console.log('complete');
       uni.hideLoading();
     };
   }
-  //请求白名单
-  var white_url = [
-  constant.url.listActivitiess,
-  constant.url.listAdvertPhoto,
-  constant.url.queryAppUserBindingOwner,
-  constant.url.listJunkRequirements];
 
-  var index = white_url.indexOf(_reqObj.url);
   //白名单直接跳过检查登录
-  if (white_url.includes(_reqObj.url)) {
-    _reqObj.communityId = "7020181217000001";
+  if (constant.url.NEED_NOT_LOGIN_URL.includes(_reqObj.url)) {
+    _reqObj.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
     uni.request(_reqObj);
     return;
   }
-  //检查是否登录成功
-  factory.login.checkLoginStatus(function () {
-    console.log('factory.login.checkLoginStatus');
+  //校验是否登录，如果没有登录跳转至温馨提示页面
+  factory.login.checkSession().then(function () {
+    //有回话 跳转至相应页面
     //重写token
-    _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token'); //console.log("_reqObj",_reqObj);
-
+    _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
     uni.request(_reqObj);
+  }, function (error) {//回话过期
+
+
+
+
+
+    //小程序登录
+
+    factory.login.doLogin();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   });
 };
 /**
@@ -1652,33 +1664,27 @@ var getCurrentLocation = function getCurrentLocation() {
     * 
     * add by wuxw 2019-12-28
     */
-
-
 var getUserInfo = function getUserInfo() {
   var _userInfo = wx.getStorageSync(constant.mapping.USER_INFO);
 
   return JSON.parse(_userInfo);
 };
+
 /**
     * 登录标记
     * add  by wuxw 2019-12-28
     */
-
-
 var getLoginFlag = function getLoginFlag() {
   var _loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
-
   return _loginFlag;
 };
 
 var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (_areaList) {};
   var areaList = wx.getStorageSync(constant.mapping.AREA_INFO);
-
   if (areaList) {
     callBack(areaList);
     return;
   }
-
   uni.request({
     url: constant.url.areaUrl,
     header: getHeaders(),
@@ -1688,7 +1694,6 @@ var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = argu
       parentAreaCode: _parentAreaCode },
 
     success: function success(res) {
-      console.log('login success');
       res = res.data;
       var province = [],
       city = [],
@@ -1737,7 +1742,7 @@ var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = argu
 var getOwner = function getOwner() {var callBack = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function (_ownerInfo) {};
   // 从硬盘中获取 业主信息
   var _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
-
+  console.log('owner', _ownerInfo);
   if (_ownerInfo) {
     callBack(_ownerInfo);
   } else {
@@ -1886,7 +1891,64 @@ var checkLoginStatus = function checkLoginStatus() {
   }
 };
 
+/**
+    * 跳转功能封装
+    * @param {Object} _param 跳转入参
+    */
+var navigateTo = function navigateTo(_param) {
+  var _url = _param.url;
+  var _tempUrl = _url.indexOf('?') > 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+  //是否需要登录
+  constant.url.NEED_NOT_LOGIN_PAGE.forEach(function (item) {
+    if (item == _tempUrl) {
+      uni.navigateTo(_param);
+      return;
+    }
+  });
+  console.log('跳转参数', _param);
+  //校验是否登录，如果没有登录跳转至温馨提示页面
+  factory.login.checkSession().then(function () {
+    //有回话 跳转至相应页面
+    uni.navigateTo(_param);
+  }, function (error) {//回话过期
 
+
+
+
+
+    //小程序登录
+
+    factory.login.doLogin();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+};
+
+var onLoad = function onLoad(_option) {
+
+
+
+
+
+
+
+
+
+
+
+};
 
 module.exports = {
   constant: constant,
@@ -1903,7 +1965,9 @@ module.exports = {
   request: request,
   getRooms: getRooms,
   getProperty: getProperty,
-  checkLoginStatus: checkLoginStatus };
+  checkLoginStatus: checkLoginStatus,
+  onLoad: onLoad,
+  navigateTo: navigateTo };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -1952,8 +2016,20 @@ AppConstant = function AppConstant() {"use strict";_classCallCheck(this, AppCons
 
 
 
+
 "992019111758490006");_defineProperty(AppConstant, "appSecurity",
 "");
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = AppConstant;
@@ -1965,18 +2041,25 @@ module.exports = AppConstant;
   !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/constant/UrlConstant.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 /**
  * url 常量类
  * 
  * add by wuxw 2019-12-28
  */
+
+var constant = __webpack_require__(/*! ../constant/index.js */ 13);
+
 // 服务器域名
 //const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-var baseUrl = 'https://app.demo.winqi.cn/';
+var baseUrl = 'https://www.rongyikj.cn/';
 //const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
-var hcBaseUrl = 'https://app.demo.winqi.cn/';
+var hcBaseUrl = 'https://www.rongyikj.cn/';
+
+var wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
+
+var loginOwnerByKey = baseUrl + "app/loginOwnerByKey"; // 根据临时秘钥登录
 
 var loginUrl = baseUrl + 'app/loginWx';
 var loginOwnerUrl = baseUrl + 'app/loginOwner';
@@ -2037,8 +2120,6 @@ var listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
 //查询车辆进场费用
 var queryFeeByCarInout = baseUrl + "app/fee.queryFeeByCarInout";
 
-
-
 //查询报修单
 var listMyRepair = baseUrl + "app/ownerRepair.listOwnerRepairs";
 
@@ -2068,6 +2149,25 @@ var deleteJunkRequirement = baseUrl + 'app/junkRequirement.deleteJunkRequirement
 
 //标记为已完成
 var updateJunkRequirement = baseUrl + 'app/junkRequirement.updateJunkRequirement';
+
+/**
+                                                                                    * 不需要登录页面
+                                                                                    */
+var NEED_NOT_LOGIN_PAGE = [
+'/pages/login/login',
+'/pages/register/register',
+'/pages/my/my',
+'/pages/index/index',
+'/pages/market/market',
+'/pages/showlogin/showlogin'];
+
+
+var NEED_NOT_LOGIN_URL = [
+listActivitiess,
+listAdvertPhoto,
+queryAppUserBindingOwner,
+listJunkRequirements];
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -2113,7 +2213,11 @@ module.exports = {
   saveJunkRequirement: saveJunkRequirement,
   listJunkRequirements: listJunkRequirements,
   deleteJunkRequirement: deleteJunkRequirement,
-  updateJunkRequirement: updateJunkRequirement };
+  updateJunkRequirement: updateJunkRequirement,
+  wechatRefrashToken: wechatRefrashToken,
+  loginOwnerByKey: loginOwnerByKey,
+  NEED_NOT_LOGIN_URL: NEED_NOT_LOGIN_URL,
+  NEED_NOT_LOGIN_PAGE: NEED_NOT_LOGIN_PAGE };
 
 /***/ }),
 
@@ -2132,7 +2236,9 @@ function _classCallCheck(instance, Constructor) {if (!(instance instanceof Const
 MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this, MappingConstant);};_defineProperty(MappingConstant, "LOGIN_FLAG",
 'loginFlag');_defineProperty(MappingConstant, "TOKEN",
 
-"token");_defineProperty(MappingConstant, "USER_INFO",
+"token");_defineProperty(MappingConstant, "OWNER_KEY",
+
+"owner_key");_defineProperty(MappingConstant, "USER_INFO",
 
 "userInfo");_defineProperty(MappingConstant, "AREA_INFO",
 
@@ -2147,6 +2253,7 @@ MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this,
 "openId");_defineProperty(MappingConstant, "HC_TEST_COMMUNITY_ID",
 
 "7020181217000001");
+
 
 
 
@@ -8559,13 +8666,76 @@ module.exports = {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */
 var util = __webpack_require__(/*! ../utils/index.js */ 17);
 
-var constant = __webpack_require__(/*! ../constant/index.js */ 13);var
+var constant = __webpack_require__(/*! ../constant/index.js */ 13);
+
+var context = __webpack_require__(/*! ../context/Java110Context.js */ 12);var
 
 LoginFactory = /*#__PURE__*/function () {"use strict";
   function LoginFactory() {_classCallCheck(this, LoginFactory);
     this.coreUtil = util.core;
   } // 检查本地 storage 中是否有登录态标识
-  _createClass(LoginFactory, [{ key: "checkLoginStatus", value: function checkLoginStatus()
+  _createClass(LoginFactory, [{ key: "getHeaders", value: function getHeaders()
+    {
+      return {
+        "app-id": constant.app.appId,
+        "transaction-id": util.core.wxuuid(),
+        "req-time": util.date.getDateYYYYMMDDHHMISS(),
+        "sign": '1234567',
+        "user-id": '-1',
+        "cookie": '_java110_token_=' + wx.getStorageSync('token'),
+        "Accept": '*/*' };
+
+    } }, { key: "checkSession",
+
+    //检查当前是否有回话
+    value: function checkSession() {var _this = this;
+      return new Promise(function (resolve, reject) {
+        var _that = _this;
+        var loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
+        var nowDate = new Date();
+        //判断如果是APP
+
+
+
+
+
+
+
+
+
+        //判断如果是H5
+
+
+
+
+
+
+
+
+
+
+
+        if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+          // 检查 session_key 是否过期
+          wx.checkSession({
+            // session_key 有效(为过期)
+            success: function success() {
+
+              resolve();
+            },
+            // session_key 过期
+            fail: function fail() {
+              // session_key过期
+              reject();
+            } });
+
+        } else {
+          // 无登录态
+          reject();
+        }
+
+      });
+    } }, { key: "checkLoginStatus", value: function checkLoginStatus()
 
     {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
       var _that = this;
@@ -8573,6 +8743,18 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
       var loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
 
       var nowDate = new Date();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8634,19 +8816,52 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
 
     }
     /**
+       * h5刷新 token
+       */ }, { key: "wechatRefreshToken", value: function wechatRefreshToken(
+    errorUrl, _login) {
+      var _errorUrl = errorUrl;
+      if (errorUrl == null || errorUrl == undefined || errorUrl == '') {
+        _errorUrl = '/#/pages/showlogin/showlogin';
+      }
+
+      if (_login == null || _login == undefined || _login == '') {
+        _login = 0; // 不是登录页面鉴权
+      }
+      uni.request({
+        url: constant.url.wechatRefrashToken,
+        method: 'get',
+        header: this.getHeaders(),
+        data: {
+          redirectUrl: window.location.href, // 当前页地址
+          errorUrl: _errorUrl,
+          loginFlag: _login },
+
+        success: function success(res) {
+          var _param = res.data;
+          if (_param.code == 0) {
+            window.location.href = _param.data.openUrl;
+            return;
+          }
+        },
+        fail: function fail(error) {
+          // 调用服务端登录接口失败
+          if (error.statusCode == 401) {
+            return;
+          }
+        } });
+
+    }
+
+    /**
        * 请求 HC服务 登录
        */ }, { key: "requsetHcServerToLogin", value: function requsetHcServerToLogin(
-
-
     loginRes) {var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
       var defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}'; // 请求服务端的登录接口
       console.log('返回信息', loginRes);
       wx.request({
         url: constant.url.loginUrl,
         method: 'post',
-        header: {
-          'APP-ID': constant.app.appId },
-
+        header: this.getHeaders(),
         data: {
           code: loginRes.code,
           // 临时登录凭证
@@ -8660,13 +8875,12 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
         },
 
         success: function success(res) {
-          console.log('login success123...:', res);
 
           if (res.statusCode == '401') {
             var data = res.data;
             uni.setStorageSync(constant.mapping.CURRENT_OPEN_ID, data.openId);
             wx.reLaunch({
-              url: '/pages/login/login' });
+              url: '/pages/showlogin/showlogin' });
 
             return;
           }
@@ -8722,8 +8936,58 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
 
     {
       return wx.getStorageSync(constant.mapping.LOGIN_FLAG);
-    } }]);return LoginFactory;}();
+    } }, { key: "_doLoginOwnerByKey", value: function _doLoginOwnerByKey(
 
+    _key) {
+      uni.request({
+        url: constant.url.loginOwnerByKey,
+        method: 'post',
+        header: this.getHeaders(),
+        data: {
+          key: _key // 当前页地址
+        },
+        success: function success(res) {
+          var _param = res.data;
+          if (_param.code != 0) {
+            uni.navigateTo({
+              url: '/pages/showlogin/showlogin' });
+
+            return;
+          }
+
+          var _ownerInfo = _param.owner;
+          wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
+          wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(_ownerInfo));
+          var _currentCommunityInfo = {
+            communityId: _ownerInfo.communityId,
+            communityName: _ownerInfo.communityName };
+
+          wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+
+          var date = new Date();
+          var year = date.getFullYear(); //获取当前年份
+          var mon = date.getMonth(); //获取当前月份
+          var da = date.getDate(); //获取当前日
+          var h = date.getHours() + 1; //获取小时
+          var m = date.getMinutes(); //获取分钟
+          var s = date.getSeconds(); //获取秒
+          var afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
+          wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
+            sessionKey: _ownerInfo.userId,
+            expireTime: afterOneHourDate.getTime() });
+
+          wx.setStorageSync(constant.mapping.TOKEN, _param.token);
+          //保存临时 钥匙
+          wx.setStorageSync(constant.mapping.OWNER_KEY, _param.key);
+        },
+        fail: function fail(error) {
+          // 调用服务端登录接口失败
+          uni.navigateTo({
+            url: '/pages/showlogin/showlogin' });
+
+        } });
+
+    } }]);return LoginFactory;}();
 
 
 ;
@@ -9223,7 +9487,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 413:
+/***/ 406:
 /*!******************************************************************************************************************!*\
   !*** C:/Users/Administrator/Documents/project/hc/smallSoftware/WechatOwnerService/components/uni-icons/icons.js ***!
   \******************************************************************************************************************/
@@ -20543,7 +20807,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC智慧家园", "backgroundColor": "#ffffff" }, "pages/my/myHouse": { "navigationBarTitleText": "我的房屋", "enablePullDownRefresh": true }, "pages/bindOwner/bindOwner": { "navigationBarTitleText": "绑定业主" }, "pages/viewBindOwner/viewBindOwner": { "navigationBarTitleText": "业主信息" }, "pages/viewCommunitys/viewCommunitys": { "navigationBarTitleText": "选择小区" }, "pages/applicationKey/applicationKey": { "navigationBarTitleText": "申请钥匙" }, "pages/applicationKeyLocation/applicationKeyLocation": { "navigationBarTitleText": "相关门禁" }, "pages/applicationKeyUser/applicationKeyUser": { "navigationBarTitleText": "填写信息" }, "pages/applicationKeyProgress/applicationKeyProgress": { "navigationBarTitleText": "钥匙进度" }, "pages/myApplicationKey/myApplicationKey": { "navigationBarTitleText": "我的钥匙" }, "pages/visitorApplicationKey/visitorApplicationKey": { "navigationBarTitleText": "访客钥匙" }, "pages/location/location": { "navigationBarTitleText": "选择小区", "navigationBarTextStyle": "white" }, "pages/openDoor/openDoor": { "navigationBarTitleText": "智慧门禁" }, "pages/my/my": { "navigationBarTitleText": "我" }, "pages/notice/index": { "navigationBarTitleText": "公告" }, "pages/notice/detail/detail": { "navigationBarTitleText": "公告详情" }, "pages/repairList/repairList": { "enablePullDownRefresh": true }, "pages/repair/repair": { "navigationBarTitleText": "报修" }, "pages/repairList/detail/detail": {}, "pages/family/family": { "navigationBarTitleText": "添加成员" }, "pages/familyList/familyList": { "enablePullDownRefresh": true, "navigationBarTitleText": "家庭成员" }, "pages/complaintList/complaintList": { "enablePullDownRefresh": true, "navigationBarTitleText": "投诉建议" }, "pages/viewApplicationKeyUser/viewApplicationKeyUser": { "navigationBarTitleText": "我的钥匙" }, "pages/complaint/complaint": { "navigationBarTitleText": "投诉建议" }, "pages/viewComplaint/viewComplaint": {}, "pages/payParkingFeeList/payParkingFeeList": { "navigationBarTitleText": "停车费" }, "pages/payParkingFee/payParkingFee": { "navigationBarTitleText": "缴停车费" }, "pages/my/myHouseDetail": { "navigationBarTitleText": "我的房屋明细" }, "pages/activites/activites": { "navigationBarTitleText": "小区文化" }, "pages/activitesDetail/activitesDetail": { "navigationBarTitleText": "详情" }, "pages/roomFeeList/roomFeeList": { "navigationBarTitleText": "物业费" }, "pages/roomFee/roomFee": { "navigationBarTitleText": "缴物业费" }, "pages/login/login": { "navigationBarTitleText": "请登录" }, "pages/myRepair/myRepair": { "navigationBarTitleText": "我的报修单" }, "pages/settings/settings": { "navigationBarTitleText": "设置" }, "pages/register/register": { "navigationBarTitleText": "请注册" }, "pages/payFeeDetail/payFeeDetail": { "navigationBarTitleText": "缴费历史" }, "pages/myProperty/myProperty": { "navigationBarTitleText": "我的物业" }, "pages/viewAdmin/viewAdmin": { "navigationBarTitleText": "技术支持" }, "pages/market/market": { "navigationBarTitleText": "跳蚤市场" }, "pages/newJunk/newJunk": { "navigationBarTitleText": "发布信息" }, "pages/myJunk/myJunk": { "navigationBarTitleText": "我的发布" }, "pages/showlogin/showlogin": { "navigationBarTitleText": "温馨提示" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarBackgroundColor": "#00AA00", "navigationBarTitleText": "HC智慧家园" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "益掌通", "backgroundColor": "#ffffff" }, "pages/my/myHouse": { "navigationBarTitleText": "我的房屋", "enablePullDownRefresh": true }, "pages/bindOwner/bindOwner": { "navigationBarTitleText": "绑定业主" }, "pages/viewBindOwner/viewBindOwner": { "navigationBarTitleText": "业主信息" }, "pages/viewCommunitys/viewCommunitys": { "navigationBarTitleText": "选择小区" }, "pages/applicationKey/applicationKey": { "navigationBarTitleText": "申请钥匙" }, "pages/applicationKeyLocation/applicationKeyLocation": { "navigationBarTitleText": "相关门禁" }, "pages/applicationKeyUser/applicationKeyUser": { "navigationBarTitleText": "填写信息" }, "pages/applicationKeyProgress/applicationKeyProgress": { "navigationBarTitleText": "钥匙进度" }, "pages/myApplicationKey/myApplicationKey": { "navigationBarTitleText": "我的钥匙" }, "pages/visitorApplicationKey/visitorApplicationKey": { "navigationBarTitleText": "访客钥匙" }, "pages/location/location": { "navigationBarTitleText": "选择小区", "navigationBarTextStyle": "white" }, "pages/openDoor/openDoor": { "navigationBarTitleText": "智慧门禁" }, "pages/my/my": { "navigationBarTitleText": "我" }, "pages/notice/index": { "navigationBarTitleText": "公告" }, "pages/notice/detail/detail": { "navigationBarTitleText": "公告详情" }, "pages/repairList/repairList": { "enablePullDownRefresh": true }, "pages/repair/repair": { "navigationBarTitleText": "报修" }, "pages/repairList/detail/detail": {}, "pages/family/family": { "navigationBarTitleText": "添加成员" }, "pages/familyList/familyList": { "enablePullDownRefresh": true, "navigationBarTitleText": "家庭成员" }, "pages/complaintList/complaintList": { "enablePullDownRefresh": true, "navigationBarTitleText": "投诉建议" }, "pages/viewApplicationKeyUser/viewApplicationKeyUser": { "navigationBarTitleText": "我的钥匙" }, "pages/complaint/complaint": { "navigationBarTitleText": "投诉建议" }, "pages/viewComplaint/viewComplaint": {}, "pages/payParkingFeeList/payParkingFeeList": { "navigationBarTitleText": "停车费" }, "pages/payParkingFee/payParkingFee": { "navigationBarTitleText": "缴停车费" }, "pages/my/myHouseDetail": { "navigationBarTitleText": "我的房屋明细" }, "pages/activites/activites": { "navigationBarTitleText": "小区文化" }, "pages/activitesDetail/activitesDetail": { "navigationBarTitleText": "详情" }, "pages/roomFeeList/roomFeeList": { "navigationBarTitleText": "物业费" }, "pages/roomFee/roomFee": { "navigationBarTitleText": "缴物业费" }, "pages/login/login": { "navigationBarTitleText": "请登录" }, "pages/myRepair/myRepair": { "navigationBarTitleText": "我的报修单" }, "pages/settings/settings": { "navigationBarTitleText": "设置" }, "pages/register/register": { "navigationBarTitleText": "请注册" }, "pages/payFeeDetail/payFeeDetail": { "navigationBarTitleText": "缴费历史" }, "pages/myProperty/myProperty": { "navigationBarTitleText": "我的物业" }, "pages/viewAdmin/viewAdmin": { "navigationBarTitleText": "技术支持" }, "pages/market/market": { "navigationBarTitleText": "跳蚤市场" }, "pages/newJunk/newJunk": { "navigationBarTitleText": "发布信息" }, "pages/myJunk/myJunk": { "navigationBarTitleText": "我的发布" }, "pages/showlogin/showlogin": { "navigationBarTitleText": "温馨提示" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarBackgroundColor": "#00AA00", "navigationBarTitleText": "益掌通" } };exports.default = _default;
 
 /***/ }),
 

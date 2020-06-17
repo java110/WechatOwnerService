@@ -48,7 +48,7 @@
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00AA00",
-    "navigationBarTitleText": "HC智慧家园"
+    "navigationBarTitleText": "益掌通"
   },
   "tabBar": {
     "color": "#272636",
@@ -82,5 +82,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap17.json"
+  "sitemapLocation": "sitemap85.json"
 }

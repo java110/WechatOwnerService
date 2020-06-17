@@ -15,18 +15,18 @@
 .block__bottom{
   height: 180rpx;
 }
-.fee-last{
+.fee-last {
 	margin-bottom: 200rpx;
 }
 .cu-btn.lgplus {
-    padding: 0 20px;
-    font-size: 18px;
-    height: 100rpx;
+	padding: 0 20px;
+	font-size: 18px;
+	height: 100rpx;
 }
-.cu-btn.sharp{
+.cu-btn.sharp {
 	border-radius: 0rpx;
 }
-.line-height{
+.line-height {
 	line-height: 100rpx;
 }
 

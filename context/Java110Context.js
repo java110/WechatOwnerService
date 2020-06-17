@@ -28,6 +28,7 @@ const getHeaders = function() {
  * http 请求 加入是否登录判断
  */
 const request = function(_reqObj) {
+	
 	//这里判断只有在 post 方式时 放加载框
 	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
 		uni.showLoading({
@@ -50,6 +51,7 @@ const request = function(_reqObj) {
 		//有回话 跳转至相应页面
 		//重写token
 		_reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
+		uni.request(_reqObj);
 	}, function(error) { //回话过期
 		// #ifdef H5
 		//先微信登录
@@ -171,7 +173,7 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
 const getOwner = function(callBack = _ownerInfo => {}) {
 	// 从硬盘中获取 业主信息
 	let _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
-
+	console.log('owner',_ownerInfo);
 	if (_ownerInfo) {
 		callBack(_ownerInfo);
 	} else {

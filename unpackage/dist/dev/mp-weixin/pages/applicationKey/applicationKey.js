@@ -169,8 +169,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
 
+var context = __webpack_require__(/*! ../../context/Java110Context.js */ 12);
+var constant = context.constant;
+var util = context.util;var _default =
 {
   data: function data() {
     return {};
@@ -182,11 +184,13 @@ var _default =
   /**
               * 生命周期函数--监听页面加载
               */
-  onLoad: function onLoad(options) {},
+  onLoad: function onLoad(options) {
+    context.onLoad(options);
+  },
 
   /**
-                                        * 生命周期函数--监听页面初次渲染完成
-                                        */
+      * 生命周期函数--监听页面初次渲染完成
+      */
   onReady: function onReady() {},
 
   /**
