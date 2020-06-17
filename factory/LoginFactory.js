@@ -18,7 +18,7 @@ class LoginFactory {
 	constructor() {
 		this.coreUtil = util.core;
 	} // 检查本地 storage 中是否有登录态标识
-	
+
 	getHeaders() {
 		return {
 			"app-id": constant.app.appId,
@@ -55,9 +55,9 @@ class LoginFactory {
 				reject();
 				return;
 			}
-			
+
 			// #endif
-			
+
 			// #ifdef MP-WEIXIN
 			if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
 				// 检查 session_key 是否过期
@@ -161,10 +161,14 @@ class LoginFactory {
 	/**
 	 * h5刷新 token
 	 */
-	wechatRefreshToken(errorUrl) {
+	wechatRefreshToken(errorUrl, _login) {
 		let _errorUrl = errorUrl;
-		if(errorUrl == null || errorUrl == undefined || errorUrl == null){
+		if (errorUrl == null || errorUrl == undefined || errorUrl == '') {
 			_errorUrl = '/#/pages/showlogin/showlogin';
+		}
+		
+		if(_login == null || _login == undefined || _login == ''){
+			_login = 0; // 不是登录页面鉴权
 		}
 		uni.request({
 			url: constant.url.wechatRefrashToken,
@@ -172,7 +176,8 @@ class LoginFactory {
 			header: this.getHeaders(),
 			data: {
 				redirectUrl: window.location.href, // 当前页地址
-				errorUrl: _errorUrl
+				errorUrl: _errorUrl,
+				loginFlag: _login
 			},
 			success: function(res) {
 				let _param = res.data;
@@ -275,8 +280,8 @@ class LoginFactory {
 	getLoginFlag() {
 		return wx.getStorageSync(constant.mapping.LOGIN_FLAG);
 	}
-	
-	_doLoginOwnerByKey(_key){
+
+	_doLoginOwnerByKey(_key) {
 		uni.request({
 			url: constant.url.loginOwnerByKey,
 			method: 'post',
@@ -288,12 +293,12 @@ class LoginFactory {
 				let _param = res.data;
 				if (_param.code != 0) {
 					uni.navigateTo({
-						url:'/pages/showlogin/showlogin'
+						url: '/pages/showlogin/showlogin'
 					});
 					return;
 				}
-				
-				let _ownerInfo = _data.owner;
+
+				let _ownerInfo = _param.owner;
 				wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
 				wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(_ownerInfo));
 				let _currentCommunityInfo = {
@@ -301,7 +306,7 @@ class LoginFactory {
 					communityName: _ownerInfo.communityName
 				};
 				wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
-				
+
 				let date = new Date();
 				let year = date.getFullYear(); //获取当前年份
 				let mon = date.getMonth(); //获取当前月份
@@ -314,14 +319,14 @@ class LoginFactory {
 					sessionKey: _ownerInfo.userId,
 					expireTime: afterOneHourDate.getTime()
 				});
-				wx.setStorageSync(constant.mapping.TOKEN, _data.token);
+				wx.setStorageSync(constant.mapping.TOKEN, _param.token);
 				//保存临时 钥匙
-				wx.setStorageSync(constant.mapping.OWNER_KEY, _data.key);
+				wx.setStorageSync(constant.mapping.OWNER_KEY, _param.key);
 			},
 			fail: function(error) {
 				// 调用服务端登录接口失败
 				uni.navigateTo({
-					url:'/pages/showlogin/showlogin'
+					url: '/pages/showlogin/showlogin'
 				});
 			}
 		});

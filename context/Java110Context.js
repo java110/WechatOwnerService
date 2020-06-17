@@ -338,7 +338,6 @@ const navigateTo = function(_param) {
 	//校验是否登录，如果没有登录跳转至温馨提示页面
 	factory.login.checkSession().then(function() {
 		//有回话 跳转至相应页面
-
 		uni.navigateTo(_param);
 	}, function(error) { //回话过期
 		// #ifdef H5

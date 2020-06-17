@@ -30,6 +30,8 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
+	
+	const login = 1;//1标识登录页面 请下发code 不要下发key
 	export default {
 		data() {
 			return {
@@ -46,10 +48,12 @@
 			let _key = option.key;
 			if(_key){
 				context.onLoad(option);
+				// 判断当前是否已经登录 ，如果登录了跳转至首页
+				
 			}else{
 				if (this.code == '' || this.code == undefined) {
 					//跳转鉴权
-					factory.login.wechatRefreshToken(window.location.href);
+					factory.login.wechatRefreshToken(window.location.href,login);
 				}
 			}
 			// #endif
