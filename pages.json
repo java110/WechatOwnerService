@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "益掌通",
+				"navigationBarTitleText": "HC智慧家园",
 				"backgroundColor": "#ffffff"
 			}
 		},
@@ -308,7 +308,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#00AA00",
-		"navigationBarTitleText": "益掌通",
+		"navigationBarTitleText": "HC智慧家园",
 		"usingComponents": { //这里为方便，全局引入了所有组件，也可以在某个page下单独引用某个组件
 			
 		}

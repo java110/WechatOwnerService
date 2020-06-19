@@ -83,6 +83,7 @@
             }
         },
         "domain" : "owner.demo.winqi.cn",
-        "publicPath" : "./"
+        "publicPath" : "./",
+        "title" : "HC智慧家园"
     }
 }

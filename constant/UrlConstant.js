@@ -3,14 +3,13 @@
  * 
  * add by wuxw 2019-12-28
  */
-
 const constant = require("../constant/index.js");
 
 // 服务器域名
 //const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-const baseUrl = 'https://www.rongyikj.cn/';
+const baseUrl = '/';
 //const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
-const hcBaseUrl = 'https://www.rongyikj.cn/';
+const hcBaseUrl = 'https://app.demo.winqi.cn/';
 
 const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 

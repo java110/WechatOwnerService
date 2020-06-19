@@ -2053,9 +2053,9 @@ var constant = __webpack_require__(/*! ../constant/index.js */ 13);
 
 // 服务器域名
 //const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-var baseUrl = 'https://www.rongyikj.cn/';
+var baseUrl = '/';
 //const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
-var hcBaseUrl = 'https://www.rongyikj.cn/';
+var hcBaseUrl = 'https://app.demo.winqi.cn/';
 
 var wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 
