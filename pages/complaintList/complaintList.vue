@@ -115,7 +115,7 @@
 		components: {
 			noDataPage
 		},
-		onLoad: function() {
+		onLoad: function(options) {
 			let that = this;
 			 context.onLoad(options);
 			context.getRooms().then(function(res) {
