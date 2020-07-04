@@ -2,6 +2,24 @@
 	<view>
 		<view class="block__title">房屋信息</view>
 		<view class="cu-form-group">
+			<view class="title">位置</view>
+			<picker bindchange="PickerChange" :value="repairScopeIndex" :range="repairScopes" :range-key="'name'" @change="repairScopeChange">
+				<view class="picker">
+					{{repairScopes[repairScopeIndex].name}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-form-group arrow" v-if="repairObjType == '002' || repairObjType =='003'" @tap="chooseFloor">
+			<view class="title">楼栋</view>
+			<input required readonly label="楼栋" v-model="floorNum" placeholder="请选择楼栋" name="floorNum" icon="arrow"></input>
+			<text class='cuIcon-right'></text>
+		</view>
+		<view class="cu-form-group arrow" v-if="repairObjType =='003'" @tap="chooseUnit">
+			<view class="title">单元</view>
+			<input v-model="unitNum" placeholder="请选择单元"></input>
+			<text class='cuIcon-right'></text>
+		</view>
+		<view class="cu-form-group" v-if="repairObjType == '004'">
 			<view class="title">房屋信息</view>
 			<picker bindchange="PickerChange" :value="index" :range="roomCloums" @change="roomChange">
 				<view class="picker">
@@ -13,11 +31,15 @@
 		<view class="block__title">报修信息</view>
 		<view class="cu-form-group">
 			<view class="title">报修类型</view>
-			<picker id="complaintType" bindchange="PickerChange" :value="complaintIndex" :range="columns" @change="repairChange">
+			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes" @change="repairTypeChange">
 				<view class="picker">
-					{{typeName?typeName:'请选择'}}
+					{{repairTypes[repairTypeIndex].repairTypeName}}
 				</view>
 			</picker>
+		</view>
+		<view class="cu-form-group" v-if="priceScope !=''">
+			<view class="title">收费标准</view>
+			<input disabled="disable" v-model="priceScope" ></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">报修人</view>
@@ -53,18 +75,18 @@
 				图片上传
 			</view>
 			<view class="action">
-				{{photoList.length}}/4
+				{{imgList.length}}/4
 			</view>
 		</view>
 		<view class="cu-form-group">
 			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in photoList" bindtap="ViewImage" :data-url="photoList[index]">
-					<image :src='photoList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="removePhoto(index)" :data-index="index">
+				<view class="bg-img" v-for="(img,index) in imgList" bindtap="ViewImage" :data-url="imgList[index]">
+					<image :src='imgList[index]' mode='aspectFill'></image>
+					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
 						<text class="cuIcon-close"></text>
 					</view>
 				</view>
-				<view class="solids" @tap="ChooseImage" v-if="photoList.length<4">
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
 					<text class="cuIcon-cameraadd"></text>
 				</view>
 			</view>
@@ -96,25 +118,53 @@
 				roomName: "",
 				roomId: '',
 				roomShow: false,
-				columns: ['卧室报修', '管道报修', '客厅报修'],
-				repairIdAttr:['10001','10002','10003'],
 				typeName: '',
-				typeId: '',
+				repairType: '',
 				typeShow: false,
 				timeShow: false,
-				photoList: [],
+				imgList: [],
 				bindTel: '',
 				context: '',
 				bindRepairName: '',
 				userId: '',
+				userName:'',
 				storeId: '',
 				photos: [],
 				communityId: "",
-				complaintIndex:0,
-				index:0
-
+				communityName: "",
+				complaintIndex: 0,
+				index: 0,
+				repairScopes: [{
+						id: '001',
+						name: '小区'
+					},
+					{
+						id: '002',
+						name: '楼栋'
+					},
+					{
+						id: '003',
+						name: '单元'
+					},
+					{
+						id: '004',
+						name: '房屋'
+					}
+				],
+				repairTypes: [],
+				repairTypeIndex:0,
+				repairScopeIndex: 0,
+				repairObjType: '',
+				repairObjId: '',
+				repairObjName: '',
+				floorNum: '',
+				floorId: '',
+				unitNum: '',
+				unitId: '',
+				priceScope:'',
 			};
 		},
+
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -131,9 +181,14 @@
 				})
 				that.roomCloums = roomCloums;
 				that.roomIdArr = roomIdArr;
-				that.userId = res.data.owner.appUserId;
+				that.userId = res.data.owner.userId;
+				that.userName = res.data.owner.appUserName;
 				that.communityId = res.data.owner.communityId;
+				that.communityName = res.data.owner.communityName;
 			});
+			
+			//加载报修类型
+			this._loadRepairTypes();
 		},
 
 		/**
@@ -144,7 +199,20 @@
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
-		onShow: function() {},
+		onShow: function() {
+			let _floor = uni.getStorageSync("_selectFloor");
+
+			if (_floor != null && _floor != undefined && _floor != '') {
+				this.floorNum = _floor.floorNum + "栋";
+				this.floorId = _floor.floorId;
+			}
+
+			let _unit = uni.getStorageSync("_selectUnit");
+			if (_unit != null && _unit != undefined && _unit != '') {
+				this.unitNum = _unit.unitNum + "单元";
+				this.unitId = _unit.unitId;
+			}
+		},
 
 		/**
 		 * 生命周期函数--监听页面隐藏
@@ -154,7 +222,12 @@
 		/**
 		 * 生命周期函数--监听页面卸载
 		 */
-		onUnload: function() {},
+		onUnload: function() {
+			//清理楼栋和单元
+			uni.removeStorageSync('_selectFloor');
+			uni.removeStorageSync('_unitFloor');
+
+		},
 
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
@@ -188,16 +261,32 @@
 
 				let obj = {
 					"repairName": this.bindRepairName,
-					"repairType": this.typeId,
+					"repairType": this.repairType,
 					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
 					"tel": this.bindTel,
 					"roomId": this.roomId,
 					"photos": [],
 					"context": this.context,
 					"userId": this.userId,
+					"userName":this.userName,
 					"communityId": this.communityId,
 					"bindDate": this.bindDate,
-					"bindTime": this.bindTime
+					"bindTime": this.bindTime,
+					"repairObjType":this.repairObjType
+				}
+
+				if (this.repairObjType == '001') {
+					obj.repairObjId = this.communityId;
+					obj.repairObjName = this.communityName;
+				} else if (this.repairObjType == '002') {
+					obj.repairObjId = this.floorId;
+					obj.repairObjName = this.floorNum ;
+				} else if (this.repairObjType == '003') {
+					obj.repairObjId = this.unitId;
+					obj.repairObjName = this.floorNum  + this.unitNum ;
+				}else{
+					obj.repairObjId = this.roomId;
+					obj.repairObjName = this.roomName;
 				}
 
 				let _photos = this.photos;
@@ -208,9 +297,7 @@
 				});
 
 				let msg = "";
-				if (obj.roomId == "") {
-					msg = "请选择房屋";
-				} else if (obj.repairType == "") {
+				 if (obj.repairType == "") {
 					msg = "请选择报修类型";
 				} else if (obj.bindRepairName == "") {
 					msg = "请填写报修人";
@@ -222,8 +309,9 @@
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
 					msg = "请填写投诉内容";
+				}else if(obj.repairObjId == ''){
+					msg = "请选择报修位置";
 				}
-				console.log(obj.roomId);
 
 				if (msg != "") {
 					wx.showToast({
@@ -279,6 +367,11 @@
 				});
 				console.log("data信息：", this);
 			},
+			deleteImage: function(e) {
+				console.log(e);
+				let imageArr = this.$data.imgList;
+				imageArr.splice(e, 1);
+			},
 			ChooseImage: function(e) {
 				let that = this;
 				wx.chooseImage({
@@ -287,33 +380,105 @@
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
 						console.log(res);
-						if (that.$data.photoList.length) {
-							that.$data.photoList.push(res.tempFilePaths[0]);
-						} else {
-							that.$data.photoList = res.tempFilePaths;
-						}
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						let _base64Photo = '';
+						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							_base64Photo = _res;
+							console.log('base64', _base64Photo);
+							that.photos.push(_base64Photo);
+						});
 					}
 				});
-			},
-			removePhoto: function(e) {
-				console.log(e);
-				let imageArr = this.$data.photoList;
-				imageArr.splice(e, 1);
 			},
 			roomChange: function(e) {
 				this.roomId = this.roomIdArr[e.detail.value];
 				this.roomName = this.roomCloums[e.detail.value];
 			},
+			repairScopeChange: function(e) {
+				console.log('改变费用完成')
+				this.repairScopeIndex = e.target.value //取其下标
+				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
+				this.repairObjType = selected.id //选中的id
+				
+			},
 			repairChange: function(e) {
 				this.typeName = this.columns[e.detail.value];
 				this.typeId = this.repairIdAttr[e.detail.value];
 			},
-			dateChange:function(e){
+			repairTypeChange:function(e){
+				this.repairTypeIndex = e.target.value //取其下标
+				let selected = this.repairTypes[this.repairTypeIndex] //获取选中的数组
+				this.repairType = selected.repairType //选中的id
+				let _payFeeFlag = selected.payFeeFlag;
+				
+				if(_payFeeFlag == 'T'){
+					this.priceScope = selected.priceScope;
+				}else{
+					this.priceScope = '';
+				}
+				
+			},
+			dateChange: function(e) {
 				this.bindDate = e.detail.value;
 			},
-			timeChange:function(e){
+			timeChange: function(e) {
 				this.bindTime = e.detail.value;
+			},
+			chooseFloor: function(e) {
+				console.log('点击调用了', e);
+				context.navigateTo({
+					url: '/pages/selectFloor/selectFloor'
+				});
+			},
+			chooseUnit: function(e) {
+				if (this.floorId == null || this.floorId == '') {
+					uni.showToast({
+						title: "请先选择楼栋"
+					});
+					return;
+				}
+				context.navigateTo({
+					url: '/pages/selectUnit/selectUnit?floorId=' + this.floorId
+				});
+			},
+			_loadRepairTypes:function(){
+				let _communityInfo = context.getCurrentCommunity();
+				let _that =this;
+				let dataObj = {
+					page: 1,
+					row: 50,
+					communityId: _communityInfo.communityId,
+				};
+				uni.request({
+					url: constant.url.listRepairSettings,
+					header: context.getHeaders(),
+					method: "GET",
+					data: dataObj,
+					//动态数据
+					success: function(res) {
+						let _json = res.data;
+						if (_json.code == 0) {
+							_that.repairTypes = _json.data;
+							
+							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
+							_that.repairType = selected.repairType //选中的id
+							let _payFeeFlag = selected.payFeeFlag;
+							
+							if(_payFeeFlag == 'T'){
+								_that.priceScope = selected.priceScope;
+							}
+						}
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
 			}
+			
 		}
 	};
 </script>

@@ -26,13 +26,13 @@
 		</view>
 
 		<view class="cu-list menu  margin-top">
-			<view v-if="ownerFlag== false" class="cu-item arrow" @click="bindingOwner()">
+			<!-- <view v-if="ownerFlag== false" class="cu-item arrow" @click="bindingOwner()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
 					<text class="text-grey">绑定业主</text>
 				</view>
-			</view>
-			<view v-else class="cu-item arrow" @click="viewOwner()">
+			</view> -->
+			<view class="cu-item arrow" @click="viewOwner()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
 					<text class="text-grey">业主信息</text>

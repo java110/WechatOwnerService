@@ -171,7 +171,7 @@
 								_jr.createTime = _simDate;
 								if(_typeCd == '222222'){
 									_jr.photos.forEach(function(_photoTmp){
-										_photoTmp.url = constant.url.hcBaseUrl + _photoTmp.url;
+										_photoTmp.url = constant.url.baseUrl + _photoTmp.url;
 									});
 								}
 								

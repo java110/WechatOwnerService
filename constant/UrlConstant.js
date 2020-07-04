@@ -6,10 +6,10 @@
 const constant = require("../constant/index.js");
 
 // 服务器域名
-//const baseUrl = '/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-const baseUrl = '/';
-//const hcBaseUrl = 'https://app.demo.winqi.cn/'; // 登录接口
-const hcBaseUrl = 'https://app.demo.winqi.cn/';
+//const baseUrl = '/'; 
+//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
+const baseUrl = 'https://app.demo.winqi.cn/';
+
 
 const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 
@@ -51,8 +51,8 @@ const listApplicationKeys = baseUrl + "app/applicationKey.listApplicationKeys"; 
 const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey"; //上传业主照片
 
 const uploadOwnerPhoto = baseUrl + "app/owner.uploadOwnerPhoto";
-const getOwnerPhotoPath = hcBaseUrl + "callComponent/download/getFile/fileByObjId";
-const filePath = hcBaseUrl + "callComponent/download/getFile/file"; //查询业主车位信息
+const getOwnerPhotoPath = baseUrl + "callComponent/download/getFile/fileByObjId";
+const filePath = baseUrl + "callComponent/download/getFile/file"; //查询业主车位信息
 
 const queryParkingSpacesByOwner = baseUrl + "app/parkingSpace.queryParkingSpacesByOwner"; //查询停车位费用
 
@@ -104,6 +104,28 @@ const deleteJunkRequirement = baseUrl + 'app/junkRequirement.deleteJunkRequireme
 //标记为已完成
 const updateJunkRequirement = baseUrl + 'app/junkRequirement.updateJunkRequirement';
 
+//查询楼栋
+const queryFloor = baseUrl + 'app/floor.queryFloors';
+
+//查询单元
+const queryUnit = baseUrl + 'app/unit.queryUnits';
+
+//查询报修类型
+const listRepairSettings = baseUrl + 'app/repair.listRepairSettings';
+
+//待办工单
+const listStaffRepairs = baseUrl + "app/ownerRepair.listStaffRepairs";
+
+//已办工单
+const listStaffFinishRepairs = baseUrl + "app/ownerRepair.listStaffFinishRepairs";
+
+// 查询报修单处理师傅
+const listRepairStaffs = baseUrl + "app/ownerRepair.listRepairStaffs";
+
+
+// 删除报修单
+const deleteOwnerRepair =  baseUrl + "app/ownerRepair.deleteOwnerRepair";
+
 /**
  * 不需要登录页面
  */
@@ -125,7 +147,6 @@ const NEED_NOT_LOGIN_URL = [
 
 module.exports = {
 	baseUrl: baseUrl,
-	hcBaseUrl: hcBaseUrl,
 	loginUrl: loginUrl,
 	loginOwnerUrl: loginOwnerUrl,
 	areaUrl: areaUrl,
@@ -170,6 +191,13 @@ module.exports = {
 	updateJunkRequirement: updateJunkRequirement,
 	wechatRefrashToken: wechatRefrashToken,
 	loginOwnerByKey: loginOwnerByKey,
-	NEED_NOT_LOGIN_URL:NEED_NOT_LOGIN_URL,
-	NEED_NOT_LOGIN_PAGE:NEED_NOT_LOGIN_PAGE
+	NEED_NOT_LOGIN_URL: NEED_NOT_LOGIN_URL,
+	NEED_NOT_LOGIN_PAGE: NEED_NOT_LOGIN_PAGE,
+	queryFloor: queryFloor,
+	queryUnit: queryUnit,
+	listRepairSettings: listRepairSettings,
+	listStaffRepairs: listStaffRepairs,
+	listStaffFinishRepairs: listStaffFinishRepairs,
+	listRepairStaffs: listRepairStaffs,
+	deleteOwnerRepair:deleteOwnerRepair
 };

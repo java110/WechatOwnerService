@@ -270,6 +270,24 @@
 			}
 		}
 		
+        ,{
+            "path" : "pages/selectFloor/selectFloor",
+            "style" : {
+				"navigationBarTitleText": "选择楼栋"
+			}
+        }
+        ,{
+            "path" : "pages/selectUnit/selectUnit",
+            "style" : {
+				"navigationBarTitleText": "选择单元"
+			}
+        }
+        ,{
+            "path" : "pages/repairDetail/repairDetail",
+            "style" : {
+				"navigationBarTitleText": "工单详情"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

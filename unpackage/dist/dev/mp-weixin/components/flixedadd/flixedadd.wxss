@@ -22,7 +22,6 @@
 	/*圆形（若需要正方形的加号可以去掉此样式）*/
 	border-radius: 40px;
 	/*四边阴影（让加号看起来有立体感）*/
-	-webkit-box-shadow: #808080 0px 0px 4px;
 	box-shadow: #808080 0px 0px 4px;
 	/*加号大小*/
 	font-size:65rpx;

@@ -183,11 +183,11 @@ const getOwner = function(callBack = _ownerInfo => {}) {
 			data: {},
 			success: function(res) {
 				console.log('login success');
-				let data = res.data;
+				let _json = res.data;
 				console.log(res);
 
-				if (res.statusCode == 200) {
-					_ownerInfo = data.auditAppUserBindingOwners[0];
+				if (_json.code == 0) {
+					_ownerInfo = _json.data[0];
 
 					if (_ownerInfo == null || _ownerInfo == undefined) {
 						callBack(null);
@@ -203,7 +203,7 @@ const getOwner = function(callBack = _ownerInfo => {}) {
 						wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
 					}
 
-					callBack(data.auditAppUserBindingOwners[0]);
+					callBack(_json.data[0]);
 				}
 			},
 			fail: function(error) {

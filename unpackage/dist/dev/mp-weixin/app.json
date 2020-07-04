@@ -42,13 +42,16 @@
     "pages/market/market",
     "pages/newJunk/newJunk",
     "pages/myJunk/myJunk",
-    "pages/showlogin/showlogin"
+    "pages/showlogin/showlogin",
+    "pages/selectFloor/selectFloor",
+    "pages/selectUnit/selectUnit",
+    "pages/repairDetail/repairDetail"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00AA00",
-    "navigationBarTitleText": "益掌通"
+    "navigationBarTitleText": "HC智慧家园"
   },
   "tabBar": {
     "color": "#272636",
@@ -81,6 +84,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap85.json"
+  "usingComponents": {}
 }

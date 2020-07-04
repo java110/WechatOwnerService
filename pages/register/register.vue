@@ -8,10 +8,10 @@
 			<text class='cuIcon-right'></text>
 		</view>
 
-		<view class="cu-form-group">
+		<view class="cu-form-group" @tap="chooseCommunity">
 			<view class="title">小区名称</view>
 			<input v-model="communityName" required readonly label="小区名称" placeholder="请选择小区" name="communityName" icon="arrow"
-			 @click="chooseCommunity"></input>
+			 ></input>
 			<text class='cuIcon-right'></text>
 		</view>
 

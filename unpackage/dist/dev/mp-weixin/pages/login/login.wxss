@@ -174,7 +174,6 @@
 .oBorder{
     border: none;
     border-radius: 2.5rem ;
-    -webkit-box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1);
     box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1);
 }
 
@@ -313,11 +312,9 @@
 	font-size: 30rpx;
 	width:601rpx;
 	height:100rpx;
-	background:-webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0.7)), to(rgba(0,0,0,0.6)));
 	background:-webkit-linear-gradient(left, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
 	background:linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
-	-webkit-box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
-	        box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
+	box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
 	border-radius:2.5rem;
 	line-height: 100rpx;
 	text-align: center;
@@ -330,11 +327,9 @@
 	font-size: 30rpx;
 	width:100rpx;
 	height:100rpx;
-	background:-webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0.7)), to(rgba(0,0,0,0.6)));
 	background:-webkit-linear-gradient(left, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
 	background:linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
-	-webkit-box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
-	        box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
+	box-shadow:0rpx 0rpx 13rpx 0rpx rgba(164,217,228,0.4);
 	border-radius:2.5rem;
 	line-height: 100rpx;
 	text-align: center;
@@ -345,7 +340,6 @@
 .buttonBorder{
     border: none ;
     border-radius: 2.5rem ;
-    -webkit-box-shadow: 0 0 60rpx 0 rgba(0,0,0,.2);
     box-shadow: 0 0 60rpx 0 rgba(0,0,0,.2);
     -webkit-transition: all 0.4s cubic-bezier(.57,.19,.51,.95);
     transition: all 0.4s cubic-bezier(.57,.19,.51,.95);
