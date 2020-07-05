@@ -288,6 +288,12 @@
 				"navigationBarTitleText": "工单详情"
 			}
         }
+        ,{
+            "path" : "pages/appraiseRepair/appraiseRepair",
+            "style" : {
+				"navigationBarTitleText": "工单评价"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

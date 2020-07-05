@@ -1,0 +1,1 @@
+<view><view class="content"><my-issue vue-id="57f71800-1" score="{{3}}" textareaPlaceholder="请评价本地服务" headTitleValue="服务分数" bind:__l="__l"></my-issue></view></view>

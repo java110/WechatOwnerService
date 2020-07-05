@@ -305,6 +305,7 @@ var factory = context.factory;var _default =
     context.onLoad(options);
     context.getRooms().then(function (res) {
       var arr = res.data.rooms;
+
       var roomCloums = [];
       var roomIdArr = [];
       arr.map(function (item) {

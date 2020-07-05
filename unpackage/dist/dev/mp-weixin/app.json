@@ -45,7 +45,8 @@
     "pages/showlogin/showlogin",
     "pages/selectFloor/selectFloor",
     "pages/selectUnit/selectUnit",
-    "pages/repairDetail/repairDetail"
+    "pages/repairDetail/repairDetail",
+    "pages/appraiseRepair/appraiseRepair"
   ],
   "subPackages": [],
   "window": {

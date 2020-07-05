@@ -173,6 +173,7 @@
 			context.onLoad(options);
 			context.getRooms().then(res => {
 				let arr = res.data.rooms;
+				
 				let roomCloums = [];
 				let roomIdArr = [];
 				arr.map(item => {

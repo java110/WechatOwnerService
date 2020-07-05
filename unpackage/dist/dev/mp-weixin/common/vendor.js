@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1738,9 +1738,12 @@ var listRepairStaffs = baseUrl + "app/ownerRepair.listRepairStaffs";
 // 删除报修单
 var deleteOwnerRepair = baseUrl + "app/ownerRepair.deleteOwnerRepair";
 
+// 报修退单
+var repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
+
 /**
-                                                                        * 不需要登录页面
-                                                                        */
+                                                                  * 不需要登录页面
+                                                                  */
 var NEED_NOT_LOGIN_PAGE = [
 '/pages/login/login',
 '/pages/register/register',
@@ -1811,7 +1814,8 @@ module.exports = {
   listStaffRepairs: listStaffRepairs,
   listStaffFinishRepairs: listStaffFinishRepairs,
   listRepairStaffs: listRepairStaffs,
-  deleteOwnerRepair: deleteOwnerRepair };
+  deleteOwnerRepair: deleteOwnerRepair,
+  repairDispatch: repairDispatch };
 
 /***/ }),
 
@@ -8156,7 +8160,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8177,14 +8181,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8260,7 +8264,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9219,6 +9223,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   "cloud-download-filled": "\uE8E9",
   "headphones": "\uE8BF",
   "shop": "\uE609" };exports.default = _default;
+
+/***/ }),
+
+/***/ 493:
+/*!******************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/static/images/st_star.png ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAAD9klEQVRYR8WXX2gcVRTGv3M3u9tsNDREiq2suzOz40REUkNEQVDBivVPtVYJ1JeiqIiIiIr4oNAXsaDgm08iiCFCWsU/RBAx0dqC0MUQiCHtZnc2CV2koLRpdLPu7P3kSiJJupvMpls6r/ec8/3mzNzvnivY4jM5OXlNe3v7ewDuJ3ma5Muu6+a3Uk62kjQ8PBzp6+t7VUTeARBdrjEUi8WeTSaT5WZrbgmiWCz2aa2/IblrleCSiDxn2/bgFYcwnyGRSAyR3FdH7ExbW9uDqVSq0AxI053I5/OvADgCIL5eSEQ0yU+UUi9alrUUFqQpCN/3d2utvwaQ3ECgrLU+5Lru0ZZDlEqlRLlc/hTAgRDFfxORh23bng0Ri1CdyOVy8Ugk8jzJ9wHENitsPovW+mOSr7muu7BpfKOAbDab6O7uvklrfTOAPQCeBNC5WcGVdZJVEfme5FdKqWmt9XQmkzlXL3+lE1IqldorlUonyVtJPgSgH4AFwGzDUB3bAPACAGNk0ySPB0HwI4CS53l/ma7J7OxsV7VaHQCwXynVS/JaEUmQVGHfusm4f0TkotY6p5QaqVQqg5LP598F8AaAKyW6ISPJbw3ECADT/qv1nDYQTwD4CMD2q0BRJfmWZLPZaFdX1+sADofZfq0CXXbXocXFxRf+++t939+mtf4QwNOtEglR5+dYLHYwmUye/X/rzc3N7QqC4DOSd4cocLkhxSAIBjzPO2UKrdn/xWLxtiAIjomIfbkqjfJJLojIM47jfL4Sc4kJFQqFR0maMyK0OzYBbFz0sGVZR8w/0RDCTE39/f1vkny73nHdhOCa0OXzZDAIgpd6enourl6sa8dTU1M74/H4TwDcrYquzyN5FsDeTCYzuX6tLsTybvkFQG+rIACcUUrdY1nW76EgxsfHt3d2dp4AcEurIESkoJTak06n/VAQMzMzO0TkOACvVRAk50nudV13KhREqVS6sVwujwJwWgUhIiWl1L50Ov1rKIhCoeCR/A5AqlUQAM6RPJDJZE6GhejVWo+IyA0thPgTwIDjOD+EgvB9/w6t9ZcArt8Ewty2LpC8TkTaNok1s+ZTjuOY0WGth9RLzOVy94qIse/ueusk/1BKjdZqNTP+T4nIfSLyAIC7AGxrAPO3iByybftYKIhCoWAOsS9IroZYIJkXkcFarTYajUanV19wfN8388hukgdJGqCd60aDhveRumY1MTHR0dHR8YGIPAbgvNb6ZDQaPbq0tHTC87xFEWGj1o+NjbU5jrMjCILHtdaPiMidywPTKaXUgGVZxVCdMEHz8/Pt1WrVTN7nbdvObSTcCMhcmCqVyu0kU5FIJJtKpS7xCJP7L8jJrBUMCpKaAAAAAElFTkSuQmCC"
+
+/***/ }),
+
+/***/ 494:
+/*!*************************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/static/images/st_star_active.png ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAADVUlEQVRYR7XXX4iUVRjH8c8z7qq7mRnVkkZJRS0RYUWRpI1ua2im/bFYsBspKiIioiK6KPAmEgq6C4IIomWDtCjFSKIdd1cjULoqWRWtiJUQCv9Vos6ceGctVp113llnz+15zu/5vs97nj8nTHClkhl4G/cJu5W9EN32TUQuJnIofWqKDi/hTbSe1ugz1VNxt38a1ZwYxKDbJZskc8Y4PC55Orr0TjpE9TeEPqys4WyPKe6Pe+xvBKThSKSSF7FOmHaOo1CRfCR5LroczwvSEEQquVXYiKvP4yC7E2tisfVNh0g7tTvmY6yqK578pOKB6PZrXVvkikTaa5oRz+AdTK0rnP2Wig+1eTnmO1LPflyItEm7GW4UbsISPIaZ9QTH7J/EN/hSGHbccCx1sNb5KkTKIrJTm6NmCrcIy1XcIVxLNQ1zRWxcwOSwgn2SYcmgZKupDljgrwiVSEMudUoPHhbm4WKhXVJo4KsbMT2Bo5K9Cjar6I004C3Jq0ya03qAX0XaajOW17OcxP3dkfo9quADzJpER+NJZ5f39Ujva9XpFWGtlCP9mkU6msZ9Tnh2NDtKpgvv4Ylm+cihM6RsdXQb+T/10jZzlH0iKeYQuFCTX9ATi+3IhM7I/zTgNskGXHehXs5z/oiCJ6Pos/9szilCacCDUrVHNFId8zJnF3GtRdZlRWp8iGxqusJrwhvUaNd53Z1tN9rme7V4PhY6Ona7ZjlOX5ttugHcMFGfNc6NSJZFlx/P5athXc0Wvj9dxpvFsUeyKLr8nhdilrANNzeLAPuFJbHIz/kgtutw0iA6mwjxm4JlUbQrH8SQa5T14/omQhxQsDKKfsgH0a9T2CLMbSLEQRWr4l7b80EMmadc7a5XNRHiTwU9UfRtXoi7lH2BK+tAZJP1YVyOljq2WaV8PIrVjztj1a4TJYuxQbispnDyh9Av2ahilym6JUuFBVTTu9b6W7ImuqptIQfEgKLkc86AyKbm7MHbK1Uv7fDYB04qVeeR7F2yGksx+6zJfNz3SO1IbHGRad4VHpIcUrFdwXottlngWEQ2G9deqaRFqw5lj0hWYP7pgWmHpCe6ZB20fiQyi/SdNqeqk/chC+09n+NxgbJnwyXulMzN5vlaNSI7+y+jHvkCgjlOdgAAAABJRU5ErkJggg=="
 
 /***/ }),
 

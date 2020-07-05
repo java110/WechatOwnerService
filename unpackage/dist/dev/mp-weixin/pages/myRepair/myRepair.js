@@ -297,6 +297,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
 var factory = context.factory;;
 var constant = context.constant;var _default =
@@ -304,15 +327,19 @@ var constant = context.constant;var _default =
   data: function data() {
     return {
       active: 0,
-      ownerId: '',
+      userId: '',
       roomId: '',
       communityId: '',
       waitRepair: [],
       doingRepair: [],
       repaired: [],
       deleteRepairModal: false,
+      backRepairModal: false,
       curRepair: {},
-      noData: false };
+      noData: false,
+      preStaffId: '',
+      preStaffName: '',
+      context: '' };
 
   },
   components: {
@@ -326,7 +353,7 @@ var constant = context.constant;var _default =
     context.onLoad(options);
     context.getOwner(function (res) {
       console.log('_ownerInfo', res);
-      that.ownerId = res.userId;
+      that.userId = res.userId;
       that.communityId = res.communityId;
       that._loadRepair(that.active);
     });
@@ -358,7 +385,7 @@ var constant = context.constant;var _default =
         "communityId": that.communityId,
         "page": 1,
         "row": 10,
-        "userId": that.ownerId,
+        "userId": that.userId,
         "repairStates": _states };
 
       context.request({
@@ -456,6 +483,111 @@ var constant = context.constant;var _default =
             duration: 2000 });
 
         } });
+
+    },
+    _backRepair: function _backRepair(_repair) {
+      //查询 上一任处理人 
+      var _communityInfo = context.getCurrentCommunity();
+      var _that = this;
+      var dataObj = {
+        page: 1,
+        row: 1,
+        communityId: _communityInfo.communityId,
+        repairId: _repair.repairId,
+        staffId: this.userId,
+        state: '10001' };
+
+      uni.request({
+        url: constant.url.listRepairStaffs,
+        header: context.getHeaders(),
+        method: "GET",
+        data: dataObj,
+        //动态数据
+        success: function success(res) {
+          var _json = res.data;
+          if (_json.code == 0) {
+            var _data = _json.data;
+
+            if (_data.length < 1) {
+              uni.showToast({
+                title: '当前不能退单' });
+
+              return;
+            }
+            _that.preStaffId = _data[0].preStaffId;
+            _that.preStaffName = _data[0].preStaffName;
+            _that.curRepair = _repair;
+            _that.backRepairModal = true;
+          }
+        },
+        fail: function fail(e) {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        } });
+
+    },
+    _cancleBackRepair: function _cancleBackRepair() {
+      this.backRepairModal = false;
+    },
+    _doBackRepair: function _doBackRepair() {
+      var that = this;
+      if (this.context == '') {
+        uni.showToast({
+          title: '退单内容不能为空',
+          icon: 'none' });
+
+        return;
+      }
+      var _communityInfo = context.getCurrentCommunity();
+      var _data = {
+        staffId: this.preStaffId,
+        staffName: this.preStaffName,
+        context: this.context,
+        action: 'BACK',
+        repairId: this.curRepair.repairId,
+        communityId: _communityInfo.communityId };
+
+      context.request({
+        url: constant.url.repairDispatch,
+        header: context.getHeaders(),
+        method: "POST",
+        data: _data,
+        //动态数据
+        success: function success(res) {
+          console.log(res); //成功情况下跳转
+          if (res.data.code != 0) {
+            uni.showToast({
+              icon: 'none',
+              title: res.data.msg,
+              duration: 2000 });
+
+            return;
+          }
+          uni.showToast({
+            icon: 'none',
+            title: '处理成功',
+            duration: 2000 });
+
+          that._cancleBackRepair();
+          that._loadRepair(0);
+        },
+        fail: function fail(e) {
+          console.log(e);
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        } });
+
+    },
+    _appraiseRepair: function _appraiseRepair(_repair) {
+      context.navigateTo({
+        url: '/pages/appraiseRepair/appraiseRepair?repairId=' + _repair.repairId });
+
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

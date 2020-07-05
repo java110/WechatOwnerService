@@ -89,7 +89,6 @@
 					</view>
 					<view class="solid-top flex justify-end margin-top padding-top-sm ">
 						<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
-						<button class="cu-btn sm bg-green margin-left" @click="payFee(item)">缴费</button>
 					</view>
 				</view>
 			</view>
@@ -130,6 +129,12 @@
 						<view class="text-gray">报修内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
+					<view class="solid-top flex justify-end margin-top padding-top-sm ">
+						<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
+						<button v-if="item.state == '1400'" class="cu-btn sm bg-green  margin-left" @click="repairDetail(item)">支付</button>
+						<button v-if="item.state == '1700'" class="cu-btn sm bg-green margin-left" @click="_appraiseRepair(item)">评价</button>
+						<button v-if="item.state == '1700' || item.state == '1400'" class="cu-btn sm  bg-red margin-left" @click="_backRepair(item)">退回</button>
+					</view>
 				</view>
 			</view>
 			<view v-else>
@@ -155,6 +160,24 @@
 			</view>
 		</view>
 
+		<view class="cu-modal" :class="backRepairModal==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">退单原因</view>
+					<view class="action" @tap="_cancleBackRepair()">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="cu-form-group">
+					<textarea v-model="context" maxlength="50" placeholder="请输入退单原因"></textarea>
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleBackRepair()">取消</view>
+					<view class="action margin-0 flex-sub text-green solid-left" @tap="_doBackRepair()">确认</view>
+				</view>
+			</view>
+		</view>
+
 
 	</view>
 </template>
@@ -168,15 +191,19 @@
 		data() {
 			return {
 				active: 0,
-				ownerId: '',
+				userId: '',
 				roomId: '',
 				communityId: '',
 				waitRepair: [],
 				doingRepair: [],
 				repaired: [],
 				deleteRepairModal: false,
+				backRepairModal: false,
 				curRepair: {},
-				noData: false
+				noData: false,
+				preStaffId: '',
+				preStaffName: '',
+				context: '',
 			}
 		},
 		components: {
@@ -190,7 +217,7 @@
 			context.onLoad(options);
 			context.getOwner(res => {
 				console.log('_ownerInfo', res);
-				that.ownerId = res.userId;
+				that.userId = res.userId;
 				that.communityId = res.communityId;
 				that._loadRepair(that.active);
 			});
@@ -222,7 +249,7 @@
 					"communityId": that.communityId,
 					"page": 1,
 					"row": 10,
-					"userId": that.ownerId,
+					"userId": that.userId,
 					"repairStates": _states
 				};
 				context.request({
@@ -321,6 +348,111 @@
 						});
 					}
 				});
+			},
+			_backRepair: function(_repair) {
+				//查询 上一任处理人 
+				let _communityInfo = context.getCurrentCommunity();
+				let _that = this;
+				let dataObj = {
+					page: 1,
+					row: 1,
+					communityId: _communityInfo.communityId,
+					repairId: _repair.repairId,
+					staffId: this.userId,
+					state: '10001'
+				};
+				uni.request({
+					url: constant.url.listRepairStaffs,
+					header: context.getHeaders(),
+					method: "GET",
+					data: dataObj,
+					//动态数据
+					success: function(res) {
+						let _json = res.data;
+						if (_json.code == 0) {
+							let _data = _json.data;
+
+							if (_data.length < 1) {
+								uni.showToast({
+									title: '当前不能退单'
+								});
+								return;
+							}
+							_that.preStaffId = _data[0].preStaffId;
+							_that.preStaffName = _data[0].preStaffName;
+							_that.curRepair = _repair;
+							_that.backRepairModal = true;
+						}
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			_cancleBackRepair: function() {
+				this.backRepairModal = false;
+			},
+			_doBackRepair: function() {
+				let that = this;
+				if (this.context == '') {
+					uni.showToast({
+						title: '退单内容不能为空',
+						icon: 'none'
+					});
+					return;
+				}
+				let _communityInfo = context.getCurrentCommunity();
+				let _data = {
+					staffId: this.preStaffId,
+					staffName: this.preStaffName,
+					context: this.context,
+					action: 'BACK',
+					repairId: this.curRepair.repairId,
+					communityId: _communityInfo.communityId
+				};
+				context.request({
+					url: constant.url.repairDispatch,
+					header: context.getHeaders(),
+					method: "POST",
+					data: _data,
+					//动态数据
+					success: function(res) {
+						console.log(res); //成功情况下跳转
+						if (res.data.code != 0) {
+							uni.showToast({
+								icon: 'none',
+								title: res.data.msg,
+								duration: 2000
+							});
+							return;
+						}
+						uni.showToast({
+							icon: 'none',
+							title: '处理成功',
+							duration: 2000
+						});
+						that._cancleBackRepair();
+						that._loadRepair(0);
+					},
+					fail: function(e) {
+						console.log(e);
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			_appraiseRepair: function(_repair) {
+				context.navigateTo({
+					url: '/pages/appraiseRepair/appraiseRepair?repairId=' + _repair.repairId
+				});
+				
 			}
 		}
 	}
