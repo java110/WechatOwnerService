@@ -162,7 +162,7 @@ var app = getApp().globalData;var _default =
   },
 
   onLoad: function onLoad(options) {
-
+    context.onLoad(options);
     var _noticeId = options.noticeId;
     this.noticeId = _noticeId;
     this._loadNoticeDetail();
@@ -175,7 +175,7 @@ var app = getApp().globalData;var _default =
   methods: {
     _loadNoticeDetail: function _loadNoticeDetail() {
       var that = this;
-      context.onLoad(options);
+
       that.communityId = context.getUserInfo().communityId;
       context.request({
         header: context.getHeaders(),

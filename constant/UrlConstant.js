@@ -129,6 +129,9 @@ const deleteOwnerRepair = baseUrl + "app/ownerRepair.deleteOwnerRepair";
 // 报修退单
 const repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
 
+// 报修评价
+const appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
+
 /**
  * 不需要登录页面
  */
@@ -203,5 +206,6 @@ module.exports = {
 	listStaffFinishRepairs: listStaffFinishRepairs,
 	listRepairStaffs: listRepairStaffs,
 	deleteOwnerRepair: deleteOwnerRepair,
-	repairDispatch: repairDispatch
+	repairDispatch: repairDispatch,
+	appraiseRepair:appraiseRepair
 };

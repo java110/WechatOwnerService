@@ -130,29 +130,31 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var SxRate = function SxRate() {Promise.all(/*! require.ensure | components/sx-rate/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/sx-rate/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/sx-rate */ 438));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
+var constant = context.constant;var SxRate = function SxRate() {Promise.all(/*! require.ensure | components/sx-rate/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/sx-rate/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/sx-rate */ 438));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
@@ -162,15 +164,22 @@ __webpack_require__.r(__webpack_exports__);
       animation: true,
       curAppraise: 4,
       context: '',
-      repairId: '' };
+      repairId: '',
+      userId: '',
+      userName: '' };
 
   },
   components: {
     SxRate: SxRate },
 
   onLoad: function onLoad(options) {
+    var _that = this;
     var _repairId = options.repairId;
     this.repairId = _repairId;
+    context.getOwner(function (_owner) {
+      _that.userId = _owner.userId;
+      _that.userName = _owner.userName;
+    });
   },
   methods: {
     onChange: function onChange(e) {
@@ -184,7 +193,6 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
-
       if (this.repairId == '') {
         uni.showToast({
           title: '未包含报修信息',
@@ -192,6 +200,54 @@ __webpack_require__.r(__webpack_exports__);
 
         return;
       }
+
+      var _data = {
+        "appraiseScore": this.curAppraise,
+        "appraiseType": "10001",
+        "context": this.context,
+        "appraiseUserId": this.userId,
+        "appraiseUserName": this.userName,
+        "objType": "10001",
+        "objId": this.repairId };
+
+
+      context.request({
+        url: constant.url.appraiseRepair,
+        header: context.getHeaders(),
+        method: "POST",
+        data: _data, //动态数据
+        success: function success(res) {
+          var _data = res.data;
+          //成功情况下跳转
+          if (_data.code == 0) {
+            wx.showToast({
+              title: '验证码下发成功',
+              icon: 'none',
+              duration: 2000 });
+
+            wx.hideLoading();
+            //console.log(e);
+            uni.navigateBack({
+              delta: 1 });
+
+            return;
+          }
+          wx.hideLoading();
+          wx.showToast({
+            title: _data.msg,
+            icon: 'none',
+            duration: 2000 });
+
+        },
+        fail: function fail(e) {
+          wx.hideLoading();
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        } });
+
 
 
     } } };exports.default = _default;

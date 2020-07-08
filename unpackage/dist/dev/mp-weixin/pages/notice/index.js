@@ -174,7 +174,7 @@ var app = getApp().globalData;var _default =
       pageSize: 10 };
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad(options) {
     var that = this;
     context.onLoad(options);
     that.communityId = context.getUserInfo().communityId;
