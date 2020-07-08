@@ -154,7 +154,8 @@
 					row: 30,
 					payerObjId: _room.roomId,
 					feeTypeCd: '888800010001',
-					communityId: _room.communityId
+					communityId: _room.communityId,
+					state:'2008001'
 				}
 				_that.moreRooms = [];
 				context.request({

@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
+    "jweixin-module": "^1.6.0",
     "vant-weapp": "^0.5.27"
   },
   "devDependencies": {},
