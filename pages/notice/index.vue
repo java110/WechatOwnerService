@@ -42,7 +42,7 @@
 				pageSize: 10
 			};
 		},
-		onLoad: function() {
+		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
 			that.communityId = context.getUserInfo().communityId;

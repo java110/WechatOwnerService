@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "工单评价",
   "usingComponents": {
-    "my-issue": "/components/myIssue"
+    "sx-rate": "/components/sx-rate/index"
   }
 }

@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   noDataPage: function() {
-    return __webpack_require__.e(/*! import() | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then(__webpack_require__.bind(null, /*! @/components/no-data-page/no-data-page.vue */ 408))
+    return __webpack_require__.e(/*! import() | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then(__webpack_require__.bind(null, /*! @/components/no-data-page/no-data-page.vue */ 416))
   }
 }
 var render = function() {
@@ -174,7 +174,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 // pages/applicationKeyLocation/applicationKeyLocation.js
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
-var constant = context.constant;var noDataPage = function noDataPage() {__webpack_require__.e(/*! require.ensure | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then((function () {return resolve(__webpack_require__(/*! @/components/no-data-page/no-data-page.vue */ 408));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var constant = context.constant;var noDataPage = function noDataPage() {__webpack_require__.e(/*! require.ensure | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then((function () {return resolve(__webpack_require__(/*! @/components/no-data-page/no-data-page.vue */ 416));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
