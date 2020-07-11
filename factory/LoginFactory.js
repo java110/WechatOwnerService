@@ -20,6 +20,8 @@ class LoginFactory {
 	} // 检查本地 storage 中是否有登录态标识
 
 	getHeaders() {
+		let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
+		
 		return {
 			"app-id": constant.app.appId,
 			"transaction-id": util.core.wxuuid(),
@@ -27,7 +29,8 @@ class LoginFactory {
 			"sign": '1234567',
 			"user-id": '-1',
 			"cookie": '_java110_token_=' + wx.getStorageSync('token'),
-			"Accept": '*/*'
+			"Accept": '*/*',
+			"w-app-id":_wAppId
 		};
 	};
 
