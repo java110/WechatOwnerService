@@ -23,6 +23,8 @@ class MappingConstant {
   static CURRENT_OPEN_ID = "openId";
   
   static HC_TEST_COMMUNITY_ID = "7020181217000001";//HC测试小区id  用于没有登录时展示相关信息
+  
+  static W_APP_ID = "wAppId";//微信公众号ID
  
 
 }

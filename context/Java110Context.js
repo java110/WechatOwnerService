@@ -14,6 +14,8 @@ const factory = require("../factory/index.js");
  * 获取请后台服务时的头信息
  */
 const getHeaders = function() {
+	
+	let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
 	return {
 		"app-id": constant.app.appId,
 		"transaction-id": util.core.wxuuid(),
@@ -21,14 +23,15 @@ const getHeaders = function() {
 		"sign": '1234567',
 		"user-id": '-1',
 		"cookie": '_java110_token_=' + wx.getStorageSync('token'),
-		"Accept": '*/*'
+		"Accept": '*/*',
+		"w-app-id":_wAppId
 	};
 };
 /**
  * http 请求 加入是否登录判断
  */
 const request = function(_reqObj) {
-	
+
 	//这里判断只有在 post 方式时 放加载框
 	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
 		uni.showLoading({
@@ -173,7 +176,7 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
 const getOwner = function(callBack = _ownerInfo => {}) {
 	// 从硬盘中获取 业主信息
 	let _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
-	console.log('owner',_ownerInfo);
+	console.log('owner', _ownerInfo);
 	if (_ownerInfo) {
 		callBack(_ownerInfo);
 	} else {
@@ -368,16 +371,23 @@ const navigateTo = function(_param) {
 };
 
 const onLoad = function(_option) {
+	
+	console.log('参数打印',_option);
 
 	// #ifdef H5
 	let _key = _option.key;
 
-	if (_key == null || _key == undefined || _key == '') {
-		return;
+	if (_key != null && _key != undefined && _key != '') {
+		//根据key 去做登录
+		factory.login._doLoginOwnerByKey(_key);
 	}
 
-	//根据key 去做登录
-	factory.login._doLoginOwnerByKey(_key);
+	let wAppId = _option.wAppId;
+
+	if (wAppId != null && wAppId != undefined && wAppId != '') {
+		uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
+	}
+	
 	// #endif
 }
 

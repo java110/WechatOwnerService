@@ -119,6 +119,12 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const util = context.util;
+	
+	// #ifdef H5
+	
+	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
+	
+	// #endif
 
 	export default {
 		data() {
@@ -159,8 +165,14 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
+			// #endif
+			
+			// #ifdef H5
+				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			// #endif
 
 			let _fee = JSON.parse(options.fee);
 			console.log('_fee', _fee);
@@ -353,10 +365,10 @@
 					data: _objData,
 					//动态数据
 					success: function(res) {
-						console.log(res);
 
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
+							// #ifdef MP-WEIXIN
 							uni.requestPayment({
 								'timeStamp': data.timeStamp,
 								'nonceStr': data.nonceStr,
@@ -374,6 +386,16 @@
 									console.log('fail:' + JSON.stringify(res));
 								}
 							});
+							// #endif
+							// #ifdef H5
+								WexinPayFactory.wexinPay(data,function(){
+									uni.showToast({
+										title: "支付成功",
+										duration: 2000
+									});
+									uni.navigateBack({});
+								});
+							// #endif
 							wx.hideLoading();
 							return;
 						}
