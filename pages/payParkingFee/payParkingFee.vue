@@ -121,7 +121,8 @@
 				feePrice: 0.00,
 				communityId: '',
 				communityName: '',
-				feeId: ''
+				feeId: '',
+				appId:''
 			};
 		},
 
@@ -130,6 +131,14 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			// #ifdef MP-WEIXIN
+			let accountInfo = uni.getAccountInfoSync();
+			this.appId = accountInfo.miniProgram.appId;
+			// #endif
+			
+			// #ifdef H5
+				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			// #endif
 			let _fee = JSON.parse(options.fee);
 			let _receivableAmount = this.feeMonth * _fee.feePrice;
 			let _communityInfo = context.getCurrentCommunity();
@@ -233,7 +242,8 @@
 					feeId: this.feeId,
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType
+					tradeType:_tradeType,
+					appId: this.appId
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -303,7 +313,8 @@
 					feeId: this.feeId,
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType
+					tradeType:_tradeType,
+					appId: this.appId
 				}
 
 				context.request({
