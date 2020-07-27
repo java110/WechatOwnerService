@@ -90,9 +90,12 @@
 				    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 				    sourceType: ['album','camera'], //从相册选择
 				    success: function (res) {
-				        //JSON.stringify(res.tempFilePaths);
-						let _photos = factory.base64.urlTobase64(res.tempFilePaths);
-						_that.uploadOwnerPhoto(_photos);
+						let _photosPromise = factory.base64.urlTobase64(res.tempFilePaths[0]);
+						_photosPromise.then((photo) => {
+							_that.uploadOwnerPhoto(photo);
+						}, (e) => {
+							console.log(e);
+						})
 				    }
 				});
 			},
