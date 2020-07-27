@@ -79,7 +79,7 @@
 						<view class="text-gray">{{item.createTime }}</view>
 					</view>
 					<view class="flex margin-top-xs justify-between">
-						<view class="text-gray">报修内容</view>
+						<view class="text-gray">投诉内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
 				</view>

@@ -24,7 +24,7 @@
 				<view class="margin-top-sm margin-left margin-right">
 					<text class="text-df">{{item.context}}</text>
 				</view>
-				<view class="margin-top-sm margin-left margin-right grid text-center col-3 grid-square">
+				<view class="margin-top-sm margin-left margin-right grid text-center col-3 grid-square" v-if="item.photos.length > 0">
 					<view class="" v-for="(_item,index) in item.photos" :key="index">
 						<image mode="scaleToFill" :data-url="_item.url" :src="_item.url" @tap="preview"></image>
 					</view>
