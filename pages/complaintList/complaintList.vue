@@ -169,7 +169,7 @@
 
 				let _paramIn = {
 					state: _state,
-					roomId: that.roomId,
+					roomIds: that.roomId,
 					page: 1,
 					row: 10,
 					communityId: that.communityId
