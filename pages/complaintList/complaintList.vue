@@ -46,6 +46,10 @@
 						<view class="text-gray">报修内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
+					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button class="cu-btn sm line-gray" @click="_toComplaintDetail(item)">详情</button>
+						<button class="cu-btn sm bg-green margin-left" @click="payFee(item)">缴费</button>
+					</view>
 				</view>
 			</view>
 			<view v-else>
@@ -81,6 +85,9 @@
 					<view class="flex margin-top-xs justify-between">
 						<view class="text-gray">投诉内容</view>
 						<view class="text-gray">{{item.context}}</view>
+					</view>
+					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button class="cu-btn sm line-gray" @click="_toComplaintDetail(item)">详情</button>
 					</view>
 				</view>
 			</view>
@@ -217,6 +224,13 @@
 				this.active = _active;
 				this._loadCompaint(_active);
 				this.noData = false;
+			},
+			_toComplaintDetail:function(_item){
+				context.navigateTo({
+					url:'/pages/complaintDetail/complaintDetail?complaintId='
+					+_item.complaintId
+					+"&communityId="+_item.communityId
+				})
 			}
 		}
 	};

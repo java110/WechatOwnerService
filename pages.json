@@ -294,6 +294,12 @@
 				"navigationBarTitleText": "工单评价"
 			}
         }
+        ,{
+            "path" : "pages/complaintDetail/complaintDetail",
+            "style" : {
+				"navigationBarTitleText": "投诉详情"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

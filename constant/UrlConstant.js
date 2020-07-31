@@ -6,7 +6,7 @@
 const constant = require("../constant/index.js");
 
 // 服务器域名
-const baseUrl = '/'; 
+const baseUrl = 'https://app.demo.winqi.cn/'; 
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 //const baseUrl = 'https://app.demo.winqi.cn/';
 
@@ -132,6 +132,9 @@ const repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
 // 报修评价
 const appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
 
+// 投诉 处理意见
+const listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
+
 /**
  * 不需要登录页面
  */
@@ -207,5 +210,6 @@ module.exports = {
 	listRepairStaffs: listRepairStaffs,
 	deleteOwnerRepair: deleteOwnerRepair,
 	repairDispatch: repairDispatch,
-	appraiseRepair:appraiseRepair
+	appraiseRepair:appraiseRepair,
+	listWorkflowAuditInfo:listWorkflowAuditInfo
 };

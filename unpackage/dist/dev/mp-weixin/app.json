@@ -46,7 +46,8 @@
     "pages/selectFloor/selectFloor",
     "pages/selectUnit/selectUnit",
     "pages/repairDetail/repairDetail",
-    "pages/appraiseRepair/appraiseRepair"
+    "pages/appraiseRepair/appraiseRepair",
+    "pages/complaintDetail/complaintDetail"
   ],
   "subPackages": [],
   "window": {
@@ -85,6 +86,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap28.json"
+  "usingComponents": {}
 }

@@ -241,7 +241,8 @@
 						data: obj,
 						//动态数据
 						success: function(res) {
-							if (res.statusCode == 200) {
+							let _json = res.data;
+							if (_json.code == 0) {
 								wx.redirectTo({
 									url: '/pages/complaintList/complaintList',
 								});
