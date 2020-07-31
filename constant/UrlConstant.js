@@ -135,6 +135,9 @@ const appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
 // 投诉 处理意见
 const listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
 
+//查询待审核单
+const auditComplaint= baseUrl + 'app/complaint.auditComplaint';
+
 /**
  * 不需要登录页面
  */
@@ -211,5 +214,6 @@ module.exports = {
 	deleteOwnerRepair: deleteOwnerRepair,
 	repairDispatch: repairDispatch,
 	appraiseRepair:appraiseRepair,
-	listWorkflowAuditInfo:listWorkflowAuditInfo
+	listWorkflowAuditInfo:listWorkflowAuditInfo,
+	auditComplaint:auditComplaint
 };

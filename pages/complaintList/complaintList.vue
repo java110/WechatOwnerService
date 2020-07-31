@@ -46,9 +46,12 @@
 						<view class="text-gray">报修内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
-					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+					<view v-if="item.currentUserId == item.startUserId" class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button  class="cu-btn sm bg-green " @click="_dealComplaint(item)">办理</button>
+						<button class="cu-btn sm line-gray margin-left" @click="_toComplaintDetail(item)">详情</button>
+					</view>
+					<view v-else class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
 						<button class="cu-btn sm line-gray" @click="_toComplaintDetail(item)">详情</button>
-						<button class="cu-btn sm bg-green margin-left" @click="payFee(item)">缴费</button>
 					</view>
 				</view>
 			</view>
@@ -95,6 +98,7 @@
 				<no-data-page></no-data-page>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
@@ -117,6 +121,7 @@
 				totalPage: 0,
 				loading: false,
 				noData:false,
+				userId:''
 			};
 		},
 		components: {
@@ -145,6 +150,7 @@
 
 				that.communityId = _owner.communityId;
 				that.ownerId = _owner.memberId;
+				that.userId = _owner.userId;
 				that.roomId = _roomId;
 				that._loadCompaint(that.active);
 			});
@@ -230,6 +236,14 @@
 					url:'/pages/complaintDetail/complaintDetail?complaintId='
 					+_item.complaintId
 					+"&communityId="+_item.communityId
+				})
+			},
+			_dealComplaint:function(_item){
+				context.navigateTo({
+					url:'/pages/complaintHandle/complaintHandle?complaintId='
+					+_item.complaintId
+					+"&communityId="+_item.communityId
+					+"&taskId="+_item.taskId
 				})
 			}
 		}

@@ -300,6 +300,12 @@
 				"navigationBarTitleText": "投诉详情"
 			}
         }
+        ,{
+            "path" : "pages/complaintHandle/complaintHandle",
+            "style" : {
+				"navigationBarTitleText": "投诉待办"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

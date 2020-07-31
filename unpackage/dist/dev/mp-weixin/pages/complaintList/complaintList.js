@@ -234,6 +234,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
 var constant = context.constant;var noDataPage = function noDataPage() {__webpack_require__.e(/*! require.ensure | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then((function () {return resolve(__webpack_require__(/*! @/components/no-data-page/no-data-page.vue */ 416));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
@@ -252,7 +256,8 @@ var constant = context.constant;var noDataPage = function noDataPage() {__webpac
       page: 1,
       totalPage: 0,
       loading: false,
-      noData: false };
+      noData: false,
+      userId: '' };
 
   },
   components: {
@@ -281,6 +286,7 @@ var constant = context.constant;var noDataPage = function noDataPage() {__webpac
 
       that.communityId = _owner.communityId;
       that.ownerId = _owner.memberId;
+      that.userId = _owner.userId;
       that.roomId = _roomId;
       that._loadCompaint(that.active);
     });
@@ -366,6 +372,14 @@ var constant = context.constant;var noDataPage = function noDataPage() {__webpac
         url: '/pages/complaintDetail/complaintDetail?complaintId=' +
         _item.complaintId +
         "&communityId=" + _item.communityId });
+
+    },
+    _dealComplaint: function _dealComplaint(_item) {
+      context.navigateTo({
+        url: '/pages/complaintHandle/complaintHandle?complaintId=' +
+        _item.complaintId +
+        "&communityId=" + _item.communityId +
+        "&taskId=" + _item.taskId });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

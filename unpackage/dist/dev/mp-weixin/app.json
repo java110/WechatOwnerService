@@ -47,7 +47,8 @@
     "pages/selectUnit/selectUnit",
     "pages/repairDetail/repairDetail",
     "pages/appraiseRepair/appraiseRepair",
-    "pages/complaintDetail/complaintDetail"
+    "pages/complaintDetail/complaintDetail",
+    "pages/complaintHandle/complaintHandle"
   ],
   "subPackages": [],
   "window": {
