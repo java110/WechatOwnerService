@@ -6,7 +6,7 @@
 const constant = require("../constant/index.js");
 
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; 
+const baseUrl = '/'; 
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 //const baseUrl = 'https://app.demo.winqi.cn/';
 

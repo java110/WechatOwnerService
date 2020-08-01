@@ -1618,7 +1618,7 @@ module.exports = AppConstant;
 var constant = __webpack_require__(/*! ../constant/index.js */ 9);
 
 // 服务器域名
-var baseUrl = 'https://app.demo.winqi.cn/';
+var baseUrl = '/';
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 //const baseUrl = 'https://app.demo.winqi.cn/';
 
