@@ -219,7 +219,7 @@ module.exports = {
 	repairDispatch: repairDispatch,
 	appraiseRepair:appraiseRepair,
 
-	listFeeByAttr:listFeeByAttr
+	listFeeByAttr:listFeeByAttr,
 
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
 	auditComplaint:auditComplaint
