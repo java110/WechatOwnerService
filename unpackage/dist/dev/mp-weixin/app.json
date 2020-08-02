@@ -46,7 +46,8 @@
     "pages/selectFloor/selectFloor",
     "pages/selectUnit/selectUnit",
     "pages/repairDetail/repairDetail",
-    "pages/appraiseRepair/appraiseRepair"
+    "pages/appraiseRepair/appraiseRepair",
+    "pages/repairPay/repairPay"
   ],
   "subPackages": [],
   "window": {
@@ -86,5 +87,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap28.json"
+  "sitemapLocation": "sitemap88.json"
 }

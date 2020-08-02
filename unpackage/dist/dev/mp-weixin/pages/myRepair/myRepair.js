@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   noDataPage: function() {
-    return __webpack_require__.e(/*! import() | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then(__webpack_require__.bind(null, /*! @/components/no-data-page/no-data-page.vue */ 416))
+    return __webpack_require__.e(/*! import() | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then(__webpack_require__.bind(null, /*! @/components/no-data-page/no-data-page.vue */ 424))
   }
 }
 var render = function() {
@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var noDataPage = function noDataPage() {__webpack_require__.e(/*! require.ensure | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then((function () {return resolve(__webpack_require__(/*! @/components/no-data-page/no-data-page.vue */ 416));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var noDataPage = function noDataPage() {__webpack_require__.e(/*! require.ensure | components/no-data-page/no-data-page */ "components/no-data-page/no-data-page").then((function () {return resolve(__webpack_require__(/*! @/components/no-data-page/no-data-page.vue */ 424));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};
 
 
 
@@ -587,6 +587,11 @@ var constant = context.constant;var _default =
     _appraiseRepair: function _appraiseRepair(_repair) {
       context.navigateTo({
         url: '/pages/appraiseRepair/appraiseRepair?repairId=' + _repair.repairId });
+
+    },
+    _toPay: function _toPay(_item) {
+      context.navigateTo({
+        url: '/pages/repairPay/repairPay?repairId=' + _item.repairId + "&communityId=" + _item.communityId + "&userId=" + this.userId });
 
 
     } } };exports.default = _default;

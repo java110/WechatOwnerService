@@ -294,6 +294,12 @@
 				"navigationBarTitleText": "工单评价"
 			}
         }
+        ,{
+            "path" : "pages/repairPay/repairPay",
+            "style" : {
+				"navigationBarTitleText": "报修支付"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

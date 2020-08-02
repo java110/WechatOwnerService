@@ -154,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
-var constant = context.constant;var SxRate = function SxRate() {Promise.all(/*! require.ensure | components/sx-rate/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/sx-rate/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/sx-rate */ 438));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var constant = context.constant;var SxRate = function SxRate() {Promise.all(/*! require.ensure | components/sx-rate/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/sx-rate/index")]).then((function () {return resolve(__webpack_require__(/*! @/components/sx-rate */ 446));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {

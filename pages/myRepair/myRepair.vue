@@ -131,7 +131,7 @@
 					</view>
 					<view class="solid-top flex justify-end margin-top padding-top-sm ">
 						<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
-						<button v-if="item.state == '1400'" class="cu-btn sm bg-green  margin-left" @click="repairDetail(item)">支付</button>
+						<button v-if="item.state == '1400'" class="cu-btn sm bg-green  margin-left" @click="_toPay(item)">支付</button>
 						<button v-if="item.state == '1700'" class="cu-btn sm bg-green margin-left" @click="_appraiseRepair(item)">评价</button>
 						<button v-if="item.state == '1700' || item.state == '1400'" class="cu-btn sm  bg-red margin-left" @click="_backRepair(item)">退回</button>
 					</view>
@@ -452,7 +452,12 @@
 				context.navigateTo({
 					url: '/pages/appraiseRepair/appraiseRepair?repairId=' + _repair.repairId
 				});
-				
+			},
+			_toPay:function(_item){
+				context.navigateTo({
+					url:'/pages/repairPay/repairPay?repairId='+_item.repairId+"&communityId="+_item.communityId+"&userId="+this.userId
+					
+				})
 			}
 		}
 	}

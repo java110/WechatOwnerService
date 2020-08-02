@@ -252,6 +252,12 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
 var constant = context.constant;
 var util = context.util;var _default =
 
+
+
+
+
+
+
 {
   data: function data() {
     return {
@@ -291,8 +297,14 @@ var util = context.util;var _default =
               */
   onLoad: function onLoad(options) {
     context.onLoad(options);
+
     var accountInfo = uni.getAccountInfoSync();
     this.appId = accountInfo.miniProgram.appId;
+
+
+
+
+
 
     var _fee = JSON.parse(options.fee);
     console.log('_fee', _fee);
@@ -485,10 +497,10 @@ var util = context.util;var _default =
         data: _objData,
         //动态数据
         success: function success(res) {
-          console.log(res);
 
           if (res.statusCode == 200 && res.data.code == '0') {
             var data = res.data; //成功情况下跳转
+
             uni.requestPayment({
               'timeStamp': data.timeStamp,
               'nonceStr': data.nonceStr,
@@ -505,6 +517,16 @@ var util = context.util;var _default =
               'fail': function fail(res) {
                 console.log('fail:' + JSON.stringify(res));
               } });
+
+
+
+
+
+
+
+
+
+
 
             wx.hideLoading();
             return;

@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1618,9 +1618,9 @@ module.exports = AppConstant;
 var constant = __webpack_require__(/*! ../constant/index.js */ 9);
 
 // 服务器域名
-//const baseUrl = '/'; 
-//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 var baseUrl = 'https://app.demo.winqi.cn/';
+//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
+//const baseUrl = 'https://app.demo.winqi.cn/';
 
 
 var wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
@@ -1744,9 +1744,12 @@ var repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
 // 报修评价
 var appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
 
+// 根据属性查询费用
+var listFeeByAttr = baseUrl + "app/feeApi/listFeeByAttr";
+
 /**
-                                                             * 不需要登录页面
-                                                             */
+                                                           * 不需要登录页面
+                                                           */
 var NEED_NOT_LOGIN_PAGE = [
 '/pages/login/login',
 '/pages/register/register',
@@ -1819,7 +1822,8 @@ module.exports = {
   listRepairStaffs: listRepairStaffs,
   deleteOwnerRepair: deleteOwnerRepair,
   repairDispatch: repairDispatch,
-  appraiseRepair: appraiseRepair };
+  appraiseRepair: appraiseRepair,
+  listFeeByAttr: listFeeByAttr };
 
 /***/ }),
 
@@ -1854,7 +1858,9 @@ MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this,
 
 "openId");_defineProperty(MappingConstant, "HC_TEST_COMMUNITY_ID",
 
-"7020181217000001");
+"7020181217000001");_defineProperty(MappingConstant, "W_APP_ID",
+
+"wAppId");
 
 
 
@@ -2248,6 +2254,8 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
   } // 检查本地 storage 中是否有登录态标识
   _createClass(LoginFactory, [{ key: "getHeaders", value: function getHeaders()
     {
+      var _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
+
       return {
         "app-id": constant.app.appId,
         "transaction-id": util.core.wxuuid(),
@@ -2255,7 +2263,8 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
         "sign": '1234567',
         "user-id": '-1',
         "cookie": '_java110_token_=' + wx.getStorageSync('token'),
-        "Accept": '*/*' };
+        "Accept": '*/*',
+        "w-app-id": _wAppId };
 
     } }, { key: "checkSession",
 
@@ -2430,6 +2439,15 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
     loginRes) {var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
       var defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}'; // 请求服务端的登录接口
       console.log('返回信息', loginRes);
+      var _appId = '';
+
+      var accountInfo = uni.getAccountInfoSync();
+      _appId = accountInfo.miniProgram.appId;
+
+
+
+
+
       wx.request({
         url: constant.url.loginUrl,
         method: 'post',
@@ -2443,8 +2461,9 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
           // 签名
           encryptedData: '',
           // 用户敏感信息
-          iv: '' // 解密算法的向量
-        },
+          iv: '', // 解密算法的向量
+          appId: _appId },
+
 
         success: function success(res) {
 
@@ -8164,7 +8183,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8185,14 +8204,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8268,7 +8287,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9088,7 +9107,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 428:
+/***/ 436:
 /*!**********************************************************************!*\
   !*** C:/project/hc/WechatOwnerService/components/uni-icons/icons.js ***!
   \**********************************************************************/
@@ -9230,18 +9249,18 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 443:
+/***/ 451:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 444);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 452);
 
 /***/ }),
 
-/***/ 444:
+/***/ 452:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9272,7 +9291,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 445);
+module.exports = __webpack_require__(/*! ./runtime */ 453);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9289,7 +9308,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 445:
+/***/ 453:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10021,7 +10040,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 446:
+/***/ 454:
 /*!*********************************************************************!*\
   !*** C:/project/hc/WechatOwnerService/components/sx-rate/common.js ***!
   \*********************************************************************/
@@ -20335,6 +20354,8 @@ var factory = __webpack_require__(/*! ../factory/index.js */ 16);
                                                * 获取请后台服务时的头信息
                                                */
 var getHeaders = function getHeaders() {
+
+  var _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
   return {
     "app-id": constant.app.appId,
     "transaction-id": util.core.wxuuid(),
@@ -20342,7 +20363,8 @@ var getHeaders = function getHeaders() {
     "sign": '1234567',
     "user-id": '-1',
     "cookie": '_java110_token_=' + wx.getStorageSync('token'),
-    "Accept": '*/*' };
+    "Accept": '*/*',
+    "w-app-id": _wAppId };
 
 };
 /**
@@ -20689,6 +20711,13 @@ var navigateTo = function navigateTo(_param) {
 };
 
 var onLoad = function onLoad(_option) {
+
+  console.log('参数打印', _option);
+
+
+
+
+
 
 
 

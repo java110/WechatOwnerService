@@ -253,7 +253,8 @@ var util = context.util;var _default =
       feePrice: 0.00,
       communityId: '',
       communityName: '',
-      feeId: '' };
+      feeId: '',
+      appId: '' };
 
   },
 
@@ -262,6 +263,14 @@ var util = context.util;var _default =
       */
   onLoad: function onLoad(options) {
     context.onLoad(options);
+
+    var accountInfo = uni.getAccountInfoSync();
+    this.appId = accountInfo.miniProgram.appId;
+
+
+
+
+
     var _fee = JSON.parse(options.fee);
     var _receivableAmount = this.feeMonth * _fee.feePrice;
     var _communityInfo = context.getCurrentCommunity();
@@ -365,7 +374,8 @@ var util = context.util;var _default =
         feeId: this.feeId,
         feeName: '停车费',
         receivedAmount: _receivedAmount,
-        tradeType: _tradeType };
+        tradeType: _tradeType,
+        appId: this.appId };
 
       context.request({
         url: constant.url.preOrder,
@@ -435,7 +445,8 @@ var util = context.util;var _default =
         feeId: this.feeId,
         feeName: '停车费',
         receivedAmount: _receivedAmount,
-        tradeType: _tradeType };
+        tradeType: _tradeType,
+        appId: this.appId };
 
 
       context.request({

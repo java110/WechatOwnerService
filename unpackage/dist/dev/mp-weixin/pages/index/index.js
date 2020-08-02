@@ -456,7 +456,7 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
             var _aPhotos = [];
 
             _advertPhotos.forEach(function (_item) {
-              _item.url = constant.url.baseUrl + _item.url + "&time=" + new Date();
+              _item.url = _item.url + "&time=" + new Date();
 
               _aPhotos.push(_item);
             });
