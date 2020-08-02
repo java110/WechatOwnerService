@@ -454,9 +454,13 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
           if (res.statusCode == 200) {
             var _advertPhotos = res.data;
             var _aPhotos = [];
+            var _urlPath = '';
+
+            _urlPath = constant.url.baseUrl;
+
 
             _advertPhotos.forEach(function (_item) {
-              _item.url = _item.url + "&time=" + new Date();
+              _item.url = _urlPath + _item.url + "&time=" + new Date();
 
               _aPhotos.push(_item);
             });
