@@ -46,6 +46,13 @@
 						<view class="text-gray">报修内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
+					<view v-if="item.currentUserId == item.startUserId" class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button  class="cu-btn sm bg-green " @click="_dealComplaint(item)">办理</button>
+						<button class="cu-btn sm line-gray margin-left" @click="_toComplaintDetail(item)">详情</button>
+					</view>
+					<view v-else class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button class="cu-btn sm line-gray" @click="_toComplaintDetail(item)">详情</button>
+					</view>
 				</view>
 			</view>
 			<view v-else>
@@ -82,12 +89,16 @@
 						<view class="text-gray">投诉内容</view>
 						<view class="text-gray">{{item.context}}</view>
 					</view>
+					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+						<button class="cu-btn sm line-gray" @click="_toComplaintDetail(item)">详情</button>
+					</view>
 				</view>
 			</view>
 			<view v-else>
 				<no-data-page></no-data-page>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
@@ -110,6 +121,7 @@
 				totalPage: 0,
 				loading: false,
 				noData:false,
+				userId:''
 			};
 		},
 		components: {
@@ -138,6 +150,7 @@
 
 				that.communityId = _owner.communityId;
 				that.ownerId = _owner.memberId;
+				that.userId = _owner.userId;
 				that.roomId = _roomId;
 				that._loadCompaint(that.active);
 			});
@@ -217,6 +230,21 @@
 				this.active = _active;
 				this._loadCompaint(_active);
 				this.noData = false;
+			},
+			_toComplaintDetail:function(_item){
+				context.navigateTo({
+					url:'/pages/complaintDetail/complaintDetail?complaintId='
+					+_item.complaintId
+					+"&communityId="+_item.communityId
+				})
+			},
+			_dealComplaint:function(_item){
+				context.navigateTo({
+					url:'/pages/complaintHandle/complaintHandle?complaintId='
+					+_item.complaintId
+					+"&communityId="+_item.communityId
+					+"&taskId="+_item.taskId
+				})
 			}
 		}
 	};

@@ -47,7 +47,12 @@
     "pages/selectUnit/selectUnit",
     "pages/repairDetail/repairDetail",
     "pages/appraiseRepair/appraiseRepair",
+<<<<<<< HEAD
     "pages/repairPay/repairPay"
+=======
+    "pages/complaintDetail/complaintDetail",
+    "pages/complaintHandle/complaintHandle"
+>>>>>>> f76e39316fdc506f6f6b7ccfd97aa238fa1f2017
   ],
   "subPackages": [],
   "window": {
@@ -86,6 +91,10 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
+<<<<<<< HEAD
   "usingComponents": {},
   "sitemapLocation": "sitemap88.json"
+=======
+  "usingComponents": {}
+>>>>>>> f76e39316fdc506f6f6b7ccfd97aa238fa1f2017
 }

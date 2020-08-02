@@ -132,8 +132,15 @@ const repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
 // 报修评价
 const appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
 
+
 // 根据属性查询费用
 const listFeeByAttr = baseUrl + "app/feeApi/listFeeByAttr";
+
+// 投诉 处理意见
+const listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
+
+//查询待审核单
+const auditComplaint= baseUrl + 'app/complaint.auditComplaint';
 
 /**
  * 不需要登录页面
@@ -211,5 +218,10 @@ module.exports = {
 	deleteOwnerRepair: deleteOwnerRepair,
 	repairDispatch: repairDispatch,
 	appraiseRepair:appraiseRepair,
+
 	listFeeByAttr:listFeeByAttr
+
+	listWorkflowAuditInfo:listWorkflowAuditInfo,
+	auditComplaint:auditComplaint
+
 };

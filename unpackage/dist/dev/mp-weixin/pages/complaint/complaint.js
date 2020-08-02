@@ -373,7 +373,8 @@ var factory = context.factory;var _default =
           data: obj,
           //动态数据
           success: function success(res) {
-            if (res.statusCode == 200) {
+            var _json = res.data;
+            if (_json.code == 0) {
               wx.redirectTo({
                 url: '/pages/complaintList/complaintList' });
 
