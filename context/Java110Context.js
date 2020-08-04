@@ -375,19 +375,18 @@ const onLoad = function(_option) {
 	console.log('参数打印',_option);
 
 	// #ifdef H5
+	let wAppId = _option.wAppId;
+	
+	if (wAppId != null && wAppId != undefined && wAppId != '') {
+		uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
+	}
+	
 	let _key = _option.key;
 
 	if (_key != null && _key != undefined && _key != '') {
 		//根据key 去做登录
 		factory.login._doLoginOwnerByKey(_key);
 	}
-
-	let wAppId = _option.wAppId;
-
-	if (wAppId != null && wAppId != undefined && wAppId != '') {
-		uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
-	}
-	
 	// #endif
 }
 
