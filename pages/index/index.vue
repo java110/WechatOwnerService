@@ -178,23 +178,7 @@
 		onLoad: function(options) {
 			let _that = this;
 			context.onLoad(options);
-			let loginStatus = context.checkLoginStatus();
-			if(!loginStatus){
-				//HC测试小区id
-				_that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-			}else{
-				context.getOwner(function(_owner) {
-					let _communityId = '';
-					if (_owner == null) {
-						_communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-					} else {
-						_communityId = _owner.communityId;
-					}
-					_that.communityId = _communityId;
-				});
-			}
-			_that.loadActivitesFun(); //查询小区广告
-			_that.loadCommunityAdvertPhotoFun();
+			
 		},
 
 		/**
@@ -211,22 +195,8 @@
 			if(context.checkLoginStatus()){
 				_that.judgeBindOwnerFun();
 			}	
+			this._initIndexData();
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
 
 		/**
 		 * 页面上拉触底事件的处理函数
@@ -236,14 +206,28 @@
 				this.page = this.page +1;
 				this.loadActivitesFun();
 			}
-			
 		},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
 		methods: {
+			_initIndexData:function(){
+				let _that = this;
+				let loginStatus = context.checkLoginStatus();
+				if(!loginStatus){
+					//HC测试小区id
+					_that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
+				}else{
+					context.getOwner(function(_owner) {
+						let _communityId = '';
+						if (_owner == null) {
+							_communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
+						} else {
+							_communityId = _owner.communityId;
+						}
+						_that.communityId = _communityId;
+					});
+				}
+				_that.loadActivitesFun(); //查询小区广告
+				_that.loadCommunityAdvertPhotoFun();
+			},
 			judgeBindOwnerFun: function() {
 				context.getOwner(function(_owner) {
 					

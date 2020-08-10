@@ -10,6 +10,7 @@ const constant = require("../constant/index.js");
 const util = require("../utils/index.js");
 
 const factory = require("../factory/index.js");
+
 /**
  * 获取请后台服务时的头信息
  */
@@ -386,6 +387,11 @@ const onLoad = function(_option) {
 
 	if (wAppId != null && wAppId != undefined && wAppId != '') {
 		uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
+	}else{
+		wAppId = uni.getStorageInfoSync(constant.mapping.W_APP_ID)
+		if(wAppId != null && wAppId != undefined && wAppId != ''){
+			uni.setStorageSync(constant.mapping.W_APP_ID, constant.app.wAppId);
+		}
 	}
 	
 	// #endif
