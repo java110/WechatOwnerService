@@ -6,7 +6,7 @@
 const constant = require("../constant/index.js");
 
 // 服务器域名
-const baseUrl = '/'; 
+const baseUrl = 'https://app.demo.winqi.cn/'; 
 //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
 //const baseUrl = 'https://app.demo.winqi.cn/';
 
@@ -132,6 +132,10 @@ const repairDispatch = baseUrl + 'app/ownerRepair.repairDispatch';
 // 报修评价
 const appraiseRepair = baseUrl + 'app/repair/appraiseRepair';
 
+
+// 根据属性查询费用
+const listFeeByAttr = baseUrl + "app/feeApi/listFeeByAttr";
+
 // 投诉 处理意见
 const listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
 
@@ -214,6 +218,10 @@ module.exports = {
 	deleteOwnerRepair: deleteOwnerRepair,
 	repairDispatch: repairDispatch,
 	appraiseRepair:appraiseRepair,
+
+	listFeeByAttr:listFeeByAttr,
+
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
 	auditComplaint:auditComplaint
+
 };

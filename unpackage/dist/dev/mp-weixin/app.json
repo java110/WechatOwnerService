@@ -47,6 +47,7 @@
     "pages/selectUnit/selectUnit",
     "pages/repairDetail/repairDetail",
     "pages/appraiseRepair/appraiseRepair",
+    "pages/repairPay/repairPay",
     "pages/complaintDetail/complaintDetail",
     "pages/complaintHandle/complaintHandle"
   ],
