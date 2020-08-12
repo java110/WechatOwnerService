@@ -47,7 +47,7 @@
 						<text class="text-grey text-sm">{{feeId }}</text>
 					</view>
 				</view>
-				<view class="cu-item">
+				<view class="cu-item" v-if="feeFlag == '1003006'">
 					<view class="content">
 						<text class="text-grey">金额</text>
 					</view>
@@ -55,7 +55,15 @@
 						<text class="text-grey text-sm">{{feePrice + '元/月' }}</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item" v-else>
+					<view class="content">
+						<text class="text-grey">金额</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{feePrice + '元' }}</text>
+					</view>
+				</view>
+				<view class="cu-item arrow" v-if="feeFlag == '1003006'">
 					<view class="content">
 						<text class="text-grey">周期</text>
 					</view>
@@ -158,6 +166,9 @@
 			this.endTime = util.date.formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
 			this.feeFlag = _fee.feeFlag;
+			if(this.feeFlag == '2006012'){
+				return;
+			}
 			this.paymentCycle = _fee.paymentCycle;	
 			for (let _index = 1; _index < 7; _index++) {
 				this.feeMonthList.push(_index * this.paymentCycle + '个月')

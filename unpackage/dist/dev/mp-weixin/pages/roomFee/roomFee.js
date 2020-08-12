@@ -330,6 +330,9 @@ var util = context.util;var _default =
     this.endTime = util.date.formatDate(_endTime);
     this.ordEndTime = _fee.endTime;
     this.feeFlag = _fee.feeFlag;
+    if (this.feeFlag == '2006012') {
+      return;
+    }
     this.paymentCycle = _fee.paymentCycle;
     for (var _index = 1; _index < 7; _index++) {
       this.feeMonthList.push(_index * this.paymentCycle + '个月');
