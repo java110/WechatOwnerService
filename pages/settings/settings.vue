@@ -31,7 +31,7 @@
 				</view>
 
 			</view>
-			<!-- #ifdef APP-PLUS || H5 -->
+		
 			<view v-if="login" class="margin-top">
 				<view class="cu-list menu">
 					<view class="cu-item " @tap="_logout()">
@@ -41,7 +41,7 @@
 					</view>
 				</view>
 			</view>
-			<!-- #endif -->
+
 
 		</view>
 		<!-- #ifdef APP-PLUS || H5 -->

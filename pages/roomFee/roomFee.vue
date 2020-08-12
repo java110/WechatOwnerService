@@ -180,7 +180,7 @@
 			// #endif
 			let _fee = JSON.parse(options.fee);
 			let _amount = _fee.amount;
-			let _receivableAmount = _amount;
+			let _receivableAmount = _fee.paymentCycle * _amount;
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);

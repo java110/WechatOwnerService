@@ -183,11 +183,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
-// pages/enterCommunity/enterCommunity.js
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
 var constant = context.constant;var pickerAddress = function pickerAddress() {Promise.all(/*! require.ensure | components/pickerAddress/pickerAddress */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pickerAddress/pickerAddress")]).then((function () {return resolve(__webpack_require__(/*! ../../components/pickerAddress/pickerAddress.vue */ 49));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
@@ -246,13 +242,8 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
   },
 
   /**
-      * 生命周期函数--监听页面初次渲染完成
+      * 生命周期函数--监听页面显示
       */
-  onReady: function onReady() {},
-
-  /**
-                                   * 生命周期函数--监听页面显示
-                                   */
   onShow: function onShow() {
     if (this.areaCode == '' || this.areaCode == undefined) {
       var _currentLocation = context.getCurrentLocation();
@@ -271,39 +262,11 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
     }
 
   },
-
-  /**
-      * 生命周期函数--监听页面隐藏
-      */
-  onHide: function onHide() {},
-
-  /**
-                                 * 生命周期函数--监听页面卸载
-                                 */
-  onUnload: function onUnload() {},
-
-  /**
-                                     * 页面相关事件处理函数--监听用户下拉动作
-                                     */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-                                                       * 页面上拉触底事件的处理函数
-                                                       */
-  onReachBottom: function onReachBottom() {},
-
-  /**
-                                               * 用户点击右上角分享
-                                               */
-  onShareAppMessage: function onShareAppMessage() {},
   methods: {
     sendMsgCode: function sendMsgCode() {
-      console.log('获取验证码');
       var _that = this;
-
       var obj = {
         tel: this.link };
-
 
       if (obj.tel == '') {
         wx.showToast({
@@ -351,8 +314,6 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
             duration: 2000 });
 
         } });
-
-
 
     },
     _doRegister: function _doRegister(e) {
@@ -412,7 +373,6 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
 
               return;
             }
-
             wx.showToast({
               title: _data.msg,
               icon: 'none',
@@ -429,9 +389,7 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
           } });
 
       }
-
     },
-
     change: function change(data) {
       var _that = this;
       _that.areaName = '';
@@ -442,7 +400,6 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
       _that.areaCode = data.data[2].code;
       console.log(data);
     },
-
     /**
         * 选择小区
         */

@@ -218,7 +218,7 @@
 		}, {
 			"path": "pages/register/register",
 			"style": {
-				"navigationBarTitleText": "请注册"
+				"navigationBarTitleText": "绑定业主"
 			}
 		}, {
 			"path": "pages/payFeeDetail/payFeeDetail",

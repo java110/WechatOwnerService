@@ -312,7 +312,7 @@ var util = context.util;var _default =
 
     var _fee = JSON.parse(options.fee);
     var _amount = _fee.amount;
-    var _receivableAmount = _amount;
+    var _receivableAmount = _fee.paymentCycle * _amount;
     var _communityInfo = context.getCurrentCommunity();
     var _lastDate = new Date(_fee.endTime);
     var _endTime = util.date.addMonth(_lastDate, this.feeMonth);

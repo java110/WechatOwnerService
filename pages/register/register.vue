@@ -15,7 +15,7 @@
 			<text class='cuIcon-right'></text>
 		</view>
 
-		<view class="block__title">完善业主</view>
+		<view class="block__title">业主信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓名</view>
 			<input v-model="appUserName" required label="姓名" clearable placeholder="请输入名称" name="appUserName"></input>
@@ -41,17 +41,13 @@
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 		</view>
-
-
-
 		<view class="padding flex flex-direction margin-top">
-			<button class="cu-btn bg-green   lg" @click="_doRegister()">注册</button>
+			<button class="cu-btn bg-green   lg" @click="_doRegister()">绑定</button>
 		</view>
 	</view>
 </template>
 
 <script>
-	// pages/enterCommunity/enterCommunity.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	import pickerAddress from '../../components/pickerAddress/pickerAddress.vue'
@@ -110,11 +106,6 @@
 		},
 
 		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
@@ -135,40 +126,12 @@
 			}
 
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
 		methods: {
 			sendMsgCode: function() {
-				console.log('获取验证码');
 				var _that = this;
-
 				let obj = {
 					tel: this.link
 				};
-
 				if (obj.tel == '') {
 					wx.showToast({
 						title: '请输入手机号',
@@ -216,8 +179,6 @@
 						})
 					}
 				});
-
-
 			},
 			_doRegister: function(e) {
 
@@ -275,8 +236,7 @@
 									url: "/pages/login/login"
 								});
 								return;
-							}
-							
+							}		
 							wx.showToast({
 								title: _data.msg,
 								icon: 'none',
@@ -293,9 +253,7 @@
 						}
 					});
 				}
-
 			},
-
 			change: function(data) {
 				let _that = this;
 				_that.areaName = '';
@@ -306,7 +264,6 @@
 				_that.areaCode = data.data[2].code;
 				console.log(data);
 			},
-
 			/**
 			 * 选择小区
 			 */

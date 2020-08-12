@@ -150,7 +150,8 @@
 				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
-			let _receivableAmount = this.feeMonth * _fee.feePrice;
+			let _receivableAmount = _fee.paymentCycle * _fee.feePrice;
+			
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);
