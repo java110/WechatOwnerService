@@ -209,23 +209,15 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
   components: {
     noDataPage: noDataPage },
 
-  props: {},
-
   /**
-              * 生命周期函数--监听页面加载
-              */
+                               * 生命周期函数--监听页面加载
+                               */
   onLoad: function onLoad(options) {
     context.onLoad(options);
   },
-
   /**
-      * 生命周期函数--监听页面初次渲染完成
+      * 生命周期函数--监听页面显示
       */
-  onReady: function onReady() {},
-
-  /**
-                                   * 生命周期函数--监听页面显示
-                                   */
   onShow: function onShow() {var _this = this;
     var _that = this;
     if (!this.needFefresh) {
@@ -250,33 +242,7 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
       _that._loadRoomFee();
     });
   },
-
-  /**
-      * 生命周期函数--监听页面隐藏
-      */
-  onHide: function onHide() {},
-
-  /**
-                                 * 生命周期函数--监听页面卸载
-                                 */
-  onUnload: function onUnload() {},
-
-  /**
-                                     * 页面相关事件处理函数--监听用户下拉动作
-                                     */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-                                                       * 页面上拉触底事件的处理函数
-                                                       */
-  onReachBottom: function onReachBottom() {},
-
-  /**
-                                               * 用户点击右上角分享
-                                               */
-  onShareAppMessage: function onShareAppMessage() {},
   methods: {
-
     payFee: function payFee(_item) {
       wx.navigateTo({
         url: '/pages/roomFee/roomFee?fee=' + JSON.stringify(_item) });
@@ -300,7 +266,6 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
         method: "GET",
         data: _objData, //动态数据
         success: function success(res) {
-          console.log(res);
           if (res.statusCode == 200) {
             //成功情况下跳转
             var _roomFees = res.data.fees;
@@ -314,7 +279,6 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
               _tmpRoom.endTime = util.date.formatDate(_endTime);
 
               var _now = new Date();
-
               if (_endTime > _now) {
                 _tmpRoom.feeStateName = '正常';
               } else {
@@ -325,6 +289,8 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
               _tmpRoom.amount = _roomFee.feePrice;
               _tmpRoom.feeId = _roomFee.feeId;
               _tmpRoom.feeName = _roomFee.feeName;
+              _tmpRoom.feeFlag = _roomFee.feeFlag;
+              _tmpRoom.paymentCycle = _roomFee.paymentCycle;
               _that.moreRooms.push(_tmpRoom);
             });
 

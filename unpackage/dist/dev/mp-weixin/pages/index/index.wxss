@@ -475,7 +475,7 @@
 	line-height: 100rpx;
 	background-color: #00AA00;
 }
-.margin-top-1{
+.margin-top-1 {
 	margin-top: 2rpx;
 }
 .tec-height {

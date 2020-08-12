@@ -73,20 +73,12 @@
 		components: {
 			noDataPage
 		},
-		props: {},
-
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
 		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
@@ -114,33 +106,7 @@
 				_that._loadRoomFee();
 			});
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
 		methods: {
-
 			payFee: function(_item) {
 				wx.navigateTo({
 					url: '/pages/roomFee/roomFee?fee=' + JSON.stringify(_item),
@@ -164,7 +130,6 @@
 					method: "GET",
 					data: _objData, //动态数据
 					success: function(res) {
-						console.log(res);
 						if (res.statusCode == 200) {
 							//成功情况下跳转
 							let _roomFees = res.data.fees;
@@ -178,7 +143,6 @@
 								_tmpRoom.endTime = util.date.formatDate(_endTime);
 
 								let _now = new Date();
-
 								if (_endTime > _now) {
 									_tmpRoom.feeStateName = '正常'
 								} else {
@@ -189,6 +153,8 @@
 								_tmpRoom.amount = _roomFee.feePrice;
 								_tmpRoom.feeId = _roomFee.feeId;
 								_tmpRoom.feeName = _roomFee.feeName;
+								_tmpRoom.feeFlag = _roomFee.feeFlag;
+								_tmpRoom.paymentCycle = _roomFee.paymentCycle;
 								_that.moreRooms.push(_tmpRoom);
 							});
 

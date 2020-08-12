@@ -246,6 +246,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 // pages/payParkingFee/payParkingFee.js
 var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
@@ -268,8 +276,8 @@ var util = context.util;var _default =
       TabCur: 0,
       scrollLeft: 0,
       showFeeMonth: false,
-      feeMonthList: ['一个月', '半年', '一年', '两年'],
-      feeMonthName: '一个月',
+      feeMonthList: [],
+      feeMonthName: '',
       feeMonth: 1,
       endTime: '',
       ordEndTime: '',
@@ -285,16 +293,14 @@ var util = context.util;var _default =
       builtUpArea: '',
       costList: [{}, {}], //费用清单
       additionalAmount: "",
-      appId: '' };
+      appId: '',
+      feeFlag: '',
+      paymentCycle: 1 };
 
   },
-
-  components: {},
-  props: {},
-
   /**
-              * 生命周期函数--监听页面加载
-              */
+      * 生命周期函数--监听页面加载
+      */
   onLoad: function onLoad(options) {
     context.onLoad(options);
 
@@ -304,16 +310,12 @@ var util = context.util;var _default =
 
 
 
-
-
     var _fee = JSON.parse(options.fee);
-    console.log('_fee', _fee);
     var _amount = _fee.amount;
     var _receivableAmount = _amount;
     var _communityInfo = context.getCurrentCommunity();
     var _lastDate = new Date(_fee.endTime);
     var _endTime = util.date.addMonth(_lastDate, this.feeMonth);
-
     this.receivableAmount = _receivableAmount;
     this.communityId = _communityInfo.communityId;
     this.communityName = _communityInfo.communityName;
@@ -327,69 +329,22 @@ var util = context.util;var _default =
     this.additionalAmount = _fee.additionalAmount;
     this.endTime = util.date.formatDate(_endTime);
     this.ordEndTime = _fee.endTime;
+    this.feeFlag = _fee.feeFlag;
+    this.paymentCycle = _fee.paymentCycle;
+    for (var _index = 1; _index < 7; _index++) {
+      this.feeMonthList.push(_index * this.paymentCycle + '个月');
+    }
+    this.feeMonthName = this.paymentCycle + '个月';
   },
-
-  /**
-      * 生命周期函数--监听页面初次渲染完成
-      */
-  onReady: function onReady() {},
-
-  /**
-                                   * 生命周期函数--监听页面显示
-                                   */
-  onShow: function onShow() {},
-
-  /**
-                                 * 生命周期函数--监听页面隐藏
-                                 */
-  onHide: function onHide() {},
-
-  /**
-                                 * 生命周期函数--监听页面卸载
-                                 */
-  onUnload: function onUnload() {},
-
-  /**
-                                     * 页面相关事件处理函数--监听用户下拉动作
-                                     */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-                                                       * 页面上拉触底事件的处理函数
-                                                       */
-  onReachBottom: function onReachBottom() {},
-
-  /**
-                                               * 用户点击右上角分享
-                                               */
-  onShareAppMessage: function onShareAppMessage() {},
   methods: {
-
-
     dateChange: function dateChange(e) {
       console.log("onConfirm", e);
       var _feeMonthName = null;
       _feeMonthName = this.feeMonthList[e.detail.value];;
-      var _feeMonth = 1;
-
-      if (_feeMonthName == '一个月') {
-        _feeMonth = 1;
-      } else if (_feeMonthName == '半年') {
-        _feeMonth = 6;
-      } else if (_feeMonthName == '一年') {
-        _feeMonth = 12;
-      } else if (_feeMonthName == '两年') {
-        _feeMonth = 24;
-      } else {
-        return;
-      }
-
+      var _feeMonth = _feeMonthName.replace("个月", "");
       var _receivableAmount = _feeMonth * this.amount;
-
       var _lastDate = new Date(this.ordEndTime);
-
       var _newDate = util.date.addMonth(_lastDate, _feeMonth);
-
       this.showFeeMonth = false;
       this.feeMonthName = _feeMonthName;
       this.receivableAmount = _receivableAmount;

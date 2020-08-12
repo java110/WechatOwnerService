@@ -327,7 +327,7 @@ var factory = context.factory;var _default =
           var wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
           uni.clearStorageSync();
           if (wAppId != null && wAppId != undefined && wAppId != '') {
-            uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
+            uni.setStorageSync(constant.mapping.W_APP_ID, wAppId);
           }
           uni.navigateTo({
             url: '/pages/login/login' });

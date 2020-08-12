@@ -314,23 +314,7 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
   onLoad: function onLoad(options) {
     var _that = this;
     context.onLoad(options);
-    var loginStatus = context.checkLoginStatus();
-    if (!loginStatus) {
-      //HC测试小区id
-      _that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-    } else {
-      context.getOwner(function (_owner) {
-        var _communityId = '';
-        if (_owner == null) {
-          _communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-        } else {
-          _communityId = _owner.communityId;
-        }
-        _that.communityId = _communityId;
-      });
-    }
-    _that.loadActivitesFun(); //查询小区广告
-    _that.loadCommunityAdvertPhotoFun();
+
   },
 
   /**
@@ -347,39 +331,41 @@ var uniNoticeBar = function uniNoticeBar() {__webpack_require__.e(/*! require.en
     if (context.checkLoginStatus()) {
       _that.judgeBindOwnerFun();
     }
+    _that.notices = [];
+    _that.ad = [];
+    this._initIndexData();
   },
 
   /**
-      * 生命周期函数--监听页面隐藏
+      * 页面上拉触底事件的处理函数
       */
-  onHide: function onHide() {},
-
-  /**
-                                 * 生命周期函数--监听页面卸载
-                                 */
-  onUnload: function onUnload() {},
-
-  /**
-                                     * 页面相关事件处理函数--监听用户下拉动作
-                                     */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-                                                       * 页面上拉触底事件的处理函数
-                                                       */
   onReachBottom: function onReachBottom() {
     if (this.notices.length >= this.page * this.row) {
       this.page = this.page + 1;
       this.loadActivitesFun();
     }
-
   },
-
-  /**
-      * 用户点击右上角分享
-      */
-  onShareAppMessage: function onShareAppMessage() {},
   methods: {
+    _initIndexData: function _initIndexData() {
+      var _that = this;
+      var loginStatus = context.checkLoginStatus();
+      if (!loginStatus) {
+        //HC测试小区id
+        _that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
+      } else {
+        context.getOwner(function (_owner) {
+          var _communityId = '';
+          if (_owner == null) {
+            _communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
+          } else {
+            _communityId = _owner.communityId;
+          }
+          _that.communityId = _communityId;
+        });
+      }
+      _that.loadActivitesFun(); //查询小区广告
+      _that.loadCommunityAdvertPhotoFun();
+    },
     judgeBindOwnerFun: function judgeBindOwnerFun() {
       context.getOwner(function (_owner) {
 

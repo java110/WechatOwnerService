@@ -62,7 +62,7 @@
 						<text class="text-grey text-sm">{{feeId }}</text>
 					</view>
 				</view>
-				<view class="cu-item">
+				<view class="cu-item"  v-if="feeFlag == '1003006'">
 					<view class="content">
 						<text class="text-grey">金额</text>
 					</view>
@@ -70,7 +70,15 @@
 						<text class="text-grey text-sm">{{amount + '元/月' }}</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item"  v-else>
+					<view class="content">
+						<text class="text-grey">金额</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{amount + '元' }}</text>
+					</view>
+				</view>
+				<view class="cu-item arrow" v-if="feeFlag == '1003006'">
 					<view class="content">
 						<text class="text-grey">周期</text>
 					</view>
@@ -136,8 +144,8 @@
 				TabCur: 0,
 				scrollLeft: 0,
 				showFeeMonth: false,
-				feeMonthList: ['一个月', '半年', '一年', '两年'],
-				feeMonthName: '一个月',
+				feeMonthList: [],
+				feeMonthName: '',
 				feeMonth: 1,
 				endTime: '',
 				ordEndTime: '',
@@ -153,13 +161,11 @@
 				builtUpArea: '',
 				costList: [{}, {}], //费用清单
 				additionalAmount: "",
-				appId: ''
+				appId: '',
+				feeFlag:'',
+				paymentCycle:1,
 			};
 		},
-
-		components: {},
-		props: {},
-
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -169,19 +175,15 @@
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
-			
 			// #ifdef H5
 				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
-
 			let _fee = JSON.parse(options.fee);
-			console.log('_fee', _fee);
 			let _amount = _fee.amount;
 			let _receivableAmount = _amount;
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);
-
 			this.receivableAmount = _receivableAmount;
 			this.communityId = _communityInfo.communityId;
 			this.communityName = _communityInfo.communityName;
@@ -195,69 +197,22 @@
 			this.additionalAmount = _fee.additionalAmount;
 			this.endTime = util.date.formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
+			this.feeFlag = _fee.feeFlag;
+			this.paymentCycle = _fee.paymentCycle;	
+			for (let _index = 1; _index < 7; _index++) {
+				this.feeMonthList.push(_index * this.paymentCycle + '个月')
+			}
+			this.feeMonthName = this.paymentCycle + '个月';
 		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
 		methods: {
-
-
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];;
-				let _feeMonth = 1;
-
-				if (_feeMonthName == '一个月') {
-					_feeMonth = 1;
-				} else if (_feeMonthName == '半年') {
-					_feeMonth = 6;
-				} else if (_feeMonthName == '一年') {
-					_feeMonth = 12;
-				} else if (_feeMonthName == '两年') {
-					_feeMonth = 24;
-				} else {
-					return;
-				}
-
+				let _feeMonth = _feeMonthName.replace("个月","");
 				let _receivableAmount = _feeMonth * this.amount;
-
 				let _lastDate = new Date(this.ordEndTime);
-
 				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
-
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
 				this.receivableAmount = _receivableAmount;
