@@ -44,7 +44,6 @@
 
 
 		</view>
-		<!-- #ifdef APP-PLUS || H5 -->
 		<view class="cu-modal" :class="logoutUser==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -62,7 +61,6 @@
 				</view>
 			</view>
 		</view>
-		<!-- #endif -->
 	</view>
 </template>
 
