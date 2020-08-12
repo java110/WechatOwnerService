@@ -27,13 +27,13 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "wxf83d66b0e9f5964d",
-	"projectname": "益掌通",
+	"projectname": "%E7%9B%8A%E6%8E%8C%E9%80%9A",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

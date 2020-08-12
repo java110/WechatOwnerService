@@ -16,6 +16,7 @@ const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 const loginOwnerByKey = baseUrl + "app/loginOwnerByKey"; // 根据临时秘钥登录
 
 const loginUrl = baseUrl + 'app/loginWx';
+const getWxPhoto = baseUrl + 'app/getWxPhoto';
 const loginOwnerUrl = baseUrl + 'app/loginOwner';
 const areaUrl = baseUrl + "app/area.listAreas";
 const GetNoticeListUrl = baseUrl + 'app/notice.listNotices'; //公告接口
@@ -37,6 +38,8 @@ const queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner'; //绑定业主
 const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner'; //查询绑定业主
 
 const ownerRegiter = baseUrl + 'app/owner.ownerRegister'; //业主注册
+
+const ownerRegisterWxPhoto = baseUrl + 'app/owner.ownerRegisterWxPhoto'; //业主注册
 
 const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners'; //解绑业主
 
@@ -164,6 +167,7 @@ const NEED_NOT_LOGIN_URL = [
 module.exports = {
 	baseUrl: baseUrl,
 	loginUrl: loginUrl,
+	getWxPhoto:getWxPhoto,
 	loginOwnerUrl: loginOwnerUrl,
 	areaUrl: areaUrl,
 	GetNoticeListUrl: GetNoticeListUrl,
@@ -222,6 +226,7 @@ module.exports = {
 	listFeeByAttr:listFeeByAttr,
 
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
-	auditComplaint:auditComplaint
+	auditComplaint:auditComplaint,
+	ownerRegisterWxPhoto:ownerRegisterWxPhoto
 
 };

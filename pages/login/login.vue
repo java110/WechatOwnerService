@@ -196,6 +196,7 @@
 				})
 			},
 			_doRegister: function() {
+				//let _url = '/pages/registerByWechat/registerByWechat';
 				let _url = '/pages/register/register';
 				// #ifdef H5
 				_url += ('?code=' + this.code);

@@ -297,7 +297,13 @@
 				"navigationBarTitleText": "投诉待办"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/registerByWechat/registerByWechat",
+            "style" : {
+				"navigationBarTitleText": "业主绑定"
+			}
+        }
+    ],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",
