@@ -178,7 +178,7 @@
 		onLoad: function(options) {
 			let _that = this;
 			context.onLoad(options);
-			
+
 		},
 
 		/**
@@ -192,9 +192,11 @@
 		onShow: function() {
 			var _that = this;
 			_that.location = wx.getStorageSync('location');
-			if(context.checkLoginStatus()){
+			if (context.checkLoginStatus()) {
 				_that.judgeBindOwnerFun();
-			}	
+			}
+			_that.notices = [];
+			_that.ad = [];
 			this._initIndexData();
 		},
 
@@ -202,19 +204,19 @@
 		 * 页面上拉触底事件的处理函数
 		 */
 		onReachBottom: function() {
-			if(this.notices.length >= this.page * this.row){
-				this.page = this.page +1;
+			if (this.notices.length >= this.page * this.row) {
+				this.page = this.page + 1;
 				this.loadActivitesFun();
 			}
 		},
 		methods: {
-			_initIndexData:function(){
+			_initIndexData: function() {
 				let _that = this;
 				let loginStatus = context.checkLoginStatus();
-				if(!loginStatus){
+				if (!loginStatus) {
 					//HC测试小区id
 					_that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-				}else{
+				} else {
 					context.getOwner(function(_owner) {
 						let _communityId = '';
 						if (_owner == null) {
@@ -230,7 +232,7 @@
 			},
 			judgeBindOwnerFun: function() {
 				context.getOwner(function(_owner) {
-					
+
 				});
 			},
 			/**
@@ -308,7 +310,7 @@
 							// #endif
 
 							_advertPhotos.forEach(function(_item) {
-								_item.url =  _urlPath + _item.url + "&time=" + new Date();
+								_item.url = _urlPath + _item.url + "&time=" + new Date();
 
 								_aPhotos.push(_item);
 							});
@@ -344,7 +346,7 @@
 			callPropertyTel: function() { //拨打电话
 				let _that = this;
 				let loginStatus = context.checkLoginStatus();
-				if(!loginStatus){
+				if (!loginStatus) {
 					uni.navigateTo({
 						url: '../showlogin/showlogin'
 					});
@@ -411,17 +413,17 @@
 			_cancleCall: function() {
 				this.callPropertyModal = false;
 			},
-			selectActiviti:function(_item){
+			selectActiviti: function(_item) {
 				this.curTypeCd = _item.typeCd;
 				this.notices = [];
 				this.page = 1;
 				this.loadActivitesFun();
 			},
-			toPage:function(pageUrl){
+			toPage: function(pageUrl) {
 				context.navigateTo({
 					url: pageUrl
 				});
-			}, 
+			},
 		}
 	};
 </script>
@@ -434,8 +436,8 @@
 		line-height: 100upx;
 		background-color: #00AA00;
 	}
-	
-	.margin-top-1{
+
+	.margin-top-1 {
 		margin-top: 2upx;
 	}
 
