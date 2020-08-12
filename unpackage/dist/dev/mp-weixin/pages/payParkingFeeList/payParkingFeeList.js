@@ -221,15 +221,9 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
   onLoad: function onLoad(options) {
     context.onLoad(options);
   },
-
   /**
-      * 生命周期函数--监听页面初次渲染完成
+      * 生命周期函数--监听页面显示
       */
-  onReady: function onReady() {},
-
-  /**
-                                   * 生命周期函数--监听页面显示
-                                   */
   onShow: function onShow() {
     var _that = this;
     if (!this.needFefresh) {
@@ -240,31 +234,6 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
       _that._loadParkingSpace(_owner);
     });
   },
-
-  /**
-      * 生命周期函数--监听页面隐藏
-      */
-  onHide: function onHide() {},
-
-  /**
-                                 * 生命周期函数--监听页面卸载
-                                 */
-  onUnload: function onUnload() {},
-
-  /**
-                                     * 页面相关事件处理函数--监听用户下拉动作
-                                     */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-                                                       * 页面上拉触底事件的处理函数
-                                                       */
-  onReachBottom: function onReachBottom() {},
-
-  /**
-                                               * 用户点击右上角分享
-                                               */
-  onShareAppMessage: function onShareAppMessage() {},
   methods: {
     payFee: function payFee(_item) {
       uni.navigateTo({
@@ -293,7 +262,6 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
             _that.parkingSpaces = _parkingSpaces;
             if (_parkingSpaces.length == 0) {
               _that.noData = true;
-
               return;
             }
             _that.curParkingSpace = _parkingSpaces[0];
@@ -339,7 +307,6 @@ var util = context.util;var noDataPage = function noDataPage() {__webpack_requir
               _fee.endTime = util.date.formatDate(_endTime);
               _fee.num = _that.curParkingSpace.num;
               var _now = new Date();
-
               if (_endTime > _now) {
                 _fee.feeStateName = '正常';
               } else {

@@ -107,8 +107,8 @@
 		data() {
 			return {
 				showFeeMonth: false,
-				feeMonthList: ['一个月', '半年', '一年', '两年'],
-				feeMonthName: '一个月',
+				feeMonthList: [],
+				feeMonthName: '',
 				feeMonth: 1,
 				endTime: '',
 				ordEndTime: '',
@@ -122,7 +122,9 @@
 				communityId: '',
 				communityName: '',
 				feeId: '',
-				appId:''
+				appId:'',
+				feeFlag:'',
+				paymentCycle:1,
 			};
 		},
 
@@ -155,42 +157,18 @@
 			this.feePrice = _fee.feePrice;
 			this.endTime = util.date.formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
+			this.feeFlag = _fee.feeFlag;
+			this.paymentCycle = _fee.paymentCycle;	
+			for (let _index = 1; _index < 7; _index++) {
+				this.feeMonthList.push(_index * this.paymentCycle + '个月')
+			}
+			this.feeMonthName = this.paymentCycle + '个月';
 
 			var pages = getCurrentPages();
 			var prevPage = pages[pages.length - 2]; //上一个页面
 			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
 			prevPage.needFefresh = false;
 		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
 
 		/**
 		 * 用户点击右上角分享
@@ -202,19 +180,7 @@
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];
-				let _feeMonth = 1;
-
-				if (_feeMonthName == '一个月') {
-					_feeMonth = 1;
-				} else if (_feeMonthName == '半年') {
-					_feeMonth = 6;
-				} else if (_feeMonthName == '一年') {
-					_feeMonth = 12;
-				} else if (_feeMonthName == '两年') {
-					_feeMonth = 24;
-				} else {
-					return;
-				}
+				let _feeMonth = _feeMonthName.replace("个月","");;
 
 				let _receivableAmount = _feeMonth * this.feePrice ;
 
