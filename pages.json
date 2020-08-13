@@ -303,6 +303,12 @@
 				"navigationBarTitleText": "业主绑定"
 			}
         }
+        ,{
+            "path" : "pages/changePassword/changePassword",
+            "style" : {
+				"navigationBarTitleText": "修改密码"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

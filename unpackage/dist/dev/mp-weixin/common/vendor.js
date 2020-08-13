@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1568,9 +1568,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/constant/AppConstant.js ***!
-  \**********************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/constant/AppConstant.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1607,9 +1607,9 @@ module.exports = AppConstant;
 /***/ }),
 
 /***/ 11:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/constant/UrlConstant.js ***!
-  \**********************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/constant/UrlConstant.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1760,9 +1760,11 @@ var listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
 //查询待审核单
 var auditComplaint = baseUrl + 'app/complaint.auditComplaint';
 
+var changeStaffPwd = baseUrl + 'app/user.changeStaffPwd'; //修改密码
+
 /**
-                                                                * 不需要登录页面
-                                                                */
+ * 不需要登录页面
+ */
 var NEED_NOT_LOGIN_PAGE = [
 '/pages/login/login',
 '/pages/register/register',
@@ -1842,14 +1844,15 @@ module.exports = {
 
   listWorkflowAuditInfo: listWorkflowAuditInfo,
   auditComplaint: auditComplaint,
-  ownerRegisterWxPhoto: ownerRegisterWxPhoto };
+  ownerRegisterWxPhoto: ownerRegisterWxPhoto,
+  changeStaffPwd: changeStaffPwd };
 
 /***/ }),
 
 /***/ 12:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/constant/MappingConstant.js ***!
-  \**************************************************************************************************/
+/*!********************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/constant/MappingConstant.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1889,9 +1892,9 @@ module.exports = MappingConstant;
 /***/ }),
 
 /***/ 13:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/utils/index.js ***!
-  \*************************************************************************************/
+/*!*******************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/utils/index.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1909,9 +1912,9 @@ module.exports = {
 /***/ }),
 
 /***/ 14:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/utils/CoreUtil.js ***!
-  \****************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/utils/CoreUtil.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1961,9 +1964,9 @@ module.exports = CoreUtil;
 /***/ }),
 
 /***/ 15:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/utils/DateUtil.js ***!
-  \****************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/utils/DateUtil.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2209,9 +2212,9 @@ module.exports = {
 /***/ }),
 
 /***/ 16:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/index.js ***!
-  \***************************************************************************************/
+/*!*********************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/index.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2245,9 +2248,9 @@ module.exports = {
 /***/ }),
 
 /***/ 17:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/LoginFactory.js ***!
-  \**********************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/LoginFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2607,9 +2610,9 @@ module.exports = new LoginFactory();
 /***/ }),
 
 /***/ 18:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/UserFactory.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/UserFactory.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2662,9 +2665,9 @@ module.exports = new UserFactory();
 /***/ }),
 
 /***/ 19:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
-  \************************************************************************************************/
+/*!******************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8202,7 +8205,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8223,14 +8226,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8306,7 +8309,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8702,9 +8705,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/FileFactory.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/FileFactory.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8748,9 +8751,9 @@ module.exports = FileFactory;
 /***/ }),
 
 /***/ 21:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/CoreFactory.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/CoreFactory.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8788,9 +8791,9 @@ module.exports = new CoreFactory();
 /***/ }),
 
 /***/ 22:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/HttpFactory.js ***!
-  \*********************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/HttpFactory.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8850,9 +8853,9 @@ module.exports = new HttpFactory();
 /***/ }),
 
 /***/ 23:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/factory/Base64Factory.js ***!
-  \***********************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/factory/Base64Factory.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9116,9 +9119,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/pages.json ***!
-  \*********************************************************************************/
+/*!***************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/pages.json ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9127,9 +9130,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 456:
-/*!****************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/components/uni-icons/icons.js ***!
-  \****************************************************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/components/uni-icons/icons.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10060,9 +10063,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 474:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/components/sx-rate/common.js ***!
-  \***************************************************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/components/sx-rate/common.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10079,9 +10082,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 54:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/components/pickerAddress/data.js ***!
-  \*******************************************************************************************************/
+/*!*************************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/components/pickerAddress/data.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20351,9 +20354,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 8:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/context/Java110Context.js ***!
-  \************************************************************************************************/
+/*!******************************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/context/Java110Context.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20781,9 +20784,9 @@ module.exports = {
 /***/ }),
 
 /***/ 9:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/WechatOwnerService/constant/index.js ***!
-  \****************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/hc/WechatOwnerService/constant/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

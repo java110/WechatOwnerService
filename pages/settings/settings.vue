@@ -13,11 +13,31 @@
 				</view>
 				<view class="cu-item arrow" @click="_toPage('/pages/viewAdmin/viewAdmin')">
 					<view class="content">
+						<text class="cuIcon-mobilefill text-cyan"></text>
+						<text class="text-grey">手机号</text>
+					</view>
+					<view class="action">
+
+					</view>
+				</view>
+				<view class="cu-item arrow" @click="_toPage('/pages/changePassword/changePassword')">
+					<view class="content">
+						<text class="cuIcon-warnfill text-cyan"></text>
+						<text class="text-grey">密码</text>
+					</view>
+					<view class="action">
+
+					</view>
+				</view>
+			</view>
+			<view class="cu-list menu">
+				<view class="cu-item arrow" @click="_toPage('/pages/viewAdmin/viewAdmin')">
+					<view class="content">
 						<text class="cuIcon-questionfill text-cyan"></text>
 						<text class="text-grey">技术支持</text>
 					</view>
 					<view class="action">
-						
+
 					</view>
 				</view>
 				<view class="cu-item">
@@ -31,7 +51,7 @@
 				</view>
 
 			</view>
-		
+
 			<view v-if="login" class="margin-top">
 				<view class="cu-list menu">
 					<view class="cu-item " @tap="_logout()">
@@ -74,7 +94,7 @@
 				headerImg: null,
 				imageList: [],
 				logoutUser: false,
-				login:true
+				login: true
 			}
 		},
 		/**
@@ -83,12 +103,12 @@
 		onLoad: function(options) {
 			context.onLoad(options);
 			const userInfo = uni.getStorageSync(constant.mapping.OWNER_INFO);
-			if(userInfo == null || userInfo == ''){
+			if (userInfo == null || userInfo == '') {
 				this.login = false;
 				return;
 			}
 			this.loadOwnerHeaderImg();
-			
+
 		},
 		methods: {
 			settingHeadImg: function() {
@@ -122,7 +142,7 @@
 				let _that = this;
 				context.getOwner(function(_owner) {
 					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId + "&communityId=" + _owner.communityId +
-						"&fileTypeCd=10000" ;
+						"&fileTypeCd=10000";
 					_that.headerImg = _headerImg;
 				});
 			},
@@ -170,9 +190,9 @@
 			_cancleLogout: function() {
 				this.logoutUser = false;
 			},
-			_toPage:function(_url){
+			_toPage: function(_url) {
 				uni.navigateTo({
-					url:_url
+					url: _url
 				});
 			},
 			_doLogoutUser: function() {
@@ -192,13 +212,13 @@
 							});
 							return;
 						}
-						let wAppId=uni.getStorageSync(constant.mapping.W_APP_ID);
+						let wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
 						uni.clearStorageSync();
 						if (wAppId != null && wAppId != undefined && wAppId != '') {
 							uni.setStorageSync(constant.mapping.W_APP_ID, wAppId);
 						}
 						uni.navigateTo({
-							url:'/pages/login/login'
+							url: '/pages/login/login'
 						});
 					},
 					fail: function(error) {

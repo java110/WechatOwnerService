@@ -145,6 +145,8 @@ const listWorkflowAuditInfo = baseUrl + 'app/workflow.listWorkflowAuditInfo';
 //查询待审核单
 const auditComplaint= baseUrl + 'app/complaint.auditComplaint';
 
+const changeStaffPwd= baseUrl + 'app/user.changeStaffPwd'; //修改密码
+
 /**
  * 不需要登录页面
  */
@@ -227,6 +229,7 @@ module.exports = {
 
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
 	auditComplaint:auditComplaint,
-	ownerRegisterWxPhoto:ownerRegisterWxPhoto
+	ownerRegisterWxPhoto:ownerRegisterWxPhoto,
+	changeStaffPwd:changeStaffPwd
 
 };
