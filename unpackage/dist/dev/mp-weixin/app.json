@@ -51,7 +51,8 @@
     "pages/complaintDetail/complaintDetail",
     "pages/complaintHandle/complaintHandle",
     "pages/registerByWechat/registerByWechat",
-    "pages/changePassword/changePassword"
+    "pages/changePassword/changePassword",
+    "pages/changeOwnerPhone/changeOwnerPhone"
   ],
   "subPackages": [],
   "window": {

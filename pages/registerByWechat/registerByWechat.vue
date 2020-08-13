@@ -33,7 +33,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="link" required label="手机号" clearable placeholder="请输入手机号"></input>
+			<input v-model="link" required label="手机号" readonly="true" clearable placeholder="请输入手机号"></input>
 			<button  class="cu-btn bg-green" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">获取手机号</button>
 		</view>
 		<view class="padding flex flex-direction margin-top">

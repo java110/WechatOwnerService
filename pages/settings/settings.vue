@@ -11,7 +11,7 @@
 						<view class="cu-avatar round " :style="{backgroundImage: 'url(' + headerImg + ')'}"></view>
 					</view>
 				</view>
-				<view class="cu-item arrow" @click="_toPage('/pages/viewAdmin/viewAdmin')">
+				<view class="cu-item arrow" @click="_toPage('/pages/changeOwnerPhone/changeOwnerPhone')">
 					<view class="content">
 						<text class="cuIcon-mobilefill text-cyan"></text>
 						<text class="text-grey">手机号</text>

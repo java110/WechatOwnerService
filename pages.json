@@ -309,6 +309,10 @@
 				"navigationBarTitleText": "修改密码"
 			}
         }
+        ,{
+            "path" : "pages/changeOwnerPhone/changeOwnerPhone",
+            "style" : {}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
