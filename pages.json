@@ -311,7 +311,10 @@
         }
         ,{
             "path" : "pages/changeOwnerPhone/changeOwnerPhone",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "修改手机"
+				
+			}
         }
     ],
 	"tabBar": {
