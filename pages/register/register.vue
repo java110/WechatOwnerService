@@ -20,10 +20,10 @@
 			<view class="title">姓名</view>
 			<input v-model="appUserName" required label="姓名" clearable placeholder="请输入名称" name="appUserName"></input>
 		</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="title">身份证</view>
 			<input v-model="idCard" required label="身份证" clearable placeholder="请输入身份证" name="idCard"></input>
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<view class="title">密码</view>
 			<input v-model="password" required type="password" label="密码" clearable placeholder="请输入密码"></input>
@@ -91,18 +91,18 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			let _location = context.getLocation();
-			let _currentLocation = context.getCurrentLocation();
+			//let _location = context.getLocation();
+			//let _currentLocation = context.getCurrentLocation();
 
-			let _areaName = _currentLocation.city + _currentLocation.district;
-			let _areaCode = _currentLocation.adcode;
+			//let _areaName = _currentLocation.city + _currentLocation.district;
+			//let _areaCode = _currentLocation.adcode;
 			//加载省份
-			context._loadArea('', '', function(_areaList) {
-				_that.areaList = _areaList;
-				_that.communityName = _location;
-				_that.areaCode = _areaCode;
-				_that.areaName = _areaName;
-			});
+			// context._loadArea('', '', function(_areaList) {
+			// 	_that.areaList = _areaList;
+			// 	_that.communityName = _location;
+			// 	_that.areaCode = _areaCode;
+			// 	_that.areaName = _areaName;
+			// });
 		},
 
 		/**
@@ -110,11 +110,11 @@
 		 */
 		onShow: function() {
 			if (this.areaCode == '' || this.areaCode == undefined) {
-				let _currentLocation = context.getCurrentLocation();
-				let _areaName = _currentLocation.city + _currentLocation.district;
-				let _areaCode = _currentLocation.adcode;
-				this.areaCode = _areaCode;
-				this.areaName = _areaName;
+				// let _currentLocation = context.getCurrentLocation();
+				// let _areaName = _currentLocation.city + _currentLocation.district;
+				// let _areaCode = _currentLocation.adcode;
+				// this.areaCode = _areaCode;
+				// this.areaName = _areaName;
 
 			} else {
 				let community = uni.getStorageSync("_selectCommunity");

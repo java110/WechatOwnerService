@@ -33,7 +33,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="link" required label="手机号" readonly="true" clearable placeholder="请输入手机号"></input>
+			<input v-model="link" required label="手机号" disabled="disabled" clearable placeholder="请输入手机号"></input>
 			<button  class="cu-btn bg-green" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">获取手机号</button>
 		</view>
 		<view class="padding flex flex-direction margin-top">
@@ -104,6 +104,7 @@
 			uni.login({
 				success: (res) => {
 					console.log("login", res);
+					_that.wxLogin(res.code);
 				}
 			})
 		},
@@ -150,7 +151,11 @@
 						decryptData: e.detail.encryptedData,
 					},
 					success: function(res) {
-						_that.link = res.data.photo;
+						let _json = res.data;
+						console.log('日志',_json)
+						if(_json.code == 0){
+							_that.link = _json.data.phoneNumber;
+						}
 					},
 					fail: function(error) {}
 				});

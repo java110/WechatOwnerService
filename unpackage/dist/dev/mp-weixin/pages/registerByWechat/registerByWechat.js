@@ -240,6 +240,7 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
     uni.login({
       success: function success(res) {
         console.log("login", res);
+        _that.wxLogin(res.code);
       } });
 
   },
@@ -286,7 +287,11 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
           decryptData: e.detail.encryptedData },
 
         success: function success(res) {
-          _that.link = res.data.photo;
+          var _json = res.data;
+          console.log('日志', _json);
+          if (_json.code == 0) {
+            _that.link = _json.data.phoneNumber;
+          }
         },
         fail: function fail(error) {} });
 

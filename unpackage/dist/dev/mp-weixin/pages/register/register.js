@@ -227,18 +227,18 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
       */
   onLoad: function onLoad(options) {
     var _that = this;
-    var _location = context.getLocation();
-    var _currentLocation = context.getCurrentLocation();
+    //let _location = context.getLocation();
+    //let _currentLocation = context.getCurrentLocation();
 
-    var _areaName = _currentLocation.city + _currentLocation.district;
-    var _areaCode = _currentLocation.adcode;
+    //let _areaName = _currentLocation.city + _currentLocation.district;
+    //let _areaCode = _currentLocation.adcode;
     //加载省份
-    context._loadArea('', '', function (_areaList) {
-      _that.areaList = _areaList;
-      _that.communityName = _location;
-      _that.areaCode = _areaCode;
-      _that.areaName = _areaName;
-    });
+    // context._loadArea('', '', function(_areaList) {
+    // 	_that.areaList = _areaList;
+    // 	_that.communityName = _location;
+    // 	_that.areaCode = _areaCode;
+    // 	_that.areaName = _areaName;
+    // });
   },
 
   /**
@@ -246,11 +246,11 @@ var constant = context.constant;var pickerAddress = function pickerAddress() {Pr
       */
   onShow: function onShow() {
     if (this.areaCode == '' || this.areaCode == undefined) {
-      var _currentLocation = context.getCurrentLocation();
-      var _areaName = _currentLocation.city + _currentLocation.district;
-      var _areaCode = _currentLocation.adcode;
-      this.areaCode = _areaCode;
-      this.areaName = _areaName;
+      // let _currentLocation = context.getCurrentLocation();
+      // let _areaName = _currentLocation.city + _currentLocation.district;
+      // let _areaCode = _currentLocation.adcode;
+      // this.areaCode = _areaCode;
+      // this.areaName = _areaName;
 
     } else {
       var community = uni.getStorageSync("_selectCommunity");
