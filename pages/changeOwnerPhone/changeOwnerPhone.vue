@@ -10,7 +10,7 @@
 		</form>
 		
 		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-green lg" @tap="_doChangePwd()">提交</button>
+			<button class="cu-btn bg-green lg" @tap="_doChangePhoto()">提交</button>
 		</view>
 		
 	</view>
@@ -26,6 +26,16 @@
 				phone:''
 			}
 		},
+		onLoad() {
+			
+			let _that = this;
+			uni.login({
+				success: (res) => {
+					console.log("login", res);
+					_that.wxLogin(res.code);
+				}
+			})
+		},
 		methods: {
 			wxLogin: function(_code) {
 				let _that = this;
@@ -37,7 +47,7 @@
 				wx.request({
 					url: constant.url.loginUrl,
 					method: 'post',
-					header: this.getHeaders(),
+					header: context.getHeaders(),
 					data: {
 						code: _code,
 						// 用户非敏感信息
@@ -46,7 +56,8 @@
 						encryptedData: '',
 						// 用户敏感信息
 						iv: '', // 解密算法的向量
-						appId: _appId
+						appId: _appId,
+						userInfo:{}
 			
 					},
 					success: function(res) {
@@ -84,7 +95,11 @@
 						decryptData: e.detail.encryptedData,
 					},
 					success: function(res) {
-						_that.link = res.data.photo;
+						let _json = res.data;
+						console.log('日志',_json)
+						if(_json.code == 0){
+							_that.phone = _json.data.phoneNumber;
+						}
 					},
 					fail: function(error) {}
 				});
@@ -101,19 +116,22 @@
 				
 				const userInfo = uni.getStorageSync(constant.mapping.OWNER_INFO);
 				let _userInfo = {
-					userId: userInfo.userId,
-					phone: this.phone,
+					memberId: userInfo.memberId,
+					link: this.phone,
+					communityId:userInfo.communityId,
+					userId:userInfo.userId
 				};
 				context.request({
-					url: constant.url.changeStaffPwd,
+					url: constant.url.changeOwnerPhone,
 					header: context.getHeaders(),
 					method: "POST",
 					data: _userInfo,
 					success: function(res) {
-						if(res.statusCode != 200){
+						let _json = res.data
+						if(_json.code != 0){
 							uni.showToast({
 								icon:"none",
-								title: res.data
+								title: _json.msg
 							});
 							return ;
 						}	

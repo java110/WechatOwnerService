@@ -147,6 +147,10 @@ const auditComplaint= baseUrl + 'app/complaint.auditComplaint';
 
 const changeStaffPwd= baseUrl + 'app/user.changeStaffPwd'; //修改密码
 
+const changeOwnerPhone= baseUrl + 'app/ownerApi/changeOwnerPhone'; //修改密码
+
+
+
 /**
  * 不需要登录页面
  */
@@ -230,6 +234,7 @@ module.exports = {
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
 	auditComplaint:auditComplaint,
 	ownerRegisterWxPhoto:ownerRegisterWxPhoto,
-	changeStaffPwd:changeStaffPwd
+	changeStaffPwd:changeStaffPwd,
+	changeOwnerPhone:changeOwnerPhone
 
 };
