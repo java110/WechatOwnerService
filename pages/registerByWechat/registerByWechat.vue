@@ -267,7 +267,7 @@
 				wx.request({
 					url: constant.url.loginUrl,
 					method: 'post',
-					header: this.getHeaders(),
+					header: context.getHeaders(),
 					data: {
 						code: _code,
 						// 用户非敏感信息
@@ -276,7 +276,8 @@
 						encryptedData: '',
 						// 用户敏感信息
 						iv: '', // 解密算法的向量
-						appId: _appId
+						appId: _appId,
+						userInfo:{}
 
 					},
 					success: function(res) {
