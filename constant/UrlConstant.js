@@ -5,10 +5,11 @@
  */
 const constant = require("../constant/index.js");
 
-// 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; 
-//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-//const baseUrl = 'https://app.demo.winqi.cn/';
+// 服务器域名 公众号
+const baseUrl = '/'; 
+
+//服务器域名 小程序时
+//const baseUrl = 'https://app.demo.winqi.cn'; 
 
 
 const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
