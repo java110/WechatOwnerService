@@ -1,3 +1,9 @@
+import {
+	requestNoAuth
+} from 'java110Request.js'
+import {
+	url
+} from '../constant/url.js'
 /**
  * @param {Object} dataObj
  * 				page: 1,
@@ -9,9 +15,8 @@
 export function getCommunitys(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
-			uni.request({
-				url: constant.url.listCommunitys,
-				header: context.getHeaders(),
+			requestNoAuth({
+				url: url.listCommunitys,
 				method: "GET",
 				data: dataObj,
 				//动态数据
