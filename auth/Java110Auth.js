@@ -1,3 +1,5 @@
+import mapping from '../constant/MappingConstant.js'
+
 /**
  * 检查会话是否 存在
  * add by 吴学文 QQ:928255095
@@ -48,4 +50,18 @@ export function checkSession() {
 		}
 		// #endif
 	});
+}
+/**
+ * 是否登录 不跳转 只是判断是否登录
+ * 
+ * add by 吴学文 QQ:928255095
+ */
+export function hasLogin() {
+	//判断当前登录状态，不调跳转登录界面
+	let loginFlag = uni.getStorageSync(mapping.LOGIN_FLAG);
+	let nowDate = new Date();
+	if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+		return true;
+	}
+	return false;
 }

@@ -7,10 +7,10 @@
  */
 const constant = require("../constant/index.js");
 
-const util = require("../utils/index.js");
 
 const factory = require("../factory/index.js");
 
+let util = {};
 /**
  * 获取请后台服务时的头信息
  */
@@ -19,8 +19,8 @@ const getHeaders = function() {
 	let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
 	return {
 		"app-id": constant.app.appId,
-		"transaction-id": util.core.wxuuid(),
-		"req-time": util.date.getDateYYYYMMDDHHMISS(),
+		"transaction-id": 'util.core.wxuuid()',
+		"req-time": 'util.date.getDateYYYYMMDDHHMISS()',
 		"sign": '1234567',
 		"user-id": '-1',
 		"cookie": '_java110_token_=' + wx.getStorageSync('token'),

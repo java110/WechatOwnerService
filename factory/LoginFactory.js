@@ -8,7 +8,9 @@
 /**
  * 登录工厂类
  */
-const util = require("../utils/index.js");
+
+import {uuid} from '../utils/SeqUtil.js'
+import {getDateYYYYMMDDHHMISS} from '../utils/DateUtil.js'
 
 const constant = require("../constant/index.js");
 
@@ -16,7 +18,7 @@ const context = require("../context/Java110Context.js");
 
 class LoginFactory {
 	constructor() {
-		this.coreUtil = util.core;
+
 	} // 检查本地 storage 中是否有登录态标识
 
 	getHeaders() {
@@ -24,8 +26,8 @@ class LoginFactory {
 		
 		return {
 			"app-id": constant.app.appId,
-			"transaction-id": util.core.wxuuid(),
-			"req-time": util.date.getDateYYYYMMDDHHMISS(),
+			"transaction-id": uuid(),
+			"req-time": getDateYYYYMMDDHHMISS(),
 			"sign": '1234567',
 			"user-id": '-1',
 			"cookie": '_java110_token_=' + wx.getStorageSync('token'),
@@ -151,13 +153,12 @@ class LoginFactory {
 					that.requsetHcServerToLogin(loginRes, callback);
 				} else {
 					// 获取 code 失败
-					that.coreUtil.showInfo('登录失败');
 					console.log('调用wx.login获取code失败');
 				}
 			},
 			fail: function(error) {
 				// 调用 wx.login 接口失败
-				that.coreUtil.showInfo('接口调用失败' + error);
+
 				console.log(error);
 			}
 		});
@@ -273,7 +274,6 @@ class LoginFactory {
 					wx.setStorageSync(constant.mapping.TOKEN, res.token);
 					callback();
 				} else {
-					util.core.showInfo(res.errmsg);
 				}
 			},
 			fail: function(error) {
@@ -284,7 +284,7 @@ class LoginFactory {
 					});
 					return;
 				}
-				util.core.showInfo('调用接口失败');
+	
 				console.log(error);
 			}
 		});

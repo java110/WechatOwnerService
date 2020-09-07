@@ -1568,20 +1568,22 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!****************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/constant/AppConstant.js ***!
-  \****************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/AppConstant.js ***!
+  \*****************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
-                                                                                                                                                                                                                                                                                                                                                                 * 应用相关常量
-                                                                                                                                                                                                                                                                                                                                                                 * 
-                                                                                                                                                                                                                                                                                                                                                                 * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                 */var
-AppConstant = function AppConstant() {"use strict";_classCallCheck(this, AppConstant);};_defineProperty(AppConstant, "wAppId",
+"use strict";
 
-"wx43458162e3c31d92");_defineProperty(AppConstant, "appId",
+
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var
+AppConstant = function AppConstant() {_classCallCheck(this, AppConstant);};_defineProperty(AppConstant, "wAppId",
+
+_config.default.wAppId);_defineProperty(AppConstant, "appId",
 
 
 
@@ -1601,33 +1603,75 @@ AppConstant = function AppConstant() {"use strict";_classCallCheck(this, AppCons
 
 
 
-
 module.exports = AppConstant;
 
 /***/ }),
 
 /***/ 11:
-/*!****************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/constant/UrlConstant.js ***!
-  \****************************************************************/
+/*!********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/conf/config.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * url 常量类
- * 
- * add by wuxw 2019-12-28
- */
-var constant = __webpack_require__(/*! ../constant/index.js */ 9);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * HC智慧家园配置文件
+                                                                                                      * 
+                                                                                                      * 本项目只有这里修改相应配置信息，如果不是二次开发 请不要修改其他文件内容
+                                                                                                      * 
+                                                                                                      * @website http://www.homecommunity.cn/
+                                                                                                      * @author 吴学文
+                                                                                                      * @QQ 928255095
+                                                                                                      */
 
-// 服务器域名
+
+
+
+
+
+
+//服务器域名 小程序 或者 app 时 后端地址
 var baseUrl = 'https://app.demo.winqi.cn/';
-//const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-//const baseUrl = 'https://app.demo.winqi.cn/';
 
 
-var wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
+//默认的小区ID和名称，用户还没有登录时显示的小区信息
+var DEFAULT_COMMUNITY_ID = "7020181217000001"; //HC测试小区id  用于没有登录时展示相关信息
+var DEFAULT_COMMUNITY_NAME = "丰仪家园";
 
+// 微信appId
+var wAppId = "wx43458162e3c31d92"; //微信AppId
+
+var logLevel = "DEBUG"; // 日志级别
+var _default =
+{
+  baseUrl: baseUrl,
+  DEFAULT_COMMUNITY_ID: DEFAULT_COMMUNITY_ID,
+  DEFAULT_COMMUNITY_NAME: DEFAULT_COMMUNITY_NAME,
+  wAppId: wAppId,
+  logLevel: logLevel };exports.default = _default;
+
+/***/ }),
+
+/***/ 12:
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/UrlConstant.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                  * url 常量类
+                                                                                                                                                                  * 
+                                                                                                                                                                  * add by wuxw 2019-12-28
+                                                                                                                                                                  */var constant = __webpack_require__(/*! ../constant/index.js */ 9);var baseUrl = _config.default.baseUrl;var wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 var loginOwnerByKey = baseUrl + "app/loginOwnerByKey"; // 根据临时秘钥登录
 
 var loginUrl = baseUrl + 'app/loginWx';
@@ -1843,9 +1887,7 @@ module.exports = {
   deleteOwnerRepair: deleteOwnerRepair,
   repairDispatch: repairDispatch,
   appraiseRepair: appraiseRepair,
-
   listFeeByAttr: listFeeByAttr,
-
   listWorkflowAuditInfo: listWorkflowAuditInfo,
   auditComplaint: auditComplaint,
   ownerRegisterWxPhoto: ownerRegisterWxPhoto,
@@ -1854,19 +1896,21 @@ module.exports = {
 
 /***/ }),
 
-/***/ 12:
-/*!********************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/constant/MappingConstant.js ***!
-  \********************************************************************/
+/***/ 13:
+/*!*********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/MappingConstant.js ***!
+  \*********************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
-                                                                                                                                                                                                                                                                                                                                                                 * 编码映射常量类
-                                                                                                                                                                                                                                                                                                                                                                 * 
-                                                                                                                                                                                                                                                                                                                                                                 * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                 */var
-MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this, MappingConstant);};_defineProperty(MappingConstant, "LOGIN_FLAG",
+"use strict";
+
+
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var
+MappingConstant = function MappingConstant() {_classCallCheck(this, MappingConstant);};_defineProperty(MappingConstant, "LOGIN_FLAG",
 'loginFlag');_defineProperty(MappingConstant, "TOKEN",
 
 "token");_defineProperty(MappingConstant, "OWNER_KEY",
@@ -1885,7 +1929,8 @@ MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this,
 
 "openId");_defineProperty(MappingConstant, "HC_TEST_COMMUNITY_ID",
 
-"7020181217000001");_defineProperty(MappingConstant, "W_APP_ID",
+_config.default.DEFAULT_COMMUNITY_ID);_defineProperty(MappingConstant, "HC_TEST_COMMUNITY_NAME",
+_config.default.DEFAULT_COMMUNITY_NAME);_defineProperty(MappingConstant, "W_APP_ID",
 
 "wAppId");
 
@@ -1896,30 +1941,95 @@ module.exports = MappingConstant;
 
 /***/ }),
 
-/***/ 13:
-/*!*******************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/utils/index.js ***!
-  \*******************************************************/
+/***/ 14:
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/core/vcRoute.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * 工具类整合类
- */
-var coreUtil = __webpack_require__(/*! ./CoreUtil.js */ 14);
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navigateTo = navigateTo;
 
-var dateUtil = __webpack_require__(/*! ./DateUtil.js */ 15);
 
-module.exports = {
-  core: coreUtil,
-  date: dateUtil };
+
+
+
+var _url2 = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 36));
+
+var _LogUtil = __webpack_require__(/*! ../utils/LogUtil.js */ 42);
+
+var _Java110Auth = __webpack_require__(/*! ../auth/Java110Auth.js */ 37);
+
+var _H5Login = __webpack_require__(/*! ../auth/H5Login.js */ 38);
+
+
+
+var _MpWeixinLogin = __webpack_require__(/*! ../auth/MpWeixinLogin.js */ 39);
+
+
+
+var _AppLogin = __webpack_require__(/*! ../auth/AppLogin.js */ 41);
+
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/MappingConstant.js */ 13));
+
+var _StorageUtil = __webpack_require__(/*! ../utils/StorageUtil.js */ 557);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                     * 路由处理文件
+                                                                                                                                                     * 
+                                                                                                                                                     * add by 吴学文 QQ 928255095
+                                                                                                                                                     */ /*
+                                                                                                                                                        * 跳转功能封装
+                                                                                                                                                         * @param {Object} _param 跳转入参
+                                                                                                                                                         */function navigateTo(_param) {var _url = _param.url;
+  var _tempUrl = _url.indexOf('?') > 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+  //是否需要登录
+  _url2.default.NEED_NOT_LOGIN_PAGE.forEach(function (item) {
+    if (item == _tempUrl) {
+      uni.navigateTo(_param);
+      return;
+    }
+  });
+  (0, _LogUtil.debug)('vcRoute', 'navigateTo', _param);
+  //校验是否登录，如果没有登录跳转至温馨提示页面
+  (0, _Java110Auth.checkSession)().then(function () {
+    //有回话 跳转至相应页面
+    uni.navigateTo(_param);
+  }, function (error) {//回话过期
+
+
+
+
+
+    //小程序登录
+
+    (0, _MpWeixinLogin.doLogin)();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
-/***/ 14:
-/*!**********************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/utils/CoreUtil.js ***!
-  \**********************************************************/
+/***/ 15:
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/CoreUtil.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1968,71 +2078,29 @@ module.exports = CoreUtil;
 
 /***/ }),
 
-/***/ 15:
-/*!**********************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/utils/DateUtil.js ***!
-  \**********************************************************/
+/***/ 16:
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/DateUtil.js ***!
+  \***********************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.formatTimeNow = formatTimeNow;exports.formatTime = formatTime;exports.formatDate = formatDate;exports.getDate = getDate;exports.dateTimeStringToDateString = dateTimeStringToDateString;exports.formatNumber = formatNumber;exports.getDateYYYYMMDDHHMISS = getDateYYYYMMDDHHMISS;exports.addYear = addYear;exports.addMonth = addMonth;exports.addDay = addDay;exports.addHour = addHour;exports.addMinutes = addMinutes;exports.addSeconds = addSeconds; /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 规范编程
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-27
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
 /**
- * 时间工具类，访问通过Java110Context 去访问，请不要直接引入该文件
- * 规范编程
- * 
- * add by wuxw 2019-12-27
- */
-
-/**
-     * @desc: 格式化时间
-     * @return: eg: '2018/04/09 21:31:00'
-     * @param {Date对象} date 
-     */
-var formatTime = function formatTime(date) {
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
-  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
-};
-/**
-    * @desc: 格式化日期
-    * @return: eg: '2018/04/09 21:31:00'
-    * @param {Date对象} date 
-    */
-
-
-var formatDate = function formatDate(date) {
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
-  return [year, month, day].map(formatNumber).join('-');
-}; //字符串转日期格式，strDate要转为日期格式的字符串 
-
-
-var getDate = function getDate(strDate) {
-  var st = strDate;
-  var a = st.split(" "); //这个根据你的字符串决定，如果中间为T则改T
-
-  var b = a[0].split("-");
-  var c = a[1].split(":");
-  var date = new Date(b[0], b[1], b[2], c[0], c[1], c[2]);
-  return date;
-};
-/**
-    * @desc: 格式化数字
-    * @return: n > 10 [eg: 12] => 12 | n < 10 [eg: 3] => '03'
-    * @param {*} n 
-    */
-
-
-var formatNumber = function formatNumber(n) {
-  n = n.toString();
-  return n[1] ? n : '0' + n;
-};
-
-var getDateYYYYMMDDHHMISS = function getDateYYYYMMDDHHMISS() {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * 将时间转换为 字符串
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @desc: 格式化时间
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @return: eg: '2018/04/09 21:31:00'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @param {Date对象} date 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */
+function formatTimeNow() {
   var date = new Date();
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
@@ -2040,186 +2108,205 @@ var getDateYYYYMMDDHHMISS = function getDateYYYYMMDDHHMISS() {
   var hour = date.getHours();
   var minute = date.getMinutes();
   var second = date.getSeconds();
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
 
+/**
+   * 
+   * 将时间转换为 字符串
+   * @desc: 格式化时间
+   * @return: eg: '2018/04/09 21:31:00'
+   * @param {Date对象} date 
+   */
+function formatTime(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
+/**
+   * 将日期转换为 字符串
+   * @desc: 格式化日期
+   * @return: eg: '2018/04/09 21:31:00'
+   * @param {Date对象} date 
+   */
+function formatDate(date) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  return [year, month, day].map(formatNumber).join('/');
+}; //字符串转日期格式，strDate要转为日期格式的字符串 
+
+
+function getDate(strDate) {
+  var st = strDate;
+  var a = st.split(" "); //这个根据你的字符串决定，如果中间为T则改T
+  var b = a[0].split("-");
+  var c = a[1].split(":");
+  var date = new Date(b[0], b[1], b[2], c[0], c[1], c[2]);
+  return date;
+};
+
+/**
+    * @description 将时间字符串 转为日期字符串 
+    * @param {String} _dateTimeString 时间字符串 YYYY-MM-DD hh:mi:ss
+    * @return {String} _value 日期字符串 YYYY/MM/DD
+    */
+function dateTimeStringToDateString(_dateTimeString) {
+  var _value = _dateTimeString.replace(/\-/g, "/");
+  var _tmpValue = new Date(_value);
+  return formatDate(_tmpValue);
+}
+
+/**
+   * @desc: 格式化数字
+   * @return: n > 10 [eg: 12] => 12 | n < 10 [eg: 3] => '03'
+   * @param {*} n 
+   */
+function formatNumber(n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+};
+
+/**
+    * @description  查询当前时间YYYYMMDDHHMISS字符串
+    * @return {YYYYMMDDHHMISS} 返回当前时间YYYYMMDDHHMISS字符串
+    * @param {}   
+    */
+function getDateYYYYMMDDHHMISS() {
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
   if (month < 10) {
     month = '0' + month;
   }
-
   if (day < 10) {
     day = '0' + day;
   }
-
   if (hour < 10) {
     hour = '0' + hour;
   }
-
   if (minute < 10) {
     minute = '0' + minute;
   }
-
   if (second < 10) {
     second = '0' + second;
   }
-
   return year + "" + month + "" + day + "" + hour + "" + minute + "" + second;
 };
 
-var addYear = function addYear(_date, _year) {
+/**
+    * @description 当前时间加 指定年
+    * @param {Object} _date 指定时间
+    * @param {Object} _year 指定年
+    * @return {Date} 返回新的日期
+    */
+function addYear(_date, _year) {
   var year = _date.getFullYear() + _year; //获取当前年份
-
-
   var mon = _date.getMonth(); //获取当前月份
-
-
   var da = _date.getDate(); //获取当前日
-
-
   var h = _date.getHours(); //获取小时
-
-
   var m = _date.getMinutes(); //获取分钟
-
-
   var s = _date.getSeconds(); //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
 };
 
-var addMonth = function addMonth(_date, _month) {
+/**
+    * @description 当前时间加指定月
+    * @param {Object} _date 指定日期
+    * @param {Object} _month 指定月
+    * @return {Date} 返回新的日期
+    */
+function addMonth(_date, _month) {
   var year = _date.getFullYear(); //获取当前年份
-
-
   var mon = _date.getMonth() + _month; //获取当前月份
-
-
   var da = _date.getDate(); //获取当前日
-
-
   var h = _date.getHours(); //获取小时
-
-
   var m = _date.getMinutes(); //获取分钟
-
-
   var s = _date.getSeconds(); //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
 };
-
-var addDay = function addDay(_date, _day) {
+/**
+    * @description 指定时间加入指定日
+    * @param {Object} _date 指定时间
+    * @param {Object} _day 指定日
+    * @return {Date} 返回新的日期
+    */
+function addDay(_date, _day) {
   var year = _date.getFullYear(); //获取当前年份
-
-
   var mon = _date.getMonth(); //获取当前月份
-
-
   var da = _date.getDate() + _day; //获取当前日
-
-
   var h = _date.getHours(); //获取小时
-
-
   var m = _date.getMinutes(); //获取分钟
-
-
   var s = _date.getSeconds(); //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
 };
 
-var addHour = function addHour(_date, _hour) {
+/**
+    * @description 指定时间上加上指定小时
+    * @param {Object} _date 指定日期
+    * @param {Object} _hour 指定小时
+    * @return {Date} 返回新的日期
+    */
+function addHour(_date, _hour) {
   var year = _date.getFullYear(); //获取当前年份
-
-
   var mon = _date.getMonth(); //获取当前月份
-
-
   var da = _date.getDate(); //获取当前日
-
-
   var h = _date.getHours() + _hour; //获取小时
-
-
   var m = _date.getMinutes(); //获取分钟
-
-
   var s = _date.getSeconds(); //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
 };
-
-var addMinutes = function addMinutes(_date, _minute) {
+/**
+    * @description 指定时间上加上指定分钟
+    * @param {Object} _date 指定日期
+    * @param {Object} _minute 指定分钟
+    * @return {Date} 返回新的日期
+    */
+function addMinutes(_date, _minute) {
   var year = _date.getFullYear(); //获取当前年份
-
-
   var mon = _date.getMonth(); //获取当前月份
-
-
   var da = _date.getDate(); //获取当前日
-
-
   var h = _date.getHours(); //获取小时
-
-
   var m = _date.getMinutes() + _minute; //获取分钟
-
-
   var s = _date.getSeconds(); //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
 };
-
-var addSeconds = function addSeconds(_date, _second) {
+/**
+    * @description 指定时间上加上指定秒
+    * @param {Object} _date 指定日期
+    * @param {Object} _second 指定秒
+    * @return {Date} 返回新的日期
+    */
+function addSeconds(_date, _second) {
   var year = _date.getFullYear(); //获取当前年份
-
-
   var mon = _date.getMonth(); //获取当前月份
-
-
   var da = _date.getDate(); //获取当前日
-
-
   var h = _date.getHours(); //获取小时
-
-
   var m = _date.getMinutes(); //获取分钟
-
-
   var s = _date.getSeconds() + _second; //获取秒
-
-
   var newDate = new Date(year, mon, da, h, m, s);
   return newDate;
-};
-
-module.exports = {
-  formatTime: formatTime,
-  getDateYYYYMMDDHHMISS: getDateYYYYMMDDHHMISS,
-  addYear: addYear,
-  addMonth: addMonth,
-  addDay: addDay,
-  addHour: addHour,
-  addMinutes: addMinutes,
-  addSeconds: addSeconds,
-  getDate: getDate,
-  formatDate: formatDate };
+}
 
 /***/ }),
 
-/***/ 16:
-/*!*********************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/index.js ***!
-  \*********************************************************/
+/***/ 17:
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2230,17 +2317,17 @@ module.exports = {
  * 
  */
 //登录工厂类
-var loginFactory = __webpack_require__(/*! ./LoginFactory.js */ 17);
+var loginFactory = __webpack_require__(/*! ./LoginFactory.js */ 18);
 
-var userFactory = __webpack_require__(/*! ./UserFactory.js */ 18);
+var userFactory = __webpack_require__(/*! ./UserFactory.js */ 19);
 
-var fileFactory = __webpack_require__(/*! ./FileFactory.js */ 20);
+var fileFactory = __webpack_require__(/*! ./FileFactory.js */ 21);
 
-var coreFactory = __webpack_require__(/*! ./CoreFactory.js */ 21);
+var coreFactory = __webpack_require__(/*! ./CoreFactory.js */ 22);
 
-var httpFactory = __webpack_require__(/*! ./HttpFactory.js */ 22);
+var httpFactory = __webpack_require__(/*! ./HttpFactory.js */ 23);
 
-var base64Factory = __webpack_require__(/*! ./Base64Factory.js */ 23);
+var base64Factory = __webpack_require__(/*! ./Base64Factory.js */ 24);
 
 module.exports = {
   login: loginFactory,
@@ -2252,32 +2339,35 @@ module.exports = {
 
 /***/ }),
 
-/***/ 17:
-/*!****************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/LoginFactory.js ***!
-  \****************************************************************/
+/***/ 18:
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/LoginFactory.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(uni) {function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 登录相关 代码封装
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
 
-/**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * 登录工厂类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */
-var util = __webpack_require__(/*! ../utils/index.js */ 13);
+
+
+
+
+
+
+
+
+
+var _SeqUtil = __webpack_require__(/*! ../utils/SeqUtil.js */ 560);
+var _DateUtil = __webpack_require__(/*! ../utils/DateUtil.js */ 16);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
 
 var constant = __webpack_require__(/*! ../constant/index.js */ 9);
 
 var context = __webpack_require__(/*! ../context/Java110Context.js */ 8);var
 
-LoginFactory = /*#__PURE__*/function () {"use strict";
+LoginFactory = /*#__PURE__*/function () {
   function LoginFactory() {_classCallCheck(this, LoginFactory);
-    this.coreUtil = util.core;
+
   } // 检查本地 storage 中是否有登录态标识
   _createClass(LoginFactory, [{ key: "getHeaders", value: function getHeaders()
     {
@@ -2285,8 +2375,8 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
 
       return {
         "app-id": constant.app.appId,
-        "transaction-id": util.core.wxuuid(),
-        "req-time": util.date.getDateYYYYMMDDHHMISS(),
+        "transaction-id": (0, _SeqUtil.uuid)(),
+        "req-time": (0, _DateUtil.getDateYYYYMMDDHHMISS)(),
         "sign": '1234567',
         "user-id": '-1',
         "cookie": '_java110_token_=' + wx.getStorageSync('token'),
@@ -2412,13 +2502,12 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
             that.requsetHcServerToLogin(loginRes, callback);
           } else {
             // 获取 code 失败
-            that.coreUtil.showInfo('登录失败');
             console.log('调用wx.login获取code失败');
           }
         },
         fail: function fail(error) {
           // 调用 wx.login 接口失败
-          that.coreUtil.showInfo('接口调用失败' + error);
+
           console.log(error);
         } });
 
@@ -2534,7 +2623,6 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
             wx.setStorageSync(constant.mapping.TOKEN, res.token);
             callback();
           } else {
-            util.core.showInfo(res.errmsg);
           }
         },
         fail: function fail(error) {
@@ -2545,7 +2633,7 @@ LoginFactory = /*#__PURE__*/function () {"use strict";
 
             return;
           }
-          util.core.showInfo('调用接口失败');
+
           console.log(error);
         } });
 
@@ -2614,10 +2702,10 @@ module.exports = new LoginFactory();
 
 /***/ }),
 
-/***/ 18:
-/*!***************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/UserFactory.js ***!
-  \***************************************************************/
+/***/ 19:
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/UserFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2626,7 +2714,7 @@ function _classCallCheck(instance, Constructor) {if (!(instance instanceof Const
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * add by wuxw 2019-12-28
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-var QQMapWX = __webpack_require__(/*! ../lib/qqmap-wx-jssdk.min.js */ 19);
+var QQMapWX = __webpack_require__(/*! ../lib/qqmap-wx-jssdk.min.js */ 20);
 
 var qqmapsdk;var
 
@@ -2666,17 +2754,6 @@ UserFactory = /*#__PURE__*/function () {"use strict";
 
 
 module.exports = new UserFactory();
-
-/***/ }),
-
-/***/ 19:
-/*!******************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var ERROR_CONF = { KEY_ERR: 311, KEY_ERR_MSG: 'key格式错误', PARAM_ERR: 310, PARAM_ERR_MSG: '请求参数信息有误', SYSTEM_ERR: 600, SYSTEM_ERR_MSG: '系统错误', WX_ERR_CODE: 1000, WX_OK_CODE: 200 };var BASE_URL = 'https://apis.map.qq.com/ws/';var URL_SEARCH = BASE_URL + 'place/v1/search';var URL_SUGGESTION = BASE_URL + 'place/v1/suggestion';var URL_GET_GEOCODER = BASE_URL + 'geocoder/v1/';var URL_CITY_LIST = BASE_URL + 'district/v1/list';var URL_AREA_LIST = BASE_URL + 'district/v1/getchildren';var URL_DISTANCE = BASE_URL + 'distance/v1/';var URL_DIRECTION = BASE_URL + 'direction/v1/';var MODE = { driving: 'driving', transit: 'transit' };var EARTH_RADIUS = 6378136.49;var Utils = { safeAdd: function safeAdd(x, y) {var lsw = (x & 0xffff) + (y & 0xffff);var msw = (x >> 16) + (y >> 16) + (lsw >> 16);return msw << 16 | lsw & 0xffff;}, bitRotateLeft: function bitRotateLeft(num, cnt) {return num << cnt | num >>> 32 - cnt;}, md5cmn: function md5cmn(q, a, b, x, s, t) {return this.safeAdd(this.bitRotateLeft(this.safeAdd(this.safeAdd(a, q), this.safeAdd(x, t)), s), b);}, md5ff: function md5ff(a, b, c, d, x, s, t) {return this.md5cmn(b & c | ~b & d, a, b, x, s, t);}, md5gg: function md5gg(a, b, c, d, x, s, t) {return this.md5cmn(b & d | c & ~d, a, b, x, s, t);}, md5hh: function md5hh(a, b, c, d, x, s, t) {return this.md5cmn(b ^ c ^ d, a, b, x, s, t);}, md5ii: function md5ii(a, b, c, d, x, s, t) {return this.md5cmn(c ^ (b | ~d), a, b, x, s, t);}, binlMD5: function binlMD5(x, len) {x[len >> 5] |= 0x80 << len % 32;x[(len + 64 >>> 9 << 4) + 14] = len;var i;var olda;var oldb;var oldc;var oldd;var a = 1732584193;var b = -271733879;var c = -1732584194;var d = 271733878;for (i = 0; i < x.length; i += 16) {olda = a;oldb = b;oldc = c;oldd = d;a = this.md5ff(a, b, c, d, x[i], 7, -680876936);d = this.md5ff(d, a, b, c, x[i + 1], 12, -389564586);c = this.md5ff(c, d, a, b, x[i + 2], 17, 606105819);b = this.md5ff(b, c, d, a, x[i + 3], 22, -1044525330);a = this.md5ff(a, b, c, d, x[i + 4], 7, -176418897);d = this.md5ff(d, a, b, c, x[i + 5], 12, 1200080426);c = this.md5ff(c, d, a, b, x[i + 6], 17, -1473231341);b = this.md5ff(b, c, d, a, x[i + 7], 22, -45705983);a = this.md5ff(a, b, c, d, x[i + 8], 7, 1770035416);d = this.md5ff(d, a, b, c, x[i + 9], 12, -1958414417);c = this.md5ff(c, d, a, b, x[i + 10], 17, -42063);b = this.md5ff(b, c, d, a, x[i + 11], 22, -1990404162);a = this.md5ff(a, b, c, d, x[i + 12], 7, 1804603682);d = this.md5ff(d, a, b, c, x[i + 13], 12, -40341101);c = this.md5ff(c, d, a, b, x[i + 14], 17, -1502002290);b = this.md5ff(b, c, d, a, x[i + 15], 22, 1236535329);a = this.md5gg(a, b, c, d, x[i + 1], 5, -165796510);d = this.md5gg(d, a, b, c, x[i + 6], 9, -1069501632);c = this.md5gg(c, d, a, b, x[i + 11], 14, 643717713);b = this.md5gg(b, c, d, a, x[i], 20, -373897302);a = this.md5gg(a, b, c, d, x[i + 5], 5, -701558691);d = this.md5gg(d, a, b, c, x[i + 10], 9, 38016083);c = this.md5gg(c, d, a, b, x[i + 15], 14, -660478335);b = this.md5gg(b, c, d, a, x[i + 4], 20, -405537848);a = this.md5gg(a, b, c, d, x[i + 9], 5, 568446438);d = this.md5gg(d, a, b, c, x[i + 14], 9, -1019803690);c = this.md5gg(c, d, a, b, x[i + 3], 14, -187363961);b = this.md5gg(b, c, d, a, x[i + 8], 20, 1163531501);a = this.md5gg(a, b, c, d, x[i + 13], 5, -1444681467);d = this.md5gg(d, a, b, c, x[i + 2], 9, -51403784);c = this.md5gg(c, d, a, b, x[i + 7], 14, 1735328473);b = this.md5gg(b, c, d, a, x[i + 12], 20, -1926607734);a = this.md5hh(a, b, c, d, x[i + 5], 4, -378558);d = this.md5hh(d, a, b, c, x[i + 8], 11, -2022574463);c = this.md5hh(c, d, a, b, x[i + 11], 16, 1839030562);b = this.md5hh(b, c, d, a, x[i + 14], 23, -35309556);a = this.md5hh(a, b, c, d, x[i + 1], 4, -1530992060);d = this.md5hh(d, a, b, c, x[i + 4], 11, 1272893353);c = this.md5hh(c, d, a, b, x[i + 7], 16, -155497632);b = this.md5hh(b, c, d, a, x[i + 10], 23, -1094730640);a = this.md5hh(a, b, c, d, x[i + 13], 4, 681279174);d = this.md5hh(d, a, b, c, x[i], 11, -358537222);c = this.md5hh(c, d, a, b, x[i + 3], 16, -722521979);b = this.md5hh(b, c, d, a, x[i + 6], 23, 76029189);a = this.md5hh(a, b, c, d, x[i + 9], 4, -640364487);d = this.md5hh(d, a, b, c, x[i + 12], 11, -421815835);c = this.md5hh(c, d, a, b, x[i + 15], 16, 530742520);b = this.md5hh(b, c, d, a, x[i + 2], 23, -995338651);a = this.md5ii(a, b, c, d, x[i], 6, -198630844);d = this.md5ii(d, a, b, c, x[i + 7], 10, 1126891415);c = this.md5ii(c, d, a, b, x[i + 14], 15, -1416354905);b = this.md5ii(b, c, d, a, x[i + 5], 21, -57434055);a = this.md5ii(a, b, c, d, x[i + 12], 6, 1700485571);d = this.md5ii(d, a, b, c, x[i + 3], 10, -1894986606);c = this.md5ii(c, d, a, b, x[i + 10], 15, -1051523);b = this.md5ii(b, c, d, a, x[i + 1], 21, -2054922799);a = this.md5ii(a, b, c, d, x[i + 8], 6, 1873313359);d = this.md5ii(d, a, b, c, x[i + 15], 10, -30611744);c = this.md5ii(c, d, a, b, x[i + 6], 15, -1560198380);b = this.md5ii(b, c, d, a, x[i + 13], 21, 1309151649);a = this.md5ii(a, b, c, d, x[i + 4], 6, -145523070);d = this.md5ii(d, a, b, c, x[i + 11], 10, -1120210379);c = this.md5ii(c, d, a, b, x[i + 2], 15, 718787259);b = this.md5ii(b, c, d, a, x[i + 9], 21, -343485551);a = this.safeAdd(a, olda);b = this.safeAdd(b, oldb);c = this.safeAdd(c, oldc);d = this.safeAdd(d, oldd);}return [a, b, c, d];}, binl2rstr: function binl2rstr(input) {var i;var output = '';var length32 = input.length * 32;for (i = 0; i < length32; i += 8) {output += String.fromCharCode(input[i >> 5] >>> i % 32 & 0xff);}return output;}, rstr2binl: function rstr2binl(input) {var i;var output = [];output[(input.length >> 2) - 1] = undefined;for (i = 0; i < output.length; i += 1) {output[i] = 0;}var length8 = input.length * 8;for (i = 0; i < length8; i += 8) {output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;}return output;}, rstrMD5: function rstrMD5(s) {return this.binl2rstr(this.binlMD5(this.rstr2binl(s), s.length * 8));}, rstrHMACMD5: function rstrHMACMD5(key, data) {var i;var bkey = this.rstr2binl(key);var ipad = [];var opad = [];var hash;ipad[15] = opad[15] = undefined;if (bkey.length > 16) {bkey = this.binlMD5(bkey, key.length * 8);}for (i = 0; i < 16; i += 1) {ipad[i] = bkey[i] ^ 0x36363636;opad[i] = bkey[i] ^ 0x5c5c5c5c;}hash = this.binlMD5(ipad.concat(this.rstr2binl(data)), 512 + data.length * 8);return this.binl2rstr(this.binlMD5(opad.concat(hash), 512 + 128));}, rstr2hex: function rstr2hex(input) {var hexTab = '0123456789abcdef';var output = '';var x;var i;for (i = 0; i < input.length; i += 1) {x = input.charCodeAt(i);output += hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f);}return output;}, str2rstrUTF8: function str2rstrUTF8(input) {return unescape(encodeURIComponent(input));}, rawMD5: function rawMD5(s) {return this.rstrMD5(this.str2rstrUTF8(s));}, hexMD5: function hexMD5(s) {return this.rstr2hex(this.rawMD5(s));}, rawHMACMD5: function rawHMACMD5(k, d) {return this.rstrHMACMD5(this.str2rstrUTF8(k), str2rstrUTF8(d));}, hexHMACMD5: function hexHMACMD5(k, d) {return this.rstr2hex(this.rawHMACMD5(k, d));}, md5: function md5(string, key, raw) {if (!key) {if (!raw) {return this.hexMD5(string);}return this.rawMD5(string);}if (!raw) {return this.hexHMACMD5(key, string);}return this.rawHMACMD5(key, string);}, getSig: function getSig(requestParam, sk, feature, mode) {var sig = null;var requestArr = [];Object.keys(requestParam).sort().forEach(function (key) {requestArr.push(key + '=' + requestParam[key]);});if (feature == 'search') {sig = '/ws/place/v1/search?' + requestArr.join('&') + sk;}if (feature == 'suggest') {sig = '/ws/place/v1/suggestion?' + requestArr.join('&') + sk;}if (feature == 'reverseGeocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'geocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'getCityList') {sig = '/ws/district/v1/list?' + requestArr.join('&') + sk;}if (feature == 'getDistrictByCityId') {sig = '/ws/district/v1/getchildren?' + requestArr.join('&') + sk;}if (feature == 'calculateDistance') {sig = '/ws/distance/v1/?' + requestArr.join('&') + sk;}if (feature == 'direction') {sig = '/ws/direction/v1/' + mode + '?' + requestArr.join('&') + sk;}sig = this.md5(sig);return sig;}, location2query: function location2query(data) {if (typeof data == 'string') {return data;}var query = '';for (var i = 0; i < data.length; i++) {var d = data[i];if (!!query) {query += ';';}if (d.location) {query = query + d.location.lat + ',' + d.location.lng;}if (d.latitude && d.longitude) {query = query + d.latitude + ',' + d.longitude;}}return query;}, rad: function rad(d) {return d * Math.PI / 180.0;}, getEndLocation: function getEndLocation(location) {var to = location.split(';');var endLocation = [];for (var i = 0; i < to.length; i++) {endLocation.push({ lat: parseFloat(to[i].split(',')[0]), lng: parseFloat(to[i].split(',')[1]) });}return endLocation;}, getDistance: function getDistance(latFrom, lngFrom, latTo, lngTo) {var radLatFrom = this.rad(latFrom);var radLatTo = this.rad(latTo);var a = radLatFrom - radLatTo;var b = this.rad(lngFrom) - this.rad(lngTo);var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));distance = distance * EARTH_RADIUS;distance = Math.round(distance * 10000) / 10000;return parseFloat(distance.toFixed(0));}, getWXLocation: function getWXLocation(success, fail, complete) {wx.getLocation({ type: 'gcj02', success: success, fail: fail, complete: complete });}, getLocationParam: function getLocationParam(location) {if (typeof location == 'string') {var locationArr = location.split(',');if (locationArr.length === 2) {location = { latitude: location.split(',')[0], longitude: location.split(',')[1] };} else {location = {};}}return location;}, polyfillParam: function polyfillParam(param) {param.success = param.success || function () {};param.fail = param.fail || function () {};param.complete = param.complete || function () {};}, checkParamKeyEmpty: function checkParamKeyEmpty(param, key) {if (!param[key]) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + key + '参数格式有误');param.fail(errconf);param.complete(errconf);return true;}return false;}, checkKeyword: function checkKeyword(param) {return !this.checkParamKeyEmpty(param, 'keyword');}, checkLocation: function checkLocation(param) {var location = this.getLocationParam(param.location);if (!location || !location.latitude || !location.longitude) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + ' location参数格式有误');param.fail(errconf);param.complete(errconf);return false;}return true;}, buildErrorConfig: function buildErrorConfig(errCode, errMsg) {return { status: errCode, message: errMsg };}, handleData: function handleData(param, data, feature) {if (feature == 'search') {var searchResult = data.data;var searchSimplify = [];for (var i = 0; i < searchResult.length; i++) {searchSimplify.push({ id: searchResult[i].id || null, title: searchResult[i].title || null, latitude: searchResult[i].location && searchResult[i].location.lat || null, longitude: searchResult[i].location && searchResult[i].location.lng || null, address: searchResult[i].address || null, category: searchResult[i].category || null, tel: searchResult[i].tel || null, adcode: searchResult[i].ad_info && searchResult[i].ad_info.adcode || null, city: searchResult[i].ad_info && searchResult[i].ad_info.city || null, district: searchResult[i].ad_info && searchResult[i].ad_info.district || null, province: searchResult[i].ad_info && searchResult[i].ad_info.province || null });}param.success(data, { searchResult: searchResult, searchSimplify: searchSimplify });} else if (feature == 'suggest') {var suggestResult = data.data;var suggestSimplify = [];for (var i = 0; i < suggestResult.length; i++) {suggestSimplify.push({ adcode: suggestResult[i].adcode || null, address: suggestResult[i].address || null, category: suggestResult[i].category || null, city: suggestResult[i].city || null, district: suggestResult[i].district || null, id: suggestResult[i].id || null, latitude: suggestResult[i].location && suggestResult[i].location.lat || null, longitude: suggestResult[i].location && suggestResult[i].location.lng || null, province: suggestResult[i].province || null, title: suggestResult[i].title || null, type: suggestResult[i].type || null });}param.success(data, { suggestResult: suggestResult, suggestSimplify: suggestSimplify });} else if (feature == 'reverseGeocoder') {var reverseGeocoderResult = data.result;var reverseGeocoderSimplify = { address: reverseGeocoderResult.address || null, latitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lat || null, longitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lng || null, adcode: reverseGeocoderResult.ad_info && reverseGeocoderResult.ad_info.adcode || null, city: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.city || null, district: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.district || null, nation: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.nation || null, province: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.province || null, street: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street || null, street_number: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street_number || null, recommend: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.recommend || null, rough: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.rough || null };if (reverseGeocoderResult.pois) {var pois = reverseGeocoderResult.pois;var poisSimplify = [];for (var i = 0; i < pois.length; i++) {poisSimplify.push({ id: pois[i].id || null, title: pois[i].title || null, latitude: pois[i].location && pois[i].location.lat || null, longitude: pois[i].location && pois[i].location.lng || null, address: pois[i].address || null, category: pois[i].category || null, adcode: pois[i].ad_info && pois[i].ad_info.adcode || null, city: pois[i].ad_info && pois[i].ad_info.city || null, district: pois[i].ad_info && pois[i].ad_info.district || null, province: pois[i].ad_info && pois[i].ad_info.province || null });}param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify, pois: pois, poisSimplify: poisSimplify });} else {param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify });}} else if (feature == 'geocoder') {var geocoderResult = data.result;var geocoderSimplify = { title: geocoderResult.title || null, latitude: geocoderResult.location && geocoderResult.location.lat || null, longitude: geocoderResult.location && geocoderResult.location.lng || null, adcode: geocoderResult.ad_info && geocoderResult.ad_info.adcode || null, province: geocoderResult.address_components && geocoderResult.address_components.province || null, city: geocoderResult.address_components && geocoderResult.address_components.city || null, district: geocoderResult.address_components && geocoderResult.address_components.district || null, street: geocoderResult.address_components && geocoderResult.address_components.street || null, street_number: geocoderResult.address_components && geocoderResult.address_components.street_number || null, level: geocoderResult.level || null };param.success(data, { geocoderResult: geocoderResult, geocoderSimplify: geocoderSimplify });} else if (feature == 'getCityList') {var provinceResult = data.result[0];var cityResult = data.result[1];var districtResult = data.result[2];param.success(data, { provinceResult: provinceResult, cityResult: cityResult, districtResult: districtResult });} else if (feature == 'getDistrictByCityId') {var districtByCity = data.result[0];param.success(data, districtByCity);} else if (feature == 'calculateDistance') {var calculateDistanceResult = data.result.elements;var distance = [];for (var i = 0; i < calculateDistanceResult.length; i++) {distance.push(calculateDistanceResult[i].distance);}param.success(data, { calculateDistanceResult: calculateDistanceResult, distance: distance });} else if (feature == 'direction') {var direction = data.result.routes;param.success(data, direction);} else {param.success(data);}}, buildWxRequestConfig: function buildWxRequestConfig(param, options, feature) {var that = this;options.header = { "content-type": "application/json" };options.method = 'GET';options.success = function (res) {var data = res.data;if (data.status === 0) {that.handleData(param, data, feature);} else {param.fail(data);}};options.fail = function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};options.complete = function (res) {var statusCode = +res.statusCode;switch (statusCode) {case ERROR_CONF.WX_ERR_CODE:{param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));break;}case ERROR_CONF.WX_OK_CODE:{var data = res.data;if (data.status === 0) {param.complete(data);} else {param.complete(that.buildErrorConfig(data.status, data.message));}break;}default:{param.complete(that.buildErrorConfig(ERROR_CONF.SYSTEM_ERR, ERROR_CONF.SYSTEM_ERR_MSG));}}};return options;}, locationProcess: function locationProcess(param, locationsuccess, locationfail, locationcomplete) {var that = this;locationfail = locationfail || function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};locationcomplete = locationcomplete || function (res) {if (res.statusCode == ERROR_CONF.WX_ERR_CODE) {param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));}};if (!param.location) {that.getWXLocation(locationsuccess, locationfail, locationcomplete);} else if (that.checkLocation(param)) {var location = Utils.getLocationParam(param.location);locationsuccess(location);}} };var QQMapWX = /*#__PURE__*/function () {"use strict";function QQMapWX(options) {_classCallCheck(this, QQMapWX);if (!options.key) {throw Error('key值不能为空');}this.key = options.key;}_createClass(QQMapWX, [{ key: "search", value: function search(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, orderby: options.orderby || '_distance', page_size: options.page_size || 10, page_index: options.page_index || 1, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}var distance = options.distance || "1000";var auto_extend = options.auto_extend || 1;var region = null;var rectangle = null;if (options.region) {region = options.region;}if (options.rectangle) {rectangle = options.rectangle;}var locationsuccess = function locationsuccess(result) {if (region && !rectangle) {requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else if (rectangle && !region) {requestParam.boundary = "rectangle(" + rectangle + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else {requestParam.boundary = "nearby(" + result.latitude + "," + result.longitude + "," + distance + "," + auto_extend + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SEARCH, data: requestParam }, 'search'));};Utils.locationProcess(options, locationsuccess);} }, { key: "getSuggestion", value: function getSuggestion(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, region: options.region || '全国', region_fix: options.region_fix || 0, policy: options.policy || 0, page_size: options.page_size || 10, page_index: options.page_index || 1, get_subpois: options.get_subpois || 0, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}if (options.location) {var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));};Utils.locationProcess(options, locationsuccess);} else {if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));}} }, { key: "reverseGeocoder", value: function reverseGeocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { coord_type: options.coord_type || 5, get_poi: options.get_poi || 0, output: 'json', key: that.key };if (options.poi_options) {requestParam.poi_options = options.poi_options;}var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'reverseGeocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'reverseGeocoder'));};Utils.locationProcess(options, locationsuccess);} }, { key: "geocoder", value: function geocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'address')) {return;}var requestParam = { address: options.address, output: 'json', key: that.key };if (options.region) {requestParam.region = options.region;}if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'geocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'geocoder'));} }, { key: "getCityList", value: function getCityList(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getCityList');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_CITY_LIST, data: requestParam }, 'getCityList'));} }, { key: "getDistrictByCityId", value: function getDistrictByCityId(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'id')) {return;}var requestParam = { id: options.id || '', output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getDistrictByCityId');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_AREA_LIST, data: requestParam }, 'getDistrictByCityId'));} }, { key: "calculateDistance", value: function calculateDistance(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { mode: options.mode || 'walking', to: Utils.location2query(options.to), output: 'json', key: that.key };if (options.from) {options.location = options.from;}if (requestParam.mode == 'straight') {var locationsuccess = function locationsuccess(result) {var locationTo = Utils.getEndLocation(requestParam.to);var data = { message: "query ok", result: { elements: [] }, status: 0 };for (var i = 0; i < locationTo.length; i++) {data.result.elements.push({ distance: Utils.getDistance(result.latitude, result.longitude, locationTo[i].lat, locationTo[i].lng), duration: 0, from: { lat: result.latitude, lng: result.longitude }, to: { lat: locationTo[i].lat, lng: locationTo[i].lng } });}var calculateResult = data.result.elements;var distanceResult = [];for (var i = 0; i < calculateResult.length; i++) {distanceResult.push(calculateResult[i].distance);}return options.success(data, { calculateResult: calculateResult, distanceResult: distanceResult });};Utils.locationProcess(options, locationsuccess);} else {var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'calculateDistance');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_DISTANCE, data: requestParam }, 'calculateDistance'));};Utils.locationProcess(options, locationsuccess);}} }, { key: "direction", value: function direction(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { output: 'json', key: that.key };if (typeof options.to == 'string') {requestParam.to = options.to;} else {requestParam.to = options.to.latitude + ',' + options.to.longitude;}var SET_URL_DIRECTION = null;options.mode = options.mode || MODE.driving;SET_URL_DIRECTION = URL_DIRECTION + options.mode;if (options.from) {options.location = options.from;}if (options.mode == MODE.driving) {if (options.from_poi) {requestParam.from_poi = options.from_poi;}if (options.heading) {requestParam.heading = options.heading;}if (options.speed) {requestParam.speed = options.speed;}if (options.accuracy) {requestParam.accuracy = options.accuracy;}if (options.road_type) {requestParam.road_type = options.road_type;}if (options.to_poi) {requestParam.to_poi = options.to_poi;}if (options.from_track) {requestParam.from_track = options.from_track;}if (options.waypoints) {requestParam.waypoints = options.waypoints;}if (options.policy) {requestParam.policy = options.policy;}if (options.plate_number) {requestParam.plate_number = options.plate_number;}}if (options.mode == MODE.transit) {if (options.departure_time) {requestParam.departure_time = options.departure_time;}if (options.policy) {requestParam.policy = options.policy;}}var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'direction', options.mode);}wx.request(Utils.buildWxRequestConfig(options, { url: SET_URL_DIRECTION, data: requestParam }, 'direction'));};Utils.locationProcess(options, locationsuccess);} }]);return QQMapWX;}();;module.exports = QQMapWX;
 
 /***/ }),
 
@@ -8710,9 +8787,20 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!***************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/FileFactory.js ***!
-  \***************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var ERROR_CONF = { KEY_ERR: 311, KEY_ERR_MSG: 'key格式错误', PARAM_ERR: 310, PARAM_ERR_MSG: '请求参数信息有误', SYSTEM_ERR: 600, SYSTEM_ERR_MSG: '系统错误', WX_ERR_CODE: 1000, WX_OK_CODE: 200 };var BASE_URL = 'https://apis.map.qq.com/ws/';var URL_SEARCH = BASE_URL + 'place/v1/search';var URL_SUGGESTION = BASE_URL + 'place/v1/suggestion';var URL_GET_GEOCODER = BASE_URL + 'geocoder/v1/';var URL_CITY_LIST = BASE_URL + 'district/v1/list';var URL_AREA_LIST = BASE_URL + 'district/v1/getchildren';var URL_DISTANCE = BASE_URL + 'distance/v1/';var URL_DIRECTION = BASE_URL + 'direction/v1/';var MODE = { driving: 'driving', transit: 'transit' };var EARTH_RADIUS = 6378136.49;var Utils = { safeAdd: function safeAdd(x, y) {var lsw = (x & 0xffff) + (y & 0xffff);var msw = (x >> 16) + (y >> 16) + (lsw >> 16);return msw << 16 | lsw & 0xffff;}, bitRotateLeft: function bitRotateLeft(num, cnt) {return num << cnt | num >>> 32 - cnt;}, md5cmn: function md5cmn(q, a, b, x, s, t) {return this.safeAdd(this.bitRotateLeft(this.safeAdd(this.safeAdd(a, q), this.safeAdd(x, t)), s), b);}, md5ff: function md5ff(a, b, c, d, x, s, t) {return this.md5cmn(b & c | ~b & d, a, b, x, s, t);}, md5gg: function md5gg(a, b, c, d, x, s, t) {return this.md5cmn(b & d | c & ~d, a, b, x, s, t);}, md5hh: function md5hh(a, b, c, d, x, s, t) {return this.md5cmn(b ^ c ^ d, a, b, x, s, t);}, md5ii: function md5ii(a, b, c, d, x, s, t) {return this.md5cmn(c ^ (b | ~d), a, b, x, s, t);}, binlMD5: function binlMD5(x, len) {x[len >> 5] |= 0x80 << len % 32;x[(len + 64 >>> 9 << 4) + 14] = len;var i;var olda;var oldb;var oldc;var oldd;var a = 1732584193;var b = -271733879;var c = -1732584194;var d = 271733878;for (i = 0; i < x.length; i += 16) {olda = a;oldb = b;oldc = c;oldd = d;a = this.md5ff(a, b, c, d, x[i], 7, -680876936);d = this.md5ff(d, a, b, c, x[i + 1], 12, -389564586);c = this.md5ff(c, d, a, b, x[i + 2], 17, 606105819);b = this.md5ff(b, c, d, a, x[i + 3], 22, -1044525330);a = this.md5ff(a, b, c, d, x[i + 4], 7, -176418897);d = this.md5ff(d, a, b, c, x[i + 5], 12, 1200080426);c = this.md5ff(c, d, a, b, x[i + 6], 17, -1473231341);b = this.md5ff(b, c, d, a, x[i + 7], 22, -45705983);a = this.md5ff(a, b, c, d, x[i + 8], 7, 1770035416);d = this.md5ff(d, a, b, c, x[i + 9], 12, -1958414417);c = this.md5ff(c, d, a, b, x[i + 10], 17, -42063);b = this.md5ff(b, c, d, a, x[i + 11], 22, -1990404162);a = this.md5ff(a, b, c, d, x[i + 12], 7, 1804603682);d = this.md5ff(d, a, b, c, x[i + 13], 12, -40341101);c = this.md5ff(c, d, a, b, x[i + 14], 17, -1502002290);b = this.md5ff(b, c, d, a, x[i + 15], 22, 1236535329);a = this.md5gg(a, b, c, d, x[i + 1], 5, -165796510);d = this.md5gg(d, a, b, c, x[i + 6], 9, -1069501632);c = this.md5gg(c, d, a, b, x[i + 11], 14, 643717713);b = this.md5gg(b, c, d, a, x[i], 20, -373897302);a = this.md5gg(a, b, c, d, x[i + 5], 5, -701558691);d = this.md5gg(d, a, b, c, x[i + 10], 9, 38016083);c = this.md5gg(c, d, a, b, x[i + 15], 14, -660478335);b = this.md5gg(b, c, d, a, x[i + 4], 20, -405537848);a = this.md5gg(a, b, c, d, x[i + 9], 5, 568446438);d = this.md5gg(d, a, b, c, x[i + 14], 9, -1019803690);c = this.md5gg(c, d, a, b, x[i + 3], 14, -187363961);b = this.md5gg(b, c, d, a, x[i + 8], 20, 1163531501);a = this.md5gg(a, b, c, d, x[i + 13], 5, -1444681467);d = this.md5gg(d, a, b, c, x[i + 2], 9, -51403784);c = this.md5gg(c, d, a, b, x[i + 7], 14, 1735328473);b = this.md5gg(b, c, d, a, x[i + 12], 20, -1926607734);a = this.md5hh(a, b, c, d, x[i + 5], 4, -378558);d = this.md5hh(d, a, b, c, x[i + 8], 11, -2022574463);c = this.md5hh(c, d, a, b, x[i + 11], 16, 1839030562);b = this.md5hh(b, c, d, a, x[i + 14], 23, -35309556);a = this.md5hh(a, b, c, d, x[i + 1], 4, -1530992060);d = this.md5hh(d, a, b, c, x[i + 4], 11, 1272893353);c = this.md5hh(c, d, a, b, x[i + 7], 16, -155497632);b = this.md5hh(b, c, d, a, x[i + 10], 23, -1094730640);a = this.md5hh(a, b, c, d, x[i + 13], 4, 681279174);d = this.md5hh(d, a, b, c, x[i], 11, -358537222);c = this.md5hh(c, d, a, b, x[i + 3], 16, -722521979);b = this.md5hh(b, c, d, a, x[i + 6], 23, 76029189);a = this.md5hh(a, b, c, d, x[i + 9], 4, -640364487);d = this.md5hh(d, a, b, c, x[i + 12], 11, -421815835);c = this.md5hh(c, d, a, b, x[i + 15], 16, 530742520);b = this.md5hh(b, c, d, a, x[i + 2], 23, -995338651);a = this.md5ii(a, b, c, d, x[i], 6, -198630844);d = this.md5ii(d, a, b, c, x[i + 7], 10, 1126891415);c = this.md5ii(c, d, a, b, x[i + 14], 15, -1416354905);b = this.md5ii(b, c, d, a, x[i + 5], 21, -57434055);a = this.md5ii(a, b, c, d, x[i + 12], 6, 1700485571);d = this.md5ii(d, a, b, c, x[i + 3], 10, -1894986606);c = this.md5ii(c, d, a, b, x[i + 10], 15, -1051523);b = this.md5ii(b, c, d, a, x[i + 1], 21, -2054922799);a = this.md5ii(a, b, c, d, x[i + 8], 6, 1873313359);d = this.md5ii(d, a, b, c, x[i + 15], 10, -30611744);c = this.md5ii(c, d, a, b, x[i + 6], 15, -1560198380);b = this.md5ii(b, c, d, a, x[i + 13], 21, 1309151649);a = this.md5ii(a, b, c, d, x[i + 4], 6, -145523070);d = this.md5ii(d, a, b, c, x[i + 11], 10, -1120210379);c = this.md5ii(c, d, a, b, x[i + 2], 15, 718787259);b = this.md5ii(b, c, d, a, x[i + 9], 21, -343485551);a = this.safeAdd(a, olda);b = this.safeAdd(b, oldb);c = this.safeAdd(c, oldc);d = this.safeAdd(d, oldd);}return [a, b, c, d];}, binl2rstr: function binl2rstr(input) {var i;var output = '';var length32 = input.length * 32;for (i = 0; i < length32; i += 8) {output += String.fromCharCode(input[i >> 5] >>> i % 32 & 0xff);}return output;}, rstr2binl: function rstr2binl(input) {var i;var output = [];output[(input.length >> 2) - 1] = undefined;for (i = 0; i < output.length; i += 1) {output[i] = 0;}var length8 = input.length * 8;for (i = 0; i < length8; i += 8) {output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;}return output;}, rstrMD5: function rstrMD5(s) {return this.binl2rstr(this.binlMD5(this.rstr2binl(s), s.length * 8));}, rstrHMACMD5: function rstrHMACMD5(key, data) {var i;var bkey = this.rstr2binl(key);var ipad = [];var opad = [];var hash;ipad[15] = opad[15] = undefined;if (bkey.length > 16) {bkey = this.binlMD5(bkey, key.length * 8);}for (i = 0; i < 16; i += 1) {ipad[i] = bkey[i] ^ 0x36363636;opad[i] = bkey[i] ^ 0x5c5c5c5c;}hash = this.binlMD5(ipad.concat(this.rstr2binl(data)), 512 + data.length * 8);return this.binl2rstr(this.binlMD5(opad.concat(hash), 512 + 128));}, rstr2hex: function rstr2hex(input) {var hexTab = '0123456789abcdef';var output = '';var x;var i;for (i = 0; i < input.length; i += 1) {x = input.charCodeAt(i);output += hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f);}return output;}, str2rstrUTF8: function str2rstrUTF8(input) {return unescape(encodeURIComponent(input));}, rawMD5: function rawMD5(s) {return this.rstrMD5(this.str2rstrUTF8(s));}, hexMD5: function hexMD5(s) {return this.rstr2hex(this.rawMD5(s));}, rawHMACMD5: function rawHMACMD5(k, d) {return this.rstrHMACMD5(this.str2rstrUTF8(k), str2rstrUTF8(d));}, hexHMACMD5: function hexHMACMD5(k, d) {return this.rstr2hex(this.rawHMACMD5(k, d));}, md5: function md5(string, key, raw) {if (!key) {if (!raw) {return this.hexMD5(string);}return this.rawMD5(string);}if (!raw) {return this.hexHMACMD5(key, string);}return this.rawHMACMD5(key, string);}, getSig: function getSig(requestParam, sk, feature, mode) {var sig = null;var requestArr = [];Object.keys(requestParam).sort().forEach(function (key) {requestArr.push(key + '=' + requestParam[key]);});if (feature == 'search') {sig = '/ws/place/v1/search?' + requestArr.join('&') + sk;}if (feature == 'suggest') {sig = '/ws/place/v1/suggestion?' + requestArr.join('&') + sk;}if (feature == 'reverseGeocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'geocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'getCityList') {sig = '/ws/district/v1/list?' + requestArr.join('&') + sk;}if (feature == 'getDistrictByCityId') {sig = '/ws/district/v1/getchildren?' + requestArr.join('&') + sk;}if (feature == 'calculateDistance') {sig = '/ws/distance/v1/?' + requestArr.join('&') + sk;}if (feature == 'direction') {sig = '/ws/direction/v1/' + mode + '?' + requestArr.join('&') + sk;}sig = this.md5(sig);return sig;}, location2query: function location2query(data) {if (typeof data == 'string') {return data;}var query = '';for (var i = 0; i < data.length; i++) {var d = data[i];if (!!query) {query += ';';}if (d.location) {query = query + d.location.lat + ',' + d.location.lng;}if (d.latitude && d.longitude) {query = query + d.latitude + ',' + d.longitude;}}return query;}, rad: function rad(d) {return d * Math.PI / 180.0;}, getEndLocation: function getEndLocation(location) {var to = location.split(';');var endLocation = [];for (var i = 0; i < to.length; i++) {endLocation.push({ lat: parseFloat(to[i].split(',')[0]), lng: parseFloat(to[i].split(',')[1]) });}return endLocation;}, getDistance: function getDistance(latFrom, lngFrom, latTo, lngTo) {var radLatFrom = this.rad(latFrom);var radLatTo = this.rad(latTo);var a = radLatFrom - radLatTo;var b = this.rad(lngFrom) - this.rad(lngTo);var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));distance = distance * EARTH_RADIUS;distance = Math.round(distance * 10000) / 10000;return parseFloat(distance.toFixed(0));}, getWXLocation: function getWXLocation(success, fail, complete) {wx.getLocation({ type: 'gcj02', success: success, fail: fail, complete: complete });}, getLocationParam: function getLocationParam(location) {if (typeof location == 'string') {var locationArr = location.split(',');if (locationArr.length === 2) {location = { latitude: location.split(',')[0], longitude: location.split(',')[1] };} else {location = {};}}return location;}, polyfillParam: function polyfillParam(param) {param.success = param.success || function () {};param.fail = param.fail || function () {};param.complete = param.complete || function () {};}, checkParamKeyEmpty: function checkParamKeyEmpty(param, key) {if (!param[key]) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + key + '参数格式有误');param.fail(errconf);param.complete(errconf);return true;}return false;}, checkKeyword: function checkKeyword(param) {return !this.checkParamKeyEmpty(param, 'keyword');}, checkLocation: function checkLocation(param) {var location = this.getLocationParam(param.location);if (!location || !location.latitude || !location.longitude) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + ' location参数格式有误');param.fail(errconf);param.complete(errconf);return false;}return true;}, buildErrorConfig: function buildErrorConfig(errCode, errMsg) {return { status: errCode, message: errMsg };}, handleData: function handleData(param, data, feature) {if (feature == 'search') {var searchResult = data.data;var searchSimplify = [];for (var i = 0; i < searchResult.length; i++) {searchSimplify.push({ id: searchResult[i].id || null, title: searchResult[i].title || null, latitude: searchResult[i].location && searchResult[i].location.lat || null, longitude: searchResult[i].location && searchResult[i].location.lng || null, address: searchResult[i].address || null, category: searchResult[i].category || null, tel: searchResult[i].tel || null, adcode: searchResult[i].ad_info && searchResult[i].ad_info.adcode || null, city: searchResult[i].ad_info && searchResult[i].ad_info.city || null, district: searchResult[i].ad_info && searchResult[i].ad_info.district || null, province: searchResult[i].ad_info && searchResult[i].ad_info.province || null });}param.success(data, { searchResult: searchResult, searchSimplify: searchSimplify });} else if (feature == 'suggest') {var suggestResult = data.data;var suggestSimplify = [];for (var i = 0; i < suggestResult.length; i++) {suggestSimplify.push({ adcode: suggestResult[i].adcode || null, address: suggestResult[i].address || null, category: suggestResult[i].category || null, city: suggestResult[i].city || null, district: suggestResult[i].district || null, id: suggestResult[i].id || null, latitude: suggestResult[i].location && suggestResult[i].location.lat || null, longitude: suggestResult[i].location && suggestResult[i].location.lng || null, province: suggestResult[i].province || null, title: suggestResult[i].title || null, type: suggestResult[i].type || null });}param.success(data, { suggestResult: suggestResult, suggestSimplify: suggestSimplify });} else if (feature == 'reverseGeocoder') {var reverseGeocoderResult = data.result;var reverseGeocoderSimplify = { address: reverseGeocoderResult.address || null, latitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lat || null, longitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lng || null, adcode: reverseGeocoderResult.ad_info && reverseGeocoderResult.ad_info.adcode || null, city: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.city || null, district: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.district || null, nation: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.nation || null, province: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.province || null, street: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street || null, street_number: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street_number || null, recommend: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.recommend || null, rough: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.rough || null };if (reverseGeocoderResult.pois) {var pois = reverseGeocoderResult.pois;var poisSimplify = [];for (var i = 0; i < pois.length; i++) {poisSimplify.push({ id: pois[i].id || null, title: pois[i].title || null, latitude: pois[i].location && pois[i].location.lat || null, longitude: pois[i].location && pois[i].location.lng || null, address: pois[i].address || null, category: pois[i].category || null, adcode: pois[i].ad_info && pois[i].ad_info.adcode || null, city: pois[i].ad_info && pois[i].ad_info.city || null, district: pois[i].ad_info && pois[i].ad_info.district || null, province: pois[i].ad_info && pois[i].ad_info.province || null });}param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify, pois: pois, poisSimplify: poisSimplify });} else {param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify });}} else if (feature == 'geocoder') {var geocoderResult = data.result;var geocoderSimplify = { title: geocoderResult.title || null, latitude: geocoderResult.location && geocoderResult.location.lat || null, longitude: geocoderResult.location && geocoderResult.location.lng || null, adcode: geocoderResult.ad_info && geocoderResult.ad_info.adcode || null, province: geocoderResult.address_components && geocoderResult.address_components.province || null, city: geocoderResult.address_components && geocoderResult.address_components.city || null, district: geocoderResult.address_components && geocoderResult.address_components.district || null, street: geocoderResult.address_components && geocoderResult.address_components.street || null, street_number: geocoderResult.address_components && geocoderResult.address_components.street_number || null, level: geocoderResult.level || null };param.success(data, { geocoderResult: geocoderResult, geocoderSimplify: geocoderSimplify });} else if (feature == 'getCityList') {var provinceResult = data.result[0];var cityResult = data.result[1];var districtResult = data.result[2];param.success(data, { provinceResult: provinceResult, cityResult: cityResult, districtResult: districtResult });} else if (feature == 'getDistrictByCityId') {var districtByCity = data.result[0];param.success(data, districtByCity);} else if (feature == 'calculateDistance') {var calculateDistanceResult = data.result.elements;var distance = [];for (var i = 0; i < calculateDistanceResult.length; i++) {distance.push(calculateDistanceResult[i].distance);}param.success(data, { calculateDistanceResult: calculateDistanceResult, distance: distance });} else if (feature == 'direction') {var direction = data.result.routes;param.success(data, direction);} else {param.success(data);}}, buildWxRequestConfig: function buildWxRequestConfig(param, options, feature) {var that = this;options.header = { "content-type": "application/json" };options.method = 'GET';options.success = function (res) {var data = res.data;if (data.status === 0) {that.handleData(param, data, feature);} else {param.fail(data);}};options.fail = function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};options.complete = function (res) {var statusCode = +res.statusCode;switch (statusCode) {case ERROR_CONF.WX_ERR_CODE:{param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));break;}case ERROR_CONF.WX_OK_CODE:{var data = res.data;if (data.status === 0) {param.complete(data);} else {param.complete(that.buildErrorConfig(data.status, data.message));}break;}default:{param.complete(that.buildErrorConfig(ERROR_CONF.SYSTEM_ERR, ERROR_CONF.SYSTEM_ERR_MSG));}}};return options;}, locationProcess: function locationProcess(param, locationsuccess, locationfail, locationcomplete) {var that = this;locationfail = locationfail || function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};locationcomplete = locationcomplete || function (res) {if (res.statusCode == ERROR_CONF.WX_ERR_CODE) {param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));}};if (!param.location) {that.getWXLocation(locationsuccess, locationfail, locationcomplete);} else if (that.checkLocation(param)) {var location = Utils.getLocationParam(param.location);locationsuccess(location);}} };var QQMapWX = /*#__PURE__*/function () {"use strict";function QQMapWX(options) {_classCallCheck(this, QQMapWX);if (!options.key) {throw Error('key值不能为空');}this.key = options.key;}_createClass(QQMapWX, [{ key: "search", value: function search(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, orderby: options.orderby || '_distance', page_size: options.page_size || 10, page_index: options.page_index || 1, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}var distance = options.distance || "1000";var auto_extend = options.auto_extend || 1;var region = null;var rectangle = null;if (options.region) {region = options.region;}if (options.rectangle) {rectangle = options.rectangle;}var locationsuccess = function locationsuccess(result) {if (region && !rectangle) {requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else if (rectangle && !region) {requestParam.boundary = "rectangle(" + rectangle + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else {requestParam.boundary = "nearby(" + result.latitude + "," + result.longitude + "," + distance + "," + auto_extend + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SEARCH, data: requestParam }, 'search'));};Utils.locationProcess(options, locationsuccess);} }, { key: "getSuggestion", value: function getSuggestion(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, region: options.region || '全国', region_fix: options.region_fix || 0, policy: options.policy || 0, page_size: options.page_size || 10, page_index: options.page_index || 1, get_subpois: options.get_subpois || 0, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}if (options.location) {var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));};Utils.locationProcess(options, locationsuccess);} else {if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));}} }, { key: "reverseGeocoder", value: function reverseGeocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { coord_type: options.coord_type || 5, get_poi: options.get_poi || 0, output: 'json', key: that.key };if (options.poi_options) {requestParam.poi_options = options.poi_options;}var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'reverseGeocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'reverseGeocoder'));};Utils.locationProcess(options, locationsuccess);} }, { key: "geocoder", value: function geocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'address')) {return;}var requestParam = { address: options.address, output: 'json', key: that.key };if (options.region) {requestParam.region = options.region;}if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'geocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'geocoder'));} }, { key: "getCityList", value: function getCityList(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getCityList');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_CITY_LIST, data: requestParam }, 'getCityList'));} }, { key: "getDistrictByCityId", value: function getDistrictByCityId(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'id')) {return;}var requestParam = { id: options.id || '', output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getDistrictByCityId');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_AREA_LIST, data: requestParam }, 'getDistrictByCityId'));} }, { key: "calculateDistance", value: function calculateDistance(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { mode: options.mode || 'walking', to: Utils.location2query(options.to), output: 'json', key: that.key };if (options.from) {options.location = options.from;}if (requestParam.mode == 'straight') {var locationsuccess = function locationsuccess(result) {var locationTo = Utils.getEndLocation(requestParam.to);var data = { message: "query ok", result: { elements: [] }, status: 0 };for (var i = 0; i < locationTo.length; i++) {data.result.elements.push({ distance: Utils.getDistance(result.latitude, result.longitude, locationTo[i].lat, locationTo[i].lng), duration: 0, from: { lat: result.latitude, lng: result.longitude }, to: { lat: locationTo[i].lat, lng: locationTo[i].lng } });}var calculateResult = data.result.elements;var distanceResult = [];for (var i = 0; i < calculateResult.length; i++) {distanceResult.push(calculateResult[i].distance);}return options.success(data, { calculateResult: calculateResult, distanceResult: distanceResult });};Utils.locationProcess(options, locationsuccess);} else {var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'calculateDistance');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_DISTANCE, data: requestParam }, 'calculateDistance'));};Utils.locationProcess(options, locationsuccess);}} }, { key: "direction", value: function direction(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { output: 'json', key: that.key };if (typeof options.to == 'string') {requestParam.to = options.to;} else {requestParam.to = options.to.latitude + ',' + options.to.longitude;}var SET_URL_DIRECTION = null;options.mode = options.mode || MODE.driving;SET_URL_DIRECTION = URL_DIRECTION + options.mode;if (options.from) {options.location = options.from;}if (options.mode == MODE.driving) {if (options.from_poi) {requestParam.from_poi = options.from_poi;}if (options.heading) {requestParam.heading = options.heading;}if (options.speed) {requestParam.speed = options.speed;}if (options.accuracy) {requestParam.accuracy = options.accuracy;}if (options.road_type) {requestParam.road_type = options.road_type;}if (options.to_poi) {requestParam.to_poi = options.to_poi;}if (options.from_track) {requestParam.from_track = options.from_track;}if (options.waypoints) {requestParam.waypoints = options.waypoints;}if (options.policy) {requestParam.policy = options.policy;}if (options.plate_number) {requestParam.plate_number = options.plate_number;}}if (options.mode == MODE.transit) {if (options.departure_time) {requestParam.departure_time = options.departure_time;}if (options.policy) {requestParam.policy = options.policy;}}var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'direction', options.mode);}wx.request(Utils.buildWxRequestConfig(options, { url: SET_URL_DIRECTION, data: requestParam }, 'direction'));};Utils.locationProcess(options, locationsuccess);} }]);return QQMapWX;}();;module.exports = QQMapWX;
+
+/***/ }),
+
+/***/ 21:
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/FileFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8755,10 +8843,10 @@ module.exports = FileFactory;
 
 /***/ }),
 
-/***/ 21:
-/*!***************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/CoreFactory.js ***!
-  \***************************************************************/
+/***/ 22:
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/CoreFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8795,10 +8883,10 @@ module.exports = new CoreFactory();
 
 /***/ }),
 
-/***/ 22:
-/*!***************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/HttpFactory.js ***!
-  \***************************************************************/
+/***/ 23:
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/HttpFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8857,10 +8945,10 @@ module.exports = new HttpFactory();
 
 /***/ }),
 
-/***/ 23:
-/*!*****************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/factory/Base64Factory.js ***!
-  \*****************************************************************/
+/***/ 24:
+/*!******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/Base64Factory.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8963,7 +9051,7 @@ module.exports = Base64Factory;
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -9092,6 +9180,71 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ 299:
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/room/roomApi.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getRooms = getRooms;
+
+
+
+
+
+
+var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));
+
+
+
+var _ownerApi = __webpack_require__(/*! ../owner/ownerApi.js */ 44);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                               * 房屋信息处理 api 接口类
+                                                                                                                                               * 
+                                                                                                                                               * add by 吴学文 QQ 928255095
+                                                                                                                                               */ /**
+                                                                                                                                                   * 查询业主房屋
+                                                                                                                                                   */function getRooms() {return new Promise(function (resolve, reject) {
+    (0, _ownerApi.getCurOwner)().
+    then(function (_owner) {
+      (0, _java110Request.request)({
+        url: _url.default.queryRoomsByOwner,
+        method: "GET",
+        data: {
+          communityId: _owner.communityId,
+          ownerId: _owner.memberId },
+
+        success: function success(res) {
+          if (res.statusCode == 200) {
+            //将业主信息和房屋信息一起返回
+            res.data['owner'] = _owner;
+            if (res.data.rooms.length == 0) {
+              reject("业主没有房屋信息");
+              return;
+            }
+            resolve(res.data);
+          } else {
+            reject("查询房屋失败");
+          }
+        },
+        fail: function fail(res) {
+          reject(res);
+        } });
+
+    });
+  });
+};
+
+/***/ }),
+
 /***/ 3:
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -9123,10 +9276,691 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 300:
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/fee/feeApi.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getRoomFees = getRoomFees;var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+/**
+                                                                                                                                                                                           * @param {Object} _objData {
+                                                                                                                                                                                          	 page: 1,
+                                                                                                                                                                                          	 row: 30,
+                                                                                                                                                                                          	 payerObjId: _room.roomId,
+                                                                                                                                                                                          	 feeTypeCd: '888800010001',
+                                                                                                                                                                                          	 communityId: _room.communityId,
+                                                                                                                                                                                          	 state:'2008001'
+                                                                                                                                                                                           }
+                                                                                                                                                                                           */
+function getRoomFees(_objData, _room) {
+  return new Promise(function (resolve, reject) {
+    var moreRooms = [];
+    (0, _java110Request.request)({
+      url: _url.default.queryFeeByOwner,
+      method: "GET",
+      data: _objData, //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          //成功情况下跳转
+          var _roomFees = res.data.fees;
+          if (_roomFees.length < 1) {
+            //_that.noData = true;
+            reject();
+          }
+          _roomFees.forEach(function (_roomFee) {
+            var _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/");
+            var _endTime = new Date(_tmpEndTime);
+            var _tmpRoom = JSON.parse(JSON.stringify(_room));
+            _tmpRoom.endTime = util.date.formatDate(_endTime);
+
+            var _now = new Date();
+            if (_endTime > _now) {
+              _tmpRoom.feeStateName = '正常';
+            } else {
+              _tmpRoom.feeStateName = '欠费';
+            }
+            _tmpRoom.additionalAmount = _roomFee.additionalAmount;
+            _tmpRoom.squarePrice = _roomFee.squarePrice;
+            _tmpRoom.amount = _roomFee.feePrice;
+            _tmpRoom.feeId = _roomFee.feeId;
+            _tmpRoom.feeName = _roomFee.feeName;
+            _tmpRoom.feeFlag = _roomFee.feeFlag;
+            _tmpRoom.paymentCycle = _roomFee.paymentCycle;
+            moreRooms.push(_tmpRoom);
+          });
+          resolve(moreRooms);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      } });
+
+  });
+}
+
+/***/ }),
+
+/***/ 34:
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/index/indexApi.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getActivitiTitle = getActivitiTitle;exports.getCategoryList = getCategoryList;exports.loadActivites = loadActivites;exports.loadAdverts = loadAdverts;
+
+
+
+
+
+
+var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+var _DateUtil = __webpack_require__(/*! ../../utils/DateUtil.js */ 16);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                  * 首页相关 数据封装API
+                                                                                                                                                  * add by 吴学文 2020-09-07
+                                                                                                                                                  * QQ 92825595
+                                                                                                                                                  * 
+                                                                                                                                                  */ /**
+                                                                                                                                                      * 查询活动列表
+                                                                                                                                                      */function getActivitiTitle() {return [{ typeCd: '10003',
+    name: '公共安全及消防' },
+
+  {
+    typeCd: '10004',
+    name: '政务及党政' },
+
+  {
+    typeCd: '10005',
+    name: '费用公开' },
+
+  {
+    typeCd: '10001',
+    name: '小区文化' },
+
+  {
+    typeCd: '10002',
+    name: '其他' }];
+
+
+}
+
+/**
+   * 查询 目录列表
+   */
+function getCategoryList() {
+  return {
+    pageone: [{
+      name: "物业费",
+      src: "/static/images/index_property.png",
+      href: "/pages/roomFeeList/roomFeeList" },
+    {
+      name: "停车费",
+      src: "/static/images/index_park.png",
+      href: "/pages/payParkingFeeList/payParkingFeeList" },
+    {
+      name: "投诉建议",
+      src: "/static/images/index_complaint.png",
+      href: "/pages/complaint/complaint" },
+    {
+      name: "家庭成员",
+      src: "/static/images/index_member.png",
+      href: "/pages/familyList/familyList" },
+    {
+      name: "报修",
+      src: "/static/images/index_repair.png",
+      href: "/pages/repair/repair" },
+    {
+      name: "智慧开门",
+      src: "/static/images/index_openDoor.png",
+      href: "/pages/openDoor/openDoor" },
+    {
+      name: "公告",
+      src: "/static/images/index_notice.png",
+      href: "/pages/notice/index" },
+    {
+      name: "联系客服",
+      src: "/static/images/index_persion.png",
+      href: "callProperty" }] };
+
+
+}
+
+
+/**
+   * 查询活动
+   */
+function loadActivites(dataObj) {
+  return new Promise(
+  function (resolve, reject) {
+    (0, _java110Request.requestNoAuth)({
+      url: _url.default.listActivitiess,
+      method: "GET",
+      data: dataObj,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          var _activites = res.data.activitiess;
+          var _acts = [];
+          _activites.forEach(function (_item) {
+            _item.src = _url.default.filePath + "?fileId=" + _item.headerImg + "&communityId=" + dataObj.communityId +
+            "&time=" + new Date();
+            _item.startTime = (0, _DateUtil.dateTimeStringToDateString)(_item.startTime);
+
+            _acts.push(_item);
+          });
+          resolve(_acts);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      } });
+
+  });
+}
+
+/**
+   * 查询小区广告
+   */
+function loadAdverts(dataObj) {
+  return new Promise(
+  function (resolve, reject) {
+    (0, _java110Request.requestNoAuth)({
+      url: _url.default.listAdvertPhoto,
+      method: "GET",
+      data: dataObj,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          var _advertPhotos = res.data;
+          var _aPhotos = [];
+          var _urlPath = '';
+
+          _urlPath = _url.default.baseUrl;
+
+          _advertPhotos.forEach(function (_item) {
+            _item.url = _urlPath + _item.url + "&time=" + new Date();
+            _aPhotos.push(_item);
+          });
+          resolve(_aPhotos);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      } });
+
+  });
+}
+
+/***/ }),
+
+/***/ 35:
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/java110Request.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getHeaders = getHeaders;exports.request = request;exports.requestNoAuth = requestNoAuth;var _CoreUtil = _interopRequireDefault(__webpack_require__(/*! ../utils/CoreUtil.js */ 15));
+
+var _AppConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/AppConstant.js */ 10));
+
+var _DateUtil = __webpack_require__(/*! ../utils/DateUtil.js */ 16);
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 36));
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/MappingConstant.js */ 13));
+
+var _Java110Auth = __webpack_require__(/*! ../auth/Java110Auth.js */ 37);
+
+var _H5Login = __webpack_require__(/*! ../auth/H5Login.js */ 38);
+
+
+
+var _MpWeixinLogin = __webpack_require__(/*! ../auth/MpWeixinLogin.js */ 39);
+
+
+
+var _AppLogin = __webpack_require__(/*! ../auth/AppLogin.js */ 41);
+
+
+
+
+
+var _LogUtil = __webpack_require__(/*! ../utils/LogUtil.js */ 42);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                             * 获取请求头信息
+                                                                                                                                             * add by 吴学文 QQ：928255095
+                                                                                                                                             **/
+function getHeaders() {
+  var _wAppId = uni.getStorageSync(_MappingConstant.default.W_APP_ID);
+  return {
+    "app-id": _AppConstant.default.appId,
+    "transaction-id": _CoreUtil.default.wxuuid(),
+    "req-time": (0, _DateUtil.getDateYYYYMMDDHHMISS)(),
+    "sign": '1234567',
+    "user-id": '-1',
+    "cookie": '_java110_token_=' + wx.getStorageSync('token'),
+    "Accept": '*/*',
+    "w-app-id": _wAppId };
+
+}
+/**
+   * http 请求 加入是否登录判断
+   */
+function request(_reqObj) {
+
+  (0, _LogUtil.debug)('java110Request', 'request', _reqObj);
+
+  //这里判断只有在 post 方式时 放加载框
+  if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
+    uni.showLoading({
+      title: '加载中',
+      mask: true });
+
+    _reqObj.complete = function () {
+      uni.hideLoading();
+    };
+  }
+
+
+  var _headers = getHeaders();
+  if (_reqObj.hasOwnProperty('header')) {
+    var _header = _reqObj.header;
+    for (var key in _headers) {
+      _header.key = _headers[key];
+    }
+  } else {
+    _reqObj.header = _headers;
+  }
+
+  //白名单直接跳过检查登录
+  if (_url.default.NEED_NOT_LOGIN_URL.includes(_reqObj.url)) {
+    _reqObj.communityId = _MappingConstant.default.HC_TEST_COMMUNITY_ID;
+    uni.request(_reqObj);
+    return;
+  }
+  //校验是否登录，如果没有登录跳转至温馨提示页面
+  (0, _Java110Auth.checkSession)().then(function () {
+    //有回话 跳转至相应页面
+    //重写token
+    _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
+    uni.request(_reqObj);
+  }, function (error) {//回话过期
+
+
+
+
+
+    //小程序登录
+
+    (0, _MpWeixinLogin.doLogin)();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  });
+}
+
+/**
+   * 
+   * 不用鉴权的 HTTP 请求
+   * @param {Object} _reqObj 请求参数
+   */
+function requestNoAuth(_reqObj) {
+  (0, _LogUtil.debug)('java110Request', 'requestNoAuth', _reqObj);
+  //这里判断只有在 post 方式时 放加载框
+  if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
+    uni.showLoading({
+      title: '加载中',
+      mask: true });
+
+    _reqObj.complete = function () {
+      uni.hideLoading();
+    };
+  }
+  var _headers = getHeaders();
+  if (_reqObj.hasOwnProperty('header')) {
+    var _header = _reqObj.header;
+    for (var key in _headers) {
+      _header.key = _headers[key];
+    }
+  } else {
+    _reqObj.header = _headers;
+  }
+
+  _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
+  uni.request(_reqObj);
+
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 36:
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/url.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 11));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var baseUrl = _config.default.baseUrl;var _default =
+{
+  baseUrl: baseUrl,
+  wechatRefrashToken: baseUrl + "app/refreshToken", // 公众号刷新token
+  loginOwnerByKey: baseUrl + "app/loginOwnerByKey", // 根据临时秘钥登录
+  loginUrl: baseUrl + 'app/loginWx',
+  getWxPhoto: baseUrl + 'app/getWxPhoto',
+  loginOwnerUrl: baseUrl + 'app/loginOwner',
+  areaUrl: baseUrl + "app/area.listAreas",
+  GetNoticeListUrl: baseUrl + 'app/notice.listNotices', //公告接口
+  saveOwnerRepair: baseUrl + 'app/ownerRepair.saveOwnerRepair', //报修
+  listOwnerRepairs: baseUrl + 'app/ownerRepair.listOwnerRepairs', //查询报修
+  saveOwner: baseUrl + 'app/owner.saveOwner', //家庭成员列表
+  queryOwnerMembers: baseUrl + 'app/owner.queryOwnerMembers', //投诉建议列表
+  listComplaints: baseUrl + 'app/complaint.listComplaints', //添加投诉建议
+  saveComplaint: baseUrl + 'app/complaint', //查询业主房间
+  queryRoomsByOwner: baseUrl + 'app/room.queryRoomsByOwner', //绑定业主
+  appUserBindingOwner: baseUrl + 'app/owner.appUserBindingOwner', //查询绑定业主
+  ownerRegiter: baseUrl + 'app/owner.ownerRegister', //业主注册
+  ownerRegisterWxPhoto: baseUrl + 'app/owner.ownerRegisterWxPhoto', //业主注册
+  queryAppUserBindingOwner: baseUrl + 'app/owner.listAppUserBindingOwners', //解绑业主
+  appUserUnBindingOwner: baseUrl + 'app/owner.deleteAppUserBindingOwner', //查询业主门禁
+  listOwnerMachines: baseUrl + 'app/owner.listOwnerMachines', // 申请钥匙
+  applyApplicationKey: baseUrl + "app/applicationKey.applyApplicationKey", //查询钥匙
+  listApplicationKeys: baseUrl + "app/applicationKey.listApplicationKeys", //申请访客钥匙
+  applyVisitorApplicationKey: baseUrl + "app/applicationKey.applyVisitorApplicationKey", //上传业主照片
+  uploadOwnerPhoto: baseUrl + "app/owner.uploadOwnerPhoto",
+  getOwnerPhotoPath: baseUrl + "callComponent/download/getFile/fileByObjId",
+  filePath: baseUrl + "callComponent/download/getFile/file", //查询业主车位信息
+  queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
+  queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
+  queryFeeByOwner: baseUrl + "app/fee.listFee", //预下单
+  preOrder: baseUrl + "app/payment/toPay", //查询小区
+  //临时车缴费
+  preOrderTempCarInout: baseUrl + "/app/payment/toPayTempCarInout",
+  listCommunitys: baseUrl + "app/community.listCommunitys", //查询小区文化
+  listActivitiess: baseUrl + "app/activities.listActivitiess", //查询小区广告
+  listAdvertPhoto: baseUrl + "app/advert.listAdvertPhoto",
+  //查询车辆进场费用
+  queryFeeByCarInout: baseUrl + "app/fee.queryFeeByCarInout",
+  //查询报修单
+  listMyRepair: baseUrl + "app/ownerRepair.listOwnerRepairs",
+  //查询在场车辆
+  listCarIn: baseUrl + "app/carInout.listCarInouts",
+  queryConfigFee: baseUrl + "app/fee.queryFeeConfig",
+  //缴费历史查询
+  queryFeeDetail: baseUrl + "app/fee.queryFeeDetail",
+  //发送验证码
+  userSendSms: baseUrl + "app/user.userSendSms",
+  userLogout: baseUrl + 'app/user.service.logout', //绑定业主
+  listStore: baseUrl + 'app/store.listStoresByCommunity', // 查询小区商户
+  //发布需求信息
+  saveJunkRequirement: baseUrl + 'app/junkRequirement.saveJunkRequirement',
+  //查询需求信息
+  listJunkRequirements: baseUrl + 'app/junkRequirement.listJunkRequirements',
+  //删除 需求信息
+  deleteJunkRequirement: baseUrl + 'app/junkRequirement.deleteJunkRequirement',
+  //标记为已完成
+  updateJunkRequirement: baseUrl + 'app/junkRequirement.updateJunkRequirement',
+  //查询楼栋
+  queryFloor: baseUrl + 'app/floor.queryFloors',
+  //查询单元
+  queryUnit: baseUrl + 'app/unit.queryUnits',
+  //查询报修类型
+  listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
+  //待办工单
+  listStaffRepairs: baseUrl + "app/ownerRepair.listStaffRepairs",
+  //已办工单
+  listStaffFinishRepairs: baseUrl + "app/ownerRepair.listStaffFinishRepairs",
+  // 查询报修单处理师傅
+  listRepairStaffs: baseUrl + "app/ownerRepair.listRepairStaffs",
+  // 删除报修单
+  deleteOwnerRepair: baseUrl + "app/ownerRepair.deleteOwnerRepair",
+  // 报修退单
+  repairDispatch: baseUrl + 'app/ownerRepair.repairDispatch',
+  // 报修评价
+  appraiseRepair: baseUrl + 'app/repair/appraiseRepair',
+  // 根据属性查询费用
+  listFeeByAttr: baseUrl + "app/feeApi/listFeeByAttr",
+  // 投诉 处理意见
+  listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
+  //查询待审核单
+  auditComplaint: baseUrl + 'app/complaint.auditComplaint',
+  changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
+  changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
+  NEED_NOT_LOGIN_PAGE: [
+  '/pages/login/login',
+  '/pages/register/register',
+  '/pages/my/my',
+  '/pages/index/index',
+  '/pages/market/market',
+  '/pages/showlogin/showlogin'],
+
+  NEED_NOT_LOGIN_URL: [
+    // this.listActivitiess,
+    // this.listAdvertPhoto,
+    // this.queryAppUserBindingOwner,
+    // this.listJunkRequirements
+  ] };exports.default = _default;
+
+/***/ }),
+
+/***/ 37:
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/Java110Auth.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.checkSession = checkSession;exports.hasLogin = hasLogin;var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/**
+                                                                                                                                                                                                                                                                                                                                   * 检查会话是否 存在
+                                                                                                                                                                                                                                                                                                                                   * add by 吴学文 QQ:928255095
+                                                                                                                                                                                                                                                                                                                                   */
+function checkSession() {var _this = this;
+  return new Promise(function (resolve, reject) {
+    var _that = _this;
+    var loginFlag = wx.getStorageSync(_MappingConstant.default.LOGIN_FLAG);
+    var nowDate = new Date();
+    //判断如果是APP
+
+
+
+
+
+
+
+
+
+    //判断如果是H5
+
+
+
+
+
+
+
+
+
+
+    if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+      // 检查 session_key 是否过期
+      wx.checkSession({
+        // session_key 有效(为过期)
+        success: function success() {
+
+          resolve();
+        },
+        // session_key 过期
+        fail: function fail() {
+          // session_key过期
+          reject();
+        } });
+
+    } else {
+      // 无登录态
+      reject();
+    }
+
+  });
+}
+/**
+   * 是否登录 不跳转 只是判断是否登录
+   * 
+   * add by 吴学文 QQ:928255095
+   */
+function hasLogin() {
+  //判断当前登录状态，不调跳转登录界面
+  var loginFlag = uni.getStorageSync(_MappingConstant.default.LOGIN_FLAG);
+  var nowDate = new Date();
+  if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+    return true;
+  }
+  return false;
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 38:
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/H5Login.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.wechatRefreshToken = wechatRefreshToken;
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 36));
+var _java110Request = __webpack_require__(/*! ../api/java110Request.js */ 35);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+/**
+                                                                                                                                                         * 
+                                                                                                                                                         * H5 刷新鉴权登录
+                                                                                                                                                         * @param {Object} errorUrl 登录失败时的跳转页面
+                                                                                                                                                         * @param {Object} _login  
+                                                                                                                                                         * 
+                                                                                                                                                         * add by 吴学文 QQ 928255095
+                                                                                                                                                         */
+function wechatRefreshToken(errorUrl, _login) {
+  var _errorUrl = errorUrl;
+  if (errorUrl == null || errorUrl == undefined || errorUrl == '') {
+    _errorUrl = '/#/pages/showlogin/showlogin';
+  }
+
+  if (_login == null || _login == undefined || _login == '') {
+    _login = 0; // 不是登录页面鉴权
+  }
+  (0, _java110Request.requestNoAuth)({
+    url: _url.default.wechatRefrashToken,
+    method: 'get',
+    data: {
+      redirectUrl: window.location.href, // 当前页地址
+      errorUrl: _errorUrl,
+      loginFlag: _login },
+
+    success: function success(res) {
+      var _param = res.data;
+      if (_param.code == 0) {
+        window.location.href = _param.data.openUrl;
+        return;
+      }
+    },
+    fail: function fail(error) {
+      // 调用服务端登录接口失败
+      if (error.statusCode == 401) {
+        return;
+      }
+    } });
+
+}
+
+/***/ }),
+
+/***/ 39:
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/MpWeixinLogin.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.doLogin = doLogin;var _LoginHcServer = __webpack_require__(/*! ./LoginHcServer.js */ 40);
+
+
+
+
+function doLogin() {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+  var that = this;
+  wx.login({
+    success: function success(loginRes) {
+      if (loginRes.code) {
+        // TODO
+        //请求服务后端登录
+        (0, _LoginHcServer.requsetHcServerToLogin)(loginRes, callback);
+      } else {
+        // 获取 code 失败
+        //that.coreUtil.showInfo('登录失败');
+        console.log('调用wx.login获取code失败');
+      }
+    },
+    fail: function fail(error) {
+      // 调用 wx.login 接口失败
+      //that.coreUtil.showInfo('接口调用失败' + error);
+      console.log(error);
+    } });
+
+}
+
+/***/ }),
+
 /***/ 4:
-/*!***************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/pages.json ***!
-  \***************************************************/
+/*!****************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/pages.json ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9134,10 +9968,531 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 468:
-/*!**********************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/components/uni-icons/icons.js ***!
-  \**********************************************************************/
+/***/ 40:
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/LoginHcServer.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.requsetHcServerToLogin = requsetHcServerToLogin;var _java110Request = __webpack_require__(/*! ../api/java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 36));
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                                        * 请求 HC服务 登录
+                                                                                                                                                                                        */
+function requsetHcServerToLogin(loginRes) {var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+  var defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}'; // 请求服务端的登录接口
+  console.log('返回信息', loginRes);
+  var _appId = '';
+
+  var accountInfo = uni.getAccountInfoSync();
+  _appId = accountInfo.miniProgram.appId;
+
+
+
+
+
+  (0, _java110Request.requestNoAuth)({
+    url: _url.default.loginUrl,
+    method: 'post',
+    data: {
+      code: loginRes.code,
+      // 临时登录凭证
+      userInfo: JSON.parse(defaultRawData),
+      // 用户非敏感信息
+      signature: '',
+      // 签名
+      encryptedData: '',
+      // 用户敏感信息
+      iv: '', // 解密算法的向量
+      appId: _appId },
+
+
+    success: function success(res) {
+      if (res.statusCode == '401') {
+        var data = res.data;
+        uni.setStorageSync(_MappingConstant.default.CURRENT_OPEN_ID, data.openId);
+        wx.reLaunch({
+          url: '/pages/showlogin/showlogin' });
+
+        return;
+      }
+
+      res = res.data;
+
+      if (res.result == 0) {
+        //that.globalData.userInfo = res.userInfo;
+        console.log(res.userInfo);
+        wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(res.userInfo));
+        var date = new Date();
+        var year = date.getFullYear(); //获取当前年份
+
+        var mon = date.getMonth(); //获取当前月份
+
+        var da = date.getDate(); //获取当前日
+
+        var h = date.getHours() + 1; //获取小时
+
+        var m = date.getMinutes(); //获取分钟
+
+        var s = date.getSeconds(); //获取秒
+
+        console.log("获取过去时间", year, mon, da, h, m, s); //将时间格式转化为时间戳
+
+        var afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
+
+        console.log("afterOneHourDate", afterOneHourDate);
+        wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
+          sessionKey: res.sessionKey,
+          expireTime: afterOneHourDate.getTime() });
+
+        wx.setStorageSync(constant.mapping.TOKEN, res.token);
+        callback();
+      } else {
+        util.core.showInfo(res.errmsg);
+      }
+    },
+    fail: function fail(error) {
+      // 调用服务端登录接口失败
+      if (error.statusCode == 401) {
+        uni.reLaunch({
+          url: '/pages/login/login' });
+
+        return;
+      }
+      util.core.showInfo('调用接口失败');
+      console.log(error);
+    } });
+
+} // 获取用户登录标示 供全局调用
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 41:
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/AppLogin.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.doLoginOwnerByKey = doLoginOwnerByKey;var _url = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 36));
+var _java110Request = __webpack_require__(/*! ../api/java110Request.js */ 35);
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/**
+                                                                                                                                                                                        * 
+                                                                                                                                                                                        * app 自登陆处理
+                                                                                                                                                                                        * @param {Object} _key 自登陆key
+                                                                                                                                                                                        * add by  wuxw QQ 928255095
+                                                                                                                                                                                        */
+function doLoginOwnerByKey(_key) {
+  (0, _java110Request.requestNoAuth)({
+    url: _url.default.loginOwnerByKey,
+    method: 'post',
+    data: {
+      key: _key // 当前页地址
+    },
+    success: function success(res) {
+      var _param = res.data;
+      if (_param.code != 0) {
+        uni.navigateTo({
+          url: '/pages/showlogin/showlogin' });
+
+        return;
+      }
+
+      var _ownerInfo = _param.owner;
+      wx.setStorageSync(_MappingConstant.default.OWNER_INFO, _ownerInfo);
+      wx.setStorageSync(_MappingConstant.default.USER_INFO, JSON.stringify(_ownerInfo));
+      var _currentCommunityInfo = {
+        communityId: _ownerInfo.communityId,
+        communityName: _ownerInfo.communityName };
+
+      wx.setStorageSync(_MappingConstant.default.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+
+      var date = new Date();
+      var year = date.getFullYear(); //获取当前年份
+      var mon = date.getMonth(); //获取当前月份
+      var da = date.getDate(); //获取当前日
+      var h = date.getHours() + 1; //获取小时
+      var m = date.getMinutes(); //获取分钟
+      var s = date.getSeconds(); //获取秒
+      var afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
+      wx.setStorageSync(_MappingConstant.default.LOGIN_FLAG, {
+        sessionKey: _ownerInfo.userId,
+        expireTime: afterOneHourDate.getTime() });
+
+      wx.setStorageSync(_MappingConstant.default.TOKEN, _param.token);
+      //保存临时 钥匙
+      wx.setStorageSync(_MappingConstant.default.OWNER_KEY, _param.key);
+    },
+    fail: function fail(error) {
+      // 调用服务端登录接口失败
+      uni.navigateTo({
+        url: '/pages/showlogin/showlogin' });
+
+    } });
+
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 42:
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/LogUtil.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.debug = debug;exports.info = info;exports.warn = warn;exports.error = error;
+
+
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 11));
+
+var _DateUtil = __webpack_require__(/*! ./DateUtil.js */ 16);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                        * 日志工具类
+                                                                                                                                        * 
+                                                                                                                                        * add by 吴学文 QQ 928255095
+                                                                                                                                        */ //日志级别
+var logLevel = _config.default.logLevel;var DEBUG = "DEBUG";
+var INFO = "INFO";
+var WARN = "WARN";
+var ERROR = "ERROR";
+
+/**
+                      * @description  debug 答应日志
+                      * @param {string} fileName 文件名
+                      * @param {string} method 方法
+                      * @param {Object} msg 打印内容
+                      */
+function debug(fileName, method, msg) {
+  if (logLevel == DEBUG) {
+    console.log((0, _DateUtil.formatTimeNow)() + ' ' + '[java110-debug] - ' + fileName + ':' + method + ' ', msg);
+  }
+}
+
+/**
+   * @description info 打印日志
+   * @param {string} fileName 文件名
+   * @param {string} method 方法
+   * @param {Object} msg 打印内容
+   */
+function info(fileName, method, msg) {
+  if (logLevel == DEBUG || logLevel == INFO) {
+    console.log((0, _DateUtil.formatTimeNow)() + ' ' + '[java110-info] - ' + fileName + ':' + method + ' ' + msg);
+  }
+}
+
+/**
+   * @description info 打印日志
+   * @param {string} fileName 文件名
+   * @param {string} method 方法
+   * @param {Object} msg 打印内容
+   */
+function warn(fileName, method, msg) {
+  if (logLevel == DEBUG || logLevel == INFO || logLevel == WARN) {
+    console.log((0, _DateUtil.formatTimeNow)() + ' ' + '[java110-warn] - ' + fileName + ':' + method + ' ' + msg);
+  }
+}
+
+/**
+   * @description error 打印日志
+   * @param {string} fileName 文件名
+   * @param {string} method 方法
+   * @param {Object} msg 打印内容
+   */
+function error(fileName, method, msg) {
+  console.error((0, _DateUtil.formatTimeNow)() + ' ' + '[java110-error] - ' + fileName + ':' + method + ' ' + msg);
+}
+
+/***/ }),
+
+/***/ 43:
+/*!***********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/community/communityApi.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getCommunitys = getCommunitys;exports.getCurCommunity = getCurCommunity;exports.recoveryCommunityInfo = recoveryCommunityInfo;var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+
+
+var _Java110Auth = __webpack_require__(/*! ../../auth/Java110Auth.js */ 37);
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));
+
+var _ownerApi = __webpack_require__(/*! ../owner/ownerApi.js */ 44);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+/**
+                                                                                                                                               * @param {Object} dataObj
+                                                                                                                                               * 				page: 1,
+                                                                                                                                              				row: 15,
+                                                                                                                                              				cityCode: this.areaCode,
+                                                                                                                                              				state: '1100',
+                                                                                                                                              				name: this.searchValue
+                                                                                                                                               */
+function getCommunitys(dataObj) {
+  return new Promise(
+  function (resolve, reject) {
+    (0, _java110Request.requestNoAuth)({
+      url: _url.default.listCommunitys,
+      method: "GET",
+      data: dataObj,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          var _communtiys = res.data.communitys;
+
+          _that.communitys = _communtiys;
+        }
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 查询当前小区
+   * 
+   * 当还没有小区时返回 演示小区
+   */
+function getCurCommunity() {
+  return new Promise(function (resolve, reject) {
+    if ((0, _Java110Auth.hasLogin)()) {// 判断是否已经登录
+      //已经登录 去后台查询
+      (0, _ownerApi.getCurOwner)().
+      then(function (_ownerInfo) {
+        var _currentCommunityInfo = {
+          communityId: _ownerInfo.communityId,
+          communityName: _ownerInfo.communityName };
+
+        resolve(_currentCommunityInfo);
+      }).then(function () {
+        var _currentCommunityInfo = {
+          communityId: _MappingConstant.default.HC_TEST_COMMUNITY_ID,
+          communityName: _MappingConstant.default.HC_TEST_COMMUNITY_NAME };
+
+        resolve(_currentCommunityInfo);
+      });
+    } else {
+      //没有登录直接写演示小区信息
+      var _currentCommunityInfo = {
+        communityId: _MappingConstant.default.HC_TEST_COMMUNITY_ID,
+        communityName: _MappingConstant.default.HC_TEST_COMMUNITY_NAME };
+
+      resolve(_currentCommunityInfo);
+    }
+  });
+}
+
+/**
+   * 将小区信息 刷入 _obj对象
+   * @param {Object} _obj 刷入 小区信息对象
+   */
+function recoveryCommunityInfo(_obj) {
+
+  return new Promise(function (resolve, reject) {
+    getCurCommunity().
+    then(function (_communityInfo) {
+      if (_obj.hasOwnProperty("communityId")) {
+        _obj.communityId = _communityInfo.communityId;
+      }
+
+      if (_obj.hasOwnProperty("communityName")) {
+        _obj.communityName = _communityInfo.communityName;
+      }
+      resolve(_communityInfo);
+    });
+  });
+
+}
+
+/***/ }),
+
+/***/ 44:
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/owner/ownerApi.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getCurOwner = getCurOwner;
+
+
+
+
+
+
+var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                                           * 首页相关 数据封装API
+                                                                                                                                                                                           * add by 吴学文 2020-09-07
+                                                                                                                                                                                           * QQ 92825595
+                                                                                                                                                                                           * 
+                                                                                                                                                                                           */ /**
+                                                                                                                                                                                               * 查询当前业主信息
+                                                                                                                                                                                               */function getCurOwner() {return new Promise(function (resolve, reject) {
+    var _ownerInfo = wx.getStorageSync(_MappingConstant.default.OWNER_INFO);
+    if (_ownerInfo) {
+      resolve(_ownerInfo);
+    } else {
+      (0, _java110Request.request)({
+        url: _url.default.queryAppUserBindingOwner,
+        data: {},
+        success: function success(res) {
+          var _json = res.data;
+          if (_json.code == 0) {
+            _ownerInfo = _json.data[0];
+            if (_ownerInfo == null || _ownerInfo == undefined) {
+              //没有业主信息
+              reject();
+              return;
+            }
+            if (_ownerInfo.state == '12000') {
+              wx.setStorageSync(_MappingConstant.default.OWNER_INFO, _ownerInfo);
+              var _currentCommunityInfo = {
+                communityId: _ownerInfo.communityId,
+                communityName: _ownerInfo.communityName };
+
+              wx.setStorageSync(_MappingConstant.default.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+            }
+            resolve(_json.data[0]);
+          }
+        },
+        fail: function fail(error) {
+          // 查询失败
+          reject();
+        } });
+
+    }
+  });
+}
+
+/***/ }),
+
+/***/ 45:
+/*!*********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/property/propertyApi.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getProperty = getProperty;
+
+
+
+
+
+
+var _java110Request = __webpack_require__(/*! ../java110Request.js */ 35);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 36));
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));
+
+
+
+var _communityApi = __webpack_require__(/*! ../community/communityApi.js */ 43);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                           * 物业信息处理 api 接口类
+                                                                                                                                                           * 
+                                                                                                                                                           * add by 吴学文 QQ 928255095
+                                                                                                                                                           */ /**
+                                                                                                                                                               * 查询物业信息
+                                                                                                                                                               * @param {Object} _communityInfo 小区信息
+                                                                                                                                                               */
+function doGetProperty(_communityInfo) {
+
+  return new Promise(function (resolve, reject) {
+    var _objData = {
+      page: 1,
+      row: 5,
+      communityId: _communityInfo.communityId,
+      memberTypeCd: '390001200002' };
+
+    (0, _java110Request.request)({
+      url: _url.default.listStore,
+      method: "GET",
+      data: _objData,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          resolve(res.data.stores[0]);
+          return;
+        }
+        reject(res.body);
+      },
+      fail: function fail(e) {
+        reject(e);
+      } });
+
+  });
+}
+
+/**
+   * 查询物业信息
+   */
+function getProperty() {
+  return new Promise(function (resolve, reject) {
+    //查询当前小区
+    (0, _communityApi.getCurCommunity)().
+    then(function (_communityInfo) {
+      //查询当前物业
+      doGetProperty(_communityInfo).
+      then(function (_propertyInfo) {
+        resolve(_propertyInfo);
+      }).
+      then(function (res) {
+        reject(res);
+      });
+    });
+  });
+};
+
+/***/ }),
+
+/***/ 483:
+/*!***********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/uni-icons/icons.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9276,18 +10631,18 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 
-/***/ 483:
+/***/ 498:
 /*!*********************************************************************************************!*\
   !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 484);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 499);
 
 /***/ }),
 
-/***/ 484:
+/***/ 499:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9318,7 +10673,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 485);
+module.exports = __webpack_require__(/*! ./runtime */ 500);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9335,7 +10690,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 485:
+/***/ 500:
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10067,10 +11422,10 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 486:
-/*!*********************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/components/sx-rate/common.js ***!
-  \*********************************************************************/
+/***/ 501:
+/*!**********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/sx-rate/common.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10086,10 +11441,190 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 54:
-/*!*************************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/components/pickerAddress/data.js ***!
-  \*************************************************************************/
+/***/ 557:
+/*!**************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/StorageUtil.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getStorageSync = getStorageSync;exports.setStorageSync = setStorageSync;
+
+
+
+
+
+
+var _LogUtil = __webpack_require__(/*! ./LogUtil.js */ 42); /**
+                                         * 存储工具类
+                                         * 
+                                         * add by 吴学文 QQ 928255095
+                                         * 
+                                         * 
+                                         */ /**
+                                             * @param {Object} _key 存储键
+                                             * @return {Object} _value 查询到值
+                                             */function getStorageSync(_key) {(0, _LogUtil.debug)('StorageUtil', 'getStorageSync', _key);var _value = uni.getStorageSync(_key);
+
+  (0, _LogUtil.debug)('StorageUtil', 'getStorageSync', _value);
+
+  return _value;
+}
+
+/**
+   * @description 将数据缓存至 磁盘中
+   * @param {Object} _key 存储键
+   * @param {Object} _value 存储值
+   */
+function setStorageSync(_key, _value) {
+  (0, _LogUtil.debug)('StorageUtil', 'setStorageSync', _key);
+
+  uni.setStorageSync(_key, _value);
+
+  (0, _LogUtil.debug)('StorageUtil', 'setStorageSync', _value);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 558:
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/core/vcFramework.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _StorageUtil = __webpack_require__(/*! ../utils/StorageUtil.js */ 557);
+
+var _LogUtil = __webpack_require__(/*! ../utils/LogUtil.js */ 42);
+
+var _communityApi = __webpack_require__(/*! ../api/community/communityApi.js */ 43);
+
+
+var _initApi = __webpack_require__(/*! ../api/init/initApi.js */ 559);
+
+var _vcRoute = __webpack_require__(/*! ./vcRoute.js */ 14); /**
+                                         * vcFramework
+                                         * 
+                                         * @author 吴学文
+                                         * 
+                                         * @version 0.3
+                                         * 
+                                         * @description uni-app 开发工具
+                                         * 
+                                         * @time 2020-03-04
+                                         * 
+                                         * @qq 928255095
+                                         * 
+                                         * @mail 928255095@qq.com
+                                         * 
+                                         */ // 存储相关
+// 日志相关
+// 小区相关
+// 页面初始化相关
+var _default = { getStorageSync: _StorageUtil.getStorageSync, setStorageSync: _StorageUtil.setStorageSync, debug: _LogUtil.debug, info: _LogUtil.info, error: _LogUtil.error, warn: _LogUtil.warn, getCurCommunity: _communityApi.getCurCommunity, recoveryCommunityInfo: _communityApi.recoveryCommunityInfo, //将小区输入相应对象
+  onLoad: _initApi.onLoad, navigateTo: _vcRoute.navigateTo };exports.default = _default;
+
+/***/ }),
+
+/***/ 559:
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/init/initApi.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.onLoad = onLoad; /**
+                                                                                                     * 页面初始化数据封装
+                                                                                                     * add by 吴学文 2020-09-07
+                                                                                                     * QQ 92825595
+                                                                                                     * 
+                                                                                                     */
+
+/**
+                                                                                                         * 页面加载方法
+                                                                                                         * @param {Object} _option 页面参数对象
+                                                                                                         */
+function onLoad(_option) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+/***/ }),
+
+/***/ 560:
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/SeqUtil.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.uuid = uuid; /**
+                                                                                                 * 序列工具类
+                                                                                                 * 
+                                                                                                 * add by 吴学文 QQ 928255095
+                                                                                                 */
+/**
+                                                                                                     * @description uuid 序列生成
+                                                                                                     * 
+                                                                                                     * @return {string} uuid 序列
+                                                                                                     */
+function uuid() {
+  var s = [];
+  var hexDigits = "0123456789abcdef";
+  for (var i = 0; i < 36; i++) {
+    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+  }
+  s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+  s[19] = hexDigits.substr(s[19] & 0x3 | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+  s[8] = s[13] = s[18] = s[23] = "-";
+  var uuid = s.join("");
+  return uuid;
+}
+
+/***/ }),
+
+/***/ 67:
+/*!**************************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/pickerAddress/data.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20359,9 +21894,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 8:
-/*!******************************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/context/Java110Context.js ***!
-  \******************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/context/Java110Context.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20374,20 +21909,20 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
  */
 var constant = __webpack_require__(/*! ../constant/index.js */ 9);
 
-var util = __webpack_require__(/*! ../utils/index.js */ 13);
 
-var factory = __webpack_require__(/*! ../factory/index.js */ 16);
+var factory = __webpack_require__(/*! ../factory/index.js */ 17);
 
+var util = {};
 /**
-                                               * 获取请后台服务时的头信息
-                                               */
+                * 获取请后台服务时的头信息
+                */
 var getHeaders = function getHeaders() {
 
   var _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
   return {
     "app-id": constant.app.appId,
-    "transaction-id": util.core.wxuuid(),
-    "req-time": util.date.getDateYYYYMMDDHHMISS(),
+    "transaction-id": 'util.core.wxuuid()',
+    "req-time": 'util.date.getDateYYYYMMDDHHMISS()',
     "sign": '1234567',
     "user-id": '-1',
     "cookie": '_java110_token_=' + wx.getStorageSync('token'),
@@ -20789,9 +22324,9 @@ module.exports = {
 /***/ }),
 
 /***/ 9:
-/*!**********************************************************!*\
-  !*** C:/project/hc/WechatOwnerService/constant/index.js ***!
-  \**********************************************************/
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20804,10 +22339,10 @@ module.exports = {
 var appConstant = __webpack_require__(/*! ./AppConstant.js */ 10); // url 常量类
 
 
-var urlConstant = __webpack_require__(/*! ./UrlConstant.js */ 11); // 映射 常量类
+var urlConstant = __webpack_require__(/*! ./UrlConstant.js */ 12); // 映射 常量类
 
 
-var mappingConstant = __webpack_require__(/*! ./MappingConstant.js */ 12);
+var mappingConstant = __webpack_require__(/*! ./MappingConstant.js */ 13);
 
 module.exports = {
   app: appConstant,

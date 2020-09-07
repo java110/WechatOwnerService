@@ -4,13 +4,8 @@
  * add by wuxw 2019-12-28
  */
 const constant = require("../constant/index.js");
-
-// 服务器域名 公众号
-const baseUrl = '/'; 
-
-//服务器域名 小程序时
-//const baseUrl = 'https://app.demo.winqi.cn'; 
-
+import conf from '../conf/config.js'
+const baseUrl = conf.baseUrl; 
 
 const wechatRefrashToken = baseUrl + "app/refreshToken"; // 公众号刷新token
 
@@ -229,13 +224,10 @@ module.exports = {
 	deleteOwnerRepair: deleteOwnerRepair,
 	repairDispatch: repairDispatch,
 	appraiseRepair:appraiseRepair,
-
 	listFeeByAttr:listFeeByAttr,
-
 	listWorkflowAuditInfo:listWorkflowAuditInfo,
 	auditComplaint:auditComplaint,
 	ownerRegisterWxPhoto:ownerRegisterWxPhoto,
 	changeStaffPwd:changeStaffPwd,
 	changeOwnerPhone:changeOwnerPhone
-
 };

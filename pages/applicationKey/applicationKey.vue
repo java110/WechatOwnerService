@@ -38,9 +38,7 @@
 </template>
 
 <script>
-const context = require("../../context/Java110Context.js");
-const constant = context.constant;
-const util = context.util;
+
 export default {
   data() {
     return {};
@@ -53,38 +51,8 @@ export default {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	  context.onLoad(options);
+	  this.vc.onLoad(options);
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
@@ -95,7 +63,7 @@ export default {
      * 申请钥匙
      */
     applyApplicationKey: function () {
-      wx.navigateTo({
+      this.vc.navigateTo({
         url: '/pages/applicationKeyLocation/applicationKeyLocation'
       });
     }

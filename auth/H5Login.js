@@ -1,6 +1,6 @@
 
 
-import url from '../constant/url.js'；
+import url from '../constant/url.js'
 import {requestNoAuth} from '../api/java110Request.js'
 
 

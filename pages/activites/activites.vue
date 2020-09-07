@@ -28,10 +28,7 @@
 </template>
 
 <script>
-// pages/activites/activites.js
-const context = require("../../context/Java110Context.js");
-const constant = context.constant;
-const util = context.util;
+import {loadActivites} from '../../api/index/indexApi.js'
 
 export default {
   data() {
@@ -49,56 +46,18 @@ export default {
    */
   onLoad: function (options) {
     let _that = this;
-	
-	context.onLoad(options);
-
-    context.getOwner(function (_owner) {
-      let _communityId = '';
-
-      if (_owner == null) {
-        _communityId = '7020181217000001';
-      } else {
-        _communityId = _owner.communityId;
-      }
-		_that.communityId = _communityId;
-      // _that.setData({
-      //   communityId: _communityId
-      // }); //查询小区文化
-
-
-      _that.loadActivitesFun();
-    });
+	this.vc.onLoad(options);
+	this.vc.recoveryCommunityInfo(_that)
+	.then((_communityInfo)=>{
+		_that.loadActivitesFun();
+	})
+	// this.vc.getCurCommunity()
+	// .then(function(_communityInfo){
+	// 	_that.communityId = _communityInfo.communityId;
+	// 	//查询小区活动信息
+	// 	_that.loadActivitesFun();
+	// })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
@@ -112,58 +71,15 @@ export default {
      */
     loadActivitesFun: function () {
       let _that = this;
-
       let _objData = {
         page: 1,
         row: 15,
         communityId: this.communityId
       };
-      context.request({
-        url: constant.url.listActivitiess,
-        header: context.getHeaders(),
-        method: "GET",
-        data: _objData,
-        //动态数据
-        success: function (res) {
-          console.log("请求返回信息：", res);
-
-          if (res.statusCode == 200) {
-            let _activites = res.data.activitiess;
-            let _acts = [];
-
-            _activites.forEach(function (_item) {
-              _item.src = constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.communityId + "&time=" + new Date();
-
-              let _startTime = _item.startTime.replace(/\-/g, "/");
-
-              let _tmpStartTime = new Date(_startTime);
-
-              _item.startTime = util.date.formatDate(_tmpStartTime);
-
-              _acts.push(_item);
-            });
-			_that.activities = _acts;
-            // _that.setData({
-            //   activities: _acts
-            // });
-
-            return;
-          }
-
-          wx.showToast({
-            title: "服务器异常了",
-            icon: 'none',
-            duration: 2000
-          });
-        },
-        fail: function (e) {
-          wx.showToast({
-            title: "服务器异常了",
-            icon: 'none',
-            duration: 2000
-          });
-        }
-      });
+      loadActivites(_objData)
+	  .then((_acts)=>{
+		  _that.activities = _acts;
+	  });
     }
   }
 };

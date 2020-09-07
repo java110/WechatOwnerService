@@ -1,7 +1,8 @@
-//后台地址
-let baseUrl = '/';
 
+import conf from '../conf/config.js'
+const baseUrl = conf.baseUrl; 
 export default {
+	baseUrl:baseUrl,
 	wechatRefrashToken: baseUrl + "app/refreshToken", // 公众号刷新token
 	loginOwnerByKey: baseUrl + "app/loginOwnerByKey", // 根据临时秘钥登录
 	loginUrl: baseUrl + 'app/loginWx',
@@ -93,9 +94,9 @@ export default {
 		'/pages/showlogin/showlogin'
 	],
 	NEED_NOT_LOGIN_URL: [
-		listActivitiess,
-		listAdvertPhoto,
-		queryAppUserBindingOwner,
-		listJunkRequirements
+		// this.listActivitiess,
+		// this.listAdvertPhoto,
+		// this.queryAppUserBindingOwner,
+		// this.listJunkRequirements
 	]
 }

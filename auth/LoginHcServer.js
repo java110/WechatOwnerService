@@ -1,5 +1,5 @@
 import {
-	requestNoAuth)
+	requestNoAuth
 } from '../api/java110Request.js'
 import url from '../constant/url.js'
 import mapping from '../constant/MappingConstant.js'

@@ -2,13 +2,13 @@ import coreUtil from '../utils/CoreUtil.js'
 
 import app from '../constant/AppConstant.js'
 
-import dataUtil from '../utils/DateUtil.js'
+import {getDateYYYYMMDDHHMISS} from '../utils/DateUtil.js'
 
 import url from '../constant/url.js'
 
 import mapping from '../constant/MappingConstant.js'
 
-import auth from '../auth/Java110Auth.js'
+import {checkSession} from '../auth/Java110Auth.js'
 
 import {
 	wechatRefreshToken
@@ -22,16 +22,19 @@ import {
 	doLoginOwnerByKey
 }
 from '../auth/AppLogin.js'
+
+
+import {debug,warn,info,error} from '../utils/LogUtil.js'
 /**
  * 获取请求头信息
  * add by 吴学文 QQ：928255095
  **/
 export function getHeaders() {
-	let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
+	let _wAppId = uni.getStorageSync(mapping.W_APP_ID);
 	return {
 		"app-id": app.appId,
 		"transaction-id": coreUtil.wxuuid(),
-		"req-time": dataUtil.getDateYYYYMMDDHHMISS(),
+		"req-time": getDateYYYYMMDDHHMISS(),
 		"sign": '1234567',
 		"user-id": '-1',
 		"cookie": '_java110_token_=' + wx.getStorageSync('token'),
@@ -43,6 +46,9 @@ export function getHeaders() {
  * http 请求 加入是否登录判断
  */
 export function request(_reqObj) {
+	
+	debug('java110Request','request',_reqObj);
+	
 	//这里判断只有在 post 方式时 放加载框
 	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
 		uni.showLoading({
@@ -72,7 +78,7 @@ export function request(_reqObj) {
 		return;
 	}
 	//校验是否登录，如果没有登录跳转至温馨提示页面
-	auth.checkSession().then(function() {
+	checkSession().then(function() {
 		//有回话 跳转至相应页面
 		//重写token
 		_reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
@@ -109,6 +115,7 @@ export function request(_reqObj) {
  * @param {Object} _reqObj 请求参数
  */
 export function requestNoAuth(_reqObj) {
+	debug('java110Request','requestNoAuth',_reqObj);
 	//这里判断只有在 post 方式时 放加载框
 	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
 		uni.showLoading({

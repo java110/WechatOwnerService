@@ -36,6 +36,10 @@ const context = require("../../context/Java110Context.js");
 const constant = context.constant;
 const util = context.util;
 
+import {getCurCommunity} from '../../api/community/communityApi.js'
+
+import {getRooms} from '../../api/room/roomApi.js'
+
 export default {
   data() {
     return {
@@ -53,13 +57,13 @@ export default {
   onLoad: function (options) {
 	context.onLoad(options);
     this.loadOwnerHouse(1);
-
-    let _communityInfo = context.getCurrentCommunity();
-
-    this.setData({
-      communityId: _communityInfo.communityId,
-      communityName: _communityInfo.communityName
-    });
+	let _that = this;
+	
+	getCurCommunity()
+	.then(function(_communityInfo){
+		_that.communityId = _communityInfo.communityId;
+		_that.communityName = _communityInfo.communityName;
+	})
   },
   methods: {
     /**
@@ -68,31 +72,17 @@ export default {
     loadOwnerHouse: function () {
       let _that = this;
 
-      context.getRooms().then(res => {
-        if (res) {
-          console.log("res=", res);
-          let _room = res.data.rooms;
-          let _owner = res.data.owner;
-
-          if (_room.length == 0) {
-            wx.showToast({
-              title: "未查询到房间",
-              icon: 'none',
-              duration: 2000
-            });
-            return;
-          }
-
+      getRooms()
+	  .then(data => {
+        if (data) {
+          let _room = data.rooms;
+          let _owner = data.owner;
           for (let _psIndex = 0; _psIndex < _room.length; _psIndex++) {
             _that.loadParkingSpaceFeeFun(_owner, _room[_psIndex], function (_fee) {
               let _tmpEndTime = _fee.endTime.replace(/\-/g, "/");
-
               let _endTime = new Date(_tmpEndTime);
-
               _room[_psIndex].endTime = util.date.formatDate(_endTime);
-
               let _now = new Date();
-
               if (_endTime > _now) {
                 _room[_psIndex].feeStateName = '正常';
                 _room[_psIndex].state = 'N';
@@ -100,21 +90,13 @@ export default {
                 _room[_psIndex].feeStateName = '欠费';
                 _room[_psIndex].state = 'Y';
               }
-
               _room[_psIndex].additionalAmount = _fee.additionalAmount;
               _room[_psIndex].feeId = _fee.feeId;
               _room[_psIndex].ownerName = _fee.ownerName;
               console.log("_room[_psIndex]=", _room[_psIndex]);
-
-              _that.setData({
-                rooms: _room
-              });
             });
           }
-
-          _that.setData({
-            rooms: res.data.rooms
-          });
+          _that.rooms = _room;
         }
       });
     },

@@ -85,11 +85,13 @@
 </template>
 
 <script>
-	// pages/index/index.js
-	const context = require("../../context/Java110Context.js");
-	const constant = context.constant;
-	// import Dialog from '../../wxcomponents/vant/dialog/dialog';
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
+	import {getActivitiTitle,getCategoryList,loadActivites,loadAdverts} from '../../api/index/indexApi.js'
+	import {getProperty} from '../../api/property/propertyApi.js'
+	
+	import {getCurOwner} from '../../api/owner/ownerApi.js'
+	
+	import {hasLogin} from '../../auth/Java110Auth.js'
 	export default {
 		data() {
 			return {
@@ -100,63 +102,9 @@
 				notices: [],
 				page: 1,
 				row: 7,
-				activitiTitle: [{
-						typeCd: '10003',
-						name: '公共安全及消防'
-					},
-					{
-						typeCd: '10004',
-						name: '政务及党政'
-					},
-					{
-						typeCd: '10005',
-						name: '费用公开'
-					},
-					{
-						typeCd: '10001',
-						name: '小区文化'
-					},
-					{
-						typeCd: '10002',
-						name: '其他'
-					}
-				],
+				activitiTitle: [],
 				curTypeCd: '10003',
-				categoryList: {
-					pageone: [{
-						name: "物业费",
-						src: "/static/images/index_property.png",
-						href: "/pages/roomFeeList/roomFeeList"
-					}, {
-						name: "停车费",
-						src: "/static/images/index_park.png",
-						href: "/pages/payParkingFeeList/payParkingFeeList"
-					}, {
-						name: "投诉建议",
-						src: "/static/images/index_complaint.png",
-						href: "/pages/complaint/complaint"
-					}, {
-						name: "家庭成员",
-						src: "/static/images/index_member.png",
-						href: "/pages/familyList/familyList"
-					}, {
-						name: "报修",
-						src: "/static/images/index_repair.png",
-						href: "/pages/repair/repair"
-					}, {
-						name: "智慧开门",
-						src: "/static/images/index_openDoor.png",
-						href: "/pages/openDoor/openDoor"
-					}, {
-						name: "公告",
-						src: "/static/images/index_notice.png",
-						href: "/pages/notice/index"
-					}, {
-						name: "联系客服",
-						src: "/static/images/index_persion.png",
-						href: "callProperty"
-					}]
-				},
+				categoryList: {},
 				selected: 0,
 				mask1Hidden: true,
 				mask2Hidden: true,
@@ -168,7 +116,6 @@
 				sortSelected: "综合排序"
 			};
 		},
-
 		components: {
 			uniNoticeBar
 		},
@@ -177,8 +124,12 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			context.onLoad(options);
-
+			this.vc.onLoad(options);
+			
+			//查询 活动标题
+			this.activitiTitle = getActivitiTitle();			
+			//查询目录
+			this.categoryList = getCategoryList();
 		},
 
 		/**
@@ -188,14 +139,13 @@
 		onShareAppMessage:function() {
 			
 		},
-
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
-			var _that = this;
-			_that.location = wx.getStorageSync('location');
-			if (context.checkLoginStatus()) {
+			let _that = this;
+			_that.location = this.vc.getStorageSync('location');
+			if (hasLogin()) {
 				_that.judgeBindOwnerFun();
 			}
 			_that.notices = [];
@@ -209,41 +159,31 @@
 		onReachBottom: function() {
 			if (this.notices.length >= this.page * this.row) {
 				this.page = this.page + 1;
-				this.loadActivitesFun();
+				this._loadActivites();
 			}
 		},
 		methods: {
 			_initIndexData: function() {
 				let _that = this;
-				let loginStatus = context.checkLoginStatus();
-				if (!loginStatus) {
-					//HC测试小区id
-					_that.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-				} else {
-					context.getOwner(function(_owner) {
-						let _communityId = '';
-						if (_owner == null) {
-							_communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-						} else {
-							_communityId = _owner.communityId;
-						}
-						_that.communityId = _communityId;
-					});
-				}
-				_that.loadActivitesFun(); //查询小区广告
-				_that.loadCommunityAdvertPhotoFun();
+				//查询当前小区信息
+				this.vc.getCurCommunity()
+				.then(function(_communityInfo){
+					_that.communityId = _communityInfo.communityId;
+					//查询小区活动信息
+					_that._loadActivites();
+					_that._loadAdvertPhoto();
+				})
 			},
 			judgeBindOwnerFun: function() {
-				context.getOwner(function(_owner) {
-
-				});
+				//查询业主
+				getCurOwner();
 			},
 			/**
 			 * 加载活动
 			 * 第一次加载是可能没有小区 则直接下载固定小区
 			 * 
 			 */
-			loadActivitesFun: function() {
+			_loadActivites: function() {
 				let _that = this;
 				let _objData = {
 					page: this.page,
@@ -251,164 +191,74 @@
 					communityId: this.communityId,
 					typeCd: this.curTypeCd
 				};
-				context.request({
-					url: constant.url.listActivitiess,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						if (res.statusCode == 200) {
-							let _activites = res.data.activitiess;
-							let _acts = [];
-
-							_activites.forEach(function(_item) {
-								_item.src = constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.communityId +
-									"&time=" + new Date();
-
-								_acts.push(_item);
-							});
-							_that.notices = _that.notices.concat(_acts);
-							return;
-						}
-
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
+				//加载活动
+				loadActivites(_objData)
+				.then(function(_acts){
+					_that.notices = _that.notices.concat(_acts);
 				});
 			},
-			loadCommunityAdvertPhotoFun: function() {
+			_loadAdvertPhoto: function() {
 				let _that = this;
-
 				let _objData = {
 					page: 1,
 					row: 5,
 					communityId: this.communityId
 				};
-				context.request({
-					url: constant.url.listAdvertPhoto,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-
-						if (res.statusCode == 200) {
-							let _advertPhotos = res.data;
-							let _aPhotos = [];
-							let _urlPath = '';
-							// #ifdef MP-WEIXIN
-							_urlPath = constant.url.baseUrl
-							// #endif
-
-							_advertPhotos.forEach(function(_item) {
-								_item.url = _urlPath + _item.url + "&time=" + new Date();
-
-								_aPhotos.push(_item);
-							});
-							_that.ad = _aPhotos;
-							return;
-						}
-
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
+				//查询 广告
+				loadAdverts(_objData)
+				.then(function(_aPhotos){
+					_that.ad = _aPhotos;
 				});
 			},
 			moreActivitiesFun: function() {
-				context.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/activites/activites'
 				});
 			},
 			showModal: function(e) {
-				context.navigateTo({
+				this.vc.navigateTo({
 					url: '../bindOwner/bindOwner'
 				});
 			},
 			callPropertyTel: function() { //拨打电话
 				let _that = this;
-				let loginStatus = context.checkLoginStatus();
-				if (!loginStatus) {
+				if (!hasLogin()) {
 					uni.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				let _objData = {
-					page: 1,
-					row: 5,
-					communityId: this.communityId,
-					memberTypeCd: '390001200002'
-				};
-				context.request({
-					url: constant.url.listStore,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						if (res.statusCode == 200) {
-							_that.property = res.data.stores[0];
-							_that.callPropertyModal = true;
-							return;
-						}
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				});
-
+				//查询物业信息
+				getProperty()
+				.then(function(_propertyInfo){
+					_that.property = _propertyInfo;
+					_that.callPropertyModal = true;
+				})
+				.then(function(res){
+					uni.showToast({
+						title: res,
+						icon: 'none',
+						duration: 2000
+					});
+				})
 			},
 			_doCall: function() {
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
 					phoneNumber: _that.property.tel,
-
 					// 成功回调
 					success: (res) => {
 						console.log('调用成功!')
 					},
-
 					// 失败回调
 					fail: (res) => {
 						console.log('调用失败!')
 					}
-
 				});
 			},
 			_toDetail: function(_item) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/activitesDetail/activitesDetail?activitiesId=' + _item.activitiesId + '&title=' + _item.title +
 						'&communityId=' + _item.communityId
 				});
@@ -420,10 +270,10 @@
 				this.curTypeCd = _item.typeCd;
 				this.notices = [];
 				this.page = 1;
-				this.loadActivitesFun();
+				this._loadActivites();
 			},
 			toPage: function(pageUrl) {
-				context.navigateTo({
+				this.vc.navigateTo({
 					url: pageUrl
 				});
 			},

@@ -58,6 +58,10 @@
 	const constant = context.constant;
 	const util = context.util;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	
+	import {getRooms} from '../../api/room/roomApi.js'
+	
+	import {getRoomFees} from '../../api/fee/feeApi.js'
 
 	export default {
 		data() {
@@ -89,10 +93,10 @@
 				return;
 			}
 			this.noData = false;
-			context.getRooms().then(res => {
-				let _rooms = res.data.rooms;
+			getRooms().then(data => {
+				let _rooms = data.rooms;
 				this.rooms = _rooms;
-				let _owner = res.data.owner;
+				let _owner = data.owner;
 				_that.moreRooms = [];
 				if (_rooms.length == 0) {
 					_that.noData = true;
@@ -124,50 +128,14 @@
 					state:'2008001'
 				}
 				_that.moreRooms = [];
-				context.request({
-					url: constant.url.queryFeeByOwner,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData, //动态数据
-					success: function(res) {
-						if (res.statusCode == 200) {
-							//成功情况下跳转
-							let _roomFees = res.data.fees;
-							if (_roomFees.length < 1) {
-								_that.noData = true;
-							}
-							_roomFees.forEach(function(_roomFee) {
-								let _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/")
-								let _endTime = new Date(_tmpEndTime);
-								let _tmpRoom = JSON.parse(JSON.stringify(_room));
-								_tmpRoom.endTime = util.date.formatDate(_endTime);
-
-								let _now = new Date();
-								if (_endTime > _now) {
-									_tmpRoom.feeStateName = '正常'
-								} else {
-									_tmpRoom.feeStateName = '欠费'
-								}
-								_tmpRoom.additionalAmount = _roomFee.additionalAmount;
-								_tmpRoom.squarePrice = _roomFee.squarePrice;
-								_tmpRoom.amount = _roomFee.feePrice;
-								_tmpRoom.feeId = _roomFee.feeId;
-								_tmpRoom.feeName = _roomFee.feeName;
-								_tmpRoom.feeFlag = _roomFee.feeFlag;
-								_tmpRoom.paymentCycle = _roomFee.paymentCycle;
-								_that.moreRooms.push(_tmpRoom);
-							});
-
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
+				getRoomFees(_objData,_room)
+				.then((moreRooms)=>{
+					_that.moreRooms = moreRooms;
+					_that.noData = false;	
+				})
+				.then(()=>{
+					_that.noData = true;
+				})
 			},
 			payFeeDetail: function(_item) {
 				wx.navigateTo({

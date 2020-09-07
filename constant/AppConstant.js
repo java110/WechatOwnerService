@@ -3,9 +3,10 @@
  * 
  * add by wuxw 2019-12-28
  */
+import conf from '../conf/config.js'
 class AppConstant {
 	
-	static wAppId="wx43458162e3c31d92"; //微信AppId
+  static wAppId= conf.wAppId; //微信AppId
   /**
   * 应用信息，主要是用来和后端服务交互时的时候用
   */
@@ -15,7 +16,6 @@ class AppConstant {
   // #endif
   
   // #ifdef H5
-  
   static appId = "992020061452450002";
   static appSecurity = "";
   // #endif

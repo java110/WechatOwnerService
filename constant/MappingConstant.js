@@ -3,6 +3,7 @@
  * 
  * add by wuxw 2019-12-28
  */
+import conf from '../conf/config.js'
 class MappingConstant {
   static LOGIN_FLAG = 'loginFlag'; //登录标识
 
@@ -22,7 +23,8 @@ class MappingConstant {
   
   static CURRENT_OPEN_ID = "openId";
   
-  static HC_TEST_COMMUNITY_ID = "7020181217000001";//HC测试小区id  用于没有登录时展示相关信息
+  static HC_TEST_COMMUNITY_ID = conf.DEFAULT_COMMUNITY_ID;//HC测试小区id  用于没有登录时展示相关信息
+  static HC_TEST_COMMUNITY_NAME = conf.DEFAULT_COMMUNITY_NAME;
   
   static W_APP_ID = "wAppId";//微信公众号ID
  

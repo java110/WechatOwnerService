@@ -42,13 +42,23 @@
     "pages/market/market",
     "pages/newJunk/newJunk",
     "pages/myJunk/myJunk",
-    "pages/showlogin/showlogin"
+    "pages/showlogin/showlogin",
+    "pages/selectFloor/selectFloor",
+    "pages/selectUnit/selectUnit",
+    "pages/repairDetail/repairDetail",
+    "pages/appraiseRepair/appraiseRepair",
+    "pages/repairPay/repairPay",
+    "pages/complaintDetail/complaintDetail",
+    "pages/complaintHandle/complaintHandle",
+    "pages/registerByWechat/registerByWechat",
+    "pages/changePassword/changePassword",
+    "pages/changeOwnerPhone/changeOwnerPhone"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#00AA00",
-    "navigationBarTitleText": "益掌通"
+    "navigationBarTitleText": "HC智慧家园"
   },
   "tabBar": {
     "color": "#272636",
@@ -82,5 +92,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap35.json"
+  "sitemapLocation": "sitemap97.json"
 }
