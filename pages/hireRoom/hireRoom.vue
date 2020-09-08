@@ -3,7 +3,7 @@
 		<view class="block__title">房屋信息</view>
 		<view class="cu-form-group">
 			<view class="title">出租标题</view>
-			<input v-model="priceScope" placeholder="如香格里拉豪华大单间" style="text-align:right"></input>
+			<input v-model="rentingName" placeholder="如香格里拉豪华大单间" class="text-right"></input>
 		</view>
 		<view class="cu-form-group" >
 			<view class="title">房屋信息</view>
@@ -36,11 +36,26 @@
 			</picker>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">手机号</view>
-			<input v-model="bindTel" placeholder="请输入手机号"></input>
+			<view class="title">租金</view>
+			<input v-model="price" class="text-right" placeholder="请输入每月租金"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">付费类型</view>
+			<picker id="rentingType" bindchange="PickerChange" :value="rentingTypeIndex" :range-key="'rentingTypeName'" :range="rentingTypes" @change="rentingTypeChange">
+				<view class="picker">
+					{{rentingTypes[rentingTypeIndex].rentingTypeName}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">服务费</view>
+			<input v-model="servicePrice" class="text-right" disabled="disabled" ></input>
+		</view>
+		
+		<view class="cu-form-group margin-top">
+			<textarea v-model="rentingDesc" placeholder="请输入描述信息"></textarea>
 		</view>
 	
-		
 		<view class="block__title">相关图片</view>
 
 		<view class="cu-bar bg-white ">
@@ -68,7 +83,7 @@
 		<view class="button_up_blank"></view>
 
 		<view class="flex flex-direction">
-			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitRepair()">提交</button>
+			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitHireRoom()">提交</button>
 		</view>
 
 	</view>
@@ -78,35 +93,28 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
+	
+	import {queryRentingConfig,hireRoom} from '../../api/room/roomApi.js'
 
 	export default {
 		data() {
 			return {
-				minDate: new Date().getTime(),
 				rooms:[],
 				apartment:'',
 				builtUpArea:'',
 				layer:'',
+				price:'',
 				roomCloums: [],
 				roomIdArr: [],
 				roomName: "",
 				roomId: '',
 				roomShow: false,
-				typeName: '',
-				typeShow: false,
-				timeShow: false,
 				imgList: [],
-				bindTel: '',
-				context: '',
-				bindRepairName: '',
-				userId: '',
+				userTel: '',
 				userName:'',
-				storeId: '',
 				photos: [],
 				communityId: "",
 				communityName: "",
-				complaintIndex: 0,
-				index: 0,
 				paymentTypes: [{
 					id:'1001',
 					paymentTypeName:'押一付一'
@@ -120,7 +128,14 @@
 				paymentTypeIndex:0,
 				paymentType: '',
 				paymentTypeName: '',
-				priceScope:'',
+				rentingTypes: [],
+				rentingTypeIndex:0,
+				rentingType: '',
+				rentingTypeName: '',
+				rentingConfigId:'',
+				servicePrice:'',
+				rentingDesc:'',
+				rentingName:''
 			};
 		},
 
@@ -141,26 +156,14 @@
 				})
 				that.roomCloums = roomCloums;
 				that.roomIdArr = roomIdArr;
-				that.userId = res.data.owner.userId;
+				that.userTel = res.data.owner.link;
 				that.userName = res.data.owner.appUserName;
 				that.communityId = res.data.owner.communityId;
 				that.communityName = res.data.owner.communityName;
 			});
 			
 			//加载报修类型
-			this._loadRepairTypes();
-		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {
-		
+			this._loadRentingTypes();
 		},
 
 		/**
@@ -168,109 +171,39 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			formatter(type, value) {
-				if (type === 'year') {
-					return `${value}年`;
-				} else if (type === 'month') {
-					return `${value}月`;
-				} else if (type === 'day') {
-					return `${value}日`;
-				}
-				return value;
-			},
-
-
-			submitRepair: function(e) {
+			submitHireRoom: function() {
 				let obj = {
-					"repairName": this.bindRepairName,
-					"repairType": this.repairType,
-					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
-					"tel": this.bindTel,
+					"rentingName": this.rentingName,
 					"roomId": this.roomId,
-					"photos": [],
-					"context": this.context,
-					"userId": this.userId,
-					"userName":this.userName,
 					"communityId": this.communityId,
-					"bindDate": this.bindDate,
-					"bindTime": this.bindTime,
-					"repairObjType":this.repairObjType
+					"price": this.price,
+					"paymentType": this.paymentType,
+					"rentingConfigId": this.rentingConfigId,
+					"photos": [],
+					"rentingDesc": this.rentingDesc,
+					"ownerTel": this.userTel,
+					"ownerName":this.userName,
+					"state":"0"
 				}
-
-				if (this.repairObjType == '001') {
-					obj.repairObjId = this.communityId;
-					obj.repairObjName = this.communityName;
-				} else if (this.repairObjType == '002') {
-					obj.repairObjId = this.floorId;
-					obj.repairObjName = this.floorNum ;
-				} else if (this.repairObjType == '003') {
-					obj.repairObjId = this.unitId;
-					obj.repairObjName = this.floorNum  + this.unitNum ;
-				}else{
-					obj.repairObjId = this.roomId;
-					obj.repairObjName = this.roomName;
-				}
-
 				let _photos = this.photos;
 				_photos.forEach(function(_item) {
 					obj.photos.push({
 						"photo": _item
 					});
 				});
-
-				let msg = "";
-				 if (obj.repairType == "") {
-					msg = "请选择报修类型";
-				} else if (obj.bindRepairName == "") {
-					msg = "请填写报修人";
-				} else if (obj.tel == "") {
-					msg = "请填写手机号";
-				} else if (obj.bindDate == "") {
-					msg = "请选择预约日期";
-				} else if (obj.bindTime == "") {
-					msg = "请选择预约时间";
-				} else if (obj.context == "") {
-					msg = "请填写投诉内容";
-				}else if(obj.repairObjId == ''){
-					msg = "请选择报修位置";
-				}
-
-				if (msg != "") {
-					wx.showToast({
-						title: msg,
-						icon: 'none',
-						duration: 2000
-					});
-				} else {
-					context.request({
-						url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-						header: context.getHeaders(),
-						method: "POST",
-						data: obj, //动态数据
-						success: function(res) {
-							let _json = res.data;
-							if (_json.code == 0) {
-								wx.redirectTo({
-									url: '/pages/myRepair/myRepair',
-								});
-								return;
-							}
-							wx.showToast({
-								title: "服务器异常了",
-								icon: 'none',
-								duration: 2000
-							})
-						},
-						fail: function(e) {
-							wx.showToast({
-								title: "服务器异常了",
-								icon: 'none',
-								duration: 2000
-							})
-						}
-					});
-
-				}
+				
+				hireRoom(obj)
+				.then((res)=>{
+					
+					//跳转页面
+					
+				},(error)=>{
+					console.log(error);
+					uni.showToast({
+						icon:'none',
+						title:error
+					})
+				})
 			},
 			
 			deleteImage: function(e) {
@@ -315,35 +248,25 @@
 				this.paymentType = selected.id //选中的id
 				this.paymentTypeName = selected.paymentTypeName //选中的id
 			},
-			_loadRepairTypes:function(){
-				let _communityInfo = context.getCurrentCommunity();
-				let _that =this;
-				let dataObj = {
-					page: 1,
-					row: 50,
-					communityId: _communityInfo.communityId,
-				};
-				uni.request({
-					url: constant.url.listRepairSettings,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: function(res) {
-						let _json = res.data;
-						if (_json.code == 0) {
-							
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+			_loadRentingTypes:function(){
+				let _that = this;
+				queryRentingConfig()
+				.then((_rentingTypes)=>{
+					_that.rentingTypes = _rentingTypes;
+					if(_rentingTypes.length >0){
+						let selected = _rentingTypes[0];
+						_that.rentingConfigId = selected.rentingConfigId;
+						_that.servicePrice = (selected.servicePrice * selected.serviceOwnerRate)+'元';
 					}
 				});
-			}
+			},
+			rentingTypeChange:function(e){
+				this.rentingTypeIndex = e.target.value //取其下标
+				let selected = this.rentingTypes[this.rentingTypeIndex] //获取选中的数组
+				this.rentingConfigId = selected.rentingConfigId //选中的id
+				this.rentingTypeName = selected.rentingTypeName //选中的id
+				this.servicePrice = (selected.servicePrice * selected.serviceOwnerRate)+'元';
+			},
 			
 		}
 	};

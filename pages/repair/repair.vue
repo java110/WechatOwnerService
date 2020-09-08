@@ -11,12 +11,12 @@
 		</view>
 		<view class="cu-form-group arrow" v-if="repairObjType == '002' || repairObjType =='003'" @tap="chooseFloor">
 			<view class="title">楼栋</view>
-			<input required readonly label="楼栋" v-model="floorNum" placeholder="请选择楼栋" name="floorNum" icon="arrow"></input>
+			<input required readonly label="楼栋" v-model="floorNum" class="text-right" placeholder="请选择楼栋" name="floorNum" icon="arrow"></input>
 			<text class='cuIcon-right'></text>
 		</view>
 		<view class="cu-form-group arrow" v-if="repairObjType =='003'" @tap="chooseUnit">
 			<view class="title">单元</view>
-			<input v-model="unitNum" placeholder="请选择单元"></input>
+			<input v-model="unitNum" placeholder="请选择单元" class="text-right"></input>
 			<text class='cuIcon-right'></text>
 		</view>
 		<view class="cu-form-group" v-if="repairObjType == '004'">
@@ -39,15 +39,15 @@
 		</view>
 		<view class="cu-form-group" v-if="priceScope !=''">
 			<view class="title">收费标准</view>
-			<input disabled="disable" v-model="priceScope" ></input>
+			<input disabled="disable" v-model="priceScope" class="text-right"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">报修人</view>
-			<input v-model="bindRepairName" placeholder="请输入报修人"></input>
+			<input v-model="bindRepairName" placeholder="请输入报修人" class="text-right"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="bindTel" placeholder="请输入手机号"></input>
+			<input v-model="bindTel" placeholder="请输入手机号" class="text-right"></input>
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">预约日期</view>
@@ -80,7 +80,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" bindtap="ViewImage" :data-url="imgList[index]">
+				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
 					<image :src='imgList[index]' mode='aspectFill'></image>
 					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
 						<text class="cuIcon-close"></text>

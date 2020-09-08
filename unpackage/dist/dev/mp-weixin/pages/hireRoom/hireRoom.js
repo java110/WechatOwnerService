@@ -130,279 +130,212 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
-var constant = context.constant;
-var factory = context.factory;var _default =
-
-{
-  data: function data() {
-    return {
-      minDate: new Date().getTime(),
-      rooms: [],
-      apartment: '',
-      builtUpArea: '',
-      layer: '',
-      roomCloums: [],
-      roomIdArr: [],
-      roomName: "",
-      roomId: '',
-      roomShow: false,
-      typeName: '',
-      typeShow: false,
-      timeShow: false,
-      imgList: [],
-      bindTel: '',
-      context: '',
-      bindRepairName: '',
-      userId: '',
-      userName: '',
-      storeId: '',
-      photos: [],
-      communityId: "",
-      communityName: "",
-      complaintIndex: 0,
-      index: 0,
-      paymentTypes: [{
-        id: '1001',
-        paymentTypeName: '押一付一' },
-      {
-        id: '2002',
-        paymentTypeName: '押一付三' },
-      {
-        id: '3003',
-        paymentTypeName: '押一付六' }],
-
-      paymentTypeIndex: 0,
-      paymentType: '',
-      paymentTypeName: '',
-      priceScope: '' };
-
-  },
-
-  /**
-      * 生命周期函数--监听页面加载
-      */
-  onLoad: function onLoad(options) {
-    var that = this;
-    this.vc.onLoad(options);
-    context.getRooms().then(function (res) {
-      var arr = res.data.rooms;
-      that.rooms = arr;
-      var roomCloums = [];
-      var roomIdArr = [];
-      arr.map(function (item) {
-        roomCloums.push(item.floorNum + "号楼" + item.unitNum + "单元" + item.roomNum + "室");
-        roomIdArr.push(item.roomId);
-      });
-      that.roomCloums = roomCloums;
-      that.roomIdArr = roomIdArr;
-      that.userId = res.data.owner.userId;
-      that.userName = res.data.owner.appUserName;
-      that.communityId = res.data.owner.communityId;
-      that.communityName = res.data.owner.communityName;
-    });
-
-    //加载报修类型
-    this._loadRepairTypes();
-  },
-
-  /**
-      * 生命周期函数--监听页面初次渲染完成
-      */
-  onReady: function onReady() {},
-
-  /**
-                                   * 生命周期函数--监听页面显示
-                                   */
-  onShow: function onShow() {
-
-  },
-
-  /**
-      * 用户点击右上角分享
-      */
-  onShareAppMessage: function onShareAppMessage() {},
-  methods: {
-    formatter: function formatter(type, value) {
-      if (type === 'year') {
-        return "".concat(value, "\u5E74");
-      } else if (type === 'month') {
-        return "".concat(value, "\u6708");
-      } else if (type === 'day') {
-        return "".concat(value, "\u65E5");
-      }
-      return value;
-    },
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-    submitRepair: function submitRepair(e) {
-      var obj = {
-        "repairName": this.bindRepairName,
-        "repairType": this.repairType,
-        "appointmentTime": this.bindDate + " " + this.bindTime + ":00",
-        "tel": this.bindTel,
-        "roomId": this.roomId,
-        "photos": [],
-        "context": this.context,
-        "userId": this.userId,
-        "userName": this.userName,
-        "communityId": this.communityId,
-        "bindDate": this.bindDate,
-        "bindTime": this.bindTime,
-        "repairObjType": this.repairObjType };
 
 
-      if (this.repairObjType == '001') {
-        obj.repairObjId = this.communityId;
-        obj.repairObjName = this.communityName;
-      } else if (this.repairObjType == '002') {
-        obj.repairObjId = this.floorId;
-        obj.repairObjName = this.floorNum;
-      } else if (this.repairObjType == '003') {
-        obj.repairObjId = this.unitId;
-        obj.repairObjName = this.floorNum + this.unitNum;
-      } else {
-        obj.repairObjId = this.roomId;
-        obj.repairObjName = this.roomName;
-      }
 
-      var _photos = this.photos;
-      _photos.forEach(function (_item) {
-        obj.photos.push({
-          "photo": _item });
 
-      });
 
-      var msg = "";
-      if (obj.repairType == "") {
-        msg = "请选择报修类型";
-      } else if (obj.bindRepairName == "") {
-        msg = "请填写报修人";
-      } else if (obj.tel == "") {
-        msg = "请填写手机号";
-      } else if (obj.bindDate == "") {
-        msg = "请选择预约日期";
-      } else if (obj.bindTime == "") {
-        msg = "请选择预约时间";
-      } else if (obj.context == "") {
-        msg = "请填写投诉内容";
-      } else if (obj.repairObjId == '') {
-        msg = "请选择报修位置";
-      }
 
-      if (msg != "") {
-        wx.showToast({
-          title: msg,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _roomApi = __webpack_require__(/*! ../../api/room/roomApi.js */ 305); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var constant = context.constant;var factory = context.factory;var _default = { data: function data() {return { rooms: [], apartment: '', builtUpArea: '', layer: '', price: '', roomCloums: [], roomIdArr: [], roomName: "", roomId: '', roomShow: false, imgList: [], userTel: '', userName: '', photos: [], communityId: "", communityName: "", paymentTypes: [{ id: '1001', paymentTypeName: '押一付一' }, { id: '2002', paymentTypeName: '押一付三' }, { id: '3003', paymentTypeName: '押一付六' }], paymentTypeIndex: 0, paymentType: '', paymentTypeName: '', rentingTypes: [], rentingTypeIndex: 0, rentingType: '', rentingTypeName: '', rentingConfigId: '', servicePrice: '', rentingDesc: '', rentingName: '' };}, /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 生命周期函数--监听页面加载
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */onLoad: function onLoad(options) {var that = this;this.vc.onLoad(options);context.getRooms().then(function (res) {var arr = res.data.rooms;that.rooms = arr;var roomCloums = [];var roomIdArr = [];arr.map(function (item) {roomCloums.push(item.floorNum + "号楼" + item.unitNum + "单元" + item.roomNum + "室");roomIdArr.push(item.roomId);});that.roomCloums = roomCloums;that.roomIdArr = roomIdArr;that.userTel = res.data.owner.link;that.userName = res.data.owner.appUserName;that.communityId = res.data.owner.communityId;that.communityName = res.data.owner.communityName;}); //加载报修类型
+    this._loadRentingTypes();}, /**
+                                 * 用户点击右上角分享
+                                 */onShareAppMessage: function onShareAppMessage() {}, methods: { submitHireRoom: function submitHireRoom() {var obj = { "rentingName": this.rentingName, "roomId": this.roomId, "communityId": this.communityId, "price": this.price, "paymentType": this.paymentType, "rentingConfigId": this.rentingConfigId, "photos": [], "rentingDesc": this.rentingDesc, "ownerTel": this.userTel, "ownerName": this.userName, "state": "0" };var _photos = this.photos;_photos.forEach(function (_item) {obj.photos.push({ "photo": _item });});
+
+      (0, _roomApi.hireRoom)(obj).
+      then(function (res) {
+
+        //跳转页面
+
+      }, function (error) {
+        console.log(error);
+        uni.showToast({
           icon: 'none',
-          duration: 2000 });
+          title: error });
 
-      } else {
-        context.request({
-          url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-          header: context.getHeaders(),
-          method: "POST",
-          data: obj, //动态数据
-          success: function success(res) {
-            var _json = res.data;
-            if (_json.code == 0) {
-              wx.redirectTo({
-                url: '/pages/myRepair/myRepair' });
-
-              return;
-            }
-            wx.showToast({
-              title: "服务器异常了",
-              icon: 'none',
-              duration: 2000 });
-
-          },
-          fail: function fail(e) {
-            wx.showToast({
-              title: "服务器异常了",
-              icon: 'none',
-              duration: 2000 });
-
-          } });
-
-
-      }
+      });
     },
 
     deleteImage: function deleteImage(e) {
@@ -447,34 +380,24 @@ var factory = context.factory;var _default =
       this.paymentType = selected.id; //选中的id
       this.paymentTypeName = selected.paymentTypeName; //选中的id
     },
-    _loadRepairTypes: function _loadRepairTypes() {
-      var _communityInfo = context.getCurrentCommunity();
+    _loadRentingTypes: function _loadRentingTypes() {
       var _that = this;
-      var dataObj = {
-        page: 1,
-        row: 50,
-        communityId: _communityInfo.communityId };
-
-      uni.request({
-        url: constant.url.listRepairSettings,
-        header: context.getHeaders(),
-        method: "GET",
-        data: dataObj,
-        //动态数据
-        success: function success(res) {
-          var _json = res.data;
-          if (_json.code == 0) {
-
-          }
-        },
-        fail: function fail(e) {
-          wx.showToast({
-            title: "服务器异常了",
-            icon: 'none',
-            duration: 2000 });
-
-        } });
-
+      (0, _roomApi.queryRentingConfig)().
+      then(function (_rentingTypes) {
+        _that.rentingTypes = _rentingTypes;
+        if (_rentingTypes.length > 0) {
+          var selected = _rentingTypes[0];
+          _that.rentingConfigId = selected.rentingConfigId;
+          _that.servicePrice = selected.servicePrice * selected.serviceOwnerRate + '元';
+        }
+      });
+    },
+    rentingTypeChange: function rentingTypeChange(e) {
+      this.rentingTypeIndex = e.target.value; //取其下标
+      var selected = this.rentingTypes[this.rentingTypeIndex]; //获取选中的数组
+      this.rentingConfigId = selected.rentingConfigId; //选中的id
+      this.rentingTypeName = selected.rentingTypeName; //选中的id
+      this.servicePrice = selected.servicePrice * selected.serviceOwnerRate + '元';
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

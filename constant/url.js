@@ -85,6 +85,7 @@ export default {
 	auditComplaint: baseUrl + 'app/complaint.auditComplaint',
 	changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
 	changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
+	queryRentingConfig: baseUrl+ 'app/renting/queryRentingConfig',// 房屋出租配置查询
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

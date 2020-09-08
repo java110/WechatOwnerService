@@ -2451,6 +2451,7 @@ var baseUrl = _config.default.baseUrl;var _default =
   auditComplaint: baseUrl + 'app/complaint.auditComplaint',
   changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
   changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
+  queryRentingConfig: baseUrl + 'app/renting/queryRentingConfig', // 房屋出租配置查询
   NEED_NOT_LOGIN_PAGE: [
   '/pages/login/login',
   '/pages/register/register',
@@ -10034,7 +10035,7 @@ function uuid() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getRooms = getRooms;
+Object.defineProperty(exports, "__esModule", { value: true });exports.getRooms = getRooms;exports.queryRentingConfig = queryRentingConfig;exports.hireRoom = hireRoom;
 
 
 
@@ -10058,7 +10059,9 @@ var _ownerApi = __webpack_require__(/*! ../owner/ownerApi.js */ 22);function _in
                                                                                                                                                * add by 吴学文 QQ 928255095
                                                                                                                                                */ /**
                                                                                                                                                    * 查询业主房屋
-                                                                                                                                                   */function getRooms() {return new Promise(function (resolve, reject) {
+                                                                                                                                                   */
+function getRooms() {
+  return new Promise(function (resolve, reject) {
     (0, _ownerApi.getCurOwner)().
     then(function (_owner) {
       (0, _java110Request.request)({
@@ -10088,6 +10091,80 @@ var _ownerApi = __webpack_require__(/*! ../owner/ownerApi.js */ 22);function _in
     });
   });
 };
+
+/**
+    * 查询房屋租聘配置
+    */
+function queryRentingConfig() {
+  return new Promise(function (resolve, reject) {
+    (0, _java110Request.request)({
+      url: _url.default.queryRentingConfig,
+      method: "GET",
+      data: {
+        page: 1,
+        row: 10 },
+
+      success: function success(res) {
+
+        var data = res.data;
+        if (data.code == 0) {
+          resolve(data.data);
+        } else {
+          reject(data.msg);
+        }
+      },
+      fail: function fail(res) {
+        reject(res);
+      } });
+
+  });
+}
+
+/**
+   * 房屋租赁
+   * @param {Object} obj 房屋租赁数据
+   */
+function hireRoom(obj) {
+  return new Promise(function (resolve, reject) {
+    var msg = "";
+    if (obj.rentingName == "") {
+      msg = "请选择报修类型";
+    } else if (obj.bindRepairName == "") {
+      msg = "请填写报修人";
+    } else if (obj.tel == "") {
+      msg = "请填写手机号";
+    } else if (obj.bindDate == "") {
+      msg = "请选择预约日期";
+    } else if (obj.bindTime == "") {
+      msg = "请选择预约时间";
+    } else if (obj.context == "") {
+      msg = "请填写投诉内容";
+    } else if (obj.repairObjId == '') {
+      msg = "请选择报修位置";
+    }
+
+    if (msg != "") {
+      reject(msg);
+    } else {
+      (0, _java110Request.request)({
+        url: _url.default.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+        method: "POST",
+        data: obj, //动态数据
+        success: function success(res) {
+          var _json = res.data;
+          if (_json.code == 0) {
+            resolve(_json);
+            return;
+          }
+          reject('服务异常');
+        },
+        fail: function fail(e) {
+          reject('服务异常');
+        } });
+
+    }
+  });
+}
 
 /***/ }),
 
