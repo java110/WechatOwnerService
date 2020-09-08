@@ -84,11 +84,21 @@
 </template>
 
 <script>
-	// pages/applicationKeyUser/applicationKeyUser.js
-	const context = require("../../context/Java110Context.js");
-	const util = context.util;
-	const factory = context.factory;
-	const constant = context.constant;
+	
+	import {
+		getCurOwner
+	} from '../../api/owner/ownerApi.js'
+	
+	import {getProperty}  from '../../api/property/propertyApi.js'
+	
+	import {formatTime,addMonth,addYear} from '../../utils/DateUtil.js'
+	
+	import {sendMessageCode} from '../../api/common/commonApi.js'
+	
+	import {applyApplicationKey} from '../../api/applicationKey/applicationKeyApi.js'
+	
+	import base64 from '../../factory/Base64Factory.js'
+	
 
 	export default {
 		data() {
@@ -133,8 +143,9 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			context.onLoad(options);
-			context.getOwner(function(_owner) {
+			this.vc.onLoad(options);
+			getCurOwner()
+			.then((_owner) =>{
 				_that.name = _owner.appUserName;
 				_that.idCard = _owner.idCard;
 				_that.tel = _owner.link;
@@ -142,7 +153,8 @@
 			this.locations = JSON.parse(options.locations);
 			this.communityId = options.communityId;
 
-			context.getProperty().then(function(_property) {
+			getProperty()
+			.then(function(_property) {
 				_that.propertyId = _property.storeId;
 			})
 		},
@@ -156,31 +168,9 @@
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
-			let _startTime = util.date.formatTime(new Date());
-
+			let _startTime = formatTime(new Date());
 			this.startTime = _startTime;
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
 		/**
 		 * 用户点击右上角分享
 		 */
@@ -199,11 +189,11 @@
 				this.indexExpiry = e.detail.value
 				let _endTime = null;
 				if (e.detail.value == '一个月') {
-					_endTime = util.date.formatTime(util.date.addMonth(new Date(), 1));
+					_endTime = formatTime(addMonth(new Date(), 1));
 				} else if (e.detail.value == '半年') {
-					_endTime = util.date.formatTime(util.date.addMonth(new Date(), 6));
+					_endTime = formatTime(addMonth(new Date(), 6));
 				} else {
-					_endTime = util.date.formatTime(util.date.addYear(new Date(), 1));
+					_endTime = formatTime(addYear(new Date(), 1));
 				}
 
 				this.showExpiry = false;
@@ -248,7 +238,7 @@
 						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						let _base64Photo = '';
-						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+						base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
 							_base64Photo = _res;
 							console.log('base64', _base64Photo);
 							that.photos.push(_base64Photo);
@@ -257,15 +247,11 @@
 				});
 			},
 			sendMsgCode: function() {
-				console.log('获取验证码');
 				var _that = this;
 
 				let obj = {
 					tel: this.tel
 				};
-
-				console.log('obj', obj)
-
 				if (obj.tel == '') {
 					wx.showToast({
 						title: '请输入手机号',
@@ -274,64 +260,9 @@
 					});
 					return;
 				}
-
-				uni.request({
-					url: constant.url.userSendSms,
-					header: context.getHeaders(),
-					method: "POST",
-					data: obj, //动态数据
-					success: function(res) {
-						console.log(res);
-						//成功情况下跳转
-						if (res.statusCode == 200) {
-							wx.showToast({
-								title: '验证码下发成功',
-								icon: 'none',
-								duration: 2000
-							});
-							wx.hideLoading();
-							_that.timer();
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: res.data,
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
-
-
+				sendMessageCode(obj,_that);
 			},
-			timer: function() {
-				let promise = new Promise((resolve, reject) => {
-					let setTimer = setInterval(
-						() => {
-							var second = this.second - 1;
-							this.second = second;
-							this.btnValue = second + '秒';
-							this.btnDisabled = true;
-							if (this.second <= 0) {
-								this.second = 60;
-								this.btnValue = '获取验证码';
-								this.btnDisabled = false;
-								resolve(setTimer)
-							}
-						}, 1000)
-				})
-				promise.then((setTimer) => {
-					clearInterval(setTimer)
-				})
-			},
+			
 
 			/**
 			 * 选择身份
@@ -383,11 +314,11 @@
 				let _endTime = null;
 
 				if (e.detail.value == '一个月') {
-					_endTime = util.date.formatTime(util.date.addMonth(new Date(), 1));
+					_endTime = formatTime(addMonth(new Date(), 1));
 				} else if (e.detail.value == '半年') {
-					_endTime = util.date.formatTime(util.date.addMonth(new Date(), 6));
+					_endTime = formatTime(addMonth(new Date(), 6));
 				} else {
-					_endTime = util.date.formatTime(util.date.addYear(new Date(), 1));
+					_endTime = formatTime(addYear(new Date(), 1));
 				}
 
 				this.showExpiry = false;
@@ -420,9 +351,7 @@
 					typeFlag: '1100102',
 					storeId: this.propertyId
 				};
-				console.log(_objData);
 				let _photos = this.photos;
-
 				_photos.forEach(function(_item) {
 					_objData.photos.push({
 						"photo": _item
@@ -489,38 +418,19 @@
 						"machineId": _item.machineId
 					});
 				});
-				console.log(_objData);
-				context.request({
-					url: constant.url.applyApplicationKey,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-
-						if (res.statusCode == 200) {
-							//成功情况下跳转
-							wx.redirectTo({
-								url: "/pages/applicationKeyProgress/applicationKeyProgress"
-							});
-							return;
-						}
-
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				});
+				applyApplicationKey(_objData)
+				.then((res)=>{
+					wx.redirectTo({
+						url: "/pages/applicationKeyProgress/applicationKeyProgress"
+					});
+					return;
+				})
+				.then((res)=>{
+					uni.showToast({
+						icon:'none',
+						title:res
+					});
+				})
 			}
 		}
 	};

@@ -29,10 +29,16 @@
 </template>
 
 <script>
-	// pages/applicationKeyProgress/applicationKeyProgress.js
-	const context = require("../../context/Java110Context.js");
-	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
+
+	import {
+		getCurOwner
+	} from '../../api/owner/ownerApi.js'
+
+	import {
+		listApplicationKeys
+	} from '../../api/applicationKey/applicationKeyApi.js'
+	
 	export default {
 		data() {
 			return {
@@ -51,7 +57,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			 context.onLoad(options);
+			this.vc.onLoad(options);
 		},
 
 		/**
@@ -65,37 +71,15 @@
 		onShow: function() {
 			let _that = this;
 
-			context.getOwner(function(_owner) {
-				let _idCard = _owner.idCard;
-				let _communityId = _owner.communityId;
-
-				_that.idCard = _idCard;
-				_that.communityId = _communityId;
-
-				_that.loadApplicationKey();
-			});
+			getCurOwner()
+				.then((_ownerInfo) => {
+					let _idCard = _ownerInfo.idCard;
+					let _communityId = _ownerInfo.communityId;
+					_that.idCard = _idCard;
+					_that.communityId = _communityId;
+					_that.loadApplicationKey();
+				})
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
 		/**
 		 * 用户点击右上角分享
 		 */
@@ -103,7 +87,6 @@
 		methods: {
 			loadApplicationKey: function() {
 				let _that = this;
-
 				let _objData = {
 					page: 1,
 					row: 10,
@@ -111,42 +94,14 @@
 					communityId: this.communityId,
 					typeFlag: '1100102'
 				};
-				context.request({
-					url: constant.url.listApplicationKeys,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						console.log(res);
-
-						if (res.statusCode == 200) {
-							//成功情况下跳转
-							let _applicationKeys = res.data.applicationKeys;
-
-							if (_applicationKeys.length == 0) {
-								wx.showToast({
-									title: "未查询到钥匙",
-									icon: 'none',
-									duration: 2000
-								});
-								return;
-							}
-
-							_that.applicationKeys = _applicationKeys;
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				});
+				//查询钥匙信息
+				listApplicationKeys(_objData)
+					.then((_applicationKeys) => {
+						_that.applicationKeys = _applicationKeys;
+					})
 			},
 			gotoDetail: function(_item) {
-				let _applicationKey =_item;
+				let _applicationKey = _item;
 				wx.navigateTo({
 					url: '/pages/viewApplicationKeyUser/viewApplicationKeyUser?applicationKeyId=' + _applicationKey.applicationKeyId +
 						"&communityId=" + this.communityId
