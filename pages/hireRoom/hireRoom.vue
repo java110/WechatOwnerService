@@ -13,25 +13,25 @@
 				</view>
 			</picker>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="builtUpArea !=''">
 			<view class="title">房屋面积</view>
 			<input v-model="builtUpArea" style="text-align:right" disabled="disabled"></input>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="apartment !=''">
 			<view class="title">户型</view>
 			<input v-model="apartment" style="text-align:right" disabled="disabled"></input>
 		</view>
-		<view class="cu-form-group">
+		<view class="cu-form-group" v-if="layer !=''">
 			<view class="title">楼层</view>
 			<input v-model="layer" style="text-align:right" disabled="disabled"></input>
 		</view>
 
-		<view class="block__title">报修信息</view>
+		<view class="block__title">出租信息</view>
 		<view class="cu-form-group">
-			<view class="title">报修类型</view>
-			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes" @change="repairTypeChange">
+			<view class="title">付费类型</view>
+			<picker id="paymentType" bindchange="PickerChange" :value="paymentTypeIndex" :range-key="'paymentTypeName'" :range="paymentTypes" @change="paymentTypeChange">
 				<view class="picker">
-					{{repairTypes[repairTypeIndex].repairTypeName}}
+					{{paymentTypes[paymentTypeIndex].paymentTypeName}}
 				</view>
 			</picker>
 		</view>
@@ -53,7 +53,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" bindtap="ViewImage" :data-url="imgList[index]">
+				<view class="bg-img" :key="index" v-for="(img,index) in imgList" bindtap="ViewImage" :data-url="imgList[index]">
 					<image :src='imgList[index]' mode='aspectFill'></image>
 					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
 						<text class="cuIcon-close"></text>
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-	// pages/enterCommunity/enterCommunity.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -88,15 +87,12 @@
 				apartment:'',
 				builtUpArea:'',
 				layer:'',
-				bindDate: '请选择',
-				bindTime: '请选择',
 				roomCloums: [],
 				roomIdArr: [],
 				roomName: "",
 				roomId: '',
 				roomShow: false,
 				typeName: '',
-				repairType: '',
 				typeShow: false,
 				timeShow: false,
 				imgList: [],
@@ -111,16 +107,19 @@
 				communityName: "",
 				complaintIndex: 0,
 				index: 0,
-				repairTypes: [],
-				repairTypeIndex:0,
-				repairScopeIndex: 0,
-				repairObjType: '',
-				repairObjId: '',
-				repairObjName: '',
-				floorNum: '',
-				floorId: '',
-				unitNum: '',
-				unitId: '',
+				paymentTypes: [{
+					id:'1001',
+					paymentTypeName:'押一付一'
+				},{
+					id:'2002',
+					paymentTypeName:'押一付三'
+				},{
+					id:'3003',
+					paymentTypeName:'押一付六'
+				}],
+				paymentTypeIndex:0,
+				paymentType: '',
+				paymentTypeName: '',
 				priceScope:'',
 			};
 		},
@@ -162,34 +161,7 @@
 		 */
 		onShow: function() {
 		
-
-			
 		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {
-			//清理楼栋和单元
-			uni.removeStorageSync('_selectFloor');
-			uni.removeStorageSync('_unitFloor');
-
-		},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
 
 		/**
 		 * 用户点击右上角分享
@@ -209,8 +181,6 @@
 
 
 			submitRepair: function(e) {
-
-
 				let obj = {
 					"repairName": this.bindRepairName,
 					"repairType": this.repairType,
@@ -339,28 +309,11 @@
 					}
 				})
 			},
-			repairScopeChange: function(e) {
-				console.log('改变费用完成')
-				this.repairScopeIndex = e.target.value //取其下标
-				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
-				this.repairObjType = selected.id //选中的id	
-			},
-			repairChange: function(e) {
-				this.typeName = this.columns[e.detail.value];
-				this.typeId = this.repairIdAttr[e.detail.value];
-			},
-			repairTypeChange:function(e){
-				this.repairTypeIndex = e.target.value //取其下标
-				let selected = this.repairTypes[this.repairTypeIndex] //获取选中的数组
-				this.repairType = selected.repairType //选中的id
-				let _payFeeFlag = selected.payFeeFlag;
-				
-				if(_payFeeFlag == 'T'){
-					this.priceScope = selected.priceScope;
-				}else{
-					this.priceScope = '';
-				}
-				
+			paymentTypeChange:function(e){
+				this.paymentTypeIndex = e.target.value //取其下标
+				let selected = this.paymentTypes[this.paymentTypeIndex] //获取选中的数组
+				this.paymentType = selected.id //选中的id
+				this.paymentTypeName = selected.paymentTypeName //选中的id
 			},
 			_loadRepairTypes:function(){
 				let _communityInfo = context.getCurrentCommunity();
@@ -379,15 +332,7 @@
 					success: function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
-							_that.repairTypes = _json.data;
 							
-							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
-							_that.repairType = selected.repairType //选中的id
-							let _payFeeFlag = selected.payFeeFlag;
-							
-							if(_payFeeFlag == 'T'){
-								_that.priceScope = selected.priceScope;
-							}
 						}
 					},
 					fail: function(e) {
