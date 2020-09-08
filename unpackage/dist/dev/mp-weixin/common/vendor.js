@@ -9671,21 +9671,23 @@ var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js 
 
 
 
-var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 13));
 
 
+
+var _DateUtil = __webpack_require__(/*! ../../utils/DateUtil.js */ 17);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
-                                                                                                                                                                                           * @param {Object} _objData {
-                                                                                                                                                                                          	 page: 1,
-                                                                                                                                                                                          	 row: 30,
-                                                                                                                                                                                          	 payerObjId: _room.roomId,
-                                                                                                                                                                                          	 feeTypeCd: '888800010001',
-                                                                                                                                                                                          	 communityId: _room.communityId,
-                                                                                                                                                                                          	 state:'2008001'
-                                                                                                                                                                                           }
-                                                                                                                                                                                           */
-function getRoomFees(_objData, _room) {
+                                                                                                                                                  * @param {Object} _objData {
+                                                                                                                                                 	 page: 1,
+                                                                                                                                                 	 row: 30,
+                                                                                                                                                 	 payerObjId: _room.roomId,
+                                                                                                                                                 	 feeTypeCd: '888800010001',
+                                                                                                                                                 	 communityId: _room.communityId,
+                                                                                                                                                 	 state:'2008001'
+                                                                                                                                                  }
+                                                                                                                                                  */
+function getRoomFees(_objData, _tmpRoom) {
   return new Promise(function (resolve, reject) {
     var moreRooms = [];
     (0, _java110Request.request)({
@@ -9701,13 +9703,9 @@ function getRoomFees(_objData, _room) {
             reject();
           }
           _roomFees.forEach(function (_roomFee) {
-            var _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/");
-            var _endTime = new Date(_tmpEndTime);
-            var _tmpRoom = JSON.parse(JSON.stringify(_room));
-            _tmpRoom.endTime = util.date.formatDate(_endTime);
-
+            _tmpRoom.endTime = (0, _DateUtil.dateTimeStringToDateString)(_roomFee.endTime);
             var _now = new Date();
-            if (_endTime > _now) {
+            if (_roomFee.endTime > _now) {
               _tmpRoom.feeStateName = '正常';
             } else {
               _tmpRoom.feeStateName = '欠费';
@@ -10685,17 +10683,22 @@ function getCategoryList() {
       src: "/static/images/index_repair.png",
       href: "/pages/repair/repair" },
     {
-      name: "智慧开门",
-      src: "/static/images/index_openDoor.png",
-      href: "/pages/openDoor/openDoor" },
-    {
       name: "公告",
       src: "/static/images/index_notice.png",
       href: "/pages/notice/index" },
     {
       name: "联系客服",
       src: "/static/images/index_persion.png",
-      href: "callProperty" }] };
+      href: "callProperty" },
+    {
+      name: "房屋出租",
+      src: "/static/images/index_openDoor.png",
+      href: "/pages/hireRoom/hireRoom" }],
+
+    pagetwo: [{
+      name: "智慧开门",
+      src: "/static/images/index_openDoor.png",
+      href: "/pages/openDoor/openDoor" }] };
 
 
 }

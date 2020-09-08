@@ -9,6 +9,8 @@ import
 mapping
 from '../../constant/MappingConstant.js'
 
+import {formatDate,dateTimeStringToDateString} from '../../utils/DateUtil.js'
+
 /**
  * @param {Object} _objData {
 	 page: 1,
@@ -19,7 +21,7 @@ from '../../constant/MappingConstant.js'
 	 state:'2008001'
  }
  */
-export function getRoomFees(_objData,_room) {
+export function getRoomFees(_objData,_tmpRoom) {
 	return new Promise((resolve, reject) => {
 		let moreRooms = [];
 		request({
@@ -35,13 +37,9 @@ export function getRoomFees(_objData,_room) {
 						reject();
 					}
 					_roomFees.forEach(function(_roomFee) {
-						let _tmpEndTime = _roomFee.endTime.replace(/\-/g, "/")
-						let _endTime = new Date(_tmpEndTime);
-						let _tmpRoom = JSON.parse(JSON.stringify(_room));
-						_tmpRoom.endTime = util.date.formatDate(_endTime);
-
+						_tmpRoom.endTime = dateTimeStringToDateString(_roomFee.endTime);
 						let _now = new Date();
-						if (_endTime > _now) {
+						if (_roomFee.endTime > _now) {
 							_tmpRoom.feeStateName = '正常'
 						} else {
 							_tmpRoom.feeStateName = '欠费'

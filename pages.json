@@ -316,6 +316,12 @@
 				
 			}
         }
+        ,{
+            "path" : "pages/hireRoom/hireRoom",
+            "style" : {
+				"navigationBarTitleText": "房屋出租"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

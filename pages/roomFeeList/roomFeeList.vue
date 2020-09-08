@@ -56,7 +56,6 @@
 	// pages/payParkingFeeList/payParkingFeeList.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	const util = context.util;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	
 	import {getRooms} from '../../api/room/roomApi.js'
@@ -132,10 +131,10 @@
 				.then((moreRooms)=>{
 					_that.moreRooms = moreRooms;
 					_that.noData = false;	
-				})
-				.then(()=>{
+				},()=>{
 					_that.noData = true;
 				})
+				
 			},
 			payFeeDetail: function(_item) {
 				wx.navigateTo({

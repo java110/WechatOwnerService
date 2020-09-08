@@ -66,10 +66,6 @@ export function getCategoryList() {
 			src: "/static/images/index_repair.png",
 			href: "/pages/repair/repair"
 		}, {
-			name: "智慧开门",
-			src: "/static/images/index_openDoor.png",
-			href: "/pages/openDoor/openDoor"
-		}, {
 			name: "公告",
 			src: "/static/images/index_notice.png",
 			href: "/pages/notice/index"
@@ -77,6 +73,15 @@ export function getCategoryList() {
 			name: "联系客服",
 			src: "/static/images/index_persion.png",
 			href: "callProperty"
+		},{
+			name: "房屋出租",
+			src: "/static/images/index_openDoor.png",
+			href: "/pages/hireRoom/hireRoom"
+		}],
+		pagetwo: [{
+			name: "智慧开门",
+			src: "/static/images/index_openDoor.png",
+			href: "/pages/openDoor/openDoor"
 		}]
 	};
 }

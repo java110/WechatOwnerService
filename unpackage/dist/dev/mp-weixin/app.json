@@ -52,7 +52,8 @@
     "pages/complaintHandle/complaintHandle",
     "pages/registerByWechat/registerByWechat",
     "pages/changePassword/changePassword",
-    "pages/changeOwnerPhone/changeOwnerPhone"
+    "pages/changeOwnerPhone/changeOwnerPhone",
+    "pages/hireRoom/hireRoom"
   ],
   "subPackages": [],
   "window": {
@@ -91,6 +92,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap38.json"
+  "usingComponents": {}
 }
