@@ -10,76 +10,30 @@ const constant = require("../constant/index.js");
 
 const factory = require("../factory/index.js");
 
+import {getHeaders,request,requestNoAuth} from '../api/java110Request.js'
+
+import {getCurOwner} from '../api/owner/ownerApi.js'
+
+import {getProperty} from '../api/property/propertyApi.js'
+
+import {onLoad} from '../api/init/initApi.js'
+
 let util = {};
-/**
- * 获取请后台服务时的头信息
- */
-const getHeaders = function() {
-	
-	let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
-	return {
-		"app-id": constant.app.appId,
-		"transaction-id": 'util.core.wxuuid()',
-		"req-time": 'util.date.getDateYYYYMMDDHHMISS()',
-		"sign": '1234567',
-		"user-id": '-1',
-		"cookie": '_java110_token_=' + wx.getStorageSync('token'),
-		"Accept": '*/*',
-		"w-app-id":_wAppId
-	};
-};
+
 /**
  * http 请求 加入是否登录判断
  */
-const request = function(_reqObj) {
+const requestObj = function(_reqObj) {
 
-	//这里判断只有在 post 方式时 放加载框
-	if (_reqObj.hasOwnProperty("method") && "POST" == _reqObj.method) {
-		uni.showLoading({
-			title: '加载中',
-			mask: true
-		});
-		_reqObj.complete = function() {
-			uni.hideLoading();
-		}
-	}
 
 	//白名单直接跳过检查登录
 	if (constant.url.NEED_NOT_LOGIN_URL.includes(_reqObj.url)) {
 		_reqObj.communityId = constant.mapping.HC_TEST_COMMUNITY_ID;
-		uni.request(_reqObj);
+		requestNoAuth(_reqObj);
 		return;
 	}
 	//校验是否登录，如果没有登录跳转至温馨提示页面
-	factory.login.checkSession().then(function() {
-		//有回话 跳转至相应页面
-		//重写token
-		_reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token');
-		uni.request(_reqObj);
-	}, function(error) { //回话过期
-		// #ifdef H5
-		//先微信登录
-		factory.login.wechatRefreshToken();
-		// #endif
-
-		//小程序登录
-		// #ifdef MP-WEIXIN
-		factory.login.doLogin();
-		// #endif
-
-		// #ifdef APP-PLUS
-		//查询临时钥匙
-		let _key = wx.getStorageSync(constant.mapping.OWNER_KEY);
-		if (_key) {
-			factory.login._doLoginOwnerByKey(_key);
-		} else {
-			uni.navigateTo({
-				url: '/pages/showlogin/showlogin'
-			});
-			return;
-		}
-		// #endif
-	});
+	request(_reqObj);
 };
 /**
  * 获取位置
@@ -176,85 +130,13 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
 
 const getOwner = function(callBack = _ownerInfo => {}) {
 	// 从硬盘中获取 业主信息
-	let _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
-	console.log('owner', _ownerInfo);
-	if (_ownerInfo) {
-		callBack(_ownerInfo);
-	} else {
-		request({
-			url: constant.url.queryAppUserBindingOwner,
-			header: getHeaders(),
-			data: {},
-			success: function(res) {
-				console.log('login success');
-				let _json = res.data;
-				console.log(res);
-
-				if (_json.code == 0) {
-					_ownerInfo = _json.data[0];
-
-					if (_ownerInfo == null || _ownerInfo == undefined) {
-						callBack(null);
-						return;
-					}
-
-					if (_ownerInfo.state == '12000') {
-						wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
-						let _currentCommunityInfo = {
-							communityId: _ownerInfo.communityId,
-							communityName: _ownerInfo.communityName
-						};
-						wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
-					}
-
-					callBack(_json.data[0]);
-				}
-			},
-			fail: function(error) {
-				// 调用服务端登录接口失败
-				wx.showToast({
-					title: '调用接口失败'
-				});
-				console.log(error);
-			}
-		});
-	}
-};
-
-const getProperty = function() {
-	let communitInfo = getCurrentCommunity();
-	return new Promise((resolve, reject) => {
-		let _objData = {
-			page: 1,
-			row: 5,
-			communityId: communitInfo.communityId,
-			memberTypeCd: '390001200002'
-		};
-		request({
-			url: constant.url.listStore,
-			header: getHeaders(),
-			method: "GET",
-			data: _objData,
-			//动态数据
-			success: function(res) {
-				console.log("请求返回信息：", res);
-				if (res.statusCode == 200) {
-					resolve(res.data.stores[0]);
-					return;
-				}
-				reject(res.body);
-			},
-			fail: function(e) {
-				//  调用服务端登录接口失败
-				wx.showToast({
-					title: '调用接口失败',
-					icon: 'none'
-				});
-				reject(e);
-			}
-		});
+	getCurOwner()
+	.then((_owner)=>{
+		callBack(_owner);
 	})
 };
+
+
 /**
  * 获取当前小区信息
  */
@@ -371,33 +253,6 @@ const navigateTo = function(_param) {
 	});
 };
 
-const onLoad = function(_option) {
-	
-	console.log('参数打印',_option);
-
-	// #ifdef H5
-	
-	let _key = _option.key;
-
-	if (_key != null && _key != undefined && _key != '') {
-		//根据key 去做登录
-		factory.login._doLoginOwnerByKey(_key);
-	}
-
-	let wAppId = _option.wAppId;
-
-	if (wAppId != null && wAppId != undefined && wAppId != '') {
-		uni.setStorageSync(constant.mapping.W_APP_ID, _option.wAppId);
-	}else{
-		wAppId = uni.getStorageInfoSync(constant.mapping.W_APP_ID)
-		if(wAppId != null && wAppId != undefined && wAppId != ''){
-			uni.setStorageSync(constant.mapping.W_APP_ID, constant.app.wAppId);
-		}
-	}
-	
-
-	// #endif
-}
 
 module.exports = {
 	constant: constant,
@@ -411,7 +266,7 @@ module.exports = {
 	getCurrentLocation: getCurrentLocation,
 	getOwner: getOwner,
 	getCurrentCommunity: getCurrentCommunity,
-	request: request,
+	request: requestObj,
 	getRooms: getRooms,
 	getProperty: getProperty,
 	checkLoginStatus: checkLoginStatus,

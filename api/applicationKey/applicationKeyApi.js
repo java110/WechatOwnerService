@@ -64,3 +64,25 @@ export function applyApplicationKey(_obj){
 		});
 	})
 }
+
+
+export function listOwnerMachines(_objData){
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.listOwnerMachines,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					let _machines = res.data.machines;
+					resolve(_machines);
+					return;
+				}
+				reject(res);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

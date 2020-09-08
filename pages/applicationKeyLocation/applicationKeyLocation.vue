@@ -37,9 +37,10 @@
 
 <script>
 	// pages/applicationKeyLocation/applicationKeyLocation.js
-	const context = require("../../context/Java110Context.js");
-	const constant = context.constant;
+
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
+	import {listOwnerMachines} from '../../api/applicationKey/applicationKeyApi.js'
+	import {getCurOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
@@ -57,7 +58,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) { //this._loadOwnerLocation();
-		 context.onLoad(options);
+		 this.vc.onLoad(options);
 		},
 
 		/**
@@ -73,26 +74,6 @@
 		},
 
 		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
 		 * 用户点击右上角分享
 		 */
 		onShareAppMessage: function() {},
@@ -100,39 +81,20 @@
 			loadOwnerLocationFun: function() {
 				let _that = this;
 
-				context.getOwner(function(_owner) {
-					console.log('数据执行', _owner);
+				getCurOwner()
+				.then((_owner)=>{
 					let _data = {
 						memberId: _owner.memberId,
 						communityId: _owner.communityId
 					};
 					_that.communityName = _owner.communityName;
 					_that.communityId = _owner.communityId;
-
-
-					context.request({
-						url: constant.url.listOwnerMachines,
-						header: context.getHeaders(),
-						method: "GET",
-						data: _data,
-						//动态数据
-						success: function(res) {
-							console.log('查询业主门禁', res); //成功情况下跳转
-
-							if (res.statusCode == 200) {
-								let _machines = res.data.machines;
-								_that.locations = _machines;
-							}
-						},
-						fail: function(e) {
-							wx.showToast({
-								title: "服务器异常了",
-								icon: 'none',
-								duration: 2000
-							});
-						}
-					});
-				});
+					listOwnerMachines(_data)
+					.then((_machines)=>{
+						_that.locations = _machines;
+					})	
+				})
+				
 			},
 			gotoApplyApplicationKeyPage: function() {
 				// 跳转至 填写信息页面

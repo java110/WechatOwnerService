@@ -21,9 +21,11 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
-	const constant = context.constant;
+
 	import SxRate from '@/components/sx-rate'
+	
+	import {appraiseRepair} from '../../api/repair/repairApi.js'
+	import {getCurOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
@@ -44,7 +46,8 @@
 			let _that = this;
 			let _repairId = options.repairId;
 			this.repairId = _repairId;
-			context.getOwner(function(_owner) {
+			getCurOwner()
+			.then(function(_owner) {
 				_that.userId = _owner.userId;
 				_that.userName = _owner.userName;
 			});
@@ -54,7 +57,7 @@
 				this.curAppraise = e;
 			},
 			submitAppraiseRepair:function(){
-				if(context == ''){
+				if(this.context == ''){
 					uni.showToast({
 						title:'请填写评价内容',
 						icon:'none'
@@ -79,45 +82,26 @@
 					 "objId":this.repairId
 				};
 				
-				context.request({
-					url: constant.url.appraiseRepair,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _data, //动态数据
-					success: function(res) {
-						let _data = res.data;
-						//成功情况下跳转
-						if (_data.code == 0) {
-							wx.showToast({
-								title: '验证码下发成功',
-								icon: 'none',
-								duration: 2000
-							});
-							wx.hideLoading();
-							//console.log(e);
-							uni.navigateBack({
-								delta: 1
-							});
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: _data.msg,
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
-				
-				
+				appraiseRepair(_data)
+				.then((_data)=>{
+					wx.showToast({
+						title: '成功',
+						icon: 'none',
+						duration: 2000
+					});
+					wx.hideLoading();
+					uni.navigateBack({
+						delta: 1
+					});
+					
+				})
+				.then((error)=>{
+					wx.showToast({
+						title: error,
+						icon: 'none',
+						duration: 2000
+					});
+				});		
 			}
 		}
 	}
