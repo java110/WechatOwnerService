@@ -71,3 +71,12 @@ export function navigateTo(_param) {
 		// #endif
 	});
 };
+
+/**
+ * 返回上层页面
+ */
+export function navigateBack(){
+	uni.navigateBack({
+		delta:1
+	});
+}

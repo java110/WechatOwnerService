@@ -49,7 +49,7 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 			if (res.result == 0) {
 				//that.globalData.userInfo = res.userInfo;
 				console.log(res.userInfo);
-				wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(res.userInfo));
+				wx.setStorageSync(mapping.USER_INFO, JSON.stringify(res.userInfo));
 				let date = new Date();
 				let year = date.getFullYear(); //获取当前年份
 
@@ -68,14 +68,14 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 				let afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
 
 				console.log("afterOneHourDate", afterOneHourDate);
-				wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
+				wx.setStorageSync(mapping.LOGIN_FLAG, {
 					sessionKey: res.sessionKey,
 					expireTime: afterOneHourDate.getTime()
 				});
-				wx.setStorageSync(constant.mapping.TOKEN, res.token);
+				wx.setStorageSync(mapping.TOKEN, res.token);
 				callback();
 			} else {
-				util.core.showInfo(res.errmsg);
+				
 			}
 		},
 		fail: function(error) {
@@ -86,7 +86,6 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 				});
 				return;
 			}
-			util.core.showInfo('调用接口失败');
 			console.log(error);
 		}
 	});

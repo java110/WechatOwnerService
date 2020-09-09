@@ -1,8 +1,7 @@
-
 import conf from '../conf/config.js'
-const baseUrl = conf.baseUrl; 
+const baseUrl = conf.baseUrl;
 export default {
-	baseUrl:baseUrl,
+	baseUrl: baseUrl,
 	wechatRefrashToken: baseUrl + "app/refreshToken", // 公众号刷新token
 	loginOwnerByKey: baseUrl + "app/loginOwnerByKey", // 根据临时秘钥登录
 	loginUrl: baseUrl + 'app/loginWx',
@@ -85,7 +84,8 @@ export default {
 	auditComplaint: baseUrl + 'app/complaint.auditComplaint',
 	changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
 	changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
-	queryRentingConfig: baseUrl+ 'app/renting/queryRentingConfig',// 房屋出租配置查询
+	queryRentingConfig: baseUrl + 'app/renting/queryRentingConfig', // 房屋出租配置查询
+	saveRentingPool: baseUrl + 'app/renting/saveRentingPool', //出租提交
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

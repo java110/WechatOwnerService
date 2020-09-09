@@ -3,7 +3,7 @@
 		<view class="block__title">房屋信息</view>
 		<view class="cu-form-group">
 			<view class="title">出租标题</view>
-			<input v-model="rentingName" placeholder="如香格里拉豪华大单间" class="text-right"></input>
+			<input v-model="rentingTitle" placeholder="如香格里拉豪华大单间" class="text-right"></input>
 		</view>
 		<view class="cu-form-group" >
 			<view class="title">房屋信息</view>
@@ -40,7 +40,7 @@
 			<input v-model="price" class="text-right" placeholder="请输入每月租金"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">付费类型</view>
+			<view class="title">出租方式</view>
 			<picker id="rentingType" bindchange="PickerChange" :value="rentingTypeIndex" :range-key="'rentingTypeName'" :range="rentingTypes" @change="rentingTypeChange">
 				<view class="picker">
 					{{rentingTypes[rentingTypeIndex].rentingTypeName}}
@@ -50,6 +50,14 @@
 		<view class="cu-form-group">
 			<view class="title">服务费</view>
 			<input v-model="servicePrice" class="text-right" disabled="disabled" ></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">入住日期</view>
+			<picker id="checkIn" bindchange="PickerChange" :value="checkInIndex" :range-key="'checkInName'" :range="checkIns" @change="checkInChange">
+				<view class="picker">
+					{{checkIns[checkInIndex].checkInName}}
+				</view>
+			</picker>
 		</view>
 		
 		<view class="cu-form-group margin-top">
@@ -91,10 +99,11 @@
 
 <script>
 	const context = require("../../context/Java110Context.js");
-	const constant = context.constant;
-	const factory = context.factory;
+
 	
 	import {queryRentingConfig,hireRoom} from '../../api/room/roomApi.js'
+	
+	import base64 from '../../factory/Base64Factory.js'
 
 	export default {
 		data() {
@@ -126,8 +135,18 @@
 					paymentTypeName:'押一付六'
 				}],
 				paymentTypeIndex:0,
-				paymentType: '',
+				paymentType: '1001',
 				paymentTypeName: '',
+				checkIns: [{
+					id:'1001',
+					checkInName:'立即入住'
+				},{
+					id:'2002',
+					checkInName:'预约'
+				}],
+				checkInIndex:0,
+				checkIn: '1001',
+				checkInName: '',	
 				rentingTypes: [],
 				rentingTypeIndex:0,
 				rentingType: '',
@@ -135,7 +154,7 @@
 				rentingConfigId:'',
 				servicePrice:'',
 				rentingDesc:'',
-				rentingName:''
+				rentingTitle:''
 			};
 		},
 
@@ -172,8 +191,9 @@
 		onShareAppMessage: function() {},
 		methods: {
 			submitHireRoom: function() {
+				let _that = this;
 				let obj = {
-					"rentingName": this.rentingName,
+					"rentingTitle": this.rentingTitle,
 					"roomId": this.roomId,
 					"communityId": this.communityId,
 					"price": this.price,
@@ -183,7 +203,8 @@
 					"rentingDesc": this.rentingDesc,
 					"ownerTel": this.userTel,
 					"ownerName":this.userName,
-					"state":"0"
+					"state":"0",
+					"checkIn":this.checkIn
 				}
 				let _photos = this.photos;
 				_photos.forEach(function(_item) {
@@ -194,8 +215,8 @@
 				
 				hireRoom(obj)
 				.then((res)=>{
-					
 					//跳转页面
+					_that.vc.navigateBack();
 					
 				},(error)=>{
 					console.log(error);
@@ -221,7 +242,7 @@
 						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						let _base64Photo = '';
-						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+						base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
 							_base64Photo = _res;
 							console.log('base64', _base64Photo);
 							that.photos.push(_base64Photo);
@@ -266,6 +287,11 @@
 				this.rentingConfigId = selected.rentingConfigId //选中的id
 				this.rentingTypeName = selected.rentingTypeName //选中的id
 				this.servicePrice = (selected.servicePrice * selected.serviceOwnerRate)+'元';
+			},
+			checkInChange:function(e){
+				this.checkInIndex = e.target.value //取其下标
+				let selected = this.checkIns[this.checkInIndex] //获取选中的数组
+				this.checkIn = selected.id //选中的id
 			},
 			
 		}

@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -144,7 +144,7 @@ function queue(hooks, data) {
   for (var i = 0; i < hooks.length; i++) {
     var hook = hooks[i];
     if (promise) {
-      promise = Promise.resolve(wrapperHook(hook));
+      promise = Promise.then(wrapperHook(hook));
     } else {
       var res = hook(data);
       if (isPromise(res)) {
@@ -363,144 +363,7 @@ var baseApi = /*#__PURE__*/Object.freeze({
   upx2px: upx2px,
   addInterceptor: addInterceptor,
   removeInterceptor: removeInterceptor,
-  interceptors: interceptors });var
-
-
-EventChannel = /*#__PURE__*/function () {
-  function EventChannel(id, events) {var _this = this;_classCallCheck(this, EventChannel);
-    this.id = id;
-    this.listener = {};
-    this.emitCache = {};
-    if (events) {
-      Object.keys(events).forEach(function (name) {
-        _this.on(name, events[name]);
-      });
-    }
-  }_createClass(EventChannel, [{ key: "emit", value: function emit(
-
-    eventName) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
-      var fns = this.listener[eventName];
-      if (!fns) {
-        return (this.emitCache[eventName] || (this.emitCache[eventName] = [])).push(args);
-      }
-      fns.forEach(function (opt) {
-        opt.fn.apply(opt.fn, args);
-      });
-      this.listener[eventName] = fns.filter(function (opt) {return opt.type !== 'once';});
-    } }, { key: "on", value: function on(
-
-    eventName, fn) {
-      this._addListener(eventName, 'on', fn);
-      this._clearCache(eventName);
-    } }, { key: "once", value: function once(
-
-    eventName, fn) {
-      this._addListener(eventName, 'once', fn);
-      this._clearCache(eventName);
-    } }, { key: "off", value: function off(
-
-    eventName, fn) {
-      var fns = this.listener[eventName];
-      if (!fns) {
-        return;
-      }
-      if (fn) {
-        for (var i = 0; i < fns.length;) {
-          if (fns[i].fn === fn) {
-            fns.splice(i, 1);
-            i--;
-          }
-          i++;
-        }
-      } else {
-        delete this.listener[eventName];
-      }
-    } }, { key: "_clearCache", value: function _clearCache(
-
-    eventName) {
-      var cacheArgs = this.emitCache[eventName];
-      if (cacheArgs) {
-        for (; cacheArgs.length > 0;) {
-          this.emit.apply(this, [eventName].concat(cacheArgs.shift()));
-        }
-      }
-    } }, { key: "_addListener", value: function _addListener(
-
-    eventName, type, fn) {
-      (this.listener[eventName] || (this.listener[eventName] = [])).push({
-        fn: fn,
-        type: type });
-
-    } }]);return EventChannel;}();
-
-
-var eventChannels = {};
-
-var eventChannelStack = [];
-
-var id = 0;
-
-function initEventChannel(events) {var cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  id++;
-  var eventChannel = new EventChannel(id, events);
-  if (cache) {
-    eventChannels[id] = eventChannel;
-    eventChannelStack.push(eventChannel);
-  }
-  return eventChannel;
-}
-
-function getEventChannel(id) {
-  if (id) {
-    var eventChannel = eventChannels[id];
-    delete eventChannels[id];
-    return eventChannel;
-  }
-  return eventChannelStack.shift();
-}
-
-var navigateTo = {
-  args: function args(fromArgs, toArgs) {
-    var id = initEventChannel(fromArgs.events).id;
-    if (fromArgs.url) {
-      fromArgs.url = fromArgs.url + (fromArgs.url.indexOf('?') === -1 ? '?' : '&') + '__id__=' + id;
-    }
-  },
-  returnValue: function returnValue(fromRes, toRes) {
-    fromRes.eventChannel = getEventChannel();
-  } };
-
-
-function findExistsPageIndex(url) {
-  var pages = getCurrentPages();
-  var len = pages.length;
-  while (len--) {
-    var page = pages[len];
-    if (page.$page && page.$page.fullPath === url) {
-      return len;
-    }
-  }
-  return -1;
-}
-
-var redirectTo = {
-  name: function name(fromArgs) {
-    if (fromArgs.exists === 'back' && fromArgs.delta) {
-      return 'navigateBack';
-    }
-    return 'redirectTo';
-  },
-  args: function args(fromArgs) {
-    if (fromArgs.exists === 'back' && fromArgs.url) {
-      var existsPageIndex = findExistsPageIndex(fromArgs.url);
-      if (existsPageIndex !== -1) {
-        var delta = getCurrentPages().length - 1 - existsPageIndex;
-        if (delta > 0) {
-          fromArgs.delta = delta;
-        }
-      }
-    }
-  } };
+  interceptors: interceptors });
 
 
 var previewImage = {
@@ -549,8 +412,6 @@ function addSafeAreaInsets(result) {
   }
 }
 var protocols = {
-  redirectTo: redirectTo,
-  navigateTo: navigateTo,
   previewImage: previewImage,
   getSystemInfo: {
     returnValue: addSafeAreaInsets },
@@ -595,9 +456,7 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
           toArgs[keyOption.name ? keyOption.name : key] = keyOption.value;
         }
       } else if (CALLBACKS.indexOf(key) !== -1) {
-        if (isFn(fromArgs[key])) {
-          toArgs[key] = processCallback(methodName, fromArgs[key], returnValue);
-        }
+        toArgs[key] = processCallback(methodName, fromArgs[key], returnValue);
       } else {
         if (!keepFromArgs) {
           toArgs[key] = fromArgs[key];
@@ -638,12 +497,7 @@ function wrapper(methodName, method) {
       if (typeof arg2 !== 'undefined') {
         args.push(arg2);
       }
-      if (isFn(options.name)) {
-        methodName = options.name(arg1);
-      } else if (isStr(options.name)) {
-        methodName = options.name;
-      }
-      var returnValue = wx[methodName].apply(wx, args);
+      var returnValue = wx[options.name || methodName].apply(wx, args);
       if (isSyncApi(methodName)) {// 同步 api
         return processReturnValue(methodName, returnValue, options.returnValue, isContextApi(methodName));
       }
@@ -717,6 +571,10 @@ var extraApi = /*#__PURE__*/Object.freeze({
 
 
 var getEmitter = function () {
+  if (typeof getUniEmitter === 'function') {
+    /* eslint-disable no-undef */
+    return getUniEmitter;
+  }
   var Emitter;
   return function getUniEmitter() {
     if (!Emitter) {
@@ -771,7 +629,7 @@ function initTriggerEvent(mpInstance) {
     }
   }
   var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {args[_key4 - 1] = arguments[_key4];}
+  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
     return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
   };
 }
@@ -784,7 +642,7 @@ function initHook(name, options) {
     };
   } else {
     options[name] = function () {
-      initTriggerEvent(this);for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {args[_key5] = arguments[_key5];}
+      initTriggerEvent(this);for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
       return oldHook.apply(this, args);
     };
   }
@@ -803,8 +661,6 @@ Component = function Component() {var options = arguments.length > 0 && argument
 var PAGE_EVENT_HOOKS = [
 'onPullDownRefresh',
 'onReachBottom',
-'onAddToFavorites',
-'onShareTimeline',
 'onShareAppMessage',
 'onPageScroll',
 'onResize',
@@ -1006,11 +862,6 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
       type: String,
       value: '' };
 
-    // 用于字节跳动小程序模拟抽象节点
-    properties.generic = {
-      type: Object,
-      value: null };
-
     properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
       value: [],
@@ -1096,18 +947,7 @@ function getExtraValue(vm, dataPathsArray) {
       var propPath = dataPathArray[1];
       var valuePath = dataPathArray[3];
 
-      var vFor;
-      if (Number.isInteger(dataPath)) {
-        vFor = dataPath;
-      } else if (!dataPath) {
-        vFor = context;
-      } else if (typeof dataPath === 'string' && dataPath) {
-        if (dataPath.indexOf('#s#') === 0) {
-          vFor = dataPath.substr(3);
-        } else {
-          vFor = vm.__get_value(dataPath, context);
-        }
-      }
+      var vFor = dataPath ? vm.__get_value(dataPath, context) : context;
 
       if (Number.isInteger(vFor)) {
         context = value;
@@ -1157,12 +997,6 @@ function processEventExtra(vm, extra, event) {
         } else {
           if (dataPath === '$event') {// $event
             extraObj['$' + index] = event;
-          } else if (dataPath === 'arguments') {
-            if (event.detail && event.detail.__args__) {
-              extraObj['$' + index] = event.detail.__args__;
-            } else {
-              extraObj['$' + index] = [event];
-            }
           } else if (dataPath.indexOf('$event.') === 0) {// $event.target.value
             extraObj['$' + index] = vm.__get_value(dataPath.replace('$event.', ''), event);
           } else {
@@ -1243,16 +1077,7 @@ function isMatchEventType(eventType, optType) {
 
 }
 
-function getContextVm(vm) {
-  var $parent = vm.$parent;
-  // 父组件是 scoped slots 或者其他自定义组件时继续查找
-  while ($parent && $parent.$parent && ($parent.$options.generic || $parent.$parent.$options.generic || $parent.$scope._$vuePid)) {
-    $parent = $parent.$parent;
-  }
-  return $parent && $parent.$parent;
-}
-
-function handleEvent(event) {var _this2 = this;
+function handleEvent(event) {var _this = this;
   event = wrapper$1(event);
 
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
@@ -1283,14 +1108,18 @@ function handleEvent(event) {var _this2 = this;
       eventsArray.forEach(function (eventArray) {
         var methodName = eventArray[0];
         if (methodName) {
-          var handlerCtx = _this2.$vm;
-          if (handlerCtx.$options.generic) {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
-            handlerCtx = getContextVm(handlerCtx) || handlerCtx;
+          var handlerCtx = _this.$vm;
+          if (
+          handlerCtx.$options.generic &&
+          handlerCtx.$parent &&
+          handlerCtx.$parent.$parent)
+          {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
+            handlerCtx = handlerCtx.$parent.$parent;
           }
           if (methodName === '$emit') {
             handlerCtx.$emit.apply(handlerCtx,
             processEventArgs(
-            _this2.$vm,
+            _this.$vm,
             event,
             eventArray[1],
             eventArray[2],
@@ -1309,17 +1138,14 @@ function handleEvent(event) {var _this2 = this;
             }
             handler.once = true;
           }
-          var params = processEventArgs(
-          _this2.$vm,
+          ret.push(handler.apply(handlerCtx, processEventArgs(
+          _this.$vm,
           event,
           eventArray[1],
           eventArray[2],
           isCustom,
-          methodName);
+          methodName)));
 
-          // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
-          // eslint-disable-next-line no-sparse-arrays
-          ret.push(handler.apply(handlerCtx, (Array.isArray(params) ? params : []).concat([,,,,,,,,,, event])));
         }
       });
     }
@@ -1338,9 +1164,7 @@ var hooks = [
 'onShow',
 'onHide',
 'onError',
-'onPageNotFound',
-'onThemeChange',
-'onUnhandledRejection'];
+'onPageNotFound'];
 
 
 function parseBaseApp(vm, _ref3)
@@ -1504,65 +1328,8 @@ function parseApp(vm) {
 }
 
 function createApp(vm) {
-  _vue.default.prototype.getOpenerEventChannel = function () {
-    if (!this.__eventChannel__) {
-      this.__eventChannel__ = new EventChannel();
-    }
-    return this.__eventChannel__;
-  };
-  var callHook = _vue.default.prototype.__call_hook;
-  _vue.default.prototype.__call_hook = function (hook, args) {
-    if (hook === 'onLoad' && args && args.__id__) {
-      this.__eventChannel__ = getEventChannel(args.__id__);
-      delete args.__id__;
-    }
-    return callHook.call(this, hook, args);
-  };
   App(parseApp(vm));
   return vm;
-}
-
-var encodeReserveRE = /[!'()*]/g;
-var encodeReserveReplacer = function encodeReserveReplacer(c) {return '%' + c.charCodeAt(0).toString(16);};
-var commaRE = /%2C/g;
-
-// fixed encodeURIComponent which is more conformant to RFC3986:
-// - escapes [!'()*]
-// - preserve commas
-var encode = function encode(str) {return encodeURIComponent(str).
-  replace(encodeReserveRE, encodeReserveReplacer).
-  replace(commaRE, ',');};
-
-function stringifyQuery(obj) {var encodeStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : encode;
-  var res = obj ? Object.keys(obj).map(function (key) {
-    var val = obj[key];
-
-    if (val === undefined) {
-      return '';
-    }
-
-    if (val === null) {
-      return encodeStr(key);
-    }
-
-    if (Array.isArray(val)) {
-      var result = [];
-      val.forEach(function (val2) {
-        if (val2 === undefined) {
-          return;
-        }
-        if (val2 === null) {
-          result.push(encodeStr(key));
-        } else {
-          result.push(encodeStr(key) + '=' + encodeStr(val2));
-        }
-      });
-      return result.join('&');
-    }
-
-    return encodeStr(key) + '=' + encodeStr(val);
-  }).filter(function (x) {return x.length > 0;}).join('&') : null;
-  return res ? "?".concat(res) : '';
 }
 
 function parseBaseComponent(vueComponentOptions)
@@ -1687,15 +1454,9 @@ function parseBasePage(vuePageOptions, _ref6)
 
   initHooks(pageOptions.methods, hooks$1, vuePageOptions);
 
-  pageOptions.methods.onLoad = function (query) {
-    this.options = query;
-    var copyQuery = Object.assign({}, query);
-    delete copyQuery.__id__;
-    this.$page = {
-      fullPath: '/' + (this.route || this.is) + stringifyQuery(copyQuery) };
-
-    this.$vm.$mp.query = query; // 兼容 mpvue
-    this.$vm.__call_hook('onLoad', query);
+  pageOptions.methods.onLoad = function (args) {
+    this.$vm.$mp.query = args; // 兼容 mpvue
+    this.$vm.__call_hook('onLoad', args);
   };
 
   return pageOptions;
@@ -1737,7 +1498,7 @@ var uni = {};
 if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
   uni = new Proxy({}, {
     get: function get(target, name) {
-      if (hasOwn(target, name)) {
+      if (target[name]) {
         return target[name];
       }
       if (baseApi[name]) {
@@ -1807,9 +1568,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/utils/CoreUtil.js ***!
-  \********************************************************************************************/
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/CoreUtil.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1859,9 +1620,9 @@ module.exports = CoreUtil;
 /***/ }),
 
 /***/ 104:
-/*!******************************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/applicationKey/applicationKeyApi.js ***!
-  \******************************************************************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/applicationKey/applicationKeyApi.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1958,9 +1719,9 @@ function listOwnerMachines(_objData) {
 /***/ }),
 
 /***/ 11:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/constant/AppConstant.js ***!
-  \**************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/AppConstant.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1998,9 +1759,9 @@ module.exports = AppConstant;
 /***/ }),
 
 /***/ 113:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/common/commonApi.js ***!
-  \**************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/common/commonApi.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2086,9 +1847,9 @@ function sendMessageCode(_objData, _that) {
 /***/ }),
 
 /***/ 12:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/conf/config.js ***!
-  \*****************************************************************************************/
+/*!********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/conf/config.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2132,9 +1893,9 @@ var _default =
 /***/ }),
 
 /***/ 13:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/utils/DateUtil.js ***!
-  \********************************************************************************************/
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/DateUtil.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2357,15 +2118,14 @@ function addSeconds(_date, _second) {
 /***/ }),
 
 /***/ 14:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/constant/url.js ***!
-  \******************************************************************************************/
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/url.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _config = _interopRequireDefault(__webpack_require__(/*! ../conf/config.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 var baseUrl = _config.default.baseUrl;var _default =
 {
   baseUrl: baseUrl,
@@ -2452,6 +2212,7 @@ var baseUrl = _config.default.baseUrl;var _default =
   changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
   changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
   queryRentingConfig: baseUrl + 'app/renting/queryRentingConfig', // 房屋出租配置查询
+  saveRentingPool: baseUrl + 'app/renting/saveRentingPool', //出租提交
   NEED_NOT_LOGIN_PAGE: [
   '/pages/login/login',
   '/pages/register/register',
@@ -2470,9 +2231,9 @@ var baseUrl = _config.default.baseUrl;var _default =
 /***/ }),
 
 /***/ 15:
-/*!******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/constant/MappingConstant.js ***!
-  \******************************************************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/MappingConstant.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2515,9 +2276,9 @@ module.exports = MappingConstant;
 /***/ }),
 
 /***/ 16:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/auth/Java110Auth.js ***!
-  \**********************************************************************************************/
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/Java110Auth.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2594,9 +2355,9 @@ function hasLogin() {
 /***/ }),
 
 /***/ 17:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/auth/H5Login.js ***!
-  \******************************************************************************************/
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/H5Login.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2651,9 +2412,9 @@ function wechatRefreshToken(errorUrl, _login) {
 /***/ }),
 
 /***/ 18:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/auth/MpWeixinLogin.js ***!
-  \************************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/MpWeixinLogin.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2688,9 +2449,9 @@ function doLogin() {var callback = arguments.length > 0 && arguments[0] !== unde
 /***/ }),
 
 /***/ 19:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/auth/LoginHcServer.js ***!
-  \************************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/LoginHcServer.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2746,7 +2507,7 @@ function requsetHcServerToLogin(loginRes) {var callback = arguments.length > 1 &
       if (res.result == 0) {
         //that.globalData.userInfo = res.userInfo;
         console.log(res.userInfo);
-        wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(res.userInfo));
+        wx.setStorageSync(_MappingConstant.default.USER_INFO, JSON.stringify(res.userInfo));
         var date = new Date();
         var year = date.getFullYear(); //获取当前年份
 
@@ -2765,14 +2526,14 @@ function requsetHcServerToLogin(loginRes) {var callback = arguments.length > 1 &
         var afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
 
         console.log("afterOneHourDate", afterOneHourDate);
-        wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
+        wx.setStorageSync(_MappingConstant.default.LOGIN_FLAG, {
           sessionKey: res.sessionKey,
           expireTime: afterOneHourDate.getTime() });
 
-        wx.setStorageSync(constant.mapping.TOKEN, res.token);
+        wx.setStorageSync(_MappingConstant.default.TOKEN, res.token);
         callback();
       } else {
-        util.core.showInfo(res.errmsg);
+
       }
     },
     fail: function fail(error) {
@@ -2783,7 +2544,6 @@ function requsetHcServerToLogin(loginRes) {var callback = arguments.length > 1 &
 
         return;
       }
-      util.core.showInfo('调用接口失败');
       console.log(error);
     } });
 
@@ -3499,7 +3259,13 @@ var uid = 0;
  * directives subscribing to it.
  */
 var Dep = function Dep () {
-  this.id = uid++;
+  // fixed by xxxxxx (nvue vuex)
+  /* eslint-disable no-undef */
+  if(typeof SharedObject !== 'undefined'){
+    this.id = SharedObject.uid++;
+  } else {
+    this.id = uid++;
+  }
   this.subs = [];
 };
 
@@ -3536,7 +3302,7 @@ Dep.prototype.notify = function notify () {
 // can be evaluated at a time.
 // fixed by xxxxxx (nvue shared vuex)
 /* eslint-disable no-undef */
-Dep.SharedObject = {};
+Dep.SharedObject = typeof SharedObject !== 'undefined' ? SharedObject : {};
 Dep.SharedObject.target = null;
 Dep.SharedObject.targetStack = [];
 
@@ -8386,15 +8152,6 @@ function cloneWithData(vm) {
     ret[key] = vm[key];
     return ret
   }, ret);
-
-  // vue-composition-api
-  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
-  if (rawBindings) {
-    Object.keys(rawBindings).forEach(function (key) {
-      ret[key] = vm[key];
-    });
-  }
-  
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -8599,7 +8356,7 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
   Vue.config.errorHandler = function(err, vm, info) {
     Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
@@ -8717,7 +8474,7 @@ function internalMixin(Vue) {
   };
 
   Vue.prototype.__map = function(val, iteratee) {
-    //TODO 暂不考虑 string
+    //TODO 暂不考虑 string,number
     var ret, i, l, keys, key;
     if (Array.isArray(val)) {
       ret = new Array(val.length);
@@ -8731,13 +8488,6 @@ function internalMixin(Vue) {
       for (i = 0, l = keys.length; i < l; i++) {
         key = keys[i];
         ret[key] = iteratee(val[key], key, i);
-      }
-      return ret
-    } else if (typeof val === 'number') {
-      ret = new Array(val);
-      for (i = 0, l = val; i < l; i++) {
-        // 第一个参数暂时仍和小程序一致
-        ret[i] = iteratee(i, i);
       }
       return ret
     }
@@ -8754,10 +8504,7 @@ var LIFECYCLE_HOOKS$1 = [
     'onShow',
     'onHide',
     'onUniNViewMessage',
-    'onPageNotFound',
-    'onThemeChange',
     'onError',
-    'onUnhandledRejection',
     //Page
     'onLoad',
     // 'onShow',
@@ -8767,8 +8514,6 @@ var LIFECYCLE_HOOKS$1 = [
     'onPullDownRefresh',
     'onReachBottom',
     'onTabItemTap',
-    'onAddToFavorites',
-    'onShareTimeline',
     'onShareAppMessage',
     'onResize',
     'onPageScroll',
@@ -8837,9 +8582,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/auth/AppLogin.js ***!
-  \*******************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/auth/AppLogin.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8910,9 +8655,9 @@ function doLoginOwnerByKey(_key) {
 /***/ }),
 
 /***/ 21:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/utils/LogUtil.js ***!
-  \*******************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/LogUtil.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8984,9 +8729,9 @@ function error(fileName, method, msg) {
 /***/ }),
 
 /***/ 22:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/owner/ownerApi.js ***!
-  \************************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/owner/ownerApi.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9052,9 +8797,9 @@ var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../cons
 /***/ }),
 
 /***/ 23:
-/*!******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/property/propertyApi.js ***!
-  \******************************************************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/property/propertyApi.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9136,9 +8881,9 @@ function getProperty() {
 /***/ }),
 
 /***/ 24:
-/*!********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/community/communityApi.js ***!
-  \********************************************************************************************************/
+/*!***********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/community/communityApi.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9253,9 +8998,9 @@ function recoveryCommunityInfo(_obj) {
 /***/ }),
 
 /***/ 25:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/init/initApi.js ***!
-  \**********************************************************************************************/
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/init/initApi.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9294,9 +9039,9 @@ function onLoad(_option) {
 /***/ }),
 
 /***/ 26:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/constant/index.js ***!
-  \********************************************************************************************/
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9322,9 +9067,9 @@ module.exports = {
 /***/ }),
 
 /***/ 27:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/constant/UrlConstant.js ***!
-  \**************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/constant/UrlConstant.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9565,9 +9310,9 @@ module.exports = {
 /***/ }),
 
 /***/ 28:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/index.js ***!
-  \*******************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/index.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9601,9 +9346,9 @@ module.exports = {
 /***/ }),
 
 /***/ 29:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/LoginFactory.js ***!
-  \**************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/LoginFactory.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9995,9 +9740,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 30:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/utils/SeqUtil.js ***!
-  \*******************************************************************************************/
+/*!**********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/SeqUtil.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10028,9 +9773,9 @@ function uuid() {
 /***/ }),
 
 /***/ 305:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/room/roomApi.js ***!
-  \**********************************************************************************************/
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/room/roomApi.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10123,31 +9868,46 @@ function queryRentingConfig() {
 /**
    * 房屋租赁
    * @param {Object} obj 房屋租赁数据
+   * "rentingName": this.rentingName,
+  	"roomId": this.roomId,
+  	"communityId": this.communityId,
+  	"price": this.price,
+  	"paymentType": this.paymentType,
+  	"rentingConfigId": this.rentingConfigId,
+  	"photos": [],
+  	"rentingDesc": this.rentingDesc,
+  	"ownerTel": this.userTel,
+  	"ownerName":this.userName,
+  	"state":"0"
    */
 function hireRoom(obj) {
   return new Promise(function (resolve, reject) {
     var msg = "";
     if (obj.rentingName == "") {
-      msg = "请选择报修类型";
-    } else if (obj.bindRepairName == "") {
-      msg = "请填写报修人";
-    } else if (obj.tel == "") {
-      msg = "请填写手机号";
-    } else if (obj.bindDate == "") {
-      msg = "请选择预约日期";
-    } else if (obj.bindTime == "") {
-      msg = "请选择预约时间";
-    } else if (obj.context == "") {
-      msg = "请填写投诉内容";
-    } else if (obj.repairObjId == '') {
-      msg = "请选择报修位置";
+      msg = "出租标题不能为空";
+    } else if (obj.roomId == "") {
+      msg = "请选择房屋";
+    } else if (obj.communityId == "") {
+      msg = "未找到小区信息";
+    } else if (obj.price == "") {
+      msg = "请填写租金(元)";
+    } else if (obj.paymentType == "") {
+      msg = "请选择付费类型";
+    } else if (obj.rentingConfigId == "") {
+      msg = "请选择出租方式";
+    } else if (obj.rentingDesc == '') {
+      msg = "请填写出租说明";
+    } else if (obj.photos.length < 1) {
+      msg = "请选择图片";
+    } else if (obj.checkIn == '') {
+      msg = "请选择入住日期";
     }
 
     if (msg != "") {
       reject(msg);
     } else {
       (0, _java110Request.request)({
-        url: _url.default.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+        url: _url.default.saveRentingPool,
         method: "POST",
         data: obj, //动态数据
         success: function success(res) {
@@ -10156,7 +9916,7 @@ function hireRoom(obj) {
             resolve(_json);
             return;
           }
-          reject('服务异常');
+          reject(_json.msg);
         },
         fail: function fail(e) {
           reject('服务异常');
@@ -10169,9 +9929,9 @@ function hireRoom(obj) {
 /***/ }),
 
 /***/ 306:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/fee/feeApi.js ***!
-  \********************************************************************************************/
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/fee/feeApi.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10246,9 +10006,9 @@ function getRoomFees(_objData, _tmpRoom) {
 /***/ }),
 
 /***/ 31:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/UserFactory.js ***!
-  \*************************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/UserFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10301,9 +10061,9 @@ module.exports = new UserFactory();
 /***/ }),
 
 /***/ 32:
-/*!****************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
-  \****************************************************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/lib/qqmap-wx-jssdk.min.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10312,9 +10072,9 @@ function _classCallCheck(instance, Constructor) {if (!(instance instanceof Const
 /***/ }),
 
 /***/ 33:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/FileFactory.js ***!
-  \*************************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/FileFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10358,9 +10118,9 @@ module.exports = FileFactory;
 /***/ }),
 
 /***/ 34:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/CoreFactory.js ***!
-  \*************************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/CoreFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10398,9 +10158,9 @@ module.exports = new CoreFactory();
 /***/ }),
 
 /***/ 35:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/HttpFactory.js ***!
-  \*************************************************************************************************/
+/*!****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/HttpFactory.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10460,9 +10220,9 @@ module.exports = new HttpFactory();
 /***/ }),
 
 /***/ 36:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/factory/Base64Factory.js ***!
-  \***************************************************************************************************/
+/*!******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/factory/Base64Factory.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10695,9 +10455,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/pages.json ***!
-  \*************************************************************************************/
+/*!****************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/pages.json ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10706,9 +10466,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 40:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/core/vcFramework.js ***!
-  \**********************************************************************************************/
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/core/vcFramework.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10760,14 +10520,14 @@ var _vcRoute = __webpack_require__(/*! ./vcRoute.js */ 42); /**
 // 小区相关
 // 页面初始化相关
 var _default = { getStorageSync: _StorageUtil.getStorageSync, setStorageSync: _StorageUtil.setStorageSync, debug: _LogUtil.debug, info: _LogUtil.info, error: _LogUtil.error, warn: _LogUtil.warn, getCurCommunity: _communityApi.getCurCommunity, recoveryCommunityInfo: _communityApi.recoveryCommunityInfo, //将小区输入相应对象
-  onLoad: _initApi.onLoad, navigateTo: _vcRoute.navigateTo };exports.default = _default;
+  onLoad: _initApi.onLoad, navigateTo: _vcRoute.navigateTo, navigateBack: _vcRoute.navigateBack };exports.default = _default;
 
 /***/ }),
 
 /***/ 41:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/utils/StorageUtil.js ***!
-  \***********************************************************************************************/
+/*!**************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/StorageUtil.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10812,14 +10572,14 @@ function setStorageSync(_key, _value) {
 /***/ }),
 
 /***/ 42:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/core/vcRoute.js ***!
-  \******************************************************************************************/
+/*!*********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/core/vcRoute.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navigateTo = navigateTo;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.navigateTo = navigateTo;exports.navigateBack = navigateBack;
 
 
 
@@ -10892,14 +10652,23 @@ var _StorageUtil = __webpack_require__(/*! ../utils/StorageUtil.js */ 41);functi
 
   });
 };
+
+/**
+    * 返回上层页面
+    */
+function navigateBack() {
+  uni.navigateBack({
+    delta: 1 });
+
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
 /***/ 435:
-/*!**************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/repair/repairApi.js ***!
-  \**************************************************************************************************/
+/*!*****************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/repair/repairApi.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10944,9 +10713,9 @@ function appraiseRepair(_data) {
 /***/ }),
 
 /***/ 49:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/index/indexApi.js ***!
-  \************************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/index/indexApi.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11112,9 +10881,9 @@ function loadAdverts(dataObj) {
 /***/ }),
 
 /***/ 498:
-/*!********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/components/uni-icons/icons.js ***!
-  \********************************************************************************************************/
+/*!***********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/uni-icons/icons.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11254,9 +11023,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 513:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12045,9 +11814,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 516:
-/*!*******************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/components/sx-rate/common.js ***!
-  \*******************************************************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/sx-rate/common.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12064,9 +11833,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 71:
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/components/pickerAddress/data.js ***!
-  \***********************************************************************************************************/
+/*!**************************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/components/pickerAddress/data.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22336,9 +22105,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 8:
-/*!****************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/context/Java110Context.js ***!
-  \****************************************************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/context/Java110Context.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22622,9 +22391,9 @@ module.exports = {
 /***/ }),
 
 /***/ 9:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/project/hc/vip/WechatOwnerService/api/java110Request.js ***!
-  \************************************************************************************************/
+/*!***************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/java110Request.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

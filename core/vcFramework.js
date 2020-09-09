@@ -25,7 +25,7 @@ import {getCurCommunity,recoveryCommunityInfo} from '../api/community/communityA
 // 页面初始化相关
 import {onLoad} from '../api/init/initApi.js'
 
-import {navigateTo} from './vcRoute.js'
+import {navigateTo,navigateBack} from './vcRoute.js'
 
 
 
@@ -40,5 +40,6 @@ export default{
 	getCurCommunity:getCurCommunity,
 	recoveryCommunityInfo:recoveryCommunityInfo,//将小区输入相应对象
 	onLoad:onLoad,
-	navigateTo:navigateTo
+	navigateTo:navigateTo,
+	navigateBack:navigateBack
 }

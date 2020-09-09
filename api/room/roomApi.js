@@ -86,31 +86,46 @@ export function queryRentingConfig() {
 /**
  * 房屋租赁
  * @param {Object} obj 房屋租赁数据
+ * "rentingName": this.rentingName,
+	"roomId": this.roomId,
+	"communityId": this.communityId,
+	"price": this.price,
+	"paymentType": this.paymentType,
+	"rentingConfigId": this.rentingConfigId,
+	"photos": [],
+	"rentingDesc": this.rentingDesc,
+	"ownerTel": this.userTel,
+	"ownerName":this.userName,
+	"state":"0"
  */
 export function hireRoom(obj) {
 	return new Promise((resolve, reject) => {
 		let msg = "";
 		if (obj.rentingName == "") {
-			msg = "请选择报修类型";
-		} else if (obj.bindRepairName == "") {
-			msg = "请填写报修人";
-		} else if (obj.tel == "") {
-			msg = "请填写手机号";
-		} else if (obj.bindDate == "") {
-			msg = "请选择预约日期";
-		} else if (obj.bindTime == "") {
-			msg = "请选择预约时间";
-		} else if (obj.context == "") {
-			msg = "请填写投诉内容";
-		} else if (obj.repairObjId == '') {
-			msg = "请选择报修位置";
+			msg = "出租标题不能为空";
+		} else if (obj.roomId == "") {
+			msg = "请选择房屋";
+		} else if (obj.communityId == "") {
+			msg = "未找到小区信息";
+		} else if (obj.price == "") {
+			msg = "请填写租金(元)";
+		} else if (obj.paymentType == "") {
+			msg = "请选择付费类型";
+		} else if (obj.rentingConfigId == "") {
+			msg = "请选择出租方式";
+		} else if (obj.rentingDesc == '') {
+			msg = "请填写出租说明";
+		} else if(obj.photos.length < 1){
+			msg = "请选择图片";
+		}else if(obj.checkIn == ''){
+			msg = "请选择入住日期";
 		}
 
 		if (msg != "") {
 			reject(msg);
 		} else {
 			request({
-				url: url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+				url: url.saveRentingPool,
 				method: "POST",
 				data: obj, //动态数据
 				success: function(res) {
@@ -119,7 +134,7 @@ export function hireRoom(obj) {
 						resolve(_json);
 						return;
 					}
-					reject('服务异常');
+					reject(_json.msg);
 				},
 				fail: function(e) {
 					reject('服务异常');
