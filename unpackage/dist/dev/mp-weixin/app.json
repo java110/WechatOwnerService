@@ -53,7 +53,8 @@
     "pages/registerByWechat/registerByWechat",
     "pages/changePassword/changePassword",
     "pages/changeOwnerPhone/changeOwnerPhone",
-    "pages/hireRoom/hireRoom"
+    "pages/hireRoom/hireRoom",
+    "pages/rentHouse/rentHouse"
   ],
   "subPackages": [],
   "window": {
@@ -72,6 +73,12 @@
         "text": "首页",
         "iconPath": "static/images/home.png",
         "selectedIconPath": "static/images/home-selected.png"
+      },
+      {
+        "pagePath": "pages/rentHouse/rentHouse",
+        "text": "房源",
+        "iconPath": "static/images/rent.png",
+        "selectedIconPath": "static/images/rent-selected.png"
       },
       {
         "pagePath": "pages/market/market",
@@ -93,5 +100,5 @@
     }
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap87.json"
+  "sitemapLocation": "sitemap39.json"
 }

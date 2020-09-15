@@ -147,6 +147,10 @@ const changeOwnerPhone= baseUrl + 'app/ownerApi/changeOwnerPhone'; //修改密�
 
 
 
+const queryRentingPool= baseUrl + 'app/renting/queryRentingPool'; //查询房源
+
+
+
 /**
  * 不需要登录页面
  */
@@ -156,14 +160,16 @@ const NEED_NOT_LOGIN_PAGE = [
 	'/pages/my/my',
 	'/pages/index/index',
 	'/pages/market/market',
-	'/pages/showlogin/showlogin'
+	'/pages/showlogin/showlogin',
+	'/pages/rentHouse/rentHouse'
 ];
 
 const NEED_NOT_LOGIN_URL = [
 	listActivitiess,
 	listAdvertPhoto,
 	queryAppUserBindingOwner,
-	listJunkRequirements
+	listJunkRequirements,
+	queryRentingPool
 ];
 
 module.exports = {
@@ -229,5 +235,6 @@ module.exports = {
 	auditComplaint:auditComplaint,
 	ownerRegisterWxPhoto:ownerRegisterWxPhoto,
 	changeStaffPwd:changeStaffPwd,
-	changeOwnerPhone:changeOwnerPhone
+	changeOwnerPhone:changeOwnerPhone,
+	queryRentingPool:queryRentingPool
 };
