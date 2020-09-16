@@ -321,7 +321,13 @@
             "style" : {
 				"navigationBarTitleText": "房屋出租"
 			}
-        }
+        },
+		{
+		    "path" : "pages/rentHouse/rentHouse",
+		    "style" : {
+				"navigationBarTitleText": "房源"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#272636",
@@ -333,6 +339,12 @@
 				"text": "首页",
 				"iconPath": "static/images/home.png",
 				"selectedIconPath": "static/images/home-selected.png"
+			},
+			{
+				"pagePath": "pages/rentHouse/rentHouse",
+				"text": "房源",
+				"iconPath": "static/images/rent.png",
+				"selectedIconPath": "static/images/rent-selected.png"
 			},
 			{
 				"pagePath": "pages/market/market",

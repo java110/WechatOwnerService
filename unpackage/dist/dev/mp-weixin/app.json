@@ -53,7 +53,8 @@
     "pages/registerByWechat/registerByWechat",
     "pages/changePassword/changePassword",
     "pages/changeOwnerPhone/changeOwnerPhone",
-    "pages/hireRoom/hireRoom"
+    "pages/hireRoom/hireRoom",
+    "pages/rentHouse/rentHouse"
   ],
   "subPackages": [],
   "window": {
@@ -74,6 +75,12 @@
         "selectedIconPath": "static/images/home-selected.png"
       },
       {
+        "pagePath": "pages/rentHouse/rentHouse",
+        "text": "房源",
+        "iconPath": "static/images/rent.png",
+        "selectedIconPath": "static/images/rent-selected.png"
+      },
+      {
         "pagePath": "pages/market/market",
         "text": "市场",
         "iconPath": "static/images/market.png",
@@ -92,6 +99,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap39.json"
+  "usingComponents": {}
 }
