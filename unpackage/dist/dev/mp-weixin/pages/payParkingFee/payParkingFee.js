@@ -355,7 +355,14 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
     //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
     prevPage.needFefresh = false;}, /**
                                      * 用户点击右上角分享
-                                     */onShareAppMessage: function onShareAppMessage() {}, methods: { dateChange: function dateChange(e) {console.log("onConfirm", e);var _feeMonthName = null;_feeMonthName = this.feeMonthList[e.detail.value];var _feeMonth = _feeMonthName.replace("个月", "");;var _receivableAmount = _feeMonth * this.feePrice;var _lastDate = new Date(this.ordEndTime);var _newDate = (0, _DateUtil.addMonth)(_lastDate, _feeMonth);this.showFeeMonth = false;this.feeMonthName = _feeMonthName;this.receivableAmount = _receivableAmount;this.feeMonth = _feeMonth;this.endTime = (0, _DateUtil.formatDate)(_newDate);}, onFeeMonthCancel: function onFeeMonthCancel(e) {this.showFeeMonth = false;}, _payWxApp: function _payWxApp(_data) {var _receivedAmount = this.receivableAmount;wx.showLoading({ title: '支付中' });var _tradeType = 'APP';var _objData = { cycles: this.feeMonth, communityId: this.communityId, feeId: this.feeId, feeName: '停车费', receivedAmount: _receivedAmount, tradeType: _tradeType, appId: this.appId };context.request({
+                                     */onShareAppMessage: function onShareAppMessage() {}, methods: { dateChange: function dateChange(e) {console.log("onConfirm", e);var _feeMonthName = null;_feeMonthName = this.feeMonthList[e.detail.value];var _feeMonth = _feeMonthName.replace("个月", "");;var _receivableAmount = _feeMonth * this.feePrice;var _lastDate = new Date(this.ordEndTime);var _newDate = (0, _DateUtil.addMonth)(_lastDate, _feeMonth);this.showFeeMonth = false;this.feeMonthName = _feeMonthName;this.receivableAmount = _receivableAmount;this.feeMonth = _feeMonth;this.endTime = (0, _DateUtil.formatDate)(_newDate);}, onFeeMonthCancel: function onFeeMonthCancel(e) {this.showFeeMonth = false;}, _payWxApp: function _payWxApp(_data) {var _receivedAmount = this.receivableAmount;wx.showLoading({ title: '支付中' });var _tradeType = 'APP';var _objData = { cycles: this.feeMonth, communityId: this.communityId,
+        feeId: this.feeId,
+        feeName: '停车费',
+        receivedAmount: _receivedAmount,
+        tradeType: _tradeType,
+        appId: this.appId };
+
+      context.request({
         url: constant.url.preOrder,
         header: context.getHeaders(),
         method: "POST",
@@ -436,7 +443,7 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
           console.log(res);
           if (res.statusCode == 200 && res.data.code == '0') {
             var data = res.data;
-            //成功情况下跳转
+
             uni.requestPayment({
               'timeStamp': data.timeStamp,
               'nonceStr': data.nonceStr,
@@ -448,17 +455,23 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
                   title: "支付成功",
                   duration: 2000 });
 
-                var pages = getCurrentPages();
-                var prevPage = pages[pages.length - 2]; //上一个页面
-                //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-                prevPage.needFefresh = true;
                 uni.navigateBack({});
               },
               'fail': function fail(res) {
                 console.log('fail:' + JSON.stringify(res));
               } });
 
-            uni.hideLoading();
+
+
+
+
+
+
+
+
+
+
+            wx.hideLoading();
             return;
           }
           uni.hideLoading();

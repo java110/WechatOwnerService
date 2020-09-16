@@ -110,6 +110,13 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	import {addMonth,formatDate} from '../../utils/DateUtil.js'
+	
+	
+	// #ifdef H5
+	
+	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
+	
+	// #endif
 
 	export default {
 		data() {
@@ -304,7 +311,7 @@
 						console.log(res);
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data;
-							//成功情况下跳转
+							// #ifdef MP-WEIXIN
 							uni.requestPayment({
 								'timeStamp': data.timeStamp,
 								'nonceStr': data.nonceStr,
@@ -316,17 +323,23 @@
 										title: "支付成功",
 										duration: 2000
 									});
-									let pages = getCurrentPages();
-									let prevPage = pages[pages.length - 2]; //上一个页面
-									//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-									prevPage.needFefresh = true;
 									uni.navigateBack({});
 								},
 								'fail': function(res) {
 									console.log('fail:' + JSON.stringify(res));
 								}
 							});
-							uni.hideLoading();
+							// #endif
+							// #ifdef H5
+								WexinPayFactory.wexinPay(data,function(){
+									uni.showToast({
+										title: "支付成功",
+										duration: 2000
+									});
+									uni.navigateBack({});
+								});
+							// #endif
+							wx.hideLoading();
 							return;
 						}
 						uni.hideLoading();
