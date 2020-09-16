@@ -22,7 +22,7 @@ const baseUrl = 'https://app.demo.winqi.cn/';
 const DEFAULT_COMMUNITY_ID = "7020181217000001";//HC测试小区id  用于没有登录时展示相关信息
 const DEFAULT_COMMUNITY_NAME = "丰仪家园";
 
-// 微信appId
+// 微信公众号 appId，小程序和app 可以不用修改
 const wAppId="wx43458162e3c31d92"; //微信AppId
 
 const logLevel="DEBUG"; // 日志级别

@@ -51,7 +51,7 @@
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">预约日期</view>
-			<picker mode="date" :value="bindDate" start="2015-09-01" end="2020-09-01" @change="dateChange">
+			<picker mode="date" :value="bindDate" start="2020-09-01" end="2050-09-01" @change="dateChange">
 				<view class="picker">
 					{{bindDate}}
 				</view>
@@ -59,7 +59,7 @@
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">预约时间</view>
-			<picker mode="time" :value="bindTime" start="09:01" end="21:01" @change="timeChange">
+			<picker mode="time" :value="bindTime" start="08:30" end="22:00" @change="timeChange">
 				<view class="picker">
 					{{bindTime}}
 				</view>
@@ -379,7 +379,7 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['album','camera'], //从相册选择
 					success: (res) => {
 						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
