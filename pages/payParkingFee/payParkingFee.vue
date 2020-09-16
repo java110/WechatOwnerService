@@ -109,7 +109,7 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	const util = context.util;
+	import {addMonth,formatDate} from '../../utils/DateUtil.js'
 
 	export default {
 		data() {
@@ -154,7 +154,7 @@
 			
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
-			let _endTime = util.date.addMonth(_lastDate, this.feeMonth);
+			let _endTime = addMonth(_lastDate, this.feeMonth);
 
 			this.receivableAmount = _receivableAmount;
 			this.communityId = _communityInfo.communityId;
@@ -164,7 +164,7 @@
 			this.carNum = _fee.carNum;
 			this.feeId = _fee.feeId;
 			this.feePrice = _fee.feePrice;
-			this.endTime = util.date.formatDate(_endTime);
+			this.endTime = formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
 			this.feeFlag = _fee.feeFlag;
 			if(this.feeFlag == '2006012'){
@@ -197,13 +197,13 @@
 				let _receivableAmount = _feeMonth * this.feePrice ;
 
 				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+				let _newDate = addMonth(_lastDate, _feeMonth);
 
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
 				this.receivableAmount = _receivableAmount;
 				this.feeMonth = _feeMonth;
-				this.endTime = util.date.formatDate(_newDate);
+				this.endTime = formatDate(_newDate);
 			},
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;

@@ -62,7 +62,9 @@
 	// pages/payParkingFeeList/payParkingFeeList.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	const util = context.util;
+	//const util = context.util;
+	
+	import {formatDate} from '../../utils/DateUtil.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 
 	export default {
@@ -147,7 +149,7 @@
 				let _objData = {
 					page: 1,
 					row: 30,
-					payerObjId: _that.curParkingSpace.psId,
+					payerObjId: _that.curParkingSpace.carId,
 					communityId: _that.curParkingSpace.communityId
 				}
 
@@ -168,7 +170,7 @@
 								let _tmpEndTime = _fee.endTime.replace(/\-/g, "/")
 								let _endTime = new Date(_tmpEndTime);
 
-								_fee.endTime = util.date.formatDate(_endTime);
+								_fee.endTime = formatDate(_endTime);
 								_fee.num = _that.curParkingSpace.num;
 								let _now = new Date();
 								if (_endTime > _now) {
