@@ -232,19 +232,12 @@ var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js 
 //
 //
 //
-var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var constant = context.constant;var factory = context.factory;var _default = { data: function data() {return { isCard: false, keyWord: '', TabCur: 3344, scrollLeft: 0, page: 1, row: 7, rents: [], title: [{ name: '整租', status: '3344' }, { name: '合租', status: '4455' }] };}, onLoad: function onLoad() {this.loadRentHouse();}, /**
-                                                                                                                                                                                                                                                                                                                                                                                              * 页面上拉触底事件的处理函数
-                                                                                                                                                                                                                                                                                                                                                                                              */onReachBottom: function onReachBottom() {if (this.rents.length >= this.page * this.row) {this.page = this.page + 1;this.loadRentHouse();} // this.page = this.page + 1;
+var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var constant = context.constant;var factory = context.factory;var _default = { data: function data() {return { isCard: false, communityName: '', TabCur: 3344, scrollLeft: 0, page: 1, row: 7, rents: [], title: [{ name: '整租', status: '3344' }, { name: '合租', status: '4455' }] };}, onLoad: function onLoad() {this.loadRentHouse();}, /**
+                                                                                                                                                                                                                                                                                                                                                                                                    * 页面上拉触底事件的处理函数
+                                                                                                                                                                                                                                                                                                                                                                                                    */onReachBottom: function onReachBottom() {if (this.rents.length >= this.page * this.row) {this.page = this.page + 1;this.loadRentHouse();} // this.page = this.page + 1;
     // console.log(this.page)
     // console.log(this.row)
-  }, methods: { IsCard: function IsCard(e) {this.isCard = e.detail.value;}, tabSelect: function tabSelect(e) {this.TabCur = e.currentTarget.dataset.id;this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60;this.searchRentRoom();}, loadRentHouse: function loadRentHouse() {var _this = this;var _paramIn = { "page": _this.page,
-        "row": _this.row,
-        "rentingType": _this.TabCur,
-        "keyWord": _this.keyWord };
-
-      context.request({
-        url: constant.url.queryRentingPool,
-        header: context.getHeaders(),
+  }, methods: { IsCard: function IsCard(e) {this.isCard = e.detail.value;}, tabSelect: function tabSelect(e) {this.TabCur = e.currentTarget.dataset.id;this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60;this.searchRentRoom();}, loadRentHouse: function loadRentHouse() {var _this = this;var _paramIn = { "page": _this.page, "row": _this.row, "rentingType": _this.TabCur, "communityName": _this.communityName };context.request({ url: constant.url.queryRentingPool, header: context.getHeaders(),
         method: "GET",
         data: _paramIn,
         success: function success(res) {

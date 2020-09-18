@@ -4,7 +4,7 @@
 			<view class="cu-bar search bg-white">
 				<view class="search-form round">
 					<text class="cuIcon-search"></text>
-					<input :adjust-position="false" v-model="keyWord" type="text" placeholder="搜索房屋" confirm-type="search"></input>
+					<input :adjust-position="false" v-model="communityName" type="text" placeholder="请输入小区名" confirm-type="search"></input>
 				</view>
 				<view class="action">
 					<button @tap="searchRentRoom" class="cu-btn bg-green shadow-blur round">搜索</button>
@@ -12,7 +12,7 @@
 			</view>
 			<scroll-view scroll-x class="bg-white nav">
 				<view class="flex text-center">
-					<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in title" :key="item.status"
+					<view class="cu-item flex-sub" :class="item.status==TabCur?'text-orange cur':''" v-for="(item,index) in title" :key="item.status"
 					 @tap="tabSelect" :data-id="item.status">
 						{{item.name}}
 					</view>
@@ -27,7 +27,7 @@
 					<image src="../../static/images/rentimage.jpg" mode="aspectFill"/>
 					<!-- <image :src="item.src" mode="aspectFill"/> -->
 					<view class="desc">
-						<view style="margin-left: 5px;" class="title-class">{{item.rentingTitle}}</view>
+						<view style="margin-left: 5px;letter-spacing: 3px;" class="title-class">{{item.rentingTitle}}</view>
 						<view class="text-content">
 							<view class='padding-sm flex flex-wrap'>
 								<view class='cu-tag line-green sm'>{{item.rentingType == 3344 ? '整租' : '合租'}}</view>
@@ -58,20 +58,13 @@
 		data() {
 			return {
 				isCard: false,
-				keyWord: '',
+				communityName: '',
 				TabCur: 3344,
 				scrollLeft: 0,
 				page: 1,
 				row: 7,
 				rents: [],
-				title: [{
-					name: '整租',
-					status: '3344'
-				}, {
-					name: '合租',
-					status: '4455'
-				}],
-
+				title: [{name: '整租',status: '3344'}, {name: '合租',status: '4455'}],
 			};
 		},
 		onLoad() {
@@ -108,7 +101,7 @@
 					"page": _this.page,
 					"row": _this.row,
 					"rentingType": _this.TabCur,
-					"keyWord": _this.keyWord
+					"communityName": _this.communityName
 				};
 				context.request({
 					url: constant.url.queryRentingPool,
