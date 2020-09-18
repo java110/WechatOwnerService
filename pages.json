@@ -325,6 +325,7 @@
 		{
 		    "path" : "pages/rentHouse/rentHouse",
 		    "style" : {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "房源"
 			}
 		}
