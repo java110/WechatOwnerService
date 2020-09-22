@@ -82,6 +82,11 @@ export function getCategoryList() {
 			name: "智慧开门",
 			src: "/static/images/index_openDoor.png",
 			href: "/pages/openDoor/openDoor"
+		},
+		{
+			name: "车位申请",
+			src: "/static/images/index_parking.png",
+			href: "/pages/applyparking/applyparking"
 		}]
 	};
 }
