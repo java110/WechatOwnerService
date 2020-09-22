@@ -23,7 +23,7 @@
 			<view class="title-class" style="margin-top: 82px;"></view>
 			<view class="cu-item shadow border-bottom" v-for="(item,index) in rents">
 
-				<view class="content">
+				<view class="content" @tap="toDetail(item.rentingId)">
 					<image src="../../static/images/rentimage.jpg" mode="aspectFill"/>
 					<!-- <image :src="item.src" mode="aspectFill"/> -->
 					<view class="desc">
@@ -132,6 +132,12 @@
 				this.row = 7;
 				this.rents = [];
 				this.loadRentHouse();
+			},
+			toDetail:function(rentingId){
+				console.log(rentingId)
+				this.vc.navigateTo({
+					url: '/pages/rentHouse/rentDetail?rentingId='+rentingId
+				});
 			}
 		}
 	}

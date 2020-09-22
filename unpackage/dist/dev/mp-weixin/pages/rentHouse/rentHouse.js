@@ -264,6 +264,12 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
       this.row = 7;
       this.rents = [];
       this.loadRentHouse();
+    },
+    toDetail: function toDetail(rentingId) {
+      console.log(rentingId);
+      this.vc.navigateTo({
+        url: '/pages/rentHouse/rentDetail?rentingId=' + rentingId });
+
     } } };exports.default = _default;
 
 /***/ }),
