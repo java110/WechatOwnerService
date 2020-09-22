@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "申请钥匙",
-  "usingComponents": {
-    "van-row": "/wxcomponents/vant/row/index",
-    "van-col": "/wxcomponents/vant/col/index",
-    "van-button": "/wxcomponents/vant/button/index"
-  }
-}

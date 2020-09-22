@@ -1,2 +1,0 @@
-setCssToHead([".",[1],"block__title { margin: 0; font-weight: 400; font-size: 14px; color: rgba(69,90,100,.6); padding: ",[0,40]," ",[0,30]," ",[0,20],"; }\n.",[1],"button_up_blank{ height: ",[0,40],"; }\n",],undefined,{path:"./pages/bindOwner/bindOwner.wxss"})();
-document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/bindOwner/bindOwner.wxml') } }));

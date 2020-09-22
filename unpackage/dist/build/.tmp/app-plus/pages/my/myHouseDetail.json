@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "我的房屋明细",
-  "usingComponents": {
-    "van-cell-group": "/wxcomponents/vant/cell-group/index",
-    "van-cell": "/wxcomponents/vant/cell/index"
-  }
-}

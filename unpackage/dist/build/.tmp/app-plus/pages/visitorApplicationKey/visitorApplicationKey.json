@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "访客钥匙",
-  "usingComponents": {
-    "van-divider": "/wxcomponents/vant/divider/index"
-  }
-}

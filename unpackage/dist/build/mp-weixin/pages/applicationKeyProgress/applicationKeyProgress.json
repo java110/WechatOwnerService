@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "钥匙进度",
-  "usingComponents": {
-    "no-data-page": "/components/no-data-page/no-data-page"
-  }
-}
