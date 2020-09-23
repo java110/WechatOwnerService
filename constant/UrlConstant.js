@@ -151,7 +151,7 @@ const queryRentingPool= baseUrl + 'app/renting/queryRentingPool'; //查询房源
 
 
 
-const searchParkingSpace= baseUrl + 'app/searchParkingSpace/listParkingSpace'; //查询空闲车位
+const queryParkingSpaces= baseUrl + 'app/parkingSpace.queryParkingSpaces'; //查询空闲车位
 
 
 
@@ -241,5 +241,5 @@ module.exports = {
 	changeStaffPwd:changeStaffPwd,
 	changeOwnerPhone:changeOwnerPhone,
 	queryRentingPool:queryRentingPool,
-	searchParkingSpace:searchParkingSpace
+	queryParkingSpaces:queryParkingSpaces
 };

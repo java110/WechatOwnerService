@@ -1,11 +1,10 @@
 <template>
 	<view>
-		<view class="block__title">车位申请</view>
 		<view class="cu-form-group">
 			<view class="title">空闲车位</view>
-			<picker bindchange="PickerChange" :value="index" :range="roomCloums" @change="roomChange">
+			<picker bindchange="PickerChange" :value="index" :range="parkingSpaces" @change="choosePickerSpace">
 				<view class="picker">
-					{{roomName?roomName:'请选择'}}
+					{{parkingSpacesName?parkingSpacesName:'请选择'}}
 				</view>
 			</picker>
 		</view>
@@ -21,6 +20,39 @@
 			<view class="title">颜色</view>
 			<input v-model="layer" style="text-align:right"></input>
 		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">类型</view>
+			<picker bindchange="PickerChange" :value="index" :range="parkingSpaces" @change="">
+				<view class="picker">
+					{{parkingSpacesName?parkingSpacesName:'请选择'}}
+				</view>
+			</picker>
+		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">起租日期</view>
+			<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+				<view class="picker">
+					{{date}}
+				</view>
+			</picker>
+		</view>
+		
+		<view class="cu-form-group">
+			<view class="title">结组日期</view>
+			<picker mode="date" :value="endDate"  @change="DateChange">
+				<view class="picker">
+					{{date}}
+				</view>
+			</picker>
+		</view>
+		
+		<view class="cu-form-group align-start">
+			<view class="title">备注信息</view>
+			<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="请输入备注信息"></textarea>
+		</view>
+		
 
 
 
@@ -36,118 +68,52 @@
 <script>
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	import {getCurCommunity} from '../../api/community/communityApi.js'
 
 
 	export default {
 		data() {
 			return {
-				rooms: [],
-				apartment: '',
-				builtUpArea: '',
-				layer: '',
-				price: '',
-				roomCloums: [],
-				roomIdArr: [],
-				roomName: "",
-				roomId: '',
-				roomShow: false,
-				imgList: [],
-				userTel: '',
+				//车位信息
+				parkingSpaces: [],
+				//车位id
+				parkingSpaceIds:[],
+				parkingSpacesName:'',
+				psId:'',
+				carTypes:['月租车','出售车辆'],
+				date: '2020-01-01',
+				endDate:'2020-01-01',
 				page: 1,
-				row: 7,
-				userName: '',
-				photos: [],
-				communityId: "",
-				communityName: "",
-				paymentTypes: [{
-					id: '1001',
-					paymentTypeName: '押一付一'
-				}, {
-					id: '2002',
-					paymentTypeName: '押一付三'
-				}, {
-					id: '3003',
-					paymentTypeName: '押一付六'
-				}],
-				paymentTypeIndex: 0,
-				paymentType: '1001',
-				paymentTypeName: '',
-				checkIns: [{
-					id: '1001',
-					checkInName: '立即入住'
-				}, {
-					id: '2002',
-					checkInName: '预约'
-				}],
-				checkInIndex: 0,
-				checkIn: '1001',
-				checkInName: '',
-				rentingTypes: [],
-				rentingTypeIndex: 0,
-				rentingType: '',
-				rentingTypeName: '',
-				rentingConfigId: '',
-				servicePrice: '',
-				rentingDesc: '',
-				rentingTitle: ''
+				row: 20,
 			};
 		},
 		onLoad: function(options) {
-			let that = this;
-			this.listParkingSpace();
+			let _this = this;
+			context.getOwner(function(_owner) {
+				_this.communityId = _owner.communityId;
+				_this.listParkingSpace();
+				
+			});
+			
 		},
-
-		onShareAppMessage: function() {},
 		methods: {
-			submitHireRoom: function() {
-				let _that = this;
-				let obj = {
-					"rentingTitle": this.rentingTitle,
-					"roomId": this.roomId,
-					"communityId": this.communityId,
-					"price": this.price,
-					"paymentType": this.paymentType,
-					"rentingConfigId": this.rentingConfigId,
-					"photos": [],
-					"rentingDesc": this.rentingDesc,
-					"ownerTel": this.userTel,
-					"ownerName": this.userName,
-					"state": "0",
-					"checkIn": this.checkIn
-				}
-				let _photos = this.photos;
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
-
-				hireRoom(obj)
-					.then((res) => {
-						//跳转页面
-						_that.vc.navigateBack();
-
-					}, (error) => {
-						console.log(error);
-						uni.showToast({
-							icon: 'none',
-							title: error
-						})
-					})
-			},
 			listParkingSpace: function() {
-				let _this = this;
-				let _paramIn = {
-					"page": _this.page,
-					"row": _this.row
-				};
 				context.request({
-					url: constant.url.searchParkingSpace,
+					url: constant.url.queryParkingSpaces,
 					header: context.getHeaders(),
 					method: "GET",
-					data: _paramIn,
+					data: {
+						"page": this.page,
+						"row": this.row,
+						"communityId": this.communityId,
+						"state":'F'
+					},
 					success: (res) => {
-						console.log(res)
+						let arr = res.data.parkingSpaces;
+						arr.map(item => {
+							this.parkingSpaces.push(item.areaNum + "停车场  " + item.num + "车位");
+							this.parkingSpaceIds.push(item.psId);
+						})
 					},
 					fail(res) {
 						wx.showToast({
@@ -157,7 +123,15 @@
 						})
 					}
 				});
-			}
+			},
+			choosePickerSpace:function(e){
+				let checkInIndex = e.target.value;
+				this.psId = this.parkingSpaceIds[checkInIndex];
+				this.parkingSpacesName = this.parkingSpaces[checkInIndex];
+			},
+			DateChange(e) {
+				this.date = e.detail.value
+			},
 		}
 	};
 </script>
