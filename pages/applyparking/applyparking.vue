@@ -1,16 +1,8 @@
 <template>
 	<view>
-		<view class="block__title">车位信息</view>
-		<view class="cu-form-group" >
-			<view class="title">车库</view>
-			<picker bindchange="PickerChange" :value="index" :range="roomCloums" @change="roomChange">
-				<view class="picker">
-					{{roomName?roomName:'请选择'}}
-				</view>
-			</picker>
-		</view>
-		<view class="cu-form-group" >
-			<view class="title">车位</view>
+		<view class="block__title">车位申请</view>
+		<view class="cu-form-group">
+			<view class="title">空闲车位</view>
 			<picker bindchange="PickerChange" :value="index" :range="roomCloums" @change="roomChange">
 				<view class="picker">
 					{{roomName?roomName:'请选择'}}
@@ -30,8 +22,8 @@
 			<input v-model="layer" style="text-align:right"></input>
 		</view>
 
-	
-		
+
+
 		<view class="button_up_blank"></view>
 
 		<view class="flex flex-direction">
@@ -43,20 +35,17 @@
 
 <script>
 	const context = require("../../context/Java110Context.js");
+	const constant = context.constant;
 
-	
-	import {queryRentingConfig,hireRoom} from '../../api/room/roomApi.js'
-	
-	import base64 from '../../factory/Base64Factory.js'
 
 	export default {
 		data() {
 			return {
-				rooms:[],
-				apartment:'',
-				builtUpArea:'',
-				layer:'',
-				price:'',
+				rooms: [],
+				apartment: '',
+				builtUpArea: '',
+				layer: '',
+				price: '',
 				roomCloums: [],
 				roomIdArr: [],
 				roomName: "",
@@ -64,74 +53,50 @@
 				roomShow: false,
 				imgList: [],
 				userTel: '',
-				userName:'',
+				page: 1,
+				row: 7,
+				userName: '',
 				photos: [],
 				communityId: "",
 				communityName: "",
 				paymentTypes: [{
-					id:'1001',
-					paymentTypeName:'押一付一'
-				},{
-					id:'2002',
-					paymentTypeName:'押一付三'
-				},{
-					id:'3003',
-					paymentTypeName:'押一付六'
+					id: '1001',
+					paymentTypeName: '押一付一'
+				}, {
+					id: '2002',
+					paymentTypeName: '押一付三'
+				}, {
+					id: '3003',
+					paymentTypeName: '押一付六'
 				}],
-				paymentTypeIndex:0,
+				paymentTypeIndex: 0,
 				paymentType: '1001',
 				paymentTypeName: '',
 				checkIns: [{
-					id:'1001',
-					checkInName:'立即入住'
-				},{
-					id:'2002',
-					checkInName:'预约'
+					id: '1001',
+					checkInName: '立即入住'
+				}, {
+					id: '2002',
+					checkInName: '预约'
 				}],
-				checkInIndex:0,
+				checkInIndex: 0,
 				checkIn: '1001',
-				checkInName: '',	
+				checkInName: '',
 				rentingTypes: [],
-				rentingTypeIndex:0,
+				rentingTypeIndex: 0,
 				rentingType: '',
 				rentingTypeName: '',
-				rentingConfigId:'',
-				servicePrice:'',
-				rentingDesc:'',
-				rentingTitle:''
+				rentingConfigId: '',
+				servicePrice: '',
+				rentingDesc: '',
+				rentingTitle: ''
 			};
 		},
-
-		/**
-		 * 生命周期函数--监听页面加载
-		 */
 		onLoad: function(options) {
 			let that = this;
-			this.vc.onLoad(options);
-			context.getRooms().then(res => {
-				let arr = res.data.rooms;
-				that.rooms = arr;
-				let roomCloums = [];
-				let roomIdArr = [];
-				arr.map(item => {
-					roomCloums.push(item.floorNum + "号楼" + item.unitNum + "单元" + item.roomNum + "室");
-					roomIdArr.push(item.roomId);
-				})
-				that.roomCloums = roomCloums;
-				that.roomIdArr = roomIdArr;
-				that.userTel = res.data.owner.link;
-				that.userName = res.data.owner.appUserName;
-				that.communityId = res.data.owner.communityId;
-				that.communityName = res.data.owner.communityName;
-			});
-			
-			//加载报修类型
-			this._loadRentingTypes();
+			this.listParkingSpace();
 		},
 
-		/**
-		 * 用户点击右上角分享
-		 */
 		onShareAppMessage: function() {},
 		methods: {
 			submitHireRoom: function() {
@@ -146,9 +111,9 @@
 					"photos": [],
 					"rentingDesc": this.rentingDesc,
 					"ownerTel": this.userTel,
-					"ownerName":this.userName,
-					"state":"0",
-					"checkIn":this.checkIn
+					"ownerName": this.userName,
+					"state": "0",
+					"checkIn": this.checkIn
 				}
 				let _photos = this.photos;
 				_photos.forEach(function(_item) {
@@ -156,88 +121,43 @@
 						"photo": _item
 					});
 				});
-				
+
 				hireRoom(obj)
-				.then((res)=>{
-					//跳转页面
-					_that.vc.navigateBack();
-					
-				},(error)=>{
-					console.log(error);
-					uni.showToast({
-						icon:'none',
-						title:error
+					.then((res) => {
+						//跳转页面
+						_that.vc.navigateBack();
+
+					}, (error) => {
+						console.log(error);
+						uni.showToast({
+							icon: 'none',
+							title: error
+						})
 					})
-				})
 			},
-			
-			deleteImage: function(e) {
-				console.log(e);
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+			listParkingSpace: function() {
+				let _this = this;
+				let _paramIn = {
+					"page": _this.page,
+					"row": _this.row
+				};
+				context.request({
+					url: constant.url.searchParkingSpace,
+					header: context.getHeaders(),
+					method: "GET",
+					data: _paramIn,
 					success: (res) => {
-						console.log(res);
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						let _base64Photo = '';
-						base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							_base64Photo = _res;
-							console.log('base64', _base64Photo);
-							that.photos.push(_base64Photo);
-						});
+						console.log(res)
+					},
+					fail(res) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
 					}
 				});
-			},
-			roomChange: function(e) {
-				let _that = this;
-				this.roomId = this.roomIdArr[e.detail.value];
-				this.roomName = this.roomCloums[e.detail.value];
-				
-				this.rooms.forEach(function(item){
-					if(item.roomId == _that.roomId){
-						_that.apartment = item.apartment;
-						_that.builtUpArea = item.builtUpArea;
-						_that.layer = item.layer;
-					}
-				})
-			},
-			paymentTypeChange:function(e){
-				this.paymentTypeIndex = e.target.value //取其下标
-				let selected = this.paymentTypes[this.paymentTypeIndex] //获取选中的数组
-				this.paymentType = selected.id //选中的id
-				this.paymentTypeName = selected.paymentTypeName //选中的id
-			},
-			_loadRentingTypes:function(){
-				let _that = this;
-				queryRentingConfig()
-				.then((_rentingTypes)=>{
-					_that.rentingTypes = _rentingTypes;
-					if(_rentingTypes.length >0){
-						let selected = _rentingTypes[0];
-						_that.rentingConfigId = selected.rentingConfigId;
-						_that.servicePrice = (selected.servicePrice * selected.serviceOwnerRate)+'元';
-					}
-				});
-			},
-			rentingTypeChange:function(e){
-				this.rentingTypeIndex = e.target.value //取其下标
-				let selected = this.rentingTypes[this.rentingTypeIndex] //获取选中的数组
-				this.rentingConfigId = selected.rentingConfigId //选中的id
-				this.rentingTypeName = selected.rentingTypeName //选中的id
-				this.servicePrice = (selected.servicePrice * selected.serviceOwnerRate)+'元';
-			},
-			checkInChange:function(e){
-				this.checkInIndex = e.target.value //取其下标
-				let selected = this.checkIns[this.checkInIndex] //获取选中的数组
-				this.checkIn = selected.id //选中的id
-			},
-			
+			}
 		}
 	};
 </script>

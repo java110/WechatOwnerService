@@ -151,6 +151,10 @@ const queryRentingPool= baseUrl + 'app/renting/queryRentingPool'; //查询房源
 
 
 
+const searchParkingSpace= baseUrl + 'app/searchParkingSpace/listParkingSpace'; //查询空闲车位
+
+
+
 /**
  * 不需要登录页面
  */
@@ -236,5 +240,6 @@ module.exports = {
 	ownerRegisterWxPhoto:ownerRegisterWxPhoto,
 	changeStaffPwd:changeStaffPwd,
 	changeOwnerPhone:changeOwnerPhone,
-	queryRentingPool:queryRentingPool
+	queryRentingPool:queryRentingPool,
+	searchParkingSpace:searchParkingSpace
 };

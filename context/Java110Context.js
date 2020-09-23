@@ -10,13 +10,23 @@ const constant = require("../constant/index.js");
 
 const factory = require("../factory/index.js");
 
-import {getHeaders,request,requestNoAuth} from '../api/java110Request.js'
+import {
+	getHeaders,
+	request,
+	requestNoAuth
+} from '../api/java110Request.js'
 
-import {getCurOwner} from '../api/owner/ownerApi.js'
+import {
+	getCurOwner
+} from '../api/owner/ownerApi.js'
 
-import {getProperty} from '../api/property/propertyApi.js'
+import {
+	getProperty
+} from '../api/property/propertyApi.js'
 
-import {onLoad} from '../api/init/initApi.js'
+import {
+	onLoad
+} from '../api/init/initApi.js'
 
 let util = {};
 
@@ -131,9 +141,9 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
 const getOwner = function(callBack = _ownerInfo => {}) {
 	// 从硬盘中获取 业主信息
 	getCurOwner()
-	.then((_owner)=>{
-		callBack(_owner);
-	})
+		.then((_owner) => {
+			callBack(_owner);
+		})
 };
 
 
@@ -254,6 +264,13 @@ const navigateTo = function(_param) {
 };
 
 
+
+
+
+
+
+
+
 module.exports = {
 	constant: constant,
 	util: util,
@@ -271,5 +288,5 @@ module.exports = {
 	getProperty: getProperty,
 	checkLoginStatus: checkLoginStatus,
 	onLoad: onLoad,
-	navigateTo: navigateTo
+	navigateTo: navigateTo,
 };
