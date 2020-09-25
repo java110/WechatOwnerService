@@ -61,6 +61,8 @@ const queryFeeByOwner = baseUrl + "app/fee.listFee"; //预下单
 
 const preOrder = baseUrl + "app/payment/toPay"; //查询小区
 
+const toOweFeePay = baseUrl + "app/payment/toOweFeePay"; //欠费缴费
+
 //临时车缴费
 const preOrderTempCarInout = baseUrl + "/app/payment/toPayTempCarInout";
 
@@ -243,6 +245,10 @@ module.exports = {
 	changeStaffPwd:changeStaffPwd,
 	changeOwnerPhone:changeOwnerPhone,
 	queryRentingPool:queryRentingPool,
+
+	toOweFeePay:toOweFeePay,
+
 	queryParkingSpaces:queryParkingSpaces,
 	saveOwnerCar:saveOwnerCar
+
 };

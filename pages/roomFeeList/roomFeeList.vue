@@ -49,6 +49,12 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
+		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
+			<view class="btn-group line-height">
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toRoomOweFee()">欠费缴费</button>
+				
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -57,10 +63,15 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+
+	import {
+		getRooms
+	} from '../../api/room/roomApi.js'
+
+	import {
+		getRoomFees
+	} from '../../api/fee/feeApi.js'
 	
-	import {getRooms} from '../../api/room/roomApi.js'
-	
-	import {getRoomFees} from '../../api/fee/feeApi.js'
 
 	export default {
 		data() {
@@ -124,17 +135,17 @@
 					payerObjId: _room.roomId,
 					feeTypeCd: '888800010001',
 					communityId: _room.communityId,
-					state:'2008001'
+					state: '2008001'
 				}
 				_that.moreRooms = [];
-				getRoomFees(_objData,_room)
-				.then((moreRooms)=>{
-					_that.moreRooms = moreRooms;
-					_that.noData = false;	
-				},()=>{
-					_that.noData = true;
-				})
-				
+				getRoomFees(_objData, _room)
+					.then((moreRooms) => {
+						_that.moreRooms = moreRooms;
+						_that.noData = false;
+					}, () => {
+						_that.noData = true;
+					})
+
 			},
 			payFeeDetail: function(_item) {
 				wx.navigateTo({
@@ -145,6 +156,18 @@
 				this.curRoom = _room;
 				this.noData = false;
 				this._loadRoomFee();
+			},
+			toRoomOweFee:function(){
+				if(this.vc.isEmpty(this.curRoom.roomId)){
+					uni.showToast({
+						icon:'none',
+						title:'没有房屋'
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url:'/pages/roomOweFee/roomOweFee?roomId='+this.curRoom.roomId
+				});
 			}
 		}
 	};
@@ -184,4 +207,18 @@
 	}
 
 	/*  #endif  */
+	.cu-btn.lgplus {
+		padding: 0 20px;
+		font-size: 18px;
+		height: 100upx;
+	
+	}
+	
+	.cu-btn.sharp {
+		border-radius: 0upx;
+	}
+	
+	.line-height {
+		line-height: 100upx;
+	}
 </style>

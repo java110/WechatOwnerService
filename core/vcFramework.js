@@ -27,6 +27,8 @@ import {onLoad} from '../api/init/initApi.js'
 
 import {navigateTo,navigateBack} from './vcRoute.js'
 
+import {isEmpty} from '../utils/StringUtil.js'
+
 
 
 
@@ -41,5 +43,6 @@ export default{
 	recoveryCommunityInfo:recoveryCommunityInfo,//将小区输入相应对象
 	onLoad:onLoad,
 	navigateTo:navigateTo,
-	navigateBack:navigateBack
+	navigateBack:navigateBack,
+	isEmpty:isEmpty
 }

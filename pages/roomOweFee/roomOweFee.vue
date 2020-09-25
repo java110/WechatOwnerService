@@ -13,34 +13,10 @@
 				</view>
 				<view class="cu-item">
 					<view class="content">
-						<text class="text-grey">楼栋编号</text>
+						<text class="text-grey">房屋</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{floorNum + '号楼'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">单元编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{unitNum + '单元'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{roomNum + '室'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋楼层</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{layer + '层'}}</text>
+						<text class="text-grey text-sm">{{floorNum}}-{{unitNum}}-{{roomNum}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -52,56 +28,23 @@
 					</view>
 				</view>
 			</view>
-			<view class="block__title">费用信息</view>
-			<view class="cu-list menu fee-last">
+			<view class="block__title" v-if="fees.length > 0">欠费信息</view>
+			<view class="cu-list menu"  v-for="(item,index) in fees" :key="index" :data-item="item">
 				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">费用编号</text>
+					<view class="content padding-tb-sm">
+						<view>
+							<view class="text-cut" style="width:220px">{{item.feeName}}</view>
+						</view>
+						<view class="text-gray text-sm">
+							<text class="margin-right-xs">{{item.endTime}}至{{item.deadlineTime}}</text></view>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{feeId }}</text>
+						<text class="text-grey text-sm">应缴:￥{{item.feePrice}}</text>
 					</view>
 				</view>
-				<view class="cu-item"  v-if="feeFlag == '1003006'">
-					<view class="content">
-						<text class="text-grey">金额</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{amount + '元/月' }}</text>
-					</view>
-				</view>
-				<view class="cu-item"  v-else>
-					<view class="content">
-						<text class="text-grey">金额</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{amount + '元' }}</text>
-					</view>
-				</view>
-				<view class="cu-item arrow" v-if="feeFlag == '1003006'">
-					<view class="content">
-						<text class="text-grey">周期</text>
-					</view>
-					<view class="action">
-						<picker bindchange="PickerChange" :value="index" :range="feeMonthList" @change="dateChange">
-							<view class="picker">
-								{{feeMonthName}}
-							</view>
-						</picker>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">到期时间</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{endTime }}</text>
-					</view>
-				</view>
-
 			</view>
 		</scroll-view>
-		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+		<view v-if="fees.length > 0" class="bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
 
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
@@ -114,8 +57,6 @@
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
 				<!-- #endif -->
 			</view>
-
-
 		</view>
 	</view>
 
@@ -127,108 +68,117 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 
-	
+
 	// #ifdef H5
-	
+
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-	
+
 	// #endif
+
+	import {
+		addMonth,
+		formatDate
+	} from '../../utils/DateUtil.js'
+
+	import {
+		getCurCommunity
+	} from '../../api/community/communityApi.js'
+
+	import {
+		getRoomOweFees
+	} from '../../api/fee/feeApi.js'
 	
-	import {addMonth,formatDate} from '../../utils/DateUtil.js'
+	import {
+		getRooms
+	} from '../../api/room/roomApi.js'
 	export default {
 		data() {
 			return {
-				date: '2018-12-25',
-				index: 0,
-				active: 0,
-				tablist: ['缴费', '历史'],
-				TabCur: 0,
 				scrollLeft: 0,
-				showFeeMonth: false,
-				feeMonthList: [],
-				feeMonthName: '',
-				feeMonth: 1,
-				endTime: '',
-				ordEndTime: '',
 				amount: 0,
 				receivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
-				feeId: '',
 				floorNum: '',
 				unitNum: '',
 				roomNum: '',
-				layer: '',
 				builtUpArea: '',
-				costList: [{}, {}], //费用清单
 				additionalAmount: "",
 				appId: '',
-				feeFlag:'',
-				paymentCycle:1,
+				fees: [],
+				roomId: ''
 			};
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			let _that = this;
 			context.onLoad(options);
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
 			// #ifdef H5
-				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
-			let _fee = JSON.parse(options.fee);
-			let _amount = _fee.amount;
-			let _receivableAmount = (_fee.paymentCycle * _amount).toFixed(2);
-			let _communityInfo = context.getCurrentCommunity();
-			let _lastDate = new Date(_fee.endTime);
-			let _endTime = addMonth(_lastDate, this.feeMonth);
-			this.receivableAmount = _receivableAmount;
-			this.communityId = _communityInfo.communityId;
-			this.communityName = _communityInfo.communityName;
-			this.floorNum = _fee.floorNum;
-			this.unitNum = _fee.unitNum;
-			this.roomNum = _fee.roomNum;
-			this.layer = _fee.layer;
-			this.builtUpArea = _fee.builtUpArea;
-			this.feeId = _fee.feeId;
-			this.amount = _amount;
-			this.additionalAmount = _fee.additionalAmount;
-			this.endTime = formatDate(_endTime);
-			this.ordEndTime = _fee.endTime;
-			this.feeFlag = _fee.feeFlag;
-			if(this.feeFlag == '2006012'){
-				return;
-			}
-			this.paymentCycle = _fee.paymentCycle;	
-			for (let _index = 1; _index < 7; _index++) {
-				this.feeMonthList.push(_index * this.paymentCycle + '个月')
-			}
-			this.feeMonthName = this.paymentCycle + '个月';
+			this.roomId = options.roomId;
+
+			getCurCommunity()
+				.then(function(_curCommunity) {
+					_that.communityId = _curCommunity.communityId;
+					_that.communityName = _curCommunity.communityName;
+					return _curCommunity;
+				}).then(function(_curCommunity) {
+					_that._loadRoomOweFee();
+				});
+			getRooms().then(data => {
+				let _rooms = data.rooms;
+				this.rooms = _rooms;
+				let _owner = data.owner;
+				_that.moreRooms = [];
+				_rooms.forEach(function(_room) {
+					if(_room.roomId == _that.roomId){
+						_that.floorNum = _room.floorNum;
+						_that.unitNum = _room.unitNum;
+						_that.roomNum = _room.roomNum;
+					}
+				});
+				_that.curRoom = _rooms[0];
+				_that._loadRoomFee();
+			});
 		},
 		methods: {
-			dateChange: function(e) {
-				console.log("onConfirm", e);
-				let _feeMonthName = null;
-				_feeMonthName = this.feeMonthList[e.detail.value];;
-				let _feeMonth = _feeMonthName.replace("个月","");
-				let _receivableAmount = _feeMonth * this.amount;
-				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
-				this.showFeeMonth = false;
-				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount;
-				this.feeMonth = _feeMonth;
-				this.endTime = util.date.formatDate(_newDate);
+
+			_loadRoomOweFee: function() {
+				let _that =this;
+				let _objData = {
+					payObjId: this.roomId,
+					payObjType:'3333',
+					page: 1,
+					row: 50,
+					communityId: this.communityId
+				}
+
+				getRoomOweFees(_objData)
+					.then(function(_fees) {
+						_that.fees = _fees;
+						return _fees;
+					}, function(error) {
+						uni.showToast({
+							icon:'none',
+							title:'没有欠费信息'
+						})
+					})
+					.then(function(_fees){
+						_fees.forEach(function(_item){
+							_that.receivableAmount += _item.feePrice;
+							
+						})
+						_that.receivableAmount = _that.receivableAmount.toFixed(2);
+					})
 			},
-			onFeeMonthChange: function(e) {
-				console.log(e);
-			},
-			onFeeMonthCancel: function(e) {
-				this.showFeeMonth = false;
-			},
+
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -239,20 +189,19 @@
 				let _objData = {
 					cycles: this.feeMonth,
 					communityId: this.communityId,
-					feeId: this.feeId,
+					roomId: this.roomId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId
 				};
 				context.request({
-					url: constant.url.preOrder,
+					url: constant.url.toOweFeePay,
 					header: context.getHeaders(),
 					method: "POST",
 					data: _objData,
 					//动态数据
 					success: function(res) {
-						console.log(res);
 
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
@@ -311,20 +260,19 @@
 				let _objData = {
 					cycles: this.feeMonth,
 					communityId: this.communityId,
-					feeId: this.feeId,
+					roomId: this.roomId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId
 				};
 				context.request({
-					url: constant.url.preOrder,
+					url: constant.url.toOweFeePay,
 					header: context.getHeaders(),
 					method: "POST",
 					data: _objData,
 					//动态数据
 					success: function(res) {
-
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
 							// #ifdef MP-WEIXIN
@@ -347,13 +295,13 @@
 							});
 							// #endif
 							// #ifdef H5
-								WexinPayFactory.wexinPay(data,function(){
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
+							WexinPayFactory.wexinPay(data, function() {
+								uni.showToast({
+									title: "支付成功",
+									duration: 2000
 								});
+								uni.navigateBack({});
+							});
 							// #endif
 							wx.hideLoading();
 							return;
@@ -380,7 +328,25 @@
 	};
 </script>
 <style>
-	@import "./roomFee.css";
+	.ppf_item {
+		padding: 0rpx 0rpx 0rpx 0rpx;
+	}
+
+	.block__title {
+		margin: 0;
+		font-weight: 400;
+		font-size: 14px;
+		color: rgba(69, 90, 100, .6);
+		padding: 40rpx 30rpx 20rpx;
+	}
+
+	.button_up_blank {
+		height: 40rpx;
+	}
+
+	.block__bottom {
+		height: 180rpx;
+	}
 
 	.fee-last {
 		margin-bottom: 200upx;
