@@ -33,7 +33,7 @@
 
 		<view class="cu-form-group">
 			<view class="title">租用类型</view>
-			<picker bindchange="PickerChange" :value="index" :range="rentTypes" @change="chooseRentTypes">
+			<picker bindchange="PickerChange" disabled="disabled" :value="index" :range="rentTypes" @change="chooseRentTypes">
 				<view class="picker">
 					{{rentTypeName?rentTypeName:'请选择'}}
 				</view>
@@ -107,8 +107,8 @@
 
 				rentTypes: ['出售车辆', '月租车'],
 				rentTypeCodes: ['H', 'S'],
-				rentTypeCode: '',
-				rentTypeName: '',
+				rentTypeCode: 'S',
+				rentTypeName: '月租车',
 
 				
 				page: 1,
