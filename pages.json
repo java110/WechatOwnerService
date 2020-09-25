@@ -328,6 +328,12 @@
 				"navigationBarTitleText": "房源"
 			}
 		}
+        ,{
+            "path" : "pages/roomOweFee/roomOweFee",
+            "style" : {
+				"navigationBarTitleText": "欠费缴费"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

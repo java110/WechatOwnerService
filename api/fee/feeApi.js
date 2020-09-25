@@ -11,6 +11,8 @@ from '../../constant/MappingConstant.js'
 
 import {formatDate,dateTimeStringToDateString} from '../../utils/DateUtil.js'
 
+
+
 /**
  * @param {Object} _objData {
 	 page: 1,
@@ -54,6 +56,44 @@ export function getRoomFees(_objData,_tmpRoom) {
 						moreRooms.push(_tmpRoom);
 					});
 					resolve(moreRooms);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 查询欠费信息
+ * @param {Object} _objData 欠费对象
+ */
+export function getRoomOweFees(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.listOweFees,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _roomFees = res.data.data;
+					if (_roomFees.length < 1) {
+						//_that.noData = true;
+						reject();
+					}
+					 _roomFees.forEach(function(_roomFee) {
+					 	_roomFee.endTime = dateTimeStringToDateString(_roomFee.endTime);
+					 	
+						_roomFee.deadlineTime = dateTimeStringToDateString(_roomFee.deadlineTime);
+					
+					
+					
+					 });
+					resolve(_roomFees);
 					return;
 				}
 				reject();

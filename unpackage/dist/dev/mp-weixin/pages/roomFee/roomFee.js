@@ -130,275 +130,276 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _DateUtil = __webpack_require__(/*! ../../utils/DateUtil.js */ 13); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // pages/payParkingFee/payParkingFee.js
-var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);
-var constant = context.constant;
-var util = context.util;var _default =
-
-
-
-
-
-
-
-{
-  data: function data() {
-    return {
-      date: '2018-12-25',
-      index: 0,
-      active: 0,
-      tablist: ['缴费', '历史'],
-      TabCur: 0,
-      scrollLeft: 0,
-      showFeeMonth: false,
-      feeMonthList: [],
-      feeMonthName: '',
-      feeMonth: 1,
-      endTime: '',
-      ordEndTime: '',
-      amount: 0,
-      receivableAmount: 0.00,
-      communityId: '',
-      communityName: '',
-      feeId: '',
-      floorNum: '',
-      unitNum: '',
-      roomNum: '',
-      layer: '',
-      builtUpArea: '',
-      costList: [{}, {}], //费用清单
-      additionalAmount: "",
-      appId: '',
-      feeFlag: '',
-      paymentCycle: 1 };
-
-  },
-  /**
-      * 生命周期函数--监听页面加载
-      */
-  onLoad: function onLoad(options) {
-    context.onLoad(options);
-
-    var accountInfo = uni.getAccountInfoSync();
-    this.appId = accountInfo.miniProgram.appId;
-
-
-
-
-    var _fee = JSON.parse(options.fee);
-    var _amount = _fee.amount;
-    var _receivableAmount = _fee.paymentCycle * _amount;
-    var _communityInfo = context.getCurrentCommunity();
-    var _lastDate = new Date(_fee.endTime);
-    var _endTime = util.date.addMonth(_lastDate, this.feeMonth);
-    this.receivableAmount = _receivableAmount;
-    this.communityId = _communityInfo.communityId;
-    this.communityName = _communityInfo.communityName;
-    this.floorNum = _fee.floorNum;
-    this.unitNum = _fee.unitNum;
-    this.roomNum = _fee.roomNum;
-    this.layer = _fee.layer;
-    this.builtUpArea = _fee.builtUpArea;
-    this.feeId = _fee.feeId;
-    this.amount = _amount;
-    this.additionalAmount = _fee.additionalAmount;
-    this.endTime = util.date.formatDate(_endTime);
-    this.ordEndTime = _fee.endTime;
-    this.feeFlag = _fee.feeFlag;
-    if (this.feeFlag == '2006012') {
-      return;
-    }
-    this.paymentCycle = _fee.paymentCycle;
-    for (var _index = 1; _index < 7; _index++) {
-      this.feeMonthList.push(_index * this.paymentCycle + '个月');
-    }
-    this.feeMonthName = this.paymentCycle + '个月';
-  },
-  methods: {
-    dateChange: function dateChange(e) {
-      console.log("onConfirm", e);
-      var _feeMonthName = null;
-      _feeMonthName = this.feeMonthList[e.detail.value];;
-      var _feeMonth = _feeMonthName.replace("个月", "");
-      var _receivableAmount = _feeMonth * this.amount;
-      var _lastDate = new Date(this.ordEndTime);
-      var _newDate = util.date.addMonth(_lastDate, _feeMonth);
-      this.showFeeMonth = false;
-      this.feeMonthName = _feeMonthName;
-      this.receivableAmount = _receivableAmount;
-      this.feeMonth = _feeMonth;
-      this.endTime = util.date.formatDate(_newDate);
-    },
-    onFeeMonthChange: function onFeeMonthChange(e) {
-      console.log(e);
-    },
-    onFeeMonthCancel: function onFeeMonthCancel(e) {
-      this.showFeeMonth = false;
-    },
-    _payWxApp: function _payWxApp(_data) {
-      var _receivedAmount = this.receivableAmount;
-      wx.showLoading({
-        title: '支付中' });
-
-
-      var _tradeType = 'APP';
-      var _objData = {
-        cycles: this.feeMonth,
-        communityId: this.communityId,
-        feeId: this.feeId,
-        feeName: '物业费',
-        receivedAmount: _receivedAmount,
-        tradeType: _tradeType,
-        appId: this.appId };
-
-      context.request({
-        url: constant.url.preOrder,
-        header: context.getHeaders(),
-        method: "POST",
-        data: _objData,
-        //动态数据
-        success: function success(res) {
-          console.log(res);
-
-          if (res.statusCode == 200 && res.data.code == '0') {
-            var data = res.data; //成功情况下跳转
-            var obj = {
-              appid: data.appId,
-              noncestr: data.nonceStr,
-              package: 'Sign=WXPay', // 固定值，以微信支付文档为主
-              partnerid: data.partnerid,
-              prepayid: data.prepayid,
-              timestamp: data.timeStamp,
-              sign: data.sign // 根据签名算法生成签名
-            };
-            // 第二种写法，传对象字符串
-            var orderInfo = JSON.stringify(obj);
-            uni.requestPayment({
+var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var constant = context.constant;var _default = { data: function data() {return { date: '2018-12-25', index: 0, active: 0, tablist: ['缴费', '历史'], TabCur: 0, scrollLeft: 0, showFeeMonth: false, feeMonthList: [], feeMonthName: '', feeMonth: 1, endTime: '', ordEndTime: '', amount: 0, receivableAmount: 0.00, communityId: '', communityName: '', feeId: '', floorNum: '', unitNum: '', roomNum: '', layer: '', builtUpArea: '', costList: [{}, {}], //费用清单
+      additionalAmount: "", appId: '', feeFlag: '', paymentCycle: 1 };}, /**
+                                                                          * 生命周期函数--监听页面加载
+                                                                          */onLoad: function onLoad(options) {context.onLoad(options);var accountInfo = uni.getAccountInfoSync();this.appId = accountInfo.miniProgram.appId;var _fee = JSON.parse(options.fee);var _amount = _fee.amount;var _receivableAmount = (_fee.paymentCycle * _amount).toFixed(2);var _communityInfo = context.getCurrentCommunity();var _lastDate = new Date(_fee.endTime);var _endTime = (0, _DateUtil.addMonth)(_lastDate, this.feeMonth);this.receivableAmount = _receivableAmount;this.communityId = _communityInfo.communityId;this.communityName = _communityInfo.communityName;this.floorNum = _fee.floorNum;this.unitNum = _fee.unitNum;this.roomNum = _fee.roomNum;this.layer = _fee.layer;this.builtUpArea = _fee.builtUpArea;this.feeId = _fee.feeId;this.amount = _amount;this.additionalAmount = _fee.additionalAmount;this.endTime = (0, _DateUtil.formatDate)(_endTime);this.ordEndTime = _fee.endTime;this.feeFlag = _fee.feeFlag;if (this.feeFlag == '2006012') {return;}this.paymentCycle = _fee.paymentCycle;for (var _index = 1; _index < 7; _index++) {this.feeMonthList.push(_index * this.paymentCycle + '个月');}this.feeMonthName = this.paymentCycle + '个月';}, methods: { dateChange: function dateChange(e) {console.log("onConfirm", e);var _feeMonthName = null;_feeMonthName = this.feeMonthList[e.detail.value];;var _feeMonth = _feeMonthName.replace("个月", "");var _receivableAmount = _feeMonth * this.amount;var _lastDate = new Date(this.ordEndTime);var _newDate = util.date.addMonth(_lastDate, _feeMonth);this.showFeeMonth = false;this.feeMonthName = _feeMonthName;this.receivableAmount = _receivableAmount;this.feeMonth = _feeMonth;this.endTime = util.date.formatDate(_newDate);}, onFeeMonthChange: function onFeeMonthChange(e) {console.log(e);}, onFeeMonthCancel: function onFeeMonthCancel(e) {this.showFeeMonth = false;}, _payWxApp: function _payWxApp(_data) {var _receivedAmount = this.receivableAmount;wx.showLoading({ title: '支付中' });var _tradeType = 'APP';var _objData = { cycles: this.feeMonth, communityId: this.communityId, feeId: this.feeId, feeName: '物业费', receivedAmount: _receivedAmount, tradeType: _tradeType, appId: this.appId };context.request({ url: constant.url.preOrder, header: context.getHeaders(), method: "POST", data: _objData, //动态数据
+        success: function success(res) {console.log(res);if (res.statusCode == 200 && res.data.code == '0') {var data = res.data; //成功情况下跳转
+            var obj = { appid: data.appId, noncestr: data.nonceStr, package: 'Sign=WXPay', // 固定值，以微信支付文档为主
+              partnerid: data.partnerid, prepayid: data.prepayid, timestamp: data.timeStamp, sign: data.sign // 根据签名算法生成签名
+            }; // 第二种写法，传对象字符串
+            var orderInfo = JSON.stringify(obj);uni.requestPayment({
               provider: 'wxpay',
               orderInfo: orderInfo, //微信、支付宝订单数据
               success: function success(res) {

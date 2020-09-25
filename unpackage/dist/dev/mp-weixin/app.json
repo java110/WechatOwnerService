@@ -54,7 +54,8 @@
     "pages/changePassword/changePassword",
     "pages/changeOwnerPhone/changeOwnerPhone",
     "pages/hireRoom/hireRoom",
-    "pages/rentHouse/rentHouse"
+    "pages/rentHouse/rentHouse",
+    "pages/roomOweFee/roomOweFee"
   ],
   "subPackages": [],
   "window": {
@@ -99,6 +100,5 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap78.json"
+  "usingComponents": {}
 }

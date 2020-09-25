@@ -41,14 +41,15 @@
 	width: 100%;
 	z-index: 2;
 }
-
-
-
-
-
-
-
-
-
-
+.cu-btn.lgplus {
+	padding: 0 20px;
+	font-size: 18px;
+	height: 100rpx;
+}
+.cu-btn.sharp {
+	border-radius: 0rpx;
+}
+.line-height {
+	line-height: 100rpx;
+}
 

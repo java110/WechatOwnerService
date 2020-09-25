@@ -760,7 +760,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2213,6 +2213,8 @@ var baseUrl = _config.default.baseUrl;var _default =
   changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
   queryRentingConfig: baseUrl + 'app/renting/queryRentingConfig', // 房屋出租配置查询
   saveRentingPool: baseUrl + 'app/renting/saveRentingPool', //出租提交
+  listOweFees: baseUrl + 'app/feeApi/listOweFees', //查询房屋欠费
+  toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
   NEED_NOT_LOGIN_PAGE: [
   '/pages/login/login',
   '/pages/register/register',
@@ -8082,7 +8084,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8103,14 +8105,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8186,7 +8188,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9137,6 +9139,8 @@ var queryFeeByOwner = baseUrl + "app/fee.listFee"; //预下单
 
 var preOrder = baseUrl + "app/payment/toPay"; //查询小区
 
+var toOweFeePay = baseUrl + "app/payment/toOweFeePay"; //欠费缴费
+
 //临时车缴费
 var preOrderTempCarInout = baseUrl + "/app/payment/toPayTempCarInout";
 
@@ -9312,7 +9316,8 @@ module.exports = {
   ownerRegisterWxPhoto: ownerRegisterWxPhoto,
   changeStaffPwd: changeStaffPwd,
   changeOwnerPhone: changeOwnerPhone,
-  queryRentingPool: queryRentingPool };
+  queryRentingPool: queryRentingPool,
+  toOweFeePay: toOweFeePay };
 
 /***/ }),
 
@@ -9936,78 +9941,29 @@ function hireRoom(obj) {
 /***/ }),
 
 /***/ 306:
-/*!***********************************************************!*\
-  !*** C:/project/vip/WechatOwnerService/api/fee/feeApi.js ***!
-  \***********************************************************/
+/*!*************************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/utils/StringUtil.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getRoomFees = getRoomFees;var _java110Request = __webpack_require__(/*! ../java110Request.js */ 9);
-
-
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 14));
-
-
-
-var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 15));
-
-
-
-var _DateUtil = __webpack_require__(/*! ../../utils/DateUtil.js */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.isEmpty = isEmpty; /**
+                                                                                                       * 字符串工具类
+                                                                                                       * 
+                                                                                                       * add by 吴学文 2020-09-25
+                                                                                                       */
 
 /**
-                                                                                                                                                  * @param {Object} _objData {
-                                                                                                                                                 	 page: 1,
-                                                                                                                                                 	 row: 30,
-                                                                                                                                                 	 payerObjId: _room.roomId,
-                                                                                                                                                 	 feeTypeCd: '888800010001',
-                                                                                                                                                 	 communityId: _room.communityId,
-                                                                                                                                                 	 state:'2008001'
-                                                                                                                                                  }
-                                                                                                                                                  */
-function getRoomFees(_objData, _tmpRoom) {
-  return new Promise(function (resolve, reject) {
-    var moreRooms = [];
-    (0, _java110Request.request)({
-      url: _url.default.queryFeeByOwner,
-      method: "GET",
-      data: _objData, //动态数据
-      success: function success(res) {
-        if (res.statusCode == 200) {
-          //成功情况下跳转
-          var _roomFees = res.data.fees;
-          if (_roomFees.length < 1) {
-            //_that.noData = true;
-            reject();
-          }
-          _roomFees.forEach(function (_roomFee) {
-            _tmpRoom.endTime = (0, _DateUtil.dateTimeStringToDateString)(_roomFee.endTime);
-            var _now = new Date();
-            if (_roomFee.endTime > _now) {
-              _tmpRoom.feeStateName = '正常';
-            } else {
-              _tmpRoom.feeStateName = '欠费';
-            }
-            _tmpRoom.additionalAmount = _roomFee.additionalAmount;
-            _tmpRoom.squarePrice = _roomFee.squarePrice;
-            _tmpRoom.amount = _roomFee.feePrice;
-            _tmpRoom.feeId = _roomFee.feeId;
-            _tmpRoom.feeName = _roomFee.feeName;
-            _tmpRoom.feeFlag = _roomFee.feeFlag;
-            _tmpRoom.paymentCycle = _roomFee.paymentCycle;
-            moreRooms.push(_tmpRoom);
-          });
-          resolve(moreRooms);
-          return;
-        }
-        reject();
-      },
-      fail: function fail(e) {
-        reject();
-      } });
+                                                                                                           * 判断是否为空
+                                                                                                           * @param {Object} _value 字符串
+                                                                                                           */
+function isEmpty(_value) {
+  if (_value == undefined || _value == null || _value.trim() == '') {
+    return true;
+  }
 
-  });
+  return false;
 }
 
 /***/ }),
@@ -10507,27 +10463,29 @@ var _communityApi = __webpack_require__(/*! ../api/community/communityApi.js */ 
 
 var _initApi = __webpack_require__(/*! ../api/init/initApi.js */ 25);
 
-var _vcRoute = __webpack_require__(/*! ./vcRoute.js */ 42); /**
-                                         * vcFramework
-                                         * 
-                                         * @author 吴学文
-                                         * 
-                                         * @version 0.3
-                                         * 
-                                         * @description uni-app 开发工具
-                                         * 
-                                         * @time 2020-03-04
-                                         * 
-                                         * @qq 928255095
-                                         * 
-                                         * @mail 928255095@qq.com
-                                         * 
-                                         */ // 存储相关
+var _vcRoute = __webpack_require__(/*! ./vcRoute.js */ 42);
+
+var _StringUtil = __webpack_require__(/*! ../utils/StringUtil.js */ 306); /**
+                                                      * vcFramework
+                                                      * 
+                                                      * @author 吴学文
+                                                      * 
+                                                      * @version 0.3
+                                                      * 
+                                                      * @description uni-app 开发工具
+                                                      * 
+                                                      * @time 2020-03-04
+                                                      * 
+                                                      * @qq 928255095
+                                                      * 
+                                                      * @mail 928255095@qq.com
+                                                      * 
+                                                      */ // 存储相关
 // 日志相关
 // 小区相关
 // 页面初始化相关
 var _default = { getStorageSync: _StorageUtil.getStorageSync, setStorageSync: _StorageUtil.setStorageSync, debug: _LogUtil.debug, info: _LogUtil.info, error: _LogUtil.error, warn: _LogUtil.warn, getCurCommunity: _communityApi.getCurCommunity, recoveryCommunityInfo: _communityApi.recoveryCommunityInfo, //将小区输入相应对象
-  onLoad: _initApi.onLoad, navigateTo: _vcRoute.navigateTo, navigateBack: _vcRoute.navigateBack };exports.default = _default;
+  onLoad: _initApi.onLoad, navigateTo: _vcRoute.navigateTo, navigateBack: _vcRoute.navigateBack, isEmpty: _StringUtil.isEmpty };exports.default = _default;
 
 /***/ }),
 
@@ -11836,6 +11794,123 @@ if (hadRuntime) {
 
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 588:
+/*!***********************************************************!*\
+  !*** C:/project/vip/WechatOwnerService/api/fee/feeApi.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.getRoomFees = getRoomFees;exports.getRoomOweFees = getRoomOweFees;var _java110Request = __webpack_require__(/*! ../java110Request.js */ 9);
+
+
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 14));
+
+
+
+var _MappingConstant = _interopRequireDefault(__webpack_require__(/*! ../../constant/MappingConstant.js */ 15));
+
+
+
+var _DateUtil = __webpack_require__(/*! ../../utils/DateUtil.js */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+
+/**
+                                                                                                                                                  * @param {Object} _objData {
+                                                                                                                                                 	 page: 1,
+                                                                                                                                                 	 row: 30,
+                                                                                                                                                 	 payerObjId: _room.roomId,
+                                                                                                                                                 	 feeTypeCd: '888800010001',
+                                                                                                                                                 	 communityId: _room.communityId,
+                                                                                                                                                 	 state:'2008001'
+                                                                                                                                                  }
+                                                                                                                                                  */
+function getRoomFees(_objData, _tmpRoom) {
+  return new Promise(function (resolve, reject) {
+    var moreRooms = [];
+    (0, _java110Request.request)({
+      url: _url.default.queryFeeByOwner,
+      method: "GET",
+      data: _objData, //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          //成功情况下跳转
+          var _roomFees = res.data.fees;
+          if (_roomFees.length < 1) {
+            //_that.noData = true;
+            reject();
+          }
+          _roomFees.forEach(function (_roomFee) {
+            _tmpRoom.endTime = (0, _DateUtil.dateTimeStringToDateString)(_roomFee.endTime);
+            var _now = new Date();
+            if (_roomFee.endTime > _now) {
+              _tmpRoom.feeStateName = '正常';
+            } else {
+              _tmpRoom.feeStateName = '欠费';
+            }
+            _tmpRoom.additionalAmount = _roomFee.additionalAmount;
+            _tmpRoom.squarePrice = _roomFee.squarePrice;
+            _tmpRoom.amount = _roomFee.feePrice;
+            _tmpRoom.feeId = _roomFee.feeId;
+            _tmpRoom.feeName = _roomFee.feeName;
+            _tmpRoom.feeFlag = _roomFee.feeFlag;
+            _tmpRoom.paymentCycle = _roomFee.paymentCycle;
+            moreRooms.push(_tmpRoom);
+          });
+          resolve(moreRooms);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      } });
+
+  });
+}
+
+/**
+   * 查询欠费信息
+   * @param {Object} _objData 欠费对象
+   */
+function getRoomOweFees(_objData) {
+  return new Promise(function (resolve, reject) {
+    (0, _java110Request.request)({
+      url: _url.default.listOweFees,
+      method: "GET",
+      data: _objData, //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          //成功情况下跳转
+          var _roomFees = res.data.data;
+          if (_roomFees.length < 1) {
+            //_that.noData = true;
+            reject();
+          }
+          _roomFees.forEach(function (_roomFee) {
+            _roomFee.endTime = (0, _DateUtil.dateTimeStringToDateString)(_roomFee.endTime);
+
+            _roomFee.deadlineTime = (0, _DateUtil.dateTimeStringToDateString)(_roomFee.deadlineTime);
+
+
+
+          });
+          resolve(_roomFees);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      } });
+
+  });
+}
 
 /***/ }),
 

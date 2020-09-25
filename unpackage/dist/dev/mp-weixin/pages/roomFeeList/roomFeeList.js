@@ -134,7 +134,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
 
 
 
@@ -196,7 +202,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 var _roomApi = __webpack_require__(/*! ../../api/room/roomApi.js */ 305);
 
-var _feeApi = __webpack_require__(/*! ../../api/fee/feeApi.js */ 306); //
+
+
+var _feeApi = __webpack_require__(/*! ../../api/fee/feeApi.js */ 588); //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -255,10 +269,7 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 生命周期函数--监听页面加载
                                                                                                                                                                                                                                                                                                                                                                                                                                                            */onLoad: function onLoad(options) {context.onLoad(options);}, /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 生命周期函数--监听页面显示
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */onShow: function onShow() {var _this = this;var _that = this;if (!this.needFefresh) {this.needFefresh = true;return;}this.noData = false;(0, _roomApi.getRooms)().then(function (data) {var _rooms = data.rooms;_this.rooms = _rooms;var _owner = data.owner;_that.moreRooms = [];if (_rooms.length == 0) {_that.noData = true;return;}_rooms.forEach(function (_room) {_room.communityId = _owner.communityId;_room.communityName = _owner.communityName;});_that.curRoom = _rooms[0];_that._loadRoomFee();});}, methods: { payFee: function payFee(_item) {wx.navigateTo({ url: '/pages/roomFee/roomFee?fee=' + JSON.stringify(_item) });}, _loadRoomFee: function _loadRoomFee() {var _that = this;var _room = this.curRoom;var _objData = { page: 1,
-        row: 30,
-        payerObjId: _room.roomId,
-        feeTypeCd: '888800010001',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */onShow: function onShow() {var _this = this;var _that = this;if (!this.needFefresh) {this.needFefresh = true;return;}this.noData = false;(0, _roomApi.getRooms)().then(function (data) {var _rooms = data.rooms;_this.rooms = _rooms;var _owner = data.owner;_that.moreRooms = [];if (_rooms.length == 0) {_that.noData = true;return;}_rooms.forEach(function (_room) {_room.communityId = _owner.communityId;_room.communityName = _owner.communityName;});_that.curRoom = _rooms[0];_that._loadRoomFee();});}, methods: { payFee: function payFee(_item) {wx.navigateTo({ url: '/pages/roomFee/roomFee?fee=' + JSON.stringify(_item) });}, _loadRoomFee: function _loadRoomFee() {var _that = this;var _room = this.curRoom;var _objData = { page: 1, row: 30, payerObjId: _room.roomId, feeTypeCd: '888800010001',
         communityId: _room.communityId,
         state: '2008001' };
 
@@ -281,7 +292,20 @@ var context = __webpack_require__(/*! ../../context/Java110Context.js */ 8);var 
       this.curRoom = _room;
       this.noData = false;
       this._loadRoomFee();
+    },
+    toRoomOweFee: function toRoomOweFee() {
+      if (this.vc.isEmpty(this.curRoom.roomId)) {
+        uni.showToast({
+          icon: 'none',
+          title: '没有房屋' });
+
+        return;
+      }
+      this.vc.navigateTo({
+        url: '/pages/roomOweFee/roomOweFee?roomId=' + this.curRoom.roomId });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
