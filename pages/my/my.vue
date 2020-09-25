@@ -65,7 +65,7 @@
 			
 			<view class="cu-item arrow" @click="myParking()">
 				<view class="content">
-					<text class="cuIcon-cameraadd text-orange"></text>
+					<text class="cuIcon-formfill text-orange"></text>
 					<text class="text-grey">车位信息</text>
 				</view>
 			</view>
