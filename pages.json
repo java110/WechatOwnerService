@@ -340,7 +340,13 @@
             "style" : {
 				"navigationBarTitleText": "欠费缴费"
 			}
-        }
+        },
+		{
+		    "path" : "pages/parkingInfo/parkingInfo",
+		    "style" : {
+				"navigationBarTitleText": "车位申请进度"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#272636",

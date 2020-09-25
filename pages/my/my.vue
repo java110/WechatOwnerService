@@ -62,6 +62,13 @@
 					<text class="text-grey">我的报修单</text>
 				</view>
 			</view>
+			
+			<view class="cu-item arrow" @click="myParking()">
+				<view class="content">
+					<text class="cuIcon-cameraadd text-orange"></text>
+					<text class="text-grey">车位信息</text>
+				</view>
+			</view>
 
 			<view class="cu-item arrow" @click="mySettings()">
 				<view class="content">
@@ -247,6 +254,11 @@
 			},
 			ckeckUserInfo: function() {
 				return context.checkLoginStatus();
+			},
+			myParking:function(){
+				wx.navigateTo({
+					url: '/pages/parkingInfo/parkingInfo',
+				});
 			}
 
 		}
