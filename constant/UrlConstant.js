@@ -153,6 +153,12 @@ const queryRentingPool= baseUrl + 'app/renting/queryRentingPool'; //查询房源
 
 
 
+const queryParkingSpaces= baseUrl + 'app/parkingSpace.queryParkingSpaces'; //查询空闲车位
+
+const saveOwnerCar= baseUrl + 'app/owner.saveOwnerCar'; //申请车位接口
+
+
+
 /**
  * 不需要登录页面
  */
@@ -239,5 +245,10 @@ module.exports = {
 	changeStaffPwd:changeStaffPwd,
 	changeOwnerPhone:changeOwnerPhone,
 	queryRentingPool:queryRentingPool,
-	toOweFeePay:toOweFeePay
+
+	toOweFeePay:toOweFeePay,
+
+	queryParkingSpaces:queryParkingSpaces,
+	saveOwnerCar:saveOwnerCar
+
 };

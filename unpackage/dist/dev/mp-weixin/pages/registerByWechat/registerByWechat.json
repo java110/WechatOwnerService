@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "业主绑定",
-  "usingComponents": {
-    "picker-address": "/components/pickerAddress/pickerAddress"
-  }
-}

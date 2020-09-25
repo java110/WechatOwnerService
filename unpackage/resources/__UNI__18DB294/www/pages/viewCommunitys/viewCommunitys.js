@@ -1,2 +1,0 @@
-setCssToHead([".",[1],"vc_community_search{ }\n.",[1],"vc_communitys{ margin-top: ",[0,20],"; }\n",],undefined,{path:"./pages/viewCommunitys/viewCommunitys.wxss"})();
-document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/viewCommunitys/viewCommunitys.wxml') } }));

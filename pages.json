@@ -325,7 +325,14 @@
 		{
 		    "path" : "pages/rentHouse/rentHouse",
 		    "style" : {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "房源"
+			}
+		},
+		{
+		    "path" : "pages/applyparking/applyparking",
+		    "style" : {
+				"navigationBarTitleText": "车位申请"
 			}
 		}
         ,{

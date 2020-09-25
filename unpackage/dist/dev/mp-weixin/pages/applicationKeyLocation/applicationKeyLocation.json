@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "相关门禁",
-  "usingComponents": {
-    "no-data-page": "/components/no-data-page/no-data-page"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "智慧门禁",
-  "usingComponents": {
-    "van-grid": "/wxcomponents/vant/grid/index",
-    "van-grid-item": "/wxcomponents/vant/grid-item/index"
-  }
-}

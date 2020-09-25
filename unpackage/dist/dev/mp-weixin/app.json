@@ -55,6 +55,7 @@
     "pages/changeOwnerPhone/changeOwnerPhone",
     "pages/hireRoom/hireRoom",
     "pages/rentHouse/rentHouse",
+    "pages/applyparking/applyparking",
     "pages/roomOweFee/roomOweFee"
   ],
   "subPackages": [],

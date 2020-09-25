@@ -1,1 +1,0 @@
-{"version":3,"sources":["uni-app:///main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,wN;AACAA,UAAU,CAACC,kBAAD,CAAV,C","file":"pages/shiwlogin/shiwlogin.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pages/shiwlogin/shiwlogin.vue'\ncreatePage(Page)"],"sourceRoot":""}

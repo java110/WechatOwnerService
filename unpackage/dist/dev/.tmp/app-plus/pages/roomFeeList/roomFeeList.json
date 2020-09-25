@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "物业费",
-  "usingComponents": {
-    "van-panel": "/wxcomponents/vant/panel/index",
-    "van-row": "/wxcomponents/vant/row/index",
-    "van-col": "/wxcomponents/vant/col/index",
-    "van-button": "/wxcomponents/vant/button/index"
-  }
-}

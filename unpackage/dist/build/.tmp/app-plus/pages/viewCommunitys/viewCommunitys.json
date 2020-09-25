@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "选择小区",
-  "usingComponents": {
-    "van-search": "/wxcomponents/vant/search/index",
-    "van-cell-group": "/wxcomponents/vant/cell-group/index",
-    "van-cell": "/wxcomponents/vant/cell/index"
-  }
-}
