@@ -178,6 +178,7 @@
 				return;
 			}
 			this.paymentCycle = _fee.paymentCycle;	
+			this.feeMonth = _fee.paymentCycle;
 			for (let _index = 1; _index < 7; _index++) {
 				this.feeMonthList.push(_index * this.paymentCycle + '个月')
 			}

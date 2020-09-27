@@ -207,6 +207,7 @@
 				this.feeMonthList.push(_index * this.paymentCycle + '个月')
 			}
 			this.feeMonthName = this.paymentCycle + '个月';
+			this.feeMonth = this.paymentCycle;
 		},
 		methods: {
 			dateChange: function(e) {
