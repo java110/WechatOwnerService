@@ -20,29 +20,28 @@
 			</scroll-view>
 		</view>
 		<view class="cu-card article no-card">
-			<view class="title-class" style="margin-top: 90px;"></view>
-			<view class="cu-item shadow border-bottom padding-top-sm" v-for="(item,index) in rents">
+			<view class="title-class" style="margin-top: 210upx;"></view>
+			<view class="cu-item shadow border-bottom padding-top-sm" v-for="(item,index) in rents" :key="index">
 				<view class="content" @tap="toDetail(item.rentingId)">
-					<image src="../../static/images/rentimage.jpg" mode="aspectFill" />
+					<image style="height: 160upx;" src="../../static/images/rentimage.jpg" mode="aspectFill" />
 					<!-- <image :src="item.src" mode="aspectFill"/> -->
 					<view class="desc">
-						<view style="margin-left: 5px;letter-spacing: 3px;" class="title-class">{{item.rentingTitle}}</view>
+						<view class="title-class renting-title">{{item.rentingTitle}}</view>
 						<view class="text-content">
-							<div>
-								<text>{{item.builtUpArea}}平方米</text>
+							<div class="">
+								<text class="text-xs">{{item.builtUpArea}}平方米 </text>
+								<text class="margin-left-xs text-xs">{{item.apartmentName}}</text>
 							</div>
-							<view class='padding-sm flex flex-wrap'>
-								<view class='cu-tag line-green sm'>{{item.rentingType == 3344 ? '整租' : '合租'}}</view>
+							<view class='flex flex-wrap '>
 								<view class='cu-tag line-orange sm'>{{item.paymentTypeName}}</view>
-								<view class='cu-tag line-olive sm'>{{item.rentingDesc}}</view>
 							</view>
 
-							<view class="flex justify-between">
+							<view class="flex justify-between margin-top-xs">
 								<div>
 									<text class="lg text-gray cuIcon-location text-xs"></text>
 									<text class="text-xs">{{item.communityName}}</text>
 								</div>
-								<text class="text-red">{{item.price}}</text>
+								<text class="text-red">{{item.price}}元/月</text>
 							</view>
 						</view>
 					</view>
@@ -127,7 +126,6 @@
 						// 	"&time=" + new Date();
 						// }
 						_this.rents = _this.rents.concat(data);
-						console.log(data.length)
 					},
 					fail: function(e) {
 						wx.showToast({
@@ -147,7 +145,7 @@
 			toDetail: function(rentingId) {
 				console.log(rentingId)
 				this.vc.navigateTo({
-					url: '/pages/rentHouse/rentDetail?rentingId=' + rentingId
+					url: '/pages/rentingDetail/rentingDetail?rentingId=' + rentingId
 				});
 			}
 		}
@@ -158,6 +156,15 @@
 	.myfixed {
 		position: fixed;
 		width: 100%;
+		height: 180upx;
 		z-index: 99;
+	}
+	
+	.renting-title{
+		font-size: 28upx;
+		
+	}
+	.content>image .rentingImage{
+		height: 200upx;
 	}
 </style>
