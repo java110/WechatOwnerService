@@ -157,6 +157,8 @@ const queryParkingSpaces= baseUrl + 'app/parkingSpace.queryParkingSpaces'; //查
 
 const saveOwnerCar= baseUrl + 'app/owner.saveOwnerCar'; //申请车位接口
 
+const queryOwnerCars= baseUrl + 'app/owner.queryOwnerCars'; //查询业主车辆
+
 
 
 /**
@@ -249,6 +251,7 @@ module.exports = {
 	toOweFeePay:toOweFeePay,
 
 	queryParkingSpaces:queryParkingSpaces,
-	saveOwnerCar:saveOwnerCar
+	saveOwnerCar:saveOwnerCar,
+	queryOwnerCars:queryOwnerCars
 
 };

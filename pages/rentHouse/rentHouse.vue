@@ -10,40 +10,44 @@
 					<button @tap="searchRentRoom" class="cu-btn bg-green shadow-blur round">搜索</button>
 				</view>
 			</view>
-			<scroll-view scroll-x class="bg-white nav">
+			<scroll-view scroll-x class="bg-white nav margin-top-sm">
 				<view class="flex text-center">
-					<view class="cu-item flex-sub" :class="item.status==TabCur?'text-orange cur':''" v-for="(item,index) in title" :key="item.status"
-					 @tap="tabSelect" :data-id="item.status">
+					<view class="cu-item flex-sub" :class="item.status==TabCur?'text-orange cur':''" v-for="(item,index) in title"
+					 :key="item.status" @tap="tabSelect" :data-id="item.status">
 						{{item.name}}
 					</view>
 				</view>
 			</scroll-view>
 		</view>
 		<view class="cu-card article no-card">
-			<view class="title-class" style="margin-top: 82px;"></view>
-			<view class="cu-item shadow border-bottom" v-for="(item,index) in rents">
-
+			<view class="title-class" style="margin-top: 90px;"></view>
+			<view class="cu-item shadow border-bottom padding-top-sm" v-for="(item,index) in rents">
 				<view class="content" @tap="toDetail(item.rentingId)">
-					<image src="../../static/images/rentimage.jpg" mode="aspectFill"/>
+					<image src="../../static/images/rentimage.jpg" mode="aspectFill" />
 					<!-- <image :src="item.src" mode="aspectFill"/> -->
 					<view class="desc">
 						<view style="margin-left: 5px;letter-spacing: 3px;" class="title-class">{{item.rentingTitle}}</view>
 						<view class="text-content">
+							<div>
+								<text>{{item.builtUpArea}}平方米</text>
+							</div>
 							<view class='padding-sm flex flex-wrap'>
 								<view class='cu-tag line-green sm'>{{item.rentingType == 3344 ? '整租' : '合租'}}</view>
 								<view class='cu-tag line-orange sm'>{{item.paymentTypeName}}</view>
 								<view class='cu-tag line-olive sm'>{{item.rentingDesc}}</view>
 							</view>
 
-							<view style="margin-left: 5px;">
+							<view class="flex justify-between">
+								<div>
+									<text class="lg text-gray cuIcon-location text-xs"></text>
+									<text class="text-xs">{{item.communityName}}</text>
+								</div>
 								<text class="text-red">{{item.price}}</text>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
-
-
 		</view>
 	</view>
 </template>
@@ -53,7 +57,7 @@
 	import url from '../../constant/url.js';
 	const constant = context.constant;
 	const factory = context.factory;
-	
+
 	export default {
 		data() {
 			return {
@@ -64,7 +68,13 @@
 				page: 1,
 				row: 7,
 				rents: [],
-				title: [{name: '整租',status: '3344'}, {name: '合租',status: '4455'}],
+				title: [{
+					name: '整租',
+					status: '3344'
+				}, {
+					name: '合租',
+					status: '4455'
+				}],
 			};
 		},
 		onLoad() {
@@ -74,16 +84,16 @@
 		 * 页面上拉触底事件的处理函数
 		 */
 		onReachBottom: function() {
-			
+
 			if (this.rents.length >= this.page * this.row) {
 				this.page = this.page + 1;
 				this.loadRentHouse();
 			}
-			
+
 			// this.page = this.page + 1;
 			// console.log(this.page)
 			// console.log(this.row)
-			
+
 		},
 		methods: {
 			IsCard(e) {
@@ -101,7 +111,8 @@
 					"page": _this.page,
 					"row": _this.row,
 					"rentingType": _this.TabCur,
-					"communityName": _this.communityName
+					"communityName": _this.communityName,
+					"state": "1,2,3,4,5,7"
 				};
 				context.request({
 					url: constant.url.queryRentingPool,
@@ -110,7 +121,7 @@
 					data: _paramIn,
 					success: function(res) {
 						let data = res.data.data;
-						
+
 						// for( let i = 0; i < data.length; i++){
 						// 	data[i].src = url.filePath + "?fileId=" + data[i].rentingId + "&communityId=" + data[i].communityId +
 						// 	"&time=" + new Date();
@@ -133,10 +144,10 @@
 				this.rents = [];
 				this.loadRentHouse();
 			},
-			toDetail:function(rentingId){
+			toDetail: function(rentingId) {
 				console.log(rentingId)
 				this.vc.navigateTo({
-					url: '/pages/rentHouse/rentDetail?rentingId='+rentingId
+					url: '/pages/rentHouse/rentDetail?rentingId=' + rentingId
 				});
 			}
 		}
