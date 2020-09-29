@@ -86,8 +86,10 @@ export default {
 	changeOwnerPhone: baseUrl + 'app/ownerApi/changeOwnerPhone', //修改密码
 	queryRentingConfig: baseUrl + 'app/renting/queryRentingConfig', // 房屋出租配置查询
 	saveRentingPool: baseUrl + 'app/renting/saveRentingPool', //出租提交
-	listOweFees: baseUrl + 'app/feeApi/listOweFees',//查询房屋欠费
+	listOweFees: baseUrl + 'app/feeApi/listOweFees', //查询房屋欠费
 	toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
+	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
+	saveRentingAppointment: baseUrl + '/app/rentingAppointment/saveRentingAppointment', //房屋预约
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

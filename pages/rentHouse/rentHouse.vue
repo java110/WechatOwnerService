@@ -23,8 +23,8 @@
 			<view class="title-class" style="margin-top: 210upx;"></view>
 			<view class="cu-item shadow border-bottom padding-top-sm" v-for="(item,index) in rents" :key="index">
 				<view class="content" @tap="toDetail(item.rentingId)">
-					<image style="height: 160upx;" src="../../static/images/rentimage.jpg" mode="aspectFill" />
-					<!-- <image :src="item.src" mode="aspectFill"/> -->
+					<!-- <image  src="../../static/images/rentimage.jpg" mode="aspectFill" /> -->
+					<image style="height: 160upx;" :src="item.src" mode="aspectFill" />
 					<view class="desc">
 						<view class="title-class renting-title">{{item.rentingTitle}}</view>
 						<view class="text-content">
@@ -56,6 +56,8 @@
 	import url from '../../constant/url.js';
 	const constant = context.constant;
 	const factory = context.factory;
+
+	const default_img = '../../static/images/rentimage.jpg';
 
 	export default {
 		data() {
@@ -121,10 +123,14 @@
 					success: function(res) {
 						let data = res.data.data;
 
-						// for( let i = 0; i < data.length; i++){
-						// 	data[i].src = url.filePath + "?fileId=" + data[i].rentingId + "&communityId=" + data[i].communityId +
-						// 	"&time=" + new Date();
-						// }
+						for (let i = 0; i < data.length; i++) {
+							let _url = default_img;
+							let _item = data[i];
+							if (_item.hasOwnProperty('photos') && _item.photos.length > 0) {
+								_url = url.baseUrl + _item.photos[0];
+							}
+							_item.src = _url;
+						}
 						_this.rents = _this.rents.concat(data);
 					},
 					fail: function(e) {
@@ -159,12 +165,13 @@
 		height: 180upx;
 		z-index: 99;
 	}
-	
-	.renting-title{
+
+	.renting-title {
 		font-size: 28upx;
-		
+
 	}
-	.content>image .rentingImage{
+
+	.content>image .rentingImage {
 		height: 200upx;
 	}
 </style>

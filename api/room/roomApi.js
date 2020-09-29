@@ -115,9 +115,9 @@ export function hireRoom(obj) {
 			msg = "请选择出租方式";
 		} else if (obj.rentingDesc == '') {
 			msg = "请填写出租说明";
-		} else if(obj.photos.length < 1){
+		} else if (obj.photos.length < 1) {
 			msg = "请选择图片";
-		}else if(obj.checkIn == ''){
+		} else if (obj.checkIn == '') {
 			msg = "请选择入住日期";
 		}
 
@@ -126,6 +126,75 @@ export function hireRoom(obj) {
 		} else {
 			request({
 				url: url.saveRentingPool,
+				method: "POST",
+				data: obj, //动态数据
+				success: function(res) {
+					let _json = res.data;
+					if (_json.code == 0) {
+						resolve(_json);
+						return;
+					}
+					reject(_json.msg);
+				},
+				fail: function(e) {
+					reject('服务异常');
+				}
+			});
+		}
+	})
+}
+
+/**
+ * 查询房源信息
+ * @param {Object} _data 查询 入参
+ */
+export function getRentingPool(_data) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.queryRentingPool,
+			method: "GET",
+			data: _data,
+			success: function(res) {
+				let data = res.data;
+				if (data.code == 0) {
+					resolve(data.data);
+				} else {
+					reject(data.msg);
+				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	})
+}
+
+/**
+ * 租房预约
+ * @param {Object} obj 租房预约数据
+ * {"appointmentId":"","tenantName":"张默默","tenantSex":"0","tenantTel":"18909711234",
+ * "appointmentTime":"2020-09-30 01:05:00","appointmentRoomId":"752020080500600202","remark":""}
+ */
+export function appointmentRoom(obj) {
+	return new Promise((resolve, reject) => {
+		let msg = "";
+		if (obj.tenantName == "") {
+			msg = "名称不能为空";
+		} else if (obj.tenantSex == "") {
+			msg = "性别不能空";
+		} else if (obj.tenantTel == "") {
+			msg = "手机号不能为空";
+		} else if (obj.appointmentTime == "") {
+			msg = "请填写预约时间";
+		} else if (obj.appointmentRoomId == "") {
+			msg = "预约房屋为空";
+		}
+
+		if (msg != "") {
+			reject(msg);
+		} else {
+			request({
+				url: url.saveRentingAppointment,
 				method: "POST",
 				data: obj, //动态数据
 				success: function(res) {

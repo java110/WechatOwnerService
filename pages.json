@@ -353,6 +353,12 @@
 			}
 		}
         
+        ,{
+            "path" : "pages/rentingAppointment/rentingAppointment",
+            "style" : {
+				"navigationBarTitleText": "租房预约"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
