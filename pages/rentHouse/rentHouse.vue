@@ -127,7 +127,12 @@
 							let _url = default_img;
 							let _item = data[i];
 							if (_item.hasOwnProperty('photos') && _item.photos.length > 0) {
+								//#ifndef H5
 								_url = url.baseUrl + _item.photos[0];
+								//#endif
+								// #ifdef H5
+								_url =  _item.photos[0];
+								//#endif
 							}
 							_item.src = _url;
 						}

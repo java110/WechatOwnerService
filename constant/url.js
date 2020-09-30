@@ -89,7 +89,7 @@ export default {
 	listOweFees: baseUrl + 'app/feeApi/listOweFees', //查询房屋欠费
 	toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
 	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
-	saveRentingAppointment: baseUrl + '/app/rentingAppointment/saveRentingAppointment', //房屋预约
+	saveRentingAppointment: baseUrl + 'app/rentingAppointment/saveRentingAppointment', //房屋预约
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

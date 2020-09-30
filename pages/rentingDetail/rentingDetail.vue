@@ -139,7 +139,13 @@
 						_that.renting = rentingPool[0];
 						let _url = default_img;
 						if (_that.renting.hasOwnProperty('photos') && _that.renting.photos.length > 0) {
+							//_url = url.baseUrl + _that.renting.photos[0];
+							//#ifndef H5
 							_url = url.baseUrl + _that.renting.photos[0];
+							//#endif
+							// #ifdef H5
+							_url =  _that.renting.photos[0];
+							//#endif
 						}
 						_that.rentingPhotos.push(_url);
 						_that._loadAdmin();
