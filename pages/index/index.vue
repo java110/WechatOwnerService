@@ -40,7 +40,7 @@
 			<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
 				<view class="cu-item" :class="item.typeCd==curTypeCd?'text-green cur':''" v-for="(item,index) in activitiTitle"
 				 :key="index" @tap="selectActiviti(item)" :data-id="index">
-					{{item.name}}
+					{{item.typeName}}
 				</view>
 			</scroll-view>
 			<view class="noticesList bg-white margin-top-1">
@@ -103,7 +103,7 @@
 				page: 1,
 				row: 7,
 				activitiTitle: [],
-				curTypeCd: '10003',
+				curTypeCd: '',
 				categoryList: {},
 				selected: 0,
 				mask1Hidden: true,
@@ -124,10 +124,7 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			this.vc.onLoad(options);
-			
-			//查询 活动标题
-			this.activitiTitle = getActivitiTitle();			
+			this.vc.onLoad(options);		
 			//查询目录
 			this.categoryList = getCategoryList();
 		},
@@ -170,8 +167,31 @@
 				.then(function(_communityInfo){
 					_that.communityId = _communityInfo.communityId;
 					//查询小区活动信息
-					_that._loadActivites();
 					_that._loadAdvertPhoto();
+				})
+				.then(function(){
+					_that._loadActivitiesType();
+				})
+			},
+			_loadActivitiesType:function(){
+				let _that = this;
+				let _objData = {
+					page: 1,
+					row: 10,
+					communityId: _that.communityId,
+					defaultShow:'Y' 
+				};
+				//查询 活动标题
+				getActivitiTitle(_objData)
+				.then((actType)=>{
+					_that.activitiTitle = actType;
+					
+				})
+				.then((acts)=>{
+					if(_that.activitiTitle.length > 0){
+						_that.curTypeCd = _that.activitiTitle[0].typeCd;
+					}
+					_that._loadActivites();
 				})
 			},
 			judgeBindOwnerFun: function() {
@@ -185,6 +205,9 @@
 			 */
 			_loadActivites: function() {
 				let _that = this;
+				if(this.curTypeCd == ''){
+					return ;
+				}
 				let _objData = {
 					page: this.page,
 					row: this.row,

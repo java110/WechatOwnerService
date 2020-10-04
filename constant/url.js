@@ -90,6 +90,7 @@ export default {
 	toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
 	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
 	saveRentingAppointment: baseUrl + 'app/rentingAppointment/saveRentingAppointment', //房屋预约
+	queryActivitiesType: baseUrl +'app/activitiesType/queryActivitiesType',
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',
