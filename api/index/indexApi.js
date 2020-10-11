@@ -16,28 +16,28 @@ import {dateTimeStringToDateString} from '../../utils/DateUtil.js'
 /**
  * 查询活动列表
  */
-export function getActivitiTitle() {
-	return [{
-			typeCd: '10003',
-			name: '公共安全及消防'
-		},
-		{
-			typeCd: '10004',
-			name: '政务及党政'
-		},
-		{
-			typeCd: '10005',
-			name: '费用公开'
-		},
-		{
-			typeCd: '10001',
-			name: '小区文化'
-		},
-		{
-			typeCd: '10002',
-			name: '其他'
-		}
-	];
+export function getActivitiTitle(dataObj) {
+
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.queryActivitiesType,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						let _activites = res.data.data;
+						resolve(_activites);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
 }
 
 /**
