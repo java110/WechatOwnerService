@@ -21,6 +21,14 @@
 					<view class="text-gray">{{item.cycles}}个月</view>
 				</view>
 				<view class="flex margin-top-xs justify-between">
+					<view class="text-gray">起始时间</view>
+					<view class="text-gray">{{item.startTime}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between">
+					<view class="text-gray">结束时间</view>
+					<view class="text-gray">{{item.endTime}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">缴费时间</view>
 					<view class="text-gray">{{item.createTime}}</view>
 				</view>
@@ -35,6 +43,7 @@
 
 <script>
 	const context = require('../../context/Java110Context.js');
+	import {formatDate}  from '../../utils/DateUtil.js'
 
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
@@ -104,7 +113,19 @@
 								_feeDetails.forEach(function(_feeDetail) {
 									let _tmpCreateTime = _feeDetail.createTime.replace(/\-/g, "/")
 									let _createTime = new Date(_tmpCreateTime);
-									_feeDetail.createTime = util.date.formatDate(_createTime);
+									_feeDetail.createTime = formatDate(_createTime);
+									if(_feeDetail.hasOwnProperty("startTime")){
+										let _tmpStartTime = _feeDetail.startTime.replace(/\-/g, "/")
+										let _startTime = new Date(_tmpStartTime);
+										_feeDetail.startTime = formatDate(_startTime);
+									}
+									
+									if(_feeDetail.hasOwnProperty("endTime")){
+										let _tmpEndTime = _feeDetail.endTime.replace(/\-/g, "/")
+										let _endTime = new Date(_tmpEndTime);
+										_feeDetail.endTime = formatDate(_endTime);
+									}
+									
 								});
 							}
 
