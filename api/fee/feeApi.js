@@ -39,6 +39,7 @@ export function getRoomFees(_objData,_tmpRoom) {
 						reject();
 					}
 					_roomFees.forEach(function(_roomFee) {
+						_tmpRoom = JSON.parse(JSON.stringify(_tmpRoom));
 						_tmpRoom.endTime = dateTimeStringToDateString(_roomFee.endTime);
 						let _now = new Date();
 						if (_roomFee.endTime > _now) {
