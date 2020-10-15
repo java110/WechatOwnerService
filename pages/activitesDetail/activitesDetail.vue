@@ -44,6 +44,10 @@
 	import {
 		loadActivites
 	} from '../../api/index/indexApi.js'
+	
+	import conf from '../../conf/config.js'
+	
+	import {replaceImgSrc} from  '../../utils/ImageUtil.js'
 	export default {
 		data() {
 			return {
@@ -122,7 +126,7 @@
 						_that.src = _activites.src;
 						_that.userName = _activites.userName;
 						_that.startTime = _activites.startTime;
-						_that.context = _activites.context;
+						_that.context = replaceImgSrc(_activites.context,conf.baseUrl);
 						_that.readCount = _activites.readCount;
 						_that.likeCount = _activites.likeCount;
 					});

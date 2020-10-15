@@ -18,6 +18,8 @@
 	/** detail.js **/
 	const context = require("../../../context/Java110Context.js");
 	const constant = context.constant; //获取app实例
+	import conf from '../../../conf/config.js'
+	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
 	//获取app实例
 	const app = getApp().globalData;
 
@@ -60,7 +62,7 @@
 						console.log(res);
 						let notice = res.data.notices[0]
 						notice.timeStr = notice.startTime.replace(/:\d{1,2}$/, ' ');
-
+						notice.context = replaceImgSrc(notice.context,conf.baseUrl);
 						that.notice = notice;
 					}
 				});
