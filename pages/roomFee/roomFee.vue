@@ -217,12 +217,12 @@
 				let _feeMonth = _feeMonthName.replace("个月","");
 				let _receivableAmount = _feeMonth * this.amount;
 				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+				let _newDate = addMonth(_lastDate, _feeMonth);
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
 				this.receivableAmount = _receivableAmount;
 				this.feeMonth = _feeMonth;
-				this.endTime = util.date.formatDate(_newDate);
+				this.endTime = formatDate(_newDate);
 			},
 			onFeeMonthChange: function(e) {
 				console.log(e);
