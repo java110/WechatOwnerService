@@ -25,7 +25,8 @@
 			</view>
 		</view>
 		<view class="ad_context">
-			<rich-text :nodes="context"></rich-text>
+			<!-- <rich-text :nodes="context"></rich-text> -->
+			<jyf-parser :html="context" ref="article"></jyf-parser>
 		</view>
 	</view>
 </template>
@@ -47,7 +48,9 @@
 	
 	import conf from '../../conf/config.js'
 	
-	import {replaceImgSrc} from  '../../utils/ImageUtil.js'
+	import {replaceImgSrc} from  '../../utils/ImageUtil.js';
+	
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 	export default {
 		data() {
 			return {
@@ -65,7 +68,7 @@
 			};
 		},
 
-		components: {},
+		components: {jyfParser},
 		props: {},
 
 		/**

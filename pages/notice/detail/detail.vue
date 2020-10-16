@@ -8,7 +8,9 @@
 	</view>
 	<view class="flex-sub bg-white">
 		<view class="content">
-		    <rich-text class="solid-bottom text-df padding" :nodes="notice.context"></rich-text>
+		    <!-- <rich-text class="solid-bottom text-df padding" :nodes="notice.context"></rich-text> -->
+			<jyf-parser :html="notice.context" ref="article"></jyf-parser>
+			
 		</view>
 	</view>
 </view>
@@ -22,6 +24,8 @@
 	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
 	//获取app实例
 	const app = getApp().globalData;
+	
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 
 	export default {
 		data() {
@@ -30,6 +34,8 @@
 				noticeId: ''
 			};
 		},
+		
+		components:{jyfParser}
 
 		onLoad: function(options) {
 			context.onLoad(options);
