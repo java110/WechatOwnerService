@@ -206,7 +206,7 @@
 			}
 			this.feeMonthName = this.paymentCycle + '个月';
 			this.feeMonth = this.paymentCycle;
-			let _endTime = addMonth(_lastDate, this.feeMonth);
+			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
 		},
 		methods: {
@@ -217,7 +217,7 @@
 				let _feeMonth = _feeMonthName.replace("个月","");
 				let _receivableAmount = _feeMonth * this.amount;
 				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = addMonth(_lastDate, _feeMonth);
+				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
 				this.receivableAmount = _receivableAmount;
