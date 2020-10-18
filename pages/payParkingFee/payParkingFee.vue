@@ -109,13 +109,16 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	import {addMonth,formatDate} from '../../utils/DateUtil.js'
-	
-	
+	import {
+		addMonth,
+		formatDate
+	} from '../../utils/DateUtil.js'
+
+
 	// #ifdef H5
-	
+
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-	
+
 	// #endif
 
 	export default {
@@ -130,16 +133,16 @@
 				amount: 0,
 				receivableAmount: 0.00,
 				additionalAmount: 0,
-				num:'',
-				feeTypeCdName:'',
-				carNum:'',
+				num: '',
+				feeTypeCdName: '',
+				carNum: '',
 				feePrice: 0.00,
 				communityId: '',
 				communityName: '',
 				feeId: '',
-				appId:'',
-				feeFlag:'',
-				paymentCycle:1,
+				appId: '',
+				feeFlag: '',
+				paymentCycle: 1,
 			};
 		},
 
@@ -152,16 +155,16 @@
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
-			
+
 			// #ifdef H5
-				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
 			let _receivableAmount = _fee.paymentCycle * _fee.feePrice;
-			
+
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
-			let _endTime = addMonth(_lastDate, this.feeMonth);
+
 
 			this.receivableAmount = _receivableAmount;
 			this.communityId = _communityInfo.communityId;
@@ -171,19 +174,20 @@
 			this.carNum = _fee.carNum;
 			this.feeId = _fee.feeId;
 			this.feePrice = _fee.feePrice;
-			this.endTime = formatDate(_endTime);
+
 			this.ordEndTime = _fee.endTime;
 			this.feeFlag = _fee.feeFlag;
-			if(this.feeFlag == '2006012'){
+			if (this.feeFlag == '2006012') {
 				return;
 			}
-			this.paymentCycle = _fee.paymentCycle;	
+			this.paymentCycle = _fee.paymentCycle;
 			this.feeMonth = _fee.paymentCycle;
 			for (let _index = 1; _index < 7; _index++) {
 				this.feeMonthList.push(_index * this.paymentCycle + '个月')
 			}
 			this.feeMonthName = this.paymentCycle + '个月';
-
+			let _endTime = addMonth(_lastDate, this.feeMonth);
+			this.endTime = formatDate(_endTime);
 			var pages = getCurrentPages();
 			var prevPage = pages[pages.length - 2]; //上一个页面
 			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
@@ -200,9 +204,9 @@
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];
-				let _feeMonth = _feeMonthName.replace("个月","");;
+				let _feeMonth = _feeMonthName.replace("个月", "");;
 
-				let _receivableAmount = _feeMonth * this.feePrice ;
+				let _receivableAmount = _feeMonth * this.feePrice;
 
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, _feeMonth);
@@ -216,8 +220,8 @@
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
 			},
-			_payWxApp:function(_data){
-				let _receivedAmount = this.receivableAmount ;
+			_payWxApp: function(_data) {
+				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
 					title: '支付中'
 				});
@@ -228,7 +232,7 @@
 					feeId: this.feeId,
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType,
+					tradeType: _tradeType,
 					appId: this.appId
 				};
 				context.request({
@@ -238,7 +242,7 @@
 					data: _objData,
 					//动态数据
 					success: function(res) {
-			
+
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
 							let obj = {
@@ -253,23 +257,23 @@
 							// 第二种写法，传对象字符串
 							let orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
-							    provider: 'wxpay',
-							    orderInfo: orderInfo, //微信、支付宝订单数据
-							    success: function (res) {
-							       uni.showToast({
-							       	title: "支付成功",
-							       	duration: 2000
-							       });
-							       uni.navigateBack({});
-							    },
-							    fail: function (err) {
-							        console.log('fail:' + JSON.stringify(err));
-							    }
+								provider: 'wxpay',
+								orderInfo: orderInfo, //微信、支付宝订单数据
+								success: function(res) {
+									uni.showToast({
+										title: "支付成功",
+										duration: 2000
+									});
+									uni.navigateBack({});
+								},
+								fail: function(err) {
+									console.log('fail:' + JSON.stringify(err));
+								}
 							});
 							wx.hideLoading();
 							return;
 						}
-			
+
 						wx.hideLoading();
 						wx.showToast({
 							title: "缴费失败",
@@ -299,7 +303,7 @@
 					feeId: this.feeId,
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
-					tradeType:_tradeType,
+					tradeType: _tradeType,
 					appId: this.appId
 				}
 
@@ -332,13 +336,13 @@
 							});
 							// #endif
 							// #ifdef H5
-								WexinPayFactory.wexinPay(data,function(){
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
+							WexinPayFactory.wexinPay(data, function() {
+								uni.showToast({
+									title: "支付成功",
+									duration: 2000
 								});
+								uni.navigateBack({});
+							});
 							// #endif
 							wx.hideLoading();
 							return;

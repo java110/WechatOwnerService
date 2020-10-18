@@ -184,7 +184,6 @@
 			let _receivableAmount = (_fee.paymentCycle * _amount).toFixed(2);
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
-			let _endTime = addMonth(_lastDate, this.feeMonth);
 			this.receivableAmount = _receivableAmount;
 			this.communityId = _communityInfo.communityId;
 			this.communityName = _communityInfo.communityName;
@@ -196,7 +195,6 @@
 			this.feeId = _fee.feeId;
 			this.amount = _amount;
 			this.additionalAmount = _fee.additionalAmount;
-			this.endTime = formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
 			this.feeFlag = _fee.feeFlag;
 			if(this.feeFlag == '2006012'){
@@ -208,6 +206,8 @@
 			}
 			this.feeMonthName = this.paymentCycle + '个月';
 			this.feeMonth = this.paymentCycle;
+			let _endTime = addMonth(_lastDate, this.feeMonth);
+			this.endTime = formatDate(_endTime);
 		},
 		methods: {
 			dateChange: function(e) {
