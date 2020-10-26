@@ -359,6 +359,12 @@
 				"navigationBarTitleText": "租房预约"
 			}
         }
+        ,{
+            "path" : "pages/mall/mall",
+            "style" : {
+				"navigationBarTitleText": "商圈"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
@@ -378,8 +384,8 @@
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
 			{
-				"pagePath": "pages/market/market",
-				"text": "市场",
+				"pagePath": "pages/mall/mall",
+				"text": "商圈",
 				"iconPath": "static/images/market.png",
 				"selectedIconPath": "static/images/market-selected.png"
 			},

@@ -35,7 +35,7 @@
 			};
 		},
 		
-		components:{jyfParser}
+		components:{jyfParser},
 
 		onLoad: function(options) {
 			context.onLoad(options);
