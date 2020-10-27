@@ -5,14 +5,14 @@
 			<block v-for="(item, index) in categoryList" :key="index">
 				<swiper-item>
 					<block v-for="(item, index2) in item" :key="index2">
-						<view class="category-info" v-if="item.href != 'callProperty'">
+						<view class="category-info" v-if="item.href != 'undefined'">
 							<navigator @tap="toPage(item.href)">
 								<image :src="item.src" class="category-image"></image>
 								<view class="category-text">{{item.name}}</view>
 							</navigator>
 						</view>
-						<view class="category-info" v-if="item.href == 'callProperty'">
-							<view @tap="callPropertyTel()">
+						<view class="category-info" v-else>
+							<view @tap="callUndefined()">
 								<image :src="item.src" class="category-image"></image>
 								<view class="category-text">{{item.name}}</view>
 							</view>
@@ -41,6 +41,12 @@
 					url:pageUrl
 				})
 			},
+			callUndefined:function(){
+				uni.showToast({
+					icon:'none',
+					title:'此功能暂不开放'
+				})
+			},
 			getCategorys: function() {
 				this.categoryList = {
 					pageone: [{
@@ -54,11 +60,19 @@
 					}, {
 						name: "限时秒杀",
 						src: "/static/images/mall_secKill.png",
-						href: "/pages/complaint/complaint"
+						href: "undefined"
 					}, {
 						name: "家政服务",
-						src: "/static/images/mall_secKill.png",
-						href: "/pages/complaint/complaint"
+						src: "/static/images/mall_domestic.png",
+						href: "undefined"
+					}, {
+						name: "美食",
+						src: "/static/images/mall_delicious.png",
+						href: "undefined"
+					}, {
+						name: "超市",
+						src: "/static/images/mall_supermarket.png",
+						href: "undefined"
 					}]
 
 				};

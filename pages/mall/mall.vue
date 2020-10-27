@@ -7,6 +7,7 @@
 			</view>
 		</view>
 		<vc-category></vc-category>
+		<vc-recommend></vc-recommend>
 		
 	</view>
 </template>
@@ -15,6 +16,8 @@
 	
 	import vcCategory from '@/components/vc-category/vc-category.vue'
 	
+	import vcRecommend from '@/components/vc-recommend/vc-recommend.vue'
+	
 	export default {
 		data() {
 			return {
@@ -22,7 +25,8 @@
 			}
 		},
 		components:{
-			vcCategory
+			vcCategory,
+			vcRecommend
 		},
 		methods: {
 			
