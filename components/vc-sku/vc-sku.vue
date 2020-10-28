@@ -68,7 +68,7 @@
 import uniNumberBox from '@/components/uni-number-box/uni-number-box.vue';
 import { mapMutations, mapActions, mapState } from 'vuex';
 export default {
-	name: 'shoproSku',
+	name: 'vcSku',
 	components: {
 		uniNumberBox
 	},
@@ -276,6 +276,10 @@ export default {
 		// 当前所选规格下，获取所有有库存的 skuPrice
 		getCanUseSkuPrice() {
 			let newPrice = [];
+			
+			if(this.skuPrice == undefined){
+				return newPrice;
+			}
 
 			for (let price of this.skuPrice) {
 				if (price.stock <= 0) {

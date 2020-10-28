@@ -93,6 +93,7 @@ export default {
 	queryActivitiesType: baseUrl +'app/activitiesType/queryActivitiesType',
 	queryProductLabel: baseUrl +'app/product/queryProductLabel',
 	queryGroupBuyProduct: baseUrl +'app/groupBuy/queryGroupBuyProduct',
+	queryProduct: baseUrl +'app/product/queryProduct',
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

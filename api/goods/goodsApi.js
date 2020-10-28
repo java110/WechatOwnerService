@@ -56,3 +56,29 @@ export function getGroupBuyProduct(dataObj) {
 		})
 }
 
+/**
+ * 查询产品
+ */
+export function getProduct(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.queryProduct,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						let _products = res.data.data;
+						resolve(_products);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+

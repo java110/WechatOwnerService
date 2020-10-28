@@ -5,7 +5,7 @@
 		</view>
 
 		<view class="grid margin-bottom text-center col-2">
-			<view class="padding-lr-xs margin-top-xs " v-for="(item,indexs) in products" :key="indexs">
+			<view class="padding-lr-xs margin-top-xs margin-bottom-sm" v-for="(item,indexs) in products" :key="indexs">
 				<view class="padding bg-white goods" @tap="_toGoodsDetail(item)">
 					<view>
 						<image class="goods-image" :src="item.coverPhoto"></image>

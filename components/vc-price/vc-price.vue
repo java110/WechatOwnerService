@@ -16,20 +16,6 @@
 				<view class="express"></view>
 			</view>
 		</view>
-		<!-- 积分商品 -->
-		<view class="score-price-card" v-if="type === 'score'">
-			<view class="x-f">
-				<image class="score-img" src="http://shopro.7wpp.com/imgs/score.png" mode=""></image>
-				<text class="price">{{ detail.price }}</text>
-			</view>
-			<view class="x-bc price-bottom-box">
-				<view class="x-f">
-					<view class="original-price">价值：￥{{ detail.original_price }}</view>
-					<text class="line"></text>
-					<view class="sold">已兑换：{{ detail.sales }}件</view>
-				</view>
-			</view>
-		</view>
 		<!-- 团购商品 -->
 		<view class="groupon-price-box" v-if="detail.activity && detail.activity.type === 'groupon'">
 			<view class="">
