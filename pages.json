@@ -365,6 +365,18 @@
 				"navigationBarTitleText": "商圈"
 			}
         }
+        ,{
+            "path" : "pages/groupBuyList/groupBuyList",
+            "style" : {
+				"navigationBarTitleText": "今日必拼"
+			}
+        }
+        ,{
+            "path" : "pages/goodDetail/goodDetail",
+            "style" : {
+				"navigationBarTitleText": "商品详情"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

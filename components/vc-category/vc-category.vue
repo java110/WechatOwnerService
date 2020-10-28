@@ -56,7 +56,7 @@
 					}, {
 						name: "品质拼团",
 						src: "/static/images/mall_groupBuy.png",
-						href: "/pages/payParkingFeeList/payParkingFeeList"
+						href: "/pages/groupBuyList/groupBuyList"
 					}, {
 						name: "限时秒杀",
 						src: "/static/images/mall_secKill.png",

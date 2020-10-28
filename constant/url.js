@@ -91,6 +91,9 @@ export default {
 	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
 	saveRentingAppointment: baseUrl + 'app/rentingAppointment/saveRentingAppointment', //房屋预约
 	queryActivitiesType: baseUrl +'app/activitiesType/queryActivitiesType',
+	queryProductLabel: baseUrl +'app/product/queryProductLabel',
+	queryGroupBuyProduct: baseUrl +'app/groupBuy/queryGroupBuyProduct',
+	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',
