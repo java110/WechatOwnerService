@@ -14,8 +14,8 @@
 								:title="groupon.groupProdName"
 								:subtitle="groupon.prodDesc"
 								:img="groupon.coverPhoto"
-								:price="groupon.groupon_price"
-								:originalPrice="groupon.original_price"
+								:price="groupon.defaultGroupBuyProductSpec.groupPrice"
+								:originalPrice="groupon.defaultGroupBuyProductSpec.price"
 							>
 								<block slot="tag">
 									<view class="tag" v-if="index < 3">TOP{{ index + 1 }}</view>

@@ -1,31 +1,15 @@
 <template>
 	<view>
-		<!-- 正常商品 -->
-		<view class="normal-price-box" v-if="type !== 'score' && !detail.activity">
-			<view class="shopro-selector-rect">
-				<text class="unit">￥</text>
-				<text class="price">{{ detail.price }}</text>
-				<text class="notice">优惠价</text>
-			</view>
-			<view class="x-bc price-bottom-box">
-				<view class="x-f shopro-selector-rect">
-					<view class="original-price">原价：￥{{ detail.original_price }}</view>
-					<text class="line"></text>
-					<view class="sold">已售：{{ detail.sales }}件</view>
-				</view>
-				<view class="express"></view>
-			</view>
-		</view>
 		<!-- 团购商品 -->
-		<view class="groupon-price-box" v-if="detail.activity && detail.activity.type === 'groupon'">
+		<view class="groupon-price-box" v-if="detail.actType == 'GROUP'">
 			<view class="">
 				<text class="unit">￥</text>
-				<text class="price">{{ detail.activity_type === 'groupon' ? detail.groupon_price : detail.price }}</text>
-				<text class="notice">{{ detail.activity.rules.team_num }}人团</text>
+				<text class="price">{{ detail.actPrice }}</text>
+				<text class="notice">{{ detail.actSales }}人团</text>
 			</view>
-			<view class="x-bc price-bottom-box">
-				<view class="x-f">
-					<view class="original-price">原价：￥{{ detail.original_price }}</view>
+			<view class="flex justify-start price-bottom-box">
+				<view class="flex justify-start align-center">
+					<view class="original-price">原价：￥{{ detail.defaultSpecValue.price }}</view>
 					<text class="line"></text>
 					<view class="sold">已拼：{{ detail.sales }}件</view>
 				</view>
@@ -39,11 +23,11 @@
 			</view>
 		</view>
 		<!-- 秒杀商品 -->
-		<view class="seckill-price-box " :class="activityRules.status !== 'end' ? 'seckill-bg' : 'seckilled-bg'" v-if="detail.activity && detail.activity.type === 'seckill'">
+		<view class="seckill-price-box " :class="activityRules.status !== 'end' ? 'seckill-bg' : 'seckilled-bg'" v-else-if="detail.actType == 'SKILL'">
 			<view class="x-bc price-top-box">
 				<view class="x-f">
 					<text class="unit">￥</text>
-					<text class="price">{{ detail.price }}</text>
+					<text class="price">{{ detail.actPrice }}</text>
 					<text class="notice">秒杀价</text>
 				</view>
 				<view class="count-down" v-show="activityRules.status === 'waiting'">
@@ -72,6 +56,22 @@
 						<view class="progress-text" v-else>已售罄</view>
 					</view>
 				</view>
+			</view>
+		</view>
+		<!-- 正常商品 -->
+		<view class="normal-price-box" v-else>
+			<view class="shopro-selector-rect">
+				<text class="unit">￥</text>
+				<text class="price">{{ detail.defaultSpecValue.price }}</text>
+				<text class="notice">优惠价</text>
+			</view>
+			<view class="flex justify-start price-bottom-box">
+				<view class="flex justify-start align-center shopro-selector-rect">
+					<view class="original-price">原价：￥{{ detail.defaultSpecValue.price }}</view>
+					<text class="line"></text>
+					<view class="sold">已售：{{ detail.sales }}件</view>
+				</view>
+				<view class="express"></view>
 			</view>
 		</view>
 	</view>

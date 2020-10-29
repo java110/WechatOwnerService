@@ -15,10 +15,10 @@
 					</view>
 					<view class="flex justify-between margin-top-xs">
 						<view>
-							<text class="text-red">￥86.5</text>
+							<text class="text-red">￥{{item.defaultSpecValue.price}}</text>
 						</view>
 						<view>
-							<text class="text-gray">销量100件</text>
+							<text class="text-gray">销量{{item.defaultSpecValue.sales}}件</text>
 						</view>
 					</view>
 				</view>

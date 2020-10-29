@@ -16,8 +16,8 @@
 
 				<!-- 价格卡片组 -->
 				<vc-price v-if="goodsInfo" :detail="goodsInfo" :type="detailType" @change="getActivityRules"></vc-price>
-				<view class="goods-title more-t">{{ goodsInfo.title }}</view>
-				<view class="sub-title more-t">{{ goodsInfo.subtitle }}</view>
+				<view class="goods-title more-t">{{ goodsInfo.actProdName }}</view>
+				<view class="sub-title more-t">{{ goodsInfo.actProdDesc }}</view>
 				<!-- 规格选择 -->
 				<view class="sku-box shopro-selector-rect" @tap="showSku = true" v-if="activityRules.status !== 'waiting' && checkActivity(goodsInfo.activity_type, 'groupon') && goodsInfo.is_sku">
 					<view class="x-bc">
@@ -34,20 +34,10 @@
 				<!-- 服务 -->
 				<vc-serve v-if="goodsInfo.service.length" v-model="showServe" :serveList="goodsInfo.service"></vc-serve>
 
-
-				<!-- 拼团玩法 -->
-				<view v-if="goodsInfo.activity && !!goodsInfo.activity.richtext_id && goodsInfo.activity_type !== 'seckill'" class="groupon-play x-bc px20"
-				 @tap="jump('/pages/public/richtext', { id: goodsInfo.activity.richtext_id })">
-					<view class="x-f">
-						<text class="title">玩法</text>
-						<view class="description one-t">{{ goodsInfo.activity.richtext_title || '开团/参团·邀请好友·人满发货（不满退款' }}</view>
-					</view>
-					<text class="cuIcon-right" style="color: #bfbfbf;"></text>
-				</view>
 				<!-- 选项卡 -->
 				<view class="sticky-box">
-					<view class="tab-box x-f">
-						<view class="tab-item y-f x-c" @tap="onTab(tab.id)" v-for="tab in tabList" :key="tab.id">
+					<view class="tab-box flex justify-between ">
+						<view class="tab-item flex flex-direction align-center <justify-center></justify-center> x-c" @tap="onTab(tab.id)" v-for="tab in tabList" :key="tab.id">
 							<view class="tab-title">
 								{{ tab.title }}
 								<text v-if="tab.id == 'tab2'" class="comment-num">({{ commentNum }})</text>
@@ -57,7 +47,7 @@
 					</view>
 					<view class="tab-detail pb20">
 						<view class="rich-box" v-show="tabCurrent === 'tab0'">
-							<uni-parser :html="goodsInfo.content"></uni-parser>
+							<jyf-parser :html="goodsInfo.content" ref="article"></jyf-parser>
 						</view>
 						<view class="goods-size" v-if="tabCurrent === 'tab1'">
 							<view class="table-box" v-if="goodsInfo.params && goodsInfo.params.length">
@@ -84,38 +74,16 @@
 					</view>
 				</view>
 			</view>
-			<!-- 积分商品foot -->
-			<view class="score-foot-box x-f" v-if="!showSku && !showServe && detailType === 'score'">
-				<view class="left x-f">
-					<view class="tools-item y-f" @tap="goHome">
-						<image class="tool-img" src="http://shopro.7wpp.com/imgs/tabbar/tab_home_sel.png" mode=""></image>
-						<text class="tool-title">首页</text>
-					</view>
-				</view>
-				<view class="right">
-					<view class="btn-box x-ac"><button class="cu-btn  seckill-btn" @tap="goPay">立即兑换</button></view>
-				</view>
-			</view>
+			
 			<!-- 其他商品foot -->
-			<view class="detail-foot_box  x-f" v-if="!showSku && !showServe && detailType !== 'score'">
-				<view class="left x-f">
-					<view class="tools-item y-f" @tap="onFavorite(goodsInfo.id)">
-						<image class="tool-img" :src="Boolean(goodsInfo.favorite) ? 'http://shopro.7wpp.com/imgs/favorite_end.png' : 'http://shopro.7wpp.com/imgs/favorite.png'"
-						 mode=""></image>
-						<text class="tool-title">收藏</text>
-					</view>
-					<view class="tools-item y-f" @tap="onShare">
-						<image class="tool-img" src="http://shopro.7wpp.com/imgs/share.png" mode=""></image>
-						<text class="tool-title">分享</text>
-					</view>
-				</view>
-				<view class="detail-right">
-					<view class="detail-btn-box x-ac" v-if="!goodsInfo.activity">
+			<view class="detail-foot_box flex align-center" >
+				<view class="detail-right ">
+					<view class="detail-btn-box flex justify-end" v-if="!goodsInfo.activity">
 						<button class="cu-btn tool-btn add-btn" @tap="addCart">加入购物车</button>
 						<button class="cu-btn tool-btn pay-btn" @tap="goPay">立即购买</button>
 					</view>
 					<!-- 拼团foot -->
-					<view class="detail-btn-box x-ac" v-if="goodsInfo.activity && goodsInfo.activity.type === 'groupon'">
+					<view class="detail-btn-box flex justify-end" v-if="goodsInfo.activity && goodsInfo.activity.type === 'groupon'">
 						<button class="cu-btn  seckilled-btn" v-if="activityRules.status == 'waiting'">暂未开始</button>
 						<button class="cu-btn  seckilled-btn" v-if="activityRules.status == 'end'">已结束</button>
 						<view class="x-f" v-if="activityRules.status == 'ing'">
@@ -145,6 +113,8 @@
 	import vcSku from '@/components/vc-sku/vc-sku.vue';
 
 	import vcEmpty from '@/components/vc-empty/vc-empty.vue';
+	
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 
 	import {
 		getProduct
@@ -162,7 +132,8 @@
 			vcPrice,
 			vcSku,
 			vcComment,
-			vcEmpty
+			vcEmpty,
+			jyfParser
 		},
 		data() {
 			return {
@@ -438,12 +409,12 @@
 	}
 
 	.goods-title {
-		font-size: 28rpx;
-		font-weight: 500;
+		font-size: 36rpx;
+		font-weight: 600;
 		line-height: 42rpx;
 		background-color: #fff;
 		padding-bottom: 10rpx;
-		padding: 10rpx 20rpx;
+		padding: 20rpx 20rpx;
 	}
 
 	.sub-title {
