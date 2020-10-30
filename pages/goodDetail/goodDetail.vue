@@ -19,18 +19,21 @@
 				<view class="goods-title more-t">{{ goodsInfo.actProdName }}</view>
 				<view class="sub-title more-t">{{ goodsInfo.actProdDesc }}</view>
 				<!-- 规格选择 -->
-				<view class="sku-box shopro-selector-rect" @tap="showSku = true" v-if="activityRules.status !== 'waiting' && checkActivity(goodsInfo.activity_type, 'groupon') && goodsInfo.is_sku">
-					<view class="x-bc">
-						<view class="x-f">
+				<view class="sku-box shopro-selector-rect" @tap="showSku = true">
+					<view class="flex justify-between">
+						<view class="flex justify-between">
 							<text class="title">规格</text>
-							<text class="tip">{{ currentSkuText || '请选择规格' }}</text>
+							<text class="tip">{{ goodsInfo.defaultSpecValue.name || '请选择规格' }}</text>
 						</view>
 						<text class="cuIcon-right"></text>
 					</view>
 				</view>
-				<vc-sku v-model="showSku" :goodsInfo="goodsInfo" :buyType="goodsInfo.activity_type == 'seckill' || detailType === 'score' ? 'buy' : buyType"
-				 :grouponBuyType="grouponBuyType" :goodsType="detailType === 'score' ? 'score' : 'goods'" @changeType="changeType"
-				 @getSkuText="getSkuText"></vc-sku>
+				<vc-sku v-model="showSku" :goodsInfo="goodsInfo" 
+				:buyType="buyType"
+				:skuList="goodsInfo.productSpecValues"
+				 :grouponBuyType="grouponBuyType" :goodsType="goodsInfo.actType" @changeType="changeType"
+				 @getSkuText="getSkuText"
+				 @chooseSku="_chooseSku"></vc-sku>
 				<!-- 服务 -->
 				<vc-serve v-if="goodsInfo.service.length" v-model="showServe" :serveList="goodsInfo.service"></vc-serve>
 
@@ -224,6 +227,15 @@
 				getProduct(_data)
 					.then(_product => {
 						that.goodsInfo = _product[0];
+						that.goodsInfo.productSpecValues.forEach(item=>{
+							let _productSpecDetails = item.productSpecDetails;
+							let _name = "";
+							_productSpecDetails.forEach(detail =>{
+								_name += (detail.detailValue +"/");
+							})
+							
+							item.name = _name;
+						})
 					});
 				that.getCommentList();
 
@@ -231,16 +243,16 @@
 			// 商品评论
 			getCommentList() {
 				let that = this;
-				that.$api('goods_comment.list', {
-					goods_id: that.goodsInfo.id,
-					per_page: 3,
-					type: 'all'
-				}).then(res => {
-					if (res.code === 1) {
-						that.commentList = res.data.data;
-						that.commentNum = res.data.total;
-					}
-				});
+				// that.$api('goods_comment.list', {
+				// 	goods_id: that.goodsInfo.id,
+				// 	per_page: 3,
+				// 	type: 'all'
+				// }).then(res => {
+				// 	if (res.code === 1) {
+				// 		that.commentList = res.data.data;
+				// 		that.commentNum = res.data.total;
+				// 	}
+				// });
 			},
 			// 组件返回的type;
 			changeType(e) {
@@ -250,26 +262,41 @@
 			getSkuText(e) {
 				this.currentSkuText = e;
 			},
+			_chooseSku:function(sc){
+				this.goodsInfo.productSpecValues.forEach(item=>{
+					item.isDefault = 'F';
+					if(item.valueId == sc.valueId){
+						item.isDefault = 'T';
+						this.goodsInfo.defaultSpecValue = item;
+					}
+				});
+			
+				console.log('sc',sc);
+			},
 			// 分享
 			onShare() {
 				this.showShare = true;
 			},
 			// 加入购物车
 			addCart() {
-				if (Boolean(uni.getStorageSync('token'))) {
+				if (this.vc.hasLogin()) {
 					this.buyType = 'cart';
 					this.showSku = true;
 				} else {
-					this.$store.commit('LOGIN_TIP', true);
+					this.vc.navigateTo({
+						url:'/pages/showlogin/showlogin'
+					})
 				}
 			},
 			// 立即购买
 			goPay() {
-				if (Boolean(uni.getStorageSync('token'))) {
+				if (this.vc.hasLogin()) {
 					this.buyType = 'buy';
 					this.showSku = true;
 				} else {
-					this.$store.commit('LOGIN_TIP', true);
+					this.vc.navigateTo({
+						url:'/pages/showlogin/showlogin'
+					})
 				}
 			},
 			// 拼团购买
@@ -617,7 +644,7 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0;
-		z-index: 999;
+		//z-index: 999;
 
 		.left,
 		.detail-right {

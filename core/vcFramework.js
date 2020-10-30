@@ -29,6 +29,8 @@ import {navigateTo,navigateBack} from './vcRoute.js'
 
 import {isEmpty} from '../utils/StringUtil.js'
 
+import {hasLogin} from '../auth/Java110Auth.js'
+
 
 
 
@@ -44,5 +46,6 @@ export default{
 	onLoad:onLoad,
 	navigateTo:navigateTo,
 	navigateBack:navigateBack,
-	isEmpty:isEmpty
+	isEmpty:isEmpty,
+	hasLogin:hasLogin
 }

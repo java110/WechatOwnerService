@@ -1,22 +1,23 @@
 <template>
 	<view class="">
 		<!-- 规格 -->
-		<view class="cu-modal sku-modal  bottom-modal" style="z-index: 999;" :class="{ show: showModal }" @tap="hideModal" v-if="goodsInfo.sku_price">
+		<view class="cu-modal sku-modal  bottom-modal" style="z-index: 999;" 
+		:class="{ show: showModal }" @tap="hideModal" v-if="goodsInfo.defaultSpecValue.price">
 			<view class="cu-dialog" @tap.stop style="background: none;">
 				<view class="shop-modal page_box" :style="goodsInfo.is_sku == 0 ? 'height:500rpx' : ''">
 					<text class="cuIcon-roundclosefill" @tap="hideModal"></text>
 					<!-- 商品信息 -->
-					<view class="top x-f modal-head__box">
-						<image class="shop-img" :src="currentSkuPrice.image ? currentSkuPrice.image : goodsInfo.image" mode="aspectFill"></image>
+					<view class="top flex justify-start modal-head__box">
+						<image class="shop-img" :src="baseUrl+goodsInfo.coverPhoto" mode="aspectFill"></image>
 						<view class="y-bc goods-box">
-							<view class="goods-title more-t">{{ goodsInfo.title }}</view>
-							<view class="x-bc goods-bottom">
+							<view class="goods-title more-t">{{ goodsInfo.prodName }}</view>
+							<view class="flex justify-between align-center goods-bottom">
 								<view class="price-box x-f">
-									<view v-if="goodsType === 'score'">{{ currentSkuPrice.price_text || goodsInfo.price }}</view>
+									<view v-if="goodsType === 'score'">{{ currentSkuPrice.price_text || goodsInfo.defaultSpecValue.price }}</view>
 									<view v-else-if="grouponBuyType === 'groupon'">
-										￥{{ currentSkuPrice.groupon_price || (goodsInfo.activity_type === 'groupon' ? goodsInfo.groupon_price : goodsInfo.price) }}
+										￥{{ currentSkuPrice.groupon_price || (goodsInfo.activity_type === 'groupon' ? goodsInfo.groupon_price : goodsInfo.defaultSpecValue.price) }}
 									</view>
-									<view v-else>￥{{ currentSkuPrice.price || goodsInfo.price }}</view>
+									<view v-else>￥{{ currentSkuPrice.price || goodsInfo.defaultSpecValue.price }}</view>
 								</view>
 								<text class="stock">库存{{ currentSkuPrice.stock || goodsInfo.stock }}件</text>
 							</view>
@@ -24,22 +25,21 @@
 					</view>
 					<!-- 选择规格 -->
 					<view class="content_box">
-						<view class="select-box y-start" v-for="(s, x) in skuList" :key="s.id">
-							<view class="type-title">{{ s.name }}</view>
-							<view class="tag-box x-f">
+						<view class="select-box flex flex-direction align-start" >
+							<view class="type-title">规格</view>
+							<view class="tag-box flex flex-direction">
 								<button
 									class="tag cu-btn"
-									v-for="(sc, y) in s.content"
-									:key="sc.id"
-									:class="{ 'tag-active': currentSkuArray[sc.pid] == sc.id, 'tag-disabled': sc.disabled == true }"
-									:disabled="sc.disabled == true"
-									@tap="chooseSku(sc.pid, sc.id)"
+									v-for="(sc, index) in skuList"
+									:key="index"
+									:class="{' tag-active':sc.isDefault == 'T'}"
+									@tap="chooseSku(sc,skuList)"
 								>
 									{{ sc.name }}
 								</button>
 							</view>
 						</view>
-						<view class="buy-num-box x-bc">
+						<view class="buy-num-box flex justify-between align-center">
 							<view class="num-title">购买数量</view>
 							<view class="num-step">
 								<uni-number-box
@@ -53,11 +53,10 @@
 							</view>
 						</view>
 					</view>
-					<view class="btn-box foot_box x-bc" v-if="buyType === 'cart' || buyType === 'buy'"><button class="cu-btn  seckill-btn" @tap="confirm">确认</button></view>
-					<view class="btn-box foot_box x-bc" v-else>
-						<button class="cu-btn  cart-btn" @tap="confirmCart">加入购物车</button>
-						<button class="cu-btn  buy-btn" @tap="confirmBuy">立即购买</button>
+					<view class="btn-box foot_box x-bc" >
+						<button class="cu-btn  seckill-btn" @tap="confirm">确认</button>
 					</view>
+					
 				</view>
 			</view>
 		</view>
@@ -66,6 +65,7 @@
 
 <script>
 import uniNumberBox from '@/components/uni-number-box/uni-number-box.vue';
+import conf from '../../conf/config.js'
 import { mapMutations, mapActions, mapState } from 'vuex';
 export default {
 	name: 'vcSku',
@@ -75,6 +75,7 @@ export default {
 	data() {
 		return {
 			skuList: [],
+			baseUrl:conf.baseUrl,
 			currentSkuPrice: {},
 			currentSkuArray: [],
 			goodsNum: 1,
@@ -84,6 +85,7 @@ export default {
 	},
 	props: {
 		goodsInfo: {},
+		skuList:[],
 		value: {},
 		buyType: {
 			type: String,
@@ -104,7 +106,9 @@ export default {
 		}
 	},
 	created() {
-		this.skuList = this.goodsInfo.sku;
+		
+		//this.skuList = this.goodsInfo.productSpecValues;
+		
 		this.changeDisabled(false);
 	},
 	mounted() {
@@ -157,122 +161,10 @@ export default {
 			});
 		},
 		// 选择规格
-		chooseSku(pid, skuId) {
-			let that = this;
-			let isChecked = true; // 选中 or 取消选中
-
-			if (that.currentSkuArray[pid] != undefined && that.currentSkuArray[pid] == skuId) {
-				// 点击已被选中的，删除并填充 ''
-				isChecked = false;
-				that.currentSkuArray.splice(pid, 1, '');
-			} else {
-				// 选中
-				that.$set(that.currentSkuArray, pid, skuId);
-			}
-
-			let chooseSkuId = []; // 选中的规格大类
-			that.currentSkuArray.forEach(sku => {
-				if (sku != '') {
-					// sku 为空是反选 填充的
-					chooseSkuId.push(sku);
-				}
-			});
-
-			// 当前所选规格下，所有可以选择的 skuPric
-			let newPrice = this.getCanUseSkuPrice();
-
-			// 判断所有规格大类是否选择完成
-			if (chooseSkuId.length == that.skuList.length && newPrice.length) {
-				that.currentSkuPrice = newPrice[0];
-			} else {
-				that.currentSkuPrice = {};
-			}
-
-			// 改变规格项禁用状态
-			this.changeDisabled(isChecked, pid, skuId);
+		chooseSku(sc,skuList) {
+			this.$emit('chooseSku',sc);	
 		},
-		// 改变禁用状态
-		changeDisabled(isChecked = false, pid = 0, skuId = 0) {
-			let newPrice = []; // 所有可以选择的 skuPrice
-
-			if (isChecked) {
-				// 选中规格
-
-				// 当前点击选中规格下的 所有可用 skuPrice
-				for (let price of this.skuPrice) {
-					if (price.stock <= 0) {
-						// this.goodsNum 不判断是否大于当前选择数量，在 uni-number-box 判断，并且 取 stock 和 goods_num 的小值
-						continue;
-					}
-					if (price.goods_sku_id_arr.indexOf(skuId.toString()) >= 0) {
-						newPrice.push(price);
-					}
-				}
-			} else {
-				// 取消选择规格
-
-				// 当前所选规格下，所有可以选择的 skuPric
-				newPrice = this.getCanUseSkuPrice();
-			}
-
-			// 所有存在并且有库存未选择的规格项 的 子项 id
-			let noChooseSkuIds = [];
-			for (let price of newPrice) {
-				noChooseSkuIds = noChooseSkuIds.concat(price.goods_sku_id_arr);
-			}
-
-			// 去重
-			noChooseSkuIds = Array.from(new Set(noChooseSkuIds));
-
-			if (isChecked) {
-				// 去除当前选中的规格项
-				let index = noChooseSkuIds.indexOf(skuId.toString());
-				noChooseSkuIds.splice(index, 1);
-			} else {
-				// 循环去除当前已选择的规格项
-				this.currentSkuArray.forEach(sku => {
-					if (sku.toString() != '') {
-						// sku 为空是反选 填充的
-						let index = noChooseSkuIds.indexOf(sku.toString());
-						if (index >= 0) {
-							// sku 存在于 noChooseSkuIds
-							noChooseSkuIds.splice(index, 1);
-						}
-					}
-				});
-			}
-
-			// 当前已选择的规格大类
-			let chooseSkuKey = [];
-			if (!isChecked) {
-				// 当前已选择的规格大类
-				this.currentSkuArray.forEach((sku, key) => {
-					if (sku != '') {
-						// sku 为空是反选 填充的
-						chooseSkuKey.push(key);
-					}
-				});
-			} else {
-				// 当前点击选择的规格大类
-				chooseSkuKey = [pid];
-			}
-
-			for (let i in this.skuList) {
-				// 当前点击的规格，或者取消选择时候 已选中的规格 不进行处理
-				if (chooseSkuKey.indexOf(this.skuList[i]['id']) >= 0) {
-					continue;
-				}
-
-				for (let j in this.skuList[i]['content']) {
-					// 如果当前规格项 id 不存在于有库存的规格项中，则禁用
-					if (noChooseSkuIds.indexOf(this.skuList[i]['content'][j]['id'].toString()) >= 0) {
-						this.skuList[i]['content'][j]['disabled'] = false;
-					} else {
-						this.skuList[i]['content'][j]['disabled'] = true;
-					}
-				}
-			}
-		},
+		
 		// 当前所选规格下，获取所有有库存的 skuPrice
 		getCanUseSkuPrice() {
 			let newPrice = [];
@@ -337,13 +229,9 @@ export default {
 			if (this.confirmSku()) {
 				let confirmGoodsList = [];
 				confirmGoodsList.push(that.confirmGoodsInfo);
-				that.jump('/pages/order/confirm', {
-					goodsList: JSON.stringify(confirmGoodsList),
-					from: 'goods',
-					orderType: that.goodsType,
-					grouponBuyType: that.grouponBuyType,
-					grouponId: that.grouponId
-				});
+				this.vc.navigateTo({
+					url:'/pages/goodsConfirm/goodsConfirm'
+				})
 			}
 		},
 		// 确定
