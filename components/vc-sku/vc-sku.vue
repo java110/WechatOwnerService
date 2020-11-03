@@ -153,7 +153,6 @@ export default {
 	},
 
 	methods: {
-		...mapActions(['addCartGoods', 'getCartList']),
 		jump(path, parmas) {
 			this.$Router.push({
 				path: path,
@@ -271,6 +270,11 @@ export default {
 					return true;
 				}
 			}
+		},
+		addCartGoods:function(_confirmGoodsList){
+			return new Promise((resolve, reject) => {
+				console.log('_confirmGoodsList',_confirmGoodsList)
+			})
 		}
 	}
 };
