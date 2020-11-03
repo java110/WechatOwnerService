@@ -94,6 +94,7 @@ export default {
 	queryProductLabel: baseUrl +'app/product/queryProductLabel',
 	queryGroupBuyProduct: baseUrl +'app/groupBuy/queryGroupBuyProduct',
 	queryProduct: baseUrl +'app/product/queryProduct',
+	saveStoreCart: baseUrl +'app/storeOrder/saveStoreCart',
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

@@ -1,7 +1,10 @@
 import {
-	requestNoAuth
+	requestNoAuth,
+	request
 } from '../java110Request.js';
 import url from '../../constant/url.js';
+
+
 
 
 /**
@@ -71,6 +74,32 @@ export function getProduct(dataObj) {
 					if (res.statusCode == 200) {
 						let _products = res.data.data;
 						resolve(_products);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+};
+
+/**
+ *  下单
+ */
+export function saveStoreCart(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.saveStoreCart,
+				method: "POST",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						
+						resolve(res.data);
 						return;
 					}
 					reject();
