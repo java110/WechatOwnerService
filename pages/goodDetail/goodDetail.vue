@@ -31,7 +31,10 @@
 				<vc-sku v-model="showSku" :goodsInfo="goodsInfo" 
 				:buyType="buyType"
 				:skuList="goodsInfo.productSpecValues"
-				 :grouponBuyType="grouponBuyType" :goodsType="goodsInfo.actType" @changeType="changeType"
+				 :grouponBuyType="grouponBuyType" 
+				 :goodsType="goodsInfo.actType"
+				 @changeBalance="changeBalance"
+				 @changeType="changeType"
 				 @getSkuText="getSkuText"
 				 @chooseSku="_chooseSku"></vc-sku>
 				<!-- 服务 -->
@@ -83,7 +86,8 @@
 				<view class="detail-right ">
 					<view class="detail-btn-box flex justify-end" v-if="!goodsInfo.activity">
 						<button class="cu-btn tool-btn add-btn" @tap="addCart">加入购物车</button>
-						<button class="cu-btn tool-btn pay-btn" @tap="goPay">立即购买</button>
+						<button class="cu-btn tool-btn pay-btn" v-if="!balance" @tap="goPay">立即购买</button>
+						<button class="cu-btn tool-btn pay-btn" v-else @tap="goBalance">结算</button>
 					</view>
 					<!-- 拼团foot -->
 					<view class="detail-btn-box flex justify-end" v-if="goodsInfo.activity && goodsInfo.activity.type === 'groupon'">
@@ -121,9 +125,9 @@
 
 	import {
 		getProduct
-	} from '../../api/goods/goodsApi.js'
+	} from '../../api/goods/goodsApi.js';
 	
-	import conf from '../../conf/config.js'
+	import conf from '../../conf/config.js';
 	import {
 		mapMutations,
 		mapActions,
@@ -175,49 +179,48 @@
 						id: 'tab2',
 						title: '用户评价'
 					}
-				]
+				],
+				balance:false
+				
 			};
 		},
-		computed: {},
+		computed: {
+			
+		},
 		onLoad(options) {
 			this.productId = options.productId;
-
 			this.getGoodsDetail();
 
 		},
 		onReady() {},
 		methods: {
-			getActivityRules(e) {
+			getActivityRules:function(e) {
 				if (e) {
 					this.activityRules = JSON.parse(e);
 				}
 			},
 			// 检测
-			checkActivity(data, type) {
+			checkActivity:function(data, type) {
 				if (data) {
 					return !data.includes(type);
 				}
 				return true;
 			},
 			// 路由跳转
-			jump(path, parmas) {
+			jump:function(path, parmas) {
 				this.showShare = false;
-				this.$Router.push({
-					path: path,
-					query: parmas
-				});
 			},
 			// 轮播图切换
-			swiperChange(e) {
+			swiperChange:function(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
 			},
 			// 选项卡
-			onTab(id) {
+			onTab:function(id) {
 				this.tabCurrent = id;
 			},
 			// 商品详情
-			getGoodsDetail() {
+			getGoodsDetail:function() {
 				let that = this;
 				let _data = {
 					page: 1,
@@ -238,28 +241,17 @@
 						})
 					});
 				that.getCommentList();
-
 			},
 			// 商品评论
-			getCommentList() {
+			getCommentList:function() {
 				let that = this;
-				// that.$api('goods_comment.list', {
-				// 	goods_id: that.goodsInfo.id,
-				// 	per_page: 3,
-				// 	type: 'all'
-				// }).then(res => {
-				// 	if (res.code === 1) {
-				// 		that.commentList = res.data.data;
-				// 		that.commentNum = res.data.total;
-				// 	}
-				// });
 			},
 			// 组件返回的type;
-			changeType(e) {
+			changeType:function(e) {
 				this.buyType = e;
 			},
 			// 组件返回的规格;
-			getSkuText(e) {
+			getSkuText:function(e) {
 				this.currentSkuText = e;
 			},
 			_chooseSku:function(sc){
@@ -270,15 +262,13 @@
 						this.goodsInfo.defaultSpecValue = item;
 					}
 				});
-			
-				console.log('sc',sc);
 			},
 			// 分享
-			onShare() {
+			onShare:function() {
 				this.showShare = true;
 			},
 			// 加入购物车
-			addCart() {
+			addCart:function() {
 				if (this.vc.hasLogin()) {
 					this.buyType = 'cart';
 					this.showSku = true;
@@ -289,7 +279,7 @@
 				}
 			},
 			// 立即购买
-			goPay() {
+			goPay:function() {
 				if (this.vc.hasLogin()) {
 					this.buyType = 'buy';
 					this.showSku = true;
@@ -299,8 +289,13 @@
 					})
 				}
 			},
+			goBalance:function(){
+				this.vc.navigateTo({
+					url: '/pages/goodsConfirm/goodsConfirm'
+				})
+			},
 			// 拼团购买
-			payGroupon(type) {
+			payGroupon:function(type) {
 				if (Boolean(uni.getStorageSync('token'))) {
 					if (type === 'groupon') {
 						this.grouponBuyType = 'groupon';
@@ -314,7 +309,7 @@
 				}
 			},
 			// 立即秒杀。
-			goSeckill() {
+			goSeckill:function() {
 				if (Boolean(uni.getStorageSync('token'))) {
 					if (this.activityRules.status !== 'waiting') {
 						this.buyType = 'buy';
@@ -326,6 +321,9 @@
 				} else {
 					this.$store.commit('LOGIN_TIP', true);
 				}
+			},
+			changeBalance:function(e){
+				this.balance = e;
 			}
 		}
 	};

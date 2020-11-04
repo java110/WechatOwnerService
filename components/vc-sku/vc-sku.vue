@@ -78,7 +78,7 @@
 				currentSkuArray: [],
 				goodsNum: 1,
 				confirmGoodsInfo: {},
-				type: this.buyType
+				type: this.buyType,
 			};
 		},
 		props: {
@@ -107,9 +107,7 @@
 		},
 		mounted() {
 			// 单规格选项
-			if (!this.goodsInfo.is_sku) {
-				this.currentSkuPrice = this.skuPrice[0];
-			}
+			
 		},
 		watch: {
 			type(nweVal, oldVal) {
@@ -147,11 +145,11 @@
 		},
 
 		methods: {
-			jump(path, parmas) {
+			jump:function(path, parmas) {
 
 			},
 			// 选择规格
-			chooseSku(sc, skuList) {
+			chooseSku:function(sc, skuList) {
 				this.$emit('chooseSku', sc);
 			},
 
@@ -199,18 +197,25 @@
 			},
 			
 			// 立即购买
-			confirmBuy() {
-				let that = this;
-
-				let confirmGoodsList = [];
-				confirmGoodsList.push(that.confirmGoodsInfo);
+			confirmBuy:function() {
+				let _that = this;
+				let valueId = '';
+				_that.goodsInfo.productSpecValues.forEach(item =>{
+					if(item.isDefault == 'T'){
+						valueId = item.valueId
+					}
+				});
 				this.vc.navigateTo({
-					url: '/pages/goodsConfirm/goodsConfirm'
+					url: '/pages/goodsConfirm/goodsConfirm?productId='
+					+_that.goodsInfo.productId
+					+"&valueId="+valueId
+					+"&goodsNum="+_that.goodsNum
+					+"&storeId="+_that.goodsInfo.storeId
 				})
 
 			},
 			// 确定
-			confirm() {
+			confirm:function() {
 				switch (this.buyType) {
 					case 'cart':
 						this.addCartGoods();
@@ -246,10 +251,9 @@
 				}).then((data)=>{
 					if(data.code == 0){
 						_that.showModal = false;
-						_that.vc.showToast({
-							title:'添加成功',
-							icon:'none'
-						});
+						
+						
+						_that.$emit('changeBalance',true)
 					}
 				},(reject)=>{
 					
