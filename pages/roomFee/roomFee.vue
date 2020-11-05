@@ -134,6 +134,10 @@
 	
 	// #endif
 	
+	// #ifdef
+	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
+	// #endif
+	
 	import {addMonth,formatDate} from '../../utils/DateUtil.js'
 	export default {
 		data() {
@@ -257,7 +261,11 @@
 
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
-							let obj = {
+							
+							let obj = {};
+							let orderInfo = {};
+							// #ifdef MP-WEIXIN
+							 obj = {
 								appid: data.appId,
 								noncestr: data.nonceStr,
 								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
@@ -266,8 +274,13 @@
 								timestamp: data.timeStamp,
 								sign: data.sign // 根据签名算法生成签名
 							}
+							// #endif
+							// #ifdef APP-PLUS
+							 obj = getPayInfo(data);
+							// #endif
+							
 							// 第二种写法，传对象字符串
-							let orderInfo = JSON.stringify(obj)
+							 orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
 								provider: 'wxpay',
 								orderInfo: orderInfo, //微信、支付宝订单数据

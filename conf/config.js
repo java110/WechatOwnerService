@@ -25,6 +25,9 @@ const DEFAULT_COMMUNITY_NAME = "丰仪家园";
 // 微信公众号 appId，小程序和app 可以不用修改
 const wAppId="wx43458162e3c31d92"; //微信AppId
 
+//app支付时这里需要填写支付秘钥
+const appPayKey="";
+
 const logLevel="DEBUG"; // 日志级别
 
 export default{
@@ -32,5 +35,6 @@ export default{
 	DEFAULT_COMMUNITY_ID:DEFAULT_COMMUNITY_ID,
 	DEFAULT_COMMUNITY_NAME:DEFAULT_COMMUNITY_NAME,
 	wAppId:wAppId,
-	logLevel:logLevel
+	logLevel:logLevel,
+	appPayKey:appPayKey
 }
