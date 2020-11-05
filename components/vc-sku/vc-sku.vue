@@ -72,7 +72,7 @@
 		},
 		data() {
 			return {
-				skuList: [],
+				
 				baseUrl: conf.baseUrl,
 				currentSkuPrice: {},
 				currentSkuArray: [],

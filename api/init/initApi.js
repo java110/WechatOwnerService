@@ -8,7 +8,7 @@ import mapping from '../../constant/MappingConstant.js';
 
 import app from '../../constant/AppConstant.js'
 
-import {_doLoginOwnerByKey} from '../../auth/AppLogin.js'
+import {doLoginOwnerByKey} from '../../auth/AppLogin.js'
 
 /**
  * 页面加载方法
@@ -19,7 +19,7 @@ export function onLoad(_option){
 	let _key = _option.key;
 	if (_key != null && _key != undefined && _key != '') {
 		//根据key 去做登录
-		_doLoginOwnerByKey(_key);
+		doLoginOwnerByKey(_key);
 	}
 	let wAppId = _option.wAppId;
 	if (wAppId != null && wAppId != undefined && wAppId != '') {
