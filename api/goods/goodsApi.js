@@ -111,3 +111,29 @@ export function saveStoreCart(dataObj) {
 		})
 }
 
+/**
+ *  下单
+ */
+export function getStoreCart(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.queryStoreCart,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						
+						resolve(res.data);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+

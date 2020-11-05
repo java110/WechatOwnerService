@@ -383,6 +383,13 @@
 				"navigationBarTitleText": "确认订单"
 			}
         }
+        ,{
+            "path" : "pages/addressList/addressList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "收货地址"  
+            }
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

@@ -200,9 +200,11 @@
 			confirmBuy:function() {
 				let _that = this;
 				let valueId = '';
+				let price = 0.0
 				_that.goodsInfo.productSpecValues.forEach(item =>{
 					if(item.isDefault == 'T'){
 						valueId = item.valueId
+						price = item.price
 					}
 				});
 				this.vc.navigateTo({
@@ -210,6 +212,9 @@
 					+_that.goodsInfo.productId
 					+"&valueId="+valueId
 					+"&goodsNum="+_that.goodsNum
+					+"&price="+price
+					+"&prodName="+_that.goodsInfo.actProdName
+					+"&coverPhoto="+encodeURIComponent(_that.goodsInfo.coverPhoto)
 					+"&storeId="+_that.goodsInfo.storeId
 				})
 
