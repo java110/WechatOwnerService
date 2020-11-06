@@ -70,12 +70,16 @@
 					<text class="price">￥{{ orderPre.dispatch_amount || '0.00' }}</text>
 				</view>
 			</view>
+			
+			<view class="black">
+				
+			</view>
 		</view>
 		<view class="foot_box flex justify-between align-center">
 			<text class="num">共1件</text>
 			<view class="all-money">
 				<text>合计：</text>
-				<text class="price">￥{{ orderPre.total_fee || '0.00' }}</text>
+				<text class="price">￥{{ totalFee || '0.00' }}</text>
 			</view>
 			<button class="cu-btn sub-btn" @tap="subOrder" :disabled="isSubOrder">
 				<text v-if="isSubOrder" class="cuIcon-loading2 cuIconfont-spin"></text>
@@ -115,10 +119,6 @@
 				address: {
 					is_default: 0
 				},
-				storeList: [], //门店列表
-				storeInfo: {
-					id: 0
-				}, //商家信息
 				addressId: 0,
 				from: '',
 				orderType: '',
@@ -126,7 +126,6 @@
 				grouponId: 0,
 				perGoodsList: [], //确认单订单商品
 				remark: '',
-				orderPre: {},
 				couponId: 0,
 				expressTypeCur: '',
 				showCheckTime: false, //配送时间弹窗。
@@ -137,7 +136,8 @@
 				checkTimeCur: 0, //默认选中时间。
 				checkTimeId: 'c1', //锚点用
 				checkDayCur: 0, //默认日期
-				personId: ''
+				personId: '',
+				totalFee:0.0
 
 			};
 		},
@@ -153,8 +153,9 @@
 			let _that = this;
 			if (options.hasOwnProperty("productId")) {
 				this.perGoodsList.push({
+					checked:true,
 					productId: options.productId,
-					valueId: options.productId,
+					valueId: options.valueId,
 					goodsNum: options.goodsNum,
 					price: options.price,
 					prodName: options.prodName,
@@ -163,14 +164,14 @@
 				});
 			}
 
-
+			await this.getOwner();
 
 			await this.init();
 		},
 		onShow() {},
 		methods: {
 			init() {
-				return Promise.all([this.getOwner(), this.getDefaultAddress(), this.getPre()]);
+				return Promise.all([ this.getDefaultAddress(), this.getPre()]);
 			},
 			jump(path) {
 				this.vc.navigateTo({
@@ -196,23 +197,24 @@
 			getPre() {
 				let that = this;
 				getStoreCart({
-					personId: that.goodsList,
+					personId: that.personId,
+					page:1,
+					row:50
 
 				}).then(res => {
-					if (res.code === 1) {
-						that.orderPre = res.data;
-						that.perGoodsList = res.data.new_goods_list
-						that.perGoodsList.map(item => {
-							item.selType = item.dispatch_type;
-							that.goodsList.forEach(goods => {
-								if (item.goods_id == goods.goods_id && item.sku_price_id == goods.sku_price_id) {
-									goods.dispatch_type = item.dispatch_type;
-
-									if (item.store_id) {
-										goods.store_id = item.store_id;
-									}
-								}
-							})
+					if (res.code === 0) {
+						let _data = res.data;
+						_data.forEach(item => {
+							that.perGoodsList.push({
+								checked:true,
+								productId: item.productId,
+								valueId: item.valueId,
+								goodsNum: item.cartNum,
+								price: item.price,
+								prodName: item.prodName,
+								coverPhoto: item.coverPhoto,
+								storeId: item.storeId
+							});
 						})
 					}
 				});
@@ -932,5 +934,8 @@
 				background-color: #fff;
 			}
 		}
+	}
+	.black{
+		height: 200upx;
 	}
 </style>

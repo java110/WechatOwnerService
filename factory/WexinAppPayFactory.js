@@ -1,5 +1,7 @@
 
 import conf from '../conf/config.js'
+
+import md5 from '../utils/md5Util.js'
 /*
 * 生成订单信息
 * @params orderInfo: any 后端返回的数据，格式和上面一样
@@ -22,7 +24,7 @@ export function getPayInfo (orderInfo) {
 	// 插入加密Key到最后
 	let strSignTemp = `${keyValueStr}&key=${key}`;
 	// 真正的二次加密
-	let sign = md5(strSignTemp).toUpperCase().substr(0, 32);
+	let sign = md5(strSignTemp).toUpperCase().substr(0, 30);
 	console.log(sign) // 可以去微信支付文档做校验
 	payInfo.sign = sign;
 	// 返回字符串给uniapp调起支付用

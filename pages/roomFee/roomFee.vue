@@ -134,7 +134,7 @@
 	
 	// #endif
 	
-	// #ifdef
+	// #ifdef APP-PLUS
 	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
 	// #endif
 	
@@ -276,11 +276,11 @@
 							}
 							// #endif
 							// #ifdef APP-PLUS
-							 obj = getPayInfo(data);
+							obj = getPayInfo(data);
 							// #endif
 							
 							// 第二种写法，传对象字符串
-							 orderInfo = JSON.stringify(obj)
+							orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
 								provider: 'wxpay',
 								orderInfo: orderInfo, //微信、支付宝订单数据
