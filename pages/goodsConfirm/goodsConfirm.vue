@@ -25,7 +25,7 @@
 
 			<view class="goods-list " v-for="(g,index) in perGoodsList" :key="g.index">
 				<view class="flex justify-start align-center">
-					<view class="flex align-center justify-center" style="height: 200rpx;" @tap="onSel(index, g.checked)">
+					<view class="flex align-center justify-center" style="height: 200rpx;" @tap="onSel(index, g)">
 						<checkbox :checked="g.checked" :class="{ checked: g.checked }" class="goods-radio round orange"></checkbox>
 					</view>
 					<view class="goods-card">
@@ -76,7 +76,7 @@
 			</view>
 		</view>
 		<view class="foot_box flex justify-between align-center">
-			<text class="num">共1件</text>
+			<text class="num">共{{goodsCount}}件</text>
 			<view class="all-money">
 				<text>合计：</text>
 				<text class="price">￥{{ totalFee || '0.00' }}</text>
@@ -137,7 +137,8 @@
 				checkTimeId: 'c1', //锚点用
 				checkDayCur: 0, //默认日期
 				personId: '',
-				totalFee:0.0
+				totalFee:0.0,
+				goodsCount:0
 
 			};
 		},
@@ -162,6 +163,10 @@
 					coverPhoto: decodeURIComponent(options.coverPhoto),
 					storeId: options.storeId
 				});
+				
+				_that.totalFee = parseFloat(options.goodsNum) * parseFloat(options.price);
+				_that.totalFee = _that.totalFee.toFixed(2)
+				_that.goodsCount = 1;
 			}
 
 			await this.getOwner();
@@ -215,7 +220,12 @@
 								coverPhoto: item.coverPhoto,
 								storeId: item.storeId
 							});
+							
+							that.totalFee = parseFloat(that.totalFee)+(parseFloat(item.cartNum) * parseFloat(item.price));
+							that.goodsCount +=1;
 						})
+						
+						that.totalFee = that.totalFee.toFixed(2)
 					}
 				});
 			},
@@ -292,6 +302,24 @@
 				if (type == 'day') {
 					this.checkDayCur = index;
 				}
+			},
+			onSel:function(index,gCheck){
+				let that = this;
+				that.perGoodsList[index].checked = that.perGoodsList[index].checked?false:true;
+				
+				let totalFee = 0.0;
+				let goodsCount =0;
+				that.perGoodsList.forEach(item=>{
+					if(item.checked == true){
+						totalFee = parseFloat(totalFee)+(parseFloat(item.goodsNum) * parseFloat(item.price));
+						goodsCount +=1;
+					}
+				})
+				that.totalFee = totalFee.toFixed(2);
+				
+				that.goodsCount = goodsCount;
+				
+				console.log(that.totalFee,that.goodsCount)
 			}
 		}
 	};
