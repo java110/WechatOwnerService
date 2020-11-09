@@ -55,3 +55,26 @@ export function getCurOwner() {
 			}
 		});
 }
+
+
+export function getUserAddress(_data){
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.queryUserAddress,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
