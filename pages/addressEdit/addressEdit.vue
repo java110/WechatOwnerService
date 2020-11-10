@@ -20,10 +20,10 @@
 			</view>
 			<view class="default-box flex justify-between align-center">
 				<text class="title">设为默认地址</text>
-				<switch class="olive switch" @tap="onSwitch" :class="{ checked: isDefault }" :checked="isDefault"></switch>
+				<switch class="olive switch" @tap="onSwitch" :class="{ checked: isDefault=='T' }" :checked="isDefault=='T'"></switch>
 			</view>
 		</view>
-		<view v-if="addressId != 0" class="foot_box x-bc">
+		<view v-if="addressId != 0" class="foot_box flex justify-between">
 			<button class="cu-btn delete-btn" @tap="deleteAddress">删除收货地址</button>
 			<button class="cu-btn save-btn" @tap="editAddress">保存收货地址</button>
 		</view>
@@ -35,7 +35,7 @@
 <script>
 	import pickerAddress from '../../components/pickerAddress/pickerAddress.vue';
 	
-	import {saveUpdateUserAddress} from '../../api/owner/ownerApi.js';
+	import {saveUpdateUserAddress,getCurOwner,getUserAddress,deleteUserAddress} from '../../api/owner/ownerApi.js';
 	
 	export default {
 		components: {pickerAddress},
@@ -47,19 +47,50 @@
 				tel: '',
 				areaCode: '',
 				address: '',
-				isDefault: false,
+				isDefault: 'F',
 				areaName:'请选择地区'
 			};
 		},
 		computed: {
 			
 		},
-		onLoad() {
+		onLoad(options) {
+			let that = this;
+			getCurOwner()
+			.then(_owner=>{
+				that.userId = _owner.userId;
+				let addressId = options.addressId;
+				
+				if(addressId != '-1'&& !this.vc.isEmpty(addressId)){
+					return that.getAddressInfo(addressId);
+				}
+				
+				return null;
+			})
+			.then((data)=>{
+				
+				if(data == null){
+					return ;
+				}
+				let _data = data.data[0]
+				that.addressId = _data.addressId,
+				that.username = _data.username;
+				that.userId = _data.userId;
+				that.areaCode= _data.areaCode;
+				that.tel= _data.tel;
+				that.address = _data.address;
+				that.isDefault = _data.isDefault;
+			});
+			
 			
 		},
 		methods: {
 			onSwitch() {
-				this.isDefault = !this.isDefault;
+				if(this.isDefault == 'T'){
+					this.isDefault = 'F';
+				} else{
+					this.isDefault = 'T';
+				}
 			},
 			change: function(data) {
 				let _that = this;
@@ -71,36 +102,42 @@
 				_that.areaCode = data.data[2].code;
 			},
 			// 编辑添加地址
-			editAddress() {
+			editAddress:function() {
 				let that = this;
+				
 				let data = {
 					addressId:that.addressId == 0 ? '-1':that.addressId,
 					userId:that.userId,
 					areaCode:that.areaCode,
+					username:that.username,
 					tel:that.tel,
 					address:that.address,
 					isDefault:that.isDefault
 				};
 				saveUpdateUserAddress(data)
 				.then((data) =>{
-					
+					uni.navigateBack({
+						delta:1
+					})
+				},(error)=>{
+					uni.showToast({
+						icon:'none',
+						title:error
+					});
 				})
 				
 			},
 			// 地址信息
-			getAddressInfo() {
-				this.$api('address.info', {
-					id: this.addressData.id
-				}).then(res => {
-					if (res.code === 1) {
-						let data = res.data;
-						let areaText = `${data.province_name}-${data.city_name}-${data.area_name}`;
-						let is_default = data.is_default === '1' ? true : false;
-						this.addressData = res.data;
-						this.area_text = areaText;
-						this.addressData.is_default = is_default;
-					}
-				});
+			getAddressInfo(addressId) {
+				let that = this;
+				let param = {
+					page:1,
+					row:1,
+					addressId:addressId,
+					userId:that.userId
+				}
+				return getUserAddress(param);
+				
 			},
 			onConfirm(e) {
 				this.addressData.area_id = e.cityCode;
@@ -112,10 +149,11 @@
 			},
 			// 删除收货地址
 			deleteAddress() {
-				this.$api('address.del', {
-					id: this.addressData.id
+				deleteUserAddress({
+					addressId: this.addressId,
+					userId:this.userId
 				}).then(res => {
-					if (res.code === 1) {
+					if (res.code === 0) {
 						uni.showToast({
 							title: '删除成功',
 							icon: 'none',

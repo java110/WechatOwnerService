@@ -79,11 +79,67 @@ export function getUserAddress(_data){
 	})
 }
 
+/**
+ * add by wuxw
+ * @param {Object} _data 保存 用户地址
+ */
 export function saveUpdateUserAddress(_data){
+	
 	return new Promise((resolve, reject) => {
+		
+		if(_data.userId == ''){
+			reject("用户不能为空");
+			return ;
+		}else if(_data.areaCode == ''){
+			reject("地区不能为空");
+			return ;
+		}else if(_data.tel == ''){
+			reject("手机号不能为空");
+			return ;
+		}else if(_data.address == ''){
+			reject("地址不能为空");
+			return ;
+		}else if(_data.isDefault == ''){
+			reject("默认地址不能为空");
+			return ;
+		}
 		let moreRooms = [];
 		request({
 			url: url.saveUserAddress,
+			method: "POST",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
+
+/**
+ * add by wuxw
+ * @param {Object} _data 保存 用户地址
+ */
+export function deleteUserAddress(_data){
+	
+	return new Promise((resolve, reject) => {
+		
+		if(_data.userId == ''){
+			reject("用户不能为空");
+			return ;
+		}else if(_data.addressId == ''){
+			reject("地址不能为空");
+			return ;
+		}
+		request({
+			url: url.deleteUserAddress,
 			method: "POST",
 			data: _data, //动态数据
 			success: function(res) {

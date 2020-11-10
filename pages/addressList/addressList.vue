@@ -4,16 +4,16 @@
 		<view class="content_box">
 			<view class="address-list" v-for="(address,index) in addressList" :key="index" @tap="useAddress(address)">
 				<view class="top flex justify-start">
-					<text class="name">{{ address.consignee }}</text>
-					<text class="phone">{{ address.phone }}</text>
-					<text class="tag" v-if="address.is_default === '1'">默认</text>
+					<text class="name">{{ address.username }}</text>
+					<text class="phone">{{ address.tel }}</text>
+					<text class="tag" v-if="address.isDefault === 'T'">默认</text>
 				</view>
-				<view class="detail">{{ address.province_name }}{{ address.city_name }}{{ address.area_name }}{{ address.address }}</view>
-				<button class="cu-btn set-btn" @tap.stop="jump('/pages/user/address/edit', { id: address.id })">编辑</button>
+				<view class="detail">{{ address.address }}</view>
+				<button class="cu-btn set-btn" @tap.stop="jump('/pages/addressEdit/addressEdit',address)">编辑</button>
 			</view>
 		</view>
 		<view class="foot_box flex justify-around">
-			<button class="cu-btn add-btn" @tap="jump('/pages/addressEdit/addressEdit')">添加收货地址</button>
+			<button class="cu-btn add-btn" @tap="jump('/pages/addressEdit/addressEdit',{addressId:'-1'})">添加收货地址</button>
 		</view>
 	</view>
 </template>
@@ -60,9 +60,9 @@
 				});
 			},
 			// 路由跳转
-			jump(path) {
+			jump(path,param) {
 				this.vc.navigateTo({
-					url:path
+					url:path+'?addressId='+param.addressId
 				})
 			},
 			getAddressList() {

@@ -1,21 +1,20 @@
 <template>
 	<view class="page_box">
 		<view class="head_box">
-			<view class="add-address-box " v-if="!addressId" @tap="jump('/pages/addressList/addressList')">
+			<view class="add-address-box " v-if="!address.addressId" @tap="jump('/pages/addressList/addressList')">
 				<view class="box-bg flex justify-between align-center padding">
 					<text class="select-notice">请选择收货地址</text>
 					<text class="cuIcon-right"></text>
 				</view>
 			</view>
-			<view class="address-list" v-else @tap="jump('/pages/user/address/list', { from: 'order' })">
-				<image class="address-bg" src="http://shopro.7wpp.com/imgs/address_line.png" mode=""></image>
-				<view class="top x-f">
-					<text class="name">{{ address.consignee }}</text>
-					<text class="phone">{{ address.phone }}</text>
-					<text class="tag" v-if="address.is_default == 1">默认</text>
+			<view class="address-list" v-else @tap="jump('/pages/addressList/addressList')">
+				<view class="top flex justify-start">
+					<text class="name">{{ address.username }}</text>
+					<text class="phone">{{ address.tel }}</text>
+					<text class="tag" v-if="address.isDefault == 'T'">默认</text>
 				</view>
-				<view class="detail x-bc">
-					<view class="address">{{ address.province_name }}{{ address.city_name }}{{ address.area_name }}{{ address.address }}</view>
+				<view class="detail flex justify-between">
+					<view class="address">{{ address.address }}</view>
 					<text class="cuIcon-right"></text>
 				</view>
 			</view>
@@ -117,7 +116,7 @@
 				showPicker: false,
 				isSubOrder: false,
 				address: {
-					is_default: 0
+					isDefault: 0
 				},
 				addressId: 0,
 				from: '',
@@ -142,16 +141,9 @@
 
 			};
 		},
-		watch: {
-			address(val, oldVal) {
-				if (this.address) {
-					this.addressId = this.address.id;
-					this.getPre();
-				}
-			}
-		},
 		async onLoad(options) {
 			let _that = this;
+			this.perGoodsList = [];
 			if (options.hasOwnProperty("productId")) {
 				this.perGoodsList.push({
 					checked:true,
