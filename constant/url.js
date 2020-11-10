@@ -97,6 +97,7 @@ export default {
 	saveStoreCart: baseUrl +'app/storeOrder/saveStoreCart',
 	queryStoreCart: baseUrl +'app/storeOrder/queryStoreCart',
 	queryUserAddress: baseUrl + 'app/userAddress/queryUserAddress',
+	saveUserAddress: baseUrl + 'app/userAddress/saveUserAddress',
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

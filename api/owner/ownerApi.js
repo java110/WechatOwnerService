@@ -78,3 +78,25 @@ export function getUserAddress(_data){
 		});
 	})
 }
+
+export function saveUpdateUserAddress(_data){
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.saveUserAddress,
+			method: "POST",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

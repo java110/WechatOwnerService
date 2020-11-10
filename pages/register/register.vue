@@ -4,7 +4,7 @@
 
 		<view class="cu-form-group arrow">
 			<view class="title">市/区</view>
-			<pickerAddress @change="change">{{areaName}}</pickerAddress>
+			<pickerAddress @change="change" class="text-right" style="width:80%">{{areaName}}</pickerAddress>
 			<text class='cuIcon-right'></text>
 		</view>
 
@@ -91,18 +91,6 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			//let _location = context.getLocation();
-			//let _currentLocation = context.getCurrentLocation();
-
-			//let _areaName = _currentLocation.city + _currentLocation.district;
-			//let _areaCode = _currentLocation.adcode;
-			//加载省份
-			// context._loadArea('', '', function(_areaList) {
-			// 	_that.areaList = _areaList;
-			// 	_that.communityName = _location;
-			// 	_that.areaCode = _areaCode;
-			// 	_that.areaName = _areaName;
-			// });
 		},
 
 		/**
@@ -110,12 +98,6 @@
 		 */
 		onShow: function() {
 			if (this.areaCode == '' || this.areaCode == undefined) {
-				// let _currentLocation = context.getCurrentLocation();
-				// let _areaName = _currentLocation.city + _currentLocation.district;
-				// let _areaCode = _currentLocation.adcode;
-				// this.areaCode = _areaCode;
-				// this.areaName = _areaName;
-
 			} else {
 				let community = uni.getStorageSync("_selectCommunity");
 				console.log('community', community)

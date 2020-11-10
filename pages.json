@@ -390,6 +390,15 @@
                 "navigationBarTitleText": "收货地址"  
             }
         }
+        ,{
+            "path" : "pages/addressEdit/addressEdit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

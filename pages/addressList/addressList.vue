@@ -1,8 +1,8 @@
 <template>
-	<view class="page_box flex flex-direction justify-between">
+	<view class="page_box">
 		<view class="head_box"></view>
 		<view class="content_box">
-			<view class="address-list" v-for="address in addressList" :key="address.id" @tap="useAddress(address)">
+			<view class="address-list" v-for="(address,index) in addressList" :key="index" @tap="useAddress(address)">
 				<view class="top flex justify-start">
 					<text class="name">{{ address.consignee }}</text>
 					<text class="phone">{{ address.phone }}</text>
@@ -13,7 +13,7 @@
 			</view>
 		</view>
 		<view class="foot_box flex justify-around">
-			<button class="cu-btn add-btn" @tap="jump('/pages/user/address/edit', { id: 0, from: from })">添加收货地址</button>
+			<button class="cu-btn add-btn" @tap="jump('/pages/addressEdit/addressEdit')">添加收货地址</button>
 		</view>
 	</view>
 </template>
@@ -60,11 +60,10 @@
 				});
 			},
 			// 路由跳转
-			jump(path, parmas) {
-				this.$Router.push({
-					path: path,
-					query: parmas
-				});
+			jump(path) {
+				this.vc.navigateTo({
+					url:path
+				})
 			},
 			getAddressList() {
 				let that = this;
@@ -144,7 +143,14 @@
 	}
 
 	.foot_box {
-		padding: 20rpx;
+
+		height: 100rpx;
+		padding: 0 25rpx;
+		justify-content: flex-end;
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
 
 		.sync-wxaddress {
 			flex: 1;
