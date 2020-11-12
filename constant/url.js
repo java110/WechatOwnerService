@@ -99,6 +99,7 @@ export default {
 	queryUserAddress: baseUrl + 'app/userAddress/queryUserAddress',
 	saveUserAddress: baseUrl + 'app/userAddress/saveUserAddress',
 	deleteUserAddress: baseUrl+'app/userAddress/deleteUserAddress',
+	goodsUnifieldOrder: baseUrl +'goods/unifieldOrder',
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

@@ -99,7 +99,7 @@
 
 
 	import {
-		getStoreCart
+		getStoreCart,goodsUnifieldOrder,toPay
 	} from '../../api/goods/goodsApi.js'
 
 	import {
@@ -119,23 +119,16 @@
 					isDefault: 0
 				},
 				addressId: 0,
-				from: '',
-				orderType: '',
-				grouponBuyType: 'alone',
-				grouponId: 0,
 				perGoodsList: [], //确认单订单商品
 				remark: '',
-				couponId: 0,
-				expressTypeCur: '',
-				showCheckTime: false, //配送时间弹窗。
 				inExpressType: [], //当前商品支持的配送方式。
-				getFocus: false, //获取焦点。
 				checkType: '自提',
 				checkTime: {},
 				checkTimeCur: 0, //默认选中时间。
 				checkTimeId: 'c1', //锚点用
 				checkDayCur: 0, //默认日期
 				personId: '',
+				personName:'',
 				totalFee:0.0,
 				goodsCount:0
 
@@ -153,7 +146,8 @@
 					price: options.price,
 					prodName: options.prodName,
 					coverPhoto: decodeURIComponent(options.coverPhoto),
-					storeId: options.storeId
+					storeId: options.storeId,
+					cartId:'-1'
 				});
 				
 				_that.totalFee = parseFloat(options.goodsNum) * parseFloat(options.price);
@@ -199,7 +193,7 @@
 					row:50
 
 				}).then(res => {
-					if (res.code === 0) {
+					if (res.code === 0 && res.data.length> 0) {
 						let _data = res.data;
 						_data.forEach(item => {
 							that.perGoodsList.push({
@@ -210,7 +204,8 @@
 								price: item.price,
 								prodName: item.prodName,
 								coverPhoto: item.coverPhoto,
-								storeId: item.storeId
+								storeId: item.storeId,
+								cartId:item.cartId
 							});
 							
 							that.totalFee = parseFloat(that.totalFee)+(parseFloat(item.cartNum) * parseFloat(item.price));
@@ -224,64 +219,61 @@
 			// 提交订单
 			subOrder() {
 				let that = this;
-				that.isSubOrder = true;
-				that.$api('order.createOrder', {
-					goods_list: that.goodsList,
-					from: that.from,
-					address_id: that.addressId,
-					coupons_id: that.couponId,
+				wx.showLoading({
+					title: '支付中'
+				});
+				let _tradeType = 'APP';
+				// #ifdef H5 || MP-WEIXIN
+				 _tradeType = 'JSAPI';
+				// #endif
+				goodsUnifieldOrder({
+					goodsList: that.perGoodsList,
 					remark: that.remark,
-					order_type: that.orderType,
-					buy_type: that.grouponBuyType,
-					groupon_id: that.grouponId
+					addressId: that.address.addressId,
+					personId: that.personId,
+					personName: that.personName,
+					userId:that.personId,
+					tradeType: _tradeType,
 				}).then(res => {
-					if (res.code === 1) {
-						let orderId = res.data.id;
-						let orderSn = res.data.order_sn;
-						that.getCartList();
-						that.isSubOrder = false;
-						//  #ifdef MP-WEIXIN
-						res.data.activity_type == 'groupon' ? this.$store.dispatch('getMessageIds', 'grouponResult') : this.$store.dispatch(
-							'getMessageIds', 'result');
-						//  #endif
-						if (res.data.status > 0) {
-							that.$Router.replace({
-								path: '/pages/order/payment/result',
-								query: {
-									orderSn: orderSn,
-									type: '',
-									pay: 1
-								}
-							});
-						} else {
-							uni.redirectTo({
-								url: `/pages/order/payment/method?orderId=${orderId}`
-							});
-						}
-					} else {
-						that.isSubOrder = false;
+					let _data = null;
+					if (res.code == '0') {
+						return toPay(res);
 					}
+					uni.showToast({
+						icon:'none',
+						title:res.msg
+					})
+					return _data;
+				})
+				.then((res)=>{
+					console.log('res',res);
+					if(res == null){
+						return ;
+					}
+					wx.hideLoading();
+					uni.showToast({
+						icon:'none',
+						title:'支付成功',
+					})
+				},(err)=>{
+					wx.hideLoading();
+					uni.showToast({
+						icon:'none',
+						title:err,
+					})
 				});
 			},
 			// 初始地址
 			getDefaultAddress() {
-				// this.$api('address.defaults').then(res => {
-				// 	if (res.code === 1) {
-				// 		if (res.data) {
-				// 			this.address = res.data;
-				// 			this.selfPhone = res.data.phone
-				// 		}
-
-				// 	}
-				// });
+				
 			},
 			getOwner: function() {
 				let _that = this;
 				return getCurOwner()
 					.then((owner) => {
 						console.log(owner)
-						_that.personId = owner.memberId
-
+						_that.personId = owner.userId;
+						_that.personName = owner.userName;
 					})
 			},
 
