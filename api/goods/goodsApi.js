@@ -152,6 +152,7 @@ export function getStoreCart(dataObj) {
  * @param {Object} dataObj 下单报文
  */
 export function goodsUnifieldOrder(dataObj) {
+	
 	return new Promise(
 		(resolve, reject) => {
 			request({
@@ -164,7 +165,7 @@ export function goodsUnifieldOrder(dataObj) {
 						resolve(res.data);
 						return;
 					}
-					reject();
+					reject(res);
 				},
 				fail: function(e) {
 					reject();

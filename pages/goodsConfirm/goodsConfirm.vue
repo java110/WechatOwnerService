@@ -41,7 +41,7 @@
 					</view>
 				</view>
 				<!-- 配送方式 -->
-				<view class="logistic item-list flex justify-between align-center" @tap="onSelExpressType(g)">
+				<view class="logistic item-list flex justify-between align-center">
 					<view class="x-f">
 						<view class="item-title">配送方式</view>
 					</view>
@@ -103,7 +103,7 @@
 	} from '../../api/goods/goodsApi.js'
 
 	import {
-		getCurOwner
+		getCurOwner,getUserAddress
 	} from '../../api/owner/ownerApi.js'
 
 
@@ -234,7 +234,7 @@
 					personName: that.personName,
 					userId:that.personId,
 					tradeType: _tradeType,
-				}).then(res => {
+				}).then((res) => {
 					let _data = null;
 					if (res.code == '0') {
 						return toPay(res);
@@ -244,9 +244,17 @@
 						title:res.msg
 					})
 					return _data;
+				},(err)=>{
+					console.log('err',err);
+					uni.showToast({
+						icon:'none',
+						title:err.data
+					})
+					
+					return null;
 				})
 				.then((res)=>{
-					console.log('res',res);
+					
 					if(res == null){
 						return ;
 					}
@@ -265,7 +273,16 @@
 			},
 			// 初始地址
 			getDefaultAddress() {
-				
+				let that = this;
+				getUserAddress({
+					userId:this.personId,
+					isDefault:'T',
+					page:1,
+					row:1
+				})
+				.then((_data) =>{
+					that.address = _data.data[0]
+				})
 			},
 			getOwner: function() {
 				let _that = this;
