@@ -60,7 +60,7 @@
 		components: {
 			noDataPage
 		},
-		onLoad: function() {
+		onLoad: function(options) {
 			context.onLoad(options);
 		},
 		onShow: function() {

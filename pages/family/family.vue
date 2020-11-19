@@ -31,6 +31,31 @@
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 		</view>
+		
+		<view class="block__title">相关图片</view>
+		
+		<view class="cu-bar bg-white ">
+			<view class="action">
+				图片上传
+			</view>
+			<view class="action">
+				{{imgList.length}}/1
+			</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="grid col-4 grid-square flex-sub">
+				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
+					<image :src='imgList[index]' mode='aspectFill'></image>
+					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
+						<text class="cuIcon-close"></text>
+					</view>
+				</view>
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
+					<text class="cuIcon-cameraadd"></text>
+				</view>
+			</view>
+		</view>
+		
 		<view class="cu-form-group margin-top">
 			<textarea v-model="remark" placeholder="请输入备注"></textarea>
 		</view>
@@ -45,6 +70,7 @@
 	// pages/enterCommunity/enterCommunity.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	const factory = context.factory;
 
 	export default {
 		data() {
@@ -66,7 +92,9 @@
 				"second": 60,
 				"btnDisabled":false,
 				"btnValue": "验证码",
-				"msgCode":''
+				"msgCode":'',
+				imgList: [],
+				photos:[]
 			};
 		},
 
@@ -122,6 +150,9 @@
 					"communityId": this.communityId,
 					"idCard": this.idCard,
 					"msgCode":this.msgCode,
+				}
+				if(this.photos.length> 0){
+					obj.ownerPhoto = this.photos[0];
 				}
 				let msg = "";
 				if (obj.ownerId == "") {
@@ -259,7 +290,30 @@
 				promise.then((setTimer) => {
 					clearInterval(setTimer)
 				})
-			}
+			},
+			deleteImage: function(e) {
+				console.log(e);
+				let imageArr = this.$data.imgList;
+				imageArr.splice(e, 1);
+			},
+			ChooseImage: function(e) {
+				let that = this;
+				wx.chooseImage({
+					count: 4, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album','camera'], //从相册选择
+					success: (res) => {
+						console.log(res);
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						let _base64Photo = '';
+						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							_base64Photo = _res;
+							console.log('base64', _base64Photo);
+							that.photos.push(_base64Photo);
+						});
+					}
+				});
+			},
 		}
 	};
 </script>
