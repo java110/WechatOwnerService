@@ -90,17 +90,18 @@ export default {
 	toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
 	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
 	saveRentingAppointment: baseUrl + 'app/rentingAppointment/saveRentingAppointment', //房屋预约
-	queryActivitiesType: baseUrl +'app/activitiesType/queryActivitiesType',
-	queryProductLabel: baseUrl +'app/product/queryProductLabel',
-	queryGroupBuyProduct: baseUrl +'app/groupBuy/queryGroupBuyProduct',
-	queryProduct: baseUrl +'app/product/queryProduct',
-	saveStoreCart: baseUrl +'app/storeOrder/saveStoreCart',
-	queryStoreCart: baseUrl +'app/storeOrder/queryStoreCart',
+	queryActivitiesType: baseUrl + 'app/activitiesType/queryActivitiesType',
+	queryProductLabel: baseUrl + 'app/product/queryProductLabel',
+	queryGroupBuyProduct: baseUrl + 'app/groupBuy/queryGroupBuyProduct',
+	queryProduct: baseUrl + 'app/product/queryProduct',
+	saveStoreCart: baseUrl + 'app/storeOrder/saveStoreCart',
+	queryStoreCart: baseUrl + 'app/storeOrder/queryStoreCart',
 	queryUserAddress: baseUrl + 'app/userAddress/queryUserAddress',
 	saveUserAddress: baseUrl + 'app/userAddress/saveUserAddress',
-	deleteUserAddress: baseUrl+'app/userAddress/deleteUserAddress',
-	goodsUnifieldOrder: baseUrl +'goods/unifieldOrder',
-	
+	deleteUserAddress: baseUrl + 'app/userAddress/deleteUserAddress',
+	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
+	deleteOwner: baseUrl + "/app/owner.deleteOwner",
+
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

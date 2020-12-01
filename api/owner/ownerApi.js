@@ -156,3 +156,37 @@ export function deleteUserAddress(_data){
 		});
 	})
 }
+
+/**
+ * add by wuxw
+ * @param {Object} _data 删除家庭成员
+ */
+export function deleteOwnerMember(_data){
+	
+	return new Promise((resolve, reject) => {
+		
+		if(_data.memberId == ''){
+			reject("成员ID不能为空");
+			return ;
+		}else if(_data.communityId == ''){
+			reject("小区不能为空");
+			return ;
+		}
+		request({
+			url: url.deleteOwner,
+			method: "POST",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
