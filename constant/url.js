@@ -101,6 +101,7 @@ export default {
 	deleteUserAddress: baseUrl + 'app/userAddress/deleteUserAddress',
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
 	deleteOwner: baseUrl + "/app/owner.deleteOwner",
+	computeFeeDiscount: baseUrl + "/app/feeDiscount/computeFeeDiscount",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

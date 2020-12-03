@@ -13,34 +13,10 @@
 				</view>
 				<view class="cu-item">
 					<view class="content">
-						<text class="text-grey">楼栋编号</text>
+						<text class="text-grey">房屋</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{floorNum + '号楼'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">单元编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{unitNum + '单元'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{roomNum + '室'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋楼层</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{layer + '层'}}</text>
+						<text class="text-grey text-sm">{{floorNum + '号楼'+unitNum+ '单元'+roomNum + '室'}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -98,8 +74,9 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
-
+				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vc-discount>
 			</view>
+			
 		</scroll-view>
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
 
@@ -126,6 +103,8 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	
+	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 
 	
 	// #ifdef H5
@@ -140,6 +119,9 @@
 	
 	import {addMonth,formatDate} from '../../utils/DateUtil.js'
 	export default {
+		components:{
+			vcDiscount
+		},
 		data() {
 			return {
 				date: '2018-12-25',
@@ -171,6 +153,7 @@
 				paymentCycle:1,
 			};
 		},
+		
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -212,8 +195,13 @@
 			this.feeMonth = this.paymentCycle;
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
+			
+			this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 		},
 		methods: {
+			computeFeeDiscount:function(_price){
+				this.receivableAmount = this.receivableAmount - _price;
+			},
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
@@ -227,6 +215,7 @@
 				this.receivableAmount = _receivableAmount;
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			},
 			onFeeMonthChange: function(e) {
 				console.log(e);

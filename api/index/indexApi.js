@@ -48,7 +48,7 @@ export function getCategoryList() {
 		pageone: [{
 			name: "物业费",
 			src: "/static/images/index_property.png",
-			href: "/pages/roomFeeList/roomFeeList"
+			href: "/pages/roomFeeListNew/roomFeeListNew"
 		}, {
 			name: "停车费",
 			src: "/static/images/index_park.png",

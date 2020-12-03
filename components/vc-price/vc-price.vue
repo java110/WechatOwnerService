@@ -80,7 +80,7 @@
 <script>
 var timer = null;
 export default {
-	name: 'shPrice',
+	name: 'vcPrice',
 	components: {},
 	data() {
 		return {

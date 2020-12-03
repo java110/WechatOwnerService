@@ -105,3 +105,29 @@ export function getRoomOweFees(_objData) {
 		});
 	})
 }
+
+/**
+ * 查询优惠信息
+ * @param {Object} _objData 费用
+ */
+export function getFeeDiscounts(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computeFeeDiscount,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _feeDiscounts = res.data.data;
+					resolve(_feeDiscounts);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}

@@ -196,6 +196,12 @@
 			}
 		},
 		{
+			"path": "pages/roomFeeListNew/roomFeeListNew",
+			"style": {
+				"navigationBarTitleText": "物业费"
+			}
+		},
+		{
 			"path": "pages/roomFee/roomFee",
 			"style": {
 				"navigationBarTitleText": "缴物业费"
