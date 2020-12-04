@@ -83,6 +83,9 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
+				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :feeId="feeId" :cycles="feeMonth"
+				 :communityId="communityId"></vc-discount>
+
 
 			</view>
 		</scroll-view>
@@ -109,6 +112,7 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 	import {
 		addMonth,
 		formatDate
@@ -122,6 +126,9 @@
 	// #endif
 
 	export default {
+		components: {
+			vcDiscount
+		},
 		data() {
 			return {
 				showFeeMonth: false,
@@ -192,6 +199,7 @@
 			var prevPage = pages[pages.length - 2]; //上一个页面
 			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
 			prevPage.needFefresh = false;
+			this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 		},
 
 		/**
@@ -199,7 +207,9 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-
+			computeFeeDiscount: function(_price) {
+				this.receivableAmount = this.receivableAmount - _price;
+			},
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
@@ -216,6 +226,7 @@
 				this.receivableAmount = _receivableAmount;
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 			},
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
