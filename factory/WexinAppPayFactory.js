@@ -7,10 +7,10 @@ import md5 from '../utils/md5Util.js'
 * @params orderInfo: any 后端返回的数据，格式和上面一样
 */
 export function getPayInfo (orderInfo) {
-		let time = new Date(),
-		let timestamp = time.getTime().toString().substr(0, 10), // 时间戳
-		let noncestr = randomSrt(true, 10, 20), // 随机数
-		let key = conf.appPayKey, // 加密Key，微信支付填写的key
+		let time = new Date();
+		let timestamp = time.getTime().toString().substr(0, 10); // 时间戳
+		let noncestr = randomSrt(true, 10, 20); // 随机数
+		let key = conf.appPayKey; // 加密Key，微信支付填写的key
 		payInfo = {
 			appid: orderInfo.appid,
 			noncestr,
@@ -54,7 +54,7 @@ export function randomSrt(isRandomLength, min, max) {
 		str += arr[pos];
 	}
 	return str;
-},
+}
 
 /*
  * 根据object生成key value字符串
