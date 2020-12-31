@@ -11,7 +11,9 @@ import {
 import url from '../../constant/url.js';
 
 
-import {dateTimeStringToDateString} from '../../utils/DateUtil.js'
+import {
+	dateTimeStringToDateString
+} from '../../utils/DateUtil.js'
 
 /**
  * 查询活动列表
@@ -70,24 +72,25 @@ export function getCategoryList() {
 			src: "/static/images/index_notice.png",
 			href: "/pages/notice/index"
 		}, {
-			name: "联系客服",
-			src: "/static/images/index_persion.png",
-			href: "callProperty"
-		},{
+			name: "开门",
+			src: "/static/images/index_openDoor.png",
+			href: "/pages/openDoor/openDoor"
+		}, {
 			name: "房屋出租",
 			src: "/static/images/index_openDoor.png",
 			href: "/pages/hireRoom/hireRoom"
 		}],
 		pagetwo: [{
-			name: "智慧开门",
-			src: "/static/images/index_openDoor.png",
-			href: "/pages/openDoor/openDoor"
-		},
-		{
-			name: "车位申请",
-			src: "/static/images/index_parking.png",
-			href: "/pages/applyparking/applyparking"
-		}]
+				name: "联系客服",
+				src: "/static/images/index_persion.png",
+				href: "callProperty"
+			},
+			{
+				name: "车位申请",
+				src: "/static/images/index_parking.png",
+				href: "/pages/applyparking/applyparking"
+			}
+		]
 	};
 }
 
@@ -95,7 +98,7 @@ export function getCategoryList() {
 /**
  * 查询活动
  */
-export function loadActivites(dataObj){
+export function loadActivites(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
 			requestNoAuth({
@@ -106,12 +109,12 @@ export function loadActivites(dataObj){
 				success: function(res) {
 					if (res.statusCode == 200) {
 						let _activites = res.data.activitiess;
-						let _acts = [];		
+						let _acts = [];
 						_activites.forEach(function(_item) {
 							_item.src = url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + dataObj.communityId +
 								"&time=" + new Date();
 							_item.startTime = dateTimeStringToDateString(_item.startTime);
-								
+
 							_acts.push(_item);
 						});
 						resolve(_acts);
@@ -129,7 +132,7 @@ export function loadActivites(dataObj){
 /**
  * 查询小区广告
  */
-export function loadAdverts(dataObj){
+export function loadAdverts(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
 			requestNoAuth({
@@ -158,5 +161,5 @@ export function loadAdverts(dataObj){
 					reject();
 				}
 			});
-		})	
+		})
 }

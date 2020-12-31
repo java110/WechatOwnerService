@@ -32,12 +32,6 @@
 			}
 		},
 		{
-			"path": "pages/applicationKey/applicationKey",
-			"style": {
-				"navigationBarTitleText": "申请钥匙"
-			}
-		},
-		{
 			"path": "pages/applicationKeyLocation/applicationKeyLocation",
 			"style": {
 				"navigationBarTitleText": "相关门禁"
@@ -77,7 +71,7 @@
 		{
 			"path": "pages/openDoor/openDoor",
 			"style": {
-				"navigationBarTitleText": "智慧门禁"
+				"navigationBarTitleText": "开门"
 			}
 		},
 		{

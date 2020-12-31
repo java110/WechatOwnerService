@@ -102,6 +102,7 @@ export default {
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
 	deleteOwner: baseUrl + "/app/owner.deleteOwner",
 	computeFeeDiscount: baseUrl + "/app/feeDiscount/computeFeeDiscount",
+	openDoor:baseUrl + "/app/machine/openDoor",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
