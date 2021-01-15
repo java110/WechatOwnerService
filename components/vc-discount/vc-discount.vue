@@ -41,6 +41,18 @@
 			cycles: {
 				type: String,
 				default: 1
+			},
+			payerObjType: {
+				type: String,
+				default: ''
+			},
+			payerObjId: {
+				type: String,
+				default: ''
+			},
+			endTime: {
+				type: String,
+				default: ''
 			}
 		},
 		computed: {},
@@ -52,7 +64,10 @@
 					row: 20,
 					feeId: _feeId,
 					communityId: _communityId,
-					cycles: _feeMonth
+					cycles: _feeMonth,
+					payerObjType: this.payerObjType,
+					payerObjId: this.payerObjId,
+					endTime: this.endTime
 				}).then((data) => {
 					_that.discounts = data;
 

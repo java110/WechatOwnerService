@@ -398,7 +398,25 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		    "path" : "pages/applyRoom/applyRoom",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/applyRoomDetail/applyRoomDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"tabBar": {
 		"color": "#272636",

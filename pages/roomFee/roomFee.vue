@@ -74,7 +74,7 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
-				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vc-discount>
+				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vc-discount>
 			</view>
 			
 		</scroll-view>
@@ -117,7 +117,7 @@
 	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
 	// #endif
 	
-	import {addMonth,formatDate} from '../../utils/DateUtil.js'
+	import {addMonth,formatDate,date2String} from '../../utils/DateUtil.js'
 	export default {
 		components:{
 			vcDiscount
@@ -136,11 +136,13 @@
 				feeMonth: 1,
 				endTime: '',
 				ordEndTime: '',
+				formatEndTime: '',
 				amount: 0,
 				receivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
 				feeId: '',
+				roomId: '',
 				floorNum: '',
 				unitNum: '',
 				roomNum: '',
@@ -177,12 +179,14 @@
 			this.floorNum = _fee.floorNum;
 			this.unitNum = _fee.unitNum;
 			this.roomNum = _fee.roomNum;
+			this.roomId = _fee.roomId;
 			this.layer = _fee.layer;
 			this.builtUpArea = _fee.builtUpArea;
 			this.feeId = _fee.feeId;
 			this.amount = _amount;
 			this.additionalAmount = _fee.additionalAmount;
 			this.ordEndTime = _fee.endTime;
+			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
 			if(this.feeFlag == '2006012'){
 				return;
@@ -196,7 +200,10 @@
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
 			
-			this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+			// this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+			this.$nextTick(() => {
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+			})
 		},
 		methods: {
 			computeFeeDiscount:function(_price){
@@ -318,7 +325,11 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					payerObjId: this.roomId,
+					payerObjType: 3333,
+					endTime: this.formatEndTime
+				
 				};
 				context.request({
 					url: constant.url.preOrder,

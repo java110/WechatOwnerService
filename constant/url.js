@@ -102,6 +102,9 @@ export default {
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
 	deleteOwner: baseUrl + "/app/owner.deleteOwner",
 	computeFeeDiscount: baseUrl + "/app/feeDiscount/computeFeeDiscount",
+	// 查询申请类型（空置房）
+	queryApplyRoomDiscountType: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscountType",
+	saveApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/saveApplyRoomDiscount",
 	openDoor:baseUrl + "/app/machine/openDoor",
 
 	NEED_NOT_LOGIN_PAGE: [

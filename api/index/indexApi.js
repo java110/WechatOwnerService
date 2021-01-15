@@ -89,6 +89,11 @@ export function getCategoryList() {
 				name: "车位申请",
 				src: "/static/images/index_parking.png",
 				href: "/pages/applyparking/applyparking"
+			},
+			{
+				name: "空置房",
+				src: "/static/images/index_openDoor.png",
+				href: "/pages/applyRoom/applyRoom"
 			}
 		]
 	};
