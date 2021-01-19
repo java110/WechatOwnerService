@@ -191,7 +191,7 @@
 				this.logoutUser = false;
 			},
 			_toPage: function(_url) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: _url
 				});
 			},
@@ -217,7 +217,7 @@
 						if (wAppId != null && wAppId != undefined && wAppId != '') {
 							uni.setStorageSync(constant.mapping.W_APP_ID, wAppId);
 						}
-						uni.navigateTo({
+						this.vc.navigateTo({
 							url: '/pages/login/login'
 						});
 					},

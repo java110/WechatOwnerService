@@ -100,12 +100,12 @@ export default {
 	saveUserAddress: baseUrl + 'app/userAddress/saveUserAddress',
 	deleteUserAddress: baseUrl + 'app/userAddress/deleteUserAddress',
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
-	deleteOwner: baseUrl + "/app/owner.deleteOwner",
-	computeFeeDiscount: baseUrl + "/app/feeDiscount/computeFeeDiscount",
+	deleteOwner: baseUrl + "app/owner.deleteOwner",
+	computeFeeDiscount: baseUrl + "app/feeDiscount/computeFeeDiscount",
 	// 查询申请类型（空置房）
 	queryApplyRoomDiscountType: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscountType",
 	saveApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/saveApplyRoomDiscount",
-	openDoor:baseUrl + "/app/machine/openDoor",
+	openDoor:baseUrl + "app/machine/openDoor",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

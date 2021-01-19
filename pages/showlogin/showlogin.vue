@@ -48,7 +48,7 @@
 				if (this.code != '' && this.code != undefined) {
 					_url += ("?code=" + this.code)
 				}
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: _url
 				});
 			}

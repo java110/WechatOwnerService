@@ -3,6 +3,7 @@ import {
 } from '../api/java110Request.js'
 import url from '../constant/url.js'
 import mapping from '../constant/MappingConstant.js'
+import {getWAppId} from '../api/init/initApi.js'
 /**
  * 请求 HC服务 登录
  */
@@ -10,14 +11,7 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 	let defaultRawData = '{"nickName":"","gender":1,"language":"","city":"","province":"","country":"","avatarUrl":""}'; // 请求服务端的登录接口
 	console.log('返回信息', loginRes);
 	let _appId = '';
-	// #ifdef MP-WEIXIN
-	let accountInfo = uni.getAccountInfoSync();
-	_appId = accountInfo.miniProgram.appId;
-	// #endif
-
-	// #ifdef H5
-	_appId = uni.getStorageSync(constant.mapping.W_APP_ID)
-	// #endif
+	_appId = getWAppId();
 	requestNoAuth({
 		url: url.loginUrl,
 		method: 'post',
@@ -39,7 +33,7 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 				let data = res.data;
 				uni.setStorageSync(mapping.CURRENT_OPEN_ID, data.openId);
 				wx.reLaunch({
-					url: '/pages/showlogin/showlogin'
+					url: '/pages/showlogin/showlogin?wAppId=' + _appId
 				});
 				return;
 			}
@@ -75,14 +69,14 @@ export function requsetHcServerToLogin(loginRes, callback = () => {}) {
 				wx.setStorageSync(mapping.TOKEN, res.token);
 				callback();
 			} else {
-				
+
 			}
 		},
 		fail: function(error) {
 			// 调用服务端登录接口失败
 			if (error.statusCode == 401) {
 				uni.reLaunch({
-					url: '/pages/login/login'
+					url: '/pages/login/login?wAppId=' + _appId
 				});
 				return;
 			}

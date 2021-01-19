@@ -23,7 +23,7 @@ import {debug,info,error,warn} from '../utils/LogUtil.js'
 import {getCurCommunity,recoveryCommunityInfo} from '../api/community/communityApi.js'
 
 // 页面初始化相关
-import {onLoad} from '../api/init/initApi.js'
+import {onLoad,getWAppId} from '../api/init/initApi.js'
 
 import {navigateTo,navigateBack} from './vcRoute.js'
 
@@ -47,5 +47,6 @@ export default{
 	navigateTo:navigateTo,
 	navigateBack:navigateBack,
 	isEmpty:isEmpty,
-	hasLogin:hasLogin
+	hasLogin:hasLogin,
+	getWAppId:getWAppId
 }

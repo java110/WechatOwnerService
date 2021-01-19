@@ -102,7 +102,7 @@
 		},
 		methods: {
 			payFee: function(_item) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/payParkingFee/payParkingFee?fee=' + JSON.stringify(_item),
 				})
 			},
@@ -193,7 +193,7 @@
 				});
 			},
 			payFeeDetail: function(_item) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/payFeeDetail/payFeeDetail?fee=' + JSON.stringify(_item),
 				});
 			},

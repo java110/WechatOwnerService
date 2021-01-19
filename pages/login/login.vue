@@ -49,7 +49,6 @@
 			if(_key){
 				context.onLoad(option);
 				// 判断当前是否已经登录 ，如果登录了跳转至首页
-				
 			}else{
 				if (this.code == '' || this.code == undefined) {
 					//跳转鉴权
@@ -59,10 +58,6 @@
 			// #endif
 			_this = this;
 			this.logoUrl = constant.url.baseUrl + 'logo.png';
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
 		},
 		methods: {
 			_doLogin: function() {
@@ -98,6 +93,7 @@
 				// #endif
 			},
 			_doMyLogin: function(_wxLoginRes) {
+				let that = this;
 				if (this.username == '') {
 					wx.showToast({
 						title: '请填写用户名',
@@ -118,7 +114,7 @@
 					username: this.username,
 					password: this.password,
 					code: _code,
-					appId: this.appId
+					appId: this.vc.getWAppId()
 				};
 
 				uni.showLoading({
@@ -180,7 +176,7 @@
 						//保存临时 钥匙
 						wx.setStorageSync(constant.mapping.OWNER_KEY, _data.key);
 						wx.switchTab({
-							url: "/pages/index/index"
+							url: "/pages/index/index?wAppId="+that.vc.getWAppId()
 						})
 
 					},
@@ -201,7 +197,7 @@
 				// #ifdef H5
 				_url += ('?code=' + this.code);
 				// #endif
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: _url
 				})
 			}

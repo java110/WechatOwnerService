@@ -246,7 +246,7 @@
 			callPropertyTel: function() { //拨打电话
 				let _that = this;
 				if (!hasLogin()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;

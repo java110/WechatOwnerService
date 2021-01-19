@@ -135,23 +135,23 @@
 		methods: {
 			bindingOwner: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../bindOwner/bindOwner'
 				});
 			},
 			viewOwner: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../viewBindOwner/viewBindOwner'
 				});
 			},
@@ -176,24 +176,24 @@
 			},
 			myProperty: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../myProperty/myProperty'
 				});
 			},
 
 			myComplaint: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../complaintList/complaintList'
 				});
 			},
@@ -204,23 +204,23 @@
 
 			myHouse: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../my/myHouse'
 				});
 			},
 			myRepair: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/myRepair/myRepair',
 				});
 			},
@@ -248,7 +248,7 @@
 				});
 			},
 			showLongModel: function() {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '../login/login'
 				});
 			},
@@ -256,7 +256,7 @@
 				return context.checkLoginStatus();
 			},
 			myParking:function(){
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/parkingInfo/parkingInfo',
 				});
 			}

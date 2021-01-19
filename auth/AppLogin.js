@@ -3,6 +3,7 @@ import {
 	requestNoAuth
 } from '../api/java110Request.js'
 import mapping from '../constant/MappingConstant.js'
+import {getWAppId} from '../api/init/initApi.js'
 
 /**
  * 
@@ -21,7 +22,7 @@ export function doLoginOwnerByKey(_key) {
 			let _param = res.data;
 			if (_param.code != 0) {
 				uni.navigateTo({
-					url: '/pages/showlogin/showlogin'
+					url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
 				});
 				return;
 			}
@@ -54,7 +55,7 @@ export function doLoginOwnerByKey(_key) {
 		fail: function(error) {
 			// 调用服务端登录接口失败
 			uni.navigateTo({
-				url: '/pages/showlogin/showlogin'
+				url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
 			});
 		}
 	});

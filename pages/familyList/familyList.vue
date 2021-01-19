@@ -150,7 +150,7 @@
 				})
 			},
 			goAdd: function(e) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: "/pages/family/family"
 				})
 			},

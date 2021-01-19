@@ -25,6 +25,7 @@
 </template>
 
 <script>
+
 	export default {
 		data() {
 			return {
@@ -37,7 +38,7 @@
 		methods: {
 
 			toPage: function(pageUrl) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url:pageUrl
 				})
 			},

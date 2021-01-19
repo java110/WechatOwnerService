@@ -76,7 +76,7 @@
 		},
 		methods: {
 			toApplyDetail: function(_item) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/applyRoomDetail/applyRoomDetail?room=' + JSON.stringify(_item)
 				});
 			},

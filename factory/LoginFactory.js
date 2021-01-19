@@ -16,13 +16,15 @@ const constant = require("../constant/index.js");
 
 const context = require("../context/Java110Context.js");
 
+import {getWAppId} from '../api/init/initApi.js'
+
 class LoginFactory {
 	constructor() {
 
 	} // 检查本地 storage 中是否有登录态标识
 
 	getHeaders() {
-		let _wAppId = uni.getStorageSync(constant.mapping.W_APP_ID);
+		let _wAppId = getWAppId();
 		
 		return {
 			"app-id": constant.app.appId,
@@ -101,7 +103,7 @@ class LoginFactory {
 		} else {
 			// 无登录态
 			uni.reLaunch({
-				url: '/pages/login/login'
+				url: '/pages/login/login?wAppId='+getWAppId()
 			});
 			return;
 		}
@@ -307,7 +309,7 @@ class LoginFactory {
 				let _param = res.data;
 				if (_param.code != 0) {
 					uni.navigateTo({
-						url: '/pages/showlogin/showlogin'
+						url: '/pages/showlogin/showlogin?wAppId='+getWAppId()
 					});
 					return;
 				}
@@ -340,7 +342,7 @@ class LoginFactory {
 			fail: function(error) {
 				// 调用服务端登录接口失败
 				uni.navigateTo({
-					url: '/pages/showlogin/showlogin'
+					url: '/pages/showlogin/showlogin?wAppId='+getWAppId()
 				});
 			}
 		});
