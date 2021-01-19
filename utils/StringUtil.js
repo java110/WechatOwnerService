@@ -37,3 +37,15 @@ export function isEmpty(_value) {
 			return true
 	}
 }
+
+export function isNull(_value) {
+	if (typeof _value == "undefined" || _value == null || _value == "") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+export function isNotNull(_value) {
+	return !isNull(_value);
+}
