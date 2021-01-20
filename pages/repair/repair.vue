@@ -31,7 +31,8 @@
 		<view class="block__title">报修信息</view>
 		<view class="cu-form-group">
 			<view class="title">报修类型</view>
-			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes" @change="repairTypeChange">
+			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes"
+			 @change="repairTypeChange">
 				<view class="picker">
 					{{repairTypes[repairTypeIndex].repairTypeName}}
 				</view>
@@ -103,6 +104,8 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
+	import * as TanslateImage from '../../utils/translate-image.js'
+	s
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -127,7 +130,7 @@
 				context: '',
 				bindRepairName: '',
 				userId: '',
-				userName:'',
+				userName: '',
 				storeId: '',
 				photos: [],
 				communityId: "",
@@ -152,7 +155,7 @@
 					}
 				],
 				repairTypes: [],
-				repairTypeIndex:0,
+				repairTypeIndex: 0,
 				repairScopeIndex: 0,
 				repairObjType: '',
 				repairObjId: '',
@@ -161,7 +164,7 @@
 				floorId: '',
 				unitNum: '',
 				unitId: '',
-				priceScope:'',
+				priceScope: '',
 			};
 		},
 
@@ -173,7 +176,7 @@
 			context.onLoad(options);
 			context.getRooms().then(res => {
 				let arr = res.data.rooms;
-				
+
 				let roomCloums = [];
 				let roomIdArr = [];
 				arr.map(item => {
@@ -187,7 +190,7 @@
 				that.communityId = res.data.owner.communityId;
 				that.communityName = res.data.owner.communityName;
 			});
-			
+
 			//加载报修类型
 			this._loadRepairTypes();
 		},
@@ -269,11 +272,11 @@
 					"photos": [],
 					"context": this.context,
 					"userId": this.userId,
-					"userName":this.userName,
+					"userName": this.userName,
 					"communityId": this.communityId,
 					"bindDate": this.bindDate,
 					"bindTime": this.bindTime,
-					"repairObjType":this.repairObjType
+					"repairObjType": this.repairObjType
 				}
 
 				if (this.repairObjType == '001') {
@@ -281,11 +284,11 @@
 					obj.repairObjName = this.communityName;
 				} else if (this.repairObjType == '002') {
 					obj.repairObjId = this.floorId;
-					obj.repairObjName = this.floorNum ;
+					obj.repairObjName = this.floorNum;
 				} else if (this.repairObjType == '003') {
 					obj.repairObjId = this.unitId;
-					obj.repairObjName = this.floorNum  + this.unitNum ;
-				}else{
+					obj.repairObjName = this.floorNum + this.unitNum;
+				} else {
 					obj.repairObjId = this.roomId;
 					obj.repairObjName = this.roomName;
 				}
@@ -298,7 +301,7 @@
 				});
 
 				let msg = "";
-				 if (obj.repairType == "") {
+				if (obj.repairType == "") {
 					msg = "请选择报修类型";
 				} else if (obj.bindRepairName == "") {
 					msg = "请填写报修人";
@@ -310,7 +313,7 @@
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
 					msg = "请填写投诉内容";
-				}else if(obj.repairObjId == ''){
+				} else if (obj.repairObjId == '') {
 					msg = "请选择报修位置";
 				}
 
@@ -378,17 +381,24 @@
 				let that = this;
 				wx.chooseImage({
 					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album','camera'], //从相册选择
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album'], //从相册选择
 					success: (res) => {
 						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
-						let _base64Photo = '';
-						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							_base64Photo = _res;
-							console.log('base64', _base64Photo);
-							that.photos.push(_base64Photo);
+						var tempFilePaths = res.tempFilePaths[0]
+
+						//#ifdef H5
+						TanslateImage.translate(tempFilePaths, (url) => {
+							that.photos.push(url);
+						})
+						//#endif
+
+						//#ifdef MP-WEIXIN
+						factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
+							that.photos.push(_res);
 						});
+						//#endif
 					}
 				});
 			},
@@ -401,24 +411,24 @@
 				this.repairScopeIndex = e.target.value //取其下标
 				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
 				this.repairObjType = selected.id //选中的id
-				
+
 			},
 			repairChange: function(e) {
 				this.typeName = this.columns[e.detail.value];
 				this.typeId = this.repairIdAttr[e.detail.value];
 			},
-			repairTypeChange:function(e){
+			repairTypeChange: function(e) {
 				this.repairTypeIndex = e.target.value //取其下标
 				let selected = this.repairTypes[this.repairTypeIndex] //获取选中的数组
 				this.repairType = selected.repairType //选中的id
 				let _payFeeFlag = selected.payFeeFlag;
-				
-				if(_payFeeFlag == 'T'){
+
+				if (_payFeeFlag == 'T') {
 					this.priceScope = selected.priceScope;
-				}else{
+				} else {
 					this.priceScope = '';
 				}
-				
+
 			},
 			dateChange: function(e) {
 				this.bindDate = e.detail.value;
@@ -443,9 +453,9 @@
 					url: '/pages/selectUnit/selectUnit?floorId=' + this.floorId
 				});
 			},
-			_loadRepairTypes:function(){
+			_loadRepairTypes: function() {
 				let _communityInfo = context.getCurrentCommunity();
-				let _that =this;
+				let _that = this;
 				let dataObj = {
 					page: 1,
 					row: 50,
@@ -461,12 +471,12 @@
 						let _json = res.data;
 						if (_json.code == 0) {
 							_that.repairTypes = _json.data;
-							
+
 							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
 							_that.repairType = selected.repairType //选中的id
 							let _payFeeFlag = selected.payFeeFlag;
-							
-							if(_payFeeFlag == 'T'){
+
+							if (_payFeeFlag == 'T') {
 								_that.priceScope = selected.priceScope;
 							}
 						}
@@ -480,7 +490,7 @@
 					}
 				});
 			}
-			
+
 		}
 	};
 </script>
