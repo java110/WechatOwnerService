@@ -12,19 +12,7 @@ import {doLoginOwnerByKey} from '../../auth/AppLogin.js';
 
 import {isNull,isNotNull} from '../../utils/StringUtil.js'
 
-/**
- * 页面加载方法
- * @param {Object} _option 页面参数对象
- */
-export function onLoad(_option){
-	// #ifdef H5
-	let _key = _option.key;
-	if (isNotNull(_key)) {
-		//根据key 去做登录
-		doLoginOwnerByKey(_key);
-	}
-	// #endif
-}
+
 /**
  * 获取WAppId
  */
@@ -47,7 +35,7 @@ export function getWAppId(){
 	
 	//4.0 判断磁盘是否存在
 	if(isNull(wAppId)){
-		wAppId = uni.getStorageInfoSync(mapping.W_APP_ID)
+		wAppId = uni.getStorageSync(mapping.W_APP_ID)
 	}
 	if(isNull(wAppId)){
 		uni.showToast({
@@ -59,4 +47,20 @@ export function getWAppId(){
 	//5.0 存储至磁盘中
 	uni.setStorageSync(mapping.W_APP_ID,wAppId)
 	return wAppId;
+}
+
+/**
+ * 页面加载方法
+ * @param {Object} _option 页面参数对象
+ */
+export function onLoad(_option){
+	// #ifdef H5
+	let _key = _option.key;
+	if (isNotNull(_key)) {
+		//根据key 去做登录
+		doLoginOwnerByKey(_key);
+	}
+	// #endif
+	//初始化wAppId
+	getWAppId();
 }

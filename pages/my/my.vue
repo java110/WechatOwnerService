@@ -226,12 +226,12 @@
 			},
 			mySettings: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/settings/settings',
 				});
 			},

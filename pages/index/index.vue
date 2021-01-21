@@ -134,7 +134,16 @@
 		 */
 		onReady: function() {},
 		onShareAppMessage:function() {
-			
+			return {
+				title: '首页',
+				path: '/pages/index/index?wAppId='+this.vc.getWAppId(),
+				success: function(res) {
+					// 转发成功
+				},
+				fail: function(res) {
+					// 转发失败
+				}
+			}
 		},
 		/**
 		 * 生命周期函数--监听页面显示
