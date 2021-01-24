@@ -244,7 +244,8 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					endTime: this.formatEndTime
 				};
 				context.request({
 					url: constant.url.preOrder,

@@ -199,6 +199,7 @@
 				let _data = {
 					token: wx.getStorageSync('token')
 				}
+				let that = this;
 				context.request({
 					url: constant.url.userLogout,
 					header: context.getHeaders(),
@@ -217,7 +218,7 @@
 						if (wAppId != null && wAppId != undefined && wAppId != '') {
 							uni.setStorageSync(constant.mapping.W_APP_ID, wAppId);
 						}
-						this.vc.navigateTo({
+						that.vc.navigateTo({
 							url: '/pages/login/login'
 						});
 					},

@@ -104,8 +104,7 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
-	import * as TanslateImage from '../../utils/translate-image.js'
-	s
+	import * as TanslateImage from '../../utils/translate-image.js';
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
