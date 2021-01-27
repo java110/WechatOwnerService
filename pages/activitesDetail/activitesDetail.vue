@@ -123,13 +123,17 @@
 					communityId: this.communityId,
 					activitiesId: this.activitiesId
 				};
+				let _urlPath = '';
+				// #ifdef MP-WEIXIN
+				_urlPath = conf.baseUrl
+				// #endif
 				loadActivites(_objData)
 					.then((_acts) => {
 						let _activites = _acts[0];
 						_that.src = _activites.src;
 						_that.userName = _activites.userName;
 						_that.startTime = _activites.startTime;
-						_that.context = replaceImgSrc(_activites.context,conf.baseUrl);
+						_that.context = replaceImgSrc(_activites.context,_urlPath);
 						_that.readCount = _activites.readCount;
 						_that.likeCount = _activites.likeCount;
 					});

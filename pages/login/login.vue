@@ -4,20 +4,33 @@
 			<view class="cu-avatar xl round margin-left logo-lage" :style="{backgroundImage: 'url(' + logoUrl + ')' }"></view>
 		</view>
 
-		<view class="margin-top padding-left padding-right radius">
+		<view class="margin-top padding-left padding-right radius" v-if="!loginByPhone">
 			<view class="cu-form-group margin-top">
 				<view class="title">用户名</view>
 				<input placeholder="请输入用户名" name="input" v-model="username"></input>
 			</view>
-			<view class="cu-form-group border-bottom">
+			<view class="cu-form-group border-bottom" >
 				<view class="title">密码</view>
 				<input placeholder="请输入密码" type="password" name="input" v-model="password"></input>
+			</view>
+		</view>
+		<view class="margin-top padding-left padding-right radius" v-else>
+			<view class="cu-form-group margin-top">
+				<view class="title">手机号</view>
+				<input placeholder="请输入手机号" name="input" v-model="username"></input>
+			</view>
+			<view class="cu-form-group border-bottom" >
+				<view class="title">验证码</view>
+				<input v-model="password" placeholder="请输入短信验证码" name="input"></input>
+				<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 			</view>
 		</view>
 
 		<view class="padding flex flex-direction margin-top">
 			<button class="cu-btn bg-green lg" @click="_doLogin()">登录</button>
 			<button class="cu-btn line-orange  margin-tb-sm lg" @click="_doRegister()">绑定业主</button>
+			
+			<view class="text-center margin-top-sm text-green" @click="_doLoginPhone()">{{phoneLoginName}}</view>
 		</view>
 
 	</view>
@@ -27,11 +40,16 @@
 	var _this;
 	import wInput from '../../components/watch-input.vue' //input
 	import wButton from '../../components/watch-button.vue' //button
+	import {
+		sendSmsCode,
+		userLogin
+	} from '../../api/user/userApi.js'
 	const context = require("../../context/Java110Context.js");
+
 	const constant = context.constant;
 	const factory = context.factory;
-	
-	const login = 1;//1标识登录页面 请下发code 不要下发key
+
+	const login = 1; //1标识登录页面 请下发code 不要下发key
 	export default {
 		data() {
 			return {
@@ -39,20 +57,26 @@
 				username: 'test001',
 				password: 'wuxw2015',
 				appId: "",
-				code: ""
+				code: "",
+				loginByPhone: false,
+				msgCode: '',
+				btnDisabled: false,
+				btnValue: '验证码',
+				phoneLoginName:'验证码登录'
+
 			};
 		},
 		onLoad(option) {
 			// #ifdef H5
 			this.code = option.code;
 			let _key = option.key;
-			if(_key){
+			if (_key) {
 				context.onLoad(option);
 				// 判断当前是否已经登录 ，如果登录了跳转至首页
-			}else{
+			} else {
 				if (this.code == '' || this.code == undefined) {
 					//跳转鉴权
-					factory.login.wechatRefreshToken(window.location.href,login);
+					factory.login.wechatRefreshToken(window.location.href, login);
 				}
 			}
 			// #endif
@@ -101,7 +125,6 @@
 					});
 					return;
 				}
-
 				if (this.password == '') {
 					wx.showToast({
 						title: '请填写密码',
@@ -114,82 +137,15 @@
 					username: this.username,
 					password: this.password,
 					code: _code,
-					appId: this.vc.getWAppId()
+					appId: this.vc.getWAppId(),
+					loginByPhone:this.loginByPhone
 				};
-
-				uni.showLoading({
-					title: '加载中',
-					mask: true
+				userLogin(_obj)
+				.then(()=>{
+					wx.switchTab({
+						url: "/pages/index/index?wAppId="+that.vc.getWAppId()
+					});
 				});
-
-				uni.request({
-					url: constant.url.loginOwnerUrl,
-					header: context.getHeaders(),
-					method: "POST",
-					data: JSON.stringify(_obj),
-					//动态数据
-					success: function(res) {
-						//将用户信息携入缓存中
-						uni.hideLoading();
-						console.log("登录返回信息", res);
-						if (res.statusCode != 200) {
-							uni.showToast({
-								icon: 'none',
-								title: res.data
-							});
-							return;
-						}
-						let _data = res.data;
-
-						let _ownerInfo = _data.owner;
-						wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
-						wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(_ownerInfo));
-						let _currentCommunityInfo = {
-							communityId: _ownerInfo.communityId,
-							communityName: _ownerInfo.communityName
-						};
-						wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
-
-						let date = new Date();
-						let year = date.getFullYear(); //获取当前年份
-
-						let mon = date.getMonth(); //获取当前月份
-
-						let da = date.getDate(); //获取当前日
-
-						let h = date.getHours() + 1; //获取小时
-
-						let m = date.getMinutes(); //获取分钟
-
-						let s = date.getSeconds(); //获取秒
-
-						console.log("获取过去时间", year, mon, da, h, m, s); //将时间格式转化为时间戳
-
-						let afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
-
-						console.log("afterOneHourDate", afterOneHourDate);
-						wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
-							sessionKey: _ownerInfo.userId,
-							expireTime: afterOneHourDate.getTime()
-						});
-						wx.setStorageSync(constant.mapping.TOKEN, _data.token);
-						//保存临时 钥匙
-						wx.setStorageSync(constant.mapping.OWNER_KEY, _data.key);
-						wx.switchTab({
-							url: "/pages/index/index?wAppId="+that.vc.getWAppId()
-						})
-
-					},
-					fail: function(e) {
-						console.log(e);
-						uni.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				})
 			},
 			_doRegister: function() {
 				//let _url = '/pages/registerByWechat/registerByWechat';
@@ -200,6 +156,19 @@
 				this.vc.navigateTo({
 					url: _url
 				})
+			},
+			sendMsgCode: function() {
+				sendSmsCode(this.username, this);
+			},
+			_doLoginPhone:function(){
+				this.loginByPhone = !this.loginByPhone;
+				if(this.loginByPhone){
+					this.phoneLoginName="密码登录"
+				}else{
+					this.phoneLoginName="验证码登录"
+				}
+				this.username = '';
+				this.password = '';
 			}
 
 		}
