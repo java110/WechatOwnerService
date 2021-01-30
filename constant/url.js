@@ -106,6 +106,7 @@ export default {
 	queryApplyRoomDiscountType: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscountType",
 	saveApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/saveApplyRoomDiscount",
 	openDoor:baseUrl + "app/machine/openDoor",
+	queryOwnerCars:baseUrl + "app/owner.queryOwnerCars",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
