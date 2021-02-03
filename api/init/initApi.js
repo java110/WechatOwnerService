@@ -10,7 +10,9 @@ import app from '../../constant/AppConstant.js'
 
 import {doLoginOwnerByKey} from '../../auth/AppLogin.js';
 
-import {isNull,isNotNull} from '../../utils/StringUtil.js'
+import {isNull,isNotNull} from '../../utils/StringUtil.js';
+
+import conf from '../../conf/config.js'
 
 
 /**
@@ -31,6 +33,11 @@ export function getWAppId(){
 	// #ifdef MP-WEIXIN
 		let accountInfo = uni.getAccountInfoSync();
 		wAppId = accountInfo.miniProgram.appId;
+	// #endif
+	
+	//4.0 如果app 则取默认值
+	// #ifdef APP-PLUS
+		wAppId = conf.wAppId;
 	// #endif
 	
 	//4.0 判断磁盘是否存在

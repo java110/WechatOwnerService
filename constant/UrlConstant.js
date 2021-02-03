@@ -16,7 +16,6 @@ const getWxPhoto = baseUrl + 'app/getWxPhoto';
 const loginOwnerUrl = baseUrl + 'app/loginOwner';
 const areaUrl = baseUrl + "app/area.listAreas";
 const GetNoticeListUrl = baseUrl + 'app/notice.listNotices'; //公告接口
-
 const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //报修
 
 const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //查询报修
