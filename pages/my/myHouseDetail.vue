@@ -41,20 +41,12 @@
 			{{roomDetail.layer+'层'}}
 		</view>
 		<view class="cu-form-group">
-			<view class="title">房间数</view>
-			{{roomDetail.section}}个
-		</view>
-		<view class="cu-form-group">
 			<view class="title">户型</view>
 			{{roomDetail.apartment}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">建筑面积</view>
 			{{roomDetail.builtUpArea+'平方米'}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">单价</view>
-			{{roomDetail.unitPrice+'元/平方米'}}
 		</view>
 
 		<view class="button_up_blank"></view>
