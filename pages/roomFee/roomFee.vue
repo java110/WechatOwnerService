@@ -66,7 +66,7 @@
 						</picker>
 					</view>
 				</view>
-				<view class="cu-item">
+				<view class="cu-item" v-if="feeFlag != '2006012'">
 					<view class="content">
 						<text class="text-grey">到期时间</text>
 					</view>

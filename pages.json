@@ -426,6 +426,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/tempParkingFee/tempParkingFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "临时车缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
