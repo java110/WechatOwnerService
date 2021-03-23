@@ -75,7 +75,7 @@
 						</picker>
 					</view>
 				</view>
-				<view class="cu-item">
+				<view class="cu-item" v-if="feeFlag != '2006012'">
 					<view class="content">
 						<text class="text-grey">到期时间</text>
 					</view>
@@ -115,7 +115,8 @@
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 	import {
 		addMonth,
-		formatDate
+		formatDate,
+		date2String
 	} from '../../utils/DateUtil.js'
 
 
@@ -137,6 +138,7 @@
 				feeMonth: 1,
 				endTime: '',
 				ordEndTime: '',
+				formatEndTime:'',
 				amount: 0,
 				receivableAmount: 0.00,
 				additionalAmount: 0,
@@ -183,6 +185,7 @@
 			this.feePrice = _fee.feePrice;
 
 			this.ordEndTime = _fee.endTime;
+			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
 			if (this.feeFlag == '2006012') {
 				return;
