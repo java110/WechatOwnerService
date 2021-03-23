@@ -244,7 +244,8 @@
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					endTime: this.formatEndTime
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -315,7 +316,8 @@
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					endTime: this.formatEndTime
 				}
 
 				context.request({
