@@ -31,7 +31,11 @@
 		<view class="block__title">报修信息</view>
 		<view class="cu-form-group">
 			<view class="title">报修类型</view>
-			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes"
+			<picker id="complaintType" bindchange="PickerChange" 
+			:value="repairTypeIndex" 
+			:range-key="'repairTypeName'" 
+			:range="repairTypes" 
+			v-if = "repairTypes.length>0"
 			 @change="repairTypeChange">
 				<view class="picker">
 					{{repairTypes[repairTypeIndex].repairTypeName}}
@@ -468,7 +472,7 @@
 					//动态数据
 					success: function(res) {
 						let _json = res.data;
-						if (_json.code == 0) {
+						if (_json.code == 0 && _json.data.length > 0) {
 							_that.repairTypes = _json.data;
 
 							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
@@ -478,6 +482,11 @@
 							if (_payFeeFlag == 'T') {
 								_that.priceScope = selected.priceScope;
 							}
+						}else{
+							uni.showToast({
+								icon:"none",
+								title:"未配置报修设置"
+							})
 						}
 					},
 					fail: function(e) {
