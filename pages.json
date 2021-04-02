@@ -417,6 +417,67 @@
 		    }
 		    
 		}
+		,{
+		    "path" : "pages/roomRenovation/roomRenovation",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/roomRenovationDetail/roomRenovationDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修申请",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomRenovationList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修记录",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomRenovationDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修详情",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+			"path" : "pages/myRoomRenovationRecord/myRoomRenovationRecord",
+			"style" :                                                                                    
+			{
+			    "navigationBarTitleText": "跟踪记录",
+			    "enablePullDownRefresh": false
+			}
+		}
+		,{
+			"path" : "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
+			"style" :                                                                                    
+			{
+			    "navigationBarTitleText": "跟踪记录详情",
+			    "enablePullDownRefresh": false
+			}
+		}
         ,{
             "path" : "pages/carOweFee/carOweFee",
             "style" :                                                                                    

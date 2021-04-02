@@ -34,7 +34,7 @@
 			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'" :range="repairTypes"
 			 @change="repairTypeChange">
 				<view class="picker">
-					{{repairTypes[repairTypeIndex].repairTypeName}}
+					{{repairTypes.length==0 ? "请选择" : repairTypes[repairTypeIndex].repairTypeName}}
 				</view>
 			</picker>
 		</view>
@@ -105,6 +105,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import * as TanslateImage from '../../utils/translate-image.js';
+	import {checkPhoneNumber} from '../../utils/StringUtil.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -156,7 +157,7 @@
 				repairTypes: [],
 				repairTypeIndex: 0,
 				repairScopeIndex: 0,
-				repairObjType: '',
+				repairObjType: '001',
 				repairObjId: '',
 				repairObjName: '',
 				floorNum: '',
@@ -275,8 +276,10 @@
 					"communityId": this.communityId,
 					"bindDate": this.bindDate,
 					"bindTime": this.bindTime,
-					"repairObjType": this.repairObjType
+					"repairObjType": this.repairObjType,
+					"repairChannel": 'Z'
 				}
+				console.log(obj);
 
 				if (this.repairObjType == '001') {
 					obj.repairObjId = this.communityId;
@@ -302,13 +305,15 @@
 				let msg = "";
 				if (obj.repairType == "") {
 					msg = "请选择报修类型";
-				} else if (obj.bindRepairName == "") {
+				} else if (obj.repairName == "") {
 					msg = "请填写报修人";
 				} else if (obj.tel == "") {
 					msg = "请填写手机号";
-				} else if (obj.bindDate == "") {
+				} else if (!checkPhoneNumber(obj.tel)) {
+					msg = "手机号有误";
+				} else if (obj.bindDate == "请选择") {
 					msg = "请选择预约日期";
-				} else if (obj.bindTime == "") {
+				} else if (obj.bindTime == "请选择") {
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
 					msg = "请填写投诉内容";
@@ -375,6 +380,7 @@
 				console.log(e);
 				let imageArr = this.$data.imgList;
 				imageArr.splice(e, 1);
+				this.photos.splice(e, 1);
 			},
 			ChooseImage: function(e) {
 				let that = this;
@@ -410,7 +416,7 @@
 				this.repairScopeIndex = e.target.value //取其下标
 				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
 				this.repairObjType = selected.id //选中的id
-
+				this._loadRepairTypes();
 			},
 			repairChange: function(e) {
 				this.typeName = this.columns[e.detail.value];
@@ -419,6 +425,10 @@
 			repairTypeChange: function(e) {
 				this.repairTypeIndex = e.target.value //取其下标
 				let selected = this.repairTypes[this.repairTypeIndex] //获取选中的数组
+				if(selected == undefined){
+					return;
+				}
+				console.log('selected',selected);
 				this.repairType = selected.repairType //选中的id
 				let _payFeeFlag = selected.payFeeFlag;
 
@@ -455,10 +465,15 @@
 			_loadRepairTypes: function() {
 				let _communityInfo = context.getCurrentCommunity();
 				let _that = this;
+				// 公共区域标识
+				let publicArea = _that.repairObjType == '004' ? 'F' : 'T';
+				// 默认选择第一个
+				_that.repairTypeIndex = 0;
 				let dataObj = {
 					page: 1,
 					row: 50,
 					communityId: _communityInfo.communityId,
+					publicArea: publicArea
 				};
 				uni.request({
 					url: constant.url.listRepairSettings,
@@ -477,6 +492,8 @@
 
 							if (_payFeeFlag == 'T') {
 								_that.priceScope = selected.priceScope;
+							}else{
+								_that.priceScope = '';
 							}
 						}
 					},

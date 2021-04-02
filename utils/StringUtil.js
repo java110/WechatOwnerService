@@ -49,3 +49,11 @@ export function isNull(_value) {
 export function isNotNull(_value) {
 	return !isNull(_value);
 }
+
+export function checkPhoneNumber(_value){
+	let grep = /^(1(([35789][0-9])|(47)))\d{8}$/;
+	if(grep.test(_value)){
+		return true;
+	}	
+	return false;
+}

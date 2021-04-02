@@ -109,6 +109,7 @@
 <script>
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	import config from '../../conf/config.js'
 	export default {
 		data() {
 			return {
@@ -123,7 +124,7 @@
 		},
 		onLoad(options) {
 			let _complaintId = options.complaintId;
-			this.srcPath=constant.url.baseUrl;
+			this.srcPath=config.commonBaseUrl;
 			console.log('options',options);
 			this.complaintId = _complaintId;
 			this.communityId = options.communityId;

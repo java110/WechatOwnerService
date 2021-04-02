@@ -157,6 +157,12 @@ const queryParkingSpaces= baseUrl + 'app/parkingSpace.queryParkingSpaces'; //查
 const saveOwnerCar= baseUrl + 'app/owner.saveOwnerCar'; //申请车位接口
 
 const queryOwnerCars= baseUrl + 'app/owner.queryOwnerCars'; //查询业主车辆
+// 查询申请类型（空置房）
+const queryApplyRoomDiscountType = baseUrl + 'app/applyRoomDiscount/queryApplyRoomDiscountType';
+// 提交申请
+const saveApplyRoomDiscount = baseUrl + 'app/applyRoomDiscount/saveApplyRoomDiscount';
+const queryFeeDiscount = baseUrl + 'app/feeDiscount/queryFeeDiscount';
+const saveRoomRenovation = baseUrl + 'app/roomRenovation/saveRoomRenovation';
 
 
 
@@ -251,6 +257,9 @@ module.exports = {
 
 	queryParkingSpaces:queryParkingSpaces,
 	saveOwnerCar:saveOwnerCar,
-	queryOwnerCars:queryOwnerCars
-
+	queryOwnerCars:queryOwnerCars,
+	queryApplyRoomDiscountType: queryApplyRoomDiscountType,
+	saveApplyRoomDiscount: saveApplyRoomDiscount,
+	queryFeeDiscount: queryFeeDiscount,
+	saveRoomRenovation: saveRoomRenovation,
 };

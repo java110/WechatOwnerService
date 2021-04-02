@@ -50,6 +50,12 @@
 					<text class="text-grey">我的投诉单</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="myRenovation()">
+				<view class="content">
+					<text class="cuIcon-form text-green"></text>
+					<text class="text-grey">房屋装修</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myHouse()">
 				<view class="content">
 					<text class="cuIcon-home text-blue"></text>
@@ -200,6 +206,18 @@
 
 			onGotUserInfo: function(e) {
 				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
+			},
+			
+			myRenovation: function(){
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '../myRenovation/myRoomList'
+				});
 			},
 
 			myHouse: function() {

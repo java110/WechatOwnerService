@@ -88,9 +88,9 @@
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	import {getActivitiTitle,getCategoryList,loadActivites,loadAdverts} from '../../api/index/indexApi.js'
 	import {getProperty} from '../../api/property/propertyApi.js'
-	
+
 	import {getCurOwner} from '../../api/owner/ownerApi.js'
-	
+
 	import {hasLogin} from '../../auth/Java110Auth.js'
 	export default {
 		data() {
@@ -194,7 +194,7 @@
 				getActivitiTitle(_objData)
 				.then((actType)=>{
 					_that.activitiTitle = actType;
-					
+
 				})
 				.then((acts)=>{
 					if(_that.activitiTitle.length > 0){
@@ -210,7 +210,7 @@
 			/**
 			 * 加载活动
 			 * 第一次加载是可能没有小区 则直接下载固定小区
-			 * 
+			 *
 			 */
 			_loadActivites: function() {
 				let _that = this;

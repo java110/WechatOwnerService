@@ -218,7 +218,7 @@
 									url: "/pages/login/login"
 								});
 								return;
-							}		
+							}
 							wx.showToast({
 								title: _data.msg,
 								icon: 'none',

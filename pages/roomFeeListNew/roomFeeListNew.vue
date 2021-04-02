@@ -183,7 +183,7 @@
 	/*  #ifdef  H5  */
 	.header_fixed {
 		position: fixed;
-		top: 80upx;
+		top: 0upx;
 		left: 0;
 		width: 100%;
 		z-index: 2;

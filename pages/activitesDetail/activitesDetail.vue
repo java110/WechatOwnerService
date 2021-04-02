@@ -133,9 +133,12 @@
 						_that.src = _activites.src;
 						_that.userName = _activites.userName;
 						_that.startTime = _activites.startTime;
-						_that.context = replaceImgSrc(_activites.context,_urlPath);
+						_that.context = replaceImgSrc(_activites.context,conf.commonBaseUrl);
 						_that.readCount = _activites.readCount;
 						_that.likeCount = _activites.likeCount;
+						wx.setNavigationBarTitle({
+						  title: _activites.title
+						})
 					});
 			},
 			hideHeadImg: function() {

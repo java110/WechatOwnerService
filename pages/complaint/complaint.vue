@@ -60,6 +60,7 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
+	import * as TanslateImage from '../../utils/translate-image.js';
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -158,12 +159,25 @@
 						success: (res) => {
 							console.log(res);
 							that.$data.imgList.push(res.tempFilePaths[0]);
-							let _base64Photo = '';
-							factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-								_base64Photo = _res;
-								console.log('base64', _base64Photo);
-								that.photos.push(_base64Photo);
+							// let _base64Photo = '';
+							// factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							// 	_base64Photo = _res;
+							// 	console.log('base64', _base64Photo);
+							// 	that.photos.push(_base64Photo);
+							// });
+							var tempFilePaths = res.tempFilePaths[0]
+							
+							//#ifdef H5
+							TanslateImage.translate(tempFilePaths, (url) => {
+								that.photos.push(url);
+							})
+							//#endif
+							
+							//#ifdef MP-WEIXIN
+							factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
+								that.photos.push(_res);
 							});
+							//#endif
 						}
 				});
 			},

@@ -1,10 +1,6 @@
 <template>
 	<view>
 		<view class="block__title">业主信息</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">业主ID</view>
-			{{ownerInfo.memberId}}
-		</view> -->
 		<view class="cu-form-group">
 			<view class="title">名称</view>
 			{{ownerInfo.appUserName}}
@@ -19,10 +15,6 @@
 		</view>
 	
 		<view class="block__title">房屋信息</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">房屋ID</view>
-			{{roomDetail.roomId}}
-		</view> -->
 		<view class="cu-form-group">
 			<view class="title">楼栋</view>
 			{{roomDetail.floorNum}}号楼
@@ -40,10 +32,6 @@
 			<view class="title">楼层</view>
 			{{roomDetail.layer+'层'}}
 		</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">房间数</view>
-			{{roomDetail.section}}个
-		</view> -->
 		<view class="cu-form-group">
 			<view class="title">户型</view>
 			{{roomDetail.apartment}}
@@ -52,35 +40,26 @@
 			<view class="title">建筑面积</view>
 			{{roomDetail.builtUpArea+'平方米'}}
 		</view>
-		<!-- <view class="cu-form-group">
-			<view class="title">单价</view>
-			{{roomDetail.unitPrice+'元/平方米'}}
-		</view> -->
-		
 		<view class="block__title">空置房申请信息填写</view>
 		<view class="cu-form-group arrow">
-			<view class="title">优惠类型</view>
-			<picker mode="selector" :value="applyType" :range="applyTypes" range-key="typeName"  @change="applyTypeChange">
-				<view class="picker">
-					{{applyTypeShow?applyTypeShow:"请选择"}}
-				</view>
-			</picker>
-		</view>
-		<view class="cu-form-group arrow">
 			<view class="title">开始日期</view>
-			<picker mode="date" :value="bindStartDate" start="2020-09-01" end="2050-09-01" @change="dateStartChange">
+			<picker mode="date" :value="startTime" start="2020-09-01" end="2050-09-01" @change="dateStartChange">
 				<view class="picker">
-					{{bindStartDate}}
+					{{startTime}}
 				</view>
 			</picker>
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">结束日期</view>
-			<picker mode="date" :value="bindEndDate" start="2020-09-01" end="2050-09-01" @change="dateEndChange">
+			<picker mode="date" :value="endTime" start="2020-09-01" end="2050-09-01" @change="dateEndChange">
 				<view class="picker">
-					{{bindEndDate}}
+					{{endTime}}
 				</view>
 			</picker>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">备注</view>
+			<input type="text" :value="remark" @input="bindRemarkInput" placeholder="请输入备注">
 		</view>
 		<view class="btn-box">
 			<button type="default" class="btn-sub" @click="subApply()">提交申请</button>
@@ -92,25 +71,19 @@
 </template>
 
 <script>
-	// pages/my/myHouseDetail.js
 	const context = require("../../context/Java110Context.js");
 	const factory = context.factory;
-	import {compareDate,addDay,date2String} from '../../utils/DateUtil.js'
-	import {queryApplyRoomDiscountType,saveApplyRoomDiscount} from '../../api/applyRoom/applyRoomApi.js'
+	import {compareDate} from '../../utils/DateUtil.js'
+	import {saveRoomRenovation} from '../../api/roomRenovation/roomRenovationApi.js'
 	export default {
 		data() {
 			return {
 				ownerInfo: {},
-				// 用户信息
 				ownerFlag: false,
-				// 是否有业主信息 标记 如果有为 true  没有为false
 				roomDetail: {},
-				bindStartDate: '请选择',
-				bindEndDate: '请选择',
-				createRemark: '空置房申请',
-				applyType: '',
-				applyTypeShow: '',
-				applyTypes: [],
+				startTime: '请选择',
+				endTime: '请选择',
+				remark: '',
 			};
 		},
 
@@ -124,7 +97,6 @@
 			let _that = this;
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
-			_that.loadApplyRoomDiscountType();
 			_that.loadOwenrInfo();
 		},
 
@@ -163,17 +135,6 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			loadApplyRoomDiscountType: function(){
-				let _that = this;
-				let params = {
-					communityId: this.roomDetail.communityId,
-					page: 1,
-					row: 50
-				}
-				queryApplyRoomDiscountType(params).then(function(types){
-					_that.applyTypes = types;
-				})
-			},
 			
 			loadOwenrInfo: function() {
 				let _that = this;
@@ -190,48 +151,30 @@
 				});
 			},
 			
-			/**
-			 * 类型修改
-			 * @param {Object} e
-			 */
-			applyTypeChange: function(e){
-				this.applyType = this.applyTypes[e.detail.value].applyType;
-				this.applyTypeShow = this.applyTypes[e.detail.value].typeName;
+			// 备注输入
+			bindRemarkInput: function(e){
+				this.remark = e.detail.value;
 			},
 			
-			/**
-			 * 修改开始时间
-			 * @param {Object} e
-			 */
+			// 修改开始时间
 			dateStartChange: function(e) {
-				this.bindStartDate = e.detail.value;
+				this.startTime = e.detail.value;
 			},
 			
-			/**
-			 * 修改结束时间
-			 * @param {Object} e
-			 */
+			// 修改结束时间
 			dateEndChange: function(e) {
-				this.bindEndDate = e.detail.value;
+				this.endTime = e.detail.value;
 			},
 			
-			/**
-			 * 提交申请
-			 */
+			// 提交申请
 			subApply: function(){
-				if(this.applyType == ''){
-					uni.showToast({
-						title: '请选择优惠类型'
-					});
-					return;
-				}
-				if(this.bindStartDate == '请选择' || this.bindEndDate == '请选择'){
+				if(this.startTime == '请选择' || this.endTime == '请选择'){
 					uni.showToast({
 						title: '请选择时间范围'
 					});
 					return;
 				}
-				if(!compareDate(this.bindEndDate, this.bindStartDate)){
+				if(!compareDate(this.endTime, this.startTime)){
 					uni.showToast({
 						title: '时间范围有误'
 					});
@@ -239,20 +182,19 @@
 				}
 				
 				let params = {
-					startTime: this.bindStartDate + ' 0:00:00',
-					// endTime: this.bindEndDate + ' 23:59:59',
-					endTime: date2String(addDay(new Date(this.bindEndDate.replace(/-/g, "/")), 1)),
+					startTime: this.startTime,
+					endTime: this.endTime,
 					roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
 					roomId: this.roomDetail.roomId,
 					communityId: this.ownerInfo.communityId,
-					createUserName: this.ownerInfo.appUserName,
-					createUserTel: this.ownerInfo.link,
-					createRemark: this.createRemark,
-					ardId: '',
-					applyType: this.applyType
+					personName: this.ownerInfo.appUserName,
+					personTel: this.ownerInfo.link,
+					remark: this.remark,
+					rId: '',
+					userId: ''
 				}
 				console.log(params);
-				saveApplyRoomDiscount(params).then(function(_res){
+				saveRoomRenovation(params).then(function(_res){
 					uni.showToast({
 						title: '申请成功'
 					});

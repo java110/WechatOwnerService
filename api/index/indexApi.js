@@ -94,6 +94,11 @@ export function getCategoryList() {
 				name: "空置房",
 				src: "/static/images/index_openDoor.png",
 				href: "/pages/applyRoom/applyRoom"
+			},
+			{
+				name: "房屋装修",
+				src: "/static/images/index_openDoor.png",
+				href: "/pages/roomRenovation/roomRenovation"
 			}
 		]
 	};

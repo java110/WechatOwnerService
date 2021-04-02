@@ -74,7 +74,7 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
-				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vc-discount>
+				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
 			
 		</scroll-view>
@@ -153,6 +153,7 @@
 				appId: '',
 				feeFlag:'',
 				paymentCycle:1,
+				squarePrice: 0,
 			};
 		},
 		
@@ -169,8 +170,14 @@
 				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
+			console.log('_fee', _fee);
 			let _amount = _fee.amount;
-			let _receivableAmount = (_fee.paymentCycle * _amount).toFixed(2);
+			let _receivableAmount = _amount;
+			if(_fee.feeFlag == "2006012"){ // 周期性费用
+				_receivableAmount = _amount;
+			}else{ // 一次性费用
+				_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
+			}
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			this.receivableAmount = _receivableAmount;
@@ -188,6 +195,7 @@
 			this.ordEndTime = _fee.endTime;
 			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
+			this.squarePrice = _fee.squarePrice;
 			if(this.feeFlag == '2006012'){
 				return;
 			}
@@ -200,26 +208,27 @@
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
 			
-			// this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			})
 		},
 		methods: {
 			computeFeeDiscount:function(_price){
-				this.receivableAmount = this.receivableAmount - _price;
+				// this.receivableAmount = this.receivableAmount - _price;
+				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
 			},
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];;
 				let _feeMonth = _feeMonthName.replace("个月","");
-				let _receivableAmount = _feeMonth * this.amount;
+				// let _receivableAmount = _feeMonth * this.amount;
+				let _receivableAmount = _feeMonth * (this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount));
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount;
+				this.receivableAmount = _receivableAmount.toFixed(2);
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
@@ -330,7 +339,6 @@
 					payerObjId: this.roomId,
 					payerObjType: 3333,
 					endTime: this.formatEndTime
-				
 				};
 				context.request({
 					url: constant.url.preOrder,

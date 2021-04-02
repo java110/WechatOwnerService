@@ -8,7 +8,7 @@
 						<text class="text-grey">工单号</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{repairInfo.repairId}}</text>
+						<text class="text-grey text-sm">{{repairId}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -16,7 +16,7 @@
 						<text class="text-grey">报修类型</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{repairInfo.repairTypeName}}</text>
+						<text class="text-grey text-sm">{{repairTypeName}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -24,7 +24,7 @@
 						<text class="text-grey">报修位置</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{repairInfo.repairObjName}}</text>
+						<text class="text-grey text-sm">{{repairObjName}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -32,7 +32,7 @@
 						<text class="text-grey">报修人</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{repairInfo.repairName}}</text>
+						<text class="text-grey text-sm">{{repairName}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -40,7 +40,7 @@
 						<text class="text-grey">报修内容</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{repairInfo.context}}</text>
+						<text class="text-grey text-sm">{{remark}}</text>
 					</view>
 				</view>
 			</view>
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+	import {date2String} from '../../utils/DateUtil.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const util = context.util;
@@ -105,13 +106,21 @@
 				appId: '',
 				repairInfo:{},
 				feeInfo:{},
-				userId:''
+				userId:'',
+				payerObjId: '',
+				payerObjType: '3333',
+				endTime: '',
+				repairTypeName: '',
+				repairObjName: '',
+				repairName: '',
+				remark: '',
 			};
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			console.log('options', options);
 			context.onLoad(options);
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
@@ -124,6 +133,13 @@
 			this.communityId = options.communityId;
 			this.repairId = options.repairId;
 			this.userId = options.userId;
+			this.payerObjId = options.repairObjId;
+			this.endTime = date2String(new Date(options.appointmentTime.replace(/-/g, "/")));
+			this.repairTypeName = options.repairTypeName;
+			this.repairObjName = options.repairObjName;
+			this.repairName = options.repairName;
+			this.remark = options.context
+			
 			this._loadRepair();
 			this._listFee();
 		},
@@ -288,7 +304,10 @@
 					feeName: '报修费',
 					receivedAmount: this.feeInfo.feePrice,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					endTime: this.endTime,
+					payerObjId: this.payerObjId,
+					payerObjType: this.payerObjType
 				};
 				context.request({
 					url: constant.url.preOrder,

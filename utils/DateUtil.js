@@ -184,12 +184,14 @@ export function addMonth(_date, _month) {
  * @return {Date} 返回新的日期
  */
 export function addDay(_date, _day) {
+	console.log(_date);
 	let year = _date.getFullYear(); //获取当前年份
 	let mon = _date.getMonth(); //获取当前月份
 	let da = _date.getDate() + _day; //获取当前日
 	let h = _date.getHours(); //获取小时
 	let m = _date.getMinutes(); //获取分钟
 	let s = _date.getSeconds(); //获取秒
+	console.log(year,mon,da,h,m,s);
 	let newDate = new Date(year, mon, da, h, m, s);
 	return newDate;
 };

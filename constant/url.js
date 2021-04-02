@@ -102,11 +102,17 @@ export default {
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
 	deleteOwner: baseUrl + "app/owner.deleteOwner",
 	computeFeeDiscount: baseUrl + "app/feeDiscount/computeFeeDiscount",
+	queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
 	// 查询申请类型（空置房）
 	queryApplyRoomDiscountType: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscountType",
 	saveApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/saveApplyRoomDiscount",
 	openDoor:baseUrl + "app/machine/openDoor",
 	queryOwnerCars:baseUrl + "app/owner.queryOwnerCars",
+	saveRoomRenovation:baseUrl + "app/roomRenovation/saveRoomRenovation",
+	queryRoomRenovation:baseUrl + "app/roomRenovation/queryRoomRenovation",
+	updateRoomRenovationState:baseUrl + "app/roomRenovation/updateRoomRenovationState",
+	queryRoomRenovationRecord: baseUrl + "app/roomRenovation/queryRoomRenovationRecord",
+	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

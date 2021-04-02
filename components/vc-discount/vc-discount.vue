@@ -13,15 +13,19 @@
 				</view>
 			</view>
 		</view>
+		<blockExplain v-if="discounts.length > 0"></blockExplain>
 	</view>
 </template>
 
 <script>
+	import blockExplain from '@/components/block-explain/block-explain.vue'
 	import {
 		getFeeDiscounts
 	} from '../../api/fee/feeApi.js'
 	export default {
-		components: {},
+		components: {
+			blockExplain
+		},
 		data() {
 			return {
 				discounts: []
@@ -75,13 +79,20 @@
 					let _selectDiscount = [];
 					_that.discounts.forEach(disItem => {
 						//disItem.discountPrice = Math.floor(disItem.discountPrice);
-						_totalDiscountMoney += parseFloat(disItem.discountPrice);
+						if(disItem.discountType == "1001" || disItem.discountType == "3003"){
+							// 优惠
+							_totalDiscountMoney -= parseFloat(Math.abs(disItem.discountPrice));
+							disItem.discountPrice = -1 * Math.abs(disItem.discountPrice);
+						}else if(disItem.discountType == "2002"){
+							// 违约
+							_totalDiscountMoney += parseFloat(Math.abs(disItem.discountPrice));
+							disItem.discountPrice = Math.abs(disItem.discountPrice);
+						}
 						_selectDiscount.push(disItem);
 					})
-					
-					if(_totalDiscountMoney > 0){
+					// if(_totalDiscountMoney > 0){
 						_that.$emit('computeFeeDiscount',_totalDiscountMoney)
-					}
+					// }
 
 				})
 			},
