@@ -99,6 +99,11 @@ export function getCategoryList() {
 				name: "房屋装修",
 				src: "/static/images/index_openDoor.png",
 				href: "/pages/roomRenovation/roomRenovation"
+			},
+			{
+				name: "测试",
+				src: "/static/images/index_openDoor.png",
+				href: "/pages/tempParkingFee/tempParkingFee"
 			}
 		]
 	};

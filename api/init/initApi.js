@@ -14,7 +14,6 @@ import {isNull,isNotNull} from '../../utils/StringUtil.js';
 
 import conf from '../../conf/config.js'
 
-
 /**
  * 获取WAppId
  */
