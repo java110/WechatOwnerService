@@ -43,7 +43,7 @@ import {
  * 跳转功能封装
  * @param {Object} _param 跳转入参
  */
-export function navigateTo(_param) {
+export function navigateTo(_param, callback = () => {}) {
 
 	//参数中刷入wAppId 
 	let _url = _param.url;
@@ -87,7 +87,7 @@ export function navigateTo(_param) {
 
 		//小程序登录
 		// #ifdef MP-WEIXIN
-		doLogin();
+		doLogin(callback);
 		// #endif
 
 		// #ifdef APP-PLUS

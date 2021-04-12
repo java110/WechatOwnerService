@@ -59,12 +59,12 @@ export function getWAppId(){
  * 页面加载方法
  * @param {Object} _option 页面参数对象
  */
-export function onLoad(_option){
+export function onLoad(_option, callback = () => {}){
 	// #ifdef H5
 	let _key = _option.key;
 	if (isNotNull(_key)) {
 		//根据key 去做登录
-		doLoginOwnerByKey(_key);
+		doLoginOwnerByKey(_key, callback);
 	}
 	// #endif
 	//初始化wAppId

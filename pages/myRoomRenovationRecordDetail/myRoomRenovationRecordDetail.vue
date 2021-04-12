@@ -22,7 +22,7 @@
 			<view v-if="imgRecordList.length > 0">
 				<view class="block__title">图片</view>
 				<view class="record-img-item" v-for="(item,index) in imgRecordList" :key="index">
-					<image :src="commonBaseUrl + item.url" :data-url="commonBaseUrl + item.url" @tap="preview" mode="widthFix"></image>
+					<image :src="commonBaseUrl + item.url" :data-url="commonBaseUrl + item.url" :data-index="index" @tap="preview" mode="widthFix"></image>
 				</view>
 			</view>
 			<view v-if="videoRecordList.length > 0">
@@ -32,13 +32,11 @@
 				</view>
 			</view>
 		</view>
-		<viewImage ref="viewImageRef"></viewImage>
 	</view>
 </template>
 
 <script>
 	import {queryRoomRenovationRecordDetail} from '../../api/roomRenovation/roomRenovationApi.js'
-	import viewImage from '@/components/view-image/view-image.vue'
 	import conf from '../../conf/config.js'
 	export default {
 		data() {
@@ -52,7 +50,6 @@
 		},
 
 		components: {
-			viewImage
 		},
 		props: {},
 
@@ -103,8 +100,15 @@
 				})
 			},
 			preview: function(e) {
-				let _url = e.target.dataset.url;
-				this.$refs.viewImageRef.showThis(_url);
+				let index = e.target.dataset.index;
+				let urls = [];
+				this.imgRecordList.forEach((item) => {
+					urls.push(this.commonBaseUrl + item.url);
+				})
+				uni.previewImage({
+					current: index,
+					urls: urls
+				})
 			}
 		}
 	};

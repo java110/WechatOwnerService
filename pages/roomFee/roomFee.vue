@@ -170,7 +170,6 @@
 				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
-			console.log('_fee', _fee);
 			let _amount = _fee.amount;
 			let _receivableAmount = _amount;
 			if(_fee.feeFlag == "2006012"){ // 周期性费用
@@ -218,7 +217,6 @@
 				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
 			},
 			dateChange: function(e) {
-				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];;
 				let _feeMonth = _feeMonthName.replace("个月","");
@@ -263,8 +261,6 @@
 					data: _objData,
 					//动态数据
 					success: function(res) {
-						console.log(res);
-
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
 							

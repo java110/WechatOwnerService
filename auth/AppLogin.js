@@ -11,7 +11,7 @@ import {getWAppId} from '../api/init/initApi.js'
  * @param {Object} _key 自登陆key
  * add by  wuxw QQ 928255095
  */
-export function doLoginOwnerByKey(_key) {
+export function doLoginOwnerByKey(_key, callback = () => {}) {
 	requestNoAuth({
 		url: url.loginOwnerByKey,
 		method: 'post',
@@ -51,6 +51,7 @@ export function doLoginOwnerByKey(_key) {
 			wx.setStorageSync(mapping.TOKEN, _param.token);
 			//保存临时 钥匙
 			wx.setStorageSync(mapping.OWNER_KEY, _param.key);
+			callback();
 		},
 		fail: function(error) {
 			// 调用服务端登录接口失败

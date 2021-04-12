@@ -111,7 +111,9 @@
 		components: {},
 		props: {},
 		onLoad: function(options) {
-			context.onLoad(options);
+			context.onLoad(options, () => {
+						this.refreshPageLoginInfo();
+					});
 			let _that = this;
 			let login = context.checkLoginStatus();
 			if (login) {
@@ -122,27 +124,28 @@
 			}
 		},
 		onShow: function() {
-			let _that = this; //查询用户信息
-
-			if (!_that.ckeckUserInfo()) {
-				_that.login = false;
-				return;
-			}
-			_that.login = true;
-
-
-			_that.loadOwenrInfo();
-			_that.userInfo = context.getUserInfo();
-			this.loadOwnerHeaderImg();
-			// _that.setData({
-			//   userInfo: context.getUserInfo()
-			// });
+			this.refreshPageLoginInfo();
 		},
 		methods: {
+			// 原onShow方法
+			// 自动登录后 刷新页面登录信息
+			refreshPageLoginInfo: function(){
+				let _that = this; //查询用户信息
+				if (!_that.ckeckUserInfo()) {
+					_that.login = false;
+					return;
+				}
+				_that.login = true;
+				_that.loadOwenrInfo();
+				_that.userInfo = context.getUserInfo();
+				this.loadOwnerHeaderImg();
+			},
 			bindingOwner: function() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -154,6 +157,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -184,6 +189,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -196,6 +203,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -212,6 +221,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -224,6 +235,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -235,6 +248,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
@@ -246,6 +261,8 @@
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
