@@ -46,7 +46,7 @@
 						<view class="text-gray">{{item.endTime}}</view>
 					</view>
 					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
-						<button class="cu-btn sm line-gray" @click="payFeeDetail(item)">历史缴费</button>
+						<!-- <button class="cu-btn sm line-gray" @click="payFeeDetail(item)">历史缴费</button> -->
 						<button class="cu-btn sm bg-green margin-left" @click="payFee(item)">缴费</button>
 					</view>
 				</view>
@@ -58,7 +58,6 @@
 			<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
 				<view class="btn-group line-height">
 					<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toCarOweFee()">欠费缴费</button>
-					
 				</view>
 			</view>
 		</view>

@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<view v-if="num != null && num != ''" class="block__title">{{num}}号车位</view>
-		<view v-if="floorNum != null && floorNum != ''" class="block__title">{{floorNum}}栋{{unitNum}}单元{{roomNum}}室</view>
+		<view  class="block__title">缴费历史</view>
 		<view v-if="noData == false">
 			<view v-for="(item,index) in feeDetails" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding">
 				<view class="flex padding-bottom-xs solid-bottom justify-between">
@@ -10,7 +9,7 @@
 				</view>
 				<view class="flex margin-top justify-between">
 					<view class="text-gray">费用名称</view>
-					<view class="text-gray">{{feeName}}</view>
+					<view class="text-gray">{{item.feeName}}</view>
 				</view>
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">缴费编码</view>
@@ -31,6 +30,10 @@
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">缴费时间</view>
 					<view class="text-gray">{{item.createTime}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between">
+					<view class="text-gray">备注</view>
+					<view class="text-gray">{{item.remark}}</view>
 				</view>
 			</view>
 		</view>
@@ -54,13 +57,8 @@
 		data() {
 			return {
 				feeDetails: [],
-				feeId: '',
+				ownerId: '',
 				communityId: '',
-				feeName: '',
-				floorNum: '',
-				unitNum: '',
-				roomNum: '',
-				num: '',
 				noData: false
 			}
 		},
@@ -73,20 +71,14 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
-			let _fee = JSON.parse(options.fee);
-			this.feeId = _fee.feeId;
-			this.feeName = _fee.feeName;
-			this.floorNum = _fee.floorNum;
-			this.unitNum = _fee.unitNum;
-			this.roomNum = _fee.roomNum;
-			this.communityId = _fee.communityId;
-			this.num = _fee.num;
+			let _that = this;
+			context.getOwner(function(_owner) {
+				_that.ownerId = _owner.memberId;
+				_that.communityId = _owner.communityId;
+				_that._loadFeeDetail();
+			});
 
-			this._loadFeeDetail();
-			var pages = getCurrentPages();
-			var prevPage = pages[pages.length - 2]; //上一个页面
-			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-			prevPage.needFefresh = false;
+			
 		},
 		methods: {
 			_loadFeeDetail: function() {
@@ -94,7 +86,7 @@
 				let _objData = {
 					page: 1,
 					row: 30,
-					feeId: this.feeId,
+					ownerId: this.ownerId,
 					communityId: this.communityId
 				}
 				context.request({
