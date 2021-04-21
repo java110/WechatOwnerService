@@ -118,7 +118,7 @@
 				let _objData = {
 					page: 1,
 					row: 10,
-					ownerId: _owner.memberId,
+					ownerId: _owner.ownerId,
 					communityId: _owner.communityId
 				}
 				context.request({
