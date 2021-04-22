@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="header_fixed block__title">
+		<view class="header_fixed">
 			<scroll-view v-if="rooms.length <5 && rooms.length >1" class="bg-white nav">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms"
@@ -183,7 +183,7 @@
 	/*  #ifdef  H5  */
 	.header_fixed {
 		position: fixed;
-		top: 0upx;
+		top: 80upx;
 		left: 0;
 		width: 100%;
 		z-index: 2;
