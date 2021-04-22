@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="header_fixed">
+		<view class="header_fixed block__title">
 			<scroll-view v-if="rooms.length <5 && rooms.length >1" class="bg-white nav">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms"
