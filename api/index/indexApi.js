@@ -101,10 +101,16 @@ export function getCategoryList() {
 				href: "/pages/roomRenovation/roomRenovation"
 			},
 			{
-				name: "测试",
+				name: "临时车收费",
 				src: "/static/images/index_openDoor.png",
 				href: "/pages/tempParkingFee/tempParkingFee"
+			},
+			{
+				name: "合同费用",
+				src: "/static/images/index_property.png",
+				href: "/pages/contractFeeList/contractFeeList"
 			}
+			
 		]
 	};
 }
