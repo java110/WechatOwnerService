@@ -33,12 +33,11 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<!-- <view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
+		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
 			<view class="btn-group line-height">
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toContractOweFee()">欠费缴费</button>
-				
 			</view>
-		</view> -->
+		</view>
 	</view>
 </template>
 

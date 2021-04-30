@@ -14,7 +14,7 @@ import {
 } from '../owner/ownerApi.js'
 /**
  * 查询业主合同
- * objId: _owner.ownerId,
+ * 
  */
 export function getContracts() {
 	return new Promise((resolve, reject) => {
@@ -25,7 +25,7 @@ export function getContracts() {
 					method: "GET",
 					data: {
 						communityId: _owner.communityId,
-						
+						objId: _owner.ownerId,
 						page:1,
 						row:50
 					},

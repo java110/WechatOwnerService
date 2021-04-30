@@ -36,57 +36,27 @@
 					</view>
 				</view>
 			</view>
-			<view class="block__title">费用信息</view>
-			<view class="cu-list menu fee-last">
+			<view class="block__title" v-if="fees.length > 0">欠费信息</view>
+			<view class="cu-list menu" v-for="(item,index) in fees" :key="index" :data-item="item">
 				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">费用编号</text>
+					<view class="content padding-tb-sm">
+						<view>
+							<view class="text-cut" style="width:220px">{{item.feeName}}</view>
+						</view>
+						<view class="text-gray text-sm">
+							<text class="margin-right-xs">{{item.endTime}}至{{item.deadlineTime}}</text></view>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{feeId }}</text>
+						<text class="text-grey text-sm">应缴:￥{{item.feePrice}}</text>
 					</view>
 				</view>
-				<view class="cu-item"  v-if="feeFlag == '1003006'">
-					<view class="content">
-						<text class="text-grey">金额</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{amount + '元/月' }}</text>
-					</view>
-				</view>
-				<view class="cu-item"  v-else>
-					<view class="content">
-						<text class="text-grey">金额</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{amount + '元' }}</text>
-					</view>
-				</view>
-				<view class="cu-item arrow" v-if="feeFlag == '1003006'">
-					<view class="content">
-						<text class="text-grey">周期</text>
-					</view>
-					<view class="action">
-						<picker bindchange="PickerChange" :value="index" :range="feeMonthList" @change="dateChange">
-							<view class="picker">
-								{{feeMonthName}}
-							</view>
-						</picker>
-					</view>
-				</view>
-				<view class="cu-item" v-if="feeFlag != '2006012'">
-					<view class="content">
-						<text class="text-grey">到期时间</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{endTime }}</text>
-					</view>
-				</view>
-				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="contractId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
-			
 		</scroll-view>
-		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+		<view style="height: 100upx;">
+			
+		</view>
+		<view v-if="fees.length > 0" class="bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
 			</view>
@@ -108,142 +78,109 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	
-	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 
-	
+
 	// #ifdef H5
-	
+
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-	
+
 	// #endif
-	
-	// #ifdef APP-PLUS
-	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
-	// #endif
-	
-	import {addMonth,formatDate,date2String} from '../../utils/DateUtil.js'
-	
+
+	import {
+		addMonth,
+		formatDate
+	} from '../../utils/DateUtil.js'
+
+	import {
+		getCurCommunity
+	} from '../../api/community/communityApi.js'
+
+	import {
+		getRoomOweFees
+	} from '../../api/fee/feeApi.js'
+
+	import {
+		getRooms
+	} from '../../api/room/roomApi.js'
 	import {getCurContract} from '../../api/contract/contractApi.js'
 	export default {
-		components:{
-			vcDiscount
-		},
 		data() {
 			return {
-				date: '2018-12-25',
-				index: 0,
-				active: 0,
-				tablist: ['缴费', '历史'],
-				TabCur: 0,
 				scrollLeft: 0,
-				showFeeMonth: false,
-				feeMonthList: [],
-				feeMonthName: '',
-				feeMonth: 1,
-				endTime: '',
-				ordEndTime: '',
-				formatEndTime: '',
 				amount: 0,
 				receivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
-				feeId: '',
+				floorNum: '',
+				unitNum: '',
+				roomNum: '',
+				builtUpArea: '',
+				additionalAmount: "",
+				appId: '',
+				fees: [],
 				contractId: '',
 				contractName: '',
 				contractCode: '',
 				contractStartTime: '',
 				contractEndTime: '',
-				costList: [{}, {}], //费用清单
-				additionalAmount: "",
-				appId: '',
-				feeFlag:'',
-				paymentCycle:1,
-				squarePrice: 0,
 			};
 		},
-		
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			let _that = this;
 			context.onLoad(options);
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
 			// #ifdef H5
-				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
-			let _fee = JSON.parse(options.fee);
-			this._loadCurContract(_fee.contractId);
-			let _amount = _fee.amount;
-			let _receivableAmount = _amount;
-			if(_fee.feeFlag == "2006012"){ // 周期性费用
-				_receivableAmount = _amount;
-			}else{ // 一次性费用
-				_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
-			}
-			let _communityInfo = context.getCurrentCommunity();
-			let _lastDate = new Date(_fee.endTime);
-			this.receivableAmount = _receivableAmount;
-			this.communityId = _communityInfo.communityId;
-			this.communityName = _communityInfo.communityName;
-			this.floorNum = _fee.floorNum;
-			this.unitNum = _fee.unitNum;
-			this.roomNum = _fee.roomNum;
-			this.contractId = _fee.contractId;
-			this.layer = _fee.layer;
-			this.builtUpArea = _fee.builtUpArea;
-			this.feeId = _fee.feeId;
-			this.amount = _amount;
-			this.additionalAmount = _fee.additionalAmount;
-			this.ordEndTime = _fee.endTime;
-			this.formatEndTime = date2String(_fee.endTime);
-			this.feeFlag = _fee.feeFlag;
-			this.squarePrice = _fee.squarePrice;
-			if(this.feeFlag == '2006012'){
-				return;
-			}
-			this.paymentCycle = _fee.paymentCycle;	
-			for (let _index = 1; _index < 7; _index++) {
-				this.feeMonthList.push(_index * this.paymentCycle + '个月')
-			}
-			this.feeMonthName = this.paymentCycle + '个月';
-			this.feeMonth = this.paymentCycle;
-			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
-			this.endTime = formatDate(_endTime);
-			
-			this.$nextTick(() => {
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
-			})
+			this.contractId = options.contractId;
+
+			getCurCommunity()
+				.then(function(_curCommunity) {
+					_that.communityId = _curCommunity.communityId;
+					_that.communityName = _curCommunity.communityName;
+					return _curCommunity;
+				}).then(function(_curCommunity) {
+					_that._loadContractOweFee();
+				});
+			this._loadCurContract(this.contractId);
 		},
 		methods: {
-			computeFeeDiscount:function(_price){
-				// this.receivableAmount = this.receivableAmount - _price;
-				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
+
+			_loadContractOweFee: function() {
+				let _that = this;
+				let _objData = {
+					payObjId: this.contractId,
+					payObjType: '7777',
+					page: 1,
+					row: 50,
+					communityId: this.communityId
+				}
+
+				getRoomOweFees(_objData)
+					.then(function(_fees) {
+						_that.fees = _fees;
+						return _fees;
+					}, function(error) {
+						uni.showToast({
+							icon: 'none',
+							title: '没有欠费信息'
+						})
+					})
+					.then(function(_fees) {
+						_fees.forEach(function(_item) {
+							_that.receivableAmount += _item.feePrice;
+
+						})
+						_that.receivableAmount = _that.receivableAmount.toFixed(2);
+					})
 			},
-			dateChange: function(e) {
-				let _feeMonthName = null;
-				_feeMonthName = this.feeMonthList[e.detail.value];;
-				let _feeMonth = _feeMonthName.replace("个月","");
-				 let _receivableAmount = _feeMonth * this.amount;
-				//let _receivableAmount = _feeMonth * (this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount));
-				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
-				this.showFeeMonth = false;
-				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount.toFixed(2);
-				this.feeMonth = _feeMonth;
-				this.endTime = formatDate(_newDate);
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
-			},
-			onFeeMonthChange: function(e) {
-				console.log(e);
-			},
-			onFeeMonthCancel: function(e) {
-				this.showFeeMonth = false;
-			},
+
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -254,27 +191,24 @@
 				let _objData = {
 					cycles: this.feeMonth,
 					communityId: this.communityId,
-					feeId: this.feeId,
+					roomId: this.contractId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					endTime: this.formatEndTime
+					payObjType:'7777'
 				};
 				context.request({
-					url: constant.url.preOrder,
+					url: constant.url.toOweFeePay,
 					header: context.getHeaders(),
 					method: "POST",
 					data: _objData,
 					//动态数据
 					success: function(res) {
+
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
-							
-							let obj = {};
-							let orderInfo = {};
-							// #ifdef MP-WEIXIN
-							 obj = {
+							let obj = {
 								appid: data.appId,
 								noncestr: data.nonceStr,
 								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
@@ -283,13 +217,8 @@
 								timestamp: data.timeStamp,
 								sign: data.sign // 根据签名算法生成签名
 							}
-							// #endif
-							// #ifdef APP-PLUS
-							obj = getPayInfo(data);
-							// #endif
-							
 							// 第二种写法，传对象字符串
-							orderInfo = JSON.stringify(obj)
+							let orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
 								provider: 'wxpay',
 								orderInfo: orderInfo, //微信、支付宝订单数据
@@ -334,23 +263,20 @@
 				let _objData = {
 					cycles: this.feeMonth,
 					communityId: this.communityId,
-					feeId: this.feeId,
+					roomId: this.contractId,
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					payerObjId: this.contractId,
-					payerObjType: 3333,
-					endTime: this.formatEndTime
+					payObjType:'7777'
 				};
 				context.request({
-					url: constant.url.preOrder,
+					url: constant.url.toOweFeePay,
 					header: context.getHeaders(),
 					method: "POST",
 					data: _objData,
 					//动态数据
 					success: function(res) {
-
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
 							// #ifdef MP-WEIXIN
@@ -373,13 +299,13 @@
 							});
 							// #endif
 							// #ifdef H5
-								WexinPayFactory.wexinPay(data,function(){
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
+							WexinPayFactory.wexinPay(data, function() {
+								uni.showToast({
+									title: "支付成功",
+									duration: 2000
 								});
+								uni.navigateBack({});
+							});
 							// #endif
 							wx.hideLoading();
 							return;
@@ -402,40 +328,39 @@
 					}
 				});
 			},
-			_loadCurContract:function(_contractId){
-				let _that =this;
+			_loadCurContract: function(_contractId) {
+				let _that = this;
 				getCurContract({
-					contractId:_contractId
-				}).then(data =>{
+					contractId: _contractId
+				}).then(data => {
 					_that.contractCode = data.contractCode;
 					_that.contractName = data.contractName;
 					_that.contractStartTime = data.startTime;
-					_that.contractEndTime = data.endTime;	
+					_that.contractEndTime = data.endTime;
 				})
 			}
-			
 		}
 	};
 </script>
 <style>
-	.ppf_item{
-	  padding: 0rpx 0rpx 0rpx 0rpx;
+	.ppf_item {
+		padding: 0rpx 0rpx 0rpx 0rpx;
 	}
-	
+
 	.block__title {
-	  margin: 0;
-	  font-weight: 400;
-	  font-size: 14px;
-	  color: rgba(69,90,100,.6);
-	  padding: 40rpx 30rpx 20rpx;
+		margin: 0;
+		font-weight: 400;
+		font-size: 14px;
+		color: rgba(69, 90, 100, .6);
+		padding: 40rpx 30rpx 20rpx;
 	}
-	
-	.button_up_blank{
-	  height: 40rpx;
+
+	.button_up_blank {
+		height: 40rpx;
 	}
-	
-	.block__bottom{
-	  height: 180rpx;
+
+	.block__bottom {
+		height: 180rpx;
 	}
 
 	.fee-last {

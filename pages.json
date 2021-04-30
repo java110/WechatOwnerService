@@ -514,6 +514,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/contractOweFee/contractOweFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "欠费缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
