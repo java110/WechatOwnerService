@@ -234,7 +234,7 @@
 				let _objData = {
 					page: 1,
 					row: 5,
-					communityId: this.communityId
+					locationTypeCd:'2000'
 				};
 				//查询 广告
 				loadAdverts(_objData)
