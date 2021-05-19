@@ -164,16 +164,7 @@ export function loadAdverts(dataObj) {
 				success: function(res) {
 					if (res.statusCode == 200) {
 						let _advertPhotos = res.data;
-						let _aPhotos = [];
-						let _urlPath = '';
-						// #ifdef MP-WEIXIN
-						_urlPath = url.baseUrl
-						// #endif
-						_advertPhotos.forEach(function(_item) {
-							_item.url = _urlPath + _item.url + "&time=" + new Date();
-							_aPhotos.push(_item);
-						});
-						resolve(_aPhotos);
+						resolve(_advertPhotos);
 						return;
 					}
 					reject();
