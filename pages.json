@@ -523,6 +523,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/questionAnswer/questionAnswer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "投票问卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/questionAnswerDetail/questionAnswerDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

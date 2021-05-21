@@ -109,6 +109,11 @@ export function getCategoryList() {
 				name: "合同费用",
 				src: "/static/images/index_property.png",
 				href: "/pages/contractFeeList/contractFeeList"
+			},
+			{
+				name: "投票问卷",
+				src: "/static/images/index_property.png",
+				href: "/pages/questionAnswer/questionAnswer"
 			}
 			
 		]
