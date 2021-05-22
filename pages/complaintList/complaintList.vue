@@ -173,7 +173,11 @@
 			 */
 			_loadCompaint: function(_active) {
 				let that = this;
-
+				
+				if(!that.communityId || !that.roomId){
+					return;
+				}
+				
 				let _state = '';
 				if (_active == 0) {
 					_state = '10001';

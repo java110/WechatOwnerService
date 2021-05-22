@@ -73,7 +73,7 @@
 					</view>
 				</view>
 				<view class="padding-xl">
-					您确认拨打{{property.name}}-{{property.tel}}
+					您确认拨打,{{property.communityName}}物业客服电话<br />{{property.sCommunityTel}}
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleCall()">取消</view>
@@ -261,24 +261,32 @@
 					return;
 				}
 				//查询物业信息
-				getProperty()
-				.then(function(_propertyInfo){
-					_that.property = _propertyInfo;
-					_that.callPropertyModal = true;
-				})
-				.then(function(res){
-					uni.showToast({
-						title: res,
-						icon: 'none',
-						duration: 2000
-					});
-				})
+				// getProperty()
+				// .then(function(_propertyInfo){
+				// 	_that.property = _propertyInfo;
+				// 	_that.callPropertyModal = true;
+				// })
+				uni.getStorage({
+					key: 'ownerInfo',
+					success: function (res) {
+						console.log(res.data);
+						_that.property = res.data;
+						_that.callPropertyModal = true;
+					}
+				});
+				// .then(function(res){
+				// 	uni.showToast({
+				// 		title: res,
+				// 		icon: 'none',
+				// 		duration: 2000
+				// 	});
+				// })
 			},
 			_doCall: function() {
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
-					phoneNumber: _that.property.tel,
+					phoneNumber: _that.property.sCommunityTel,
 					// 成功回调
 					success: (res) => {
 						console.log('调用成功!')
