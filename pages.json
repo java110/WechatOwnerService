@@ -496,6 +496,51 @@
             }
             
         }
+        ,{
+            "path" : "pages/contractFee/contractFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "合同缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/contractFeeList/contractFeeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "合同费用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/contractOweFee/contractOweFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "欠费缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/questionAnswer/questionAnswer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "投票问卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/questionAnswerDetail/questionAnswerDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

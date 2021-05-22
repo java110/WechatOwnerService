@@ -113,6 +113,9 @@ export default {
 	updateRoomRenovationState:baseUrl + "app/roomRenovation/updateRoomRenovationState",
 	queryRoomRenovationRecord: baseUrl + "app/roomRenovation/queryRoomRenovationRecord",
 	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
+	queryContract:baseUrl + "app/contract/queryContract",
+	queryQuestionAnswer:baseUrl + "app/questionAnswer/queryQuestionAnswer",
+	queryQuestionAnswerTitle:baseUrl + "app/questionAnswer/queryQuestionAnswerTitle",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

@@ -26,12 +26,7 @@
 		</view>
 
 		<view class="cu-list menu  margin-top">
-			<!-- <view v-if="ownerFlag== false" class="cu-item arrow" @click="bindingOwner()">
-				<view class="content">
-					<text class="cuIcon-profile text-pink"></text>
-					<text class="text-grey">绑定业主</text>
-				</view>
-			</view> -->
+			
 			<view class="cu-item arrow" @click="viewOwner()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
@@ -66,6 +61,12 @@
 				<view class="content">
 					<text class="cuIcon-formfill text-orange"></text>
 					<text class="text-grey">我的报修单</text>
+				</view>
+			</view>
+			 <view  class="cu-item arrow" @click="feeDetail()">
+				<view class="content">
+					<text class="cuIcon-profile text-pink"></text>
+					<text class="text-grey">缴费历史</text>
 				</view>
 			</view>
 			
@@ -268,6 +269,19 @@
 				}
 				this.vc.navigateTo({
 					url: '/pages/settings/settings',
+				});
+			},
+			feeDetail:function(){
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/payFeeDetail/payFeeDetail',
 				});
 			},
 			/**

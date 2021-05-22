@@ -101,10 +101,21 @@ export function getCategoryList() {
 				href: "/pages/roomRenovation/roomRenovation"
 			},
 			{
-				name: "测试",
+				name: "临时车收费",
 				src: "/static/images/index_openDoor.png",
 				href: "/pages/tempParkingFee/tempParkingFee"
+			},
+			{
+				name: "合同费用",
+				src: "/static/images/index_property.png",
+				href: "/pages/contractFeeList/contractFeeList"
+			},
+			{
+				name: "投票问卷",
+				src: "/static/images/index_property.png",
+				href: "/pages/questionAnswer/questionAnswer"
 			}
+			
 		]
 	};
 }
@@ -158,16 +169,7 @@ export function loadAdverts(dataObj) {
 				success: function(res) {
 					if (res.statusCode == 200) {
 						let _advertPhotos = res.data;
-						let _aPhotos = [];
-						let _urlPath = '';
-						// #ifdef MP-WEIXIN
-						_urlPath = url.baseUrl
-						// #endif
-						_advertPhotos.forEach(function(_item) {
-							_item.url = _urlPath + _item.url + "&time=" + new Date();
-							_aPhotos.push(_item);
-						});
-						resolve(_aPhotos);
+						resolve(_advertPhotos);
 						return;
 					}
 					reject();
