@@ -116,6 +116,7 @@ export default {
 	queryContract:baseUrl + "app/contract/queryContract",
 	queryQuestionAnswer:baseUrl + "app/questionAnswer/queryQuestionAnswer",
 	queryQuestionAnswerTitle:baseUrl + "app/questionAnswer/queryQuestionAnswerTitle",
+	saveUserQuestionAnswerValue:baseUrl + "app/userQuestionAnswer/saveUserQuestionAnswerValue",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

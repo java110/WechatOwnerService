@@ -12,6 +12,7 @@
 						<text class="margin-right-xs">结束时间：</text> {{question.endTime}}</view>
 				</view>
 				<view class="action" v-if="question.state == '0'">已结束</view>
+				<view class="action" v-else-if="question.state == '2'">已投票</view>
 			</view>
 		</view>
 		<view class="cu-list menu" v-if="questions.length === 0">
@@ -41,13 +42,15 @@
 				communityId: "",
 				questions: [],
 				currPageIndex: 0,
-				pageSize: 10
+				pageSize: 10,
+				userId:''
 			};
 		},
 		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
 			that.communityId = context.getUserInfo().communityId;
+			that.userId = context.getUserInfo().userId;
 			
 			queryQuestionAnswer({
 				page:1,
@@ -62,7 +65,10 @@
 					if(_endTime.getTime() > new Date().getTime()){
 						item.state = '1';
 					}else{
-						item.state = '0'
+						item.state = '0';
+					}
+					if(item.userId == that.userId){
+						item.state = '2';
 					}
 					item.startTime = item.startTime.replace(/:\d{1,2}$/, ' ');
 					item.endTime = item.endTime.replace(/:\d{1,2}$/, ' ');
@@ -79,6 +85,13 @@
 					uni.showToast({
 						icon:'none',
 						title:'此投票问卷已结束'
+					})
+					return ;
+				}
+				if(_question.state == '2'){
+					uni.showToast({
+						icon:'none',
+						title:'此投票问卷已投票'
 					})
 					return ;
 				}

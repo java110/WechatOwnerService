@@ -61,4 +61,31 @@ export function queryQuestionAnswerTitle(_data) {
 	})
 }
 
+/**
+ * add by wuxw
+ * @param {Object} _data 保存 用户地址
+ */
+export function saveUserQuestionAnswerValue(_data){
+	
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.saveUserQuestionAnswerValue,
+			method: "POST",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
+
 

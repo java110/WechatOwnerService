@@ -36,7 +36,7 @@
 	const factory = context.factory;
 
 	import {
-		queryQuestionAnswerTitle
+		queryQuestionAnswerTitle,saveUserQuestionAnswerValue
 	} from '../../api/question/questionApi.js'
 
 	export default {
@@ -108,22 +108,53 @@
 			submitQuestionAnswer: function(e) {
 
 				console.log(this.titles);
+				
+				let _questionAnswerTitles = [];
+				let _titles = this.titles;
+				let _valueId = '';
+				_titles.forEach(item => {
+					
+					if (item.titleType == '2002') {
+						item.radio.forEach(_radio=>{
+							_questionAnswerTitles.push({
+								valueContent:_radio.valueId,
+								titleId:item.titleId,
+								titleType:item.titleType
+							})
+						})
+					} else {
+						_valueId = item.radio;
+						_questionAnswerTitles.push({
+							valueContent:_valueId,
+							titleId:item.titleId,
+							titleType:item.titleType
+						})
+					}
+				})
+
 				let obj = {
-					"repairName": this.bindRepairName,
-					"repairType": this.repairType,
-					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
-					"tel": this.bindTel,
-					"roomId": this.roomId,
-					"photos": [],
-					"context": this.context,
-					"userId": this.userId,
-					"userName": this.userName,
-					"communityId": this.communityId,
-					"bindDate": this.bindDate,
-					"bindTime": this.bindTime,
-					"repairObjType": this.repairObjType,
-					"repairChannel": 'Z'
+					"qaId": this.qaId,
+					"objType": this.objType,
+					"objId": context.getUserInfo().communityId,
+					"answerType": '1002',
+					questionAnswerTitles:_questionAnswerTitles
 				}
+				
+				saveUserQuestionAnswerValue(obj)
+				.then(_data=>{
+					uni.showToast({
+						icon:'none',
+						title:'投票成功'
+					});
+					uni.navigateBack({
+						delta:1
+					})
+				},err=>{
+					uni.showToast({
+						icon:'none',
+						title:err
+					})
+				})
 
 
 
