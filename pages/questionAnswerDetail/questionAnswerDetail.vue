@@ -18,6 +18,11 @@
 						:checked="item.radio[valueIndex].checked?true:false" :value="valueItem.valueId"></checkbox>
 				</view>
 			</checkbox-group>
+			<view v-else>
+				<view class="cu-form-group ">
+					<textarea maxlength="512" v-model="item.radio" placeholder="请回答"></textarea>
+				</view>
+			</view>
 		</view>
 
 

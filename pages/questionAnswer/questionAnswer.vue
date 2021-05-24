@@ -49,6 +49,9 @@
 		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
+		},
+		onShow: function() {
+			let that = this;
 			that.communityId = context.getUserInfo().communityId;
 			that.userId = context.getUserInfo().userId;
 			
@@ -75,9 +78,6 @@
 				});
 				that.questions = _data.data;
 			})
-		},
-		onShow: function() {
-			let that = this;
 		},
 		methods: {
 			gotoDetail: function(_question) {
