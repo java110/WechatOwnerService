@@ -21,8 +21,20 @@ export function translate(imgSrc, callback) {
         var h = that.height;
 
         // 默认按比例压缩
-
         var w = that.width;
+		
+		if(h > 1080 || w > 1080){
+			let _rate = 0;
+			if(h > w){
+				_rate = h/1080;
+				h = 1080;
+				w = Math.floor(w/_rate);		
+			}else{
+				_rate = w/1080;
+				w = 1080;
+				h = Math.floor(h/_rate);		
+			}
+		}
 
         var canvas = document.createElement('canvas');
 
