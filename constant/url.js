@@ -117,7 +117,8 @@ export default {
 	queryQuestionAnswer:baseUrl + "app/questionAnswer/queryQuestionAnswer",
 	queryQuestionAnswerTitle:baseUrl + "app/questionAnswer/queryQuestionAnswerTitle",
 	saveUserQuestionAnswerValue:baseUrl + "app/userQuestionAnswer/saveUserQuestionAnswerValue",
-
+	listMachineTranslates:baseUrl + "app/machineTranslate.listMachineTranslates",
+	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',
