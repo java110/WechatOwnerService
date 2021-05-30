@@ -5,7 +5,7 @@
 			<view v-for="(item,index) in machineTranslates" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding">
 				<view class="flex padding-bottom-xs solid-bottom justify-between">
 					<view>同步时间</view>
-					<view class="text-gray">{{item.createTime}}</view>
+					<view class="text-gray">{{item.updateTime}}</view>
 				</view>
 				<view class="flex margin-top justify-between">
 					<view class="text-gray">设备名称</view>
@@ -78,7 +78,7 @@
 				})
 				.then(_data => {
 					_data.forEach(function(_log) {
-						let _tmpCreateTime = _log.createTime.replace(/\-/g, "/")	
+						_log.updateTime = _log.updateTime.replace(/\-/g, "/")	
 					});
 					_that.machineTranslates = _data;
 				},err =>{
