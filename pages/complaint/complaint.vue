@@ -61,6 +61,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import * as TanslateImage from '../../utils/translate-image.js';
+	import {checkPhoneNumber} from '../../utils/StringUtil.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -236,6 +237,8 @@
 					msg = "请填写投诉人";
 				} else if (obj.tel == "") {
 					msg = "请填写手机号";
+				} else if (!checkPhoneNumber(obj.tel)) {
+					msg = "手机号有误";
 				} else if (obj.context == "") {
 					msg = "请填写投诉内容";
 				}
