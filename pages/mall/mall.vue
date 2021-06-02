@@ -1,35 +1,22 @@
 <template>
 	<view>
-		<view class="cu-bar search bg-white">
-			<view class="search-form round">
-				<text class="cuIcon-search"></text>
-				<input :adjust-position="false" v-model="communityName" type="text" placeholder="请输入商品名" confirm-type="search"></input>
-			</view>
-		</view>
-		<vc-category></vc-category>
-		<vc-recommend></vc-recommend>
-		
+		 <web-view ref="webview"
+		        src="http://mallapp.homecommunity.cn/#/?hcCommunityId=7020181217000001&hcCode=123456789"  @message="reciveMessage"></web-view>
 	</view>
 </template>
 
 <script>
-	
-	import vcCategory from '@/components/vc-category/vc-category.vue'
-	
-	import vcRecommend from '@/components/vc-recommend/vc-recommend.vue'
-	
+	import conf from '../../conf/config.js'
 	export default {
 		data() {
 			return {
-				
+				url:conf.mallUrl
 			}
 		},
-		components:{
-			vcCategory,
-			vcRecommend
-		},
 		methods: {
-			
+			reciveMessage:function(event){
+				console.log('商城回传的参数',event);
+			}
 		}
 	}
 </script>

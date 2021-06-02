@@ -135,14 +135,6 @@
 				"navigationBarTitleText": "我的钥匙"
 			}
 		},
-		// #ifndef MP-WEIXIN 
-		{
-			"path": "pages/viewPersonFace/viewPersonFace",
-			"style": {
-				"navigationBarTitleText": "人脸"
-			}
-		},
-		// #endif
 		{
 			"path": "pages/complaint/complaint",
 			"style": {
@@ -365,40 +357,7 @@
 				"navigationBarTitleText": "商圈"
 			}
         }
-        ,{
-            "path" : "pages/groupBuyList/groupBuyList",
-            "style" : {
-				"navigationBarTitleText": "今日必拼"
-			}
-        }
-        ,{
-            "path" : "pages/goodDetail/goodDetail",
-            "style" : {
-				"navigationBarTitleText": "商品详情"
-			}
-        }
-        ,{
-            "path" : "pages/goodsConfirm/goodsConfirm",
-            "style" : {
-				"navigationBarTitleText": "确认订单"
-			}
-        }
-        ,{
-            "path" : "pages/addressList/addressList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "收货地址"  
-            }
-        }
-        ,{
-            "path" : "pages/addressEdit/addressEdit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
+       ,
 		{
 		    "path" : "pages/applyRoom/applyRoom",
 		    "style" :                                                                                    
