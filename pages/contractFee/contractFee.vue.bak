@@ -182,7 +182,7 @@
 			if(_fee.feeFlag == "2006012"){ // 周期性费用
 				_receivableAmount = _amount;
 			}else{ // 一次性费用
-				_receivableAmount = (_amount * _fee.paymentCycle).toFixed(2);
+				_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
 			}
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);

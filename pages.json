@@ -500,6 +500,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/machineTranslateLog/machineTranslateLog",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "门禁同步日志",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

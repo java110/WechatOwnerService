@@ -76,6 +76,13 @@
 					<text class="text-grey">车位信息</text>
 				</view>
 			</view>
+			
+			<view class="cu-item arrow" @click="_machineTranslate()">
+				<view class="content">
+					<text class="cuIcon-formfill text-orange"></text>
+					<text class="text-grey">门禁同步日志</text>
+				</view>
+			</view>
 
 			<view class="cu-item arrow" @click="mySettings()">
 				<view class="content">
@@ -307,6 +314,11 @@
 			myParking:function(){
 				this.vc.navigateTo({
 					url: '/pages/parkingInfo/parkingInfo',
+				});
+			},
+			_machineTranslate:function(){
+				this.vc.navigateTo({
+					url: '/pages/machineTranslateLog/machineTranslateLog',
 				});
 			}
 
