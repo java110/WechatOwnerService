@@ -36,6 +36,7 @@ const logLevel="DEBUG"; // 日志级别
 
 export default{
 	baseUrl:baseUrl,
+	mallUrl:mallUrl,
 	commonBaseUrl: commonBaseUrl,
 	DEFAULT_COMMUNITY_ID:DEFAULT_COMMUNITY_ID,
 	DEFAULT_COMMUNITY_NAME:DEFAULT_COMMUNITY_NAME,

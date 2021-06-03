@@ -64,6 +64,7 @@
 			})
 			.then(_data=>{
 				_data.data.forEach(function(item, index) {
+					item.endTime = item.endTime.replaceAll("-","/");
 					let _endTime = new Date(item.endTime);
 					if(_endTime.getTime() > new Date().getTime()){
 						item.state = '1';

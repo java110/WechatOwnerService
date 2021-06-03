@@ -14,9 +14,11 @@
 			<checkbox-group class="block" @change="checkboxChange($event,item)" v-else-if="item.titleType == '2002'">
 				<view class="cu-form-group " v-for="(valueItem,valueIndex) in item.questionAnswerTitleValues">
 					<view class="title">{{valueItem.qaValue}}</view>
-					<checkbox :class="item.radio[valueIndex].checked?'checked':''"
-						:checked="item.radio[valueIndex].checked?true:false" :value="valueItem.valueId"></checkbox>
+					<checkbox :class="item.radio[valueIndex].selected == '1'?'checked':''"
+						:checked="item.radio[valueIndex].selected == '1'?true:false" :value="valueItem.valueId">
+					</checkbox>
 				</view>
+				<!--:checked="item.radio[valueIndex].checked?true:false"-->
 			</checkbox-group>
 			<view v-else>
 				<view class="cu-form-group ">
@@ -41,7 +43,8 @@
 	const factory = context.factory;
 
 	import {
-		queryQuestionAnswerTitle,saveUserQuestionAnswerValue
+		queryQuestionAnswerTitle,
+		saveUserQuestionAnswerValue
 	} from '../../api/question/questionApi.js'
 
 	export default {
@@ -79,7 +82,7 @@
 								item.radio.push({
 									checked: false,
 									valueId: value.valueId,
-									selected:'0'
+									selected: '0'
 								})
 							})
 						} else {
@@ -101,38 +104,48 @@
 			},
 			checkboxChange: function(e, item) {
 				item.radio.forEach(value => {
-					if (value.valueId == e.detail.value) {
-						if(value.selected == '0'){
-							value.selected = '1';
-						}else{
-							value.selected = '0';
-						}
-					}
+					value.selected = '0';
+					value.checked = false;
 				})
+
+				item.radio.forEach(value => {
+					e.detail.value.forEach(_dValue =>{
+						if (value.valueId == _dValue) {
+							if (value.selected == '0') {
+								value.selected = '1';
+								value.checked = true;
+							}
+						}
+					})
+				})
+
+				console.log('item.radio', item.radio, e)
 			},
 			submitQuestionAnswer: function(e) {
 
 				console.log(this.titles);
-				
+
 				let _questionAnswerTitles = [];
 				let _titles = this.titles;
 				let _valueId = '';
 				_titles.forEach(item => {
-					
+
 					if (item.titleType == '2002') {
-						item.radio.forEach(_radio=>{
-							_questionAnswerTitles.push({
-								valueContent:_radio.valueId,
-								titleId:item.titleId,
-								titleType:item.titleType
-							})
+						item.radio.forEach(_radio => {
+							if (_radio.selected == '1') {
+								_questionAnswerTitles.push({
+									valueContent: _radio.valueId,
+									titleId: item.titleId,
+									titleType: item.titleType
+								})
+							}
 						})
 					} else {
 						_valueId = item.radio;
 						_questionAnswerTitles.push({
-							valueContent:_valueId,
-							titleId:item.titleId,
-							titleType:item.titleType
+							valueContent: _valueId,
+							titleId: item.titleId,
+							titleType: item.titleType
 						})
 					}
 				})
@@ -142,24 +155,24 @@
 					"objType": this.objType,
 					"objId": context.getUserInfo().communityId,
 					"answerType": '1002',
-					questionAnswerTitles:_questionAnswerTitles
+					questionAnswerTitles: _questionAnswerTitles
 				}
-				
+
 				saveUserQuestionAnswerValue(obj)
-				.then(_data=>{
-					uni.showToast({
-						icon:'none',
-						title:'投票成功'
-					});
-					uni.navigateBack({
-						delta:1
+					.then(_data => {
+						uni.showToast({
+							icon: 'none',
+							title: '投票成功'
+						});
+						uni.navigateBack({
+							delta: 1
+						})
+					}, err => {
+						uni.showToast({
+							icon: 'none',
+							title: err
+						})
 					})
-				},err=>{
-					uni.showToast({
-						icon:'none',
-						title:err
-					})
-				})
 
 
 
