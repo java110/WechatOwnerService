@@ -12,9 +12,18 @@
 				url: ''
 			}
 		},
+		mounted() {
+			// #ifdef H5
+			window.addEventListener("message", this.reciveMessage);
+			// #endif
+		},
 		onLoad(options) {
-			this.url = options.url;
-		
+			let _url = options.url;
+
+			this.url = conf.mallUrl + '#' + _url;
+
+			console.log('_hcUrl',this.url);
+
 		},
 		methods: {
 			reciveMessage: function(event) {

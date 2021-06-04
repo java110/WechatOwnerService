@@ -354,7 +354,8 @@
         ,{
             "path" : "pages/mall/mall",
             "style" : {
-				"navigationBarTitleText": "商圈"
+				"navigationBarTitleText": "商圈",
+				"navigationStyle":"custom"
 			}
         }
        ,
@@ -514,7 +515,8 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }

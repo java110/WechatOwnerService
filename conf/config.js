@@ -15,7 +15,9 @@ const baseUrl = '/';
 const commonBaseUrl = 'https://hc.demo.winqi.cn/';
 
 //商城的url
-const mallUrl = 'http://mallapp.homecommunity.cn/#/?hcCommunityId=7020181217000001&hcCode=123456789';
+const mallUrl = 'http://mallapp.homecommunity.cn/';
+
+const mallUrlIndexPage = mallUrl+'#/?hcCommunityId=7020181217000001&hcCode=123456789&mallFrom=HC';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
@@ -37,6 +39,7 @@ const logLevel="DEBUG"; // 日志级别
 export default{
 	baseUrl:baseUrl,
 	mallUrl:mallUrl,
+	mallUrlIndexPage:mallUrlIndexPage,
 	commonBaseUrl: commonBaseUrl,
 	DEFAULT_COMMUNITY_ID:DEFAULT_COMMUNITY_ID,
 	DEFAULT_COMMUNITY_NAME:DEFAULT_COMMUNITY_NAME,
