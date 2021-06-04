@@ -260,12 +260,6 @@
 					});
 					return;
 				}
-				//查询物业信息
-				// getProperty()
-				// .then(function(_propertyInfo){
-				// 	_that.property = _propertyInfo;
-				// 	_that.callPropertyModal = true;
-				// })
 				uni.getStorage({
 					key: 'ownerInfo',
 					success: function (res) {
@@ -274,13 +268,6 @@
 						_that.callPropertyModal = true;
 					}
 				});
-				// .then(function(res){
-				// 	uni.showToast({
-				// 		title: res,
-				// 		icon: 'none',
-				// 		duration: 2000
-				// 	});
-				// })
 			},
 			_doCall: function() {
 				let _that = this;

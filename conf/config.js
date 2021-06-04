@@ -10,14 +10,17 @@
 
 // #ifdef H5
 // 服务器域名 公众号时，配置为 / 就可以
-const baseUrl = '/'; 
+const baseUrl = '/';
 // #endif
 const commonBaseUrl = 'https://hc.demo.winqi.cn/';
 
 //商城的url
 const mallUrl = 'http://mallapp.homecommunity.cn/';
 
-const mallUrlIndexPage = mallUrl+'#/?hcCommunityId=7020181217000001&hcCode=123456789&mallFrom=HC';
+const mallUrlIndexPage = mallUrl + '#/?mallFrom=HC';
+
+//商城token 刷新页面
+const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
@@ -25,25 +28,26 @@ const baseUrl = 'https://hc.demo.winqi.cn/';
 // #endif
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
-const DEFAULT_COMMUNITY_ID = "7020181217000001";//HC测试小区id  用于没有登录时展示相关信息
+const DEFAULT_COMMUNITY_ID = "7020181217000001"; //HC测试小区id  用于没有登录时展示相关信息
 const DEFAULT_COMMUNITY_NAME = "丰仪家园";
 
 // APP 或者 公众号  appId
-const wAppId=""; //微信AppId
+const wAppId = ""; //微信AppId
 
 //app支付时这里需要填写支付秘钥
-const appPayKey="";
+const appPayKey = "";
 
-const logLevel="DEBUG"; // 日志级别
+const logLevel = "DEBUG"; // 日志级别
 
-export default{
-	baseUrl:baseUrl,
-	mallUrl:mallUrl,
-	mallUrlIndexPage:mallUrlIndexPage,
+export default {
+	baseUrl: baseUrl,
+	mallUrl: mallUrl,
+	mallUrlIndexPage: mallUrlIndexPage,
+	mallUrlRefresh: mallUrlRefresh,
 	commonBaseUrl: commonBaseUrl,
-	DEFAULT_COMMUNITY_ID:DEFAULT_COMMUNITY_ID,
-	DEFAULT_COMMUNITY_NAME:DEFAULT_COMMUNITY_NAME,
-	wAppId:wAppId,
-	logLevel:logLevel,
-	appPayKey:appPayKey
+	DEFAULT_COMMUNITY_ID: DEFAULT_COMMUNITY_ID,
+	DEFAULT_COMMUNITY_NAME: DEFAULT_COMMUNITY_NAME,
+	wAppId: wAppId,
+	logLevel: logLevel,
+	appPayKey: appPayKey
 }

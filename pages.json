@@ -520,6 +520,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/hcWebViewRefresh/hcWebViewRefresh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户鉴权",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
