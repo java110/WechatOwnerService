@@ -530,6 +530,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/homemaking/homemaking",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "家政服务",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
@@ -543,8 +553,8 @@
 				"selectedIconPath": "static/images/home-selected.png"
 			},
 			{
-				"pagePath": "pages/rentHouse/rentHouse",
-				"text": "房源",
+				"pagePath": "pages/homemaking/homemaking",
+				"text": "家政",
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
