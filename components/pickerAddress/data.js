@@ -288,7 +288,10 @@ export default [
 			}, {
 				"countyCode": "130203",
 				"countyName": "路北区"
-			}, {
+			},{
+				"countyCode": "130273",
+				"countyName": "唐山高新技术产业开发区"
+			},{
 				"countyCode": "130281",
 				"countyName": "遵化市"
 			}, {

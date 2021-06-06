@@ -32,7 +32,7 @@ export function getRooms() {
 					method: "GET",
 					data: {
 						communityId: _owner.communityId,
-						ownerId: _owner.memberId
+						ownerId: _owner.ownerId
 					},
 					success: function(res) {
 						if (res.statusCode == 200) {

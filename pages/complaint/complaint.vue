@@ -60,6 +60,8 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
+	import * as TanslateImage from '../../utils/translate-image.js';
+	import {checkPhoneNumber} from '../../utils/StringUtil.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -158,12 +160,25 @@
 						success: (res) => {
 							console.log(res);
 							that.$data.imgList.push(res.tempFilePaths[0]);
-							let _base64Photo = '';
-							factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-								_base64Photo = _res;
-								console.log('base64', _base64Photo);
-								that.photos.push(_base64Photo);
+							// let _base64Photo = '';
+							// factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							// 	_base64Photo = _res;
+							// 	console.log('base64', _base64Photo);
+							// 	that.photos.push(_base64Photo);
+							// });
+							var tempFilePaths = res.tempFilePaths[0]
+							
+							//#ifdef H5
+							TanslateImage.translate(tempFilePaths, (url) => {
+								that.photos.push(url);
+							})
+							//#endif
+							
+							//#ifdef MP-WEIXIN
+							factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
+								that.photos.push(_res);
 							});
+							//#endif
 						}
 				});
 			},
@@ -222,6 +237,8 @@
 					msg = "请填写投诉人";
 				} else if (obj.tel == "") {
 					msg = "请填写手机号";
+				} else if (!checkPhoneNumber(obj.tel)) {
+					msg = "手机号有误";
 				} else if (obj.context == "") {
 					msg = "请填写投诉内容";
 				}

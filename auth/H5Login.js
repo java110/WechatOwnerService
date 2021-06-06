@@ -2,6 +2,8 @@
 
 import url from '../constant/url.js'
 import {requestNoAuth} from '../api/java110Request.js'
+import {isNull} from '../utils/StringUtil.js'
+import {getWAppId} from '../api/init/initApi.js'
 
 
 /**
@@ -15,10 +17,10 @@ import {requestNoAuth} from '../api/java110Request.js'
 export function wechatRefreshToken(errorUrl, _login) {
 		let _errorUrl = errorUrl;
 		if (errorUrl == null || errorUrl == undefined || errorUrl == '') {
-			_errorUrl = '/#/pages/showlogin/showlogin';
+			_errorUrl = '/#/pages/showlogin/showlogin?wAppId='+getWAppId();
 		}
 		
-		if(_login == null || _login == undefined || _login == ''){
+		if(isNull(_login)){
 			_login = 0; // 不是登录页面鉴权
 		}
 		requestNoAuth({

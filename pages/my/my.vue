@@ -6,7 +6,8 @@
 			<view class="userinfo">
 				<block>
 					<view v-if="login">
-						<view class="cu-avatar header-img round " :style="{backgroundImage: 'url(' + headerImg + ')' }"></view>
+						<view class="cu-avatar header-img round " :style="{backgroundImage: 'url(' + headerImg + ')' }">
+						</view>
 						<view class="userinfo-nickname text-center margin-top">
 							<text>{{userName}}</text>
 						</view>
@@ -26,28 +27,11 @@
 		</view>
 
 		<view class="cu-list menu  margin-top">
-			<!-- <view v-if="ownerFlag== false" class="cu-item arrow" @click="bindingOwner()">
-				<view class="content">
-					<text class="cuIcon-profile text-pink"></text>
-					<text class="text-grey">绑定业主</text>
-				</view>
-			</view> -->
+
 			<view class="cu-item arrow" @click="viewOwner()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
 					<text class="text-grey">业主信息</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myProperty()">
-				<view class="content">
-					<text class="cuIcon-service text-red"></text>
-					<text class="text-grey">我的物业</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myComplaint()">
-				<view class="content">
-					<text class="cuIcon-form text-green"></text>
-					<text class="text-grey">我的投诉单</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="myHouse()">
@@ -56,20 +40,54 @@
 					<text class="text-grey">我的房屋</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="mallOrder()">
+				<view class="content">
+					<text class="cuIcon-shopfill text-orange"></text>
+					<text class="text-grey">商城订单</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="feeDetail()">
+				<view class="content">
+					<text class="cuIcon-profile text-pink"></text>
+					<text class="text-grey">缴费历史</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="myComplaint()">
+				<view class="content">
+					<text class="cuIcon-form text-green"></text>
+					<text class="text-grey">我的投诉单</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myRepair()">
 				<view class="content">
 					<text class="cuIcon-formfill text-orange"></text>
 					<text class="text-grey">我的报修单</text>
 				</view>
 			</view>
-			
+			<view class="cu-item arrow" @click="_machineTranslate()">
+				<view class="content">
+					<text class="cuIcon-formfill text-orange"></text>
+					<text class="text-grey">门禁同步日志</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="myRenovation()">
+				<view class="content">
+					<text class="cuIcon-form text-green"></text>
+					<text class="text-grey">房屋装修</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myParking()">
 				<view class="content">
 					<text class="cuIcon-formfill text-orange"></text>
 					<text class="text-grey">车位信息</text>
 				</view>
 			</view>
-
+			<view class="cu-item arrow" @click="myProperty()">
+				<view class="content">
+					<text class="cuIcon-service text-red"></text>
+					<text class="text-grey">我的物业</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="mySettings()">
 				<view class="content">
 					<text class="cuIcon-settings text-gray"></text>
@@ -88,7 +106,10 @@
 	const constant = context.constant;
 	//获取app实例
 	const app = getApp().globalData;
-
+	import conf from '../../conf/config.js';
+	import {getHcCode} from '../../api/webView/webViewApi.js'
+	
+	import {getCurCommunity} from '../../api/community/communityApi.js'
 	export default {
 		data() {
 			return {
@@ -105,7 +126,9 @@
 		components: {},
 		props: {},
 		onLoad: function(options) {
-			context.onLoad(options);
+			context.onLoad(options, () => {
+				this.refreshPageLoginInfo();
+			});
 			let _that = this;
 			let login = context.checkLoginStatus();
 			if (login) {
@@ -116,42 +139,45 @@
 			}
 		},
 		onShow: function() {
-			let _that = this; //查询用户信息
-
-			if (!_that.ckeckUserInfo()) {
-				_that.login = false;
-				return;
-			}
-			_that.login = true;
-
-
-			_that.loadOwenrInfo();
-			_that.userInfo = context.getUserInfo();
-			this.loadOwnerHeaderImg();
-			// _that.setData({
-			//   userInfo: context.getUserInfo()
-			// });
+			this.refreshPageLoginInfo();
 		},
 		methods: {
+			// 原onShow方法
+			// 自动登录后 刷新页面登录信息
+			refreshPageLoginInfo: function() {
+				let _that = this; //查询用户信息
+				if (!_that.ckeckUserInfo()) {
+					_that.login = false;
+					return;
+				}
+				_that.login = true;
+				_that.loadOwenrInfo();
+				_that.userInfo = context.getUserInfo();
+				this.loadOwnerHeaderImg();
+			},
 			bindingOwner: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../bindOwner/bindOwner'
 				});
 			},
 			viewOwner: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../viewBindOwner/viewBindOwner'
 				});
 			},
@@ -163,76 +189,104 @@
 
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
-						// _that.setData({
-						//   ownerFlag: true
-						// });
 					} else {
 						_that.ownerFlag = false;
-						// _that.setData({
-						//   ownerFlag: false
-						// });
 					}
 				});
 			},
 			myProperty: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../myProperty/myProperty'
 				});
 			},
 
 			myComplaint: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '../complaintList/complaintList'
 				});
 			},
-
 			onGotUserInfo: function(e) {
 				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
 			},
-
-			myHouse: function() {
+			myRenovation: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
+					url: '../myRenovation/myRoomList'
+				});
+			},
+			myHouse: function() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
 					url: '../my/myHouse'
 				});
 			},
 			myRepair: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/myRepair/myRepair',
 				});
 			},
 			mySettings: function() {
 				if (!this.ckeckUserInfo()) {
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
 					});
 					return;
 				}
-				wx.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/settings/settings',
+				});
+			},
+			feeDetail: function() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/payFeeDetail/payFeeDetail',
 				});
 			},
 			/**
@@ -241,23 +295,43 @@
 			loadOwnerHeaderImg: function() {
 				let _that = this;
 				context.getOwner(function(_owner) {
-					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId + "&communityId=" + _owner.communityId +
+					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId +
+						"&communityId=" + _owner.communityId +
 						"&fileTypeCd=10000";
 					_that.headerImg = _headerImg;
 					_that.userName = _owner.appUserName;
 				});
 			},
 			showLongModel: function() {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '../login/login'
 				});
 			},
 			ckeckUserInfo: function() {
 				return context.checkLoginStatus();
 			},
-			myParking:function(){
-				wx.navigateTo({
+			myParking: function() {
+				this.vc.navigateTo({
 					url: '/pages/parkingInfo/parkingInfo',
+				});
+			},
+			_machineTranslate: function() {
+				this.vc.navigateTo({
+					url: '/pages/machineTranslateLog/machineTranslateLog',
+				});
+			},
+			mallOrder:function(){
+				let that = this;
+				let _communityId = '';
+				getCurCommunity()
+				.then(res=>{
+					_communityId = res.communityId;
+					return getHcCode();
+				}).then(_data => {
+					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					uni.navigateTo({
+						url: '/pages/hcWebView/hcWebView?url='+_url
+					});
 				});
 			}
 
@@ -266,8 +340,8 @@
 </script>
 <style>
 	@import "./my.css";
-	
-	.header-img{
+
+	.header-img {
 		width: 200upx;
 		height: 200upx;
 	}

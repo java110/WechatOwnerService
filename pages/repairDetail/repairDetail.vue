@@ -2,7 +2,7 @@
 	<view>
 		<view class="cu-timeline">
 			<view class="cu-time">工单</view>
-			<view class="cu-item " v-for="(item,index) in staffs">
+			<view class="cu-item " v-for="(item,index) in staffs" :key="key">
 				<view class="bg-cyan content">
 					<text>{{item.startTime}} </text> 到达 {{item.staffName}} 工位
 				</view>
@@ -12,8 +12,14 @@
 				<view class="bg-cyan content" v-if="item.endTime != undefined">
 					<text>处理意见：</text>  {{item.context}}
 				</view>
+				<view class="bg-cyan content" v-if="item.photoVos.length > 0 && item.state==10005">
+					<view class="repair-img-item" v-for="(pic, index2) in item.photoVos" :key="key2">
+						<image :src="imgUrlPre + pic.url" :data-url="imgUrlPre + pic.url" @tap="preview" mode="widthFix"></image>
+					</view>
+				</view>
 			</view>
 		</view>
+		<viewImage ref="viewImageRef"></viewImage>
 	</view>
 </template>
 
@@ -21,13 +27,21 @@
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
+	import conf from '../../conf/config.js'
+	import viewImage from '@/components/view-image/view-image.vue'
 	export default {
 		data() {
 			return {
+				viewImage: false,
+				viewImageSrc: '',
 				staffs:[],
 				repairId:'',
-				communityId:''
+				communityId:'',
+				imgUrlPre: '',
 			}
+		},
+		components: {
+			viewImage
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -37,6 +51,7 @@
 			context.onLoad(options);
 			this.repairId = options.repairId;
 			this.communityId = context.getCurrentCommunity().communityId;
+			this.imgUrlPre = conf.commonBaseUrl;
 			
 			//加载报修类型
 			this._loadRepairStaffs();
@@ -71,11 +86,22 @@
 						});
 					}
 				});
+			},
+			preview: function(e) {
+				let _url = e.target.dataset.url;
+				this.$refs.viewImageRef.showThis(_url);
 			}
 		}
 	}
 </script>
-
 <style>
-
+	.repair-img-item{
+		display: inline-block;
+		margin: 0 20upx;
+	}
+	.repair-img-item image{
+		width: 200upx;
+		border-radius: 15upx;
+	}
 </style>
+

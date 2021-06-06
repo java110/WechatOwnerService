@@ -88,7 +88,7 @@
 		onShareAppMessage: function() {},
 		methods: {
 			myHouseDetail: function(_item) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: '/pages/my/myHouseDetail?room=' + JSON.stringify(_item)
 				});
 			},

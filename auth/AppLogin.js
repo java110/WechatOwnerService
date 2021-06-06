@@ -3,6 +3,7 @@ import {
 	requestNoAuth
 } from '../api/java110Request.js'
 import mapping from '../constant/MappingConstant.js'
+import {getWAppId} from '../api/init/initApi.js'
 
 /**
  * 
@@ -10,7 +11,7 @@ import mapping from '../constant/MappingConstant.js'
  * @param {Object} _key 自登陆key
  * add by  wuxw QQ 928255095
  */
-export function doLoginOwnerByKey(_key) {
+export function doLoginOwnerByKey(_key, callback = () => {}) {
 	requestNoAuth({
 		url: url.loginOwnerByKey,
 		method: 'post',
@@ -21,7 +22,7 @@ export function doLoginOwnerByKey(_key) {
 			let _param = res.data;
 			if (_param.code != 0) {
 				uni.navigateTo({
-					url: '/pages/showlogin/showlogin'
+					url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
 				});
 				return;
 			}
@@ -50,11 +51,12 @@ export function doLoginOwnerByKey(_key) {
 			wx.setStorageSync(mapping.TOKEN, _param.token);
 			//保存临时 钥匙
 			wx.setStorageSync(mapping.OWNER_KEY, _param.key);
+			callback();
 		},
 		fail: function(error) {
 			// 调用服务端登录接口失败
 			uni.navigateTo({
-				url: '/pages/showlogin/showlogin'
+				url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
 			});
 		}
 	});

@@ -8,7 +8,9 @@
 	</view>
 	<view class="flex-sub bg-white">
 		<view class="content">
-		    <rich-text class="solid-bottom text-df padding" :nodes="notice.context"></rich-text>
+		    <!-- <rich-text class="solid-bottom text-df padding" :nodes="notice.context"></rich-text> -->
+			<jyf-parser :html="notice.context" ref="article"></jyf-parser>
+			
 		</view>
 	</view>
 </view>
@@ -18,8 +20,12 @@
 	/** detail.js **/
 	const context = require("../../../context/Java110Context.js");
 	const constant = context.constant; //获取app实例
+	import conf from '../../../conf/config.js'
+	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
 	//获取app实例
 	const app = getApp().globalData;
+	
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 
 	export default {
 		data() {
@@ -28,6 +34,8 @@
 				noticeId: ''
 			};
 		},
+		
+		components:{jyfParser},
 
 		onLoad: function(options) {
 			context.onLoad(options);
@@ -60,7 +68,7 @@
 						console.log(res);
 						let notice = res.data.notices[0]
 						notice.timeStr = notice.startTime.replace(/:\d{1,2}$/, ' ');
-
+						notice.context = replaceImgSrc(notice.context,conf.baseUrl);
 						that.notice = notice;
 					}
 				});

@@ -13,34 +13,10 @@
 				</view>
 				<view class="cu-item">
 					<view class="content">
-						<text class="text-grey">楼栋编号</text>
+						<text class="text-grey">房屋</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{floorNum + '号楼'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">单元编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{unitNum + '单元'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋编号</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{roomNum + '室'}}</text>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="content">
-						<text class="text-grey">房屋楼层</text>
-					</view>
-					<view class="action">
-						<text class="text-grey text-sm">{{layer + '层'}}</text>
+						<text class="text-grey text-sm">{{floorNum + '号楼'+unitNum+ '单元'+roomNum + '室'}}</text>
 					</view>
 				</view>
 				<view class="cu-item">
@@ -90,7 +66,7 @@
 						</picker>
 					</view>
 				</view>
-				<view class="cu-item">
+				<view class="cu-item" v-if="feeFlag != '2006012'">
 					<view class="content">
 						<text class="text-grey">到期时间</text>
 					</view>
@@ -98,8 +74,9 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
-
+				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
+			
 		</scroll-view>
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
 
@@ -126,6 +103,8 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	
+	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 
 	
 	// #ifdef H5
@@ -134,8 +113,15 @@
 	
 	// #endif
 	
-	import {addMonth,formatDate} from '../../utils/DateUtil.js'
+	// #ifdef APP-PLUS
+	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
+	// #endif
+	
+	import {addMonth,formatDate,date2String} from '../../utils/DateUtil.js'
 	export default {
+		components:{
+			vcDiscount
+		},
 		data() {
 			return {
 				date: '2018-12-25',
@@ -150,11 +136,13 @@
 				feeMonth: 1,
 				endTime: '',
 				ordEndTime: '',
+				formatEndTime: '',
 				amount: 0,
 				receivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
 				feeId: '',
+				roomId: '',
 				floorNum: '',
 				unitNum: '',
 				roomNum: '',
@@ -165,8 +153,10 @@
 				appId: '',
 				feeFlag:'',
 				paymentCycle:1,
+				squarePrice: 0,
 			};
 		},
+		
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -181,24 +171,30 @@
 			// #endif
 			let _fee = JSON.parse(options.fee);
 			let _amount = _fee.amount;
-			let _receivableAmount = (_fee.paymentCycle * _amount).toFixed(2);
+			let _receivableAmount = _amount;
+			if(_fee.feeFlag == "2006012"){ // 周期性费用
+				_receivableAmount = _amount;
+			}else{ // 一次性费用
+				_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
+			}
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
-			let _endTime = addMonth(_lastDate, this.feeMonth);
 			this.receivableAmount = _receivableAmount;
 			this.communityId = _communityInfo.communityId;
 			this.communityName = _communityInfo.communityName;
 			this.floorNum = _fee.floorNum;
 			this.unitNum = _fee.unitNum;
 			this.roomNum = _fee.roomNum;
+			this.roomId = _fee.roomId;
 			this.layer = _fee.layer;
 			this.builtUpArea = _fee.builtUpArea;
 			this.feeId = _fee.feeId;
 			this.amount = _amount;
 			this.additionalAmount = _fee.additionalAmount;
-			this.endTime = formatDate(_endTime);
 			this.ordEndTime = _fee.endTime;
+			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
+			this.squarePrice = _fee.squarePrice;
 			if(this.feeFlag == '2006012'){
 				return;
 			}
@@ -208,21 +204,32 @@
 			}
 			this.feeMonthName = this.paymentCycle + '个月';
 			this.feeMonth = this.paymentCycle;
+			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
+			this.endTime = formatDate(_endTime);
+			
+			this.$nextTick(() => {
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+			})
 		},
 		methods: {
+			computeFeeDiscount:function(_price){
+				// this.receivableAmount = this.receivableAmount - _price;
+				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
+			},
 			dateChange: function(e) {
-				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];;
 				let _feeMonth = _feeMonthName.replace("个月","");
-				let _receivableAmount = _feeMonth * this.amount;
+				// let _receivableAmount = _feeMonth * this.amount;
+				let _receivableAmount = _feeMonth * (this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount));
 				let _lastDate = new Date(this.ordEndTime);
-				let _newDate = util.date.addMonth(_lastDate, _feeMonth);
+				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount;
+				this.receivableAmount = _receivableAmount.toFixed(2);
 				this.feeMonth = _feeMonth;
-				this.endTime = util.date.formatDate(_newDate);
+				this.endTime = formatDate(_newDate);
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			},
 			onFeeMonthChange: function(e) {
 				console.log(e);
@@ -244,7 +251,8 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					endTime: this.formatEndTime
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -253,11 +261,13 @@
 					data: _objData,
 					//动态数据
 					success: function(res) {
-						console.log(res);
-
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
-							let obj = {
+							
+							let obj = {};
+							let orderInfo = {};
+							// #ifdef MP-WEIXIN
+							 obj = {
 								appid: data.appId,
 								noncestr: data.nonceStr,
 								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
@@ -266,8 +276,13 @@
 								timestamp: data.timeStamp,
 								sign: data.sign // 根据签名算法生成签名
 							}
+							// #endif
+							// #ifdef APP-PLUS
+							obj = getPayInfo(data);
+							// #endif
+							
 							// 第二种写法，传对象字符串
-							let orderInfo = JSON.stringify(obj)
+							orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
 								provider: 'wxpay',
 								orderInfo: orderInfo, //微信、支付宝订单数据
@@ -316,7 +331,10 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					payerObjId: this.roomId,
+					payerObjType: 3333,
+					endTime: this.formatEndTime
 				};
 				context.request({
 					url: constant.url.preOrder,

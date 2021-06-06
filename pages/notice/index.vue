@@ -76,7 +76,7 @@
 				let that = this;
 				
 				//wx.setStorageSync('notice-' + index, JSON.stringify(that.notices[index]));
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: "/pages/notice/detail/detail?noticeId=" + _notice.noticeId
 				});
 			},

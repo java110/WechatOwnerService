@@ -216,14 +216,16 @@
 			let that = this;
 			context.onLoad(options);
 			context.getOwner(res => {
-				console.log('_ownerInfo', res);
 				that.userId = res.userId;
 				that.communityId = res.communityId;
 				that._loadRepair(that.active);
 			});
-
-
-
+		},
+		
+		onShow: function(){
+			if(this.userId && this.communityId){
+				this._loadRepair(this.active);
+			}
 		},
 		methods: {
 			/**
@@ -454,9 +456,17 @@
 				});
 			},
 			_toPay:function(_item){
+				console.log(_item);
 				context.navigateTo({
-					url:'/pages/repairPay/repairPay?repairId='+_item.repairId+"&communityId="+_item.communityId+"&userId="+this.userId
-					
+					url:'/pages/repairPay/repairPay?repairId='+_item.repairId+
+					"&communityId="+_item.communityId+
+					"&userId="+this.userId+
+					"&repairObjId="+_item.repairObjId+
+					"&appointmentTime="+_item.appointmentTime+
+					"&repairTypeName="+_item.repairTypeName+
+					"&repairObjName="+_item.repairObjName+
+					"&repairName="+_item.repairName+
+					"&context="+_item.context
 				})
 			}
 		}

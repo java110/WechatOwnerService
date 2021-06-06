@@ -66,6 +66,8 @@ class WexinPayFactory {
 			/*alert("config信息验证失败");*/
 		});
 	}
+	
+	
 
 };
 

@@ -25,7 +25,8 @@
 			</view>
 		</view>
 		<view class="ad_context">
-			<rich-text :nodes="context"></rich-text>
+			<!-- <rich-text :nodes="context"></rich-text> -->
+			<jyf-parser :html="context" ref="article"></jyf-parser>
 		</view>
 	</view>
 </template>
@@ -44,6 +45,12 @@
 	import {
 		loadActivites
 	} from '../../api/index/indexApi.js'
+	
+	import conf from '../../conf/config.js'
+	
+	import {replaceImgSrc} from  '../../utils/ImageUtil.js';
+	
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 	export default {
 		data() {
 			return {
@@ -61,7 +68,7 @@
 			};
 		},
 
-		components: {},
+		components: {jyfParser},
 		props: {},
 
 		/**
@@ -116,15 +123,22 @@
 					communityId: this.communityId,
 					activitiesId: this.activitiesId
 				};
+				let _urlPath = '';
+				// #ifdef MP-WEIXIN
+				_urlPath = conf.baseUrl
+				// #endif
 				loadActivites(_objData)
 					.then((_acts) => {
 						let _activites = _acts[0];
 						_that.src = _activites.src;
 						_that.userName = _activites.userName;
 						_that.startTime = _activites.startTime;
-						_that.context = _activites.context;
+						_that.context = replaceImgSrc(_activites.context,conf.commonBaseUrl);
 						_that.readCount = _activites.readCount;
 						_that.likeCount = _activites.likeCount;
+						wx.setNavigationBarTitle({
+						  title: _activites.title
+						})
 					});
 			},
 			hideHeadImg: function() {

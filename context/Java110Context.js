@@ -18,7 +18,7 @@ import {
 
 import {
 	getCurOwner
-} from '../api/owner/ownerApi.js'
+} from '../api/owner/ownerApi.js';
 
 import {
 	getProperty
@@ -34,7 +34,6 @@ let util = {};
  * http 请求 加入是否登录判断
  */
 const requestObj = function(_reqObj) {
-
 
 	//白名单直接跳过检查登录
 	if (constant.url.NEED_NOT_LOGIN_URL.includes(_reqObj.url)) {
@@ -171,7 +170,7 @@ const getRooms = function() {
 				method: "GET",
 				data: {
 					communityId: _owner.communityId,
-					ownerId: _owner.memberId
+					ownerId: _owner.ownerId
 				},
 				success: function(res) {
 					if (res.statusCode == 200) {

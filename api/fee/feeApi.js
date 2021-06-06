@@ -39,6 +39,7 @@ export function getRoomFees(_objData,_tmpRoom) {
 						reject();
 					}
 					_roomFees.forEach(function(_roomFee) {
+						_tmpRoom = JSON.parse(JSON.stringify(_tmpRoom));
 						_tmpRoom.endTime = dateTimeStringToDateString(_roomFee.endTime);
 						let _now = new Date();
 						if (_roomFee.endTime > _now) {
@@ -94,6 +95,32 @@ export function getRoomOweFees(_objData) {
 					
 					 });
 					resolve(_roomFees);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 查询优惠信息
+ * @param {Object} _objData 费用
+ */
+export function getFeeDiscounts(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computeFeeDiscount,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _feeDiscounts = res.data.data;
+					resolve(_feeDiscounts);
 					return;
 				}
 				reject();

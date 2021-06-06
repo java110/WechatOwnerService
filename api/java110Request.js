@@ -9,6 +9,8 @@ import url from '../constant/url.js'
 import mapping from '../constant/MappingConstant.js'
 
 import {checkSession} from '../auth/Java110Auth.js'
+import {getWAppId} from './init/initApi.js'
+
 
 import {
 	wechatRefreshToken
@@ -101,7 +103,7 @@ export function request(_reqObj) {
 			doLoginOwnerByKey(_key);
 		} else {
 			uni.navigateTo({
-				url: '/pages/showlogin/showlogin'
+				url: '/pages/showlogin/showlogin?wAppId='+getWAppId()
 			});
 			return;
 		}

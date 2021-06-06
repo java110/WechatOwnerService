@@ -23,11 +23,13 @@ import {debug,info,error,warn} from '../utils/LogUtil.js'
 import {getCurCommunity,recoveryCommunityInfo} from '../api/community/communityApi.js'
 
 // 页面初始化相关
-import {onLoad} from '../api/init/initApi.js'
+import {onLoad,getWAppId} from '../api/init/initApi.js'
 
 import {navigateTo,navigateBack} from './vcRoute.js'
 
 import {isEmpty} from '../utils/StringUtil.js'
+
+import {hasLogin} from '../auth/Java110Auth.js'
 
 
 
@@ -44,5 +46,7 @@ export default{
 	onLoad:onLoad,
 	navigateTo:navigateTo,
 	navigateBack:navigateBack,
-	isEmpty:isEmpty
+	isEmpty:isEmpty,
+	hasLogin:hasLogin,
+	getWAppId:getWAppId
 }

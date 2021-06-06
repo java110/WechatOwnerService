@@ -86,6 +86,7 @@
 
 <script>
 	const context = require("../../context/Java110Context.js");
+	import * as TanslateImage from '../../utils/translate-image.js';
 	const constant = context.constant;
 	const factory = context.factory;
 	export default {
@@ -115,7 +116,7 @@
 				var _that = this;
 				wx.chooseImage({
 					count: 1,
-					sizeType: ['original', 'compressed'],
+					sizeType: ['compressed'],
 					sourceType: ['album', 'camera'],
 					success: function(res) {
 						// console.log(res)
@@ -127,11 +128,20 @@
 						});
 						var tempFilePaths = res.tempFilePaths
 						console.log('头像地址', tempFilePaths);
+						//#ifdef H5
+						TanslateImage.translate(tempFilePaths, (_baseInfo) => {
+							_that.headerImg = _baseInfo;
+							_that._uploadOwnerHeaderImg();
+							wx.hideLoading()
+						})
+						//#endif
+						//#ifdef MP-WEIXIN
 						factory.base64.urlTobase64(tempFilePaths[0]).then(function(_baseInfo) {
 							_that.headerImg = _baseInfo;
 							_that._uploadOwnerHeaderImg();
 							wx.hideLoading()
 						});
+						//#endif
 					}
 				})
 			},
@@ -191,7 +201,7 @@
 				this.logoutUser = false;
 			},
 			_toPage: function(_url) {
-				uni.navigateTo({
+				this.vc.navigateTo({
 					url: _url
 				});
 			},
@@ -199,6 +209,7 @@
 				let _data = {
 					token: wx.getStorageSync('token')
 				}
+				let that = this;
 				context.request({
 					url: constant.url.userLogout,
 					header: context.getHeaders(),
@@ -217,7 +228,7 @@
 						if (wAppId != null && wAppId != undefined && wAppId != '') {
 							uni.setStorageSync(constant.mapping.W_APP_ID, wAppId);
 						}
-						uni.navigateTo({
+						that.vc.navigateTo({
 							url: '/pages/login/login'
 						});
 					},

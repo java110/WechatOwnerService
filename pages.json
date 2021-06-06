@@ -32,12 +32,6 @@
 			}
 		},
 		{
-			"path": "pages/applicationKey/applicationKey",
-			"style": {
-				"navigationBarTitleText": "申请钥匙"
-			}
-		},
-		{
 			"path": "pages/applicationKeyLocation/applicationKeyLocation",
 			"style": {
 				"navigationBarTitleText": "相关门禁"
@@ -77,7 +71,7 @@
 		{
 			"path": "pages/openDoor/openDoor",
 			"style": {
-				"navigationBarTitleText": "智慧门禁"
+				"navigationBarTitleText": "开门"
 			}
 		},
 		{
@@ -141,14 +135,6 @@
 				"navigationBarTitleText": "我的钥匙"
 			}
 		},
-		// #ifndef MP-WEIXIN 
-		{
-			"path": "pages/viewPersonFace/viewPersonFace",
-			"style": {
-				"navigationBarTitleText": "人脸"
-			}
-		},
-		// #endif
 		{
 			"path": "pages/complaint/complaint",
 			"style": {
@@ -191,6 +177,12 @@
 		},
 		{
 			"path": "pages/roomFeeList/roomFeeList",
+			"style": {
+				"navigationBarTitleText": "物业费"
+			}
+		},
+		{
+			"path": "pages/roomFeeListNew/roomFeeListNew",
 			"style": {
 				"navigationBarTitleText": "物业费"
 			}
@@ -359,6 +351,195 @@
 				"navigationBarTitleText": "租房预约"
 			}
         }
+        ,{
+            "path" : "pages/mall/mall",
+            "style" : {
+				"navigationBarTitleText": "商圈",
+				"navigationStyle":"custom"
+			}
+        }
+       ,
+		{
+		    "path" : "pages/applyRoom/applyRoom",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/applyRoomDetail/applyRoomDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/roomRenovation/roomRenovation",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/roomRenovationDetail/roomRenovationDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修申请",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomRenovationList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修记录",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myRenovation/myRoomRenovationDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "装修详情",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+			"path" : "pages/myRoomRenovationRecord/myRoomRenovationRecord",
+			"style" :                                                                                    
+			{
+			    "navigationBarTitleText": "跟踪记录",
+			    "enablePullDownRefresh": false
+			}
+		}
+		,{
+			"path" : "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
+			"style" :                                                                                    
+			{
+			    "navigationBarTitleText": "跟踪记录详情",
+			    "enablePullDownRefresh": false
+			}
+		}
+        ,{
+            "path" : "pages/carOweFee/carOweFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "欠费缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/tempParkingFee/tempParkingFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "临时车缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/contractFee/contractFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "合同缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/contractFeeList/contractFeeList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "合同费用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/contractOweFee/contractOweFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "欠费缴费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/questionAnswer/questionAnswer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "投票问卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/questionAnswerDetail/questionAnswerDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machineTranslateLog/machineTranslateLog",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "门禁同步日志",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/hcWebView/hcWebView",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/hcWebViewRefresh/hcWebViewRefresh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户鉴权",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/homemaking/homemaking",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "家政服务",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
@@ -372,14 +553,14 @@
 				"selectedIconPath": "static/images/home-selected.png"
 			},
 			{
-				"pagePath": "pages/rentHouse/rentHouse",
-				"text": "房源",
+				"pagePath": "pages/homemaking/homemaking",
+				"text": "家政",
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
 			{
-				"pagePath": "pages/market/market",
-				"text": "市场",
+				"pagePath": "pages/mall/mall",
+				"text": "商圈",
 				"iconPath": "static/images/market.png",
 				"selectedIconPath": "static/images/market-selected.png"
 			},

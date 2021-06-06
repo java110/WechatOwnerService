@@ -79,6 +79,11 @@
                     "target" : "https://app.demo.winqi.cn", //目标接口域名
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
+                },
+                "/callComponent" : {
+                    "target" : "https://app.demo.winqi.cn", //目标接口域名
+                    "changeOrigin" : true, //是否跨域
+                    "secure" : true // 设置支持https协议的代理
                 }
             }
         },

@@ -207,21 +207,21 @@
 			addlisttap:function(index){/*第一个序列为0,第二个为1,以此类推;当值为-1代表点击的是遮慕层*/
 				let login = context.checkLoginStatus();
 				if(!login){
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
 				}
 				let _that = this;
 				if(index == 0){
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url:'/pages/myJunk/myJunk'
 					});
 					return ;	
 				}
 				if(index == 1){
 					
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url:"/pages/newJunk/newJunk?active=" + this.active
 					});
 					return ;
@@ -232,7 +232,7 @@
 				let _that = this;
 				let login = context.checkLoginStatus();
 				if(!login){
-					uni.navigateTo({
+					this.vc.navigateTo({
 						url: '../showlogin/showlogin'
 					});
 					return;
