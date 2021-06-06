@@ -234,7 +234,8 @@
 				let _objData = {
 					page: 1,
 					row: 5,
-					locationTypeCd:'2000'
+					locationTypeCd:'2000',
+					viewType:'8888'
 				};
 				//查询 广告
 				loadAdverts(_objData)
