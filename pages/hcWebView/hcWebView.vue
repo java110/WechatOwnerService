@@ -20,7 +20,14 @@
 		onLoad(options) {
 			let _url = options.url;
 
-			this.url = conf.mallUrl + '#' + _url;
+			if(_url.indexOf("http")>-1){
+				_url = _url.replace("**","?");
+				_url = _url.replace("@@","&");
+				_url = _url.replace("$$","#");
+				this.url = _url;
+			}else{
+				this.url = conf.mallUrl + '#' + _url;
+			}
 
 			console.log('_hcUrl',this.url);
 

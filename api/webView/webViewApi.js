@@ -14,9 +14,14 @@ import {
 	dateTimeStringToDateString
 } from '../../utils/DateUtil.js'
 
+import WexinPayFactory from '../../factory/WexinPayFactory.js'
+
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
+const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
+const ACTION_PAY_ORDER = "payOrder";
+
 
 
 /**
@@ -62,8 +67,8 @@ export function checkSession(that, url) {
 			uni.navigateTo({
 				url: '/pages/hcWebViewRefresh/hcWebViewRefresh?url=' + _url
 			});
-		},err=>{
-			
+		}, err => {
+
 		});
 	}, function(error) { //回话过期
 		// #ifdef H5
@@ -91,6 +96,80 @@ export function checkSession(that, url) {
 	});
 }
 
+export function getCurrentPage(){
+	let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
+	let curRoute = routes[routes.length - 1].route //获取当前页面路由
+	return '/'+curRoute;
+}
+
+export function toPay(data, _url) {
+	return new Promise((resolve, reject) => {
+		let obj = {};
+		let orderInfo = {};
+		// #ifdef MP-WEIXIN
+		uni.requestPayment({
+			'timeStamp': data.timeStamp,
+			'nonceStr': data.nonceStr,
+			'package': data.package,
+			'signType': data.signType,
+			'paySign': data.sign,
+			'success': function(res) {
+				uni.showToast({
+					title: "支付成功",
+					duration: 2000
+				});
+				uni.redirectTo({
+					url:getCurrentPage()+'?url='+_url
+				});
+			},
+			'fail': function(err) {
+				uni.showToast({
+					icon: 'none',
+					title: err
+				})
+			}
+		});
+		// #endif
+		// #ifdef H5
+		WexinPayFactory.wexinPay(data, function() {
+			uni.showToast({
+				title: "支付成功",
+				duration: 2000
+			});
+			uni.redirectTo({
+				url:getCurrentPage()+'?url='+_url
+			});
+		});
+		// #endif
+		// #ifdef APP-PLUS
+		obj = getPayInfo(data);
+		// 第二种写法，传对象字符串
+		orderInfo = JSON.stringify(obj)
+		uni.requestPayment({
+			provider: 'wxpay',
+			orderInfo: orderInfo, //微信、支付宝订单数据
+			success: function(res) {
+				console.log("购买", res)
+				uni.showToast({
+					title: "支付成功",
+					duration: 2000
+				});
+				uni.redirectTo({
+					url:getCurrentPage()+'?url='+_url
+				});
+			},
+			fail: function(err) {
+				console.log("购买失败", err)
+				uni.showToast({
+					icon: 'none',
+					title: err
+				})
+			}
+		});
+		// #endif
+	})
+}
+
 /**
  * @param {Object} event事件
  */
@@ -107,6 +186,10 @@ export function reciveMessage(event, that) {
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
 		//校验是否登录，如果没有登录跳转至温馨提示页面
 		checkSession(that, _data.url);
+	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
+		window.location.href = _data.url;
+	} else if (_data.action == ACTION_PAY_ORDER) {
+		toPay(_data.data, _data.url);
 	}
 
 }
