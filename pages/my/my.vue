@@ -348,7 +348,7 @@
 					_communityId = res.communityId;
 					return getHcCode();
 				}).then(_data => {
-					let _url = "/pages/homemarking/order?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
 					uni.navigateTo({
 						url: '/pages/hcWebView/hcWebView?url='+_url
 					});
