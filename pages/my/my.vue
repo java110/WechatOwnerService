@@ -46,6 +46,12 @@
 					<text class="text-grey">商城订单</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="housekeepingOrder()">
+				<view class="content">
+					<text class="cuIcon-shopfill text-orange"></text>
+					<text class="text-grey">家政订单</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="feeDetail()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
@@ -329,6 +335,20 @@
 					return getHcCode();
 				}).then(_data => {
 					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					uni.navigateTo({
+						url: '/pages/hcWebView/hcWebView?url='+_url
+					});
+				});
+			},
+			housekeepingOrder:function(){
+				let that = this;
+				let _communityId = '';
+				getCurCommunity()
+				.then(res=>{
+					_communityId = res.communityId;
+					return getHcCode();
+				}).then(_data => {
+					let _url = "/pages/homemarking/order?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
 					uni.navigateTo({
 						url: '/pages/hcWebView/hcWebView?url='+_url
 					});
