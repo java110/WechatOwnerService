@@ -175,7 +175,8 @@
 			if(_fee.feeFlag == "2006012"){ // 周期性费用
 				_receivableAmount = _amount;
 			}else{ // 一次性费用
-				_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
+				//_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
+				_receivableAmount = (_fee.amount * _fee.paymentCycle).toFixed(2);
 			}
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
@@ -221,7 +222,7 @@
 				_feeMonthName = this.feeMonthList[e.detail.value];;
 				let _feeMonth = _feeMonthName.replace("个月","");
 				// let _receivableAmount = _feeMonth * this.amount;
-				let _receivableAmount = _feeMonth * (this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount));
+				let _receivableAmount = _feeMonth * this.amount;
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
