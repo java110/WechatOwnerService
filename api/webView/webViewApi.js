@@ -13,9 +13,9 @@ import {
 	formatDate,
 	dateTimeStringToDateString
 } from '../../utils/DateUtil.js'
-
+// #ifdef H5
 import WexinPayFactory from '../../factory/WexinPayFactory.js'
-
+// #endif
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
