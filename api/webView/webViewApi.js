@@ -15,7 +15,10 @@ import {
 } from '../../utils/DateUtil.js'
 // #ifdef H5
 import WexinPayFactory from '../../factory/WexinPayFactory.js'
+import {wechatRefreshToken} from '../../auth/H5Login.js'
 // #endif
+
+import {checkSession} from '../../auth/Java110Auth.js'
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
@@ -53,7 +56,7 @@ export function getHcCode(_objData) {
 /**
  * 检查回话
  */
-export function checkSession(that, url) {
+export function actionRefreshToken(that, url) {
 	checkSession().then(function() {
 		let _url = conf.mallUrl + url;
 		if (_url.indexOf("?") > -1) {
@@ -185,7 +188,7 @@ export function reciveMessage(event, that) {
 		return;
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
 		//校验是否登录，如果没有登录跳转至温馨提示页面
-		checkSession(that, _data.url);
+		actionRefreshToken(that, _data.url);
 	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
 		window.location.href = _data.url;
 	} else if (_data.action == ACTION_PAY_ORDER) {
