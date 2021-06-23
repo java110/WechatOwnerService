@@ -16,6 +16,9 @@
 	import {
 		isNull
 	} from '../../utils/StringUtil.js'
+	
+	import {getStorageSync} from '../../utils/StorageUtil.js'
+	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
 			return {
