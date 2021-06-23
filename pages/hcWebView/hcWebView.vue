@@ -6,10 +6,16 @@
 
 <script>
 	import conf from '../../conf/config.js'
-	import {decodeUrl} from '../../utils/UrlUtil.js'
+	import {
+		decodeUrl
+	} from '../../utils/UrlUtil.js'
 	import {
 		reciveMessage
 	} from '../../api/webView/webViewApi.js'
+
+	import {
+		isNull
+	} from '../../utils/StringUtil.js'
 	export default {
 		data() {
 			return {
@@ -23,15 +29,13 @@
 		},
 		onLoad(options) {
 			let _url = options.url;
-			_url = decodeUrl(_url);
-			if(_url.indexOf("http")>-1){
-				this.url = _url;
-			}else{
-				this.url = conf.mallUrl + '#' + _url;
+			if (isNull(_url)) {
+				_url = getStorageSync(mapping.HC_MALL_CUR_URL);
 			}
-
-			console.log('_hcUrl',this.url);
-
+			if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
+				_url = conf.mallUrl + '#' + _url;
+			}
+			this.url = _url;
 		},
 		methods: {
 			reciveMessage: function(event) {

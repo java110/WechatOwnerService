@@ -26,7 +26,13 @@ import {
 
 import conf from '../../conf/config.js'
 
-import {encodeUrl} from '../../utils/UrlUtil.js'
+import {isNull} from '../../utils/StringUtil.js'
+
+import {
+	encodeUrl
+} from '../../utils/UrlUtil.js';
+
+import {getStorageSync,setStorageSync} from '../../utils/StorageUtil.js'
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
@@ -64,34 +70,18 @@ export function getHcCode(_objData) {
 /**
  * 检查回话
  */
-export function actionRefreshToken(that, url) {
+export function actionRefreshToken(that) {
 	checkSession().then(function() {
-
 		//这部分是 业主端回话有效的情况
 		console.log('业主端回话有效');
-		let _url = url;
-		if(url.indexOf("http") < 0 && url.indexOf("https") < 0){	
-			_url = conf.mallUrl + url;
-		}
-		console.log('_url',_url)
-		if (_url.indexOf("?") > -1) {
-			_url += "&"
-		} else {
-			_url += "?"
-		}
-		//申请会话
-		getHcCode().then(_data => {
-			_url += ("hcCode=" + _data.hcCode);
-			_url = encodeUrl(_url);
-			uni.navigateTo({
-				url: '/pages/hcWebViewRefresh/hcWebViewRefresh?url=' + _url
-			});
-		}, err => {
-
+		uni.navigateTo({
+			url: '/pages/hcWebViewRefresh/hcWebViewRefresh'
 		});
 	}, function(error) { //回话过期
 		console.log('回话已经过期');
-		wechatRefreshToken();
+		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh';
+		let _mallAuthUrl = conf.mallUrl;
+		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
 }
 
@@ -176,17 +166,18 @@ export function reciveMessage(event, that) {
 	console.log('商城回传的参数', event);
 
 	let _data = event.data;
+	if(_data.hasOwnProperty("url") && !isNull(_data.url)){
+		setStorageSync(mapping.HC_MALL_CUR_URL,_data.url);
+	}
 	console.log('_data', _data)
 	if (_data.action == ACTION_NAVIGATE_TO) {
-		_data.url = encodeUrl(_data.url);
 		uni.navigateTo({
-			url: '/pages/hcWebView/hcWebView?url=' + _data.url
+			url: '/pages/hcWebView/hcWebView'
 		});
 		return;
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
 		//校验是否登录，如果没有登录跳转至温馨提示页面
-		_data.url = encodeUrl(_data.url);
-		actionRefreshToken(that, _data.url);
+		actionRefreshToken(that);
 	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
 		//_data.url = encodeUrl(_data.url);
 		window.location.href = _data.url;
