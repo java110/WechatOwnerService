@@ -10,6 +10,7 @@
 		reciveMessage,getHcCode
 	} from '../../api/webView/webViewApi.js'
 
+	import {decodeUrl} from '../../utils/UrlUtil.js';
 
 	export default {
 		data() {
@@ -26,7 +27,7 @@
 		onLoad(options) {
 			let _that = this;
 			let _url = options.url;
-
+			_url = decodeUrl(_url);
 			//刷新hcCode
 			this.vc.getCurCommunity()
 				.then(function(_communityInfo) {

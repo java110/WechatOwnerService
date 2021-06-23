@@ -9,6 +9,8 @@
 	import {
 		reciveMessage
 	} from '../../api/webView/webViewApi.js'
+	
+	import {decodeUrl} from '../../utils/UrlUtil.js'
 	export default {
 		data() {
 			return {
@@ -22,7 +24,9 @@
 		},
 		onLoad(options) {
 			let _url = options.url;
-			this.url = conf.mallUrlRefresh + "&url="+_url;
+			//_url = decodeUrl(_url);
+			this.url = conf.mallUrlRefresh + "&url=" + _url;
+
 		},
 		methods: {
 			onReciveMessage: function(event) {

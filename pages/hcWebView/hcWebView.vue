@@ -6,6 +6,10 @@
 
 <script>
 	import conf from '../../conf/config.js'
+	import {decodeUrl} from '../../utils/UrlUtil.js'
+	import {
+		reciveMessage
+	} from '../../api/webView/webViewApi.js'
 	export default {
 		data() {
 			return {
@@ -19,11 +23,8 @@
 		},
 		onLoad(options) {
 			let _url = options.url;
-
+			_url = decodeUrl(_url);
 			if(_url.indexOf("http")>-1){
-				_url = _url.replace("**","?");
-				_url = _url.replace("@@","&");
-				_url = _url.replace("$$","#");
 				this.url = _url;
 			}else{
 				this.url = conf.mallUrl + '#' + _url;
@@ -35,6 +36,7 @@
 		methods: {
 			reciveMessage: function(event) {
 				console.log('商城回传的参数', event);
+				reciveMessage(event);
 			}
 		}
 	}

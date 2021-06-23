@@ -115,6 +115,8 @@
 	import conf from '../../conf/config.js';
 	import {getHcCode} from '../../api/webView/webViewApi.js'
 	
+	import {encodeUrl} from '../../utils/UrlUtil.js'
+	
 	import {getCurCommunity} from '../../api/community/communityApi.js'
 	export default {
 		data() {
@@ -332,9 +334,8 @@
 				getCurCommunity()
 				.then(res=>{
 					_communityId = res.communityId;
-					return getHcCode();
-				}).then(_data => {
-					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&mallFrom=HC";
+					_url = encodeUrl(_url)
 					uni.navigateTo({
 						url: '/pages/hcWebView/hcWebView?url='+_url
 					});
@@ -346,9 +347,8 @@
 				getCurCommunity()
 				.then(res=>{
 					_communityId = res.communityId;
-					return getHcCode();
-				}).then(_data => {
-					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&&mallFrom=HC";
+					_url = encodeUrl(_url)
 					uni.navigateTo({
 						url: '/pages/hcWebView/hcWebView?url='+_url
 					});
