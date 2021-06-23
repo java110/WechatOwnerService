@@ -169,7 +169,7 @@ export function reciveMessage(event, that) {
 	if(_data.hasOwnProperty("url") && !isNull(_data.url)){
 		setStorageSync(mapping.HC_MALL_CUR_URL,_data.url);
 	}
-	console.log('_data', _data)
+	console.log('_data', _data);
 	if (_data.action == ACTION_NAVIGATE_TO) {
 		uni.navigateTo({
 			url: '/pages/hcWebView/hcWebView'
