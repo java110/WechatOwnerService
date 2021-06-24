@@ -26,11 +26,6 @@
 				url: '',
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.onReciveMessage);
-			// #endif
-		},
 		onLoad(options) {
 			let _key = options.key;
 			if (isNotNull(_key)) {
@@ -40,13 +35,9 @@
 			}
 		},
 		methods: {
-			onReciveMessage: function(event) {
-				console.log('商城回传的参数', event);
-				reciveMessage(event);
-			},
 			_getHcCode: function() {
 				getHcCode().then(_data => {
-					this.url = conf.mallUrlRefresh + "?hcCode=" + _data.hcCode;
+					this.url = conf.mallUrlRefresh + "&hcCode=" + _data.hcCode;
 				}, err => {
 
 				});

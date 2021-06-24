@@ -19,11 +19,6 @@
 				communityId: ''
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.onReciveMessage);
-			// #endif
-		},
 		onLoad(options) {
 			let _that = this;
 			let _url = options.url;

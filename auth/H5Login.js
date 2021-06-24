@@ -25,7 +25,6 @@ export function wechatRefreshToken(errorUrl, _login,_redirectUrl) {
 			_redirectUrl = window.location.href;
 		}
 		
-		
 		if(isNull(_login)){
 			_login = 0; // 不是登录页面鉴权
 		}

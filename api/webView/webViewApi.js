@@ -34,10 +34,13 @@ import {
 
 import {getStorageSync,setStorageSync} from '../../utils/StorageUtil.js'
 
+import {uuid} from '../../utils/SeqUtil.js'
+
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
 const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
+const ACTION_SET_TITLE = "setTitle";
 
 
 
@@ -75,11 +78,11 @@ export function actionRefreshToken(that) {
 		//这部分是 业主端回话有效的情况
 		console.log('业主端回话有效');
 		uni.navigateTo({
-			url: '/pages/hcWebViewRefresh/hcWebViewRefresh'
+			url: '/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid()
 		});
 	}, function(error) { //回话过期
 		console.log('回话已经过期');
-		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh';
+		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
 		let _mallAuthUrl = conf.mallUrl;
 		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
@@ -172,7 +175,7 @@ export function reciveMessage(event, that) {
 	console.log('_data', _data);
 	if (_data.action == ACTION_NAVIGATE_TO) {
 		uni.navigateTo({
-			url: '/pages/hcWebView/hcWebView'
+			url: '/pages/hcWebView/hcWebView?java110Id='+uuid()
 		});
 		return;
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
@@ -184,6 +187,11 @@ export function reciveMessage(event, that) {
 	} else if (_data.action == ACTION_PAY_ORDER) {
 		//_data.url = encodeUrl(_data.url);
 		toPay(_data.data, _data.url);
+	}else if (_data.action == ACTION_SET_TITLE) {
+		//_data.url = encodeUrl(_data.url);
+		uni.setNavigationBarTitle({
+		　　title:_data.title
+		})
 	}
 
 }

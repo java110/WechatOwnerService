@@ -16,19 +16,16 @@
 	import {
 		isNull
 	} from '../../utils/StringUtil.js'
-	
-	import {getStorageSync} from '../../utils/StorageUtil.js'
+
+	import {
+		getStorageSync
+	} from '../../utils/StorageUtil.js'
 	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
 			return {
 				url: ''
 			}
-		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.reciveMessage);
-			// #endif
 		},
 		onLoad(options) {
 			let _url = options.url;
@@ -41,7 +38,7 @@
 			this.url = _url;
 		},
 		methods: {
-			reciveMessage: function(event) {
+			onReciveMessage: function(event) {
 				console.log('商城回传的参数', event);
 				reciveMessage(event);
 			}
