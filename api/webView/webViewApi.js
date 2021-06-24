@@ -83,7 +83,7 @@ export function actionRefreshToken(that) {
 	}, function(error) { //回话过期
 		console.log('回话已经过期');
 		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
-		let _mallAuthUrl = conf.mallUrl;
+		let _mallAuthUrl = conf.mallUrl+"";
 		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
 }
