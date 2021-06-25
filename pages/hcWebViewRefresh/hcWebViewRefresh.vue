@@ -28,6 +28,11 @@
 		},
 		onLoad(options) {
 			let _key = options.key;
+			let _hcCode = options.hcCode;
+			if(isNotNull(_hcCode)){
+				this.url = conf.mallUrlRefresh + "&hcCode=" + _hcCode;
+				return ;
+			}
 			if (isNotNull(_key)) {
 				context.onLoad(options, this._getHcCode);
 			} else {

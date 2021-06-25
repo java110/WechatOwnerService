@@ -82,9 +82,8 @@ export function actionRefreshToken(that) {
 		});
 	}, function(error) { //回话过期
 		console.log('回话已经过期');
-		let _redirectUrl = conf.mallUrl + '/#/pages/mallTokenRefresh/mallTokenRefresh'
 		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
-		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+_redirectUrl;
+		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+_hasOwnerUrl;
 		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
 }
