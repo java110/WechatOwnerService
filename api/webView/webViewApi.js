@@ -41,6 +41,9 @@ const ACTION_REFRESH_TOKEN = "refreshToken";
 const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
 const ACTION_SET_TITLE = "setTitle";
+const ACTION_NAVIGATE_HOME = "navigateHome";
+
+
 
 
 
@@ -83,7 +86,7 @@ export function actionRefreshToken(that) {
 	}, function(error) { //回话过期
 		console.log('回话已经过期');
 		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
-		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+_hasOwnerUrl+"&errorUrl="+conf.mallUrl;
+		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+encodeURIComponent(_hasOwnerUrl)+"&errorUrl="+conf.mallUrl;
 		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
 }
@@ -162,13 +165,34 @@ export function toPay(data, _url) {
 	})
 }
 
+export function switchPage(_url){
+	
+	if(_url == 'mall'){
+		uni.switchTab({
+			url:'/pages/mall/mall'
+		})
+	}else if(_url == 'homemaking'){
+		uni.switchTab({
+			url:'/pages/homemaking/homemaking'
+		})
+	}else{
+		uni.switchTab({
+			url:_url
+		})
+	}
+	
+}
+
 /**
  * @param {Object} event事件
  */
 export function reciveMessage(event, that) {
 	console.log('商城回传的参数', event);
-
 	let _data = event.data;
+	if (_data.action == ACTION_NAVIGATE_HOME) {
+		switchPage(_data.url);
+		return ;
+	}
 	if(_data.hasOwnProperty("url") && !isNull(_data.url)){
 		setStorageSync(mapping.HC_MALL_CUR_URL,_data.url);
 	}
@@ -193,5 +217,4 @@ export function reciveMessage(event, that) {
 		　　title:_data.title
 		})
 	}
-
 }
