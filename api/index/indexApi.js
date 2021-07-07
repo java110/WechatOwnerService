@@ -87,27 +87,27 @@ export function getCategoryList() {
 			},
 			{
 				name: "空置房",
-				src: "/static/images/index_openDoor.png",
+				src: "/static/images/index_emptyRoom.png",
 				href: "/pages/applyRoom/applyRoom"
 			},
 			{
 				name: "房屋装修",
-				src: "/static/images/index_openDoor.png",
+				src: "/static/images/index_fitment.png",
 				href: "/pages/roomRenovation/roomRenovation"
 			},
 			// {
 			// 	name: "临时车收费",
-			// 	src: "/static/images/index_openDoor.png",
+			// 	src: "/static/images/index_carCharges.png",
 			// 	href: "/pages/tempParkingFee/tempParkingFee"
 			// },
 			{
 				name: "合同费用",
-				src: "/static/images/index_property.png",
+				src: "/static/images/index_contractCost.png",
 				href: "/pages/contractFeeList/contractFeeList"
 			},
 			{
 				name: "投票问卷",
-				src: "/static/images/index_property.png",
+				src: "/static/images/index_Voting.png",
 				href: "/pages/questionAnswer/questionAnswer"
 			}
 
