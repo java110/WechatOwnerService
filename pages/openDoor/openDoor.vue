@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view>
-			<image src="../../static/images/openDoorTop.png" class="heard-location-icon"></image>
+			<image src="/static/images/openDoorTop.png" class="heard-location-icon"></image>
 		</view>
 		<view class="cu-list grid" :class="'col-2'">
 			<view class="cu-item" @click="showOpenDoor(item);"
@@ -20,7 +20,7 @@
 					</view>
 				</view>
 				<view class="padding-xl">
-					您确认{{curMachine.machineName}}开门? 请勿频繁操作！
+					您确认{{curMachine.machineName}}开门? 开门次数有限,请勿频繁操作！
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleOpenDoor()">取消</view>
@@ -90,18 +90,22 @@
 			},
 			_doOpenDoor:function(){
 				let _that = this;
+				wx.showLoading({
+					title: '请求中'
+				});
 				openDoor({
 					communityId:this.communityId,
 					userRole:'owner',
 					machineCode:_that.curMachine.machineCode,
 					userId:this.memberId
 				}).then((res)=>{
+					wx.hideLoading();
 					let data = res.data;
 					let msg = '';
 					if(data.code == 0){
 						msg = '请求发送至门禁'
 					}else{
-						msg = '开门失败'
+						msg = data.msg;
 					}
 					wx.showToast({
 						title: msg,
@@ -110,6 +114,7 @@
 					});
 					_that._cancleOpenDoor();
 				},(err)=>{
+					wx.hideLoading();
 					wx.showToast({
 						title: '开门失败',
 						icon: 'none',
