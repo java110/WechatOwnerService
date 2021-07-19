@@ -6,35 +6,41 @@
 
 <script>
 	import conf from '../../conf/config.js'
+	import {
+		decodeUrl
+	} from '../../utils/UrlUtil.js'
+	import {
+		reciveMessage
+	} from '../../api/webView/webViewApi.js'
+
+	import {
+		isNull
+	} from '../../utils/StringUtil.js'
+
+	import {
+		getStorageSync
+	} from '../../utils/StorageUtil.js'
+	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
 			return {
 				url: ''
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.reciveMessage);
-			// #endif
-		},
 		onLoad(options) {
 			let _url = options.url;
-
-			if(_url.indexOf("http")>-1){
-				_url = _url.replace("**","?");
-				_url = _url.replace("@@","&");
-				_url = _url.replace("$$","#");
-				this.url = _url;
-			}else{
-				this.url = conf.mallUrl + '#' + _url;
+			if (isNull(_url)) {
+				_url = getStorageSync(mapping.HC_MALL_CUR_URL);
 			}
-
-			console.log('_hcUrl',this.url);
-
+			if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
+				_url = conf.mallUrl + '#' + _url;
+			}
+			this.url = _url;
 		},
 		methods: {
-			reciveMessage: function(event) {
+			onReciveMessage: function(event) {
 				console.log('商城回传的参数', event);
+				reciveMessage(event);
 			}
 		}
 	}

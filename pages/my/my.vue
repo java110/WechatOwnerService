@@ -115,7 +115,13 @@
 	import conf from '../../conf/config.js';
 	import {getHcCode} from '../../api/webView/webViewApi.js'
 	
+	import {encodeUrl} from '../../utils/UrlUtil.js'
+	
 	import {getCurCommunity} from '../../api/community/communityApi.js'
+	
+	import {setStorageSync} from '../../utils/StorageUtil.js'
+	
+	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
 			return {
@@ -332,11 +338,10 @@
 				getCurCommunity()
 				.then(res=>{
 					_communityId = res.communityId;
-					return getHcCode();
-				}).then(_data => {
-					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&mallFrom=HC";
+					setStorageSync(mapping.HC_MALL_CUR_URL,_url);
 					uni.navigateTo({
-						url: '/pages/hcWebView/hcWebView?url='+_url
+						url: '/pages/hcWebView/hcWebView'
 					});
 				});
 			},
@@ -346,11 +351,10 @@
 				getCurCommunity()
 				.then(res=>{
 					_communityId = res.communityId;
-					return getHcCode();
-				}).then(_data => {
-					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&hcCode="+_data.hcCode;
+					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&mallFrom=HC";
+					setStorageSync(mapping.HC_MALL_CUR_URL,_url);
 					uni.navigateTo({
-						url: '/pages/hcWebView/hcWebView?url='+_url
+						url: '/pages/hcWebView/hcWebView'
 					});
 				});
 			}

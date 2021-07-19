@@ -15,12 +15,35 @@ import {
 } from '../../utils/DateUtil.js'
 // #ifdef H5
 import WexinPayFactory from '../../factory/WexinPayFactory.js'
+import {
+	wechatRefreshToken
+} from '../../auth/H5Login.js'
 // #endif
+
+import {
+	checkSession
+} from '../../auth/Java110Auth.js'
+
+import conf from '../../conf/config.js'
+
+import {isNull} from '../../utils/StringUtil.js'
+
+import {
+	encodeUrl
+} from '../../utils/UrlUtil.js';
+
+import {getStorageSync,setStorageSync} from '../../utils/StorageUtil.js'
+
+import {uuid} from '../../utils/SeqUtil.js'
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
 const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
+const ACTION_SET_TITLE = "setTitle";
+const ACTION_NAVIGATE_HOME = "navigateHome";
+
+
 
 
 
@@ -53,53 +76,25 @@ export function getHcCode(_objData) {
 /**
  * 检查回话
  */
-export function checkSession(that, url) {
+export function actionRefreshToken(that) {
 	checkSession().then(function() {
-		let _url = conf.mallUrl + url;
-		if (_url.indexOf("?") > -1) {
-			_url += "&"
-		} else {
-			_url += "?"
-		}
-		//申请会话
-		getHcCode().then(_data => {
-			_url += ("hcCode=" + _data.hcCode);
-			uni.navigateTo({
-				url: '/pages/hcWebViewRefresh/hcWebViewRefresh?url=' + _url
-			});
-		}, err => {
-
+		//这部分是 业主端回话有效的情况
+		console.log('业主端回话有效');
+		uni.navigateTo({
+			url: '/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid()
 		});
 	}, function(error) { //回话过期
-		// #ifdef H5
-		//先微信登录
-		wechatRefreshToken();
-		// #endif
-
-		//小程序登录
-		// #ifdef MP-WEIXIN
-		doLogin();
-		// #endif
-
-		// #ifdef APP-PLUS
-		//查询临时钥匙
-		let _key = wx.getStorageSync(mapping.OWNER_KEY);
-		if (_key) {
-			doLoginOwnerByKey(_key);
-		} else {
-			uni.navigateTo({
-				url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
-			});
-			return;
-		}
-		// #endif
+		console.log('回话已经过期');
+		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
+		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+encodeURIComponent(_hasOwnerUrl)+"&errorUrl="+conf.mallUrl;
+		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
 	});
 }
 
-export function getCurrentPage(){
+export function getCurrentPage() {
 	let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
 	let curRoute = routes[routes.length - 1].route //获取当前页面路由
-	return '/'+curRoute;
+	return '/' + curRoute;
 }
 
 export function toPay(data, _url) {
@@ -119,7 +114,7 @@ export function toPay(data, _url) {
 					duration: 2000
 				});
 				uni.redirectTo({
-					url:getCurrentPage()+'?url='+_url
+					url: getCurrentPage() + '?url=' + _url
 				});
 			},
 			'fail': function(err) {
@@ -137,7 +132,7 @@ export function toPay(data, _url) {
 				duration: 2000
 			});
 			uni.redirectTo({
-				url:getCurrentPage()+'?url='+_url
+				url: getCurrentPage() + '?url=' + _url
 			});
 		});
 		// #endif
@@ -155,7 +150,7 @@ export function toPay(data, _url) {
 					duration: 2000
 				});
 				uni.redirectTo({
-					url:getCurrentPage()+'?url='+_url
+					url: getCurrentPage() + '?url=' + _url
 				});
 			},
 			fail: function(err) {
@@ -170,26 +165,56 @@ export function toPay(data, _url) {
 	})
 }
 
+export function switchPage(_url){
+	
+	if(_url == 'mall'){
+		uni.switchTab({
+			url:'/pages/mall/mall'
+		})
+	}else if(_url == 'homemaking'){
+		uni.switchTab({
+			url:'/pages/homemaking/homemaking'
+		})
+	}else{
+		uni.switchTab({
+			url:_url
+		})
+	}
+	
+}
+
 /**
  * @param {Object} event事件
  */
 export function reciveMessage(event, that) {
 	console.log('商城回传的参数', event);
-
 	let _data = event.data;
-	console.log('_data', _data)
+	if (_data.action == ACTION_NAVIGATE_HOME) {
+		switchPage(_data.url);
+		return ;
+	}
+	if(_data.hasOwnProperty("url") && !isNull(_data.url)){
+		setStorageSync(mapping.HC_MALL_CUR_URL,_data.url);
+	}
+	console.log('_data', _data);
 	if (_data.action == ACTION_NAVIGATE_TO) {
 		uni.navigateTo({
-			url: '/pages/hcWebView/hcWebView?url=' + _data.url
+			url: '/pages/hcWebView/hcWebView?java110Id='+uuid()
 		});
 		return;
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
 		//校验是否登录，如果没有登录跳转至温馨提示页面
-		checkSession(that, _data.url);
+		actionRefreshToken(that);
 	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
+		//_data.url = encodeUrl(_data.url);
 		window.location.href = _data.url;
 	} else if (_data.action == ACTION_PAY_ORDER) {
+		//_data.url = encodeUrl(_data.url);
 		toPay(_data.data, _data.url);
+	}else if (_data.action == ACTION_SET_TITLE) {
+		//_data.url = encodeUrl(_data.url);
+		uni.setNavigationBarTitle({
+		　　title:_data.title
+		})
 	}
-
 }

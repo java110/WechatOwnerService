@@ -76,46 +76,41 @@ export function getCategoryList() {
 			src: "/static/images/index_openDoor.png",
 			href: "/pages/openDoor/openDoor"
 		}, {
-			name: "房屋出租",
-			src: "/static/images/index_openDoor.png",
-			href: "/pages/hireRoom/hireRoom"
+			name: "联系客服",
+			src: "/static/images/index_persion.png",
+			href: "callProperty"
 		}],
 		pagetwo: [{
-				name: "联系客服",
-				src: "/static/images/index_persion.png",
-				href: "callProperty"
-			},
-			{
 				name: "车位申请",
 				src: "/static/images/index_parking.png",
 				href: "/pages/applyparking/applyparking"
 			},
 			{
 				name: "空置房",
-				src: "/static/images/index_openDoor.png",
+				src: "/static/images/index_emptyRoom.png",
 				href: "/pages/applyRoom/applyRoom"
 			},
 			{
 				name: "房屋装修",
-				src: "/static/images/index_openDoor.png",
+				src: "/static/images/index_fitment.png",
 				href: "/pages/roomRenovation/roomRenovation"
 			},
-			{
-				name: "临时车收费",
-				src: "/static/images/index_openDoor.png",
-				href: "/pages/tempParkingFee/tempParkingFee"
-			},
+			// {
+			// 	name: "临时车收费",
+			// 	src: "/static/images/index_carCharges.png",
+			// 	href: "/pages/tempParkingFee/tempParkingFee"
+			// },
 			{
 				name: "合同费用",
-				src: "/static/images/index_property.png",
+				src: "/static/images/index_contractCost.png",
 				href: "/pages/contractFeeList/contractFeeList"
 			},
 			{
 				name: "投票问卷",
-				src: "/static/images/index_property.png",
+				src: "/static/images/index_Voting.png",
 				href: "/pages/questionAnswer/questionAnswer"
 			}
-			
+
 		]
 	};
 }
@@ -137,7 +132,8 @@ export function loadActivites(dataObj) {
 						let _activites = res.data.activitiess;
 						let _acts = [];
 						_activites.forEach(function(_item) {
-							_item.src = url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + dataObj.communityId +
+							_item.src = url.filePath + "?fileId=" + _item.headerImg +
+								"&communityId=" + dataObj.communityId +
 								"&time=" + new Date();
 							_item.startTime = dateTimeStringToDateString(_item.startTime);
 

@@ -7,8 +7,13 @@
 <script>
 	import conf from '../../conf/config.js'
 	import {
-		reciveMessage,getHcCode
+		reciveMessage,
+		getHcCode
 	} from '../../api/webView/webViewApi.js'
+
+	import {
+		decodeUrl
+	} from '../../utils/UrlUtil.js';
 
 
 	export default {
@@ -18,14 +23,11 @@
 				communityId: ''
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.onReciveMessage);
-			// #endif
-		},
 		onLoad(options) {
 			let _that = this;
 			let _url = options.url;
+			_url = decodeUrl(_url);
+
 
 			//刷新hcCode
 			this.vc.getCurCommunity()
@@ -33,21 +35,11 @@
 					_that.communityId = _communityInfo.communityId;
 				})
 				.then(function() {
-					_that._getHcCode(_url);
+					_that.url = conf.mallUrlIndexPage + "&hcCommunityId=" + _that.communityId;
 				})
 
 		},
 		methods: {
-			_getHcCode: function(_url) {
-				let _that =this;
-				if (_url) {
-					this.url = conf.mallUrl + _url;
-				} else {
-					getHcCode().then(_data => {
-						_that.url = conf.mallUrlIndexPage +"&hcCommunityId="+_that.communityId+"&hcCode="+_data.hcCode;
-					});
-				}
-			},
 			onReciveMessage: function(event) {
 				reciveMessage(event);
 			}

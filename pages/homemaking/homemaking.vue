@@ -10,6 +10,7 @@
 		reciveMessage,getHcCode
 	} from '../../api/webView/webViewApi.js'
 
+	import {decodeUrl} from '../../utils/UrlUtil.js';
 
 	export default {
 		data() {
@@ -18,36 +19,21 @@
 				communityId: ''
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.onReciveMessage);
-			// #endif
-		},
 		onLoad(options) {
 			let _that = this;
 			let _url = options.url;
-
+			_url = decodeUrl(_url);
 			//刷新hcCode
 			this.vc.getCurCommunity()
 				.then(function(_communityInfo) {
 					_that.communityId = _communityInfo.communityId;
 				})
 				.then(function() {
-					_that._getHcCode(_url);
+					_that.url = conf.mallUrl+"#/pages/homemaking/index?mallFrom=HC&hcCommunityId="+_that.communityId;
 				})
 
 		},
 		methods: {
-			_getHcCode: function(_url) {
-				let _that =this;
-				if (_url) {
-					this.url = conf.mallUrl + _url;
-				} else {
-					getHcCode().then(_data => {
-						_that.url = conf.mallUrl+"#/pages/homemaking/index?mallFrom=HC&hcCommunityId="+_that.communityId+"&hcCode="+_data.hcCode;
-					});
-				}
-			},
 			onReciveMessage: function(event) {
 				reciveMessage(event);
 			}

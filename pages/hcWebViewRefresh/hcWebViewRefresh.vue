@@ -7,27 +7,45 @@
 <script>
 	import conf from '../../conf/config.js'
 	import {
-		reciveMessage
+		reciveMessage,
+		getHcCode
 	} from '../../api/webView/webViewApi.js'
+
+	import {
+		isNotNull
+	} from '../../utils/StringUtil.js'
+
+	import {
+		decodeUrl,
+		encodeUrl
+	} from '../../utils/UrlUtil.js'
+	const context = require("../../context/Java110Context.js");
 	export default {
 		data() {
 			return {
-				url: ''
+				url: '',
 			}
 		},
-		mounted() {
-			// #ifdef H5
-			window.addEventListener("message", this.onReciveMessage);
-			// #endif
-		},
 		onLoad(options) {
-			let _url = options.url;
-			this.url = conf.mallUrlRefresh + "&url="+_url;
+			let _key = options.key;
+			let _hcCode = options.hcCode;
+			if(isNotNull(_hcCode)){
+				this.url = conf.mallUrlRefresh + "&hcCode=" + _hcCode;
+				return ;
+			}
+			if (isNotNull(_key)) {
+				context.onLoad(options, this._getHcCode);
+			} else {
+				this._getHcCode()
+			}
 		},
 		methods: {
-			onReciveMessage: function(event) {
-				console.log('商城回传的参数', event);
-				reciveMessage(event);
+			_getHcCode: function() {
+				getHcCode().then(_data => {
+					this.url = conf.mallUrlRefresh + "&hcCode=" + _data.hcCode;
+				}, err => {
+
+				});
 			}
 		}
 	}

@@ -27,6 +27,8 @@ class MappingConstant {
   static HC_TEST_COMMUNITY_NAME = conf.DEFAULT_COMMUNITY_NAME;
   
   static W_APP_ID = "wAppId";//微信公众号ID
+  
+  static HC_MALL_CUR_URL = "HC_MALL_CUR_URL";
  
 
 }
