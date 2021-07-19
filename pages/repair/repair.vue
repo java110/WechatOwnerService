@@ -320,7 +320,7 @@
 				} else if (obj.bindTime == "请选择") {
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
-					msg = "请填写投诉内容";
+					msg = "请填写报修内容";
 				} else if (obj.repairObjId == '') {
 					msg = "请选择报修位置";
 				}

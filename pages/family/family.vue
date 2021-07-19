@@ -15,7 +15,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">年龄</view>
-			<input v-model="age" placeholder="请输入年龄"></input>
+			<input type="number" v-model="age" placeholder="请输入年龄"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证</view>

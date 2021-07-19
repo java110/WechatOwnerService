@@ -55,7 +55,8 @@
 					communityId: that.communityId,
 					page: 1,
 					row: 10,
-					noticeTypeCd:1000
+					noticeTypeCd:1000,
+					clientType: 'H5'
 				},
 				success: function(res) {
 					// TODO 判断
