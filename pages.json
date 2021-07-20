@@ -540,6 +540,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/openDoorByQrCode/openDoorByQrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "二维码开门",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
