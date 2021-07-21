@@ -2,7 +2,7 @@
 	"pages": [{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "HC智慧家园",
+				"navigationBarTitleText": "德坤云物管",
 				"backgroundColor": "#ffffff"
 			}
 		},
@@ -552,18 +552,18 @@
 				"iconPath": "static/images/home.png",
 				"selectedIconPath": "static/images/home-selected.png"
 			},
-			{
-				"pagePath": "pages/homemaking/homemaking",
-				"text": "家政",
-				"iconPath": "static/images/rent.png",
-				"selectedIconPath": "static/images/rent-selected.png"
-			},
-			{
-				"pagePath": "pages/mall/mall",
-				"text": "商圈",
-				"iconPath": "static/images/market.png",
-				"selectedIconPath": "static/images/market-selected.png"
-			},
+			// {
+			// 	"pagePath": "pages/homemaking/homemaking",
+			// 	"text": "家政",
+			// 	"iconPath": "static/images/rent.png",
+			// 	"selectedIconPath": "static/images/rent-selected.png"
+			// },
+			// {
+			// 	"pagePath": "pages/mall/mall",
+			// 	"text": "商圈",
+			// 	"iconPath": "static/images/market.png",
+			// 	"selectedIconPath": "static/images/market-selected.png"
+			// },
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
@@ -583,7 +583,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#00AA00",
-		"navigationBarTitleText": "HC智慧家园",
+		"navigationBarTitleText": "德坤云物管",
 		"usingComponents": { //这里为方便，全局引入了所有组件，也可以在某个page下单独引用某个组件
 
 		}

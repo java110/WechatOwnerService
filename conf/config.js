@@ -12,7 +12,7 @@
 // 服务器域名 公众号时，配置为 / 就可以
 const baseUrl = '/';
 // #endif
-const commonBaseUrl = 'http://demo.homecommunity.cn/';
+const commonBaseUrl = 'http://qh.dianlixiaoqu.homecommunity.cn/';
 
 //商城的url
 const mallUrl = 'http://mallapp.homecommunity.cn/';
@@ -24,12 +24,12 @@ const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mall
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://demo.homecommunity.cn/';
+const baseUrl = 'http://qh.dianlixiaoqu.homecommunity.cn/';
 // #endif
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
-const DEFAULT_COMMUNITY_ID = "7020181217000001"; //HC测试小区id  用于没有登录时展示相关信息
-const DEFAULT_COMMUNITY_NAME = "丰仪家园";
+const DEFAULT_COMMUNITY_ID = "2021071533770010"; //HC测试小区id  用于没有登录时展示相关信息
+const DEFAULT_COMMUNITY_NAME = "海湖新区电力小区";
 
 // APP 或者 公众号  appId
 const wAppId = ""; //微信AppId
