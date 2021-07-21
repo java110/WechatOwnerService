@@ -60,10 +60,6 @@ export function getCategoryList() {
 			src: "/static/images/index_complaint.png",
 			href: "/pages/complaint/complaint"
 		}, {
-			name: "家庭成员",
-			src: "/static/images/index_member.png",
-			href: "/pages/familyList/familyList"
-		}, {
 			name: "报修",
 			src: "/static/images/index_repair.png",
 			href: "/pages/repair/repair"
@@ -76,11 +72,19 @@ export function getCategoryList() {
 			src: "/static/images/index_openDoor.png",
 			href: "/pages/openDoor/openDoor"
 		}, {
+			name: "二维码开门",
+			src: "/static/images/index_openDoor.png",
+			href: "/pages/openDoorByQrCode/openDoorByQrCode"
+		}, {
 			name: "联系客服",
 			src: "/static/images/index_persion.png",
 			href: "callProperty"
 		}],
 		pagetwo: [{
+				name: "家庭成员",
+				src: "/static/images/index_member.png",
+				href: "/pages/familyList/familyList"
+			}, {
 				name: "车位申请",
 				src: "/static/images/index_parking.png",
 				href: "/pages/applyparking/applyparking"
