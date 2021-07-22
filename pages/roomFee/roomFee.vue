@@ -74,12 +74,28 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
+				<view class="cu-item" v-if="preReadingTime">
+					<view class="content">
+						<text class="text-grey">上期读表时间</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{preReadingTime }}</text>
+					</view>
+				</view>
 				<view class="cu-item" v-if="preDegrees">
 					<view class="content">
 						<text class="text-grey">上期度数</text>
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">{{preDegrees }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curReadingTime">
+					<view class="content">
+						<text class="text-grey">本期读表时间</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curReadingTime }}</text>
 					</view>
 				</view>
 				<view class="cu-item" v-if="curDegrees">
@@ -180,7 +196,9 @@
 				paymentCycle:1,
 				squarePrice: 0,
 				preDegrees:'',
-				curDegrees:''
+				curDegrees:'',
+				preReadingTime:'',
+				curReadingTime:''
 			};
 		},
 		
@@ -225,6 +243,8 @@
 			this.squarePrice = _fee.squarePrice;
 			this.preDegrees = _fee.preDegrees;
 			this.curDegrees = _fee.curDegrees;
+			this.preReadingTime = _fee.preReadingTime;
+			this.curReadingTime = _fee.curReadingTime;
 			if(this.feeFlag == '2006012'){
 				return;
 			}
