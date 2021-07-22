@@ -31,6 +31,18 @@
 					<view class="text-gray">缴费时间</view>
 					<view class="text-gray">{{item.createTime}}</view>
 				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.preDegrees">
+					<view class="text-gray">上期度数</view>
+					<view class="text-gray">{{item.preDegrees}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.curDegrees">
+					<view class="text-gray">本期度数</view>
+					<view class="text-gray">{{item.curDegrees}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.preDegrees">
+					<view class="text-gray">使用量</view>
+					<view class="text-gray">{{item.curDegrees-item.preDegrees}}</view>
+				</view>
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">备注</view>
 					<view class="text-gray">{{item.remark}}</view>

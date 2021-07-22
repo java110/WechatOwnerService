@@ -54,6 +54,8 @@ export function getRoomFees(_objData,_tmpRoom) {
 						_tmpRoom.feeName = _roomFee.feeName;
 						_tmpRoom.feeFlag = _roomFee.feeFlag;
 						_tmpRoom.paymentCycle = _roomFee.paymentCycle;
+						_tmpRoom.preDegrees = _roomFee.preDegrees;
+						_tmpRoom.curDegrees = _roomFee.curDegrees;
 						moreRooms.push(_tmpRoom);
 					});
 					resolve(moreRooms);

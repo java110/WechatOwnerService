@@ -74,6 +74,31 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
+				<view class="cu-item" v-if="preDegrees">
+					<view class="content">
+						<text class="text-grey">上期度数</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{preDegrees }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curDegrees">
+					<view class="content">
+						<text class="text-grey">本期度数</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curDegrees }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curDegrees">
+					<view class="content">
+						<text class="text-grey">使用量</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curDegrees-preDegrees}}</text>
+					</view>
+				</view>
+				
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
 			
@@ -154,6 +179,8 @@
 				feeFlag:'',
 				paymentCycle:1,
 				squarePrice: 0,
+				preDegrees:'',
+				curDegrees:''
 			};
 		},
 		
@@ -196,6 +223,8 @@
 			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
 			this.squarePrice = _fee.squarePrice;
+			this.preDegrees = _fee.preDegrees;
+			this.curDegrees = _fee.curDegrees;
 			if(this.feeFlag == '2006012'){
 				return;
 			}
@@ -207,6 +236,7 @@
 			this.feeMonth = this.paymentCycle;
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
+		
 			
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
