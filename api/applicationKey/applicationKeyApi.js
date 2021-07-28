@@ -111,3 +111,27 @@ export function openDoor(_obj){
 		});
 	})
 }
+
+/**
+ * 远程开门
+ * @param {Object} _obj 申请钥匙对象内容
+ */
+export function getQrCode(_obj){
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.getQrCode,
+			method: "POST",
+			data: _obj, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res);
+					return;
+				}
+				reject(res);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

@@ -107,6 +107,7 @@ export default {
 	queryApplyRoomDiscountType: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscountType",
 	saveApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/saveApplyRoomDiscount",
 	openDoor: baseUrl + "app/machine/openDoor",
+	getQrCode: baseUrl + "app/machine/getQRcode",
 	queryOwnerCars: baseUrl + "app/owner.queryOwnerCars",
 	saveRoomRenovation: baseUrl + "app/roomRenovation/saveRoomRenovation",
 	queryRoomRenovation: baseUrl + "app/roomRenovation/queryRoomRenovation",
