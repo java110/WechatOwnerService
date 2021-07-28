@@ -119,6 +119,7 @@ export default {
 	saveUserQuestionAnswerValue: baseUrl + "app/userQuestionAnswer/saveUserQuestionAnswerValue",
 	listMachineTranslates: baseUrl + "app/machineTranslate.listMachineTranslates",
 	generatorHcCode: baseUrl + "app/userLogin/generatorHcCode",
+	queryApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscount",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

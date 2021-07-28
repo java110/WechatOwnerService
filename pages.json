@@ -540,6 +540,33 @@
             }
             
         }
+		,{
+		    "path" : "pages/myApplyRoom/myRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myApplyRoom/myApplyRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请记录",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myApplyRoom/myApplyRoomDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请详情",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"tabBar": {
 		"color": "#272636",

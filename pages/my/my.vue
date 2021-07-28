@@ -58,6 +58,12 @@
 					<text class="text-grey">缴费历史</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="applyRoomDetail()">
+				<view class="content">
+					<text class="cuIcon-profile text-pink"></text>
+					<text class="text-grey">空置房申请历史</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myComplaint()">
 				<view class="content">
 					<text class="cuIcon-form text-green"></text>
@@ -299,6 +305,19 @@
 				}
 				this.vc.navigateTo({
 					url: '/pages/payFeeDetail/payFeeDetail',
+				});
+			},
+			applyRoomDetail: function(){
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/myApplyRoom/myRoomList',
 				});
 			},
 			/**
