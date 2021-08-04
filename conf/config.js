@@ -17,7 +17,7 @@ const commonBaseUrl = 'http://demo.homecommunity.cn/';
 //商城的url
 const mallUrl = 'http://mallapp.homecommunity.cn/';
 
-const mallUrlIndexPage = mallUrl + '#/?mallFrom=HC';
+const mallUrlIndexPage = mallUrl + '#/pages/index/index?mallFrom=HC';
 
 //商城token 刷新页面
 const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
