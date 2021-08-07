@@ -183,9 +183,10 @@
 				});
 			},
 			deleteImage: function(e) {
-				console.log(e);
 				let imageArr = this.$data.imgList;
+				let photoArr = this.$data.photos;
 				imageArr.splice(e, 1);
+				photoArr.splice(e, 1);
 			},
 			_changeComplaint:function(e){
 				this.typeName = this.columns[e.detail.value];

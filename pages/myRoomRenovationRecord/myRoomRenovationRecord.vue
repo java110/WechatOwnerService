@@ -109,4 +109,14 @@
 		width: 100%;
 		height: 100%;
 	}
+	.load-more{
+		width: 80%;
+		margin: 30rpx auto;
+		height: 90rpx;
+		line-height: 90rpx;
+		text-align: center;
+		color: #007AFF;
+		font-size: 32rpx;
+		text-decoration: underline;
+	}
 </style>

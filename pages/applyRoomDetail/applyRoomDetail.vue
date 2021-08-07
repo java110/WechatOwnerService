@@ -239,9 +239,10 @@
 				}
 				
 				let params = {
-					startTime: this.bindStartDate + ' 0:00:00',
+					startTime: this.bindStartDate,
 					// endTime: this.bindEndDate + ' 23:59:59',
-					endTime: date2String(addDay(new Date(this.bindEndDate.replace(/-/g, "/")), 1)),
+					// endTime: date2String(addDay(new Date(this.bindEndDate.replace(/-/g, "/")), 1)),
+					endTime: this.bindEndDate,
 					roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
 					roomId: this.roomDetail.roomId,
 					communityId: this.ownerInfo.communityId,

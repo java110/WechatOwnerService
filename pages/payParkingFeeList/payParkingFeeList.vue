@@ -2,15 +2,15 @@
 	<view>
 		<view>
 			<view class="header_fixed">
-				<scroll-view v-if="parkingSpaces.length <5 && parkingSpaces.length >1" class="bg-white nav">
+				<!-- <scroll-view v-if="parkingSpaces.length <5 && parkingSpaces.length >1" class="bg-white nav">
 					<view class="flex text-center">
 						<view class="cu-item flex-sub" :class="item.psId==curParkingSpace.psId?'text-green cur':''" v-for="(item,index) in parkingSpaces"
 						 :key="index" @tap="switchParkingSpace(item)" :data-id="index">
 							{{item.carNum}}({{item.num}}车位)
 						</view>
 					</view>
-				</scroll-view>
-				<scroll-view v-if="parkingSpaces.length >4" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
+				</scroll-view> -->
+				<scroll-view v-if="parkingSpaces.length >1" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
 					<view class="cu-item flex-sub" :class="item.psId==curParkingSpace.psId?'text-green cur':''" v-for="(item,index) in parkingSpaces"
 					 :key="index" @tap="switchParkingSpace(item)" :data-id="index">
 						{{item.carNum}}({{item.num}}车位)
@@ -19,7 +19,7 @@
 			</view>
 			<view v-if="parkingSpaces.length == 1" class="block__title">{{parkingSpaces[0].carNum}}({{parkingSpaces[0].num}}车位)</view>
 			<view v-if="parkingSpaces.length > 1" class="margin-header-top"></view>
-			<view v-if="noData == false" >
+			<view v-if="noData == false" class="margin-bottom-100">
 				<view v-for="(item,index) in moreParkingSpaces" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
 					<view class="flex padding-bottom-xs solid-bottom justify-between">
 						<view>{{item.feeName}}</view>
@@ -236,6 +236,21 @@
 
 	.margin-header-top {
 		height: 100upx;
+	}
+	
+	.line-height {
+	    line-height: 100rpx;
+	}
+	.cu-btn.lgplus {
+	    padding: 0 20px;
+	    font-size: 18px;
+	    height: 100rpx;
+	}
+	.cu-btn.sharp {
+	    border-radius: 0rpx;
+	}
+	.margin-bottom-100{
+		margin-bottom: 100rpx;
 	}
 
 	/*  #ifdef  APP-PLUS || MP-WEIXIN  */

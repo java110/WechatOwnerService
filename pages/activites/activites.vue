@@ -73,7 +73,9 @@
 				let _objData = {
 					page: 1,
 					row: 15,
-					communityId: this.communityId
+					communityId: this.communityId,
+					defaultShow: 'Y',
+					clientType: 'H5'
 				};
 				loadActivites(_objData)
 					.then((_acts) => {

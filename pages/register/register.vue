@@ -112,16 +112,28 @@
 			sendMsgCode: function() {
 				var _that = this;
 				let obj = {
-					tel: this.link
+					tel: this.link,
+					communityId: this.communityId,
+					appUserName: this.appUserName,
+					captchaType: 'ownerBinding'
 				};
+				let msg = "";
 				if (obj.tel == '') {
+					msg = '请输入手机号';
+				} else if (!obj.communityId) {
+					msg = "请填写小区名称";
+				} else if (!obj.appUserName) {
+					msg = "请填写业主名称";
+				}
+				if (msg != "") {
 					wx.showToast({
-						title: '请输入手机号',
+						title: msg,
 						icon: 'none',
 						duration: 2000
 					});
 					return;
 				}
+				console.log(obj);
 				uni.showLoading({
 					title: '加载中',
 					mask: true

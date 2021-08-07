@@ -221,7 +221,9 @@
 					page: this.page,
 					row: this.row,
 					communityId: this.communityId,
-					typeCd: this.curTypeCd
+					typeCd: this.curTypeCd,
+					defaultShow: 'Y',
+					clientType: 'H5'
 				};
 				//加载活动
 				loadActivites(_objData)

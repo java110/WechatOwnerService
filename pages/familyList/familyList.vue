@@ -35,7 +35,7 @@
 		</view>
 		<view class="button_up_blank"></view>
 
-		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+		<view v-if="ownerTypeCd == '1001'" class="bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
 			<view class="action text-orange margin-right line-height">
 
 			</view>
@@ -80,7 +80,8 @@
 				loading: false,
 				communityId: '',
 				ownerId: '',
-				curOwnerMember:{}
+				curOwnerMember:{},
+				ownerTypeCd: '',
 			};
 		},
 		components: {
@@ -115,9 +116,9 @@
 				let that = this;
 				that.owners = [];
 				context.getOwner(function(_owner) {
-					console.log(_owner.communityId, 99999999);
 					that.communityId = _owner.communityId;
 					that.ownerId = _owner.memberId;
+					that.ownerTypeCd = _owner.ownerTypeCd;
 					that.getTable(1);
 				});
 			},
