@@ -105,6 +105,13 @@
 			}
 		},
 		{
+			"path": "pages/reportInfoBack/reportInfoBack",
+			"style": {
+				"navigationBarTitleText": "返省上报",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/repairList/detail/detail",
 			"style": {}
 		},
