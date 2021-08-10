@@ -112,6 +112,14 @@
 			}
 		},
 		{
+			"path": "pages/reportInfoDetail/reportInfoDetail",
+			"style": {
+				"navigationBarTitleText": "疫情问卷上报",
+				"enablePullDownRefresh": false
+			}
+		},
+		
+		{
 			"path": "pages/repairList/detail/detail",
 			"style": {}
 		},

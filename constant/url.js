@@ -122,8 +122,8 @@ export default {
 	generatorHcCode: baseUrl + "app/userLogin/generatorHcCode",
 	queryApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscount",
 	saveReportInfoBackCity: baseUrl + "app/reportInfoBackCity/saveReportInfoBackCity",
-	
-	
+	querySettingTitle: baseUrl + "app/reportInfoSettingTitle/querySettingTitle",
+	saveReportInfoAnswerValue: baseUrl + "app/reportInfoAnswerValue/saveReportInfoAnswerValue",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

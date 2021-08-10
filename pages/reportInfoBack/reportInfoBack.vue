@@ -96,7 +96,6 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
-			 context.onLoad(options);
 			 if(!options.communityId){
 			 	wx.showToast({
 			 		title: "小区信息错误",
@@ -118,19 +117,6 @@
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
-			if (this.areaCode == '' || this.areaCode == undefined) {
-				let _currentLocation = context.getCurrentLocation();
-
-				let _areaName = _currentLocation.city + _currentLocation.district;
-
-				let _areaCode = _currentLocation.adcode;
-				this.areaCode = _areaCode;
-				//this.areaName = _areaName;
-				// this.setData({
-				//   areaCode: _areaCode,
-				//   areaName: _areaName
-				// });
-			}
 		},
 
 		/**
