@@ -17,7 +17,7 @@ const commonBaseUrl = 'http://demo.homecommunity.cn/';
 //商城的url
 const mallUrl = 'http://mallapp.homecommunity.cn/';
 
-const mallUrlIndexPage = mallUrl + '#/?mallFrom=HC';
+const mallUrlIndexPage = mallUrl + '#/pages/index/index?mallFrom=HC';
 
 //商城token 刷新页面
 const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
@@ -28,8 +28,8 @@ const baseUrl = 'http://demo.homecommunity.cn/';
 // #endif
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
-const DEFAULT_COMMUNITY_ID = "7020181217000001"; //HC测试小区id  用于没有登录时展示相关信息
-const DEFAULT_COMMUNITY_NAME = "丰仪家园";
+const DEFAULT_COMMUNITY_ID = "2021080494780158"; //HC测试小区id  用于没有登录时展示相关信息
+const DEFAULT_COMMUNITY_NAME = "HC演示小区";
 
 // APP 或者 公众号  appId
 const wAppId = ""; //微信AppId

@@ -68,7 +68,7 @@
 				</view>
 				<view class="cu-item" v-if="feeFlag != '2006012'">
 					<view class="content">
-						<text class="text-grey">到期时间</text>
+						<text class="text-grey">缴费后时间</text>
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">{{endTime}}</text>
