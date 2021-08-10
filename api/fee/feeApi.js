@@ -58,6 +58,10 @@ export function getRoomFees(_objData,_tmpRoom) {
 						_tmpRoom.curDegrees = _roomFee.curDegrees;
 						_tmpRoom.preReadingTime = _roomFee.preReadingTime;
 						_tmpRoom.curReadingTime = _roomFee.curReadingTime;
+						_tmpRoom.feeState = _roomFee.state;
+						_tmpRoom.deadlineTime = _roomFee.deadlineTime;
+						_tmpRoom.amountOwed = _roomFee.amountOwed;
+						_tmpRoom.startTime = _roomFee.startTime;
 						moreRooms.push(_tmpRoom);
 					});
 					resolve(moreRooms);

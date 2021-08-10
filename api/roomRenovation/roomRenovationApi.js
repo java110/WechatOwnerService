@@ -52,7 +52,7 @@ export function queryRoomRenovation(_data){
 			success: function(res) {
 				let data = res.data;
 				if (data.code == 0) {
-					resolve(data.data);
+					resolve(data);
 				} else {
 					uni.showToast({
 						title: data.msg
@@ -105,7 +105,7 @@ export function queryRoomRenovationRecord(_data){
 			data: _data,
 			success: function(res) {
 				if(res.data.code == 0){
-					resolve(res.data.data);
+					resolve(res.data);
 				}else{
 					wx.showToast({
 						title: "服务器异常了",
