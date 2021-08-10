@@ -1,7 +1,7 @@
 <template>
 	<view class="tab-container bg-white">
-		<view class="cu-list menu">
-			<view class="cu-item arrow" v-if="renovationList.length > 0" v-for="(item, key) in renovationList" :key="key" :data-item="item" @click="toRenovationDetail(item)">
+		<view class="cu-list menu" v-if="renovationList.length > 0">
+			<view class="cu-item arrow" v-for="(item, key) in renovationList" :key="key" :data-item="item" @click="toRenovationDetail(item)">
 				<view class="content padding-tb-sm">
 					<view>
 						<text class="cuIcon-homefill text-green margin-right-xs"></text> {{item.stateName}}</view>
@@ -12,13 +12,16 @@
 	
 				</view>
 			</view>
-			<view class="cu-item" v-if="renovationList.length === 0">
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
+		</view>
+		<view class="cu-list menu" v-else>
+			<view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-warn text-green"></text>
 					<text class="text-grey">暂无装修信息</text>
 				</view>
 				<view class="action">
-	
+
 				</view>
 			</view>
 		</view>
@@ -28,6 +31,7 @@
 <script>
 	const context = require("../../context/Java110Context.js");
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	
 	import {
 		queryRoomRenovation
@@ -38,12 +42,20 @@
 			return {
 				roomDetail: [],
 				renovationList: [],
-				noData: false
+				noData: false,
+				page: 1,
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			};
 		},
 	
 		components: {
-			noDataPage
+			noDataPage,
+			uniLoadMore
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -52,30 +64,47 @@
 			let _that = this;
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
+			_that.loadApply();
 		},
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
-			let _that = this;
-			this.noData = false;
-			let params = {
-				roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
-				communityId: this.roomDetail.communityId,
-				page: 1,
-				row: 10,
+		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
 			}
-			console.log(params);
-			queryRoomRenovation(params).then(function(_res){
-				_that.moreRooms = [];
-				if (_res.length == 0) {
-					_that.noData = true;
-					return;
-				}
-				_that.renovationList = _res
-			})
+			this.loadApply();
 		},
 		methods: {
+			/**
+			 * 加载数据
+			 */
+			loadApply: function(){
+				this.loadingStatus = 'more';
+				let _that = this;
+				let params = {
+					roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
+					communityId: this.roomDetail.communityId,
+					page: _that.page,
+					row: 10,
+				}
+				queryRoomRenovation(params).then(function(_res){
+					_that.renovationList = _that.renovationList.concat(_res.data)
+					_that.page ++;
+					
+					if (_that.renovationList.length == 0) {
+						_that.noData = true;
+						return;
+					}
+					if(_that.renovationList.length == _res.total){
+						_that.loadingStatus = 'noMore';
+						return;
+					}
+				})
+			},
+			
 			toRenovationDetail: function(_item) {
 				this.vc.navigateTo({
 					url: '/pages/myRenovation/myRoomRenovationDetail?room=' + JSON.stringify(_item)

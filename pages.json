@@ -638,7 +638,8 @@
 		"navigationBarTitleText": "HC智慧家园",
 		"usingComponents": { //这里为方便，全局引入了所有组件，也可以在某个page下单独引用某个组件
 
-		}
+		},
+		"onReachBottonDistance":50
 	},
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
