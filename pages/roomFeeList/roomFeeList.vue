@@ -1,18 +1,18 @@
 <template>
 	<view>
 		<view class="header_fixed">
-			<scroll-view v-if="rooms.length <5 && rooms.length >1" class="bg-white nav">
+			<scroll-view v-if="rooms.length <3 && rooms.length >1" class="bg-white nav">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms"
 					 :key="index" @tap="switchRoom(item)" :data-id="index">
-						{{item.floorNum}}栋{{item.roomNum}}室
+						{{item.floorNum}}栋{{item.unitNum}}单元{{item.roomNum}}室
 					</view>
 				</view>
 			</scroll-view>
-			<scroll-view v-if="rooms.length >4" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
+			<scroll-view v-if="rooms.length >2" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
 				<view class="cu-item flex-sub" :class="item.roomId==curRoom.roomId?'text-green cur':''" v-for="(item,index) in rooms"
 				 :key="index" @tap="switchRoom(item)" :data-id="index">
-					{{item.floorNum}}栋{{item.roomNum}}室
+					{{item.floorNum}}栋{{item.unitNum}}单元{{item.roomNum}}室
 				</view>
 			</scroll-view>
 		</view>

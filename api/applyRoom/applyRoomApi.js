@@ -77,7 +77,7 @@ export function queryApplyRoomDiscount(_data) {
 
 				let data = res.data;
 				if (data.code == 0) {
-					resolve(data.data);
+					resolve(data);
 				} else {
 					uni.showToast({
 						title: data.msg
