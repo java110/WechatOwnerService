@@ -60,9 +60,9 @@
 		 */
 		onLoad: function(options) {
 			let that = this;
-			this.qaId = options.qaId;
+			this.settingId = options.settingId;
 			querySettingTitle({
-					qaId: this.qaId,
+					settingId: this.settingId,
 					page: 1,
 					row: 100
 				})
@@ -146,11 +146,9 @@
 				})
 
 				let obj = {
-					"qaId": this.qaId,
-					"objType": this.objType,
-					"objId": context.getUserInfo().communityId,
-					"answerType": '1002',
-					questionAnswerTitles: _questionAnswerTitles
+					"settingId": this.settingId,
+					"communityId": context.getUserInfo().communityId,
+					"questionAnswerTitles": _questionAnswerTitles
 				}
 				saveReportInfoAnswerValue(obj)
 					.then(_data => {
