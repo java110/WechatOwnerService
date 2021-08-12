@@ -259,3 +259,29 @@ export function compareDate(date1,date2){
 		return false; //第二个大
 	}
 }
+
+// 计费结束时间计算（同pc端）
+export function dateSubOneDay(_startTime, _endTime, feeFlag) {
+	if (!_endTime || _endTime == '-') {
+		return _endTime
+	}
+	let dateTime = new Date(_endTime.replace(/\-/g, '/'));
+	let startTime = new Date(_startTime.replace(/\-/g, '/'));
+	//如果开始时间是31日 结束时间是30日 不做处理
+	let _startTimeLastDay = startTime.getDate();
+	let _endTimeLastDay = dateTime.getDate();
+	if (_startTimeLastDay == 31 && _endTimeLastDay == 30) {
+		return formatDate(dateTime);
+	}
+
+	//2月份特殊处理
+	let _endTimeMonth = dateTime.getMonth();
+	if (_endTimeMonth == 1 && _endTimeLastDay > 26 && _startTimeLastDay > 26) {
+		return formatDate(dateTime);
+	}
+	if (feeFlag != "2006012") {
+		dateTime = new Date(dateTime.setDate(dateTime.getDate() - 1));
+	}
+	dateTime = formatDate(dateTime)
+	return dateTime;
+}

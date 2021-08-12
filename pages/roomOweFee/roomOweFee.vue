@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<scroll-view scroll-y>
+		<scroll-view scroll-y style="padding-bottom: 100rpx;">
 			<view class="block__title">房屋信息</view>
 			<view class="cu-list menu">
 				<view class="cu-item">

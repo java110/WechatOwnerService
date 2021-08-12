@@ -57,3 +57,17 @@ export function checkPhoneNumber(_value){
 	}	
 	return false;
 }
+
+export function checkStrLength(strTemp) { 
+	var i,sum;
+	sum=0;
+	var length = strTemp.length ;
+	for(i=0;i<length;i++){
+		if ((strTemp.charCodeAt(i)>=0) && (strTemp.charCodeAt(i)<=255)) {
+			sum=sum+1;
+		}else {
+			sum=sum+2;
+		}
+	}
+	return sum; 
+}
