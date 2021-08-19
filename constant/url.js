@@ -121,6 +121,7 @@ export default {
 	listMachineTranslates: baseUrl + "app/machineTranslate.listMachineTranslates",
 	generatorHcCode: baseUrl + "app/userLogin/generatorHcCode",
 	queryApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscount",
+	querySetting: baseUrl + "app/reportInfoSetting/queryReportInfoSetting",
 	saveReportInfoBackCity: baseUrl + "app/reportInfoBackCity/saveReportInfoBackCity",
 	querySettingTitle: baseUrl + "app/reportInfoSettingTitle/querySettingTitle",
 	saveReportInfoAnswerValue: baseUrl + "app/reportInfoAnswerValue/saveReportInfoAnswerValue",
