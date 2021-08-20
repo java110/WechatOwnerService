@@ -264,7 +264,7 @@
 			this.feeMonthName = this.paymentCycle + '个月';
 			this.feeMonth = this.paymentCycle;
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
-			this.endTime = this._getDeadlineTime(_endTime);
+			this.endTime = formatDate(_endTime);
 		
 			
 			this.$nextTick(() => {
@@ -289,7 +289,7 @@
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
 				this.feeMonth = _feeMonth;
-				this.endTime = this._getDeadlineTime(_newDate);
+				this.endTime = formatDate(_newDate);
 				this.receivableAmount = this.getReceivableAmount();
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			},
