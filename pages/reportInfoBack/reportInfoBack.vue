@@ -54,13 +54,17 @@
 			<textarea v-model="remark" placeholder="请输入备注"></textarea>
 		</view>
 		<view class="button_up_blank">
-			<button class="cu-btn bg-green lg margin-top" @tap.native.stop="reportBack">上报数据</button>
+			<button class="cu-btn bg-green lg margin-top" @tap="reportBack">上报数据</button>
 		</view>
 	</view>
 </template>
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
+	import {
+		saveReportInfoBackCity,
+		querySettingTitle
+	} from '../../api/reportInfo/reportInfoApi.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 
@@ -98,7 +102,7 @@
 			let _that = this;
 			 if(!options.communityId){
 			 	wx.showToast({
-			 		title: "小区信息错误",
+			 		title: "小区信息错误，请从新扫码！",
 			 		icon: 'none',
 			 		duration: 2000
 			 	});
@@ -107,7 +111,6 @@
 			 this.communityId = options.communityId;
 			_that.source = _that.arraySourceType[_that.indexSource].code;
 		},
-
 		/**
 		 * 生命周期函数--监听页面初次渲染完成
 		 */
@@ -148,9 +151,7 @@
 				this.indexSource = e.target.value;
 				this.source = this.arraySourceType[this.indexSource].code;
 			},
-	
 			bindInput: function(e) {
-				console.log('数据监听', e);
 				let _that = this;
 				let dataset = e.currentTarget.dataset;
 				let value = e.detail.value;
@@ -160,24 +161,28 @@
 			reportBack: function(e) {
 				let obj = {
 					"areaCode": this.areaCode,
+					"communityId": this.communityId,
 					"communityName": this.communityName,
 					"name": this.name,
 					"idCard": this.idCard,
 					"tel": this.tel,
 					"sourceCityName": this.sourceCityName,
+					"sourceCity": "-1",
+					"source": this.source,
 					"bindDate": this.bindDate,
 					"bindTime": this.bindTime,
 					"remark":this.remark,
 					"backTime":this.bindDate + " " + this.bindTime + ":00",
 				};
 				let msg = "";
-
-				if(obj.name == "") {
+				if(obj.communityId == "") {
+					msg = "请从新扫码";
+				} else if(obj.name == "") {
 					msg = "请填写姓名";
-				} else if (obj.idCard == "") {
-					msg = "请填写身份证号";
-				} else if (obj.tel == "") {
-					msg = "请填写手机号";
+				} else if (obj.idCard == "" || obj.idCard.length != 18) {
+					msg = "请正确填写身份证号";
+				} else if (obj.tel == "" || obj.tel.length != 11) {
+					msg = "请正确填写的手机号";
 				}else if (obj.sourceCityName == "") {
 					msg = "请填写城市名称";
 				}else if (obj.bindDate == "请选择") {
@@ -192,38 +197,22 @@
 						duration: 2000
 					});
 				} else {
-					console.log("提交数据", obj);
 					wx.showLoading({
 						title: '提交中'
 					});
-					context.request({
-						url: constant.url.saveReportInfoBackCity,
-						header: context.getHeaders(),
-						method: "POST",
-						data: obj,
-						//动态数据
-						success: function(res) {
-							console.log(res); //成功情况下跳转
-							if (res.statusCode == 200) {
-								wx.hideLoading();
-								return;
-							}
-							wx.hideLoading();
-							wx.showToast({
-								title: res.data,
+					saveReportInfoBackCity(obj)
+						.then(_data => {
+							uni.showToast({
 								icon: 'none',
-								duration: 2000
+								title: '保存成功'
 							});
-						},
-						fail: function(e) {
-							wx.hideLoading();
-							wx.showToast({
-								title: "服务器异常了",
+							this.communityId = "";
+						}, err => {
+							uni.showToast({
 								icon: 'none',
-								duration: 2000
-							});
-						}
-					});
+								title: err
+							})
+						})
 				}
 			},
 			onChange: function(e) {

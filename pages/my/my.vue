@@ -40,7 +40,7 @@
 					<text class="text-grey">我的房屋</text>
 				</view>
 			</view>
-			<view class="cu-item arrow" @click="mallOrder()">
+			<!-- <view class="cu-item arrow" @click="mallOrder()">
 				<view class="content">
 					<text class="cuIcon-shopfill text-orange"></text>
 					<text class="text-grey">商城订单</text>
@@ -51,7 +51,7 @@
 					<text class="cuIcon-homefill text-orange"></text>
 					<text class="text-grey">家政订单</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="cu-item arrow" @click="feeDetail()">
 				<view class="content">
 					<text class="cuIcon-card text-pink"></text>

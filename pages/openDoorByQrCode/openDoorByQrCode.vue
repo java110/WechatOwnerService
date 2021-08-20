@@ -76,11 +76,11 @@
 					_that.qrCode = data.data
 					new qrCode('openDoorQrcode', {
 						text: _that.qrCode,
-						width: 150,
-						height: 150,
+						width: 250,
+						height: 250,
 						colorDark: "#333333",
 						colorLight: "#FFFFFF",
-						correctLevel: qrCode.CorrectLevel.H
+						correctLevel: qrCode.CorrectLevel.L
 					})
 				},(err)=>{
 					wx.hideLoading();

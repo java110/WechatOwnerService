@@ -56,7 +56,7 @@ export function getCategoryList() {
 			src: "/static/images/index_park.png",
 			href: "/pages/payParkingFeeList/payParkingFeeList"
 		}, {
-			name: "投诉建议",
+			name: "投诉咨询",
 			src: "/static/images/index_complaint.png",
 			href: "/pages/complaint/complaint"
 		}, {
