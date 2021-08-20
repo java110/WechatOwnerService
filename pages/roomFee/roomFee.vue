@@ -68,12 +68,53 @@
 				</view>
 				<view class="cu-item" v-if="feeFlag != '2006012'">
 					<view class="content">
-						<text class="text-grey">到期时间</text>
+						<text class="text-grey">缴费后时间</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">{{endTime }}</text>
+						<text class="text-grey text-sm">{{endTime}}</text>
 					</view>
 				</view>
+				<view class="cu-item" v-if="preReadingTime">
+					<view class="content">
+						<text class="text-grey">上期读表时间</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{preReadingTime }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="preDegrees">
+					<view class="content">
+						<text class="text-grey">上期度数</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{preDegrees }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curReadingTime">
+					<view class="content">
+						<text class="text-grey">本期读表时间</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curReadingTime }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curDegrees">
+					<view class="content">
+						<text class="text-grey">本期度数</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curDegrees }}</text>
+					</view>
+				</view>
+				<view class="cu-item" v-if="curDegrees">
+					<view class="content">
+						<text class="text-grey">使用量</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{curDegrees-preDegrees}}</text>
+					</view>
+				</view>
+				
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
 			
@@ -117,7 +158,7 @@
 	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
 	// #endif
 	
-	import {addMonth,formatDate,date2String} from '../../utils/DateUtil.js'
+	import {addMonth,formatDate,date2String,dateSubOneDay} from '../../utils/DateUtil.js'
 	export default {
 		components:{
 			vcDiscount
@@ -154,6 +195,14 @@
 				feeFlag:'',
 				paymentCycle:1,
 				squarePrice: 0,
+				preDegrees:'',
+				curDegrees:'',
+				preReadingTime:'',
+				curReadingTime:'',
+				feeState: '',
+				startTime: '',
+				deadlineTime: '',
+				amountOwed: '',
 			};
 		},
 		
@@ -170,11 +219,12 @@
 				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
+			console.log('fee info : ',_fee);
 			let _amount = _fee.amount;
 			let _receivableAmount = _amount;
-			if(_fee.feeFlag == "2006012"){ // 周期性费用
+			if(_fee.feeFlag == "2006012"){ // 一次性费用
 				_receivableAmount = _amount;
-			}else{ // 一次性费用
+			}else{ // 周期性费用
 				//_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
 				_receivableAmount = (_fee.amount * _fee.paymentCycle).toFixed(2);
 			}
@@ -196,6 +246,14 @@
 			this.formatEndTime = date2String(_fee.endTime);
 			this.feeFlag = _fee.feeFlag;
 			this.squarePrice = _fee.squarePrice;
+			this.preDegrees = _fee.preDegrees;
+			this.curDegrees = _fee.curDegrees;
+			this.preReadingTime = _fee.preReadingTime;
+			this.curReadingTime = _fee.curReadingTime;
+			this.feeState = _fee.feeState;
+			this.startTime = _fee.startTime;
+			this.deadlineTime = _fee.deadlineTime;
+			this.amountOwed = _fee.amountOwed;
 			if(this.feeFlag == '2006012'){
 				return;
 			}
@@ -206,34 +264,47 @@
 			this.feeMonthName = this.paymentCycle + '个月';
 			this.feeMonth = this.paymentCycle;
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
-			this.endTime = formatDate(_endTime);
+			this.endTime = this._getDeadlineTime(_endTime);
+		
 			
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			})
 		},
 		methods: {
+			// （单价×面积+附加费）  × 周期
+			getReceivableAmount: function(){
+				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth).toFixed(2);
+			},
 			computeFeeDiscount:function(_price){
 				// this.receivableAmount = this.receivableAmount - _price;
 				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
 			},
 			dateChange: function(e) {
 				let _feeMonthName = null;
-				_feeMonthName = this.feeMonthList[e.detail.value];;
+				_feeMonthName = this.feeMonthList[e.detail.value];
 				let _feeMonth = _feeMonthName.replace("个月","");
-				// let _receivableAmount = _feeMonth * this.amount;
-				let _receivableAmount = _feeMonth * this.amount;
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
 				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount.toFixed(2);
 				this.feeMonth = _feeMonth;
-				this.endTime = formatDate(_newDate);
+				this.endTime = this._getDeadlineTime(_newDate);
+				this.receivableAmount = this.getReceivableAmount();
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			},
 			onFeeMonthChange: function(e) {
 				console.log(e);
+			},
+			// 计费结束时间计算（同pc端）
+			_getDeadlineTime: function () {
+				if (this.amountOwed == 0 && this.formatEndTime == this.deadlineTime) {
+					return "-";
+				}
+				if (this.feeState == '2009001') {
+					return "-";
+				}
+				return dateSubOneDay(this.startTime, this.deadlineTime, this.feeFlag);
 			},
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;

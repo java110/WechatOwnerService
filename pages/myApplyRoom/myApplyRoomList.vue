@@ -1,12 +1,12 @@
 <template>
 	<view class="tab-container bg-white">
-		<view class="cu-list menu" v-if="renovationList.length > 0">
-			<view class="cu-item arrow" v-for="(item, key) in renovationList" :key="key" :data-item="item" @click="toRenovationDetail(item)">
+		<view class="cu-list menu" v-if="applyList.length > 0">
+			<view class="cu-item arrow" v-for="(item, key) in applyList" :key="key" :data-item="item" @click="toApplyRoomDetail(item)">
 				<view class="content padding-tb-sm">
 					<view>
-						<text class="cuIcon-homefill text-green margin-right-xs"></text> {{item.stateName}}</view>
+						<text class="cuIcon-homefill text-green margin-right-xs"></text> {{item.applyTypeName}}</view>
 					<view class="text-gray text-sm">
-						<text class="cuIcon-right margin-right-xs"></text> {{item.createTime}}</view>
+						<text class="cuIcon-right margin-right-xs"></text> {{item.stateName}}</view>
 				</view>
 				<view class="action">
 	
@@ -15,13 +15,13 @@
 			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view class="cu-list menu" v-else>
-			<view class="cu-item">
+			<view class="cu-item" v-if="applyList.length === 0">
 				<view class="content">
 					<text class="cuIcon-warn text-green"></text>
 					<text class="text-grey">暂无装修信息</text>
 				</view>
 				<view class="action">
-
+	
 				</view>
 			</view>
 		</view>
@@ -34,14 +34,14 @@
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	
 	import {
-		queryRoomRenovation
-	} from '../../api/roomRenovation/roomRenovationApi.js'	
+		queryApplyRoomDiscount
+	} from '../../api/applyRoom/applyRoomApi.js'	
 	
 	export default {
 		data() {
 			return {
 				roomDetail: [],
-				renovationList: [],
+				applyList: [],
 				noData: false,
 				page: 1,
 				loadingStatus : 'loading',
@@ -64,24 +64,22 @@
 			let _that = this;
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
-			_that.loadApply();
+			_that._loadApply();
 		},
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
+			
 		},
 		onReachBottom : function(){
 			if(this.loadingStatus == 'noMore'){
 				return;
 			}
-			this.loadApply();
+			this._loadApply();
 		},
 		methods: {
-			/**
-			 * 加载数据
-			 */
-			loadApply: function(){
+			_loadApply: function(){
 				this.loadingStatus = 'more';
 				let _that = this;
 				let params = {
@@ -90,24 +88,19 @@
 					page: _that.page,
 					row: 10,
 				}
-				queryRoomRenovation(params).then(function(_res){
-					_that.renovationList = _that.renovationList.concat(_res.data)
+				queryApplyRoomDiscount(params).then(function(_res){
+					_that.applyList = _that.applyList.concat(_res.data);
 					_that.page ++;
-					
-					if (_that.renovationList.length == 0) {
-						_that.noData = true;
-						return;
-					}
-					if(_that.renovationList.length == _res.total){
+					if(_that.applyList.length == _res.total){
 						_that.loadingStatus = 'noMore';
 						return;
 					}
 				})
 			},
 			
-			toRenovationDetail: function(_item) {
+			toApplyRoomDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myRenovation/myRoomRenovationDetail?room=' + JSON.stringify(_item)
+					url: '/pages/myApplyRoom/myApplyRoomDetail?room=' + JSON.stringify(_item)
 				});
 			},
 		}

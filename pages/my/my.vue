@@ -48,14 +48,20 @@
 			</view>
 			<view class="cu-item arrow" @click="housekeepingOrder()">
 				<view class="content">
-					<text class="cuIcon-shopfill text-orange"></text>
+					<text class="cuIcon-homefill text-orange"></text>
 					<text class="text-grey">家政订单</text>
 				</view>
 			</view> -->
 			<view class="cu-item arrow" @click="feeDetail()">
 				<view class="content">
-					<text class="cuIcon-profile text-pink"></text>
+					<text class="cuIcon-card text-pink"></text>
 					<text class="text-grey">缴费历史</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="applyRoomDetail()">
+				<view class="content">
+					<text class="cuIcon-square text-pink"></text>
+					<text class="text-grey">空置房申请历史</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="myComplaint()">
@@ -66,7 +72,7 @@
 			</view>
 			<view class="cu-item arrow" @click="myRepair()">
 				<view class="content">
-					<text class="cuIcon-formfill text-orange"></text>
+					<text class="cuIcon-repairfill text-orange"></text>
 					<text class="text-grey">我的报修单</text>
 				</view>
 			</view>
@@ -78,13 +84,13 @@
 			</view>
 			<view class="cu-item arrow" @click="myRenovation()">
 				<view class="content">
-					<text class="cuIcon-form text-green"></text>
+					<text class="cuIcon-paintfill text-green"></text>
 					<text class="text-grey">房屋装修</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="myParking()">
 				<view class="content">
-					<text class="cuIcon-formfill text-orange"></text>
+					<text class="cuIcon-taxi text-orange"></text>
 					<text class="text-grey">车位信息</text>
 				</view>
 			</view>
@@ -299,6 +305,19 @@
 				}
 				this.vc.navigateTo({
 					url: '/pages/payFeeDetail/payFeeDetail',
+				});
+			},
+			applyRoomDetail: function(){
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/myApplyRoom/myRoomList',
 				});
 			},
 			/**

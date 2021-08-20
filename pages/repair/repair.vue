@@ -109,7 +109,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import * as TanslateImage from '../../utils/translate-image.js';
-	import {checkPhoneNumber} from '../../utils/StringUtil.js'
+	import {checkPhoneNumber,checkStrLength} from '../../utils/StringUtil.js'
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
 	const factory = context.factory;
@@ -311,6 +311,8 @@
 					msg = "请选择报修类型";
 				} else if (obj.repairName == "") {
 					msg = "请填写报修人";
+				} else if (checkStrLength(obj.repairName) > 10) {
+					msg = "报修人长度不能超过5位";
 				} else if (obj.tel == "") {
 					msg = "请填写手机号";
 				} else if (!checkPhoneNumber(obj.tel)) {

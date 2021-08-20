@@ -63,3 +63,30 @@ export function saveApplyRoomDiscount(_data) {
 		});
 	})
 }
+
+/**
+ * 查询优惠类型
+ */
+export function queryApplyRoomDiscount(_data) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.queryApplyRoomDiscount,
+			method: "GET",
+			data: _data,
+			success: function(res) {
+
+				let data = res.data;
+				if (data.code == 0) {
+					resolve(data);
+				} else {
+					uni.showToast({
+						title: data.msg
+					})
+				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	})
+}

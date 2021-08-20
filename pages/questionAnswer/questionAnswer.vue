@@ -66,7 +66,10 @@
 				_data.data.forEach(function(item, index) {
 					item.endTime = item.endTime.replace("-","/");
 					let _endTime = new Date(item.endTime);
-					if(_endTime.getTime() > new Date().getTime()){
+					let _startTime = new Date(item.startTime.replace("-","/"));
+					if(_startTime.getTime() > new Date().getTime()){
+						item.state = '-1';
+					} else if(_endTime.getTime() > new Date().getTime()){
 						item.state = '1';
 					}else{
 						item.state = '0';
@@ -82,6 +85,13 @@
 		},
 		methods: {
 			gotoDetail: function(_question) {
+				if(_question.state == '-1'){
+					uni.showToast({
+						icon:'none',
+						title:'此投票问卷尚未开始'
+					})
+					return ;
+				}
 				if(_question.state == '0'){
 					uni.showToast({
 						icon:'none',

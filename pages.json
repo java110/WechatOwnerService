@@ -105,6 +105,21 @@
 			}
 		},
 		{
+			"path": "pages/reportInfoBack/reportInfoBack",
+			"style": {
+				"navigationBarTitleText": "返省上报",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/reportInfoDetail/reportInfoDetail",
+			"style": {
+				"navigationBarTitleText": "疫情问卷上报",
+				"enablePullDownRefresh": false
+			}
+		},
+		
+		{
 			"path": "pages/repairList/detail/detail",
 			"style": {}
 		},
@@ -540,6 +555,33 @@
             }
             
         }
+		,{
+		    "path" : "pages/myApplyRoom/myRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择房屋",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myApplyRoom/myApplyRoomList",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请记录",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/myApplyRoom/myApplyRoomDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "空置房申请详情",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/openDoorByQrCode/openDoorByQrCode",
             "style" :                                                                                    
@@ -596,7 +638,8 @@
 		"navigationBarTitleText": "德坤云物管",
 		"usingComponents": { //这里为方便，全局引入了所有组件，也可以在某个page下单独引用某个组件
 
-		}
+		},
+		"onReachBottonDistance":50
 	},
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)

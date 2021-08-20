@@ -31,11 +31,24 @@
 					<view class="text-gray">缴费时间</view>
 					<view class="text-gray">{{item.createTime}}</view>
 				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.preDegrees">
+					<view class="text-gray">上期度数</view>
+					<view class="text-gray">{{item.preDegrees}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.curDegrees">
+					<view class="text-gray">本期度数</view>
+					<view class="text-gray">{{item.curDegrees}}</view>
+				</view>
+				<view class="flex margin-top-xs justify-between" v-if="item.preDegrees">
+					<view class="text-gray">使用量</view>
+					<view class="text-gray">{{item.curDegrees-item.preDegrees}}</view>
+				</view>
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">备注</view>
 					<view class="text-gray">{{item.remark}}</view>
 				</view>
 			</view>
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -50,6 +63,7 @@
 
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 
 
 	const util = context.util;
@@ -59,11 +73,19 @@
 				feeDetails: [],
 				ownerId: '',
 				communityId: '',
-				noData: false
+				noData: false,
+				page: 1,
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			}
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			uniLoadMore
 		},
 
 		/**
@@ -80,12 +102,19 @@
 
 			
 		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
+			}
+			this._loadFeeDetail();
+		},
 		methods: {
 			_loadFeeDetail: function() {
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
-					page: 1,
-					row: 30,
+					page: _that.page,
+					row: 10,
 					ownerId: this.ownerId,
 					communityId: this.communityId
 				}
@@ -95,7 +124,6 @@
 					method: "GET",
 					data: _objData, //动态数据
 					success: function(res) {
-						console.log(res);
 						if (res.statusCode == 200) {
 							//成功情况下跳转
 							let _feeDetails = res.data.feeDetails;
@@ -120,12 +148,16 @@
 									
 								});
 							}
+							_that.feeDetails = _that.feeDetails.concat(_feeDetails);
+							_that.page ++;
 
-							if (_feeDetails.length < 1) {
+							if (_that.feeDetails.length < 1) {
 								_that.noData = true;
 							}
-							console.log(_feeDetails, _feeDetails.length, _that.noData);
-							_that.feeDetails = _feeDetails;
+							if(_that.feeDetails.length == res.data.total){
+								_that.loadingStatus = 'noMore';
+								return;
+							}
 						}
 					},
 					fail: function(e) {

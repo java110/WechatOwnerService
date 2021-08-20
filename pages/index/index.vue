@@ -32,7 +32,7 @@
 			 indicator-active-color="#FECA49" autoplay="true" interval="5000" duration="1000" circular="true">
 				<block v-for="(item, index) in ad" :key="index">
 					<swiper-item>
-						<image :src="item.url"></image>
+						<image :src="item.url" @click="_advertJump(item)"></image>
 					</swiper-item>
 				</block>
 			</swiper>
@@ -237,7 +237,8 @@
 					page: 1,
 					row: 5,
 					locationTypeCd:'2000',
-					viewType:'8888'
+					viewType:'8888',
+					clientType: 'H5'
 				};
 				//查询 广告
 				loadAdverts(_objData)
@@ -306,6 +307,27 @@
 				this.vc.navigateTo({
 					url: pageUrl
 				});
+			},
+			_advertJump: function(ad){
+				console.log(ad);
+				if(ad.advertType == 3 || !ad.pageUrl){
+					return;
+				}
+				if(ad.advertType == 2){
+					// 站外
+					let url = encodeURIComponent(ad.pageUrl)
+					uni.navigateTo({
+						url:'/pages/hcWebView/hcWebView?url='+url
+					})
+					return;
+				}
+				if(ad.advertType == 1){
+					// 站内
+					uni.navigateTo({
+						url: ad.pageUrl
+					})
+					return;
+				}
 			},
 		}
 	};
