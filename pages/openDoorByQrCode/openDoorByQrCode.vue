@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="padding-xl margin-top">
-			<canvas style="width: 300upx;height: 300upx;  margin: 0 auto;" canvas-id="openDoorQrcode"></canvas>
+			<canvas style="width: 520upx;height: 520upx;  margin: 0 auto;" canvas-id="openDoorQrcode"></canvas>
 		</view>
 			
 		<view class="padding flex flex-direction margin-top">
