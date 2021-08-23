@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="margin-bottom-xs">
-			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="欢迎访问德坤云物管"></uni-notice-bar>
+			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="欢迎访问HC智慧家园"></uni-notice-bar>
 		</view>
 
 		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
