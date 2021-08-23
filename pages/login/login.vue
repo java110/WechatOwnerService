@@ -54,8 +54,8 @@
 		data() {
 			return {
 				logoUrl: '',
-				username: '',
-				password: '',
+				username: 'test001',
+				password: 'wuxw2015',
 				appId: "",
 				code: "",
 				loginByPhone: false,
