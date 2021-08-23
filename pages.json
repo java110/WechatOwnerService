@@ -37,24 +37,24 @@
 				"navigationBarTitleText": "相关门禁"
 			}
 		},
-		{
-			"path": "pages/applicationKeyUser/applicationKeyUser",
-			"style": {
-				"navigationBarTitleText": "填写信息"
-			}
-		},
-		{
-			"path": "pages/applicationKeyProgress/applicationKeyProgress",
-			"style": {
-				"navigationBarTitleText": "钥匙进度"
-			}
-		},
-		{
-			"path": "pages/myApplicationKey/myApplicationKey",
-			"style": {
-				"navigationBarTitleText": "我的钥匙"
-			}
-		},
+		// {
+		// 	"path": "pages/applicationKeyUser/applicationKeyUser",
+		// 	"style": {
+		// 		"navigationBarTitleText": "填写信息"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/applicationKeyProgress/applicationKeyProgress",
+		// 	"style": {
+		// 		"navigationBarTitleText": "钥匙进度"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/myApplicationKey/myApplicationKey",
+		// 	"style": {
+		// 		"navigationBarTitleText": "我的钥匙"
+		// 	}
+		// },
 		{
 			"path": "pages/visitorApplicationKey/visitorApplicationKey",
 			"style": {
