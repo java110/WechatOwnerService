@@ -3,7 +3,7 @@
 		<view style="background-color: white;padding: 40rpx 30rpx 10rpx;text-align: center;
 			color: black;font-size: 20px;">{{setting.name}}</view>
 		<view class="" v-for="(item,index) in titles" :key="index">
-			<view class="block__title">{{item.title}}</view>
+			<view class="block__title">{{index+1}}，{{item.title}}</view>
 			<radio-group class="block" @change="radioChange($event,item)" v-if="item.titleType == '1001'">
 				<view class="cu-form-group" v-for="(valueItem,valueIndex) in item.reportInfoSettingTitleValueDtos"
 					:key="valueIndex">
@@ -130,7 +130,6 @@
 				_that[name] = value; //  
 			},
 			radioChange: function(e, item) {
-				console.log(e, item)
 				item.radio = e.detail.value;
 			},
 			checkboxChange: function(e, item) {
@@ -151,7 +150,6 @@
 			},
 			submitQuestionAnswer: function(e) {
 				let obj = {
-					"areaCode": this.areaCode,
 					"communityId": this.communityId,
 					"communityName": this.communityName,
 					"name": this.name,
@@ -166,7 +164,9 @@
 					"backTime":this.bindDate + " " + this.bindTime + ":00",
 				};
 				let msg = "";
-				if(obj.name == "") {
+				if(obj.communityId == "") {
+					msg = "请从新扫码";
+				}else if(obj.name == "") {
 					msg = "请填写姓名";
 				} else if (obj.idCard == "" || obj.idCard.length != 18) {
 					msg = "请正确填写身份证号";
@@ -186,53 +186,68 @@
 				let _valueId = '';
 				_titles.forEach(item => {
 					if (item.titleType == '2002') {
+						let _valueContent = [];
 						item.radio.forEach(_radio => {
 							if (_radio.selected == '1') {
-								_questionAnswerTitles.push({
-									valueContent: _radio.valueId,
-									titleId: item.titleId,
-									titleType: item.titleType
-								})
+								_valueContent.push(_radio.valueId)
 							}
+						})
+						_questionAnswerTitles.push({
+							communityId: this.communityId,
+							valueContent: _valueContent,
+							titleId: item.titleId,
+							titleType: item.titleType
 						})
 					} else {
 						_valueId = item.radio;
 						_questionAnswerTitles.push({
+							communityId: this.communityId,
 							valueContent: _valueId,
 							titleId: item.titleId,
 							titleType: item.titleType
 						})
 					}
-					console.log(item);
 				});
+				let reflag = false;
+				_questionAnswerTitles.forEach(item => {
+					if(item.valueContent.toString().length == 0){
+						uni.showToast({
+							icon: 'none',
+							title: '保存成功'
+						});
+						reflag = true;
+						return false;
+					}
+				});
+				if(reflag){
+					uni.showToast({
+						icon: 'none',
+						title: '有未答项，请作答！'
+					});
+					return false;
+				}
 				obj = {
 					"settingId": this.settingId,
 					"communityId":this.communityId,
-					"questionAnswerTitles": _questionAnswerTitles
+					"personName": this.name,
+					"idCard": this.idCard,
+					"tel": this.tel,
+					questionAnswerTitles: _questionAnswerTitles,
 				}
-				console.log("提交数据", obj);
 				saveReportInfoAnswerValue(obj)
 					.then(_data => {
 						uni.showToast({
 							icon: 'none',
 							title: '保存成功'
 						});
-						uni.navigateBack({
-							delta: 1
-						})
+						this.communityId = "";
 					}, err => {
 						uni.showToast({
 							icon: 'none',
 							title: err
 						})
 					})
-
-
-
-			}
-
-
-		}
+			}}
 	};
 </script>
 <style>

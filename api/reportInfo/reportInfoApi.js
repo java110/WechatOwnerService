@@ -41,7 +41,6 @@ export function querySetting(_data){
  */
 export function querySettingTitle(_data) {
 	return new Promise((resolve, reject) => {
-		let moreRooms = [];
 		requestNoAuth({
 			url: url.querySettingTitle,
 			method: "GET",
@@ -66,7 +65,6 @@ export function querySettingTitle(_data) {
  */
 export function saveReportInfoAnswerValue(_data){
 	return new Promise((resolve, reject) => {
-		let moreRooms = [];
 		requestNoAuth({
 			url: url.saveReportInfoAnswerValue,
 			method: "POST",
@@ -92,7 +90,6 @@ export function saveReportInfoAnswerValue(_data){
  */
 export function saveReportInfoBackCity(_data){
 	return new Promise((resolve, reject) => {
-		let moreRooms = [];
 		requestNoAuth({
 			url: url.saveReportInfoBackCity,
 			method: "POST",
