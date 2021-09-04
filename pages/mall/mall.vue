@@ -1,6 +1,6 @@
 <template>
 	<view class="h5-html">
-		 <web-view ref="webview"  :src="url"  @onPostMessage="onReciveMessage"></web-view>
+		 <web-view ref="webview" id="mallWebView" :src="url"  @onPostMessage="onReciveMessage"></web-view>
 	</view>
 </template>
 
@@ -30,6 +30,7 @@
 			let _that = this;
 			let _url = options.url;
 			_url = decodeUrl(_url);
+			setStorageSync('_go_back_refresh', 0);
 			//刷新hcCode
 			this.vc.getCurCommunity()
 				.then(function(_communityInfo) {
@@ -41,10 +42,17 @@
 
 		},
 		onShow() {
+			let that = this;
 			let _goBackRefresh = getStorageSync('_go_back_refresh');
 			if (_goBackRefresh == 1) {
-				let wv = this.$refs.webview
-				wv.currentWebview().reload(true);
+				// #ifdef H5
+				document.getElementsByTagName('iframe').forEach(item => {
+					console.log(item.id);
+					if('mallWebView' == item.id){
+						item.contentWindow.location.href = that.url;
+					}
+				})
+				// #endif
 			}
 			setStorageSync('_go_back_refresh', 0);
 
