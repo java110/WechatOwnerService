@@ -10,7 +10,10 @@
 		reciveMessage,
 		getHcCode
 	} from '../../api/webView/webViewApi.js'
-
+	import {
+		getStorageSync,
+		setStorageSync
+	} from '../../utils/StorageUtil.js'
 	import {
 		decodeUrl
 	} from '../../utils/UrlUtil.js';
@@ -27,8 +30,6 @@
 			let _that = this;
 			let _url = options.url;
 			_url = decodeUrl(_url);
-
-
 			//刷新hcCode
 			this.vc.getCurCommunity()
 				.then(function(_communityInfo) {
@@ -37,6 +38,15 @@
 				.then(function() {
 					_that.url = conf.mallUrlIndexPage + "&hcCommunityId=" + _that.communityId;
 				})
+
+		},
+		onShow() {
+			let _goBackRefresh = getStorageSync('_go_back_refresh');
+			if (_goBackRefresh == 1) {
+				let wv = this.$refs.webview
+				wv.currentWebview().reload(true);
+			}
+			setStorageSync('_go_back_refresh', 0);
 
 		},
 		methods: {

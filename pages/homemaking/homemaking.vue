@@ -33,6 +33,15 @@
 				})
 
 		},
+		onShow() {
+			let _goBackRefresh = getStorageSync('_go_back_refresh');
+			if(_goBackRefresh == 1){
+				let wv = this.$refs.webview
+				wv.reload(true);
+			}
+			setStorageSync('_go_back_refresh',0)
+			
+		},
 		methods: {
 			onReciveMessage: function(event) {
 				reciveMessage(event);

@@ -42,6 +42,8 @@ const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
 const ACTION_SET_TITLE = "setTitle";
 const ACTION_NAVIGATE_HOME = "navigateHome";
+const ACTION_NAVIGATE_BACK = "navigateBack";
+
 
 
 
@@ -217,4 +219,13 @@ export function reciveMessage(event, that) {
 		　　title:_data.title
 		})
 	}
+	else if (_data.action == ACTION_NAVIGATE_BACK) {
+		//_data.url = encodeUrl(_data.url);
+		setStorageSync('_go_back_refresh',1);
+		uni.navigateBack({
+			delta:1
+		})
+	}
+	
+	
 }
