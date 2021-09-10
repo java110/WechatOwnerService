@@ -126,6 +126,7 @@ export default {
 	querySettingTitle: baseUrl + "app/reportInfoSettingTitle/querySettingTitle",
 	saveReportInfoAnswerValue: baseUrl + "app/reportInfoAnswerValue/saveReportInfoAnswerValue",
 
+
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',
