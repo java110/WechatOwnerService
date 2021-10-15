@@ -1,5 +1,5 @@
 import {
-	request
+	request,requestNoAuth
 } from '../java110Request.js'
 import
 url
@@ -95,12 +95,8 @@ export function getRoomOweFees(_objData) {
 						reject();
 					}
 					 _roomFees.forEach(function(_roomFee) {
-					 	_roomFee.endTime = dateTimeStringToDateString(_roomFee.endTime);
-					 	
+					 	_roomFee.endTime = dateTimeStringToDateString(_roomFee.endTime);		 	
 						_roomFee.deadlineTime = dateTimeStringToDateString(_roomFee.deadlineTime);
-					
-					
-					
 					 });
 					resolve(_roomFees);
 					return;
@@ -129,6 +125,31 @@ export function getFeeDiscounts(_objData) {
 					//成功情况下跳转
 					let _feeDiscounts = res.data.data;
 					resolve(_feeDiscounts);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 查询停车费
+ * @param {Object} _objData 费用
+ */
+export function getTempCarFeeOrder(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.getTempCarFeeOrder,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
 					return;
 				}
 				reject();

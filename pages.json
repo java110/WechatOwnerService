@@ -592,6 +592,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/tempCarFee/tempCarFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "停车费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

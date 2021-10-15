@@ -125,6 +125,7 @@ export default {
 	saveReportInfoBackCity: baseUrl + "app/reportInfoBackCity/saveReportInfoBackCity",
 	querySettingTitle: baseUrl + "app/reportInfoSettingTitle/querySettingTitle",
 	saveReportInfoAnswerValue: baseUrl + "app/reportInfoAnswerValue/saveReportInfoAnswerValue",
+	getTempCarFeeOrder: baseUrl + "app/tempCarFee.getTempCarFeeOrder",
 
 
 	NEED_NOT_LOGIN_PAGE: [
