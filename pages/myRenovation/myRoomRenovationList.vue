@@ -64,12 +64,14 @@
 			let _that = this;
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
-			_that.loadApply();
 		},
 		/**
 		 * 生命周期函数--监听页面显示
 		 */
 		onShow: function() {
+			this.page = 1;
+			this.renovationList = [];
+			this.loadApply();
 		},
 		onReachBottom : function(){
 			if(this.loadingStatus == 'noMore'){

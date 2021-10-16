@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="margin-top" v-if="renovationRecordList.length > 0">
-			<view class="cu-list menu-avatar " v-for="(item,index) in renovationRecordList" :key="index" @tap="_showDetail(item)">
+		<view class="margin-top" v-if="applyRoomRecordList.length > 0">
+			<view class="cu-list menu-avatar " v-for="(item,index) in applyRoomRecordList" :key="index" @tap="_showDetail(item)">
 				<view class="cu-item arrow">
 					<view class="item-content">
 						<view class="text-grey">
@@ -10,7 +10,7 @@
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								操作人员：{{item.staffName}}
+								操作人员：{{item.createUserName}}
 							</view>
 						</view>
 					</view>
@@ -32,13 +32,13 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-	import {queryRoomRenovationRecord} from '../../api/roomRenovation/roomRenovationApi.js'
+	import {listApplyRoomDiscountRecord} from '../../api/applyRoom/applyRoomApi.js'
 	export default {
 		data() {
 			return {
-				renovationInfo: [],
+				applyRoomInfo: [],
 				communityId: '',
-				renovationRecordList: [],
+				applyRoomRecordList: [],
 				page: 1,
 				loadingStatus : 'loading',
 				loadingContentText: {
@@ -54,7 +54,8 @@
 		},
 		onLoad: function(options) {
 			let _that = this;
-			_that.renovationInfo = JSON.parse(options.apply);
+			_that.applyRoomInfo = JSON.parse(options.apply);
+			console.log(_that.applyRoomInfo);
 			this.loadApply();
 		},
 		onShow: function(){
@@ -75,16 +76,16 @@
 				let _objData = {
 					page: this.page,
 					row: 10,
-					communityId: this.renovationInfo.communityId,
-					rId: this.renovationInfo.rId,
-					roomName: this.renovationInfo.roomName,
-					roomId: this.renovationInfo.roomId
+					communityId: this.applyRoomInfo.communityId,
+					ardId: this.applyRoomInfo.ardId,
+					roomName: this.applyRoomInfo.roomName,
+					roomId: this.applyRoomInfo.roomId
 				};
-				queryRoomRenovationRecord(_objData)
+				listApplyRoomDiscountRecord(_objData)
 				.then(function(res){
-					_that.renovationRecordList = _that.renovationRecordList.concat(res.data)
+					_that.applyRoomRecordList = _that.applyRoomRecordList.concat(res.data)
 					_that.page ++;
-					if(_that.renovationRecordList.length == res.total){
+					if(_that.applyRoomRecordList.length == res.total){
 						_that.loadingStatus = 'noMore';
 						return;
 					}
@@ -95,9 +96,9 @@
 			 * 跳转详情页
 			 */			
 			_showDetail: function(_item){
-				_item.communityId = this.renovationInfo.communityId;
+				_item.communityId = this.applyRoomInfo.communityId;
 				uni.navigateTo({
-					url: '/pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/myApplyRoom/myApplyRoomRecordDetail?apply=' + JSON.stringify(_item)
 				});
 			}
 		}

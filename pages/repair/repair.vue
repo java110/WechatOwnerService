@@ -348,7 +348,7 @@
 								return;
 							}
 							wx.showToast({
-								title: "服务器异常了",
+								title: _json.msg,
 								icon: 'none',
 								duration: 2000
 							})

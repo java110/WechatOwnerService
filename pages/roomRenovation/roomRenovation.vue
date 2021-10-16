@@ -22,12 +22,13 @@
 				</view>
 			</view>
 		</view>
+		<!-- <instructions4use @disagree="_disagree"></instructions4use> -->
 	</view>
 </template>
 
 <script>
 	const context = require("../../context/Java110Context.js");
-	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	// import instructions4use from '@/components/instructions4use/instructions4use.vue'
 	
 	import {
 		getRooms
@@ -38,13 +39,12 @@
 			return {
 				rooms: [],
 				curRoom: {},
-				moreRooms: [],
-				noData: false
+				moreRooms: []
 			};
 		},
 	
 		components: {
-			noDataPage
+			// instructions4use
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -57,14 +57,12 @@
 		 */
 		onShow: function() {
 			let _that = this;
-			this.noData = false;
 			getRooms().then(data => {
 				let _rooms = data.rooms;
 				this.rooms = _rooms;
 				let _owner = data.owner;
 				_that.moreRooms = [];
 				if (_rooms.length == 0) {
-					_that.noData = true;
 					return;
 				}
 				_rooms.forEach(function(_room) {
@@ -80,6 +78,12 @@
 					url: '/pages/roomRenovationDetail/roomRenovationDetail?room=' + JSON.stringify(_item)
 				});
 			},
+			
+			// _disagree: function(){
+			// 	uni.switchTab({
+			// 		url: '/pages/index/index'
+			// 	})
+			// }
 		}
 	};
 </script>

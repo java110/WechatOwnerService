@@ -28,76 +28,22 @@
 
 		<view class="cu-list menu  margin-top">
 
-			<view class="cu-item arrow" @click="viewOwner()">
+			<view class="cu-item arrow" @click="myAssets()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
-					<text class="text-grey">业主信息</text>
+					<text class="text-grey">我的资产</text>
 				</view>
 			</view>
-			<view class="cu-item arrow" @click="myHouse()">
+			<view class="cu-item arrow" @click="myAccount()">
 				<view class="content">
-					<text class="cuIcon-home text-blue"></text>
-					<text class="text-grey">我的房屋</text>
+					<text class="cuIcon-recharge text-yellow"></text>
+					<text class="text-grey">我的钱包</text>
 				</view>
 			</view>
-			<!-- <view class="cu-item arrow" @click="mallOrder()">
+			<view class="cu-item arrow" @click="myServices()">
 				<view class="content">
-					<text class="cuIcon-shopfill text-orange"></text>
-					<text class="text-grey">商城订单</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="housekeepingOrder()">
-				<view class="content">
-					<text class="cuIcon-homefill text-orange"></text>
-					<text class="text-grey">家政订单</text>
-				</view>
-			</view> -->
-			<view class="cu-item arrow" @click="feeDetail()">
-				<view class="content">
-					<text class="cuIcon-card text-pink"></text>
-					<text class="text-grey">缴费历史</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="applyRoomDetail()">
-				<view class="content">
-					<text class="cuIcon-square text-pink"></text>
-					<text class="text-grey">空置房申请历史</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myComplaint()">
-				<view class="content">
-					<text class="cuIcon-form text-green"></text>
-					<text class="text-grey">我的投诉单</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myRepair()">
-				<view class="content">
-					<text class="cuIcon-repairfill text-orange"></text>
-					<text class="text-grey">我的报修单</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="_machineTranslate()">
-				<view class="content">
-					<text class="cuIcon-formfill text-orange"></text>
-					<text class="text-grey">门禁同步日志</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myRenovation()">
-				<view class="content">
-					<text class="cuIcon-paintfill text-green"></text>
-					<text class="text-grey">房屋装修</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myParking()">
-				<view class="content">
-					<text class="cuIcon-taxi text-orange"></text>
-					<text class="text-grey">车位信息</text>
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="myProperty()">
-				<view class="content">
-					<text class="cuIcon-service text-red"></text>
-					<text class="text-grey">我的物业</text>
+					<text class="cuIcon-profile text-pink"></text>
+					<text class="text-grey">生活服务</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="mySettings()">
@@ -186,140 +132,6 @@
 					url: '../bindOwner/bindOwner'
 				});
 			},
-			viewOwner: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '../viewBindOwner/viewBindOwner'
-				});
-			},
-			loadOwenrInfo: function() {
-				let _that = this;
-
-				context.getOwner(function(_ownerInfo) {
-					console.log(_ownerInfo);
-
-					if (_ownerInfo) {
-						_that.ownerFlag = true;
-					} else {
-						_that.ownerFlag = false;
-					}
-				});
-			},
-			myProperty: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '../myProperty/myProperty'
-				});
-			},
-
-			myComplaint: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '../complaintList/complaintList'
-				});
-			},
-			onGotUserInfo: function(e) {
-				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
-			},
-			myRenovation: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '../myRenovation/myRoomList'
-				});
-			},
-			myHouse: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '../my/myHouse'
-				});
-			},
-			myRepair: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '/pages/myRepair/myRepair',
-				});
-			},
-			mySettings: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '/pages/settings/settings',
-				});
-			},
-			feeDetail: function() {
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '/pages/payFeeDetail/payFeeDetail',
-				});
-			},
-			applyRoomDetail: function(){
-				if (!this.ckeckUserInfo()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					}, () => {
-						this.refreshPageLoginInfo();
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url: '/pages/myApplyRoom/myRoomList',
-				});
-			},
 			/**
 			 * 查询业主头像
 			 */
@@ -341,43 +153,78 @@
 			ckeckUserInfo: function() {
 				return context.checkLoginStatus();
 			},
-			myParking: function() {
-				this.vc.navigateTo({
-					url: '/pages/parkingInfo/parkingInfo',
-				});
-			},
-			_machineTranslate: function() {
-				this.vc.navigateTo({
-					url: '/pages/machineTranslateLog/machineTranslateLog',
-				});
-			},
-			mallOrder:function(){
-				let that = this;
-				let _communityId = '';
-				getCurCommunity()
-				.then(res=>{
-					_communityId = res.communityId;
-					let _url = "/pages/myOrder/myOrder?hcCommunityId="+_communityId+"&mallFrom=HC";
-					setStorageSync(mapping.HC_MALL_CUR_URL,_url);
-					uni.navigateTo({
-						url: '/pages/hcWebView/hcWebView'
-					});
-				});
-			},
-			housekeepingOrder:function(){
-				let that = this;
-				let _communityId = '';
-				getCurCommunity()
-				.then(res=>{
-					_communityId = res.communityId;
-					let _url = "/pages/homemaking/order?hcCommunityId="+_communityId+"&mallFrom=HC";
-					setStorageSync(mapping.HC_MALL_CUR_URL,_url);
-					uni.navigateTo({
-						url: '/pages/hcWebView/hcWebView'
-					});
-				});
-			}
+			loadOwenrInfo: function() {
+				let _that = this;
 
+				context.getOwner(function(_ownerInfo) {
+					console.log(_ownerInfo);
+
+					if (_ownerInfo) {
+						_that.ownerFlag = true;
+					} else {
+						_that.ownerFlag = false;
+					}
+				});
+			},
+			onGotUserInfo: function(e) {
+				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
+			},
+			// 我的资产
+			myAssets: function() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: './myMenu?pageSign=myAssets'
+				});
+			},
+			// 生活服务
+			myServices: function(){
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: './myMenu?pageSign=myServices'
+				});
+			},
+			// 设置
+			mySettings: function() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/settings/settings',
+				});
+			},
+			// 我的钱包
+			myAccount: function() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateTo({
+					url: '/pages/myAccount/myAccount',
+				});
+			},
 		}
 	};
 </script>

@@ -11,6 +11,14 @@
 				</view>
 				<view class="bg-cyan content" v-if="item.endTime != undefined">
 					<text>处理意见：</text>  {{item.context}}
+					<block v-if="item.state == '12000' && item.payTypeName != undefined">
+						({{item.payTypeName}})
+					</block>
+				</view>
+				<!-- 待支付状态 - 详情描述 -->
+				<view class="bg-cyan content" v-if="item.state == '10009'">
+					<text>处理意见：</text> {{item.context}}
+					<block v-if="item.payTypeName != undefined">({{item.payTypeName}})</block>
 				</view>
 				<view class="bg-cyan content" v-if="item.photoVos.length > 0 && item.state==10005">
 					<view class="repair-img-item" v-for="(pic, index2) in item.photoVos" :key="key2">

@@ -114,7 +114,7 @@
 						<text class="text-grey text-sm">{{curDegrees-preDegrees}}</text>
 					</view>
 				</view>
-				
+				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount" ></vcUserAccount>
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
 			
@@ -146,6 +146,7 @@
 	const constant = context.constant;
 	
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
+	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
 
 	
 	// #ifdef H5
@@ -161,7 +162,8 @@
 	import {addMonth,formatDate,date2String,dateSubOneDay} from '../../utils/DateUtil.js'
 	export default {
 		components:{
-			vcDiscount
+			vcDiscount,
+			vcUserAccount
 		},
 		data() {
 			return {
@@ -203,6 +205,9 @@
 				startTime: '',
 				deadlineTime: '',
 				amountOwed: '',
+				selectUserAccount: [], // 选中的账户
+				accountAmount: 0.0, // 账户金额
+				deductionAmount: 0.0, // 抵扣金额
 			};
 		},
 		
@@ -269,33 +274,65 @@
 			
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId,this.communityId);
 			})
 		},
 		methods: {
+			
 			// （单价×面积+附加费）  × 周期
 			getReceivableAmount: function(){
 				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth).toFixed(2);
 			},
+			
+			// 折扣金额
 			computeFeeDiscount:function(_price){
 				// this.receivableAmount = this.receivableAmount - _price;
 				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
+				this._computeUserAmount();
 			},
+			
+			// 选择使用账户余额
+			getUserAmount: function(_accInfo){
+				// 选中的账户列表
+				this.selectUserAccount = _accInfo.selectedAccounts;
+				// 账户金额
+				this.accountAmount = _accInfo.totalUserAmount;
+				this._updatePrice(this.feeMonth);
+			},
+			
+			// 使用账户余额后，更新金额
+			_computeUserAmount: function(){
+				// 抵扣金额
+				this.deductionAmount = parseFloat(this.accountAmount) > parseFloat(this.receivableAmount) ? parseFloat(this.receivableAmount) : parseFloat(this.accountAmount);
+				// 更新应缴金额
+				let receivableAmount = parseFloat(this.receivableAmount) - parseFloat(this.accountAmount);
+				this.receivableAmount = receivableAmount < 0 ? '0.00' : receivableAmount.toFixed(2);
+			},
+			
+			// 切换缴费周期
 			dateChange: function(e) {
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];
 				let _feeMonth = _feeMonthName.replace("个月","");
+				this._updatePrice(_feeMonth);
+			},
+			
+			// 更新金额
+			_updatePrice(_feeMonth){
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
-				this.feeMonthName = _feeMonthName;
+				this.feeMonthName = _feeMonth + '个月';
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
 				this.receivableAmount = this.getReceivableAmount();
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
 			},
+			
 			onFeeMonthChange: function(e) {
 				console.log(e);
 			},
+			
 			// 计费结束时间计算（同pc端）
 			_getDeadlineTime: function () {
 				if (this.amountOwed == 0 && this.formatEndTime == this.deadlineTime) {
@@ -306,9 +343,11 @@
 				}
 				return dateSubOneDay(this.startTime, this.deadlineTime, this.feeFlag);
 			},
+			
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
 			},
+			
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -390,6 +429,7 @@
 					}
 				});
 			},
+			
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -406,7 +446,10 @@
 					appId: this.appId,
 					payerObjId: this.roomId,
 					payerObjType: 3333,
-					endTime: this.formatEndTime
+					endTime: this.formatEndTime,
+					selectUserAccount: this.selectUserAccount, // 选中的账户
+					accountAmount: this.accountAmount, // 账户金额
+					deductionAmount: this.deductionAmount, // 抵扣金额
 				};
 				context.request({
 					url: constant.url.preOrder,

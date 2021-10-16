@@ -69,6 +69,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	const context = require("../../context/Java110Context.js");
+	import {isIDCard} from '../../utils/StringUtil.js'
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -163,6 +164,8 @@
 					msg = "请填写年龄";
 				} else if (obj.idCard == "") {
 					msg = "请填写身份证";
+				} else if (!isIDCard(obj.idCard)){
+					msg = "身份证号有误";
 				}else if (obj.link == "") {
 					msg = "请填写手机号";
 				}else if (obj.msgCode == "") {

@@ -126,8 +126,14 @@ export default {
 	querySettingTitle: baseUrl + "app/reportInfoSettingTitle/querySettingTitle",
 	saveReportInfoAnswerValue: baseUrl + "app/reportInfoAnswerValue/saveReportInfoAnswerValue",
 	getTempCarFeeOrder: baseUrl + "app/tempCarFee.getTempCarFeeOrder",
-
-
+	// 空置房跟踪记录列表
+	listApplyRoomDiscountRecord: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecord",
+	// 空置房跟踪记录详情
+	listApplyRoomDiscountRecordDetail: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecordDetail",
+	// 查询房屋费用项
+	listRoomFee: baseUrl + "callComponent/listRoomFee/list",
+	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
+	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',

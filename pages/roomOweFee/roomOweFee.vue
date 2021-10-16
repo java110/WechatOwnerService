@@ -106,7 +106,8 @@
 				additionalAmount: "",
 				appId: '',
 				fees: [],
-				roomId: ''
+				roomId: '',
+				property: {},
 			};
 		},
 		/**
@@ -145,10 +146,19 @@
 					}
 				});
 				_that.curRoom = _rooms[0];
-				_that._loadRoomFee();
+				// _that._loadRoomFee();
 			});
+			_that._loadProperty();
 		},
 		methods: {
+			
+			_loadProperty: function() {
+				let _that = this;
+				context.getProperty()
+					.then(function(_property) {
+						_that.property = _property;
+					});
+			},
 
 			_loadRoomOweFee: function() {
 				let _that =this;
@@ -264,7 +274,8 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId
+					appId: this.appId,
+					storeId: this.property.storeId,
 				};
 				context.request({
 					url: constant.url.toOweFeePay,

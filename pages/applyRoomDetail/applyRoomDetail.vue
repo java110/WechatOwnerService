@@ -60,9 +60,17 @@
 		<view class="block__title">空置房申请信息填写</view>
 		<view class="cu-form-group arrow">
 			<view class="title">优惠类型</view>
-			<picker mode="selector" :value="applyType" :range="applyTypes" range-key="typeName"  @change="applyTypeChange">
+			<picker mode="selector" :range="applyTypes" range-key="typeName"  @change="applyTypeChange">
 				<view class="picker">
 					{{applyTypeShow?applyTypeShow:"请选择"}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-form-group arrow">
+			<view class="title">费用项目</view>
+			<picker mode="selector" :range="feeTypeCds" range-key="feeName"  @change="feeTypeCdsChange">
+				<view class="picker">
+					{{feeTypeCd?feeTypeCd:"请选择"}}
 				</view>
 			</picker>
 		</view>
@@ -82,6 +90,10 @@
 				</view>
 			</picker>
 		</view>
+		<view class="cu-form-group arrow">
+			<view class="title">申请说明</view>
+			<input type="text" v-model="createRemark">
+		</view>
 		<view class="btn-box">
 			<button type="default" class="btn-sub" @click="subApply()">提交申请</button>
 		</view>
@@ -96,7 +108,7 @@
 	const context = require("../../context/Java110Context.js");
 	const factory = context.factory;
 	import {compareDate,addDay,date2String} from '../../utils/DateUtil.js'
-	import {queryApplyRoomDiscountType,saveApplyRoomDiscount} from '../../api/applyRoom/applyRoomApi.js'
+	import {queryApplyRoomDiscountType,saveApplyRoomDiscount,listRoomFee} from '../../api/applyRoom/applyRoomApi.js'
 	export default {
 		data() {
 			return {
@@ -107,10 +119,13 @@
 				roomDetail: {},
 				bindStartDate: '请选择',
 				bindEndDate: '请选择',
-				createRemark: '空置房申请',
+				createRemark: '',
 				applyType: '',
 				applyTypeShow: '',
 				applyTypes: [],
+				feeTypeCds: [],
+				feeId: '',
+				feeTypeCd: '',
 			};
 		},
 
@@ -126,6 +141,7 @@
 			_that.roomDetail = JSON.parse(options.room);
 			_that.loadApplyRoomDiscountType();
 			_that.loadOwenrInfo();
+			_that.loadRoomFee();
 		},
 
 		/**
@@ -163,6 +179,21 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			loadRoomFee: function(){
+				let _that = this;
+				let params = {
+					page: 1,
+					row: 50,
+					communityId: this.roomDetail.communityId,
+					payerObjId: this.roomDetail.roomId,
+					state: '2008001'
+				};
+				listRoomFee(params).then(function(data){
+					let fees = data.fees;
+					_that.feeTypeCds = fees;
+				})
+			},
+			
 			loadApplyRoomDiscountType: function(){
 				let _that = this;
 				let params = {
@@ -200,6 +231,15 @@
 			},
 			
 			/**
+			 * @param {Object} e
+			 * 费用项改变
+			 */
+			feeTypeCdsChange: function(e){
+				this.feeId = this.feeTypeCds[e.detail.value].feeId;
+				this.feeTypeCd = this.feeTypeCds[e.detail.value].feeName;
+			},
+			
+			/**
 			 * 修改开始时间
 			 * @param {Object} e
 			 */
@@ -219,21 +259,23 @@
 			 * 提交申请
 			 */
 			subApply: function(){
+				let msg = '';
 				if(this.applyType == ''){
-					uni.showToast({
-						title: '请选择优惠类型'
-					});
-					return;
+					msg = '请选择优惠类型';
+				}else if(this.feeId == ''){
+					msg = '请选择费用项目';
+				}else if(this.bindStartDate == '请选择' || this.bindEndDate == '请选择'){
+					msg = '请选择时间范围';
+				}else if(!compareDate(this.bindEndDate, this.bindStartDate)){
+					msg = '时间范围有误';
+				}else if(this.createRemark == ''){
+					msg = '请填写申请说明';
 				}
-				if(this.bindStartDate == '请选择' || this.bindEndDate == '请选择'){
+				
+				if(msg != ''){
 					uni.showToast({
-						title: '请选择时间范围'
-					});
-					return;
-				}
-				if(!compareDate(this.bindEndDate, this.bindStartDate)){
-					uni.showToast({
-						title: '时间范围有误'
+						title: msg,
+						icon: 'none'
 					});
 					return;
 				}
@@ -250,7 +292,8 @@
 					createUserTel: this.ownerInfo.link,
 					createRemark: this.createRemark,
 					ardId: '',
-					applyType: this.applyType
+					applyType: this.applyType,
+					feeId: this.feeId,
 				}
 				console.log(params);
 				saveApplyRoomDiscount(params).then(function(_res){

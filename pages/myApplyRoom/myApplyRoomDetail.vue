@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<view class="cu-form-group" @click="showRecord()">
+			<view class="title">跟踪记录</view>
+			点击查看>
+		</view>
 		<view class="block__title">用户信息</view>
 		<view class="cu-form-group">
 			<view class="title">名称</view>
@@ -90,7 +94,14 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			
+			/**
+			 * 查看跟踪记录
+			 */
+			showRecord: function(){
+				uni.navigateTo({
+					url: '/pages/myApplyRoom/myApplyRoomRecord?apply=' + JSON.stringify(this.applyDetail)
+				});
+			},
 		}
 	};
 </script>

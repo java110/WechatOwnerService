@@ -40,7 +40,7 @@
 			<view class="title">建筑面积</view>
 			{{roomDetail.builtUpArea+'平方米'}}
 		</view>
-		<view class="block__title">空置房申请信息填写</view>
+		<view class="block__title">装修申请信息填写</view>
 		<view class="cu-form-group arrow">
 			<view class="title">开始日期</view>
 			<picker mode="date" :value="startTime" start="2020-09-01" end="2050-09-01" @change="dateStartChange">
@@ -58,8 +58,20 @@
 			</picker>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">备注</view>
-			<input type="text" :value="remark" @input="bindRemarkInput" placeholder="请输入备注">
+			<view class="title">装修单位</view>
+			<input type="text" v-model="renovationCompany" placeholder="请输入装修单位">
+		</view>
+		<view class="cu-form-group">
+			<view class="title">装修负责人</view>
+			<input type="text" v-model="personMain" placeholder="请输入装修负责人">
+		</view>
+		<view class="cu-form-group">
+			<view class="title">负责人电话</view>
+			<input type="text" v-model="personMainTel" placeholder="请输入负责人电话">
+		</view>
+		<view class="cu-form-group">
+			<view class="title">装修详情</view>
+			<input type="text" v-model="remark" placeholder="请输入装修详情">
 		</view>
 		<view class="btn-box">
 			<button type="default" class="btn-sub" @click="subApply()">提交申请</button>
@@ -72,8 +84,10 @@
 
 <script>
 	const context = require("../../context/Java110Context.js");
-	const factory = context.factory;
+	// const constant = context.constant;
+	// const factory = context.factory;
 	import {compareDate} from '../../utils/DateUtil.js'
+	import {checkPhoneNumber} from '../../utils/StringUtil.js'
 	import {saveRoomRenovation} from '../../api/roomRenovation/roomRenovationApi.js'
 	export default {
 		data() {
@@ -84,6 +98,12 @@
 				startTime: '请选择',
 				endTime: '请选择',
 				remark: '',
+				isPostpone: 'N',
+				renovationCompany: '',
+				personMain: '',
+				personMainTel: '',
+				// admin: {},
+				property: {},
 			};
 		},
 
@@ -135,25 +155,61 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			
 			loadOwenrInfo: function() {
 				let _that = this;
 
 				context.getOwner(function(_ownerInfo) {
-					console.log(_ownerInfo);
-
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
 						_that.ownerInfo = _ownerInfo;
+						_that._loadProperty();
+						// _that._loadAdmin();
 					} else {
 						_that.ownerFlag = false;
 					}
 				});
 			},
+			// _loadAdmin:function(){
+			// 	let _that = this;
+			// 	let _objData = {
+			// 		page: 1,
+			// 		row: 1,
+			// 		communityId: this.ownerInfo.communityId,
+			// 		memberTypeCd: '390001200000'
+			// 	};
+			// 	context.request({
+			// 		url: constant.url.listStore,
+			// 		header: context.getHeaders(),
+			// 		method: "GET",
+			// 		data: _objData,
+			// 		//动态数据
+			// 		success: function(res) {
+			// 			if (res.statusCode == 200) {
+			// 				_that.admin = res.data.stores[0];
+			// 				return;
+			// 			}
+			// 			uni.showToast({
+			// 				title: "服务器异常了",
+			// 				icon: 'none',
+			// 				duration: 2000
+			// 			});
+			// 		},
+			// 		fail: function(e) {
+			// 			wx.showToast({
+			// 				title: "服务器异常了",
+			// 				icon: 'none',
+			// 				duration: 2000
+			// 			});
+			// 		}
+			// 	});
+			// },
 			
-			// 备注输入
-			bindRemarkInput: function(e){
-				this.remark = e.detail.value;
+			_loadProperty: function() {
+				let _that = this;
+				context.getProperty()
+					.then(function(_property) {
+						_that.property = _property;
+					});
 			},
 			
 			// 修改开始时间
@@ -168,16 +224,26 @@
 			
 			// 提交申请
 			subApply: function(){
+				let msg = '';
 				if(this.startTime == '请选择' || this.endTime == '请选择'){
-					uni.showToast({
-						title: '请选择时间范围'
-					});
-					return;
+					msg = '请选择时间范围';
+				}else if(!compareDate(this.endTime, this.startTime)){
+					msg = '时间范围有误';
+				}else if(this.renovationCompany == ''){
+					msg = '请填写装修单位';
+				}else if(this.personMain == ''){
+					msg = '请填写装修负责人';
+				}else if(this.personMainTel == '' || !checkPhoneNumber(this.personMainTel)){
+					msg = '负责人电话有误';
+				}else if(this.remark == ''){
+					msg = '请填写装修详情';
 				}
-				if(!compareDate(this.endTime, this.startTime)){
+				
+				if(msg != ''){
 					uni.showToast({
-						title: '时间范围有误'
-					});
+						title: msg,
+						icon: 'none'
+					})
 					return;
 				}
 				
@@ -191,9 +257,13 @@
 					personTel: this.ownerInfo.link,
 					remark: this.remark,
 					rId: '',
-					userId: ''
+					userId: '',
+					isPostpone: this.isPostpone,
+					renovationCompany: this.renovationCompany,
+					personMain: this.personMain,
+					personMainTel: this.personMainTel,
+					storeId: this.property.storeId,
 				}
-				console.log(params);
 				saveRoomRenovation(params).then(function(_res){
 					uni.showToast({
 						title: '申请成功'

@@ -6,6 +6,9 @@
  */
 
 import {
+	request
+} from '../java110Request.js'
+import {
 	requestNoAuth
 } from '../java110Request.js';
 import url from '../../constant/url.js';
@@ -165,4 +168,54 @@ export function userLogin(_obj) {
 				}
 			});
 		})
+}
+
+/**
+ * 查询用户账户信息
+ * @param {Object} _objData
+ */
+export function queryOwnerAccount(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.queryOwnerAccount,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _feeDiscounts = res.data.data;
+					resolve(_feeDiscounts);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 查询用户账户信息明细
+ * @param {Object} _objData
+ */
+export function queryOwnerAccountDetail(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.queryOwnerAccountDetail,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
 }
