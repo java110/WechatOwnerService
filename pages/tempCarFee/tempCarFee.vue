@@ -44,7 +44,8 @@
 					</view>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 30px;">
-					<button @click="onPayFee" :disabled="amount == 0" class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
+					<button @click="onPayFee" :disabled="amount == 0"
+						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
 				</view>
 			</view>
 		</scroll-view>
@@ -62,6 +63,12 @@
 	import {
 		getTempCarFeeOrder
 	} from '../../api/fee/feeApi.js'
+	import {
+		isNotNull
+	} from '../../utils/StringUtil.js'
+	import {
+		refreshUserOpenId
+	} from '../../api/user/userApi.js'
 	export default {
 		data() {
 			return {
@@ -70,16 +77,24 @@
 				stopTimeTotal: 0,
 				inTime: '',
 				amount: 0.0,
-				queryTime:''
+				queryTime: '',
+				appId: '',
+				openId: '',
 			};
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.openId = options.openId;
 			this.paId = options.paId;
 			this.carNum = options.carNum;
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID);
+			this.appId = options.appId;
+			if (!isNotNull(this.openId)) {
+				//刷新 openId
+				this._refreshWechatOpenId();
+				return;
+			}
 			this._loadTempCarFee();
 		},
 		methods: {
@@ -155,6 +170,15 @@
 							duration: 2000
 						});
 					}
+				});
+			},
+			_refreshWechatOpenId: function() {
+				let _redirectUrl = window.location.href;
+				refreshUserOpenId({
+					redirectUrl: _redirectUrl,
+					wAppId: this.appId
+				}).then(_data => {
+
 				});
 			}
 		}

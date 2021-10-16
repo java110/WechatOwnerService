@@ -79,7 +79,8 @@
 					index7: ""
 				},
 				carNum: '',
-				paId:''
+				paId:'',
+				appId:''
 			}
 		},
 		components: {
@@ -87,6 +88,7 @@
 		},
 		onLoad(options) {
 			this.paId = options.paId;
+			this.appId = options.appId;
 		},
 		methods: {
 			showCarNumberKeyboard() {
@@ -152,9 +154,8 @@
 						})
 						return ;
 					}
-					
 					uni.navigateTo({
-						url:'/pages/tempCarFee/tempCarFee?paId='+_that.paId+'&carNum='+_that.carNum
+						url:'/pages/tempCarFee/tempCarFee?paId='+_that.paId+'&carNum='+_that.carNum+"&appId="+_that.appId
 					})
 				})
 			}
