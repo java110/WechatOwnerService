@@ -227,12 +227,12 @@ export function queryOwnerAccountDetail(_objData) {
 export function refreshUserOpenId(_objData){
 	return new Promise((resolve, reject) => {
 		requestNoAuth({
-			url: url.queryOwnerAccountDetail,
-			method: "POST",
-			data: JSON.stringify(_obj), //动态数据
+			url: url.refreshOpenId,
+			method: "GET",
+			data: _objData, //动态数据
 			success: function(res) {
 				if (res.statusCode == 200) {
-					resolve(res);
+					resolve(res.data);
 					return;
 				}
 				reject();

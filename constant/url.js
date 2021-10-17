@@ -3,6 +3,7 @@ const baseUrl = conf.baseUrl;
 export default {
 	baseUrl: baseUrl,
 	wechatRefrashToken: baseUrl + "app/refreshToken", // 公众号刷新token
+	refreshOpenId: baseUrl + "app/refreshOpenId", // 公众号刷新token
 	loginOwnerByKey: baseUrl + "app/loginOwnerByKey", // 根据临时秘钥登录
 	loginUrl: baseUrl + 'app/loginWx',
 	getWxPhoto: baseUrl + 'app/getWxPhoto',
@@ -88,6 +89,7 @@ export default {
 	saveRentingPool: baseUrl + 'app/renting/saveRentingPool', //出租提交
 	listOweFees: baseUrl + 'app/feeApi/listOweFees', //查询房屋欠费
 	toOweFeePay: baseUrl + "app/payment/toOweFeePay", //欠费缴费
+	toPayTempCarFee: baseUrl + "app/payment/toPayTempCarFee", //欠费缴费
 	queryRentingPool: baseUrl + 'app/renting/queryRentingPool',
 	saveRentingAppointment: baseUrl + 'app/rentingAppointment/saveRentingAppointment', //房屋预约
 	queryActivitiesType: baseUrl + 'app/activitiesType/queryActivitiesType',
@@ -134,16 +136,18 @@ export default {
 	listRoomFee: baseUrl + "callComponent/listRoomFee/list",
 	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
 	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
+	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',
 		'/pages/register/register',
 		'/pages/my/my',
 		'/pages/index/index',
 		'/pages/market/market',
-		'/pages/showlogin/showlogin'
+		'/pages/showlogin/showlogin',
+		
 	],
 	NEED_NOT_LOGIN_URL: [
-		// this.listActivitiess,
+		baseUrl + "app/payment/toPayTempCarFee"
 		// this.listAdvertPhoto,
 		// this.queryAppUserBindingOwner,
 		// this.listJunkRequirements

@@ -61,14 +61,10 @@
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
 
 	import {
-		getTempCarFeeOrder
+		getTempCarFeeOrder,
+		toPayTempCarFee
 	} from '../../api/fee/feeApi.js'
-	import {
-		isNotNull
-	} from '../../utils/StringUtil.js'
-	import {
-		refreshUserOpenId
-	} from '../../api/user/userApi.js'
+
 	export default {
 		data() {
 			return {
@@ -80,6 +76,7 @@
 				queryTime: '',
 				appId: '',
 				openId: '',
+				inoutId:''
 			};
 		},
 		/**
@@ -90,11 +87,6 @@
 			this.paId = options.paId;
 			this.carNum = options.carNum;
 			this.appId = options.appId;
-			if (!isNotNull(this.openId)) {
-				//刷新 openId
-				this._refreshWechatOpenId();
-				return;
-			}
 			this._loadTempCarFee();
 		},
 		methods: {
@@ -116,6 +108,7 @@
 					_that.inTime = data.inTime;
 					_that.amount = data.amount;
 					_that.queryTime = data.queryTime;
+					_that.inoutId = data.orderId;
 				})
 			},
 			onPayFee: function() {
@@ -125,62 +118,38 @@
 				});
 				let _tradeType = 'JSAPI';
 				let _objData = {
-					cycles: this.feeMonth,
-					communityId: this.communityId,
-					feeId: this.feeId,
-					feeName: '物业费',
-					receivedAmount: _receivedAmount,
+					carNum: this.carNum,
+					openId: this.openId,
+					paId: this.paId,
+					feeName: '停车费',
 					tradeType: _tradeType,
 					appId: this.appId,
-					payerObjId: this.roomId,
-					payerObjType: 3333,
-					endTime: this.formatEndTime
+					inoutId: this.inoutId
 				};
-				context.request({
-					url: constant.url.preOrder,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						if (res.statusCode == 200 && res.data.code == '0') {
-							let data = res.data; //成功情况下跳转
-							WexinPayFactory.wexinPay(data, function() {
-								uni.showToast({
-									title: "支付成功",
-									duration: 2000
-								});
-								uni.navigateBack({});
+				toPayTempCarFee(_objData)
+				.then(_data=>{
+					if (_data.code == '0') {
+						WexinPayFactory.wexinPay(_data, function() {
+							uni.showToast({
+								title: "支付成功",
+								duration: 2000
 							});
-							wx.hideLoading();
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: "缴费失败",
-							icon: 'none',
-							duration: 2000
+							uni.navigateBack({
+								delta:1
+							});
 						});
-					},
-					fail: function(e) {
 						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+						return;
 					}
-				});
+					wx.hideLoading();
+					wx.showToast({
+						title: "缴费失败",
+						icon: 'none',
+						duration: 2000
+					});
+				})
 			},
-			_refreshWechatOpenId: function() {
-				let _redirectUrl = window.location.href;
-				refreshUserOpenId({
-					redirectUrl: _redirectUrl,
-					wAppId: this.appId
-				}).then(_data => {
-
-				});
-			}
+			
 		}
 	};
 </script>

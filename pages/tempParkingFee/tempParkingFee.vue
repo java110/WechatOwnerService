@@ -51,7 +51,8 @@
 
 			<view class="plat-btn-black"></view>
 			<view class="cu-bar btn-group" style="margin-top: 30px;">
-				<button @click="_queryCarNum" :disabled="carNum.length< 7" class="cu-btn bg-green shadow-blur round lg">立即查询</button>
+				<button @click="_queryCarNum" :disabled="carNum.length< 7"
+					class="cu-btn bg-green shadow-blur round lg">立即查询</button>
 			</view>
 		</view>
 
@@ -63,7 +64,16 @@
 
 <script>
 	import selectCarNum from '../../components/select-carnum/select-carnum.vue';
-	import {getTempCarFeeOrder} from '../../api/fee/feeApi.js'
+	import {
+		getTempCarFeeOrder
+	} from '../../api/fee/feeApi.js'
+	import {
+		isNotNull
+	} from '../../utils/StringUtil.js'
+	import {
+		refreshUserOpenId
+	} from '../../api/user/userApi.js'
+	import {isWxOrAli} from '../../utils/EnvUtil.js'
 	export default {
 		data() {
 			return {
@@ -79,8 +89,9 @@
 					index7: ""
 				},
 				carNum: '',
-				paId:'',
-				appId:''
+				paId: '',
+				appId: '',
+				openId: '',
 			}
 		},
 		components: {
@@ -89,6 +100,12 @@
 		onLoad(options) {
 			this.paId = options.paId;
 			this.appId = options.appId;
+			this.openId = options.openId;
+			if (!isNotNull(this.openId)) {
+				//刷新 openId
+				this._refreshWechatOpenId();
+				return;
+			}
 		},
 		methods: {
 			showCarNumberKeyboard() {
@@ -141,23 +158,44 @@
 			confirmGuaCarNumber: function() {
 
 			},
-			_queryCarNum:function(){
+			_queryCarNum: function() {
 				let _that = this;
 				getTempCarFeeOrder({
-					paId:this.paId,
-					carNum:this.carNum
-				}).then(_data =>{
-					if(_data.code != 0){
+					paId: this.paId,
+					carNum: this.carNum
+				}).then(_data => {
+					if (_data.code != 0) {
 						uni.showToast({
-							icon:'none',
-							title:'未查到停车费'
+							icon: 'none',
+							title: '未查到停车费'
 						})
-						return ;
+						return;
 					}
 					uni.navigateTo({
-						url:'/pages/tempCarFee/tempCarFee?paId='+_that.paId+'&carNum='+_that.carNum+"&appId="+_that.appId
+						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
+							.carNum + "&appId=" + _that.appId+"&openId="+this.openId
 					})
 				})
+			},
+			_refreshWechatOpenId: function() {
+				if(isWxOrAli() == 'AliPay'){
+					uni.showToast({
+						icon:'none',
+						title:'支付宝暂时未开通，敬请期待'
+					})
+					return ;
+				}
+				let _redirectUrl = window.location.href;
+				refreshUserOpenId({
+					redirectUrl: _redirectUrl,
+					wAppId: this.appId
+				}).then(_data => {
+					console.log(_data,123)
+					if (_data.code == 0) {
+						window.location.href = _data.data.openUrl;
+						return;
+					}
+				});
 			}
 		}
 	}
