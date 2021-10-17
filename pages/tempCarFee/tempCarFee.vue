@@ -47,6 +47,10 @@
 					<button @click="onPayFee" :disabled="amount == 0"
 						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
 				</view>
+				<view class="cu-bar btn-group" style="margin-top: 30px;">
+					<button @click="onReQuery()"
+						class="cu-btn bg-grey shadow-blur round lg">重新查询</button>
+				</view>
 			</view>
 		</scroll-view>
 	</view>
@@ -149,6 +153,11 @@
 					});
 				})
 			},
+			onReQuery:function(){
+				uni.navigateTo({
+					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + this.openId
+				})
+			}
 			
 		}
 	};

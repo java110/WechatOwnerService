@@ -73,7 +73,9 @@
 	import {
 		refreshUserOpenId
 	} from '../../api/user/userApi.js'
-	import {isWxOrAli} from '../../utils/EnvUtil.js'
+	import {
+		isWxOrAli
+	} from '../../utils/EnvUtil.js'
 	export default {
 		data() {
 			return {
@@ -104,6 +106,14 @@
 			if (!isNotNull(this.openId)) {
 				//刷新 openId
 				this._refreshWechatOpenId();
+				return;
+			}
+			this.carNum = options.carNum;
+			if (isNotNull(this.carNum)) {
+				uni.navigateTo({
+					url: '/pages/tempCarFee/tempCarFee?paId=' + this.paId + '&carNum=' + this
+						.carNum + "&appId=" + this.appId + "&openId=" + this.openId
+				})
 				return;
 			}
 		},
@@ -173,24 +183,24 @@
 					}
 					uni.navigateTo({
 						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
-							.carNum + "&appId=" + _that.appId+"&openId="+this.openId
+							.carNum + "&appId=" + _that.appId + "&openId=" + this.openId
 					})
 				})
 			},
 			_refreshWechatOpenId: function() {
-				if(isWxOrAli() == 'AliPay'){
+				if (isWxOrAli() == 'AliPay') {
 					uni.showToast({
-						icon:'none',
-						title:'支付宝暂时未开通，敬请期待'
+						icon: 'none',
+						title: '支付宝暂时未开通，敬请期待'
 					})
-					return ;
+					return;
 				}
 				let _redirectUrl = window.location.href;
 				refreshUserOpenId({
 					redirectUrl: _redirectUrl,
 					wAppId: this.appId
 				}).then(_data => {
-					console.log(_data,123)
+					console.log(_data, 123)
 					if (_data.code == 0) {
 						window.location.href = _data.data.openUrl;
 						return;
