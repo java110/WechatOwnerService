@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view  class="block__title">缴费历史</view>
+		<view  class="block__title">账户明细</view>
 		<view v-if="accountDetails.length > 0">
 			<view v-for="(item,index) in accountDetails" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding">
 				<view class="flex padding-bottom-xs solid-bottom justify-between">
