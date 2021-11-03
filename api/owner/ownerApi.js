@@ -24,9 +24,17 @@ export function getCurOwner() {
 			if (_ownerInfo) {
 				resolve(_ownerInfo);
 			} else {
+				//查询用户信息
+				let _userInfo = wx.getStorageSync(mapping.USER_INFO);
+				if(!_userInfo){
+					reject();
+					return ;
+				}
 				request({
 					url: url.queryAppUserBindingOwner,
-					data: {},
+					data: {
+						openId:JSON.parse(_userInfo).openId
+					},
 					success: function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
