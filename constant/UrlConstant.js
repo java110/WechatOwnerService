@@ -154,9 +154,9 @@ const queryRentingPool= baseUrl + 'app/renting/queryRentingPool'; //查询房源
 
 const queryParkingSpaces= baseUrl + 'app/parkingSpace.queryParkingSpaces'; //查询空闲车位
 
-const saveOwnerCar= baseUrl + 'app/owner.saveOwnerCar'; //申请车位接口
+const saveOwnerCar= baseUrl + 'app/parkingSpaceApply.saveParkingSpaceApply'; //申请车位接口owner.saveOwnerCar（原来的）
 
-const queryOwnerCars= baseUrl + 'app/owner.queryOwnerCars'; //查询业主车辆
+const queryOwnerCars= baseUrl + 'app/parkingSpaceApply.listParkingSpaceApply'; //查询业主车辆
 // 查询申请类型（空置房）
 const queryApplyRoomDiscountType = baseUrl + 'app/applyRoomDiscount/queryApplyRoomDiscountType';
 // 提交申请

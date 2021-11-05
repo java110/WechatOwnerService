@@ -219,3 +219,27 @@ export function queryOwnerAccountDetail(_objData) {
 		});
 	})
 }
+
+/**
+ * 刷新用户
+ * @param {Object} _objData
+ */
+export function refreshUserOpenId(_objData){
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.refreshOpenId,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}

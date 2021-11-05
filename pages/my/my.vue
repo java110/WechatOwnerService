@@ -65,14 +65,22 @@
 	//获取app实例
 	const app = getApp().globalData;
 	import conf from '../../conf/config.js';
-	import {getHcCode} from '../../api/webView/webViewApi.js'
-	
-	import {encodeUrl} from '../../utils/UrlUtil.js'
-	
-	import {getCurCommunity} from '../../api/community/communityApi.js'
-	
-	import {setStorageSync} from '../../utils/StorageUtil.js'
-	
+	import {
+		getHcCode
+	} from '../../api/webView/webViewApi.js'
+
+	import {
+		encodeUrl
+	} from '../../utils/UrlUtil.js'
+
+	import {
+		getCurCommunity
+	} from '../../api/community/communityApi.js'
+
+	import {
+		setStorageSync
+	} from '../../utils/StorageUtil.js'
+
 	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
@@ -148,6 +156,8 @@
 			showLongModel: function() {
 				this.vc.navigateTo({
 					url: '../login/login'
+				}, () => {
+					this.refreshPageLoginInfo();
 				});
 			},
 			ckeckUserInfo: function() {
@@ -184,7 +194,7 @@
 				});
 			},
 			// 生活服务
-			myServices: function(){
+			myServices: function() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
 						url: '../showlogin/showlogin'

@@ -11,17 +11,12 @@
 					</view>
 				</scroll-view>
 			</view>
-			<view v-if="noData == false">
+			<view v-if="noData == false" style="margin-top: 100upx;">
 				<view v-for="(item,index) in parkings" :key="index" 
 				class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
-					
-					<view class="flex margin-top justify-between">
+					<view v-if="item.areaNum != null" class="flex margin-top justify-between">
 						<view class="text-gray">车位</view>
 						<view class="text-gray">{{item.areaNum}}{{item.num}}</view>
-					</view>
-					<view class="flex margin-top justify-between">
-						<view class="text-gray">状态</view>
-						<view class="text-gray">{{item.stateName}}</view>
 					</view>
 					<view class="flex margin-top-xs justify-between">
 						<view class="text-gray">车牌号</view>
@@ -38,6 +33,10 @@
 					<view class="flex margin-top-xs justify-between">
 						<view class="text-gray">结租时间</view>
 						<view class="text-gray">{{item.endTime}}</view>
+					</view>
+					<view class="flex margin-top-xs justify-between">
+						<view class="text-gray">备注</view>
+						<view class="text-gray">{{item.remark}}</view>
 					</view>
 				</view>
 			</view>
@@ -62,16 +61,16 @@
 		data() {
 			return {
 				parkingType: [{
-					"name": '正常',
+					"name": '待审核',
 					"code": 1001
 				}, {
-					"name": '车位释放欠费',
+					"name": '待缴费',
 					"code": 2002
 				}, {
-					"name": '车位释放',
+					"name": '完成',
 					"code": 3003
 				}, {
-					"name": '预约中',
+					"name": '申请失败',
 					"code": 4004
 				}],
 				code: '1001',

@@ -44,7 +44,12 @@
 					</view>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 30px;">
-					<button @click="onPayFee" :disabled="amount == 0" class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
+					<button @click="onPayFee" :disabled="amount == 0"
+						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
+				</view>
+				<view class="cu-bar btn-group" style="margin-top: 30px;">
+					<button @click="onReQuery()"
+						class="cu-btn bg-grey shadow-blur round lg">重新查询</button>
 				</view>
 			</view>
 		</scroll-view>
@@ -60,8 +65,10 @@
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
 
 	import {
-		getTempCarFeeOrder
+		getTempCarFeeOrder,
+		toPayTempCarFee
 	} from '../../api/fee/feeApi.js'
+
 	export default {
 		data() {
 			return {
@@ -70,16 +77,20 @@
 				stopTimeTotal: 0,
 				inTime: '',
 				amount: 0.0,
-				queryTime:''
+				queryTime: '',
+				appId: '',
+				openId: '',
+				inoutId:''
 			};
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.openId = options.openId;
 			this.paId = options.paId;
 			this.carNum = options.carNum;
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID);
+			this.appId = options.appId;
 			this._loadTempCarFee();
 		},
 		methods: {
@@ -101,6 +112,7 @@
 					_that.inTime = data.inTime;
 					_that.amount = data.amount;
 					_that.queryTime = data.queryTime;
+					_that.inoutId = data.orderId;
 				})
 			},
 			onPayFee: function() {
@@ -110,53 +122,43 @@
 				});
 				let _tradeType = 'JSAPI';
 				let _objData = {
-					cycles: this.feeMonth,
-					communityId: this.communityId,
-					feeId: this.feeId,
-					feeName: '物业费',
-					receivedAmount: _receivedAmount,
+					carNum: this.carNum,
+					openId: this.openId,
+					paId: this.paId,
+					feeName: '停车费',
 					tradeType: _tradeType,
 					appId: this.appId,
-					payerObjId: this.roomId,
-					payerObjType: 3333,
-					endTime: this.formatEndTime
+					inoutId: this.inoutId
 				};
-				context.request({
-					url: constant.url.preOrder,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						if (res.statusCode == 200 && res.data.code == '0') {
-							let data = res.data; //成功情况下跳转
-							WexinPayFactory.wexinPay(data, function() {
-								uni.showToast({
-									title: "支付成功",
-									duration: 2000
-								});
-								uni.navigateBack({});
+				toPayTempCarFee(_objData)
+				.then(_data=>{
+					if (_data.code == '0') {
+						WexinPayFactory.wexinPay(_data, function() {
+							uni.showToast({
+								title: "支付成功",
+								duration: 2000
 							});
-							wx.hideLoading();
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: "缴费失败",
-							icon: 'none',
-							duration: 2000
+							uni.navigateBack({
+								delta:1
+							});
 						});
-					},
-					fail: function(e) {
 						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+						return;
 					}
-				});
+					wx.hideLoading();
+					wx.showToast({
+						title: "缴费失败",
+						icon: 'none',
+						duration: 2000
+					});
+				})
+			},
+			onReQuery:function(){
+				uni.navigateTo({
+					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + this.openId
+				})
 			}
+			
 		}
 	};
 </script>

@@ -1,14 +1,6 @@
 <template>
 	<view>
 		<view class="cu-form-group">
-			<view class="title">空闲车位</view>
-			<picker bindchange="PickerChange" :value="index" :range="parkingSpaces" @change="choosePickerSpace">
-				<view class="picker">
-					{{parkingSpacesName?parkingSpacesName:'请选择'}}
-				</view>
-			</picker>
-		</view>
-		<view class="cu-form-group">
 			<view class="title">车牌号</view>
 			<input v-model="carNum" style="text-align:right"></input>
 		</view>
@@ -29,18 +21,7 @@
 				</view>
 			</picker>
 		</view>
-
-
 		<view class="cu-form-group">
-			<view class="title">租用类型</view>
-			<picker bindchange="PickerChange" disabled="disabled" :value="index" :range="rentTypes" @change="chooseRentTypes">
-				<view class="picker">
-					{{rentTypeName?rentTypeName:'请选择'}}
-				</view>
-			</picker>
-		</view>
-
-		<view class="cu-form-group" v-if="rentTypeCode == 'S'">
 			<view class="title">起租日期</view>
 			<picker mode="date" :value="startDate" @change="startDateChange">
 				<view class="picker">
@@ -49,7 +30,7 @@
 			</picker>
 		</view>
 
-		<view class="cu-form-group" v-if="rentTypeCode == 'S'">
+		<view class="cu-form-group">
 			<view class="title">结组日期</view>
 			<picker mode="date" :value="endDate" @change="endDateChange">
 				<view class="picker">
@@ -94,22 +75,17 @@
 				ownerId:'',
 				storeId:'',
 				userId:'',
-				
+				applyPersonName:'',
+				applyPersonLink:'',
+				applyPersonId:'',
 				parkingSpaces: [],
 				parkingSpaceIds: [],
 				parkingSpacesName: '',
-				
 				//车辆类型
 				carTypes: ['家用小汽车', '客车', '货车'],
 				carTypeCodes: ['9901', '9902', '9903'],
 				carTypeCode: '',
 				carTypeName: '',
-
-				rentTypes: ['出售车辆', '月租车'],
-				rentTypeCodes: ['H', 'S'],
-				rentTypeCode: 'S',
-				rentTypeName: '月租车',
-
 				
 				page: 1,
 				row: 20,
@@ -118,20 +94,21 @@
 		onLoad: function(options) {
 			let _this = this;
 			context.getOwner(function(_owner) {
+				console.log("_owner",_owner);
 				_this.communityId = _owner.communityId;
 				_this.ownerId = _owner.memberId;
 				_this.userId = _owner.userId;
+				_this.applyPersonName = _owner.appUserName;
+				_this.applyPersonLink = _owner.link;
+				_this.applyPersonId = _owner.userId;
 				_this.listParkingSpace();
 			});
 			let param = {
 				"communityId":_this.communityId
 			}
-			getProperty().then(function(res){
-				_this.storeId = res.storeId
-			});
-
 		},
 		methods: {
+			
 			listParkingSpace: function() {
 				context.request({
 					url: constant.url.queryParkingSpaces,
@@ -165,7 +142,7 @@
 				this.parkingSpacesName = this.parkingSpaces[checkInIndex];
 			},
 			endDateChange: function(e) {
-				this.endate = e.detail.value
+				this.endDate = e.detail.value
 			},
 			//车辆类型
 			chooseCarTypes: function(e) {
@@ -173,18 +150,13 @@
 				this.carTypeCode = this.carTypeCodes[index];
 				this.carTypeName = this.carTypes[index];
 			},
-			chooseRentTypes: function(e) {
-				let index = e.target.value;
-				this.rentTypeCode = this.rentTypeCodes[index];
-				this.rentTypeName = this.rentTypes[index];
-			},
+		
 			startDateChange: function(e) {
 				this.startDate = e.detail.value
+				console.log(this.startDate);
 			},
 			submitApply:function(){
-				
 				let obj = {
-					"psId": this.psId,
 					"carNum": this.carNum,
 					"carBrand": this.carBrand,
 					"carColor": this.carColor,
@@ -192,19 +164,18 @@
 					"startTime": this.startDate,
 					"endTime": this.endDate,
 					"carType":this.carTypeCode,
-					"carNumType":this.rentTypeCode,
 					"communityId":this.communityId,
 					"ownerId":this.ownerId,
-					"storeId":this.storeId,
+					"state":"1001",
+					"applyPersonName":this.applyPersonName,
+					"applyPersonLink":this.applyPersonLink,
+					"applyPersonId":this.applyPersonId,
 					"userId":this.userId
-					
 				};
 				
 				let msg = "";
 				
-				if (obj.psId == "") {
-					msg = "请选择空闲车位";
-				} else if (obj.carNum == "") {
+				if (obj.carNum == "") {
 					msg = "请填写车牌号";
 				} else if (obj.carBrand == "") {
 					msg = "请填写车辆品牌";
@@ -212,26 +183,13 @@
 					msg = "请填写车辆颜色";
 				}else if(obj.carType == ""){
 					msg = "请选择车辆类型";
-				}else if(obj.carNumType == ''){
-					msg = "请选择租用类型";
 				}
-				
-				if(obj.rentTypeCode == 'S'){
-					if(obj.startTime == '2020-01-01'){
-						msg = "请选择租用开始日期";
-					}
-					if(obj.endTime == '2020-01-01'){
-						msg = "请选择租用结束日期";
-					}
+				if(obj.startTime == '2020-01-01'){
+					msg = "请选择起租日期";
 				}
-				
-				if(obj.rentTypeCode == 'H'){
-					obj.startTime = '';
-					obj.endTime = '';
+				if(obj.endTime == '2020-01-01'){
+					msg = "请选择结租日期";
 				}
-				
-				
-				
 				if(msg != ""){
 					wx.showToast({
 						title: msg,
@@ -241,7 +199,6 @@
 					return;
 				}
 				
-				
 				context.request({
 					url: constant.url.saveOwnerCar,
 					header: context.getHeaders(),
@@ -249,13 +206,18 @@
 					data: obj,
 					success: function(res) {
 						let _json = res.data;
+						
 						if (_json.code == 0) {
 							wx.showToast({
-								title: "提交成功",
+								title: "提交成功，可到 我的-生活服务-车位信息 中查看进度",
 								icon: 'none',
-								duration: 2000
+								duration: 5000,
+								success: function() {
+								                setTimeout(function() {
+								                  uni.navigateBack({})
+								                }, 5000) //延迟时间
+								              },
 							})
-							uni.navigateBack({})
 							// wx.redirectTo({
 							// 	url: '/pages/complaintList/complaintList',
 							// });
