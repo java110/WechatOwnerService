@@ -91,6 +91,7 @@
 	import {
 		getRooms
 	} from '../../api/room/roomApi.js'
+	
 	export default {
 		data() {
 			return {
@@ -107,7 +108,7 @@
 				appId: '',
 				fees: [],
 				roomId: '',
-				property: {},
+				property: {}
 			};
 		},
 		/**
@@ -275,7 +276,7 @@
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					storeId: this.property.storeId,
+					storeId: this.property.storeId
 				};
 				context.request({
 					url: constant.url.toOweFeePay,
