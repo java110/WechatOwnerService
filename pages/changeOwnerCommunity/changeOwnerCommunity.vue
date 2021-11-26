@@ -7,10 +7,10 @@
 				<view class="cu-item" v-for="(item,sub) in communitys" :key="sub" @tap="_doChangeCommunity(item)">
 					<view class="content padding-tb-sm">
 						<view>
-							<text class="lg  cuIcon-homefill text-blue margin-right-xs"></text> {{item.name}}
+							<text class="lg  cuIcon-homefill text-blue margin-right-xs"></text> {{item.communityName}}
 						</view>
 						<view class="text-gray text-sm">
-							<text class="lg text-gray cuIcon-location margin-right-xs"></text> {{item.address}}
+							<text class="lg text-gray cuIcon-location margin-right-xs"></text> {{item.name}}
 						</view>
 					</view>
 				</view>
@@ -23,6 +23,8 @@
 <script>
 
 	import {getOwnerCommunitys} from '../../api/community/communityApi.js'
+	import {getCurOwner} from '../../api/owner/ownerApi.js'
+	import mapping from '../../constant/MappingConstant.js'
 
 	export default {
 		data() {
@@ -37,10 +39,10 @@
 		methods: {
 			_loadCommunitys: function() {
 				let _that = this;
-				let _condition = {
-					name: this.communityName
-				}
-				getOwnerCommunitys()
+				let _ownerInfo = wx.getStorageSync(mapping.OWNER_INFO);
+				getOwnerCommunitys({
+					link:_ownerInfo.link
+				})
 					.then(_communitys => {
 						_that.communitys = _communitys;
 					});

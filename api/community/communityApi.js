@@ -1,5 +1,5 @@
 import {
-	requestNoAuth
+	requestNoAuth,request
 } from '../java110Request.js'
 import 
 	url
@@ -119,7 +119,7 @@ export function getOwnerCommunitys(dataObj) {
 				//动态数据
 				success: function(res) {
 					if (res.statusCode == 200) {
-						let _communtiys = res.data.data;
+						let _communitys = res.data.data;
 						resolve(_communitys);
 					}
 				},
@@ -128,4 +128,5 @@ export function getOwnerCommunitys(dataObj) {
 				}
 			});
 		})
+		
 }
