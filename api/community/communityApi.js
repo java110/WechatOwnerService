@@ -104,3 +104,28 @@ export function recoveryCommunityInfo(_obj){
 	})
 	
 }
+
+/**
+ * 查询业主小区
+ * @param {Object} dataObj 对象
+ */
+export function getOwnerCommunitys(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.listCommunitys,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						let _communtiys = res.data.communitys;
+						resolve(_communitys);
+					}
+				},
+				fail: function(e) {
+					reject(e);
+				}
+			});
+		})
+}

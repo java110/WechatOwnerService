@@ -611,6 +611,15 @@
 		        "enablePullDownRefresh": false
 		    }
 		}
+        ,{
+            "path" : "pages/changeOwnerCommunity/changeOwnerCommunity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "切换小区",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

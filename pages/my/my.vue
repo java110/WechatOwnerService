@@ -24,10 +24,13 @@
 		</view>
 
 		<view class="cu-list menu  margin-top">
-			<view class="cu-item arrow" @click="myAssets()">
+			<view class="cu-item arrow" @tap="_changeCommunity()">
 				<view class="content">
-					<text class="cuIcon-profile text-pink"></text>
-					<text class="text-grey">我的小区</text>
+					<text class="cuIcon-circlefill text-yellow"></text>
+					<text class="text-grey">切换小区</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{currentCommunityName}}</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="myAssets()">
@@ -235,6 +238,12 @@
 				}
 				this.vc.navigateTo({
 					url: '/pages/myAccount/myAccount',
+				});
+			},
+			//切换小区
+			_changeCommunity:function(){
+				uni.navigateTo({
+					url:"/pages/changeOwnerCommunity/changeOwnerCommunity"
 				});
 			},
 		}
