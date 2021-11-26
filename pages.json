@@ -37,30 +37,6 @@
 				"navigationBarTitleText": "相关门禁"
 			}
 		},
-		// {
-		// 	"path": "pages/applicationKeyUser/applicationKeyUser",
-		// 	"style": {
-		// 		"navigationBarTitleText": "填写信息"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/applicationKeyProgress/applicationKeyProgress",
-		// 	"style": {
-		// 		"navigationBarTitleText": "钥匙进度"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/myApplicationKey/myApplicationKey",
-		// 	"style": {
-		// 		"navigationBarTitleText": "我的钥匙"
-		// 	}
-		// },
-		{
-			"path": "pages/visitorApplicationKey/visitorApplicationKey",
-			"style": {
-				"navigationBarTitleText": "访客钥匙"
-			}
-		},
 		{
 			"path": "pages/location/location",
 			"style": {
@@ -145,12 +121,6 @@
 			}
 		},
 		{
-			"path": "pages/viewApplicationKeyUser/viewApplicationKeyUser",
-			"style": {
-				"navigationBarTitleText": "我的钥匙"
-			}
-		},
-		{
 			"path": "pages/complaint/complaint",
 			"style": {
 				"navigationBarTitleText": "投诉建议"
@@ -225,7 +195,7 @@
 		}, {
 			"path": "pages/register/register",
 			"style": {
-				"navigationBarTitleText": "绑定业主"
+				"navigationBarTitleText": "注册"
 			}
 		}, {
 			"path": "pages/payFeeDetail/payFeeDetail",

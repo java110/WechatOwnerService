@@ -2,7 +2,6 @@
 	<view>
 		<!--index.wxml-->
 		<view class="user-container bg-white ">
-
 			<view class="userinfo">
 				<block>
 					<view v-if="login">
@@ -21,13 +20,16 @@
 						</view>
 					</view>
 				</block>
-
 			</view>
-
 		</view>
 
 		<view class="cu-list menu  margin-top">
-
+			<view class="cu-item arrow" @click="myAssets()">
+				<view class="content">
+					<text class="cuIcon-profile text-pink"></text>
+					<text class="text-grey">我的小区</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myAssets()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>

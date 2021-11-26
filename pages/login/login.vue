@@ -28,7 +28,7 @@
 
 		<view class="padding flex flex-direction margin-top">
 			<button class="cu-btn bg-green lg" @click="_doLogin()">登录</button>
-			<button class="cu-btn line-orange  margin-tb-sm lg" @click="_doRegister()">绑定业主</button>
+			<button class="cu-btn line-orange  margin-tb-sm lg" @click="_doRegister()">注册</button>
 			
 			<view class="text-center margin-top-sm text-green" @click="_doLoginPhone()">{{phoneLoginName}}</view>
 		</view>
