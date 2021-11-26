@@ -136,6 +136,8 @@ export default {
 	listRoomFee: baseUrl + "callComponent/listRoomFee/list",
 	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
 	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
+	ownerCommunity: baseUrl + "app/owner.ownerCommunity",
+	
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

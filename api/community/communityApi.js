@@ -113,13 +113,13 @@ export function getOwnerCommunitys(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
 			request({
-				url: url.listCommunitys,
+				url: url.ownerCommunity,
 				method: "GET",
 				data: dataObj,
 				//动态数据
 				success: function(res) {
 					if (res.statusCode == 200) {
-						let _communtiys = res.data.communitys;
+						let _communtiys = res.data.data;
 						resolve(_communitys);
 					}
 				},

@@ -47,6 +47,7 @@
 			},
 			_doChangeCommunity: function(_community) {
 				uni.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_community));
+				wx.setStorageSync(mapping.OWNER_INFO, _community);
 				uni.navigateBack({
 					delta: 1
 				})
