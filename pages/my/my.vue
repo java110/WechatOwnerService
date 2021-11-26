@@ -190,7 +190,7 @@
 					return;
 				}
 				this.vc.navigateTo({
-					url: './myMenu?pageSign=myAssets'
+					url: '/pages/my/myMenu?pageSign=myAssets'
 				});
 			},
 			// 生活服务
@@ -204,7 +204,7 @@
 					return;
 				}
 				this.vc.navigateTo({
-					url: './myMenu?pageSign=myServices'
+					url: '/pages/my/myMenu?pageSign=myServices'
 				});
 			},
 			// 设置

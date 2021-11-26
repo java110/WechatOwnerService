@@ -62,8 +62,9 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
+	// #ifdef H5
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-
+	// #endif
 	import {
 		getTempCarFeeOrder,
 		toPayTempCarFee
@@ -133,6 +134,7 @@
 				toPayTempCarFee(_objData)
 				.then(_data=>{
 					if (_data.code == '0') {
+						// #ifdef H5	
 						WexinPayFactory.wexinPay(_data, function() {
 							uni.showToast({
 								title: "支付成功",
@@ -142,6 +144,7 @@
 								delta:1
 							});
 						});
+						// #endif
 						wx.hideLoading();
 						return;
 					}
