@@ -203,6 +203,13 @@ export function deleteOwnerMember(_data){
  * 
  */
 export function hasOwner(){
+	let loginFlag = wx.getStorageSync(mapping.LOGIN_FLAG);
+	let nowDate = new Date();
+	//判断如果是APP
+
+	if (!loginFlag || loginFlag.expireTime < nowDate.getTime()) {
+		return ;
+	}
 	let _ownerInfo = wx.getStorageSync(mapping.OWNER_INFO);
 	if(_ownerInfo){
 		uni.showToast({

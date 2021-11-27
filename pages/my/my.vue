@@ -30,7 +30,7 @@
 					<text class="text-grey">切换小区</text>
 				</view>
 				<view class="action">
-					<text class="text-grey text-sm">{{currentCommunityName}}</text>
+					<text class="text-grey text-sm">{{communityName}}</text>
 				</view>
 			</view>
 			<view class="cu-item arrow" @click="myAssets()">
@@ -87,12 +87,14 @@
 	} from '../../utils/StorageUtil.js'
 
 	import mapping from '../../constant/MappingConstant.js'
+	import {hasOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
 				userInfo: {},
 				headerImg: '',
 				userName: '',
+				communityName:'',
 				// 用户信息
 				ownerFlag: false, // 是否有业主信息 标记 如果有为 true  没有为false
 				login: true
@@ -158,6 +160,7 @@
 						"&fileTypeCd=10000";
 					_that.headerImg = _headerImg;
 					_that.userName = _owner.appUserName;
+					_that.communityName = _owner.communityName;
 				});
 			},
 			showLongModel: function() {
@@ -196,6 +199,7 @@
 					});
 					return;
 				}
+				hasOwner();
 				this.vc.navigateTo({
 					url: '/pages/my/myMenu?pageSign=myAssets'
 				});
@@ -210,6 +214,7 @@
 					});
 					return;
 				}
+				hasOwner();
 				this.vc.navigateTo({
 					url: '/pages/my/myMenu?pageSign=myServices'
 				});

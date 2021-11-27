@@ -266,6 +266,7 @@
 					});
 					return;
 				}
+				hasOwner();
 				uni.getStorage({
 					key: 'ownerInfo',
 					success: function (res) {
@@ -276,6 +277,7 @@
 				});
 			},
 			_doCall: function() {
+			
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
