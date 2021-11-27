@@ -92,6 +92,8 @@
 	import {getCurOwner} from '../../api/owner/ownerApi.js'
 
 	import {hasLogin} from '../../auth/Java110Auth.js'
+	
+	import {hasOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
@@ -304,6 +306,7 @@
 				this._loadActivites();
 			},
 			toPage: function(pageUrl) {
+				hasOwner();
 				this.vc.navigateTo({
 					url: pageUrl
 				});

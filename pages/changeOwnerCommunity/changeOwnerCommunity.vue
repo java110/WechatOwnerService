@@ -3,7 +3,7 @@
 
 		<view>
 			<view class="padding">小区信息</view>
-			<view class="cu-list menu ">
+			<view class="cu-list menu " v-if="communitys.length>0">
 				<view class="cu-item" v-for="(item,sub) in communitys" :key="sub" @tap="_doChangeCommunity(item)">
 					<view class="content padding-tb-sm">
 						<view>
@@ -15,6 +15,18 @@
 					</view>
 				</view>
 			</view>
+			<block v-else>
+				<view class="cu-list menu">
+					<view class="cu-item">
+						<view class="content">
+							<text class="cuIcon-notification text-grey"></text>
+							<text class="text-grey">暂无小区信息</text>
+						</view>
+						<view class="action">
+						</view>
+					</view>
+				</view>
+			</block>
 		</view>
 
 	</view>

@@ -130,6 +130,7 @@
 				_that.login = true;
 				_that.loadOwenrInfo();
 				_that.userInfo = context.getUserInfo();
+				console.log('用户信息',_that.userInfo)
 				this.loadOwnerHeaderImg();
 			},
 			bindingOwner: function() {
@@ -151,6 +152,7 @@
 			loadOwnerHeaderImg: function() {
 				let _that = this;
 				context.getOwner(function(_owner) {
+			
 					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId +
 						"&communityId=" + _owner.communityId +
 						"&fileTypeCd=10000";

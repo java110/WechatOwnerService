@@ -198,3 +198,35 @@ export function deleteOwnerMember(_data){
 		});
 	})
 }
+/**
+ * 判断是否存在业主
+ * 
+ */
+export function hasOwner(){
+	let _ownerInfo = wx.getStorageSync(mapping.OWNER_INFO);
+	if(_ownerInfo){
+		uni.showToast({
+			icon:'none',
+			title:'未查询到业主房产'
+		})
+		throw new Error('业主不存在');
+	}
+	
+	let _memberId = _ownerInfo.memberId;
+	
+	if(!_memberId){
+		uni.showToast({
+			icon:'none',
+			title:'未查询到业主房产'
+		})
+		throw new Error('业主不存在');
+	}
+	
+	if(_memberId != '-1'){
+		uni.showToast({
+			icon:'none',
+			title:'未查询到业主房产'
+		})
+		throw new Error('业主不存在');	
+	}
+}
