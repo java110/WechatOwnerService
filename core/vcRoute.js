@@ -66,13 +66,13 @@ export function navigateTo(_param, callback = () => {}) {
 	let noLoginFlag = false;
 	url.NEED_NOT_LOGIN_PAGE.forEach(item => {
 		if (item == _tempUrl) {
-			console.log('item=>',item,_tempUrl)
+			console.log('item=>', item, _tempUrl)
 			uni.navigateTo(_param);
 			noLoginFlag = true;
 		}
 	});
-	if(noLoginFlag){
-		return ;
+	if (noLoginFlag) {
+		return;
 	}
 	debug('vcRoute', 'navigateTo', _param);
 	//校验是否登录，如果没有登录跳转至温馨提示页面
@@ -102,6 +102,19 @@ export function navigateTo(_param, callback = () => {}) {
 			return;
 		}
 		// #endif
+	});
+};
+
+/*
+ * 跳转功能封装
+ * @param {Object} _param 跳转入参
+ */
+export function navigateToMall(_param) {
+	//参数中刷入wAppId 
+	let _url = _param.url;
+	uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url)
+	uni.navigateTo({
+		url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
 	});
 };
 

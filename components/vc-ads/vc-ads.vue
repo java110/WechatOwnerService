@@ -24,7 +24,7 @@
 			},
 			// 高度，单位upx，默认180upx
 			height: {
-				default: 160
+				default: 140
 			}
 		},
 		data() {

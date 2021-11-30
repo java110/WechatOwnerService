@@ -93,9 +93,9 @@
 			selectType(index) {
 				let shopTypeId = this.navList[index].shopTypeId;
 				this.shopTypeId = shopTypeId;
-				this.vc.navigateTo({
+				this.vc.navigateToMall({
 					url: '/pages/market/market?typeId=' + shopTypeId
-				}, true)
+				})
 			},
 			_getCategoryList() {
 				let _that = this
