@@ -49,6 +49,25 @@ export function getCommunitys(dataObj) {
 		})
 }
 
+export function getCommunityId(){
+	
+	let _currentCommunity = uni.getStorageSync("currentCommunityInfo")
+	if(_currentCommunity){
+		return _currentCommunity.communityId;
+	}
+	
+	return "";
+	
+}
+
+export function getCommunityName(){
+	let _currentCommunity = uni.getStorageSync("currentCommunityInfo")
+	if(_currentCommunity){
+		return _currentCommunity.communityName;
+	}
+	return "";
+}
+
 /**
  * 查询当前小区
  * 
