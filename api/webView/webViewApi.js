@@ -43,6 +43,7 @@ const ACTION_REFRESH_TOKEN = "refreshToken";
 const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
 const ACTION_SET_TITLE = "setTitle";
+const ACTION_SET_COMMUNITY = "setCommunity";
 const ACTION_NAVIGATE_HOME = "navigateHome";
 const ACTION_NAVIGATE_BACK = "navigateBack";
 
@@ -212,6 +213,8 @@ export function reciveMessage(event, that) {
 		uni.navigateBack({
 			delta:1
 		})
+	}else if(_data.action == ACTION_SET_COMMUNITY){
+		setStorageSync(mapping.CURRENT_MALL_COMMUNITY_INFO,_data.data);
 	}
 	
 	

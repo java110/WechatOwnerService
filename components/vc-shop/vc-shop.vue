@@ -32,7 +32,7 @@
 		loadCommunityShops
 	} from '../../api/mall/mallApi.js'
 	import {
-		getCommunityId
+		getMallCommunityId
 	} from '../../api/community/communityApi.js'
 	import {
 		isNotNull
@@ -57,7 +57,7 @@
 		methods: {
 			_loadCommunityShops: function() {
 				let _that = this;
-				_that.communityId = getCommunityId();
+				_that.communityId = getMallCommunityId();
 				let _data = {
 					page: 1,
 					row: 5,

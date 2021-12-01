@@ -31,33 +31,9 @@
 		},
 		methods: {
 			_urlJump: function(_menu){
-				if(_menu.skipType == 2){
-					// 站外
-					let url = encodeURIComponent(_menu.url)
-					this.vc.navigateTo({
-						url:'/pages/hcWebView/hcWebView?url='+url
-					})
-					return;
-				} else if(_menu.skipType == 1){
-					// 站内
-					this.vc.navigateTo({
-						url: _menu.url
-					},true)
-					return;
-				}else{
-					return;
-				}
-			},
-			toPage: function(pageUrl) {
-				if(pageUrl.indexOf('/pages/shopIndex/category')> -1){
-					uni.switchTab({
-						url:pageUrl
-					})
-					return ;
-				}
-				this.vc.navigateTo({
-					url:pageUrl
-				},true)
+				this.vc.navigateToMall({
+					url: _menu.url
+				})
 			},
 			callUndefined:function(){
 				uni.showToast({

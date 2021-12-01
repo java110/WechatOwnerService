@@ -1,10 +1,10 @@
 <template>
 	<view>
 		<view class="cu-bar search bg-white nav-list">
-			<view class="search-form round">
+			<view class="search-form round" @tap="toSearch()">
 				<text class="cuIcon-search"></text>
 				<input :adjust-position="false" type="text" placeholder="请输入商品名" @tap="toSearch()"
-					disabled="true"></input>
+					></input>
 			</view>
 			<view class="text-white" @tap="toSelectArea()">
 				{{selectCommunityName}}<text class="cuIcon-refresharrow"></text>
@@ -24,9 +24,7 @@
 			<vc-recommend ref="vcRecommendRef"></vc-recommend>
 			<vc-shop ref="vcShopRef"></vc-shop>
 		</view>
-
 		<vc-bottom-black></vc-bottom-black>
-
 	</view>
 </template>
 
@@ -52,8 +50,8 @@
 		queryShopType
 	} from '../../api/mall/mallApi.js'
 	import {
-		getCommunityId,
-		getCommunityName
+		getMallCommunityId,
+		getMallCommunityName
 	} from '../../api/community/communityApi.js';
 	import {
 		sliceArray
@@ -85,14 +83,22 @@
 			this._getCategoryList();
 		},
 		onShow: function() {
-			this.selectCommunityName = getCommunityName();
-			this.$refs.vcShopRef._loadCommunityShops();
-			this.$refs.vcRecommendRef._loadRecommendProdcut();
+			this.selectCommunityName = getMallCommunityName();
+			if(this.$refs.vcShopRef){
+				this.$refs.vcShopRef._loadCommunityShops();
+			}
+			if(this.$refs.vcRecommendRef){
+				this.$refs.vcRecommendRef._loadRecommendProdcut();
+			}
+			this.shopTypeId = 0
 		},
 		methods: {
 			selectType(index) {
 				let shopTypeId = this.navList[index].shopTypeId;
 				this.shopTypeId = shopTypeId;
+				if(this.shopTypeId == 0){
+					return;//首页不跳转
+				}
 				this.vc.navigateToMall({
 					url: '/pages/market/market?typeId=' + shopTypeId
 				})
@@ -136,16 +142,16 @@
 				}
 			},
 			//搜索跳转
-			toSearch(e) {
-				this.vc.navigateTo({
-					url: `/pages/goods/HM-search?searchType=3`
-				}, true)
+			toSearch:function() {
+				this.vc.navigateToMall({
+					url: '/pages/goods/HM-search?searchType=3'
+				})
 			},
 			//切换小区
 			toSelectArea(e) {
-				this.vc.navigateTo({
+				this.vc.navigateToMall({
 					url: `/pages/selectcommunity/selectcommunity`
-				}, true)
+				})
 			}
 		}
 	}
@@ -153,7 +159,7 @@
 
 <style lang="scss" scoped>
 	.nav-list {
-		background-image: linear-gradient(45deg, #FA2E1B, #FF523C) !important;
+		background-image: linear-gradient(45deg, #FA2E1B, #FA2E1B) !important;
 	}
 	.nav-scroll{
 		background-color: #FA2E1B;

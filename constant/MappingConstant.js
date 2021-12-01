@@ -16,6 +16,8 @@ class MappingConstant {
   static AREA_INFO = "areaInfo"; // 地区信息
 
   static CURRENT_COMMUNITY_INFO = "currentCommunityInfo"; // 小区信息
+  
+  
 
   static OWNER_INFO = "ownerInfo"; // 当前业主信息
 
@@ -29,6 +31,8 @@ class MappingConstant {
   static W_APP_ID = "wAppId";//微信公众号ID
   
   static HC_MALL_CUR_URL = "HC_MALL_CUR_URL";
+  
+  static CURRENT_MALL_COMMUNITY_INFO = "CURRENT_MALL_COMMUNITY_INFO"
  
 
 }

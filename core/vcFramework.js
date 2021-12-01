@@ -48,5 +48,6 @@ export default{
 	navigateBack:navigateBack,
 	isEmpty:isEmpty,
 	hasLogin:hasLogin,
-	getWAppId:getWAppId
+	getWAppId:getWAppId,
+	navigateToMall:navigateToMall
 }

@@ -36,7 +36,7 @@
 		getRecommendProduct
 	} from '../../api/goods/goodsApi.js'
 	import conf from '../../conf/config.js'
-	import {getCommunityId} from '../../api/community/communityApi.js';
+	import {getMallCommunityId} from '../../api/community/communityApi.js';
 	export default {
 		data() {
 			return {
@@ -50,7 +50,7 @@
 		methods: {
 			_loadRecommendProdcut: function() {
 				let _that = this;
-					_that.communityId = getCommunityId();
+					_that.communityId = getMallCommunityId();
 				let _data = {
 					page: 1,
 					row: 6,

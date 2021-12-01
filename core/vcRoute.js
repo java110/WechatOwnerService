@@ -39,6 +39,8 @@ import {
 	getWAppId
 } from '../api/init/initApi.js'
 
+import {getHcCode} from '../api/webView/webViewApi.js'
+
 /*
  * 跳转功能封装
  * @param {Object} _param 跳转入参
@@ -111,11 +113,32 @@ export function navigateTo(_param, callback = () => {}) {
  */
 export function navigateToMall(_param) {
 	//参数中刷入wAppId 
+	
 	let _url = _param.url;
-	uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url)
-	uni.navigateTo({
-		url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
-	});
+	uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
+	
+	//判断有没有登录
+	if(!hasLogin()){ //没有登录直接跳转
+		uni.navigateTo({
+			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
+		});
+		return;
+	}
+	
+	getHcCode().then(_data=>{
+		if(_url.indexOf("?")>0){
+			_url = _url +"&hcCode="+_data.hcCode;
+		}else{
+			_url = _url +"?hcCode="+_data.hcCode;
+		}
+		uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
+		uni.navigateTo({
+			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
+		});
+	})
+	
+	
+	
 };
 
 /**

@@ -1,5 +1,5 @@
 <template>
-	<swiper class="ad-swiper bg-white c-radius margin-top-sm" :style="adHeight" indicator-dots="true"
+	<swiper class="ad-swiper bg-white c-radius margin-top-sm"  indicator-dots="true"
 		indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49" autoplay="true" interval="5000"
 		duration="1000" circular="true">
 		<block v-for="(item, index) in ad" :key="index">
@@ -58,6 +58,9 @@
 </script>
 
 <style>
+	.ad-swiper{
+		height: 300upx;
+	}
 	.ad-img {
 		width: 100%;
 		height: 100%;

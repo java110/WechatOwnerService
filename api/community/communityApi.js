@@ -14,6 +14,8 @@ import mapping from '../../constant/MappingConstant.js'
 
 import {getCurOwner} from '../owner/ownerApi.js'
 
+import conf from '../../conf/config.js'
+
 
 /**
  * @param {Object} dataObj
@@ -49,23 +51,43 @@ export function getCommunitys(dataObj) {
 		})
 }
 
+
+export function getMallCommunityId(){
+	let _currentCommunity = uni.getStorageSync(mapping.CURRENT_MALL_COMMUNITY_INFO)
+	if(_currentCommunity){
+		return _currentCommunity.communityId;
+	}
+	return  getCommunityId();
+}
+
+export function getMallCommunityName(){
+	let _currentCommunity = uni.getStorageSync(mapping.CURRENT_MALL_COMMUNITY_INFO)
+	if(_currentCommunity){
+		return _currentCommunity.name;
+	}
+	return getCommunityName();
+}
+
 export function getCommunityId(){
-	
+
 	let _currentCommunity = uni.getStorageSync("currentCommunityInfo")
 	if(_currentCommunity){
 		return _currentCommunity.communityId;
 	}
 	
-	return "";
+	return conf.DEFAULT_COMMUNITY_ID;
 	
 }
+
+
+
 
 export function getCommunityName(){
 	let _currentCommunity = uni.getStorageSync("currentCommunityInfo")
 	if(_currentCommunity){
 		return _currentCommunity.communityName;
 	}
-	return "";
+	return conf.DEFAULT_COMMUNITY_NAME;
 }
 
 /**
