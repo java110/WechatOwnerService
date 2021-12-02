@@ -51,13 +51,18 @@
 					<text class="text-grey">生活服务</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="toMallOrders()">
+				<view class="content">
+					<text class="cuIcon-goodsfavor text-pink"></text>
+					<text class="text-grey">商城订单</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="mySettings()">
 				<view class="content">
 					<text class="cuIcon-settings text-gray"></text>
 					<text class="text-grey">设置</text>
 				</view>
 			</view>
-
 		</view>
 	</view>
 </template>
@@ -175,16 +180,26 @@
 			},
 			loadOwenrInfo: function() {
 				let _that = this;
-
 				context.getOwner(function(_ownerInfo) {
-					console.log(_ownerInfo);
-
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
 					} else {
 						_that.ownerFlag = false;
 					}
 				});
+			},
+			toMallOrders() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateToMall({
+					url: '/pages/myOrder/myOrder'
+				})
 			},
 			onGotUserInfo: function(e) {
 				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
