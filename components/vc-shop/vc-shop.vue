@@ -82,7 +82,7 @@
 			_toShopDetail: function(_shop) {
 				let url = this.openType == "1,3" ? '/pages/cate/cate?shopId=' :
 					'/pages/homemaking/shop?shopId='
-				this.vc.navigateTo({
+				this.vc.navigateToMall({
 					url: url + _shop.shopId
 				}, true);
 			}
