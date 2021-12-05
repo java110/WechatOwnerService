@@ -30,7 +30,7 @@
 <script>
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	import conf from '../../config.js'
+	import conf from '../../conf/config'
 
 	export default {
 		data() {
@@ -114,6 +114,7 @@
 				});
 			},
 			_doRegister: function(e) {
+				console.log(conf.DEFAULT_COMMUNITY_ID,'123')
 				let obj = {
 					"link": this.link,
 					"msgCode": this.msgCode,
