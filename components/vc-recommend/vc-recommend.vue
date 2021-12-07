@@ -62,7 +62,7 @@
 					})
 			},
 			_toGoodsDetail: function(_product) {
-				this.vc.navigateTo({
+				this.vc.navigateToMall({
 					url: '/pages/goods/goods?productId=' + _product.productId+"&shopId="+_product.shopId 
 				},true);
 			}

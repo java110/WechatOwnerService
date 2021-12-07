@@ -18,6 +18,9 @@
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 		</view>
+		<view >
+			<view >{{codeMsg}}</view>
+		</view> 
 		<view class="padding flex flex-direction margin-top">
 			<button class="cu-btn bg-green   lg" @click="_doRegister()">绑定</button>
 		</view>
@@ -27,13 +30,14 @@
 <script>
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	import conf from '../../config.js'
+	import conf from '../../conf/config'
 
 	export default {
 		data() {
 			return {
 				link: '',
 				second: 60,
+				codeMsg: '',
 				msgCode: '',
 				areaShow: false,
 				btnValue: '验证码',
@@ -87,6 +91,7 @@
 								icon: 'none',
 								duration: 2000
 							});
+							_that.codeMsg = res.data;
 							wx.hideLoading();
 							_that.timer();
 							return;
@@ -109,6 +114,7 @@
 				});
 			},
 			_doRegister: function(e) {
+				console.log(conf.DEFAULT_COMMUNITY_ID,'123')
 				let obj = {
 					"link": this.link,
 					"msgCode": this.msgCode,
