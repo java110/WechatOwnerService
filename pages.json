@@ -620,6 +620,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/roomFee/ownerCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "优惠卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

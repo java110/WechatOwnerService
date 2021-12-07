@@ -30,6 +30,8 @@ class MappingConstant {
   
   static W_APP_ID = "wAppId";//微信公众号ID
   
+  static COUPON_USER_KEY = "couponUserKey";//微信公众号ID
+  
   static HC_MALL_CUR_URL = "HC_MALL_CUR_URL";
   
   static CURRENT_MALL_COMMUNITY_INFO = "CURRENT_MALL_COMMUNITY_INFO"
