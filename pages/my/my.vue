@@ -198,7 +198,7 @@
 					return;
 				}
 				this.vc.navigateToMall({
-					url: '/pages/myOrder/myOrder'
+					url: '/pages/myOrder/myOrderAll'
 				})
 			},
 			onGotUserInfo: function(e) {

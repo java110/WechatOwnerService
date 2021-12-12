@@ -74,6 +74,8 @@ export default {
 	headImg: '/static/images/missing-face.png',
 	// 出错填充图片
 	errorImage: '/static/images/errorImage.jpg',
+	
+	HOMEMAKING_CATEGORY_LIST: "HOMEMAKING_CATEGORY_TYPE_LIST", //家政服务菜单（类型）
 }
 
 module.exports = MappingConstant;

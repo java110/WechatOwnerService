@@ -12,7 +12,6 @@
 			<view class="title">颜色</view>
 			<input v-model="carColor" style="text-align:right"></input>
 		</view>
-
 		<view class="cu-form-group">
 			<view class="title">车辆类型</view>
 			<picker bindchange="PickerChange" :value="index" :range="carTypes" @change="chooseCarTypes">
@@ -29,7 +28,6 @@
 				</view>
 			</picker>
 		</view>
-
 		<view class="cu-form-group">
 			<view class="title">结组日期</view>
 			<picker mode="date" :value="endDate" @change="endDateChange">
@@ -38,19 +36,14 @@
 				</view>
 			</picker>
 		</view>
-
 		<view class="cu-form-group align-start">
 			<view class="title">备注信息</view>
 			<textarea maxlength="-1" v-model="remark" placeholder="请输入备注信息"></textarea>
 		</view>
-
-
 		<view class="button_up_blank"></view>
-
 		<view class="flex flex-direction">
 			<button @click="submitApply()" class="cu-btn bg-green margin-tb-sm lg">提交</button>
 		</view>
-
 	</view>
 </template>
 
@@ -97,10 +90,10 @@
 				console.log("_owner",_owner);
 				_this.communityId = _owner.communityId;
 				_this.ownerId = _owner.memberId;
-				_this.userId = _owner.userId;
+				_this.userId = _owner.ownerId;
 				_this.applyPersonName = _owner.appUserName;
 				_this.applyPersonLink = _owner.link;
-				_this.applyPersonId = _owner.userId;
+				_this.applyPersonId = _owner.ownerId;
 				_this.listParkingSpace();
 			});
 			let param = {
@@ -153,7 +146,6 @@
 		
 			startDateChange: function(e) {
 				this.startDate = e.detail.value
-				console.log(this.startDate);
 			},
 			submitApply:function(){
 				let obj = {
@@ -172,7 +164,7 @@
 					"applyPersonId":this.applyPersonId,
 					"userId":this.userId
 				};
-				
+				console.log(obj);
 				let msg = "";
 				
 				if (obj.carNum == "") {
@@ -198,7 +190,6 @@
 					});
 					return;
 				}
-				
 				context.request({
 					url: constant.url.saveOwnerCar,
 					header: context.getHeaders(),
@@ -206,7 +197,6 @@
 					data: obj,
 					success: function(res) {
 						let _json = res.data;
-						
 						if (_json.code == 0) {
 							wx.showToast({
 								title: "提交成功，可到 我的-生活服务-车位信息 中查看进度",

@@ -88,6 +88,13 @@
 			}
 		},
 		{
+			"path": "pages/payParkingApplyFee/payParkingApplyFee",
+			"style": {
+				"navigationBarTitleText": "车位申请缴费",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/reportInfoDetail/reportInfoDetail",
 			"style": {
 				"navigationBarTitleText": "疫情问卷上报",
