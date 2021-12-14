@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<view class="cu-bar search bg-white b-radius">
-			<view class="search-form round">
+			<view class="search-form round" @tap="toSearch()">
 				<text class="cuIcon-search"></text>
-				<input :adjust-position="false" placeholder="请输入服务名称" type="text"  @tap="toSearch()" disabled="true"></input>
+				<input :adjust-position="false" placeholder="请输入服务名称" type="text" disabled="true"></input>
 			</view>
 			<view class="text-green" @tap="toSelectArea()">
 				{{selectCommunityName}}<text class="cuIcon-refresharrow"></text></view>
