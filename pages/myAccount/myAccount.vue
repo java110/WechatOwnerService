@@ -9,16 +9,17 @@
 						<text class="cuIcon-right margin-right-xs"></text>余额: {{item.amount}}</view>
 				</view>
 				<view class="action">
-
 				</view>
 			</view>
-			<view class="cu-item" v-if="accounts.length === 0">
-				<view class="content">
-					<text class="cuIcon-warn text-green"></text>
-					<text class="text-grey">暂无账户信息</text>
+			<view class="cu-item arrow" @click="coupons(item)">
+				<view class="content padding-tb-sm">
+					<view>
+						<text class="cuIcon-ticket text-green margin-right-xs"></text>我的优惠券</view>
+					<view class="text-gray text-sm">
+					</view>
 				</view>
 				<view class="action">
-
+			
 				</view>
 			</view>
 		</view>
@@ -83,12 +84,16 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			coupons: function(_item) {
+				this.vc.navigateTo({
+					url: '/pages/myAccount/myCoupons',
+				})
+			},
 			myAccountDetail: function(_item) {
 				this.vc.navigateTo({
 					url: '/pages/myAccount/myAccountDetail?acctId=' + _item.acctId
 				});
 			},
-
 			/**
 			 * 加载业主房屋信息
 			 */
