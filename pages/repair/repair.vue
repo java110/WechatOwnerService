@@ -393,7 +393,7 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['album','camera'], //从相册选择
 					success: (res) => {
 						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
