@@ -20,6 +20,7 @@
 	import {
 		getStorageSync
 	} from '../../utils/StorageUtil.js'
+	import {getMallCommunityId} from '../../api/community/communityApi.js'
 	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {
@@ -35,11 +36,24 @@
 			if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
 				_url = conf.mallUrl + '#' + _url;
 			}
+			
+			if(_url.indexOf("?")>0){
+				_url = _url +"&hcCommunityId="+getMallCommunityId();
+			}else{
+				_url = _url +"?hcCommunityId="+getMallCommunityId();
+			}
+			// #ifdef H5
+			_url = _url +"&mallFrom=HC_H5"
+			// #endif
+			// #ifndef H5
+			_url = _url +"&mallFrom=HC_APP"
+			// #endif
 			this.url = _url;
 		},
 		methods: {
 			onReciveMessage: function(event) {
 				console.log('商城回传的参数', event);
+				event.data = JSON.parse(event.data);
 				reciveMessage(event);
 			}
 		}

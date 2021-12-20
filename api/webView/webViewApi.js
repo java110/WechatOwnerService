@@ -36,11 +36,14 @@ import {getStorageSync,setStorageSync} from '../../utils/StorageUtil.js'
 
 import {uuid} from '../../utils/SeqUtil.js'
 
+import {getWAppId} from '../init/initApi.js'
+
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";
 const ACTION_NAVIGATE_TO_PAGE = "navigateToPage";
 const ACTION_PAY_ORDER = "payOrder";
 const ACTION_SET_TITLE = "setTitle";
+const ACTION_SET_COMMUNITY = "setCommunity";
 const ACTION_NAVIGATE_HOME = "navigateHome";
 const ACTION_NAVIGATE_BACK = "navigateBack";
 
@@ -74,23 +77,6 @@ export function getHcCode(_objData) {
 			}
 		});
 	})
-}
-/**
- * 检查回话
- */
-export function actionRefreshToken(that) {
-	checkSession().then(function() {
-		//这部分是 业主端回话有效的情况
-		console.log('业主端回话有效');
-		uni.navigateTo({
-			url: '/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid()
-		});
-	}, function(error) { //回话过期
-		console.log('回话已经过期');
-		let _hasOwnerUrl = window.location.origin+'/#/pages/hcWebViewRefresh/hcWebViewRefresh?java110Id='+uuid();
-		let _mallAuthUrl = conf.mallUrl+"/app/userAuth/mallUserRefreshToken?redirectUrl="+encodeURIComponent(_hasOwnerUrl)+"&errorUrl="+conf.mallUrl;
-		wechatRefreshToken(_mallAuthUrl, '0', _hasOwnerUrl);
-	});
 }
 
 export function getCurrentPage() {
@@ -205,8 +191,10 @@ export function reciveMessage(event, that) {
 		});
 		return;
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
-		//校验是否登录，如果没有登录跳转至温馨提示页面
-		actionRefreshToken(that);
+		//跳转登录
+		uni.navigateTo({
+			url:'/pages/showlogin/showlogin?wAppId='+getWAppId()
+		})
 	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
 		//_data.url = encodeUrl(_data.url);
 		window.location.href = _data.url;
@@ -225,6 +213,8 @@ export function reciveMessage(event, that) {
 		uni.navigateBack({
 			delta:1
 		})
+	}else if(_data.action == ACTION_SET_COMMUNITY){
+		setStorageSync(mapping.CURRENT_MALL_COMMUNITY_INFO,_data.data);
 	}
 	
 	

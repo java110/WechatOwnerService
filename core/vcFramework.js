@@ -25,7 +25,7 @@ import {getCurCommunity,recoveryCommunityInfo} from '../api/community/communityA
 // 页面初始化相关
 import {onLoad,getWAppId} from '../api/init/initApi.js'
 
-import {navigateTo,navigateBack} from './vcRoute.js'
+import {navigateTo,navigateBack,navigateToMall} from './vcRoute.js'
 
 import {isEmpty} from '../utils/StringUtil.js'
 
@@ -48,5 +48,6 @@ export default{
 	navigateBack:navigateBack,
 	isEmpty:isEmpty,
 	hasLogin:hasLogin,
-	getWAppId:getWAppId
+	getWAppId:getWAppId,
+	navigateToMall:navigateToMall
 }

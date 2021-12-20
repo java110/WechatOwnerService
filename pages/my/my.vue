@@ -2,7 +2,6 @@
 	<view>
 		<!--index.wxml-->
 		<view class="user-container bg-white ">
-
 			<view class="userinfo">
 				<block>
 					<view v-if="login">
@@ -21,13 +20,19 @@
 						</view>
 					</view>
 				</block>
-
 			</view>
-
 		</view>
 
 		<view class="cu-list menu  margin-top">
-
+			<view class="cu-item arrow" @tap="_changeCommunity()">
+				<view class="content">
+					<text class="cuIcon-circlefill text-yellow"></text>
+					<text class="text-grey">切换小区</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{communityName}}</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="myAssets()">
 				<view class="content">
 					<text class="cuIcon-profile text-pink"></text>
@@ -46,13 +51,18 @@
 					<text class="text-grey">生活服务</text>
 				</view>
 			</view>
+			<view class="cu-item arrow" @click="toMallOrders()">
+				<view class="content">
+					<text class="cuIcon-goodsfavor text-pink"></text>
+					<text class="text-grey">商城订单</text>
+				</view>
+			</view>
 			<view class="cu-item arrow" @click="mySettings()">
 				<view class="content">
 					<text class="cuIcon-settings text-gray"></text>
 					<text class="text-grey">设置</text>
 				</view>
 			</view>
-
 		</view>
 	</view>
 </template>
@@ -82,12 +92,14 @@
 	} from '../../utils/StorageUtil.js'
 
 	import mapping from '../../constant/MappingConstant.js'
+	import {hasOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
 				userInfo: {},
 				headerImg: '',
 				userName: '',
+				communityName:'',
 				// 用户信息
 				ownerFlag: false, // 是否有业主信息 标记 如果有为 true  没有为false
 				login: true
@@ -125,6 +137,7 @@
 				_that.login = true;
 				_that.loadOwenrInfo();
 				_that.userInfo = context.getUserInfo();
+				console.log('用户信息',_that.userInfo)
 				this.loadOwnerHeaderImg();
 			},
 			bindingOwner: function() {
@@ -146,11 +159,13 @@
 			loadOwnerHeaderImg: function() {
 				let _that = this;
 				context.getOwner(function(_owner) {
+			
 					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId +
 						"&communityId=" + _owner.communityId +
 						"&fileTypeCd=10000";
 					_that.headerImg = _headerImg;
 					_that.userName = _owner.appUserName;
+					_that.communityName = _owner.communityName;
 				});
 			},
 			showLongModel: function() {
@@ -165,16 +180,26 @@
 			},
 			loadOwenrInfo: function() {
 				let _that = this;
-
 				context.getOwner(function(_ownerInfo) {
-					console.log(_ownerInfo);
-
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
 					} else {
 						_that.ownerFlag = false;
 					}
 				});
+			},
+			toMallOrders() {
+				if (!this.ckeckUserInfo()) {
+					this.vc.navigateTo({
+						url: '../showlogin/showlogin'
+					}, () => {
+						this.refreshPageLoginInfo();
+					});
+					return;
+				}
+				this.vc.navigateToMall({
+					url: '/pages/myOrder/myOrderAll'
+				})
 			},
 			onGotUserInfo: function(e) {
 				console.log("nickname=" + JSON.stringify(e.detail.userInfo));
@@ -189,8 +214,9 @@
 					});
 					return;
 				}
+				hasOwner();
 				this.vc.navigateTo({
-					url: './myMenu?pageSign=myAssets'
+					url: '/pages/my/myMenu?pageSign=myAssets'
 				});
 			},
 			// 生活服务
@@ -203,8 +229,9 @@
 					});
 					return;
 				}
+				hasOwner();
 				this.vc.navigateTo({
-					url: './myMenu?pageSign=myServices'
+					url: '/pages/my/myMenu?pageSign=myServices'
 				});
 			},
 			// 设置
@@ -233,6 +260,12 @@
 				}
 				this.vc.navigateTo({
 					url: '/pages/myAccount/myAccount',
+				});
+			},
+			//切换小区
+			_changeCommunity:function(){
+				uni.navigateTo({
+					url:"/pages/changeOwnerCommunity/changeOwnerCommunity"
 				});
 			},
 		}

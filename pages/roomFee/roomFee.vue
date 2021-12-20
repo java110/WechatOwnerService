@@ -116,11 +116,21 @@
 				</view>
 				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount" ></vcUserAccount>
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
+				<view class="cu-list menu" @click="coupons()">
+					<view class="cu-item arrow">
+						<view class="content padding-tb-sm">
+							<view>
+								<view class="text-cut" style="width:220px">使用优惠卷抵扣</view>
+							</view>
+						</view>
+						<view>{{couponAmount}}</view>
+					</view>
+				</view>
 			</view>
 			
 		</scroll-view>
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
-
+			
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
 			</view>
@@ -132,8 +142,6 @@
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
 				<!-- #endif -->
 			</view>
-
-
 		</view>
 	</view>
 
@@ -160,6 +168,7 @@
 	// #endif
 	
 	import {addMonth,formatDate,date2String,dateSubOneDay} from '../../utils/DateUtil.js'
+	
 	export default {
 		components:{
 			vcDiscount,
@@ -208,6 +217,9 @@
 				selectUserAccount: [], // 选中的账户
 				accountAmount: 0.0, // 账户金额
 				deductionAmount: 0.0, // 抵扣金额
+				couponAmount: 0.0,
+				amountCount: 0.0,
+				couponList: []
 			};
 		},
 		
@@ -233,6 +245,7 @@
 				//_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
 				_receivableAmount = (_fee.amount * _fee.paymentCycle).toFixed(2);
 			}
+			
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			this.receivableAmount = _receivableAmount;
@@ -259,6 +272,8 @@
 			this.startTime = _fee.startTime;
 			this.deadlineTime = _fee.deadlineTime;
 			this.amountOwed = _fee.amountOwed;
+			this.amountCount = this.receivableAmount;
+			
 			if(this.feeFlag == '2006012'){
 				return;
 			}
@@ -277,8 +292,25 @@
 				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId,this.communityId);
 			})
 		},
+		onShow() {
+		 let couponUser  = uni.getStorageSync(constant.mapping.COUPON_USER_KEY);
+		 this.couponAmount = couponUser.couponAmount;
+		 this.couponList = couponUser.couponList;
+		 this.receivableAmount = this.amountCount;
+		 if(this.couponAmount){
+			 this.receivableAmount = parseFloat(this.receivableAmount) - parseFloat(this.couponAmount);
+			 if(this.receivableAmount <= 0){
+				 this.receivableAmount = 0.0;
+			 }
+		 }
+		 uni.removeStorageSync(constant.mapping.COUPON_USER_KEY)
+		},
 		methods: {
-			
+			coupons: function(_item) {
+				wx.navigateTo({
+					url: '/pages/roomFee/ownerCoupon',
+				})
+			},
 			// （单价×面积+附加费）  × 周期
 			getReceivableAmount: function(){
 				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth).toFixed(2);
@@ -290,7 +322,6 @@
 				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
 				this._computeUserAmount();
 			},
-			
 			// 选择使用账户余额
 			getUserAmount: function(_accInfo){
 				// 选中的账户列表
@@ -363,7 +394,8 @@
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					endTime: this.formatEndTime
+					endTime: this.formatEndTime,
+					couponList: this.couponList
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -450,6 +482,7 @@
 					selectUserAccount: this.selectUserAccount, // 选中的账户
 					accountAmount: this.accountAmount, // 账户金额
 					deductionAmount: this.deductionAmount, // 抵扣金额
+					couponList: this.couponList
 				};
 				context.request({
 					url: constant.url.preOrder,

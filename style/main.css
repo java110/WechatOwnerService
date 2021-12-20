@@ -3910,3 +3910,6 @@ scroll-view.cu-steps .cu-item {
 .lines-white {
 	color: #ffffff;
 }
+.c-radius{
+	border-radius: 20upx;
+}

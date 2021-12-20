@@ -39,6 +39,8 @@ import {
 	getWAppId
 } from '../api/init/initApi.js'
 
+import {getHcCode} from '../api/webView/webViewApi.js'
+
 /*
  * 跳转功能封装
  * @param {Object} _param 跳转入参
@@ -66,13 +68,13 @@ export function navigateTo(_param, callback = () => {}) {
 	let noLoginFlag = false;
 	url.NEED_NOT_LOGIN_PAGE.forEach(item => {
 		if (item == _tempUrl) {
-			console.log('item=>',item,_tempUrl)
+			console.log('item=>', item, _tempUrl)
 			uni.navigateTo(_param);
 			noLoginFlag = true;
 		}
 	});
-	if(noLoginFlag){
-		return ;
+	if (noLoginFlag) {
+		return;
 	}
 	debug('vcRoute', 'navigateTo', _param);
 	//校验是否登录，如果没有登录跳转至温馨提示页面
@@ -103,6 +105,40 @@ export function navigateTo(_param, callback = () => {}) {
 		}
 		// #endif
 	});
+};
+
+/*
+ * 跳转功能封装
+ * @param {Object} _param 跳转入参
+ */
+export function navigateToMall(_param) {
+	//参数中刷入wAppId 
+	
+	let _url = _param.url;
+	uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
+	
+	//判断有没有登录
+	if(!hasLogin()){ //没有登录直接跳转
+		uni.navigateTo({
+			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
+		});
+		return;
+	}
+	
+	getHcCode().then(_data=>{
+		if(_url.indexOf("?")>0){
+			_url = _url +"&hcCode="+_data.hcCode;
+		}else{
+			_url = _url +"?hcCode="+_data.hcCode;
+		}
+		uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
+		uni.navigateTo({
+			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
+		});
+	})
+	
+	
+	
 };
 
 /**

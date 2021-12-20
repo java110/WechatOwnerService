@@ -92,6 +92,8 @@
 	import {getCurOwner} from '../../api/owner/ownerApi.js'
 
 	import {hasLogin} from '../../auth/Java110Auth.js'
+	
+	import {hasOwner} from '../../api/owner/ownerApi.js'
 	export default {
 		data() {
 			return {
@@ -264,6 +266,7 @@
 					});
 					return;
 				}
+				hasOwner();
 				uni.getStorage({
 					key: 'ownerInfo',
 					success: function (res) {
@@ -274,6 +277,7 @@
 				});
 			},
 			_doCall: function() {
+			
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
@@ -304,6 +308,7 @@
 				this._loadActivites();
 			},
 			toPage: function(pageUrl) {
+				hasOwner();
 				this.vc.navigateTo({
 					url: pageUrl
 				});

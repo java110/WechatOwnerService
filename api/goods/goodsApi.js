@@ -24,7 +24,7 @@ export function getRecommendProduct(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
 			requestNoAuth({
-				url: url.queryProductLabel,
+				url: url.queryMainCategory,
 				method: "GET",
 				data: dataObj,
 				//动态数据

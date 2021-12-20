@@ -32,6 +32,7 @@ export default {
 	queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
 	queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
 	queryFeeByOwner: baseUrl + "app/fee.listFee", //预下单
+	queryCouponUser: baseUrl + "app/couponUser.listCouponUser", //查询用户优惠卷
 	preOrder: baseUrl + "app/payment/toPay", //查询小区
 	//临时车缴费
 	preOrderTempCarInout: baseUrl + "/app/payment/toPayTempCarInout",
@@ -136,6 +137,12 @@ export default {
 	listRoomFee: baseUrl + "callComponent/listRoomFee/list",
 	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
 	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
+	ownerCommunity: baseUrl + "app/owner.ownerCommunity",
+	queryShopType: baseUrl + 'app/shopType/queryShopType',//查询店铺类型
+	// 家政服务类型（菜单）
+	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
+	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
+	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'/pages/login/login',

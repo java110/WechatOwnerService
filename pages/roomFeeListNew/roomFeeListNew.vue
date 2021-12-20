@@ -61,6 +61,7 @@
 		data() {
 			return {
 				rooms: [],
+				couponUsers: [],
 				curRoom: {},
 				moreRooms: [],
 				needFefresh: true,

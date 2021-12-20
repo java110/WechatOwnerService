@@ -14,9 +14,16 @@
 			<view v-if="noData == false" style="margin-top: 100upx;">
 				<view v-for="(item,index) in parkings" :key="index" 
 				class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
-					<view v-if="item.areaNum != null" class="flex margin-top justify-between">
-						<view class="text-gray">车位</view>
-						<view class="text-gray">{{item.areaNum}}{{item.num}}</view>
+					<view class="flex padding-bottom-xs solid-bottom justify-between">
+						<view>{{item.applyId}}</view>
+						<view class="text-gray" v-if="item.state == '2002'">
+								<!-- #ifdef H5 || MP-WEIXIN -->
+								<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="payFee(item)">缴费</button>
+								<!-- #endif -->
+								<!-- #ifdef APP-PLUS -->
+								<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="payFee(item)">缴费</button>
+								<!-- #endif -->
+						</view>
 					</view>
 					<view class="flex margin-top-xs justify-between">
 						<view class="text-gray">车牌号</view>
@@ -90,6 +97,13 @@
 		},
 		onLoad: function(options) {
 			context.onLoad(options);
+			// #ifdef MP-WEIXIN
+			let accountInfo = uni.getAccountInfoSync();
+			this.appId = accountInfo.miniProgram.appId;
+			// #endif
+			// #ifdef H5
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			// #endif
 		},
 		onShow: function() {
 			let _that = this;
@@ -137,7 +151,12 @@
 				this.code = _parkingSpace.code;
 				this.noData = false;
 				this.listParkingSpace();
-			}
+			},
+			payFee: function(_item) {
+				this.vc.navigateTo({
+					url: '/pages/payParkingApplyFee/payParkingApplyFee?fee=' + JSON.stringify(_item),
+				})
+			},
 		}
 	};
 </script>

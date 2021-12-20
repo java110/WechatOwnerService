@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<view class="cu-list menu  margin-top">
-
 			<block v-if="pageSign == 'myAssets'">
 				<view class="cu-item arrow" @click="viewOwner()">
 					<view class="content">
@@ -100,6 +99,7 @@
 		props: {},
 		onLoad: function(options) {
 			this.pageSign = options.pageSign;
+			console.log(options,"123")
 		},
 		onShow: function() {
 		},
