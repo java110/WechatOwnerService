@@ -13,7 +13,7 @@
 				<view >
 					<view class="list"  v-if="active==0">
 						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
-							<image src="../../static/images/coupon.png" class="coupon"></image>
+							<image src="/static/images/coupon.png" class="coupon"></image>
 							<view class="box">
 								<view class="price">
 									<view class="icon">¥</view>
@@ -36,7 +36,7 @@
 				<view v-for="(itemsData, i) in list">
 					<view class="list expired" v-if="active==1">
 						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
-							<image src="../../static/images/coupon.png" class="coupon"></image>
+							<image src="/static/images/coupon.png" class="coupon"></image>
 							<view class="box">
 								<view class="price">
 									<view class="icon">¥</view>
@@ -58,7 +58,7 @@
 				<view class="list expired" v-if="active==2">
 					<view >
 						<view class="listItem"  v-for="(item, index) in tmpCouponList" :key="index">
-							<image src="../../static/images/coupon.png" class="coupon"></image>
+							<image src="/static/images/coupon.png" class="coupon"></image>
 							<view class="box">
 								<view class="price">
 									<view class="icon">¥</view>
@@ -234,9 +234,6 @@
 		.tab {
 			top: 0;
 			position: fixed;
-			/* #ifdef H5 */
-			top: 88rpx;
-			/* #endif */
 			left: 0;
 			width: 100%;
 			display: flex;
