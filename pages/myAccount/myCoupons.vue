@@ -22,7 +22,7 @@
 								<view class="descripe">
 									<view class="shop-name">{{ item.couponName }}</view>
 									<view class="text">无门槛</view>
-									<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
+									<view class="expire">{{ item.createTime }}-{{ item.endTime+' 前' }}</view>
 								</view>
 								<view class="usestate" >
 									您可以在缴物业费、停车费等地方直接抵扣。
