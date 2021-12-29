@@ -114,7 +114,6 @@
 				});
 			},
 			_doRegister: function(e) {
-				console.log(conf.DEFAULT_COMMUNITY_ID,'123')
 				let obj = {
 					"link": this.link,
 					"msgCode": this.msgCode,

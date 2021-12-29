@@ -38,7 +38,7 @@
 						<text class="text-grey text-sm">{{feeId }}</text>
 					</view>
 				</view>
-				<view class="cu-item"  v-if="feeFlag == '1003006'">
+				<view class="cu-item" v-if="feeFlag == '1003006'">
 					<view class="content">
 						<text class="text-grey">金额</text>
 					</view>
@@ -46,7 +46,7 @@
 						<text class="text-grey text-sm">{{amount + '元/月' }}</text>
 					</view>
 				</view>
-				<view class="cu-item"  v-else>
+				<view class="cu-item" v-else>
 					<view class="content">
 						<text class="text-grey">金额</text>
 					</view>
@@ -114,9 +114,8 @@
 						<text class="text-grey text-sm">{{curDegrees-preDegrees}}</text>
 					</view>
 				</view>
-				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount" ></vcUserAccount>
-				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
-				<view class="cu-list menu" @click="coupons()">
+				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount"></vcUserAccount>
+				<view class="cu-list menu margin-top" @click="coupons()">
 					<view class="cu-item arrow">
 						<view class="content padding-tb-sm">
 							<view>
@@ -126,11 +125,15 @@
 						<view>{{couponAmount}}</view>
 					</view>
 				</view>
+				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333"
+					:payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth"
+					:communityId="communityId"></vcDiscount>
+
 			</view>
-			
+
 		</scroll-view>
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
-			
+
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
 			</view>
@@ -152,25 +155,32 @@
 	// pages/payParkingFee/payParkingFee.js
 	const context = require("../../context/Java110Context.js");
 	const constant = context.constant;
-	
+
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
 
-	
+
 	// #ifdef H5
-	
+
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-	
+
 	// #endif
-	
+
 	// #ifdef APP-PLUS
-	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
+	import {
+		getPayInfo
+	} from '../../factory/WexinAppPayFactory.js'
 	// #endif
-	
-	import {addMonth,formatDate,date2String,dateSubOneDay} from '../../utils/DateUtil.js'
-	
+
+	import {
+		addMonth,
+		formatDate,
+		date2String,
+		dateSubOneDay
+	} from '../../utils/DateUtil.js'
+
 	export default {
-		components:{
+		components: {
 			vcDiscount,
 			vcUserAccount
 		},
@@ -203,13 +213,13 @@
 				costList: [{}, {}], //费用清单
 				additionalAmount: "",
 				appId: '',
-				feeFlag:'',
-				paymentCycle:1,
+				feeFlag: '',
+				paymentCycle: 1,
 				squarePrice: 0,
-				preDegrees:'',
-				curDegrees:'',
-				preReadingTime:'',
-				curReadingTime:'',
+				preDegrees: '',
+				curDegrees: '',
+				preReadingTime: '',
+				curReadingTime: '',
 				feeState: '',
 				startTime: '',
 				deadlineTime: '',
@@ -222,7 +232,7 @@
 				couponList: []
 			};
 		},
-		
+
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -233,19 +243,19 @@
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
 			// #ifdef H5
-				this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
-			console.log('fee info : ',_fee);
+			console.log('fee info : ', _fee);
 			let _amount = _fee.amount;
 			let _receivableAmount = _amount;
-			if(_fee.feeFlag == "2006012"){ // 一次性费用
+			if (_fee.feeFlag == "2006012") { // 一次性费用
 				_receivableAmount = _amount;
-			}else{ // 周期性费用
+			} else { // 周期性费用
 				//_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
 				_receivableAmount = (_fee.amount * _fee.paymentCycle).toFixed(2);
 			}
-			
+
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			this.receivableAmount = _receivableAmount;
@@ -273,11 +283,11 @@
 			this.deadlineTime = _fee.deadlineTime;
 			this.amountOwed = _fee.amountOwed;
 			this.amountCount = this.receivableAmount;
-			
-			if(this.feeFlag == '2006012'){
+
+			if (this.feeFlag == '2006012') {
 				return;
 			}
-			this.paymentCycle = _fee.paymentCycle;	
+			this.paymentCycle = _fee.paymentCycle;
 			for (let _index = 1; _index < 7; _index++) {
 				this.feeMonthList.push(_index * this.paymentCycle + '个月')
 			}
@@ -285,71 +295,81 @@
 			this.feeMonth = this.paymentCycle;
 			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 			this.endTime = formatDate(_endTime);
-		
-			
+
+
 			this.$nextTick(() => {
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
-				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId,this.communityId);
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
+				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
 			})
 		},
 		onShow() {
-		 let couponUser  = uni.getStorageSync(constant.mapping.COUPON_USER_KEY);
-		 this.couponAmount = couponUser.couponAmount;
-		 this.couponList = couponUser.couponList;
-		 this.receivableAmount = this.amountCount;
-		 if(this.couponAmount){
-			 this.receivableAmount = parseFloat(this.receivableAmount) - parseFloat(this.couponAmount);
-			 if(this.receivableAmount <= 0){
-				 this.receivableAmount = 0.0;
-			 }
-		 }
-		 uni.removeStorageSync(constant.mapping.COUPON_USER_KEY)
+			this._dealUserCoupons();
 		},
 		methods: {
+			_dealUserCoupons: function() {
+				let couponUser = uni.getStorageSync(constant.mapping.COUPON_USER_KEY);
+				if(!couponUser){
+					return ;
+				}
+				uni.removeStorageSync(constant.mapping.COUPON_USER_KEY);
+				this.couponAmount = couponUser.couponAmount;
+				this.couponList = couponUser.couponList;
+				this.receivableAmount = this.amountCount;
+				if (this.couponAmount) {
+					this.receivableAmount = (parseFloat(this.receivableAmount) - parseFloat(this.couponAmount))
+						.toFixed(2);
+					if (this.receivableAmount <= 0) {
+						this.receivableAmount = 0.0;
+					}
+				}
+				
+			},
 			coupons: function(_item) {
 				wx.navigateTo({
 					url: '/pages/roomFee/ownerCoupon',
 				})
 			},
 			// （单价×面积+附加费）  × 周期
-			getReceivableAmount: function(){
-				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth).toFixed(2);
+			getReceivableAmount: function() {
+				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth)
+					.toFixed(2);
 			},
-			
+
 			// 折扣金额
-			computeFeeDiscount:function(_price){
+			computeFeeDiscount: function(_price) {
 				// this.receivableAmount = this.receivableAmount - _price;
 				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
 				this._computeUserAmount();
 			},
 			// 选择使用账户余额
-			getUserAmount: function(_accInfo){
+			getUserAmount: function(_accInfo) {
 				// 选中的账户列表
 				this.selectUserAccount = _accInfo.selectedAccounts;
 				// 账户金额
 				this.accountAmount = _accInfo.totalUserAmount;
 				this._updatePrice(this.feeMonth);
 			},
-			
+
 			// 使用账户余额后，更新金额
-			_computeUserAmount: function(){
+			_computeUserAmount: function() {
 				// 抵扣金额
-				this.deductionAmount = parseFloat(this.accountAmount) > parseFloat(this.receivableAmount) ? parseFloat(this.receivableAmount) : parseFloat(this.accountAmount);
+				this.deductionAmount = parseFloat(this.accountAmount) > parseFloat(this.receivableAmount) ? parseFloat(
+					this.receivableAmount) : parseFloat(this.accountAmount);
 				// 更新应缴金额
 				let receivableAmount = parseFloat(this.receivableAmount) - parseFloat(this.accountAmount);
 				this.receivableAmount = receivableAmount < 0 ? '0.00' : receivableAmount.toFixed(2);
 			},
-			
+
 			// 切换缴费周期
 			dateChange: function(e) {
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];
-				let _feeMonth = _feeMonthName.replace("个月","");
+				let _feeMonth = _feeMonthName.replace("个月", "");
 				this._updatePrice(_feeMonth);
 			},
-			
+
 			// 更新金额
-			_updatePrice(_feeMonth){
+			_updatePrice(_feeMonth) {
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
 				this.showFeeMonth = false;
@@ -357,15 +377,15 @@
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
 				this.receivableAmount = this.getReceivableAmount();
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 			},
-			
+
 			onFeeMonthChange: function(e) {
 				console.log(e);
 			},
-			
+
 			// 计费结束时间计算（同pc端）
-			_getDeadlineTime: function () {
+			_getDeadlineTime: function() {
 				if (this.amountOwed == 0 && this.formatEndTime == this.deadlineTime) {
 					return "-";
 				}
@@ -374,11 +394,11 @@
 				}
 				return dateSubOneDay(this.startTime, this.deadlineTime, this.feeFlag);
 			},
-			
+
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
 			},
-			
+
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -406,11 +426,11 @@
 					success: function(res) {
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data; //成功情况下跳转
-							
+
 							let obj = {};
 							let orderInfo = {};
 							// #ifdef MP-WEIXIN
-							 obj = {
+							obj = {
 								appid: data.appId,
 								noncestr: data.nonceStr,
 								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
@@ -423,7 +443,7 @@
 							// #ifdef APP-PLUS
 							obj = getPayInfo(data);
 							// #endif
-							
+
 							// 第二种写法，传对象字符串
 							orderInfo = JSON.stringify(obj)
 							uni.requestPayment({
@@ -461,7 +481,7 @@
 					}
 				});
 			},
-			
+
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -514,13 +534,13 @@
 							});
 							// #endif
 							// #ifdef H5
-								WexinPayFactory.wexinPay(data,function(){
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
+							WexinPayFactory.wexinPay(data, function() {
+								uni.showToast({
+									title: "支付成功",
+									duration: 2000
 								});
+								uni.navigateBack({});
+							});
 							// #endif
 							wx.hideLoading();
 							return;
