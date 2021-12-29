@@ -634,6 +634,14 @@
                 "navigationBarTitleText": "优惠卷",
                 "enablePullDownRefresh": false
             }
+        },
+		{
+            "path" : "pages/myAccount/myCoupons",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的优惠券",
+                "enablePullDownRefresh": false
+            }
             
         }
     ],
