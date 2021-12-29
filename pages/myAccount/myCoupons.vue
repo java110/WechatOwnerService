@@ -10,15 +10,9 @@
 			</view>
 			<view class="content">
 				<!-- 未使用 -->
-<<<<<<< HEAD
-				<view>
-					<view class="list" v-if="active==0">
-						<view class="listItem" v-for="(item, index) in couponList" :key="index">
-=======
 				<view >
 					<view class="list"  v-if="active==0">
 						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
->>>>>>> 2a32c560597e4407f5574f9fb1f10ca92b52e79e
 							<image src="/static/images/coupon.png" class="coupon"></image>
 							<view class="box">
 								<view class="price">
@@ -39,23 +33,6 @@
 				</view>
 
 				<!-- 已使用 -->
-<<<<<<< HEAD
-				<view class="list expired" v-if="active==1">
-					<view class="listItem" v-for="(item, index) in useCouponList" :key="index">
-						<image src="/static/images/coupon.png" class="coupon"></image>
-						<view class="box">
-							<view class="price">
-								<view class="icon">¥</view>
-								<view class="volum">{{ item.actualPrice }}</view>
-							</view>
-							<view class="descripe">
-								<view class="shop-name">{{ item.couponName }}</view>
-								<view class="text">无门槛</view>
-								<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
-							</view>
-							<view class="usestate">
-								您已使用过此优惠券。
-=======
 				<view v-for="(itemsData, i) in list">
 					<view class="list expired" v-if="active==1">
 						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
@@ -73,20 +50,14 @@
 								<view class="usestate" >
 									您已使用过此优惠券。
 								</view>
->>>>>>> 2a32c560597e4407f5574f9fb1f10ca92b52e79e
 							</view>
 						</view>
 					</view>
 				</view>
 				<!-- 已过期 -->
 				<view class="list expired" v-if="active==2">
-<<<<<<< HEAD
-					<view>
-						<view class="listItem" v-for="(item, index) in tmpCouponList" :key="index">
-=======
 					<view >
 						<view class="listItem"  v-for="(item, index) in tmpCouponList" :key="index">
->>>>>>> 2a32c560597e4407f5574f9fb1f10ca92b52e79e
 							<image src="/static/images/coupon.png" class="coupon"></image>
 							<view class="box">
 								<view class="price">
