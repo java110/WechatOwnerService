@@ -175,6 +175,7 @@
 					tel: context.getUserInfo().link,
 					state: '2002'
 				}
+				let _couponUsers = [];
 				getCouponUsers(_objData, _couponUsers)
 					.then((_couponList) => {
 						_couponList.data.forEach(item => {
