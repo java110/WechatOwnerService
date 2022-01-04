@@ -104,7 +104,7 @@
 			gotoDetail: function(_notice) {
 				let that = this;
 				this.vc.navigateTo({
-					url: "/pages/notice/detail/detail?noticeId=" + _notice.noticeId
+					url: "/pages/notice/detail/detail?noticeId=" + _notice.noticeId+"&communityId="+that.communityId
 				});
 			},
 		}

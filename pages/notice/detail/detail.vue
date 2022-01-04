@@ -31,7 +31,8 @@
 		data() {
 			return {
 				notice: {},
-				noticeId: ''
+				noticeId: '',
+				communityId:''
 			};
 		},
 		
@@ -41,6 +42,7 @@
 			context.onLoad(options);
 			let _noticeId = options.noticeId;
 			this.noticeId = _noticeId;
+			this.communityId = options.communityId;
 			this._loadNoticeDetail();
 		},
 		onShow: function() {
@@ -52,7 +54,6 @@
 			_loadNoticeDetail: function() {
 				let that = this;
 				
-				that.communityId = context.getUserInfo().communityId;
 				context.request({
 					header: context.getHeaders(),
 					url: constant.url.GetNoticeListUrl,
