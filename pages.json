@@ -643,7 +643,25 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		    "path" : "pages/tempCarFee/tempCarCoupon",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "我的优惠券详情",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/unlicensedCarIn/unlicensedCarIn",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "无牌车入场",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"tabBar": {
 		"color": "#272636",

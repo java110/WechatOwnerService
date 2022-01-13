@@ -43,6 +43,16 @@
 						<text class="text-grey text-sm">{{amount + '元' }}</text>
 					</view>
 				</view>
+				<view class="cu-list menu margin-top" @click="coupons">
+					<view class="cu-item arrow">
+						<view class="content padding-tb-sm">
+							<view>
+								<view class="text-cut" style="width:220px">使用优惠卷抵扣</view>
+							</view>
+						</view>
+						<view>{{couponAmount+ '元' }}</view>
+					</view>
+				</view>
 				<view class="cu-bar btn-group" style="margin-top: 30px;">
 					<button @click="onPayFee" :disabled="amount == 0"
 						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
@@ -81,7 +91,10 @@
 				queryTime: '',
 				appId: '',
 				openId: '',
-				inoutId:''
+				inoutId:'',
+				receivableAmount: 0.0, // 抵扣金额
+				couponAmount: 0.0,
+				couponList: []
 			};
 		},
 		/**
@@ -93,6 +106,9 @@
 			this.carNum = options.carNum;
 			this.appId = options.appId;
 			this._loadTempCarFee();
+		},
+		onShow: function(options) {
+			this._dealUserCoupons();
 		},
 		methods: {
 			_loadTempCarFee: function() {
@@ -116,6 +132,32 @@
 					_that.inoutId = data.orderId;
 				})
 			},
+			_dealUserCoupons: function() {
+				let couponUser = uni.getStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY);
+				if(!couponUser){
+					return ;
+				}
+				uni.removeStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY);
+				console.log(couponUser);
+				console.log(couponUser.couponAmount);
+				this.couponAmount = couponUser.couponAmount;
+				this.couponList = couponUser.couponList;
+				// this.receivableAmount = this.amount;
+				// if (this.couponAmount) {
+				// 	this.receivableAmount = (parseFloat(this.receivableAmount) - parseFloat(this.couponAmount))
+				// 		.toFixed(2);
+				// 	if (this.receivableAmount <= 0) {
+				// 		this.receivableAmount = 0.0;
+				// 	}
+				// }
+				
+			},
+			coupons: function(_item) {
+				let _that = this;
+				wx.navigateTo({
+					url: '/pages/tempCarFee/tempCarCoupon?carNum='+_that.carNum+ "&appId=" + _that.appId + "&openId=" + _that.openId
+				})
+			},
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
@@ -129,7 +171,8 @@
 					feeName: '停车费',
 					tradeType: _tradeType,
 					appId: this.appId,
-					inoutId: this.inoutId
+					inoutId: this.inoutId,
+					couponList: this.couponList
 				};
 				toPayTempCarFee(_objData)
 				.then(_data=>{
@@ -158,7 +201,7 @@
 			},
 			onReQuery:function(){
 				uni.navigateTo({
-					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + this.openId
+					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId
 				})
 			}
 			

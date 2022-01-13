@@ -78,7 +78,7 @@ export function getRoomFees(_objData,_tmpRoom) {
 //查询用户优惠卷
 export function getCouponUsers(_objData,_couponUsers) {
 	return new Promise((resolve, reject) => {
-		request({
+		requestNoAuth({
 			url: url.queryCouponUser,
 			method: "GET",
 			data: _objData, //动态数据

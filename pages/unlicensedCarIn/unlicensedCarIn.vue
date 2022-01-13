@@ -51,8 +51,8 @@
 
 			<view class="plat-btn-black"></view>
 			<view class="cu-bar btn-group" style="margin-top: 30px;">
-				<button @click="_queryCarNum" :disabled="carNum.length< 7"
-					class="cu-btn bg-green shadow-blur round lg">立即查询</button>
+				<button @click="_saveCarNum" :disabled="carNum == ''"
+					class="cu-btn bg-green shadow-blur round lg">立即入场</button>
 			</view>
 		</view>
 
@@ -66,8 +66,8 @@
 	import selectCarNum from '../../components/select-carnum/select-carnum.vue';
 	import mapping from '../../constant/MappingConstant.js'
 	import {
-		getTempCarFeeOrder
-	} from '../../api/fee/feeApi.js'
+		customCarInOut
+	} from '../../api/car/carApi.js'
 	import {
 		isNotNull
 	} from '../../utils/StringUtil.js'
@@ -92,35 +92,20 @@
 					index7: ""
 				},
 				carNum: '',
-				paId: '',
+				communityId: '',
 				appId: '',
-				openId: '',
+				machineId: '',
 			}
 		},
 		components: {
 			selectCarNum
 		},
 		onLoad(options) {
-			this.paId = options.paId;
+			this.communityId = options.communityId;
+			this.machineId = options.machineId;
 			this.appId = options.appId;
-			this.openId = options.openId;
-			uni.setStorageSync(mapping.W_APP_ID,this.appId)
-			if (!isNotNull(this.openId)) {
-				//刷新 openId
-				this._refreshWechatOpenId();
-				return;
-			}
-			this.carNum = options.carNum;
-			if (isNotNull(this.carNum)) {
-				uni.navigateTo({
-					url: '/pages/tempCarFee/tempCarFee?paId=' + this.paId + '&carNum=' + this
-						.carNum + "&appId=" + this.appId + "&openId=" + this.openId
-				})
-				return;
-			}else{
-				this.carNum="";
-				return;
-			}
+			// this.openId = options.openId;
+			//uni.setStorageSync(mapping.W_APP_ID,this.appId)
 		},
 		methods: {
 			showCarNumberKeyboard() {
@@ -173,52 +158,33 @@
 			confirmGuaCarNumber: function() {
 
 			},
-			_queryCarNum: function() {
+			_saveCarNum: function() {
 				let _that = this;
-				getTempCarFeeOrder({
-					paId: this.paId,
-					carNum: this.carNum,
-					couponIds: ''
+				customCarInOut({
+					communityId: _that.communityId,
+					carNum: _that.carNum,
+					machineId: _that.machineId,
+					type: '1101'
 				}).then(_data => {
-					if (_data.code != 0) {
+					if (_data.data.code != 0) {
 						uni.showToast({
 							icon: 'none',
-							title: '未查到停车费'
+							title: '车牌号提交失败！'
 						})
 						return;
 					}
-					uni.navigateTo({
-						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
-							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId
+					uni.showToast({
+						icon: 'none',
+						title: '车牌号提交成功！'
 					})
+					window.location.reload();
+					return;
 				})
-			},
-			_refreshWechatOpenId: function() {
-				// console.log("判断微信还是支付宝");
-				// console.log(isWxOrAli());
-				// if (isWxOrAli() == 'AliPay') {
-				// 	uni.showToast({
-				// 		icon: 'none',
-				// 		title: '支付宝暂时未开通，敬请期待'
-				// 	})
-				// 	return;
-				// }
-				let _redirectUrl = window.location.href;
-				refreshUserOpenId({
-					redirectUrl: _redirectUrl,
-					wAppId: this.appId
-				}).then(_data => {
-					console.log(_data, 123)
-					if (_data.code == 0) {
-						window.location.href = _data.data.openUrl;
-						return;
-					}
-				});
 			}
 		}
 	}
 </script>
 
 <style>
-	@import "./tempParkingFee.css";
+	@import "../tempParkingFee/tempParkingFee.css";
 </style>

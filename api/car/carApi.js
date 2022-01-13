@@ -6,7 +6,7 @@
 
 
 import {
-	request
+	request,requestNoAuth
 } from '../java110Request.js'
 import
 url
@@ -45,4 +45,23 @@ export function getCars(_objData) {
 	});
 };
 
+/**
+ * 保存业主车辆
+ */
+export function customCarInOut(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.customCarInOut,
+			method: "POST",
+			data:_objData,
+			success: function(res) {
+				//将业主信息和房屋信息一起返回
+				resolve(res);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
 

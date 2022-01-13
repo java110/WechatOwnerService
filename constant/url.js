@@ -112,6 +112,7 @@ export default {
 	openDoor: baseUrl + "app/machine/openDoor",
 	getQrCode: baseUrl + "app/machine/getQRcode",
 	queryOwnerCars: baseUrl + "app/parkingSpaceApply.listParkingSpaceApply",
+	customCarInOut: baseUrl + "app/machine.customCarInOutCmd",//手工保存车牌号
 	saveRoomRenovation: baseUrl + "app/roomRenovation/saveRoomRenovation",
 	queryRoomRenovation: baseUrl + "app/roomRenovation/queryRoomRenovation",
 	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
@@ -151,7 +152,6 @@ export default {
 		'/pages/index/index',
 		'/pages/market/market',
 		'/pages/showlogin/showlogin',
-		
 	],
 	NEED_NOT_LOGIN_URL: [
 		baseUrl + "app/payment/toPayTempCarFee"
