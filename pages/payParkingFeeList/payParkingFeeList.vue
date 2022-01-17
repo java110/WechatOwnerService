@@ -80,7 +80,8 @@
 				curParkingSpace: {},
 				moreParkingSpaces: [],
 				needFefresh: true,
-				noData: false
+				noData: false,
+				appId: ''
 			};
 		},
 		components: {
@@ -92,6 +93,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			this.appId = options.wAppId;
 		},
 		/**
 		 * 生命周期函数--监听页面显示
@@ -108,6 +110,7 @@
 		},
 		methods: {
 			payFee: function(_item) {
+				_item["carNum"]=this.curParkingSpace.carNum;
 				this.vc.navigateTo({
 					url: '/pages/payParkingFee/payParkingFee?fee=' + JSON.stringify(_item),
 				})

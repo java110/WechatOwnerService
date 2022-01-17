@@ -208,9 +208,9 @@
 								                }, 5000) //延迟时间
 								              },
 							})
-							// wx.redirectTo({
-							// 	url: '/pages/complaintList/complaintList',
-							// });
+							wx.redirectTo({
+								url: '/pages/parkingInfo/parkingInfo',
+							});
 							return;
 						}
 						wx.showToast({
