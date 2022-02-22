@@ -19,14 +19,15 @@ import conf from '../../conf/config.js'
  */
 export function getWAppId(){
 	let wAppId = null;
-	// #ifdef H5
-		//1.0 获取当前页面
-		let routes = getCurrentPages();
-		//在微信小程序或是app中，通过curPage.options；如果是H5，则需要curPage.$route.query（H5中的curPage.options为undefined，所以刚好就不需要条件编译了）
-		let curParam = routes[routes.length - 1].options;
-		//2.0 从当前页面参数中获取
-		wAppId = curParam.wAppId;
-	 // #endif
+	//这里 虚拟与现实反馈有bug 注释处理 2022-02-22
+	// // #ifdef H5
+	// 	//1.0 获取当前页面
+	// 	let routes = getCurrentPages();
+	// 	//在微信小程序或是app中，通过curPage.options；如果是H5，则需要curPage.$route.query（H5中的curPage.options为undefined，所以刚好就不需要条件编译了）
+	// 	let curParam = routes[routes.length - 1].options;
+	// 	//2.0 从当前页面参数中获取
+	// 	wAppId = curParam.wAppId;
+	//  // #endif
 	
 	//3.0 微信小程序直接调用小程序获取
 	// #ifdef MP-WEIXIN
