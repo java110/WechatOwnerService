@@ -13,13 +13,13 @@
 
 	import {
 		isNotNull
-	} from '../../utils/StringUtil.js'
+	} from '../../lib/java110/utils/StringUtil.js'
 
 	import {
 		decodeUrl,
 		encodeUrl
-	} from '../../utils/UrlUtil.js'
-	const context = require("../../context/Java110Context.js");
+	} from '../../lib/java110/utils/UrlUtil.js'
+	import context from '../../lib/java110/Java110Context.js'
 	export default {
 		data() {
 			return {

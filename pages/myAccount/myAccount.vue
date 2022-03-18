@@ -28,7 +28,7 @@
 
 <script>
 	// pages/myAccount/myAccount.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	import {queryOwnerAccount} from '../../api/user/userApi.js'
 
 	export default {

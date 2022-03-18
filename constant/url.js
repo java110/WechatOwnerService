@@ -146,12 +146,14 @@ export default {
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	
 	NEED_NOT_LOGIN_PAGE: [
-		'/pages/login/login',
-		'/pages/register/register',
-		'/pages/my/my',
-		'/pages/index/index',
-		'/pages/market/market',
-		'/pages/showlogin/showlogin',
+		'pages/login/login',
+		'pages/register/register',
+		'pages/my/my',
+		'pages/index/index',
+		'pages/market/market',
+		'pages/showlogin/showlogin',
+		'pages/homemaking/homemaking',
+		'pages/mall/mall',
 	],
 	NEED_NOT_LOGIN_URL: [
 		baseUrl + "app/payment/toPayTempCarFee"

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import {sliceArray} from '../../utils/ArrayUtil.js'
+  import {sliceArray} from '../../lib/java110/utils/ArrayUtil.js'
 
 	export default {
 	  // 组件传参菜单数据

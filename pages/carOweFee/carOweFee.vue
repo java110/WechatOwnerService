@@ -57,7 +57,7 @@
 
 <script>
 	// pages/payParkingFee/payParkingFee.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 
 
@@ -70,7 +70,7 @@
 	import {
 		addMonth,
 		formatDate
-	} from '../../utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js'
 
 	import {
 		getCurCommunity

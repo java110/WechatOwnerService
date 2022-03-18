@@ -68,8 +68,8 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
-	const context = require("../../context/Java110Context.js");
-	import {isIDCard} from '../../utils/StringUtil.js'
+	import context from '../../lib/java110/Java110Context.js';
+	import {isIDCard} from '../../lib/java110/utils/StringUtil.js'
 	const constant = context.constant;
 	const factory = context.factory;
 

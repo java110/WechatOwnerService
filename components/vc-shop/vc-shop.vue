@@ -36,7 +36,7 @@
 	} from '../../api/community/communityApi.js'
 	import {
 		isNotNull
-	} from '../../utils/StringUtil.js'
+	} from '../../lib/java110/utils/StringUtil.js'
 
 	export default {
 		props: {

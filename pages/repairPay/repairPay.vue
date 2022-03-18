@@ -86,8 +86,8 @@
 </template>
 
 <script>
-	import {date2String} from '../../utils/DateUtil.js'
-	const context = require("../../context/Java110Context.js");
+	import {date2String} from '../../lib/java110/utils/DateUtil.js'
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	const util = context.util;
 	

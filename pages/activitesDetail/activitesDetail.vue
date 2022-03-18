@@ -48,7 +48,7 @@
 	
 	import conf from '../../conf/config.js'
 	
-	import {replaceImgSrc} from  '../../utils/ImageUtil.js';
+	import {replaceImgSrc} from  '../../lib/java110/utils/ImageUtil.js';
 	
 	import jyfParser from "@/components/jyf-parser/jyf-parser";
 	export default {

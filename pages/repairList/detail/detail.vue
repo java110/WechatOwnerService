@@ -14,7 +14,7 @@
 </template>
 
 <script>
-	const context = require("../../../context/Java110Context.js"); //获取app实例
+	import context from '../../../lib/java110/Java110Context.js'
 	//获取app实例
 	const app = getApp().globalData;
 

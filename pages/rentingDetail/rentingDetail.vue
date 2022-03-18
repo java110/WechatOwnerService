@@ -99,7 +99,7 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const default_img = '../../static/images/rentimage.jpg';
 	import url from '../../constant/url.js';
 

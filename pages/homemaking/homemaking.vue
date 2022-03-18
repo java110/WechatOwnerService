@@ -38,7 +38,7 @@
 	} from "../../api/homemaking/homemakingApi.js"
 	import {
 		sliceArray
-	} from '../../utils/ArrayUtil.js'
+	} from '../../lib/java110/utils/ArrayUtil.js'
 	import mapping from '../../constant/MappingConstant.js'
 	import {getCommunityId,getMallCommunityId,getMallCommunityName} from '../../api/community/communityApi.js';
 	export default {

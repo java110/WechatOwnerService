@@ -48,7 +48,7 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	import {getCurCommunity} from '../../api/community/communityApi.js'
 	

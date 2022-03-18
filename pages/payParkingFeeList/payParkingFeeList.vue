@@ -66,11 +66,11 @@
 
 <script>
 	// pages/payParkingFeeList/payParkingFeeList.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	//const util = context.util;
 	
-	import {formatDate} from '../../utils/DateUtil.js'
+	import {formatDate} from '../../lib/java110/utils/DateUtil.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 
 	export default {

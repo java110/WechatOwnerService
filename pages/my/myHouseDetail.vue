@@ -56,7 +56,7 @@
 
 <script>
 	// pages/my/myHouseDetail.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const factory = context.factory;
 
 	export default {

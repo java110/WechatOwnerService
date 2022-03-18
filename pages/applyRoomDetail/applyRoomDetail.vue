@@ -105,9 +105,9 @@
 
 <script>
 	// pages/my/myHouseDetail.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js'
 	const factory = context.factory;
-	import {compareDate,addDay,date2String} from '../../utils/DateUtil.js'
+	import {compareDate,addDay,date2String} from '../../lib/java110/utils/DateUtil.js'
 	import {queryApplyRoomDiscountType,saveApplyRoomDiscount,listRoomFee} from '../../api/applyRoom/applyRoomApi.js'
 	export default {
 		data() {

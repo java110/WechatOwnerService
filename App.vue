@@ -1,6 +1,6 @@
 <script>
 	//app.js
-	const context = require("./context/Java110Context.js");
+	import context from './lib/java110/Java110Context.js'
 	const loginFactory = context.factory.login;
 	const userFactory = context.factory.user;
 	

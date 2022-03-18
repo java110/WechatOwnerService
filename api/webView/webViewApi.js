@@ -1,6 +1,6 @@
 import {
 	request
-} from '../java110Request.js'
+} from '../../lib/java110/java110Request.js'
 import
 url
 from '../../constant/url.js'
@@ -12,7 +12,7 @@ from '../../constant/MappingConstant.js'
 import {
 	formatDate,
 	dateTimeStringToDateString
-} from '../../utils/DateUtil.js'
+} from '../../lib/java110/utils/DateUtil.js'
 // #ifdef H5
 import WexinPayFactory from '../../factory/WexinPayFactory.js'
 import {
@@ -22,21 +22,21 @@ import {
 
 import {
 	checkSession
-} from '../../auth/Java110Auth.js'
+} from '../../lib/java110/page/Page.js'
 
 import conf from '../../conf/config.js'
 
-import {isNull} from '../../utils/StringUtil.js'
+import {isNull} from '../../lib/java110/utils/StringUtil.js'
 
 import {
 	encodeUrl
-} from '../../utils/UrlUtil.js';
+} from '../../lib/java110/utils/UrlUtil.js';
 
-import {getStorageSync,setStorageSync} from '../../utils/StorageUtil.js'
+import {getStorageSync,setStorageSync} from '../../lib/java110/utils/StorageUtil.js'
 
-import {uuid} from '../../utils/SeqUtil.js'
+import {uuid} from '../../lib/java110/utils/SeqUtil.js'
 
-import {getWAppId} from '../init/initApi.js'
+import {getWAppId} from '../../lib/java110/utils/StorageUtil.js'
 
 const ACTION_NAVIGATE_TO = "navigateTo"; // 跳转
 const ACTION_REFRESH_TOKEN = "refreshToken";

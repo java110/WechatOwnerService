@@ -153,7 +153,7 @@
 
 <script>
 	// pages/payParkingFee/payParkingFee.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
@@ -177,7 +177,7 @@
 		formatDate,
 		date2String,
 		dateSubOneDay
-	} from '../../utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js'
 
 	export default {
 		components: {

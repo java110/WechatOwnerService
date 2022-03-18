@@ -8,36 +8,20 @@ import url from '../constant/url.js'
 
 import {
 	debug
-} from '../utils/LogUtil.js'
+} from '../lib/java110/utils/LogUtil.js'
 
 import {
 	hasLogin,
 	checkSession
-} from '../auth/Java110Auth.js'
+} from '../lib/java110/page/Page.js'
 
-import {
-	wechatRefreshToken
-} from '../auth/H5Login.js'
-
-import {
-	doLogin
-} from '../auth/MpWeixinLogin.js'
-
-import {
-	doLoginOwnerByKey
-}
-from '../auth/AppLogin.js'
 
 import mapping from '../constant/MappingConstant.js'
 
 import {
-	getStorageSync
-} from '../utils/StorageUtil.js';
+	getStorageSync,getWAppId
+} from '../lib/java110/utils/StorageUtil.js';
 
-// 页面初始化相关
-import {
-	getWAppId
-} from '../api/init/initApi.js'
 
 import {getHcCode} from '../api/webView/webViewApi.js'
 
@@ -78,33 +62,10 @@ export function navigateTo(_param, callback = () => {}) {
 	}
 	debug('vcRoute', 'navigateTo', _param);
 	//校验是否登录，如果没有登录跳转至温馨提示页面
-	checkSession().then(function() {
+	checkSession(_param.url,function() {
 		//有回话 跳转至相应页面
 		uni.navigateTo(_param);
-	}, function(error) { //回话过期
-		// #ifdef H5
-		//先微信登录
-		wechatRefreshToken();
-		// #endif
-
-		//小程序登录
-		// #ifdef MP-WEIXIN
-		doLogin(callback);
-		// #endif
-
-		// #ifdef APP-PLUS
-		//查询临时钥匙
-		let _key = getStorageSync(mapping.OWNER_KEY);
-		if (_key) {
-			doLoginOwnerByKey(_key);
-		} else {
-			uni.navigateTo({
-				url: '/pages/showlogin/showlogin?wAppId=' + getWAppId()
-			});
-			return;
-		}
-		// #endif
-	});
+	})
 };
 
 /*

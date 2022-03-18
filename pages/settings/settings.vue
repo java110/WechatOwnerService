@@ -85,8 +85,10 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
-	import * as TanslateImage from '../../utils/translate-image.js';
+	
+	import context from '../../lib/java110/Java110Context.js'
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	
 	const constant = context.constant;
 	const factory = context.factory;
 	export default {

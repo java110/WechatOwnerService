@@ -184,7 +184,7 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	const context = require('../../context/Java110Context.js');
+	import context from '../../lib/java110/Java110Context.js';
 	const factory = context.factory;;
 	const constant = context.constant;
 	export default {

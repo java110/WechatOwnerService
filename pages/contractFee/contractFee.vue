@@ -106,7 +106,7 @@
 
 <script>
 	// pages/payParkingFee/payParkingFee.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
@@ -122,7 +122,7 @@
 	import {getPayInfo} from '../../factory/WexinAppPayFactory.js'
 	// #endif
 	
-	import {addMonth,formatDate,date2String} from '../../utils/DateUtil.js'
+	import {addMonth,formatDate,date2String} from '../../lib/java110/utils/DateUtil.js'
 	
 	import {getCurContract} from '../../api/contract/contractApi.js'
 	export default {
