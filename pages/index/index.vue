@@ -91,7 +91,7 @@
 
 	import {getCurOwner} from '../../api/owner/ownerApi.js'
 
-	import {hasLogin} from '../../auth/Java110Auth.js'
+	import {hasLogin} from '../../lib/java110/page/Page.js'
 	
 	import {hasOwner} from '../../api/owner/ownerApi.js'
 	export default {

@@ -5,7 +5,7 @@
  * 
  */
 //登录工厂类
-const loginFactory = require("./LoginFactory.js");
+
 
 const userFactory = require("./UserFactory.js");
 
@@ -18,7 +18,6 @@ const httpFactory = require("./HttpFactory.js");
 const base64Factory = require("./Base64Factory.js");
 
 module.exports = {
-  login: loginFactory,
   user: userFactory,
   file: fileFactory,
   core: coreFactory,

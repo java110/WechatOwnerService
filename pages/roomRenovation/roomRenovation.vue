@@ -27,7 +27,7 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	// import instructions4use from '@/components/instructions4use/instructions4use.vue'
 	
 	import {

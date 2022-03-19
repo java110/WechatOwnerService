@@ -7,7 +7,7 @@
 
 import {
 	request
-} from '../java110Request.js'
+} from '../../lib/java110/java110Request.js'
 import
 url
 from '../../constant/url.js'

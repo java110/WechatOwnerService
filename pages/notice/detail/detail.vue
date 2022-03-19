@@ -18,10 +18,11 @@
 
 <script>
 	/** detail.js **/
-	const context = require("../../../context/Java110Context.js");
+	
+	import context from '../../../lib/java110/Java110Context.js'
 	const constant = context.constant; //获取app实例
 	import conf from '../../../conf/config.js'
-	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
+	import {replaceImgSrc} from '../../../lib/java110/utils/ImageUtil.js'
 	//获取app实例
 	const app = getApp().globalData;
 	

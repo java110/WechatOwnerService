@@ -60,9 +60,10 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
-	import * as TanslateImage from '../../utils/translate-image.js';
-	import {checkPhoneNumber} from '../../utils/StringUtil.js'
-	const context = require("../../context/Java110Context.js");
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	
+	import {checkPhoneNumber} from '../../lib/java110/utils/StringUtil.js'
+	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -100,7 +101,6 @@
 			let that = this;
 			context.onLoad(options);
 			context.getRooms().then(res => {
-				console.log(res);
 				let arr = res.data.rooms;
 				let roomCloums = [];
 				let roomIdArr = [];
@@ -108,7 +108,6 @@
 					roomCloums.push(item.floorNum + "号楼" + item.unitNum + "单元" + item.roomNum + "室");
 					roomIdArr.push(item.roomId);
 				});
-				console.log(that);
 				that.roomCloums = roomCloums;
 				that.roomIdArr = roomIdArr;
 				that.userId = res.data.owner.appUserId;

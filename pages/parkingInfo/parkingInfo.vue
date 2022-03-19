@@ -11,7 +11,7 @@
 					</view>
 				</scroll-view>
 			</view>
-			<view v-if="noData == false" style="margin-top: 100upx;">
+			<view v-if="noData == false" style="margin-top: 150upx;">
 				<view v-for="(item,index) in parkings" :key="index" 
 				class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
 					<view class="flex padding-bottom-xs solid-bottom justify-between">
@@ -55,13 +55,13 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
 
 	import {
 		formatDate
-	} from '../../utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 
 	export default {
@@ -120,6 +120,7 @@
 		},
 		methods: {
 			listParkingSpace: function() {
+				let _that = this;
 				context.request({
 					url: constant.url.queryOwnerCars,
 					header: context.getHeaders(),
@@ -129,7 +130,7 @@
 						"row": this.row,
 						"communityId": this.communityId,
 						"state": this.code,
-						"ownerId":this.ownerId
+						"applyPersonId":this.ownerId
 					},
 					success: (res) => {
 						let data = res.data.data;
@@ -137,8 +138,60 @@
 							this.noData = true;
 						}
 						this.parkings = data;
+						if(this.parkings.length > 0){
+							_that._loadParkingSpaceFee();
+						}
+
 					},
 					fail(res) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
+					}
+				});
+			},
+			_loadParkingSpaceFee: function() {
+				let _that = this;
+				let _objData = {
+					page: 1,
+					row: 30,
+					payerObjId: _that.parkings[0].carId,
+					communityId: _that.parkings[0].communityId
+				}
+			
+				_that.moreParkingSpaces = [];
+				context.request({
+					url: constant.url.queryFeeByOwner,
+					header: context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						if (res.statusCode == 200) {
+							//成功情况下跳转
+							let _parkingSpaceFees = res.data.fees;
+							if (_parkingSpaceFees.length < 1) {
+								_that.noData = true;
+							}
+							_parkingSpaceFees.forEach(function(_fee) {
+								let _tmpEndTime = _fee.endTime.replace(/\-/g, "/")
+								let _endTime = new Date(_tmpEndTime);
+			
+								_fee.endTime = formatDate(_endTime);
+								_fee.num = _that.parkings[0].num;
+								let _now = new Date();
+								if (_endTime > _now) {
+									_fee.feeStateName = '正常'
+								} else {
+									_fee.feeStateName = '欠费'
+								}
+								_that.moreParkingSpaces.push(_fee);
+							});
+							console.log(_that.moreParkingSpaces);
+						}
+					},
+					fail: function(e) {
 						wx.showToast({
 							title: "服务器异常了",
 							icon: 'none',
@@ -153,8 +206,10 @@
 				this.listParkingSpace();
 			},
 			payFee: function(_item) {
+				let _moreParkingSpaces = this.moreParkingSpaces[0];
+				_moreParkingSpaces["carNum"]=this.parkings[0].carNum;
 				this.vc.navigateTo({
-					url: '/pages/payParkingApplyFee/payParkingApplyFee?fee=' + JSON.stringify(_item),
+					url: '/pages/payParkingApplyFee/payParkingApplyFee?fee=' + JSON.stringify(_moreParkingSpaces),
 				})
 			},
 		}

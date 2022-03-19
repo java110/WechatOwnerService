@@ -55,7 +55,7 @@
 	} from '../../api/community/communityApi.js';
 	import {
 		sliceArray
-	} from '../../utils/ArrayUtil.js'
+	} from '../../lib/java110/utils/ArrayUtil.js'
 
 	export default {
 		data() {

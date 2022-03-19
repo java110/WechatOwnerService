@@ -70,13 +70,13 @@
 	} from '../../api/car/carApi.js'
 	import {
 		isNotNull
-	} from '../../utils/StringUtil.js'
+	} from '../../lib/java110/utils/StringUtil.js'
 	import {
 		refreshUserOpenId
 	} from '../../api/user/userApi.js'
 	import {
 		isWxOrAli
-	} from '../../utils/EnvUtil.js'
+	} from '../../lib/java110/utils/EnvUtil.js'
 	export default {
 		data() {
 			return {

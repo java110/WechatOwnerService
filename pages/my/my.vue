@@ -69,7 +69,7 @@
 
 <script>
 	/** index.js **/
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const factory = context.factory; //获取app实例
 	const constant = context.constant;
 	//获取app实例
@@ -81,7 +81,7 @@
 
 	import {
 		encodeUrl
-	} from '../../utils/UrlUtil.js'
+	} from '../../lib/java110/utils/UrlUtil.js'
 
 	import {
 		getCurCommunity
@@ -89,7 +89,7 @@
 
 	import {
 		setStorageSync
-	} from '../../utils/StorageUtil.js'
+	} from '../../lib/java110/utils/StorageUtil.js'
 
 	import mapping from '../../constant/MappingConstant.js'
 	import {hasOwner} from '../../api/owner/ownerApi.js'
@@ -113,14 +113,6 @@
 			context.onLoad(options, () => {
 				this.refreshPageLoginInfo();
 			});
-			let _that = this;
-			let login = context.checkLoginStatus();
-			if (login) {
-				factory.login.checkLoginStatus(function() {
-					_that.userInfo = context.getUserInfo();
-					_that.loadOwenrInfo();
-				});
-			}
 		},
 		onShow: function() {
 			this.refreshPageLoginInfo();
@@ -159,7 +151,6 @@
 			loadOwnerHeaderImg: function() {
 				let _that = this;
 				context.getOwner(function(_owner) {
-			
 					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId +
 						"&communityId=" + _owner.communityId +
 						"&fileTypeCd=10000";

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	export default {

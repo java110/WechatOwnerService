@@ -29,8 +29,8 @@
 </template>
 
 <script>
-	const context = require('../../context/Java110Context.js');
-	import {formatDate}  from '../../utils/DateUtil.js'
+	import context from '../../lib/java110/Java110Context.js';
+	import {formatDate}  from '../../lib/java110/utils/DateUtil.js'
 	
 	import {getMachineTranslates} from '../../api/machine/machineApi.js'
 
@@ -64,7 +64,6 @@
 				_that._loadMachineTranslates();
 			});
 
-			
 		},
 		methods: {
 			_loadMachineTranslates: function() {

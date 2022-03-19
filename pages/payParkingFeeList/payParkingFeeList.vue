@@ -66,11 +66,11 @@
 
 <script>
 	// pages/payParkingFeeList/payParkingFeeList.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	//const util = context.util;
 	
-	import {formatDate} from '../../utils/DateUtil.js'
+	import {formatDate} from '../../lib/java110/utils/DateUtil.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 
 	export default {
@@ -80,7 +80,8 @@
 				curParkingSpace: {},
 				moreParkingSpaces: [],
 				needFefresh: true,
-				noData: false
+				noData: false,
+				appId: ''
 			};
 		},
 		components: {
@@ -92,6 +93,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			this.appId = options.wAppId;
 		},
 		/**
 		 * 生命周期函数--监听页面显示
@@ -108,6 +110,7 @@
 		},
 		methods: {
 			payFee: function(_item) {
+				_item["carNum"]=this.curParkingSpace.carNum;
 				this.vc.navigateTo({
 					url: '/pages/payParkingFee/payParkingFee?fee=' + JSON.stringify(_item),
 				})

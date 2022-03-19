@@ -21,7 +21,7 @@
 
 <script>
 	/** index.js **/
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant; //获取app实例
 	//获取app实例
 	const app = getApp().globalData;

@@ -41,9 +41,9 @@
 </template>
 
 <script>
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const factory = context.factory;
-	import {compareDate} from '../../utils/DateUtil.js'
+	import {compareDate} from '../../lib/java110/utils/DateUtil.js'
 	import {updateRoomRenovationState} from '../../api/roomRenovation/roomRenovationApi.js'
 	export default {
 		data() {

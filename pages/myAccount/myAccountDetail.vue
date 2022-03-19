@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	const context = require('../../context/Java110Context.js');
+	import context from '../../lib/java110/Java110Context.js';
 	import {queryOwnerAccountDetail} from '../../api/user/userApi.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';

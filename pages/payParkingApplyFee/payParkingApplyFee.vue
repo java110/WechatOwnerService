@@ -110,14 +110,17 @@
 
 <script>
 	// pages/payParkingFee/payParkingFee.js
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
+	import {
+		getCurCommunity
+	} from '../../api/community/communityApi.js'
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 	import {
 		addMonth,
 		formatDate,
 		date2String
-	} from '../../utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js'
 
 
 	// #ifdef H5
@@ -160,6 +163,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			let _that = this;
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
@@ -169,15 +173,19 @@
 			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
+			console.log(_fee);
 			let _receivableAmount = _fee.paymentCycle * _fee.feePrice;
-
-			let _communityInfo = context.getCurrentCommunity();
+			
+			getCurCommunity()
+			.then(function(_communityInfo){
+				_that.communityId = _communityInfo.communityId;
+				_that.communityName = _communityInfo.communityName;
+			})
+				
 			let _lastDate = new Date(_fee.endTime);
 
 
 			this.receivableAmount = _receivableAmount;
-			this.communityId = _communityInfo.communityId;
-			this.communityName = _communityInfo.communityName;
 			this.num = _fee.num;
 			this.feeTypeCdName = _fee.feeTypeCdName;
 			this.carNum = _fee.carNum;

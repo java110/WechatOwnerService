@@ -84,9 +84,9 @@
 
 <script>
 	/** index.js **/
-	const context = require("../../context/Java110Context.js");
+	import context from '../../lib/java110/Java110Context.js';
 	import {getCurCommunity} from '../../api/community/communityApi.js'
-	import {setStorageSync} from '../../utils/StorageUtil.js'
+	import {setStorageSync} from '../../lib/java110/utils/StorageUtil.js'
 	import mapping from '../../constant/MappingConstant.js'
 	export default {
 		data() {

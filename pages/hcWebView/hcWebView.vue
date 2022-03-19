@@ -8,18 +8,18 @@
 	import conf from '../../conf/config.js'
 	import {
 		decodeUrl
-	} from '../../utils/UrlUtil.js'
+	} from '../../lib/java110/utils/UrlUtil.js'
 	import {
 		reciveMessage
 	} from '../../api/webView/webViewApi.js'
 
 	import {
 		isNull
-	} from '../../utils/StringUtil.js'
+	} from '../../lib/java110/utils/StringUtil.js'
 
 	import {
 		getStorageSync
-	} from '../../utils/StorageUtil.js'
+	} from '../../lib/java110/utils/StorageUtil.js'
 	import {getMallCommunityId} from '../../api/community/communityApi.js'
 	import mapping from '../../constant/MappingConstant.js'
 	export default {
