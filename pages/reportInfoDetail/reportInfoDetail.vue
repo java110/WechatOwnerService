@@ -112,8 +112,7 @@
 							item.radio = ''
 						}
 					})
-					
-					that.titles = _data.data;
+					that.titles = _data.data.sort(function(a,b){return a.seq - b.seq});
 				});
 		},
 
