@@ -43,6 +43,10 @@ export function navigateTo(_param, callback = () => {}) {
 		_newUrl = _url + ('?wAppId=' + getWAppId());
 		_tempUrl = _url;
 	}
+	
+	if(_tempUrl.startsWith("/")){
+		_tempUrl = _tempUrl.substring(1)
+	}
 
 	if (_url.indexOf('wAppId') < 0) {
 		_param.url = _newUrl;

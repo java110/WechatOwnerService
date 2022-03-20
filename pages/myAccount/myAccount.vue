@@ -34,7 +34,7 @@
 	export default {
 		data() {
 			return {
-				accounts: ""
+				accounts: []
 			};
 		},
 
@@ -108,6 +108,10 @@
 							link: _ownerInfo.link,
 							communityId: _ownerInfo.communityId
 						}).then((data) => {
+							if(!data){
+								_that.accounts=[];
+								return ;
+							}
 							_that.accounts = data;
 						})
 					}

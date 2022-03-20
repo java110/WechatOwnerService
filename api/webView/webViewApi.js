@@ -15,9 +15,7 @@ import {
 } from '../../lib/java110/utils/DateUtil.js'
 // #ifdef H5
 import WexinPayFactory from '../../factory/WexinPayFactory.js'
-import {
-	wechatRefreshToken
-} from '../../auth/H5Login.js'
+
 // #endif
 
 import {

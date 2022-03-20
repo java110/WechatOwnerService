@@ -80,6 +80,10 @@
 					feeId: _feeId,
 					communityId: _communityId
 				}).then((data) => {
+					if(!data){
+						_that.accounts = [];
+						return;
+					}
 					_that.accounts = data;
 				})
 			},

@@ -145,6 +145,7 @@
 				let _couponUsers = [];
 				getCouponUsers(_objData, _couponUsers)
 					.then((_couponList) => {
+						
 						_couponList.data.forEach(items => {
 							items.createTime = items.createTime.replaceAll('-', '/');
 							items.endTime= items.endTime.replaceAll('-', '/');
