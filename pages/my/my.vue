@@ -161,7 +161,7 @@
 			},
 			showLongModel: function() {
 				this.vc.navigateTo({
-					url: '../login/login'
+					url: '/pages/login/login'
 				}, () => {
 					this.refreshPageLoginInfo();
 				});
