@@ -1,5 +1,5 @@
 <template>
-	<view class="vc-shop margin-top " v-if="shops.length>0">
+	<view class="vc-shop margin-top " v-if="shops && shops.length>0">
 		<view class="text-left margin-left-xs margin-bottom-sm">
 			<text class="recommend-title">附近商家</text>
 		</view>

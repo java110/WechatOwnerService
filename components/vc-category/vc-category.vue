@@ -1,5 +1,6 @@
 <template>
-	<scroll-view @scrolltolower="lower" class="scroll-restaurants-list " scroll-y="true" style="height:300upx">
+	<!--  @scrolltolower="lower" -->
+	<scroll-view class="scroll-restaurants-list " scroll-y="true" style="height:300upx">
 		<swiper class=" padding-top-xs margin-top-sm bg-white c-radius" style="height: 280upx;" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
 		 indicator-active-color="#FECA49">
 			<block v-for="(item, index) in categoryList" :key="index">

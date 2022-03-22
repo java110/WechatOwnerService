@@ -191,6 +191,8 @@
 				that.roomIdArr = roomIdArr;
 				that.userId = res.data.owner.userId;
 				that.userName = res.data.owner.appUserName;
+				that.bindRepairName = that.userName;
+				that.bindTel = res.data.owner.link;
 				that.communityId = res.data.owner.communityId;
 				that.communityName = res.data.owner.communityName;
 			});

@@ -11,7 +11,8 @@
 			</view>
 		</view>
 		<view class="">
-			<scroll-view scroll-x class="nav nav-scroll  padding-bottom-xs" scroll-with-animation :scroll-left="scrollLeft">
+			<!--:scroll-left="scrollLeft"-->
+			<scroll-view scroll-x class="nav nav-scroll  padding-bottom-xs" scroll-with-animation >
 				<view class="cu-item text-white" :class="item.shopTypeId==shopTypeId?'nav-cur':''"
 					v-for="(item,index) in navList" :key="index" @tap="selectType(index)" :data-id="index">
 					{{item.typeName}}

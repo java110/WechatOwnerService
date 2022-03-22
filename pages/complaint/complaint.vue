@@ -112,6 +112,8 @@
 				that.roomIdArr = roomIdArr;
 				that.userId = res.data.owner.appUserId;
 				that.communityId = res.data.owner.communityId;
+				that.complaintName = res.data.owner.appUserName;
+				that.tel = res.data.owner.link;
 			});
 		},
 
