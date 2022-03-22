@@ -18,7 +18,7 @@
 		</view>
 		<view v-if="rooms.length == 1" class="block__title">{{rooms[0].floorNum}}栋{{rooms[0].roomNum}}室</view>
 		<view v-if="rooms.length > 1" class="margin-header-top"></view>
-		<view v-if="noData == false">
+		<view v-if="noData == false" style="padding-bottom: 200rpx;">
 			<view class="cu-list menu" v-if="moreRooms.length > 0" v-for="(fee, idx) in moreRooms" :key="idx" :data-item="fee"
 			 @click="payFee(fee)">
 				<view class="cu-item arrow">
