@@ -110,7 +110,7 @@
 		components: {},
 		props: {},
 		onLoad: function(options) {
-			context.onLoad(options, () => {
+			this.vc.onLoad(options, () => {
 				this.refreshPageLoginInfo();
 			});
 		},
