@@ -110,7 +110,7 @@
 		components: {},
 		props: {},
 		onLoad: function(options) {
-			context.onLoad(options, () => {
+			this.vc.onLoad(options, () => {
 				this.refreshPageLoginInfo();
 			});
 		},
@@ -161,7 +161,7 @@
 			},
 			showLongModel: function() {
 				this.vc.navigateTo({
-					url: '../login/login'
+					url: '/pages/login/login'
 				}, () => {
 					this.refreshPageLoginInfo();
 				});

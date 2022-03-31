@@ -12,6 +12,12 @@
 // 服务器域名 公众号时，配置为 / 就可以
 const baseUrl = '/';
 // #endif
+
+// #ifndef H5
+//服务器域名 小程序 或者 app 时 后端地址
+const baseUrl = 'http://demo.homecommunity.cn/';
+// #endif
+
 const commonBaseUrl = 'http://demo.homecommunity.cn/';
 
 //商城的url
@@ -22,10 +28,7 @@ const mallUrlIndexPage = mallUrl + '#/pages/index/index?mallFrom=HC';
 //商城token 刷新页面
 const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
 
-// #ifndef H5
-//服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://demo.homecommunity.cn/';
-// #endif
+
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
 

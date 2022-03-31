@@ -1,7 +1,7 @@
 
 import conf from '../conf/config.js'
 
-import md5 from '../utils/md5Util.js'
+import md5 from '../lib/java110/utils/md5Util.js'
 /*
 * 生成订单信息
 * @params orderInfo: any 后端返回的数据，格式和上面一样

@@ -3,8 +3,8 @@
 		<view class="margin-bottom-xs">
 			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="欢迎访问HC智慧家园"></uni-notice-bar>
 		</view>
-
-		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
+		<!--@scrolltolower="lower"-->
+		<scroll-view  class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
 			 indicator-active-color="#FECA49">
 				<block v-for="(item, index) in categoryList" :key="index">
@@ -36,8 +36,8 @@
 					</swiper-item>
 				</block>
 			</swiper>
-
-			<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
+			<!--:scroll-left="scrollLeft"-->
+			<scroll-view scroll-x class="bg-white nav" scroll-with-animation >
 				<view class="cu-item" :class="item.typeCd==curTypeCd?'text-green cur':''" v-for="(item,index) in activitiTitle"
 				 :key="index" @tap="selectActiviti(item)" :data-id="index">
 					{{item.typeName}}
@@ -106,7 +106,7 @@
 				row: 7,
 				activitiTitle: [],
 				curTypeCd: '',
-				categoryList: {},
+				categoryList: [],
 				selected: 0,
 				mask1Hidden: true,
 				mask2Hidden: true,

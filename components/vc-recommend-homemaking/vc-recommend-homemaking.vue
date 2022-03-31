@@ -1,5 +1,5 @@
 <template>
-  <view v-if="products.length > 0">
+  <view v-if="products && products.length > 0">
 
     <view v-for="(item,indexs) in products" :key="indexs" class="margin-top recommend-block">
       <view class="text-left ">
