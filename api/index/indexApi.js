@@ -48,7 +48,13 @@ export function getActivitiTitle(dataObj) {
 export function getCategoryList() {
 	return {
 		pageone: [{
-			name: "物业费",
+			name: "综合缴费",
+			src: "/static/images/index_payFee.png",
+			href: "/pages/oweFee/oweFee"
+			//href: "/pages/oweFeeGarden/oweFeeGarden"
+			
+		}, {
+			name: "房屋费",
 			src: "/static/images/index_property.png",
 			href: "/pages/roomFeeListNew/roomFeeListNew"
 		}, {
@@ -71,10 +77,10 @@ export function getCategoryList() {
 			name: "开门",
 			src: "/static/images/index_openDoor.png",
 			href: "/pages/openDoor/openDoor"
-		}, {
-			name: "二维码开门",
-			src: "/static/images/index_openDoor.png",
-			href: "/pages/openDoorByQrCode/openDoorByQrCode"
+		// }, {
+		// 	name: "二维码开门",
+		// 	src: "/static/images/index_openDoor.png",
+		// 	href: "/pages/openDoorByQrCode/openDoorByQrCode"
 		}, {
 			name: "联系客服",
 			src: "/static/images/index_persion.png",

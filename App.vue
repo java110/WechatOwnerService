@@ -17,6 +17,13 @@
 			 // #ifdef H5
 			 window.addEventListener("message", reciveMessage);
 			 // #endif
+			 
+			 uni.onTabBarMidButtonTap(()=>{
+			     uni.navigateTo({
+			      url:"/pages/openDoorByQrCode/openDoorByQrCode",
+			      animationType:'slide-in-bottom'
+			     })
+			    })   
 		},
 		// app全局数据
 		globalData: {

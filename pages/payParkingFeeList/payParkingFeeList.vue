@@ -2,14 +2,6 @@
 	<view>
 		<view>
 			<view class="header_fixed">
-				<!-- <scroll-view v-if="parkingSpaces.length <5 && parkingSpaces.length >1" class="bg-white nav">
-					<view class="flex text-center">
-						<view class="cu-item flex-sub" :class="item.psId==curParkingSpace.psId?'text-green cur':''" v-for="(item,index) in parkingSpaces"
-						 :key="index" @tap="switchParkingSpace(item)" :data-id="index">
-							{{item.carNum}}({{item.num}}车位)
-						</view>
-					</view>
-				</scroll-view> -->
 				<scroll-view v-if="parkingSpaces.length >1" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
 					<view class="cu-item flex-sub" :class="item.psId==curParkingSpace.psId?'text-green cur':''" v-for="(item,index) in parkingSpaces"
 					 :key="index" @tap="switchParkingSpace(item)" :data-id="index">
@@ -53,12 +45,6 @@
 			</view>
 			<view v-else>
 				<no-data-page></no-data-page>
-			</view>
-			
-			<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
-				<view class="btn-group line-height">
-					<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toCarOweFee()">欠费缴费</button>
-				</view>
 			</view>
 		</view>
 	</view>
@@ -210,18 +196,6 @@
 				this.curParkingSpace = _parkingSpace;
 				this.noData = false;
 				this._loadParkingSpaceFee();
-			},
-			toCarOweFee:function(){
-				if(this.vc.isEmpty(this.curParkingSpace.carId)){
-					uni.showToast({
-						icon:'none',
-						title:'没有车辆'
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url:'/pages/carOweFee/carOweFee?carId='+this.curParkingSpace.carId
-				});
 			}
 		}
 	};
