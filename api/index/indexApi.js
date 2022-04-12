@@ -119,6 +119,11 @@ export function getCategoryList() {
 				name: "投票问卷",
 				src: "/static/images/index_Voting.png",
 				href: "/pages/questionAnswer/questionAnswer"
+			},
+			{
+				name: "访客登记",
+				src: "/static/images/index_complaint.png",
+				href: "/pages/visit/addVisit"
 			}
 
 		]

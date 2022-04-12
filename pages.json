@@ -652,6 +652,24 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
+		},
+		{
+		    "path" : "pages/visit/addVisit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "访客登记",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/visit/addVisitSuccess",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "登记成功",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
     ],
 	"tabBar": {
