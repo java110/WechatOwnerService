@@ -139,6 +139,9 @@
 				_room.feePrice = parseFloat(_room.feePrice) + parseFloat(_fee.feePrice)
 				_room.feePrice = _room.feePrice.toFixed(2)
 				
+			},
+			onPayFee:function(){
+				payOweFee(this);
 			}
 		}
 	};

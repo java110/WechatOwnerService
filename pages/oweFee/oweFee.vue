@@ -126,6 +126,9 @@
 						_that.receivableAmount = _that.receivableAmount.toFixed(2);
 					})
 			},
+			onPayFee:function(){
+				payOweFee(this);
+			}
 		}
 	};
 </script>
