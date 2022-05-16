@@ -331,8 +331,9 @@
 			},
 			// （单价×面积+附加费）  × 周期
 			getReceivableAmount: function() {
-				return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth)
-					.toFixed(2);
+				// return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth)
+				// 	.toFixed(2);
+				return (this.amount * this.feeMonth).toFixed(2);
 			},
 
 			// 折扣金额
