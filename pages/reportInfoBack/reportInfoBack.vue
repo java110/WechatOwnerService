@@ -67,6 +67,7 @@
 	} from '../../api/reportInfo/reportInfoApi.js'
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
+	import {getCurCommunity} from '../../api/community/communityApi.js'
 
 	export default {
 		data() {
@@ -101,14 +102,12 @@
 		onLoad: function(options) {
 			let _that = this;
 			 if(!options.communityId){
-			 	wx.showToast({
-			 		title: "小区信息错误，请从新扫码！",
-			 		icon: 'none',
-			 		duration: 2000
-			 	});
-				return
+			 	getCurCommunity().then((_community)=>{
+					_that.communityId = _community.communityId;
+				});
+			 }else{
+				 this.communityId = options.communityId;
 			 }
-			 this.communityId = options.communityId;
 			_that.source = _that.arraySourceType[_that.indexSource].code;
 		},
 		/**
