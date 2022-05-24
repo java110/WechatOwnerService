@@ -163,6 +163,7 @@ const queryApplyRoomDiscountType = baseUrl + 'app/applyRoomDiscount/queryApplyRo
 const saveApplyRoomDiscount = baseUrl + 'app/applyRoomDiscount/saveApplyRoomDiscount';
 const queryFeeDiscount = baseUrl + 'app/feeDiscount/queryFeeDiscount';
 const saveRoomRenovation = baseUrl + 'app/roomRenovation/saveRoomRenovation';
+const saveAddVisit = baseUrl + "callComponent/addVisit/save";
 
 
 
@@ -262,4 +263,5 @@ module.exports = {
 	saveApplyRoomDiscount: saveApplyRoomDiscount,
 	queryFeeDiscount: queryFeeDiscount,
 	saveRoomRenovation: saveRoomRenovation,
+	saveAddVisit: saveAddVisit,
 };

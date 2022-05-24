@@ -5,18 +5,18 @@
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="item.contractId==curContract.contractId?'text-green cur':''" v-for="(item,index) in contracts"
 					 :key="index" @tap="switchContract(item)" :data-id="index">
-						{{item.contractCode}}
+						{{item.contractName}}
 					</view>
 				</view>
 			</scroll-view>
 			<scroll-view v-if="contracts.length >4" scroll-x class="bg-white nav" scroll-with-animation scroll-left="true">
 				<view class="cu-item flex-sub" :class="item.contractId==curContract.contractId?'text-green cur':''" v-for="(item,index) in contracts"
 				 :key="index" @tap="switchContract(item)" :data-id="index">
-					{{item.contractCode}}
+					{{item.contractName}}
 				</view>
 			</scroll-view>
 		</view>
-		<view v-if="contracts.length == 1" class="block__title">{{contracts[0].contractCode}}</view>
+		<view v-if="contracts.length == 1" class="block__title">{{contracts[0].contractName}}</view>
 		<view v-if="contracts.length > 1" class="margin-header-top"></view>
 		<view v-if="noData == false">
 			<view class="cu-list menu" v-if="moreContracts.length > 0" v-for="(fee, idx) in moreContracts" :key="idx" :data-item="fee"
@@ -33,11 +33,11 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
+		<!-- <view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
 			<view class="btn-group line-height">
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toContractOweFee()">欠费缴费</button>
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 

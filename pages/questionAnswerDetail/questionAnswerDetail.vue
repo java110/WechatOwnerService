@@ -69,7 +69,8 @@
 					objType: this.objType,
 					qaId: this.qaId,
 					page: 1,
-					row: 100
+					row: 100,
+                    objId:''
 				})
 				.then(_data => {
 					_data.data.forEach(item => {

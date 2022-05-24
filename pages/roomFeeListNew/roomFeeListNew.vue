@@ -33,12 +33,6 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%; bottom: 0;">
-			<view class="btn-group line-height">
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="toRoomOweFee()">欠费缴费</button>
-				
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -140,18 +134,6 @@
 				this.curRoom = _room;
 				this.noData = false;
 				this._loadRoomFee();
-			},
-			toRoomOweFee:function(){
-				if(this.vc.isEmpty(this.curRoom.roomId)){
-					uni.showToast({
-						icon:'none',
-						title:'没有房屋'
-					});
-					return;
-				}
-				this.vc.navigateTo({
-					url:'/pages/roomOweFee/roomOweFee?roomId='+this.curRoom.roomId
-				});
 			}
 		}
 	};

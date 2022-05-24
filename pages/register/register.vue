@@ -18,9 +18,9 @@
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 		</view>
-		<view >
+		<!-- <view >
 			<view >{{codeMsg}}</view>
-		</view> 
+		</view> -->
 		<view class="padding flex flex-direction margin-top">
 			<button class="cu-btn bg-green   lg" @click="_doRegister()">绑定</button>
 		</view>

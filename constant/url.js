@@ -144,6 +144,7 @@ export default {
 	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
 	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
+	saveAddVisit: baseUrl + "callComponent/addVisit/save",
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
