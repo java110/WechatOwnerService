@@ -14,12 +14,6 @@
 			}
 		},
 		{
-			"path": "pages/bindOwner/bindOwner",
-			"style": {
-				"navigationBarTitleText": "绑定业主"
-			}
-		},
-		{
 			"path": "pages/viewBindOwner/viewBindOwner",
 			"style": {
 				"navigationBarTitleText": "业主信息"
