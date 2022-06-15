@@ -64,6 +64,7 @@
 
 	// #ifdef H5
 	import {
+		getPageWAppId,
 		wechatRefreshToken
 	} from '@/lib/java110/page/PageH5.js'
 	// #endif
@@ -76,7 +77,8 @@
 				setting: {},
 				titles: [],
 				qaId: '',
-				objType: ''
+				objType: '',
+				openId:''
 			};
 		},
 		/**
@@ -86,9 +88,11 @@
 			let that = this;
 			// #ifdef H5
 			if (!options.openId) {
+				getPageWAppId(options);
 				wechatRefreshToken(window.location.href, 2, window.location.href);
 				return;
 			}
+			this.openId = options.openId;
 			this._loadUserInfo(options.openId);
 			// #endif
 			this.settingId = options.settingId;
@@ -178,6 +182,7 @@
 					"bindTime": this.bindTime,
 					"remark": this.remark,
 					"backTime": this.bindDate + " " + this.bindTime + ":00",
+					"openId":this.openId,
 				};
 				let msg = "";
 				if (obj.communityId == "") {
@@ -248,6 +253,7 @@
 					"personName": this.name,
 					"idCard": this.idCard,
 					"tel": this.tel,
+					"openId":this.openId,
 					questionAnswerTitles: _questionAnswerTitles,
 				}
 				saveReportInfoAnswerValue(obj)
@@ -257,6 +263,9 @@
 							title: '保存成功'
 						});
 						this.communityId = "";
+						uni.navigateBack({
+							delta:1
+						})
 					}, err => {
 						uni.showToast({
 							icon: 'none',
