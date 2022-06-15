@@ -28,21 +28,22 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="block__title">人员信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓名</view>
 			<input :value="name" @input="bindInput" data-name="name" required label="姓名" clearable placeholder="请输入名称"
-			 name="name"></input>
+				name="name"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证</view>
-			<input :value="idCard" @input="bindInput" data-name="idCard" required label="身份证" clearable placeholder="请输入身份证"
-			 name="idCard"></input>
+			<input :value="idCard" @input="bindInput" data-name="idCard" required label="身份证" clearable
+				placeholder="请输入身份证" name="idCard"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input :value="tel" @input="bindInput" data-name="tel" required label="手机号" clearable placeholder="请输入手机号" name="tel"></input>
+			<input :value="tel" @input="bindInput" data-name="tel" required label="手机号" clearable placeholder="请输入手机号"
+				name="tel"></input>
 		</view>
 		<view class="button_up_blank"></view>
 		<view class="flex flex-direction">
@@ -57,16 +58,22 @@
 	import {
 		saveReportInfoAnswerValue,
 		querySettingTitle,
-		querySetting
+		querySetting,
+		queryReportInfoAnswerByOpenId
 	} from '../../api/reportInfo/reportInfoApi.js'
 
+	// #ifdef H5
+	import {
+		wechatRefreshToken
+	} from '@/lib/java110/page/PageH5.js'
+	// #endif
 	export default {
 		data() {
 			return {
 				name: '',
 				idCard: '',
 				tel: '',
-				setting:{},
+				setting: {},
 				titles: [],
 				qaId: '',
 				objType: ''
@@ -77,6 +84,13 @@
 		 */
 		onLoad: function(options) {
 			let that = this;
+			// #ifdef H5
+			if (!options.openId) {
+				wechatRefreshToken(window.location.href, 2, window.location.href);
+				return;
+			}
+			this._loadUserInfo(options.openId);
+			// #endif
 			this.settingId = options.settingId;
 			this.communityId = options.communityId;
 			querySetting({
@@ -112,8 +126,10 @@
 							item.radio = ''
 						}
 					})
-					
-					that.titles = _data.data.sort(function(a,b){return a.seq - b.seq});
+
+					that.titles = _data.data.sort(function(a, b) {
+						return a.seq - b.seq
+					});
 				});
 		},
 
@@ -138,7 +154,7 @@
 					value.checked = false;
 				})
 				item.radio.forEach(value => {
-					e.detail.value.forEach(_dValue =>{
+					e.detail.value.forEach(_dValue => {
 						if (value.valueId == _dValue) {
 							if (value.selected == '0') {
 								value.selected = '1';
@@ -160,13 +176,13 @@
 					"source": this.source,
 					"bindDate": this.bindDate,
 					"bindTime": this.bindTime,
-					"remark":this.remark,
-					"backTime":this.bindDate + " " + this.bindTime + ":00",
+					"remark": this.remark,
+					"backTime": this.bindDate + " " + this.bindTime + ":00",
 				};
 				let msg = "";
-				if(obj.communityId == "") {
+				if (obj.communityId == "") {
 					msg = "请从新扫码";
-				}else if(obj.name == "") {
+				} else if (obj.name == "") {
 					msg = "请填写姓名";
 				} else if (obj.idCard == "" || obj.idCard.length != 18) {
 					msg = "请正确填写身份证号";
@@ -210,7 +226,7 @@
 				});
 				let reflag = false;
 				_questionAnswerTitles.forEach(item => {
-					if(item.valueContent.toString().length == 0){
+					if (item.valueContent.toString().length == 0) {
 						uni.showToast({
 							icon: 'none',
 							title: '保存成功'
@@ -219,7 +235,7 @@
 						return false;
 					}
 				});
-				if(reflag){
+				if (reflag) {
 					uni.showToast({
 						icon: 'none',
 						title: '有未答项，请作答！'
@@ -228,7 +244,7 @@
 				}
 				obj = {
 					"settingId": this.settingId,
-					"communityId":this.communityId,
+					"communityId": this.communityId,
 					"personName": this.name,
 					"idCard": this.idCard,
 					"tel": this.tel,
@@ -247,7 +263,22 @@
 							title: err
 						})
 					})
-			}}
+			},
+			_loadUserInfo: function(_openId) {
+				let _that = this;
+				queryReportInfoAnswerByOpenId({
+					openId: _openId
+				}).then(_data => {
+					let _params = _data.data;
+					if (!_params || _params.length < 1) {
+						return;
+					}
+					_that.name = _params[0].personName;
+					_that.idCard = _params[0].idCard;
+					_that.tel = _params[0].tel;
+				})
+			}
+		},
 	};
 </script>
 <style>
