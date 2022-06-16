@@ -36,7 +36,7 @@
 			if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
 				_url = conf.mallUrl + '#' + _url;
 			}
-			
+			_url = decodeUrl(_url)
 			if(_url.indexOf("?")>0){
 				_url = _url +"&hcCommunityId="+getMallCommunityId();
 			}else{
@@ -48,6 +48,7 @@
 			// #ifndef H5
 			_url = _url +"&mallFrom=HC_APP"
 			// #endif
+			
 			this.url = _url;
 		},
 		methods: {
