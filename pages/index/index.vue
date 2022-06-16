@@ -11,7 +11,7 @@
 					<swiper-item>
 						<block v-for="(item, index2) in item" :key="index2">
 							<view class="category-info" v-if="item.href != 'callProperty'">
-								<navigator @tap="toPage(item.href)">
+								<navigator @tap="toPage(item.href,item.needLogin)">
 									<image :src="item.src" class="category-image"></image>
 									<view class="category-text">{{item.name}}</view>
 								</navigator>
@@ -73,7 +73,7 @@
 					</view>
 				</view>
 				<view class="padding-xl">
-					您确认拨打,{{property.communityName}}物业客服电话<br />{{property.sCommunityTel}}
+					您确认拨打,{{communityName}}物业客服电话<br />{{tel}}
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleCall()">取消</view>
@@ -98,7 +98,8 @@
 		data() {
 			return {
 				communityId: '',
-				property: {},
+				communityName: '',
+				tel:'',
 				callPropertyModal: false,
 				ad: [],
 				notices: [],
@@ -177,6 +178,8 @@
 				this.vc.getCurCommunity()
 				.then(function(_communityInfo){
 					_that.communityId = _communityInfo.communityId;
+					_that.communityName = _communityInfo.communityName;
+					_that.tel = _communityInfo.tel;
 					//查询小区活动信息
 					_that._loadAdvertPhoto();
 				})
@@ -260,28 +263,29 @@
 			},
 			callPropertyTel: function() { //拨打电话
 				let _that = this;
-				if (!hasLogin()) {
-					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
-					});
-					return;
-				}
-				hasOwner();
-				uni.getStorage({
-					key: 'ownerInfo',
-					success: function (res) {
-						console.log(res.data);
-						_that.property = res.data;
-						_that.callPropertyModal = true;
-					}
-				});
+				// if (!hasLogin()) {
+				// 	this.vc.navigateTo({
+				// 		url: '../showlogin/showlogin'
+				// 	});
+				// 	return;
+				// }
+				// hasOwner();
+				// uni.getStorage({
+				// 	key: 'ownerInfo',
+				// 	success: function (res) {
+				// 		console.log(res.data);
+				// 		_that.property = res.data;
+				// 		_that.callPropertyModal = true;
+				// 	}
+				// });
+				_that.callPropertyModal = true;
 			},
 			_doCall: function() {
 			
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
-					phoneNumber: _that.property.sCommunityTel,
+					phoneNumber: _that.tel,
 					// 成功回调
 					success: (res) => {
 						console.log('调用成功!')
@@ -307,7 +311,13 @@
 				this.page = 1;
 				this._loadActivites();
 			},
-			toPage: function(pageUrl) {
+			toPage: function(pageUrl,_needLogin) {
+				if(_needLogin == 'N'){
+					this.vc.navigateTo({
+						url: pageUrl
+					});
+					return ;
+				}
 				hasOwner();
 				this.vc.navigateTo({
 					url: pageUrl

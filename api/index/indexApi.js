@@ -124,7 +124,14 @@ export function getCategoryList() {
 				name: "访客登记",
 				src: "/static/images/index_complaint.png",
 				href: "/pages/visit/addVisit"
-			}
+			},
+			{
+				name: "反省上报",
+				src: "/static/images/index_complaint.png",
+				href: "/pages/reportInfoBack/reportInfoBack",
+				needLogin:'N'
+			},
+			
 
 		]
 	};

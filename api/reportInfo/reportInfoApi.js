@@ -108,3 +108,25 @@ export function saveReportInfoBackCity(_data){
 		});
 	})
 }
+
+
+export function queryReportInfoAnswerByOpenId(_data) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.queryReportInfoAnswerByOpenId,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

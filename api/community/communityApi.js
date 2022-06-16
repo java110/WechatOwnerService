@@ -36,9 +36,10 @@ export function getCommunitys(dataObj) {
 				success: function(res) {
 					if (res.statusCode == 200) {
 						let _communtiys = res.data.communitys;
-
-						_that.communitys = _communtiys;
+						resolve(_communtiys);
+						return ;
 					}
+					
 				},
 				fail: function(e) {
 					wx.showToast({
@@ -103,23 +104,33 @@ export function getCurCommunity() {
 				.then(function(_ownerInfo) {
 					let _currentCommunityInfo = {
 						communityId: _ownerInfo.communityId,
-						communityName: _ownerInfo.communityName
+						communityName: _ownerInfo.communityName,
+						tel:_ownerInfo.sCommunityTel
 					};
 					resolve(_currentCommunityInfo);
-				}).then(function() {
+				},function() {
 					let _currentCommunityInfo = {
 						communityId: mapping.HC_TEST_COMMUNITY_ID,
-						communityName: mapping.HC_TEST_COMMUNITY_NAME
+						communityName: mapping.HC_TEST_COMMUNITY_NAME,
+						tel:''
 					};
 					resolve(_currentCommunityInfo);
 				})
 		} else {
 			//没有登录直接写演示小区信息
-			let _currentCommunityInfo = {
-				communityId: mapping.HC_TEST_COMMUNITY_ID,
-				communityName: mapping.HC_TEST_COMMUNITY_NAME
-			};
-			resolve(_currentCommunityInfo);
+			getCommunitys({
+				communityId:mapping.HC_TEST_COMMUNITY_ID,
+				page:1,
+				row:1
+			}).then(function(_communitys){
+				let _currentCommunityInfo = {
+					communityId: _communitys[0].communityId,
+					communityName: _communitys[0].name,
+					tel:_communitys[0].tel
+				};
+				resolve(_currentCommunityInfo);
+			})
+			
 		}
 	})
 }

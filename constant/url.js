@@ -145,6 +145,7 @@ export default {
 	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	saveAddVisit: baseUrl + "callComponent/addVisit/save",
+	queryReportInfoAnswerByOpenId : baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
 	
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
