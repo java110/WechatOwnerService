@@ -49,6 +49,24 @@
 		<view class="flex flex-direction">
 			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitQuestionAnswer()">提交</button>
 		</view>
+		
+		<view class="cu-modal" :class="finishFlag==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">登记完成</view>
+					<view class="action" @tap="_cancleFinishModal()">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					感谢您的反馈
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleFinishModal()">关闭</view>
+				</view>
+			</view>
+		</view>
+		
 	</view>
 </template>
 
@@ -78,7 +96,8 @@
 				titles: [],
 				qaId: '',
 				objType: '',
-				openId:''
+				openId:'',
+				finishFlag:false,
 			};
 		},
 		/**
@@ -256,6 +275,7 @@
 					"openId":this.openId,
 					questionAnswerTitles: _questionAnswerTitles,
 				}
+				let _that = this;
 				saveReportInfoAnswerValue(obj)
 					.then(_data => {
 						uni.showToast({
@@ -263,9 +283,7 @@
 							title: '保存成功'
 						});
 						this.communityId = "";
-						uni.navigateBack({
-							delta:1
-						})
+						_that.finishFlag = true;
 					}, err => {
 						uni.showToast({
 							icon: 'none',
@@ -285,6 +303,12 @@
 					_that.name = _params[0].personName;
 					_that.idCard = _params[0].idCard;
 					_that.tel = _params[0].tel;
+				})
+			},
+			_cancleFinishModal:function(){
+				this.finishFlag = false;
+				uni.navigateBack({
+					delta:1
 				})
 			}
 		},
