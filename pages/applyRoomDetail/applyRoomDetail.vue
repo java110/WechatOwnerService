@@ -226,8 +226,10 @@
 			 * @param {Object} e
 			 */
 			applyTypeChange: function(e){
-				this.applyType = this.applyTypes[e.detail.value].applyType;
-				this.applyTypeShow = this.applyTypes[e.detail.value].typeName;
+				if(this.applyTypes.length > 0){
+					this.applyType = this.applyTypes[e.detail.value].applyType;
+					this.applyTypeShow = this.applyTypes[e.detail.value].typeName;
+				}
 			},
 			
 			/**
@@ -235,8 +237,10 @@
 			 * 费用项改变
 			 */
 			feeTypeCdsChange: function(e){
-				this.feeId = this.feeTypeCds[e.detail.value].feeId;
-				this.feeTypeCd = this.feeTypeCds[e.detail.value].feeName;
+				if(this.feeTypeCds.length > 0){
+					this.feeId = this.feeTypeCds[e.detail.value].feeId;
+					this.feeTypeCd = this.feeTypeCds[e.detail.value].feeName;
+				}
 			},
 			
 			/**

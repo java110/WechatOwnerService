@@ -284,17 +284,16 @@
 			this.amountOwed = _fee.amountOwed;
 			this.amountCount = this.receivableAmount;
 
-			if (this.feeFlag == '2006012') {
-				return;
+			if (this.feeFlag != '2006012') {
+				this.paymentCycle = _fee.paymentCycle;
+				for (let _index = 1; _index < 7; _index++) {
+					this.feeMonthList.push(_index * this.paymentCycle + '个月')
+				}
+				this.feeMonthName = this.paymentCycle + '个月';
+				this.feeMonth = this.paymentCycle;
+				let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
+				this.endTime = formatDate(_endTime);
 			}
-			this.paymentCycle = _fee.paymentCycle;
-			for (let _index = 1; _index < 7; _index++) {
-				this.feeMonthList.push(_index * this.paymentCycle + '个月')
-			}
-			this.feeMonthName = this.paymentCycle + '个月';
-			this.feeMonth = this.paymentCycle;
-			let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
-			this.endTime = formatDate(_endTime);
 
 
 			this.$nextTick(() => {

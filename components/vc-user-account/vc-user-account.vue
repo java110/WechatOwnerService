@@ -14,7 +14,7 @@
 							</view>
 						</view>
 						<view class="action">
-							<text class="text-grey text-sm">{{account.amount}}元</text>
+							<text class="text-grey text-sm">{{account.amount}}{{account.acctType == '2004' ? '分' : '元'}}</text>
 						</view>
 					</view>
 				</view>
@@ -46,8 +46,22 @@
 				let _selectedAccounts = [];
 				this.accounts.forEach(item => {
 					if(val.includes(item.acctId)){
-						_totalUserAmount += parseFloat(item.amount);
-						_selectedAccounts.push(item);
+						// 账户类型判断
+						if (item.acctType == '2004') { //积分账户
+							if (parseFloat(item.amount) >= parseFloat(item.maximumNumber)) { //如果积分账户余额大于最大使用积分，就抵扣最大使用积分
+								_totalUserAmount += parseFloat(item.maximumNumber / item.deductionProportion);
+								_selectedAccounts.push(item);
+							} else {
+								_totalUserAmount += parseFloat(item.amount / item.deductionProportion);
+								_selectedAccounts.push(item);
+							}
+						} else if (item.acctType == '2003') { //现金账户
+							_totalUserAmount += parseFloat(item.amount);
+							_selectedAccounts.push(item);
+						} else {
+							_totalUserAmount += parseFloat(item.amount);
+							_selectedAccounts.push(item);
+						}
 					}
 				})
 				

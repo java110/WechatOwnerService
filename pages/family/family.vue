@@ -69,7 +69,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import context from '../../lib/java110/Java110Context.js';
-	import {isIDCard} from '../../lib/java110/utils/StringUtil.js'
+	import {isIDCard,checkPhoneNumber} from '../../lib/java110/utils/StringUtil.js'
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -168,6 +168,8 @@
 					msg = "身份证号有误";
 				}else if (obj.link == "") {
 					msg = "请填写手机号";
+				} else if (!checkPhoneNumber(obj.link)){
+					msg = "手机号有误";
 				}else if (obj.msgCode == "") {
 					msg = "请填写验证码";
 				}
@@ -191,7 +193,7 @@
 						success: function(res) {
 							console.log(res, 99999);
 
-							if (res.statusCode == 200) {
+							if (res.statusCode == 200 && res.data.code == 0) {
 								uni.hideLoading();
 								uni.navigateBack();
 								return;
@@ -199,7 +201,7 @@
 
 							uni.hideLoading();
 							uni.showToast({
-								title: res.data,
+								title: res.data.msg,
 								icon: 'none',
 								duration: 2000
 							});
@@ -231,6 +233,14 @@
 				if (obj.tel == '') {
 					wx.showToast({
 						title: '请输入手机号',
+						icon: 'none',
+						duration: 2000
+					});
+					return;
+				}
+				if(!checkPhoneNumber(obj.tel)){
+					wx.showToast({
+						title: '手机号有误',
 						icon: 'none',
 						duration: 2000
 					});

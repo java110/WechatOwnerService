@@ -83,7 +83,8 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
-				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :feeId="feeId" :cycles="feeMonth"
+				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount"></vcUserAccount>
+				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth"
 				 :communityId="communityId"></vc-discount>
 
 
@@ -113,6 +114,7 @@
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
+	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
 	import {
 		addMonth,
 		formatDate,
@@ -128,7 +130,8 @@
 
 	export default {
 		components: {
-			vcDiscount
+			vcDiscount,
+			vcUserAccount
 		},
 		data() {
 			return {
@@ -152,6 +155,9 @@
 				appId: '',
 				feeFlag: '',
 				paymentCycle: 1,
+				selectUserAccount: [], // 选中的账户
+				accountAmount: 0.0, // 账户金额
+				deductionAmount: 0.0, // 抵扣金额
 			};
 		},
 
@@ -202,7 +208,10 @@
 			var prevPage = pages[pages.length - 2]; //上一个页面
 			//直接调用上一个页面的setData()方法，把数据存到上一个页面中去
 			prevPage.needFefresh = false;
-			this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
+			this.$nextTick(() => {
+				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
+				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
+			})
 		},
 
 		/**
@@ -210,25 +219,44 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			// 选择使用账户余额
+			getUserAmount: function(_accInfo) {
+				// 选中的账户列表
+				this.selectUserAccount = _accInfo.selectedAccounts;
+				// 账户金额
+				this.accountAmount = _accInfo.totalUserAmount;
+				this._updatePrice(this.feeMonth);
+			},
 			computeFeeDiscount: function(_price) {
-				this.receivableAmount = this.receivableAmount - _price;
+				// this.receivableAmount = this.receivableAmount - _price;
+				this.receivableAmount = (parseFloat(this.receivableAmount) + parseFloat(_price)).toFixed(2);
+				this._computeUserAmount();
+			},
+			// 使用账户余额后，更新金额
+			_computeUserAmount: function() {
+				// 抵扣金额
+				this.deductionAmount = parseFloat(this.accountAmount) > parseFloat(this.receivableAmount) ? parseFloat(
+					this.receivableAmount) : parseFloat(this.accountAmount);
+				// 更新应缴金额
+				let receivableAmount = parseFloat(this.receivableAmount) - parseFloat(this.accountAmount);
+				this.receivableAmount = receivableAmount < 0 ? '0.00' : receivableAmount.toFixed(2);
 			},
 			dateChange: function(e) {
 				console.log("onConfirm", e);
 				let _feeMonthName = null;
 				_feeMonthName = this.feeMonthList[e.detail.value];
 				let _feeMonth = _feeMonthName.replace("个月", "");;
-
-				let _receivableAmount = _feeMonth * this.feePrice;
-
+				this._updatePrice(_feeMonth);
+			},
+			// 更新金额
+			_updatePrice(_feeMonth) {
 				let _lastDate = new Date(this.ordEndTime);
 				let _newDate = addMonth(_lastDate, parseInt(_feeMonth));
-
 				this.showFeeMonth = false;
-				this.feeMonthName = _feeMonthName;
-				this.receivableAmount = _receivableAmount;
+				this.feeMonthName = _feeMonth + '个月';
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
+				this.receivableAmount = _feeMonth * this.feePrice;
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 			},
 			onFeeMonthCancel: function(e) {
@@ -320,7 +348,10 @@
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					endTime: this.formatEndTime
+					endTime: this.formatEndTime,
+					selectUserAccount: this.selectUserAccount, // 选中的账户
+					accountAmount: this.accountAmount, // 账户金额
+					deductionAmount: this.deductionAmount, // 抵扣金额
 				}
 
 				context.request({
@@ -329,7 +360,6 @@
 					method: "POST",
 					data: _objData, //动态数据
 					success: function(res) {
-						console.log(res);
 						if (res.statusCode == 200 && res.data.code == '0') {
 							let data = res.data;
 							// #ifdef MP-WEIXIN

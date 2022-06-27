@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="scs-t">登记成功</view>
+		<view class="scs-t">{{msg}}</view>
 		
 		<view class="flex flex-direction fixed-bottom" style="width: 100%;">
 			<button class="cu-btn bg-green margin-tb-sm lg" @click="toIndex()">返回首页</button>
@@ -15,7 +15,7 @@
 	export default {
 		data() {
 			return {
-				
+				msg: '',
 			};
 		},
 
@@ -27,6 +27,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			this.msg = options.msg;
 		},
 		
 		methods: {

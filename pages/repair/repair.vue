@@ -307,7 +307,9 @@
 						"photo": _item
 					});
 				});
-
+				// 预约时间校验
+				let oppoTime = Date.parse(new Date(obj.appointmentTime.replace(/-/g, '/'))),
+				now = Date.parse(new Date());
 				let msg = "";
 				if (obj.repairType == "") {
 					msg = "请选择报修类型";
@@ -323,6 +325,8 @@
 					msg = "请选择预约日期";
 				} else if (obj.bindTime == "请选择") {
 					msg = "请选择预约时间";
+				} else if (now - oppoTime > 1800 * 1000){
+					msg = "预约时间有误";
 				} else if (obj.context == "") {
 					msg = "请填写报修内容";
 				} else if (obj.repairObjId == '') {
