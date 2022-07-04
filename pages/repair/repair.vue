@@ -56,7 +56,7 @@
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">预约日期</view>
-			<picker mode="date" :value="bindDate" start="2020-09-01" end="2050-09-01" @change="dateChange">
+			<picker mode="date" :value="bindDate" :start="todayDate" end="2050-09-01" @change="dateChange">
 				<view class="picker">
 					{{bindDate}}
 				</view>
@@ -64,7 +64,7 @@
 		</view>
 		<view class="cu-form-group arrow">
 			<view class="title">预约时间</view>
-			<picker mode="time" :value="bindTime" start="08:30" end="22:00" @change="timeChange">
+			<picker mode="time" :value="bindTime" :start="todayDateTime" end="22:00" @change="timeChange">
 				<view class="picker">
 					{{bindTime}}
 				</view>
@@ -113,6 +113,7 @@
 	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	const factory = context.factory;
+	import {formatDate,formatHourAndMin} from '@/lib/java110/utils/DateUtil.js'
 
 	export default {
 		data() {
@@ -169,6 +170,8 @@
 				unitNum: '',
 				unitId: '',
 				priceScope: '',
+				todayDate:'',
+				todayDateTime:''
 			};
 		},
 
@@ -199,6 +202,8 @@
 
 			//加载报修类型
 			this._loadRepairTypes();
+			this.todayDate = formatDate(new Date());
+			this.todayDateTime = formatHourAndMin(new Date())
 		},
 
 		/**
