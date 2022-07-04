@@ -1,23 +1,5 @@
 <template>
 	<view>
-		<view class="block__title">业主信息</view>
-		<view class="cu-form-group">
-			<view class="title">业主ID</view>
-			{{ownerInfo.memberId}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">名称</view>
-			{{ownerInfo.appUserName}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">身份证</view>
-			{{ownerInfo.idCard}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">联系方式</view>
-			{{ownerInfo.link}}
-		</view>
-
 		<view class="block__title">房屋信息</view>
 		<view class="cu-form-group">
 			<view class="title">房屋ID</view>

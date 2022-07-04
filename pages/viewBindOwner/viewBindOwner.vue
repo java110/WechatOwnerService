@@ -11,15 +11,6 @@
 		<view class="cu-list menu">
 			<view class="cu-item">
 				<view class="content">
-					<text class="cuIcon-location text-green"></text>
-					<text class="text-grey">市/区</text>
-				</view>
-				<view class="action">
-					<text class="text-grey text-sm">{{areaName}}</text>
-				</view>
-			</view>
-			<view class="cu-item">
-				<view class="content">
 					<text class="cuIcon-info text-green"></text>
 					<text class="text-grey">小区编码</text>
 				</view>
@@ -40,15 +31,7 @@
 		</view>
 		<view class="block__title">业主信息</view>
 		<view class="cu-list menu">
-			<view class="cu-item">
-				<view class="content">
-					<text class="cuIcon-info text-green"></text>
-					<text class="text-grey">业主编码</text>
-				</view>
-				<view class="action">
-					<text class="text-grey text-sm">{{appUserId}}</text>
-				</view>
-			</view>
+			
 			<view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-profile text-green"></text>
