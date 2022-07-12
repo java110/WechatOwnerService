@@ -31,6 +31,7 @@
 			<view class="title">当前进度</view>
 			{{applyDetail.stateName}}
 		</view>
+		<uploadImage v-if="applyDetail.urls.length > 0" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImage>
 	
 		<view class="button_up_blank"></view>
 	
@@ -39,15 +40,23 @@
 
 <script>
 	import context from '../../lib/java110/Java110Context.js';
+	import {queryApplyRoomDiscount} from '../../api/applyRoom/applyRoomApi.js'	
+	import uploadImage from "../../components/vc-upload/vc-upload.vue";	
 	const factory = context.factory;
 	export default {
 		data() {
 			return {
 				applyDetail: {},
+				maxPhotoNum: 4,
+				sendImgList: [],
+				canEdit: false,
+				imgTitle: '图片材料'
 			};
 		},
 
-		components: {},
+		components: {
+			uploadImage
+		},
 		props: {},
 
 		/**
@@ -56,7 +65,17 @@
 		onLoad: function(options) {
 			let _that = this;
 			context.onLoad(options);
-			_that.applyDetail = JSON.parse(options.room);
+			
+			let params = {
+				communityId: options.communityId,
+				page: 1,
+				row: 1,
+				ardId: options.ardId
+			}
+			queryApplyRoomDiscount(params).then(function(_res){
+				_that.applyDetail = _res.data[0];
+				_that.sendImgList = _res.data[0].urls;
+			})
 		},
 
 		/**
@@ -98,8 +117,14 @@
 			 * 查看跟踪记录
 			 */
 			showRecord: function(){
+				let apply = {
+					communityId: this.applyDetail.communityId,
+					roomName: this.applyDetail.roomName,
+					roomId: this.applyDetail.roomId,
+					ardId: this.applyDetail.ardId,
+				}
 				uni.navigateTo({
-					url: '/pages/myApplyRoom/myApplyRoomRecord?apply=' + JSON.stringify(this.applyDetail)
+					url: '/pages/myApplyRoom/myApplyRoomRecord?apply=' + JSON.stringify(apply)
 				});
 			},
 		}

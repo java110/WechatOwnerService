@@ -94,6 +94,28 @@
 			<view class="title">申请说明</view>
 			<input type="text" v-model="createRemark">
 		</view>
+		<view class="block__title">图片材料</view>
+		<view class="cu-bar bg-white ">
+			<view class="action">
+				图片上传
+			</view>
+			<view class="action">
+				{{imgList.length}}/4
+			</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="grid col-4 grid-square flex-sub">
+				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
+					<image :src='imgList[index]' mode='aspectFill'></image>
+					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
+						<text class="cuIcon-close"></text>
+					</view>
+				</view>
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+					<text class="cuIcon-cameraadd"></text>
+				</view>
+			</view>
+		</view>
 		<view class="btn-box">
 			<button type="default" class="btn-sub" @click="subApply()">提交申请</button>
 		</view>
@@ -105,6 +127,7 @@
 
 <script>
 	// pages/my/myHouseDetail.js
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import context from '../../lib/java110/Java110Context.js'
 	const factory = context.factory;
 	import {compareDate,addDay,date2String} from '../../lib/java110/utils/DateUtil.js'
@@ -126,6 +149,8 @@
 				feeTypeCds: [],
 				feeId: '',
 				feeTypeCd: '',
+				imgList: [],
+				photos: [],
 			};
 		},
 
@@ -260,6 +285,44 @@
 			},
 			
 			/**
+			 * 删除图片
+			 * @param {Object} e
+			 */
+			deleteImage: function(e) {
+				let imageArr = this.$data.imgList;
+				imageArr.splice(e, 1);
+				this.photos.splice(e, 1);
+			},
+			/**
+			 * 选择图片
+			 * @param {Object} e
+			 */
+			ChooseImage: function(e) {
+				let that = this;
+				wx.chooseImage({
+					count: 4, //默认9
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album','camera'], //从相册选择
+					success: (res) => {
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						var tempFilePaths = res.tempFilePaths[0]
+			
+						//#ifdef H5
+						TanslateImage.translate(tempFilePaths, (url) => {
+							that.photos.push(url);
+						})
+						//#endif
+			
+						//#ifdef MP-WEIXIN
+						factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
+							that.photos.push(_res);
+						});
+						//#endif
+					}
+				});
+			},
+			
+			/**
 			 * 提交申请
 			 */
 			subApply: function(){
@@ -298,8 +361,8 @@
 					ardId: '',
 					applyType: this.applyType,
 					feeId: this.feeId,
+					photos: this.photos
 				}
-				console.log(params);
 				saveApplyRoomDiscount(params).then(function(_res){
 					uni.showToast({
 						title: '申请成功'
