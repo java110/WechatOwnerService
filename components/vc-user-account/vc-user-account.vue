@@ -90,7 +90,7 @@
 				let _that = this;
 				queryOwnerAccount({
 					page: 1,
-					row: 20,
+					row: 30,
 					feeId: _feeId,
 					communityId: _communityId
 				}).then((data) => {

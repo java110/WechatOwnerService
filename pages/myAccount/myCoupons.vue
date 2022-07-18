@@ -110,7 +110,9 @@
 	} from '../../lib/java110/utils/DateUtil.js'
 	import {
 		getCouponUsers
-	} from '../../api/fee/feeApi.js'
+	} from '../../api/fee/feeApi.js';
+	
+	import {getCommunityId} from '@/api/community/communityApi.js'
 
 	export default {
 		data() {
@@ -138,6 +140,7 @@
 					page: 1,
 					row: 30,
 					tel: context.getUserInfo().link,
+					communityId:getCommunityId(),
 					state: '1001'
 				}
 				_that.couponList = [];
