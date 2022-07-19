@@ -4,6 +4,7 @@
 			"style": {
 				"navigationBarTitleText": "HC智慧家园",
 				"backgroundColor": "#ffffff"
+				
 			}
 		},
 		{
@@ -95,7 +96,7 @@
 				"enablePullDownRefresh": false
 			}
 		},
-		
+
 		{
 			"path": "pages/repairList/detail/detail",
 			"style": {}
@@ -201,8 +202,7 @@
 			"style": {
 				"navigationBarTitleText": "我的物业"
 			}
-		}
-		, {
+		}, {
 			"path": "pages/viewAdmin/viewAdmin",
 			"style": {
 				"navigationBarTitleText": "技术支持"
@@ -228,8 +228,7 @@
 			"style": {
 				"navigationBarTitleText": "温馨提示"
 			}
-		}
-		, {
+		}, {
 			"path": "pages/selectFloor/selectFloor",
 			"style": {
 				"navigationBarTitleText": "选择楼栋"
@@ -264,365 +263,293 @@
 			"style": {
 				"navigationBarTitleText": "投诉待办"
 			}
-		}
-	    ,{
-            "path" : "pages/registerByWechat/registerByWechat",
-            "style" : {
+		}, {
+			"path": "pages/registerByWechat/registerByWechat",
+			"style": {
 				"navigationBarTitleText": "业主绑定"
 			}
-        }
-        ,{
-            "path" : "pages/changePassword/changePassword",
-            "style" : {
+		}, {
+			"path": "pages/changePassword/changePassword",
+			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
-        }
-        ,{
-            "path" : "pages/changeOwnerPhone/changeOwnerPhone",
-            "style" : {
+		}, {
+			"path": "pages/changeOwnerPhone/changeOwnerPhone",
+			"style": {
 				"navigationBarTitleText": "修改手机"
 			}
-        }
-        ,{
-            "path" : "pages/hireRoom/hireRoom",
-            "style" : {
+		}, {
+			"path": "pages/hireRoom/hireRoom",
+			"style": {
 				"navigationBarTitleText": "房屋出租"
 			}
-        },
+		},
 		{
-		    "path" : "pages/rentHouse/rentHouse",
-		    "style" : {
+			"path": "pages/rentHouse/rentHouse",
+			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "房源"
 			}
-		},{
-            "path" : "pages/rentingDetail/rentingDetail",
-            "style" : {
+		}, {
+			"path": "pages/rentingDetail/rentingDetail",
+			"style": {
 				"navigationBarTitleText": ""
 			}
-        },
+		},
 		{
-		    "path" : "pages/applyparking/applyparking",
-		    "style" : {
+			"path": "pages/applyparking/applyparking",
+			"style": {
 				"navigationBarTitleText": "车位申请"
 			}
-		}
-        ,{
-            "path" : "pages/oweFee/oweFee",
-            "style" : {
-				"navigationBarTitleText": "综合缴费"
-			}
-        },
-		{
-		    "path" : "pages/oweFeeGarden/oweFeeGarden",
-		    "style" : {
+		}, {
+			"path": "pages/oweFee/oweFee",
+			"style": {
 				"navigationBarTitleText": "综合缴费"
 			}
 		},
 		{
-		    "path" : "pages/parkingInfo/parkingInfo",
-		    "style" : {
+			"path": "pages/oweFeeGarden/oweFeeGarden",
+			"style": {
+				"navigationBarTitleText": "综合缴费"
+			}
+		},
+		{
+			"path": "pages/parkingInfo/parkingInfo",
+			"style": {
 				"navigationBarTitleText": "车位申请进度"
 			}
 		}
-        
-        ,{
-            "path" : "pages/rentingAppointment/rentingAppointment",
-            "style" : {
+
+		, {
+			"path": "pages/rentingAppointment/rentingAppointment",
+			"style": {
 				"navigationBarTitleText": "租房预约"
 			}
-        }
-        ,{
-            "path" : "pages/mall/mall",
-            "style" : {
+		}, {
+			"path": "pages/mall/mall",
+			"style": {
 				"navigationBarTitleText": "商圈",
-				"navigationStyle":"custom"
+				"navigationStyle": "custom"
 			}
-        }
-       ,
+		},
 		{
-		    "path" : "pages/applyRoom/applyRoom",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "选择房屋",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/applyRoomDetail/applyRoomDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "空置房申请",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/roomRenovation/roomRenovation",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "选择房屋",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/roomRenovationDetail/roomRenovationDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "装修申请",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myRenovation/myRoomList",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "选择房屋",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myRenovation/myRoomRenovationList",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "装修记录",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myRenovation/myRoomRenovationDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "装修详情",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-			"path" : "pages/myRoomRenovationRecord/myRoomRenovationRecord",
-			"style" :
-			{
-			    "navigationBarTitleText": "跟踪记录",
-			    "enablePullDownRefresh": false
+			"path": "pages/applyRoom/applyRoom",
+			"style": {
+				"navigationBarTitleText": "选择房屋",
+				"enablePullDownRefresh": false
 			}
-		}
-		,{
-			"path" : "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
-			"style" :
-			{
-			    "navigationBarTitleText": "跟踪记录详情",
-			    "enablePullDownRefresh": false
+		}, {
+			"path": "pages/applyRoomDetail/applyRoomDetail",
+			"style": {
+				"navigationBarTitleText": "空置房申请",
+				"enablePullDownRefresh": false
 			}
-		}
-        ,{
-            "path" : "pages/tempParkingFee/tempParkingFee",
-            "style" :
-            {
-                "navigationBarTitleText": "临时车缴费",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/contractFee/contractFee",
-            "style" :
-            {
-                "navigationBarTitleText": "合同缴费",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/contractFeeList/contractFeeList",
-            "style" :
-            {
-                "navigationBarTitleText": "合同费用",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/contractOweFee/contractOweFee",
-            "style" :
-            {
-                "navigationBarTitleText": "欠费缴费",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/questionAnswer/questionAnswer",
-            "style" :
-            {
-                "navigationBarTitleText": "投票问卷",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/questionAnswerDetail/questionAnswerDetail",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/machineTranslateLog/machineTranslateLog",
-            "style" :
-            {
-                "navigationBarTitleText": "门禁同步日志",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/hcWebView/hcWebView",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-        }
-        ,{
-            "path" : "pages/hcWebViewRefresh/hcWebViewRefresh",
-            "style" :
-            {
-                "navigationBarTitleText": "用户鉴权",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-        }
-        ,{
-            "path" : "pages/homemaking/homemaking",
-            "style" :
-            {
-                "navigationBarTitleText": "家政服务",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-        }
-		,{
-		    "path" : "pages/myApplyRoom/myRoomList",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "选择房屋",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myApplyRoom/myApplyRoomList",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "空置房申请记录",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myApplyRoom/myApplyRoomDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "空置房申请详情",
-		        "enablePullDownRefresh": false
-		    }
-		}
-        ,{
-            "path" : "pages/openDoorByQrCode/openDoorByQrCode",
-            "style" :
-            {
-                "navigationBarTitleText": "二维码开门",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-        }
-        ,{
-            "path" : "pages/tempCarFee/tempCarFee",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "停车费",
-                "enablePullDownRefresh": false
-            }
-        }
-		,{
-		    "path" : "pages/myApplyRoom/myApplyRoomRecord",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "跟踪记录",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myApplyRoom/myApplyRoomRecordDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "跟踪记录详情",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/myAccount/myAccount",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "我的账户",
-		        "enablePullDownRefresh": false
-		    }
+		}, {
+			"path": "pages/roomRenovation/roomRenovation",
+			"style": {
+				"navigationBarTitleText": "选择房屋",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/roomRenovationDetail/roomRenovationDetail",
+			"style": {
+				"navigationBarTitleText": "装修申请",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myRenovation/myRoomList",
+			"style": {
+				"navigationBarTitleText": "选择房屋",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myRenovation/myRoomRenovationList",
+			"style": {
+				"navigationBarTitleText": "装修记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myRenovation/myRoomRenovationDetail",
+			"style": {
+				"navigationBarTitleText": "装修详情",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myRoomRenovationRecord/myRoomRenovationRecord",
+			"style": {
+				"navigationBarTitleText": "跟踪记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
+			"style": {
+				"navigationBarTitleText": "跟踪记录详情",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/tempParkingFee/tempParkingFee",
+			"style": {
+				"navigationBarTitleText": "临时车缴费",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/contractFee/contractFee",
+			"style": {
+				"navigationBarTitleText": "合同缴费",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/contractFeeList/contractFeeList",
+			"style": {
+				"navigationBarTitleText": "合同费用",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/contractOweFee/contractOweFee",
+			"style": {
+				"navigationBarTitleText": "欠费缴费",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/questionAnswer/questionAnswer",
+			"style": {
+				"navigationBarTitleText": "投票问卷",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/questionAnswerDetail/questionAnswerDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/machineTranslateLog/machineTranslateLog",
+			"style": {
+				"navigationBarTitleText": "门禁同步日志",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/hcWebView/hcWebView",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/hcWebViewRefresh/hcWebViewRefresh",
+			"style": {
+				"navigationBarTitleText": "用户鉴权",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/homemaking/homemaking",
+			"style": {
+				"navigationBarTitleText": "服务"
+			}
+		}, {
+			"path": "pages/myApplyRoom/myRoomList",
+			"style": {
+				"navigationBarTitleText": "选择房屋",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myApplyRoom/myApplyRoomList",
+			"style": {
+				"navigationBarTitleText": "空置房申请记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myApplyRoom/myApplyRoomDetail",
+			"style": {
+				"navigationBarTitleText": "空置房申请详情",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/openDoorByQrCode/openDoorByQrCode",
+			"style": {
+				"navigationBarTitleText": "二维码开门",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/tempCarFee/tempCarFee",
+			"style": {
+				"navigationBarTitleText": "停车费",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myApplyRoom/myApplyRoomRecord",
+			"style": {
+				"navigationBarTitleText": "跟踪记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myApplyRoom/myApplyRoomRecordDetail",
+			"style": {
+				"navigationBarTitleText": "跟踪记录详情",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myAccount/myAccount",
+			"style": {
+				"navigationBarTitleText": "我的账户",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/myAccount/myAccountDetail",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "账户明细",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/myAccount/myAccountDetail",
+			"style": {
+				"navigationBarTitleText": "账户明细",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/my/myMenu",
-		    "style" :
-		    {
-		        "navigationBarTitleText": "我",
-		        "enablePullDownRefresh": false
-		    }
-		}
-        ,{
-            "path" : "pages/changeOwnerCommunity/changeOwnerCommunity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "切换小区",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/roomFee/ownerCoupon",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "优惠卷",
-                "enablePullDownRefresh": false
-            }
-        },
-		{
-            "path" : "pages/myAccount/myCoupons",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的优惠券",
-                "enablePullDownRefresh": false
-            }
-        },
-		{
-		    "path" : "pages/tempCarFee/tempCarCoupon",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "我的优惠券详情",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/my/myMenu",
+			"style": {
+				"navigationBarTitleText": "我",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/changeOwnerCommunity/changeOwnerCommunity",
+			"style": {
+				"navigationBarTitleText": "切换小区",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/roomFee/ownerCoupon",
+			"style": {
+				"navigationBarTitleText": "优惠卷",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/unlicensedCarIn/unlicensedCarIn",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "无牌车入场",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/myAccount/myCoupons",
+			"style": {
+				"navigationBarTitleText": "我的优惠券",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/visit/addVisit",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "访客登记",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/tempCarFee/tempCarCoupon",
+			"style": {
+				"navigationBarTitleText": "我的优惠券详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/unlicensedCarIn/unlicensedCarIn",
+			"style": {
+				"navigationBarTitleText": "无牌车入场",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/visit/addVisit",
+			"style": {
+				"navigationBarTitleText": "访客登记",
+				"enablePullDownRefresh": false
+			}
 		},
 		// {
 		//     "path" : "pages/visit/addVisitSuccess",
@@ -633,34 +560,32 @@
 		//     }
 		// },
 		{
-		    "path" : "pages/visit/visitList",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "登记列表",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/visit/visitList",
+			"style": {
+				"navigationBarTitleText": "登记列表",
+				"enablePullDownRefresh": false
+			}
 		},
 		{
-		    "path" : "pages/visit/visitDetail",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "预约详情",
-		        "enablePullDownRefresh": false
-		    }
+			"path": "pages/visit/visitDetail",
+			"style": {
+				"navigationBarTitleText": "预约详情",
+				"enablePullDownRefresh": false
+			}
 		}
-    ],
+	],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",
 		"backgroundColor": "#fff",
 		"borderStyle": "black",
-		"midButton":{
-		   "width":"95px",
-		   "height":"95px",
-		   "iconPath":"static/images/homekey.png",
-		   "text":"开门",
-		   "iconWidth":"75px"
-		  },
+		"midButton": {
+			"width": "95px",
+			"height": "95px",
+			"iconPath": "static/images/homekey.png",
+			"text": "开门",
+			"iconWidth": "75px"
+		},
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "首页",
@@ -669,7 +594,7 @@
 			},
 			{
 				"pagePath": "pages/homemaking/homemaking",
-				"text": "家政",
+				"text": "服务",
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
@@ -697,12 +622,12 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#00AA00",
+		"navigationBarBackgroundColor": "#2B7FF0",
 		"navigationBarTitleText": "HC智慧家园",
 		"usingComponents": { //这里为方便，全局引入了所有组件，也可以在某个page下单独引用某个组件
 
 		},
-		"onReachBottonDistance":50
+		"onReachBottonDistance": 50
 	},
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
