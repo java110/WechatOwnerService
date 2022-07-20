@@ -4,26 +4,20 @@
 			<view class="header_fixed">
 				<scroll-view class="bg-white nav">
 					<view class="flex text-center">
-						<view class="cu-item flex-sub" :class="item.code==code?'text-green cur':''" v-for="(item,index) in parkingType"
-						 :key="index" @tap="switchParkingSpace(item)" :data-id="index">
+						<view class="cu-item flex-sub" :class="item.code==code?'text-green cur':''"
+							v-for="(item,index) in parkingType" :key="index" @tap="switchParkingSpace(item)"
+							:data-id="index">
 							{{item.name}}
 						</view>
 					</view>
 				</scroll-view>
 			</view>
-			<view v-if="noData == false" style="margin-top: 150upx;">
-				<view v-for="(item,index) in parkings" :key="index" 
-				class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
-					<view class="flex padding-bottom-xs solid-bottom justify-between">
+			<view v-if="noData == false" style="margin-top: 110upx;">
+				<view v-for="(item,index) in parkings" :key="index"
+					class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding padding-bottom-xs">
+					<view class="flex solid-bottom justify-between">
 						<view>{{item.applyId}}</view>
-						<view class="text-gray" v-if="item.state == '2002'">
-								<!-- #ifdef H5 || MP-WEIXIN -->
-								<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="payFee(item)">缴费</button>
-								<!-- #endif -->
-								<!-- #ifdef APP-PLUS -->
-								<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="payFee(item)">缴费</button>
-								<!-- #endif -->
-						</view>
+						<view></view>
 					</view>
 					<view class="flex margin-top-xs justify-between">
 						<view class="text-gray">车牌号</view>
@@ -45,6 +39,9 @@
 						<view class="text-gray">备注</view>
 						<view class="text-gray">{{item.remark}}</view>
 					</view>
+					<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm"  v-if="item.state == '2002'">
+						<button class="cu-btn sm bg-green margin-left" @click="toPayFee(item)">去缴费</button>
+					</view>
 				</view>
 			</view>
 			<view v-else>
@@ -57,8 +54,6 @@
 <script>
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
-
-
 	import {
 		formatDate
 	} from '../../lib/java110/utils/DateUtil.js'
@@ -83,8 +78,8 @@
 				code: '1001',
 				moreParkingSpaces: [],
 				needFefresh: true,
-				parkings:[],
-				communityId:'',
+				parkings: [],
+				communityId: '',
 				noData: false,
 				page: 1,
 				row: 20,
@@ -121,6 +116,7 @@
 		methods: {
 			listParkingSpace: function() {
 				let _that = this;
+				this.parkings = [];
 				context.request({
 					url: constant.url.queryOwnerCars,
 					header: context.getHeaders(),
@@ -130,68 +126,16 @@
 						"row": this.row,
 						"communityId": this.communityId,
 						"state": this.code,
-						"applyPersonId":this.ownerId
+						"applyPersonId": this.ownerId
 					},
 					success: (res) => {
 						let data = res.data.data;
-						if(data.length == 0){
+						if (data.length == 0) {
 							this.noData = true;
 						}
 						this.parkings = data;
-						if(this.parkings.length > 0){
-							_that._loadParkingSpaceFee();
-						}
-
 					},
 					fail(res) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
-			},
-			_loadParkingSpaceFee: function() {
-				let _that = this;
-				let _objData = {
-					page: 1,
-					row: 30,
-					payerObjId: _that.parkings[0].carId,
-					communityId: _that.parkings[0].communityId
-				}
-			
-				_that.moreParkingSpaces = [];
-				context.request({
-					url: constant.url.queryFeeByOwner,
-					header: context.getHeaders(),
-					method: "GET",
-					data: _objData, //动态数据
-					success: function(res) {
-						if (res.statusCode == 200) {
-							//成功情况下跳转
-							let _parkingSpaceFees = res.data.fees;
-							if (_parkingSpaceFees.length < 1) {
-								_that.noData = true;
-							}
-							_parkingSpaceFees.forEach(function(_fee) {
-								let _tmpEndTime = _fee.endTime.replace(/\-/g, "/")
-								let _endTime = new Date(_tmpEndTime);
-			
-								_fee.endTime = formatDate(_endTime);
-								_fee.num = _that.parkings[0].num;
-								let _now = new Date();
-								if (_endTime > _now) {
-									_fee.feeStateName = '正常'
-								} else {
-									_fee.feeStateName = '欠费'
-								}
-								_that.moreParkingSpaces.push(_fee);
-							});
-							console.log(_that.moreParkingSpaces);
-						}
-					},
-					fail: function(e) {
 						wx.showToast({
 							title: "服务器异常了",
 							icon: 'none',
@@ -205,11 +149,9 @@
 				this.noData = false;
 				this.listParkingSpace();
 			},
-			payFee: function(_item) {
-				let _moreParkingSpaces = this.moreParkingSpaces[0];
-				_moreParkingSpaces["carNum"]=this.parkings[0].carNum;
+			toPayFee: function() {
 				this.vc.navigateTo({
-					url: '/pages/payParkingApplyFee/payParkingApplyFee?fee=' + JSON.stringify(_moreParkingSpaces),
+					url: '/pages/payParkingFeeList/payParkingFeeList',
 				})
 			},
 		}

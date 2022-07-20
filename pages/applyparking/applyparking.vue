@@ -63,8 +63,8 @@
 				carColor:'',
 				remark:'',
 				psId: '',
-				startDate: '2020-01-01',
-				endDate: '2020-01-01',
+				startDate: '请选择',
+				endDate: '请选择',
 				ownerId:'',
 				storeId:'',
 				userId:'',
@@ -198,16 +198,6 @@
 					success: function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
-							wx.showToast({
-								title: "提交成功，可到 我的-生活服务-车位信息 中查看进度",
-								icon: 'none',
-								duration: 5000,
-								success: function() {
-								                setTimeout(function() {
-								                  uni.navigateBack({})
-								                }, 5000) //延迟时间
-								              },
-							})
 							wx.redirectTo({
 								url: '/pages/parkingInfo/parkingInfo',
 							});
@@ -217,7 +207,7 @@
 							title: "服务器异常了",
 							icon: 'none',
 							duration: 2000
-						})
+						});
 					},
 					fail: function(e) {
 						wx.showToast({

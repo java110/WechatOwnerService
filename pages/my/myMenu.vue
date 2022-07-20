@@ -73,7 +73,7 @@
 				<view class="cu-item arrow" @click="myParking()">
 					<view class="content">
 						<text class="cuIcon-taxi text-orange"></text>
-						<text class="text-grey">车位信息</text>
+						<text class="text-grey">车位申请进度</text>
 					</view>
 				</view>
 			</block>

@@ -45,9 +45,6 @@
 			return {
 				selectCommunityName: "",
 				communityId: '',
-				ad: [],
-				
-				categoryList: [],
 				selected: 0,
 				mask1Hidden: true,
 				mask2Hidden: true,
@@ -101,9 +98,6 @@
 			if (hasLogin()) {
 				_that.judgeBindOwnerFun();
 			}
-
-			_that.ad = [];
-			this._initIndexData();
 		},
 
 		/**
@@ -116,17 +110,6 @@
 			}
 		},
 		methods: {
-			_initIndexData: function() {
-				let _that = this;
-				//查询当前小区信息
-				this.vc.getCurCommunity()
-					.then(function(_communityInfo) {
-						_that.communityId = _communityInfo.communityId;
-						//查询小区活动信息
-						_that._loadAdvertPhoto();
-					})
-			},
-			
 			judgeBindOwnerFun: function() {
 				//查询业主
 				getCurOwner();
@@ -136,8 +119,6 @@
 			 * 第一次加载是可能没有小区 则直接下载固定小区
 			 *
 			 */
-			
-			
 			showModal: function(e) {
 				this.vc.navigateTo({
 					url: '../bindOwner/bindOwner'
@@ -148,13 +129,6 @@
 				this.vc.navigateTo({
 					url: pageUrl
 				});
-			},
-			
-			//切换小区
-			toSelectArea(e) {
-				this.vc.navigateToMall({
-					url: `/pages/selectcommunity/selectcommunity`
-				}, true)
 			},
 		}
 	};
