@@ -580,11 +580,11 @@
 		"backgroundColor": "#fff",
 		"borderStyle": "black",
 		"midButton": {
-			"width": "95px",
-			"height": "95px",
+			"width": "65px",
+			"height": "65px",
 			"iconPath": "static/images/homekey.png",
 			"text": "开门",
-			"iconWidth": "75px"
+			"iconWidth": "45px"
 		},
 		"list": [{
 				"pagePath": "pages/index/index",

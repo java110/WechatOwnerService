@@ -194,4 +194,57 @@
 			margin-right: 0;
 		}
 	}
+	
+	
+	.noticesList-list{
+	  font-size: 25rpx;
+	  display: flex;
+	  width: 100%;
+	  padding: 10rpx 0;   
+	  border-bottom: 1rpx solid #ECECEC;
+	  color: #6D6D6D;
+	  justify-content: space-between;
+	}
+	.notices-info-name{
+	  margin-top: 10rpx;
+	  color: black;
+	  font-size: 30rpx;
+	  display: -webkit-box;  /*设置为弹性盒子*/
+	  -webkit-line-clamp: 2;  /*最多显示5行*/
+	  overflow: hidden;  /*超出隐藏*/
+	  text-overflow: ellipsis;  /*超出显示为省略号*/
+	  -webkit-box-orient: vertical;
+	  word-break: break-all;  /*强制英文单词自动换行*/
+	}
+	.notices-info-image image{
+	  width: 200rpx;
+	  height: 150rpx;
+	  margin: 10rpx 20rpx 0rpx 20rpx;
+	  border-radius: 10rpx;
+	}
+	.notices-info{
+	  margin: 10rpx 0rpx 0rpx 20rpx;
+	  height: 150rpx;
+	  flex-direction: column;
+	  display: flex;
+	  justify-content: space-between;
+	}
+	.notice-bottom{
+	  display: flex;
+	  text-align: left;
+	}
+	.notice-bottom view{
+	  margin-right: 20rpx;
+	}
+	
+	.notice-bottom icon{
+	  color: #8a8a8a;
+	  display: inline-block;
+	  width: 40rpx;
+	  height: 40rpx;
+	}
+	.notice-bottom view text{
+	  font-size: 25rpx;
+	  line-height: 40rpx;
+	}
 </style>

@@ -170,53 +170,6 @@
 
 	
 
-	.new_box {
-		background: #fff;
-		padding: 20upx;
-		margin-bottom: 20upx;
-
-		.new_wrap {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.new_item {
-			position: relative;
-			display: inline-block;
-			padding: 20upx;
-			margin-right: 20upx;
-			width: calc((100% - 40upx) / 2);
-			background: #f5f5f5;
-			border-radius: 5upx;
-
-			.new_font {
-				z-index: 2;
-			}
-
-			.name {
-				font-size: 28upx;
-				font-weight: 600;
-				color: #333;
-				text-align: left;
-			}
-
-			.text {
-				font-size: 24upx;
-				font-weight: 400;
-				color: #999;
-			}
-
-			image {
-				width: 160upx;
-				height: 120upx;
-			}
-		}
-
-		.new_item:last-child {
-			margin-right: 0;
-		}
-	}
-
+	
 	
 </style>
