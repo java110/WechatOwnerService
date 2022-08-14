@@ -54,84 +54,84 @@
 			_loadMenu: function() {
 				this.real_list = [{
 						name: '生活缴费',
-						src: '/static/images/serve/1.png',
+						src: this.imgUrl+'/h5/images/serve/1.png',
 						href: '/pages/oweFee/oweFee'
 					}, {
 						name: '房屋费',
-						src: '/static/images/serve/5.png',
+						src: this.imgUrl+'/h5/images/serve/5.png',
 						href: '/pages/roomFeeListNew/roomFeeListNew'
 					}, {
 						name: '停车费',
-						src: '/static/images/serve/9.png',
+						src: this.imgUrl+'/h5/images/serve/9.png',
 						href: '/pages/payParkingFeeList/payParkingFeeList'
 					}, {
 						name: '合同费',
-						src: '/static/images/serve/12.png',
+						src: this.imgUrl+'/h5/images/serve/12.png',
 						href: '/pages/contractFeeList/contractFeeList'
 					},
 					{
 						name: '家庭成员',
-						src: '/static/images/serve/2.png',
+						src: this.imgUrl+'/h5/images/serve/2.png',
 						href: '/pages/familyList/familyList'
 					},
 					{
 						name: '访客通行',
-						src: '/static/images/serve/3.png',
+						src: this.imgUrl+'/h5/images/serve/3.png',
 						href: '/pages/visit/visitList'
 					},
 					{
 						name: '投诉咨询',
-						src: '/static/images/serve/4.png',
+						src: this.imgUrl+'/h5/images/serve/4.png',
 						href: '/pages/complaint/complaint'
 					},
 					{
 						name: '报事维修',
-						src: '/static/images/serve/6.png',
+						src: this.imgUrl+'/h5/images/serve/6.png',
 						href: '/pages/repair/repair'
 					},
 					{
 						name: '社区公告',
-						src: '/static/images/serve/7.png',
+						src: this.imgUrl+'/h5/images/serve/7.png',
 						href: '/pages/notice/index'
 					},
 					{
 						name: '一键开门',
-						src: '/static/images/serve/8.png',
+						src: this.imgUrl+'/h5/images/serve/8.png',
 						href: '/pages/openDoor/openDoor'
 					},
 					{
 						name: '装修报备',
-						src: '/static/images/serve/10.png',
+						src: this.imgUrl+'/h5/images/serve/10.png',
 						href: '/pages/roomRenovation/roomRenovation'
 					},
 					{
 						name: '业主信息',
-						src: '/static/images/serve/my1.png',
+						src: this.imgUrl+'/h5/images/serve/my1.png',
 						href: '/pages/viewBindOwner/viewBindOwner'
 					},
 					{
 						name: "车位申请",
-						src: "/static/images/serve/my6.png",
+						src: this.imgUrl+"/h5/images/serve/my6.png",
 						href: "/pages/applyparking/applyparking"
 					},
 					{
 						name: "投票问卷",
-						src: "/static/images/serve/my2.png",
+						src: this.imgUrl+"/h5/images/serve/my2.png",
 						href: "/pages/questionAnswer/questionAnswer"
 					}, {
 						name: "反省上报",
-						src: "/static/images/serve/my3.png",
+						src: this.imgUrl+"/h5/images/serve/my3.png",
 						href: "/pages/reportInfoBack/reportInfoBack",
 						needLogin: 'N'
 					},
 					{
 						name: '空置房申请',
-						src: '/static/images/serve/my9.png',
+						src: this.imgUrl+'/h5/images/serve/my9.png',
 						href: '/pages/myApplyRoom/myRoomList'
 					},
 					{
 						name: '房屋装修',
-						src: '/static/images/serve/15.png',
+						src: this.imgUrl+'/h5/images/serve/15.png',
 						href: '/pages/myRenovation/myRoomList'
 					}
 				];

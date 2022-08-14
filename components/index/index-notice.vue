@@ -30,7 +30,7 @@
 					</block>
 				</view>
 				<view class="active_empty" v-else>
-					<image src="/static/images/serve/empty.png" />
+					<image :src="noImg" />
 					<text class="text">暂无活动哦~</text>
 				</view>
 			</view>
@@ -52,6 +52,7 @@
 			return {
 				notices: [],
 				activitiTitle: [],
+				noImg:this.imgUrl+'/h5/images/serve/empty.png',
 				curTypeCd: '',
 				page: 1,
 				row: 7,

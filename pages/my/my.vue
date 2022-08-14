@@ -48,8 +48,7 @@
 		data() {
 			return {	
 				property: {},
-				// 用户信息
-				
+				// 用户信息	
 			};
 		},
 		components: {

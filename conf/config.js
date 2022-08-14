@@ -54,5 +54,6 @@ export default {
 	DEFAULT_COMMUNITY_NAME: DEFAULT_COMMUNITY_NAME,
 	wAppId: wAppId,
 	logLevel: logLevel,
-	appPayKey: appPayKey
+	appPayKey: appPayKey,
+	imgUrl:commonBaseUrl
 }

@@ -36,73 +36,73 @@
 			return {
 				order_list: [{
 						name: '待付款',
-						src: '/static/images/serve/order1.png',
+						src: this.imgUrl+'/h5/images/serve/order1.png',
 						href: ''
 					},
 					{
 						name: '待发货',
-						src: '/static/images/serve/order2.png',
+						src: this.imgUrl+'/h5/images/serve/order2.png',
 						href: ''
 					},
 					{
 						name: '待收货',
-						src: '/static/images/serve/order3.png',
+						src: this.imgUrl+'/h5/images/serve/order3.png',
 						href: ''
 					},
 					{
 						name: '已完成',
-						src: '/static/images/serve/order4.png',
+						src: this.imgUrl+'/h5/images/serve/order4.png',
 						href: ''
 					}
 				],
 				serve_list: [{
 						name: '业主信息',
-						src: '/static/images/serve/my1.png',
+						src: this.imgUrl+'/h5/images/serve/my1.png',
 						href: '/pages/viewBindOwner/viewBindOwner'
 					},
 					{
 						name: '我的物业',
-						src: '/static/images/serve/my2.png',
+						src: this.imgUrl+'/h5/images/serve/my2.png',
 						href: '/pages/myProperty/myProperty'
 					},
 					{
 						name: '我的房屋',
-						src: '/static/images/serve/my3.png',
+						src: this.imgUrl+'/h5/images/serve/my3.png',
 						href: '/pages/my/myHouse'
 					},
 					{
 						name: '我的报修',
-						src: '/static/images/serve/my4.png',
+						src: this.imgUrl+'/h5/images/serve/my4.png',
 						href: '/pages/myRepair/myRepair'
 					},
 					{
 						name: '缴费记录',
-						src: '/static/images/serve/my5.png',
+						src: this.imgUrl+'/h5/images/serve/my5.png',
 						href: '/pages/payFeeDetail/payFeeDetail'
 					},
 					{
 						name: '我的车位',
-						src: '/static/images/serve/my6.png',
+						src: this.imgUrl+'/h5/images/serve/my6.png',
 						href: '/pages/parkingInfo/parkingInfo'
 					},
 					{
 						name: '我的投诉',
-						src: '/static/images/serve/11.png',
+						src: this.imgUrl+'/h5/images/serve/11.png',
 						href: '/pages/complaintList/complaintList'
 					},
 					{
 						name: '门禁日志',
-						src: '/static/images/serve/my9.png',
+						src: this.imgUrl+'/h5/images/serve/my9.png',
 						href: '/pages/machineTranslateLog/machineTranslateLog'
 					},
 					{
 						name: '空置房记录',
-						src: '/static/images/serve/my8.png',
+						src: this.imgUrl+'/h5/images/serve/my8.png',
 						href: '/pages/myApplyRoom/myRoomList'
 					},
 					{
 						name: '装修记录',
-						src: '/static/images/serve/my10.png',
+						src: this.imgUrl+'/h5/images/serve/my10.png',
 						href: '/pages/myRenovation/myRoomList'
 					},
 					

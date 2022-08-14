@@ -26,10 +26,10 @@
 		data() {
 			return {
 				banner: [{
-						url: '/static/images/serve/banner1.jpg'
+						url: this.imgUrl+'/h5/images/serve/banner1.jpg'
 					},
 					{
-						url: '/static/images/serve/banner2.jpg'
+						url: this.imgUrl+'/h5/images/serve/banner2.jpg'
 					}
 				],
 				ad:[],

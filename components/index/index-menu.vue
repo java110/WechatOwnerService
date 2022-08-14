@@ -76,13 +76,13 @@
 				callPropertyModal: false,
 				property: {},
 				new_list: [{
-						src: '/static/images/serve/new1.png',
+						src: this.imgUrl+'/h5/images/serve/new1.png',
 						name: '新手指引',
 						desc: '新手指引',
 						href:''
 					},
 					{
-						src: '/static/images/serve/new2.png',
+						src: this.imgUrl+'/h5/images/serve/new2.png',
 						name: '联系物业',
 						desc: '一键搞定',
 						href:'_callPropertyTel'
@@ -97,38 +97,38 @@
 			_loadFunc:function(){
 				this.home_list = [{
 							name: '生活缴费',
-							src: '/static/images/serve/1.png',
+							src: this.imgUrl+'/h5/images/serve/1.png',
 							href: '/pages/oweFee/oweFee'
 						},
 						{
 							name: '家庭成员',
-							src: '/static/images/serve/2.png',
+							src: this.imgUrl+'/h5/images/serve/2.png',
 							href: '/pages/familyList/familyList'
 						},
 						{
 							name: '报事维修',
-							src: '/static/images/serve/6.png',
+							src: this.imgUrl+'/h5/images/serve/6.png',
 							href: '/pages/repair/repair'
 						},
 					],
 				this.serve_list = [{
 						name: '一键开门',
-						src: '/static/images/serve/8.png',
+						src: this.imgUrl+'/h5/images/serve/8.png',
 						href: '/pages/openDoor/openDoor'
 					},
 					{
 						name: '装修报备',
-						src: '/static/images/serve/10.png',
+						src: this.imgUrl+'/h5/images/serve/10.png',
 						href: '/pages/roomRenovation/roomRenovation'
 					},
 					{
 						name: '访客通行',
-						src: '/static/images/serve/3.png',
+						src: this.imgUrl+'/h5/images/serve/3.png',
 						href: '/pages/visit/visitList'
 					},
 					{
 						name: '社区公告',
-						src: '/static/images/serve/7.png',
+						src: this.imgUrl+'/h5/images/serve/7.png',
 						href: '/pages/notice/index'
 					},
 				]

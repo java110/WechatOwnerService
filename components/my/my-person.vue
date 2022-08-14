@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="user-container bg-white my_user">
-			<view class="userinfo">
+			<view class="userinfo" :style="{background: 'url('+topImg+') no-repeat center center;'}">
 				<view class="already" v-if="login">
 					<view class="cu-avatar header-img round " :style="{ backgroundImage: 'url(' + headerImg + ')' }">
 					</view>
@@ -49,7 +49,8 @@
 		data() {
 			return {
 				userInfo: {},
-				headerImg: '/static/images/serve/head.png',
+				headerImg: this.imgUrl+'/h5/images/serve/head.png',
+				topImg: this.imgUrl+'/h5/images/serve/bg.png',
 				userName: '',
 				userPhone: '',
 				communityName: '',
@@ -186,7 +187,7 @@
 
 	.userinfo {
 		height: 200upx;
-		background: url('/static/images/serve/bg.png') no-repeat center center;
+		//background: url('/static/images/serve/bg.png') no-repeat center center;
 		background-size: 100% 100%;
 
 		padding: 30upx 0;
