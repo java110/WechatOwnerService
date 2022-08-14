@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="user-container bg-white my_user">
-			<view class="userinfo" :style="{background: 'url('+topImg+') no-repeat center center;'}">
+			<view class="userinfo" :style="{background: 'url('+topImg+') no-repeat center center'}" >
 				<view class="already" v-if="login">
 					<view class="cu-avatar header-img round " :style="{ backgroundImage: 'url(' + headerImg + ')' }">
 					</view>
@@ -12,9 +12,15 @@
 					</view>
 				</view>
 				<view class="wait" v-else @tap="showLongModel">
+					<!-- #ifdef MP-WEIXIN -->
 					<view class="userinfo-avatar">
 						<open-data type="userAvatarUrl" lang="zh_CN" />
 					</view>
+					<!-- #endif -->
+					<!-- #ifdef H5 || APP-PLUS -->
+					<view class="cu-avatar header-img round " :style="{ backgroundImage: 'url(' + headerImg + ')' }">
+					</view>
+					<!-- #endif -->
 					<view class="userinfo-nickname margin-top">
 						<text>请登录</text>
 					</view>
@@ -172,7 +178,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="scss" scoped>
 	.my_user {
 		padding: 0;
 	}

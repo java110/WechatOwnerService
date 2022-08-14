@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view>
-			<image src="/static/images/openDoorTop.png" class="heard-location-icon"></image>
+			<image :src="topImg" class="heard-location-icon"></image>
 		</view>
 		<view class="cu-list grid" :class="'col-2'">
 			<view class="cu-item" @click="showOpenDoor(item);"
@@ -43,7 +43,8 @@
 				communityId: '',
 				openDoorFlag:false,
 				curMachine:{},
-				memberId:''
+				memberId:'',
+				topImg:this.imgUrl+'/h5/images/openDoorTop.png'
 			};
 		},
 		components: {
