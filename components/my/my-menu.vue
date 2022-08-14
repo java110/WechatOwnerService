@@ -141,6 +141,7 @@
 
 <style lang="less">
 	.order_box {
+			margin-top:20upx;
 		.order_title {
 			line-height: 42upx;
 			font-size: 30upx;
@@ -173,6 +174,7 @@
 	}
 
 	.serve_box {
+		margin-top:20upx;
 		.serve_title {
 			line-height: 42upx;
 			font-size: 30upx;

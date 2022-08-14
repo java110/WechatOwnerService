@@ -220,7 +220,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
-		padding: 0 50upx;
+		padding: 10upx 50upx;
 		border-radius: 20upx;
 
 		.money_item {
