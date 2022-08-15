@@ -4,8 +4,9 @@
 			<view class="cu-form-group margin-top">
 				<view class="title">手机号</view>
 				<input placeholder="请输入手机号" type="number" disabled="disabled" name="input" v-model="phone"></input>
+				<!-- #ifdef MP-WEIXIN -->
 				<button  class="cu-btn bg-green" open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">获取手机号</button>
-				
+				<!-- #endif -->
 			</view>
 		</form>
 		
