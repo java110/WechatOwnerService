@@ -119,7 +119,7 @@
 						src: this.imgUrl+"/h5/images/serve/my2.png",
 						href: "/pages/questionAnswer/questionAnswer"
 					}, {
-						name: "反省上报",
+						name: "返省上报",
 						src: this.imgUrl+"/h5/images/serve/my3.png",
 						href: "/pages/reportInfoBack/reportInfoBack",
 						needLogin: 'N'
