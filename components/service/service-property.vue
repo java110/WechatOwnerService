@@ -127,12 +127,12 @@
 					{
 						name: '空置房申请',
 						src: this.imgUrl+'/h5/images/serve/my9.png',
-						href: '/pages/myApplyRoom/myRoomList'
+						href: '/pages/applyRoomDetail/applyRoomDetail'
 					},
 					{
 						name: '房屋装修',
 						src: this.imgUrl+'/h5/images/serve/15.png',
-						href: '/pages/myRenovation/myRoomList'
+						href: '/pages/roomRenovationDetail/roomRenovationDetail'
 					}
 				];
 			}
