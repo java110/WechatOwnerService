@@ -8,9 +8,9 @@
 import {
 	request
 } from '../../lib/java110/java110Request.js'
-import 
-	url
- from '../../constant/url.js'
+import
+url
+from '../../constant/url.js'
 
 import mapping from '../../constant/MappingConstant.js'
 
@@ -26,14 +26,14 @@ export function getCurOwner() {
 			} else {
 				//查询用户信息
 				let _userInfo = wx.getStorageSync(mapping.USER_INFO);
-				if(!_userInfo){
+				if (!_userInfo) {
 					reject();
-					return ;
+					return;
 				}
 				request({
 					url: url.queryAppUserBindingOwner,
 					data: {
-						openId:JSON.parse(_userInfo).openId
+						openId: JSON.parse(_userInfo).openId
 					},
 					success: function(res) {
 						let _json = res.data;
@@ -50,7 +50,8 @@ export function getCurOwner() {
 									communityId: _ownerInfo.communityId,
 									communityName: _ownerInfo.communityName
 								};
-								wx.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+								wx.setStorageSync(mapping.CURRENT_COMMUNITY_INFO,
+								_currentCommunityInfo);
 							}
 							resolve(_json.data[0]);
 						}
@@ -64,8 +65,48 @@ export function getCurOwner() {
 		});
 }
 
+/**
+ * 查询当前业主信息
+ */
+export function refreshOwner() {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.queryAppUserBindingOwner,
+				data: {
+					openId: JSON.parse(_userInfo).openId
+				},
+				success: function(res) {
+					let _json = res.data;
+					if (_json.code == 0) {
+						_ownerInfo = _json.data[0];
+						if (_ownerInfo == null || _ownerInfo == undefined) {
+							//没有业主信息
+							reject();
+							return;
+						}
+						if (_ownerInfo.state == '12000') {
+							wx.setStorageSync(mapping.OWNER_INFO, _ownerInfo);
+							let _currentCommunityInfo = {
+								communityId: _ownerInfo.communityId,
+								communityName: _ownerInfo.communityName
+							};
+							wx.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
+						}
+						resolve(_json.data[0]);
+					}
+				},
+				fail: function(error) {
+					// 查询失败
+					reject();
+				}
+			});
+		});
+}
 
-export function getUserAddress(_data){
+
+
+export function getUserAddress(_data) {
 	return new Promise((resolve, reject) => {
 		let moreRooms = [];
 		request({
@@ -76,7 +117,7 @@ export function getUserAddress(_data){
 				let _data = res.data;
 				if (_data.code == 0) {
 					resolve(_data);
-					return ;
+					return;
 				}
 				reject(_data.msg);
 			},
@@ -91,25 +132,25 @@ export function getUserAddress(_data){
  * add by wuxw
  * @param {Object} _data 保存 用户地址
  */
-export function saveUpdateUserAddress(_data){
-	
+export function saveUpdateUserAddress(_data) {
+
 	return new Promise((resolve, reject) => {
-		
-		if(_data.userId == ''){
+
+		if (_data.userId == '') {
 			reject("用户不能为空");
-			return ;
-		}else if(_data.areaCode == ''){
+			return;
+		} else if (_data.areaCode == '') {
 			reject("地区不能为空");
-			return ;
-		}else if(_data.tel == ''){
+			return;
+		} else if (_data.tel == '') {
 			reject("手机号不能为空");
-			return ;
-		}else if(_data.address == ''){
+			return;
+		} else if (_data.address == '') {
 			reject("地址不能为空");
-			return ;
-		}else if(_data.isDefault == ''){
+			return;
+		} else if (_data.isDefault == '') {
 			reject("默认地址不能为空");
-			return ;
+			return;
 		}
 		let moreRooms = [];
 		request({
@@ -120,7 +161,7 @@ export function saveUpdateUserAddress(_data){
 				let _data = res.data;
 				if (_data.code == 0) {
 					resolve(_data);
-					return ;
+					return;
 				}
 				reject(_data.msg);
 			},
@@ -135,16 +176,16 @@ export function saveUpdateUserAddress(_data){
  * add by wuxw
  * @param {Object} _data 保存 用户地址
  */
-export function deleteUserAddress(_data){
-	
+export function deleteUserAddress(_data) {
+
 	return new Promise((resolve, reject) => {
-		
-		if(_data.userId == ''){
+
+		if (_data.userId == '') {
 			reject("用户不能为空");
-			return ;
-		}else if(_data.addressId == ''){
+			return;
+		} else if (_data.addressId == '') {
 			reject("地址不能为空");
-			return ;
+			return;
 		}
 		request({
 			url: url.deleteUserAddress,
@@ -154,7 +195,7 @@ export function deleteUserAddress(_data){
 				let _data = res.data;
 				if (_data.code == 0) {
 					resolve(_data);
-					return ;
+					return;
 				}
 				reject(_data.msg);
 			},
@@ -169,16 +210,16 @@ export function deleteUserAddress(_data){
  * add by wuxw
  * @param {Object} _data 删除家庭成员
  */
-export function deleteOwnerMember(_data){
-	
+export function deleteOwnerMember(_data) {
+
 	return new Promise((resolve, reject) => {
-		
-		if(_data.memberId == ''){
+
+		if (_data.memberId == '') {
 			reject("成员ID不能为空");
-			return ;
-		}else if(_data.communityId == ''){
+			return;
+		} else if (_data.communityId == '') {
 			reject("小区不能为空");
-			return ;
+			return;
 		}
 		request({
 			url: url.deleteOwner,
@@ -188,7 +229,7 @@ export function deleteOwnerMember(_data){
 				let _data = res.data;
 				if (_data.code == 0) {
 					resolve(_data);
-					return ;
+					return;
 				}
 				reject(_data.msg);
 			},
@@ -202,35 +243,35 @@ export function deleteOwnerMember(_data){
  * 判断是否存在业主
  * 
  */
-export function hasOwner(){
+export function hasOwner() {
 	let loginFlag = wx.getStorageSync(mapping.LOGIN_FLAG);
 	let nowDate = new Date();
 	//判断如果是APP
 	if (!loginFlag || loginFlag.expireTime < nowDate.getTime()) {
-		return ;
+		return;
 	}
 	let _ownerInfo = wx.getStorageSync(mapping.OWNER_INFO);
-	if(!_ownerInfo){
+	if (!_ownerInfo) {
 		uni.showToast({
-			icon:'none',
-			title:'未查询到业主房产'
+			icon: 'none',
+			title: '未查询到业主房产'
 		})
 		throw new Error('业主不存在');
 	}
-	
+
 	let _memberId = _ownerInfo.memberId;
-	if(!_memberId){
+	if (!_memberId) {
 		uni.showToast({
-			icon:'none',
-			title:'未查询到业主房产'
+			icon: 'none',
+			title: '未查询到业主房产'
 		})
 		throw new Error('业主不存在');
 	}
-	if(_memberId == '-1'){
+	if (_memberId == '-1') {
 		uni.showToast({
-			icon:'none',
-			title:'未查询到业主房产'
+			icon: 'none',
+			title: '未查询到业主房产'
 		})
-		throw new Error('业主不存在');	
+		throw new Error('业主不存在');
 	}
 }

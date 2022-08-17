@@ -88,6 +88,7 @@
 	
 	import context from '../../lib/java110/Java110Context.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import {refreshOwner} from '@/api/owner/ownerApi.js'
 	
 	const constant = context.constant;
 	const factory = context.factory;
@@ -152,10 +153,10 @@
 			 */
 			loadOwnerHeaderImg: function() {
 				let _that = this;
-				context.getOwner(function(_owner) {
-					let _headerImg = constant.url.getOwnerPhotoPath + "?objId=" + _owner.memberId + "&communityId=" + _owner.communityId +
-						"&fileTypeCd=10000";
-					_that.headerImg = _headerImg;
+				refreshOwner().then(_owner=>{
+					_that.headerImg = _owner.headerImgUrl;
+				},err=>{
+					
 				});
 			},
 			_uploadOwnerHeaderImg: function() {
