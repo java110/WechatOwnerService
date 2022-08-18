@@ -39,7 +39,9 @@
 
 	import {
 		hasOwner
-	} from '../../api/owner/ownerApi.js'
+	} from '../../api/owner/ownerApi.js';
+	
+	import conf from '@/conf/config.js'
 	export default {
 		data() {
 			return {
@@ -68,6 +70,9 @@
 		 */
 		onLoad: function(options) {
 			let _that = this;
+			uni.setNavigationBarTitle({
+				title:conf.systemName
+			})
 			this.vc.onLoad(options);
 			//查询目录
 		},

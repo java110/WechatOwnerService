@@ -147,6 +147,7 @@ export default {
 	saveAddVisit: baseUrl + "callComponent/addVisit/save",
 	queryReportInfoAnswerByOpenId : baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
 	listOwnerVisit: baseUrl + "callComponent/visitManage/list",
+		listSystemInfo:baseUrl+"app/system.listSystemInfo",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

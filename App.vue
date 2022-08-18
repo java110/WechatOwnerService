@@ -4,7 +4,12 @@
 	const loginFactory = context.factory.login;
 	const userFactory = context.factory.user;
 	
-	import {reciveMessage} from './api/webView/webViewApi.js'
+	import {reciveMessage} from './api/webView/webViewApi.js';
+	
+	import {requestNoAuth} from './lib/java110/java110Request.js';
+	
+	
+	import url from './constant/url.js'
 
 	export default {
 		// 小程序启动生命周期
@@ -24,6 +29,24 @@
 			      animationType:'slide-in-bottom'
 			     })
 			    })   
+				
+				requestNoAuth({
+					url: url.listSystemInfo,
+					method: "GET",
+					data: {
+						page:1,
+						row:1
+					},
+					success: function(res) {
+						console.log(res.data);
+						if(res.data.data && res.data.data.length >0){
+							uni.setStorageSync('java110SystemConfig',res.data.data[0])
+						}
+						//reslove(res);
+					},
+					fail: function(e) {}
+				
+				});
 		},
 		// app全局数据
 		globalData: {

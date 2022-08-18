@@ -7,7 +7,7 @@
  * @author 吴学文
  * @QQ 928255095
  */
-
+let _systemConfig = uni.getStorageSync('java110SystemConfig');
 // #ifdef H5
 // 服务器域名 公众号时，配置为 / 就可以
 const baseUrl = '/';
@@ -15,26 +15,18 @@ const baseUrl = '/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://demo.homecommunity.cn/';
+const baseUrl = 'http://192.168.1.108:8088/';
 // #endif
 
-const commonBaseUrl = 'http://demo.homecommunity.cn/';
+let commonBaseUrl = 'http://demo.homecommunity.cn/';
 
 //商城的url
-const mallUrl = 'http://mallapp.homecommunity.cn/';
-
-const mallUrlIndexPage = mallUrl + '#/pages/index/index?mallFrom=HC';
-
-//商城token 刷新页面
-const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
-
-
+let mallUrl = 'http://mallapp.homecommunity.cn/';
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
 
-const DEFAULT_COMMUNITY_ID = "2021081177860471"; //HC测试小区id  用于没有登录时展示相关信息
-const DEFAULT_COMMUNITY_NAME = "HC演示小区";
-
+let DEFAULT_COMMUNITY_ID = "2021081177860471"; //HC测试小区id  用于没有登录时展示相关信息
+let DEFAULT_COMMUNITY_NAME = "HC演示小区";
 
 // APP 或者 公众号  appId
 const wAppId = ""; //微信AppId
@@ -43,6 +35,22 @@ const wAppId = ""; //微信AppId
 const appPayKey = "";
 
 const logLevel = "DEBUG"; // 日志级别
+
+let systemName="业主版";
+
+if(_systemConfig){
+	mallUrl = _systemConfig.mallUrl;
+	commonBaseUrl = _systemConfig.imgUrl;
+	systemName = _systemConfig.ownerTitle;
+	DEFAULT_COMMUNITY_ID = _systemConfig.defaultCommunityId;
+}
+
+const mallUrlIndexPage = mallUrl + '#/pages/index/index?mallFrom=HC';
+
+//商城token 刷新页面
+const mallUrlRefresh = mallUrl + "#/pages/mallTokenRefresh/mallTokenRefresh?mallFrom=HC"
+
+
 
 export default {
 	baseUrl: baseUrl,
@@ -55,5 +63,6 @@ export default {
 	wAppId: wAppId,
 	logLevel: logLevel,
 	appPayKey: appPayKey,
-	imgUrl:commonBaseUrl
+	imgUrl:commonBaseUrl,
+	systemName:systemName
 }
