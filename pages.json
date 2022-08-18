@@ -600,12 +600,14 @@
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
+			// #ifdef H5
 			{
 				"pagePath": "pages/mall/mall",
 				"text": "商圈",
 				"iconPath": "static/images/market.png",
 				"selectedIconPath": "static/images/market-selected.png"
 			},
+			// #endif
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",

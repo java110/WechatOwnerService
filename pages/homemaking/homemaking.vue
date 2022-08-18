@@ -1,7 +1,9 @@
 <template>
 	<view>
 		<service-property></service-property>
+		<!-- #ifdef H5 -->
 		<service-homemaking></service-homemaking>
+		<!-- #endif -->
 	</view>
 </template>
 

@@ -2,7 +2,7 @@
 	<view>
 		<view class="user-container bg-white my_user">
 			<view class="userinfo" :style="{background: 'url('+topImg+') no-repeat center center'}" >
-				<view class="already" v-if="login">
+				<view class="wait" v-if="login">
 					<view class="cu-avatar header-img round " :style="{ backgroundImage: 'url(' + headerImg + ')' }">
 					</view>
 					<view class="userinfo-nickname margin-top">
@@ -192,12 +192,9 @@
 	}
 
 	.userinfo {
-		height: 200upx;
+		height: 280upx;
 		//background: url('/static/images/serve/bg.png') no-repeat center center;
 		background-size: 100% 100%;
-
-		padding: 30upx 0;
-
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -210,7 +207,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		width: 100%;
-		padding: 0 15%;
+		padding: 0 20%;
 	}
 
 	.userinfo-nickname {
@@ -220,6 +217,7 @@
 		flex-direction: column;
 		color: #fff;
 		margin: 0 !important;
+		height: 280upx;
 	}
 
 	.money_box {
