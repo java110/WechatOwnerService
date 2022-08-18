@@ -135,7 +135,7 @@ export default {
 	// 空置房跟踪记录详情
 	listApplyRoomDiscountRecordDetail: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecordDetail",
 	// 查询房屋费用项
-	listRoomFee: baseUrl + "callComponent/listRoomFee/list",
+	listRoomFee: baseUrl + "app/fee.listFee",
 	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
 	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
 	ownerCommunity: baseUrl + "app/owner.ownerCommunity",
@@ -144,9 +144,9 @@ export default {
 	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
 	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
-	saveAddVisit: baseUrl + "callComponent/addVisit/save",
+	saveAddVisit: baseUrl + "app/visit.saveVisit",
 	queryReportInfoAnswerByOpenId : baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
-	listOwnerVisit: baseUrl + "callComponent/visitManage/list",
+	listOwnerVisit: baseUrl + "app/visit.listVisits",
 		listSystemInfo:baseUrl+"app/system.listSystemInfo",
 
 	NEED_NOT_LOGIN_PAGE: [
