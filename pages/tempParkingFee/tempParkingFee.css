@@ -206,3 +206,13 @@
 		width: 46rpx;
 		height: 38rpx;
 	}
+	
+	.temp-history{
+		font-size: 38upx;
+		color: #888888;
+	}
+	
+	.temp-remark{
+		margin-top: 300upx;
+		color: #888888;
+	}

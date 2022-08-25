@@ -63,9 +63,13 @@
 				</view>
 			</view>
 		</scroll-view>
+		<view class="temp-remark">
+			<view>临停缴费提示</view>
+			<view>1、支付后请在15分钟内离场，否则会产生新的停车费：</view>
+			<view>2、缴费前请仔细核对停车场、停车时间、支付金额。</view>
+		</view>
 	</view>
-
-	</view>
+	
 </template>
 
 <script>
@@ -253,5 +257,8 @@
 
 	.line-height {
 		line-height: 100upx;
+	}
+	.temp-remark{
+		color: #888888;
 	}
 </style>

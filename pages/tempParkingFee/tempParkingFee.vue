@@ -46,10 +46,12 @@
 				</view>
 			</view>
 
+			<view class=" temp-history">
 			<view class="padding"><text>往期记录</text></view>
-			<view>
-				<view class="padding" v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
+			<view class="flex justify-start">
+				<view class="padding-left" v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
 				</view>
+			</view>
 			</view>
 			<view class='plate-input-flag' bindtap='changeplate'>
 				<text>{{carNumBtn}}</text>
@@ -59,6 +61,13 @@
 			<view class="cu-bar btn-group" style="margin-top: 30px;">
 				<button @click="_queryCarNum" :disabled="carNum.length< 7"
 					class="cu-btn bg-green shadow-blur round lg">立即查询</button>
+			</view>
+			
+			<view class="temp-remark">
+				<view>临停支付说明</view>
+				<view>1、若因特殊原因无法查询车辆信息，请联系停车场人工处理：</view>
+				<view>2、查询缴费前请仔细核对停车场及车牌号：</view>
+				<view>3、若长时间无法加载页面，请检查网络是否畅通或扫码重试。</view>
 			</view>
 		</view>
 
