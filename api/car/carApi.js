@@ -48,7 +48,7 @@ export function getCars(_objData) {
 
 export function queryWaitPayFeeTempCar(_objData) {
 	return new Promise((resolve, reject) => {
-		request({
+		requestNoAuth({
 			url: url.queryWaitPayFeeTempCar,
 			method: "GET",
 			data:_objData,

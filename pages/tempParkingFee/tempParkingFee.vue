@@ -86,7 +86,7 @@
 
 	import {
 		queryWaitPayFeeTempCar
-	} from '@/api/car/carApi.js'
+	} from '@/api/car/carApi.js';
 	export default {
 		data() {
 			return {
