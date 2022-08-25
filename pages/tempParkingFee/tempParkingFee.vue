@@ -46,9 +46,9 @@
 				</view>
 			</view>
 
-			<view><text>往期记录</text></view>
+			<view class="padding"><text>往期记录</text></view>
 			<view>
-				<view v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
+				<view class="padding" v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
 				</view>
 			</view>
 			<view class='plate-input-flag' bindtap='changeplate'>
