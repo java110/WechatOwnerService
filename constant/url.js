@@ -148,6 +148,8 @@ export default {
 	queryReportInfoAnswerByOpenId : baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
 	listOwnerVisit: baseUrl + "app/visit.listVisits",
 		listSystemInfo:baseUrl+"app/system.listSystemInfo",
+		queryWaitPayFeeTempCar:baseUrl+"app/car.queryWaitPayFeeTempCar",
+		
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

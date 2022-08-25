@@ -45,6 +45,27 @@ export function getCars(_objData) {
 	});
 };
 
+
+export function queryWaitPayFeeTempCar(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.queryWaitPayFeeTempCar,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//将业主信息和房屋信息一起返回
+					resolve(res.data);
+				} else {
+					reject("查询车辆失败");
+				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
 /**
  * 保存业主车辆
  */

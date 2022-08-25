@@ -45,6 +45,12 @@
 					</view>
 				</view>
 			</view>
+
+			<view><text>往期记录</text></view>
+			<view>
+				<view v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
+				</view>
+			</view>
 			<view class='plate-input-flag' bindtap='changeplate'>
 				<text>{{carNumBtn}}</text>
 			</view>
@@ -76,7 +82,11 @@
 	} from '../../api/user/userApi.js'
 	import {
 		isWxOrAli
-	} from '../../lib/java110/utils/EnvUtil.js'
+	} from '../../lib/java110/utils/EnvUtil.js';
+
+	import {
+		queryWaitPayFeeTempCar
+	} from '@/api/car/carApi.js'
 	export default {
 		data() {
 			return {
@@ -95,7 +105,8 @@
 				paId: '',
 				appId: '',
 				openId: '',
-				machineId:'',
+				machineId: '',
+				carNums: []
 			}
 		},
 		components: {
@@ -106,23 +117,13 @@
 			this.appId = options.appId;
 			this.openId = options.openId;
 			this.machineId = options.machineId;
-			uni.setStorageSync(mapping.W_APP_ID,this.appId)
+			uni.setStorageSync(mapping.W_APP_ID, this.appId)
 			if (!isNotNull(this.openId)) {
 				//刷新 openId
 				this._refreshWechatOpenId();
 				return;
 			}
-			this.carNum = options.carNum;
-			if (isNotNull(this.carNum)) {
-				uni.navigateTo({
-					url: '/pages/tempCarFee/tempCarFee?paId=' + this.paId + '&carNum=' + this
-						.carNum + "&appId=" + this.appId + "&openId=" + this.openId+"&machineId="+this.machineId
-				})
-				return;
-			}else{
-				this.carNum="";
-				return;
-			}
+			this._loadExistsCarNum();
 		},
 		methods: {
 			showCarNumberKeyboard() {
@@ -191,7 +192,8 @@
 					}
 					uni.navigateTo({
 						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
-							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
+							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId +
+							"&machineId=" + this.machineId
 					})
 				})
 			},
@@ -208,7 +210,7 @@
 				let _redirectUrl = window.location.href;
 				refreshUserOpenId({
 					redirectUrl: _redirectUrl,
-					wAppId: this.appId
+					wAppId: this.appId,
 				}).then(_data => {
 					console.log(_data, 123)
 					if (_data.code == 0) {
@@ -216,6 +218,48 @@
 						return;
 					}
 				});
+			},
+			_loadExistsCarNum: function() {
+				let _that = this;
+				queryWaitPayFeeTempCar({
+					openId: this.openId,
+					machineId: this.machineId
+				}).then(_json => {
+					_that.carNums = _json.data;
+					if (_json.data && _json.data.length == 1) {
+						_that.carNum = _json.data[0].carNum;
+						_that._queryCarNum();
+					}
+				})
+			},
+			_loadTempFee: function(_carNum) {
+				this.carNum = _carNum;
+				if (_carNum.length > 0) {
+					this.inputPlates.index0 = _carNum[0];
+				}
+				if (_carNum.length > 1) {
+					this.inputPlates.index1 = _carNum[1];
+				}
+				if (_carNum.length > 2) {
+					this.inputPlates.index2 = _carNum[2];
+				}
+				if (_carNum.length > 3) {
+					this.inputPlates.index3 = _carNum[3];
+				}
+				if (_carNum.length > 4) {
+					this.inputPlates.index4 = _carNum[4];
+				}
+				if (_carNum.length > 5) {
+					this.inputPlates.index5 = _carNum[5];
+				} 
+				if (_carNum.length > 6) {
+					this.inputPlates.index6 = _carNum[6];
+				} 
+				if (_carNum.length > 7) {
+					this.inputPlates.index7 = _carNum[7];
+				} 
+				//查询
+				this._queryCarNum();
 			}
 		}
 	}
