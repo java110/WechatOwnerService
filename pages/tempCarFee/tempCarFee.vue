@@ -53,21 +53,22 @@
 						<view>{{couponAmount+ '元' }}</view>
 					</view>
 				</view>
-				<view class="cu-bar btn-group" style="margin-top: 30px;">
+				<view class="cu-bar btn-group" style="margin-top: 20upx;">
 					<button @click="onPayFee" :disabled="amount == 0"
 						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
 				</view>
-				<view class="cu-bar btn-group" style="margin-top: 30px;">
+				<view class="cu-bar btn-group" style="margin-top: 20upx;">
 					<button @click="onReQuery()"
 						class="cu-btn bg-grey shadow-blur round lg">重新查询</button>
 				</view>
 			</view>
+			<view class="temp-remark">
+				<view>临停缴费提示</view>
+				<view>1、支付后请在15分钟内离场，否则会产生新的停车费：</view>
+				<view>2、缴费前请仔细核对停车场、停车时间、支付金额。</view>
+			</view>
 		</scroll-view>
-		<view class="temp-remark">
-			<view>临停缴费提示</view>
-			<view>1、支付后请在15分钟内离场，否则会产生新的停车费：</view>
-			<view>2、缴费前请仔细核对停车场、停车时间、支付金额。</view>
-		</view>
+		
 	</view>
 	
 </template>
@@ -241,7 +242,7 @@
 	}
 
 	.fee-last {
-		margin-bottom: 200upx;
+		margin-bottom: 100upx;
 	}
 
 	.cu-btn.lgplus {
