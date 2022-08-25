@@ -85,6 +85,7 @@
 			return {
 				paId: '',
 				carNum: '',
+				machineId:'',
 				stopTimeTotal: 0,
 				inTime: '',
 				amount: 0.0,
@@ -105,6 +106,7 @@
 			this.paId = options.paId;
 			this.carNum = options.carNum;
 			this.appId = options.appId;
+			this.machineId = options.machineId;
 			this._loadTempCarFee();
 		},
 		onShow: function(options) {
@@ -172,7 +174,8 @@
 					tradeType: _tradeType,
 					appId: this.appId,
 					inoutId: this.inoutId,
-					couponList: this.couponList
+					couponList: this.couponList,
+					machineId:this.machineId
 				};
 				toPayTempCarFee(_objData)
 				.then(_data=>{
@@ -201,7 +204,7 @@
 			},
 			onReQuery:function(){
 				uni.navigateTo({
-					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId
+					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
 				})
 			}
 			

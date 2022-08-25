@@ -95,6 +95,7 @@
 				paId: '',
 				appId: '',
 				openId: '',
+				machineId:'',
 			}
 		},
 		components: {
@@ -104,6 +105,7 @@
 			this.paId = options.paId;
 			this.appId = options.appId;
 			this.openId = options.openId;
+			this.machineId = options.machineId;
 			uni.setStorageSync(mapping.W_APP_ID,this.appId)
 			if (!isNotNull(this.openId)) {
 				//刷新 openId
@@ -114,7 +116,7 @@
 			if (isNotNull(this.carNum)) {
 				uni.navigateTo({
 					url: '/pages/tempCarFee/tempCarFee?paId=' + this.paId + '&carNum=' + this
-						.carNum + "&appId=" + this.appId + "&openId=" + this.openId
+						.carNum + "&appId=" + this.appId + "&openId=" + this.openId+"&machineId="+this.machineId
 				})
 				return;
 			}else{
@@ -189,7 +191,7 @@
 					}
 					uni.navigateTo({
 						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
-							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId
+							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
 					})
 				})
 			},

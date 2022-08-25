@@ -23,5 +23,19 @@
   "bugs": {
     "url": "https://github.com/java110/WechatOwnerService/issues"
   },
-  "homepage": "https://github.com/java110/WechatOwnerService#readme"
+  "homepage": "https://github.com/java110/WechatOwnerService#readme",
+  "uni-app": {
+  			"scripts": {
+  			"WUYE": {
+  				"title":"业主端不包含商城",
+  				"BROWSER":"",
+  				"env": {
+  					"UNI_PLATFORM": "h5"
+  				 },
+  				"define": {
+  					"WUYE": true
+  				}
+  			}
+  		}   
+  	}
 }
