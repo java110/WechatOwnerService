@@ -261,5 +261,6 @@
 	}
 	.temp-remark{
 		color: #888888;
+		padding:10upx;
 	}
 </style>
