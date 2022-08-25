@@ -203,8 +203,12 @@
 				})
 			},
 			onReQuery:function(){
-				uni.navigateTo({
-					url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
+				// uni.navigateTo({
+				// 	url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
+				// })
+				
+				uni.navigateBack({
+					delta:1
 				})
 			}
 			
