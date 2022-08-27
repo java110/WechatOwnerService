@@ -47,11 +47,12 @@
 			</view>
 
 			<view class=" temp-history">
-			<view class="padding"><text>往期记录</text></view>
-			<view class="flex justify-start">
-				<view class="padding-left" v-for="(item,index) in carNums" :key="index" @tap="_loadTempFee(item.carNum)">{{item.carNum}}
+				<view class="padding"><text>往期记录</text></view>
+				<view class="flex justify-start">
+					<view class="padding-left" v-for="(item,index) in carNums" :key="index"
+						@tap="_loadTempFee(item.carNum)">{{item.carNum}}
+					</view>
 				</view>
-			</view>
 			</view>
 			<view class='plate-input-flag' bindtap='changeplate'>
 				<text>{{carNumBtn}}</text>
@@ -62,7 +63,7 @@
 				<button @click="_queryCarNum" :disabled="carNum.length< 7"
 					class="cu-btn bg-green shadow-blur round lg">立即查询</button>
 			</view>
-			
+
 			<view class="temp-remark">
 				<view>临停支付说明</view>
 				<view>1、若因特殊原因无法查询车辆信息，请联系停车场人工处理：</view>
@@ -87,7 +88,8 @@
 		isNotNull
 	} from '../../lib/java110/utils/StringUtil.js'
 	import {
-		refreshUserOpenId
+		refreshUserOpenId,
+		getOpenIdFromAliPay
 	} from '../../api/user/userApi.js'
 	import {
 		isWxOrAli
@@ -113,23 +115,40 @@
 				carNum: '',
 				paId: '',
 				appId: '',
+				aliAppId: '',
 				openId: '',
 				machineId: '',
+				communityId:'',
 				carNums: []
 			}
 		},
 		components: {
 			selectCarNum
 		},
+		mounted() {
+			// #ifdef H5
+			if (isWxOrAli() == "ALIPAY") {
+				const oScript = document.createElement('script');
+				oScript.type = 'text/javascript';
+				oScript.src = 'https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js';
+				document.body.appendChild(oScript);
+			}
+			// #endif
+		},
 		onLoad(options) {
 			this.paId = options.paId;
 			this.appId = options.appId;
 			this.openId = options.openId;
 			this.machineId = options.machineId;
+			this.communityId = options.communityId;
 			uni.setStorageSync(mapping.W_APP_ID, this.appId)
 			if (!isNotNull(this.openId)) {
 				//刷新 openId
-				this._refreshWechatOpenId();
+				if (isWxOrAli() == 'ALIPAY') {
+					this._refreshAliPayOpenId();
+				} else {
+					this._refreshWechatOpenId();
+				}
 				return;
 			}
 			this._loadExistsCarNum();
@@ -206,16 +225,28 @@
 					})
 				})
 			},
+			_refreshAliPayOpenId: function() {
+				// console.log("判断微信还是支付宝");
+				// console.log(isWxOrAli());
+				let _that = this;
+				ap.getAuthCode({
+					appId: this.aliAppId,
+					scopes: ['auth_base'],
+				}, function(res) {
+					ap.alert(JSON.stringify(res));
+					getOpenIdFromAliPay({
+						authCode:res.authCode,
+						communityId:_that.communityId
+					}).then(_data=>{
+						_that.openId = _data.data;
+						_that._loadExistsCarNum();
+					})
+				});
+
+			},
 			_refreshWechatOpenId: function() {
 				// console.log("判断微信还是支付宝");
 				// console.log(isWxOrAli());
-				// if (isWxOrAli() == 'AliPay') {
-				// 	uni.showToast({
-				// 		icon: 'none',
-				// 		title: '支付宝暂时未开通，敬请期待'
-				// 	})
-				// 	return;
-				// }
 				let _redirectUrl = window.location.href;
 				refreshUserOpenId({
 					redirectUrl: _redirectUrl,
@@ -230,9 +261,14 @@
 			},
 			_loadExistsCarNum: function() {
 				let _that = this;
+				let _openType = "WECHAT";
+				if(isWxOrAli == 'ALIPAY'){
+					_openType = 'ALIPAY'
+				}
 				queryWaitPayFeeTempCar({
 					openId: this.openId,
-					machineId: this.machineId
+					machineId: this.machineId,
+					openType:_openType
 				}).then(_json => {
 					_that.carNums = _json.data;
 					if (_json.data && _json.data.length == 1) {
@@ -260,13 +296,13 @@
 				}
 				if (_carNum.length > 5) {
 					this.inputPlates.index5 = _carNum[5];
-				} 
+				}
 				if (_carNum.length > 6) {
 					this.inputPlates.index6 = _carNum[6];
-				} 
+				}
 				if (_carNum.length > 7) {
 					this.inputPlates.index7 = _carNum[7];
-				} 
+				}
 				//查询
 				this._queryCarNum();
 			}
