@@ -149,6 +149,9 @@ export default {
 	listOwnerVisit: baseUrl + "app/visit.listVisits",
 		listSystemInfo:baseUrl+"app/system.listSystemInfo",
 		queryWaitPayFeeTempCar:baseUrl+"app/car.queryWaitPayFeeTempCar",
+		payTempCarFee:baseUrl+"app/alipay.payTempCarFee",
+		
+		
 		
 
 	NEED_NOT_LOGIN_PAGE: [

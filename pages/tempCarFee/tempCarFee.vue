@@ -79,12 +79,18 @@
 	const constant = context.constant;
 	// #ifdef H5
 	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
+	const AliPayFactory = require('../../factory/AliPayFactory.js');
 	// #endif
 	import {
 		getTempCarFeeOrder,
-		toPayTempCarFee
-	} from '../../api/fee/feeApi.js'
-
+		toPayTempCarFee,
+		toAliPayTempCarFee
+	} from '../../api/fee/feeApi.js';
+	
+	import {
+		isWxOrAli
+	} from '../../lib/java110/utils/EnvUtil.js';
+	
 	export default {
 		data() {
 			return {
@@ -166,6 +172,57 @@
 				})
 			},
 			onPayFee: function() {
+				if(isWxOrAli == 'ALIPAY'){
+					onAliPayPayFee();
+				}else{
+					onWxPayFee();
+				}
+			},
+			onAliPayPayFee:function(){
+				let _receivedAmount = this.receivableAmount;
+				wx.showLoading({
+					title: '支付中'
+				});
+				let _tradeType = 'JSAPI';
+				let _objData = {
+					carNum: this.carNum,
+					openId: this.openId,
+					paId: this.paId,
+					feeName: '停车费',
+					tradeType: _tradeType,
+					appId: this.appId,
+					inoutId: this.inoutId,
+					couponList: this.couponList,
+					machineId:this.machineId
+				};
+				toAliPayTempCarFee(_objData)
+				.then(_data=>{
+					if (_data.code == '0') {
+						// #ifdef H5	
+						AliPayFactory.aliPay({
+							tradeNO:_data.data
+						}, function() {
+							uni.showToast({
+								title: "支付成功",
+								duration: 2000
+							});
+							uni.navigateBack({
+								delta:1
+							});
+						});
+						// #endif
+						wx.hideLoading();
+						return;
+					}
+					wx.hideLoading();
+					wx.showToast({
+						title: "缴费失败",
+						icon: 'none',
+						duration: 2000
+					});
+				})
+			},
+			onWxPayFee:function(){
 				let _receivedAmount = this.receivableAmount;
 				wx.showLoading({
 					title: '支付中'
