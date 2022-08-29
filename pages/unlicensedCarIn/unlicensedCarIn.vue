@@ -55,6 +55,22 @@
 					class="cu-btn bg-green shadow-blur round lg">立即入场</button>
 			</view>
 		</view>
+		
+		<view class="cu-modal" :class="showToastFlag==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">温馨提示</view>
+					<view class="action">
+					</view>
+				</view>
+				<view class="padding-xl">
+					车牌号提交成功!
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_closeToastModal()">关闭</view>
+				</view>
+			</view>
+		</view>
 
 		<select-car-num ref="popupCarNumber" type="bottom" @confirm="confirmGuaCarNumber" @getCarNum="getCarNum"
 			:gua="false"></select-car-num>
@@ -95,6 +111,7 @@
 				communityId: '',
 				appId: '',
 				machineId: '',
+				showToastFlag:false,
 			}
 		},
 		components: {
@@ -173,13 +190,13 @@
 						})
 						return;
 					}
-					uni.showToast({
-						icon: 'none',
-						title: '车牌号提交成功！'
-					})
-					window.location.reload();
+					this.showToastFlag = true;
+					
 					return;
 				})
+			},
+			_closeToastModal:function(){
+				window.location.reload();
 			}
 		}
 	}
