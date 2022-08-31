@@ -55,7 +55,7 @@
 		},
 		methods: {
 			sendMsgCode: function() {
-				var _that = this;
+				let _that = this;
 				let obj = {
 					tel: this.link
 				};
@@ -87,9 +87,9 @@
 						//成功情况下跳转
 						if (res.statusCode == 200) {
 							wx.showToast({
-								title: '验证码下发成功',
+								title: res.data,
 								icon: 'none',
-								duration: 2000
+								duration: 3000
 							});
 							_that.codeMsg = res.data;
 							wx.hideLoading();
