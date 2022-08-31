@@ -88,10 +88,11 @@
 	
 	import context from '../../lib/java110/Java110Context.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
-	import {refreshOwner} from '@/api/owner/ownerApi.js'
-	
+	import {refreshOwner} from '@/api/owner/ownerApi.js';
+	import conf from '@/conf/config.js';
 	const constant = context.constant;
 	const factory = context.factory;
+	
 	export default {
 		data() {
 			return {
@@ -112,7 +113,7 @@
 				return;
 			}
 			this.loadOwnerHeaderImg();
-
+			
 		},
 		methods: {
 			settingHeadImg: function() {
@@ -134,14 +135,12 @@
 						//#ifdef H5
 						TanslateImage.translate(tempFilePaths, (_baseInfo) => {
 							_that.headerImg = _baseInfo;
-							_that._uploadOwnerHeaderImg();
 							wx.hideLoading()
 						})
 						//#endif
 						//#ifdef MP-WEIXIN
 						factory.base64.urlTobase64(tempFilePaths[0]).then(function(_baseInfo) {
 							_that.headerImg = _baseInfo;
-							_that._uploadOwnerHeaderImg();
 							wx.hideLoading()
 						});
 						//#endif
@@ -152,9 +151,14 @@
 			 * 查询业主头像
 			 */
 			loadOwnerHeaderImg: function() {
+				console.log('loadOwnerHeaderImg')
 				let _that = this;
 				refreshOwner().then(_owner=>{
-					_that.headerImg = _owner.headerImgUrl;
+					if(_owner.headImgUrl ){
+						_that.headerImg = _owner.headImgUrl;
+					}else{
+						_that.headerImg = conf.imgUrl+'/h5/images/serve/head.png';
+					}	
 				},err=>{
 					
 				});
@@ -184,6 +188,8 @@
 								});
 								return;
 							}
+							
+							_that.loadOwnerHeaderImg();
 						},
 						fail: function(e) {
 							wx.showToast({

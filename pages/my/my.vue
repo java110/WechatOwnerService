@@ -3,7 +3,7 @@
 		<!--index.wxml-->
 		<my-person ref="myPersonRef"></my-person>
 
-		<my-menu ></my-menu>
+		<my-menu></my-menu>
 
 		<my-system ref="mySystem"></my-system>
 	</view>
@@ -46,7 +46,7 @@
 	import mySystem from '@/components/my/my-system.vue'
 	export default {
 		data() {
-			return {	
+			return {
 				property: {},
 				// 用户信息	
 			};
@@ -64,8 +64,13 @@
 		},
 		onShow: function() {
 			let _that = this; //查询用户信息
-			this.$refs.myPersonRef.refreshPageLoginInfo();
-			this.$refs.mySystem._judgeHasLogin();
+			if (this.$refs.myPersonRef) {
+				this.$refs.myPersonRef.refreshPageLoginInfo();
+			}
+			if (this.$refs.mySystem) {
+				this.$refs.mySystem._judgeHasLogin();
+			}
+
 		},
 		methods: {
 			// 原onShow方法

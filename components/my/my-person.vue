@@ -50,13 +50,14 @@
 	import context from '@/lib/java110/Java110Context.js';
 	const factory = context.factory; //获取app实例
 	const constant = context.constant;
+	import conf from '@/conf/config.js'
 	export default {
 		name: "my-person",
 		data() {
 			return {
 				userInfo: {},
-				headerImg: this.imgUrl+'/h5/images/serve/head.png',
-				topImg: this.imgUrl+'/h5/images/serve/bg.png',
+				headerImg: conf.imgUrl+'/h5/images/serve/head.png',
+				topImg: conf.imgUrl+'/h5/images/serve/bg.png',
 				userName: '',
 				userPhone: '',
 				communityName: '',
@@ -111,7 +112,7 @@
 					if(_owner.headImgUrl){
 						_that.headerImg = _owner.headImgUrl;
 					}else{
-						_that.headerImg = '/static/images/serve/head.png';
+						_that.headerImg =conf.imgUrl+'/h5/images/serve/head.png';
 					}
 					_that.userName = _owner.appUserName;
 					_that.userPhone = _owner.link;

@@ -71,6 +71,11 @@ export function getCurOwner() {
 export function refreshOwner() {
 	return new Promise(
 		(resolve, reject) => {
+			let _userInfo = wx.getStorageSync(mapping.USER_INFO);
+			if (!_userInfo) {
+				reject();
+				return;
+			}
 			request({
 				url: url.queryAppUserBindingOwner,
 				data: {
@@ -78,8 +83,8 @@ export function refreshOwner() {
 				},
 				success: function(res) {
 					let _json = res.data;
-					if (_json.code == 0) {
-						_ownerInfo = _json.data[0];
+					if (_json.code == 0 && _json.data && _json.data.length >0) {
+						let _ownerInfo = _json.data[0];
 						if (_ownerInfo == null || _ownerInfo == undefined) {
 							//没有业主信息
 							reject();
