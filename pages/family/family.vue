@@ -6,6 +6,10 @@
 			<input v-model="name" placeholder="请输入成员名称"></input>
 		</view>
 		<view class="cu-form-group">
+			<view class="title">身份证</view>
+			<input v-model="idCard" placeholder="请输入身份证" @blur="idCardChange"></input>
+		</view>
+		<view class="cu-form-group">
 			<view class="title">性别</view>
 			<picker bindchange="PickerChange" :value="index" :range="sexArr" @change="sexChange">
 				<view class="picker">
@@ -18,9 +22,18 @@
 			<input type="number" v-model="age" placeholder="请输入年龄"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">身份证</view>
-			<input v-model="idCard" placeholder="请输入身份证"></input>
+			<view class="title">人员类型</view>
+			<picker :value="typeCdIndex" :range="typeCds" range-key="name" @change="_changeTypeCd">
+				<view class="picker">
+					{{typeCds[typeCdIndex].name}}
+				</view>
+			</picker>
 		</view>
+		<view class="cu-form-group">
+			<view class="title">家庭住址</view>
+			<input type="text" v-model="address" placeholder="选填,请输入家庭住址"></input>
+		</view>
+		
 		<view class="block__title">联系信息</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
@@ -69,7 +82,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import context from '../../lib/java110/Java110Context.js';
-	import {isIDCard,checkPhoneNumber} from '../../lib/java110/utils/StringUtil.js'
+	import {isIDCard,checkPhoneNumber,idCardInfoExt} from '../../lib/java110/utils/StringUtil.js'
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -84,16 +97,31 @@
 				"remark": "",
 				"ownerId": "",
 				"userId": "",
+				"typeCds": [
+					{
+						value: '1002',
+						name: '家庭成员'
+					},
+					{
+						value: '1003',
+						name: '租客'
+					},
+					{
+						value: '1005',
+						name: '其他'
+					}
+				],
+				"typeCdIndex": 0,
 				"ownerTypeCd": "1002",
 				"idCard": "",
 				"age": "",
 				"memberId": "-1",
 				"communityId": "",
-				"remark": '',
 				"second": 60,
 				"btnDisabled":false,
 				"btnValue": "验证码",
 				"msgCode":'',
+				"address": "",
 				imgList: [],
 				photos:[]
 			};
@@ -137,7 +165,6 @@
 		onPullDownRefresh: function() {},
 		methods: {
 			submitOwnerMember: function(e) {
-				console.log('this',this);
 				let obj = {
 					"sex": this.sex,
 					"name": this.name,
@@ -151,6 +178,7 @@
 					"communityId": this.communityId,
 					"idCard": this.idCard,
 					"msgCode":this.msgCode,
+					"address": this.address,
 				}
 				if(this.photos.length> 0){
 					obj.ownerPhoto = this.photos[0];
@@ -183,16 +211,12 @@
 					uni.showLoading({
 						title: '提交中',
 					});
-					console.log("提交数据", obj);
 					context.request({
 						url: constant.url.saveOwner,
 						header: context.getHeaders(),
 						method: "POST",
 						data: obj,
-						// data:obj, //动态数据
 						success: function(res) {
-							console.log(res, 99999);
-
 							if (res.statusCode == 200 && res.data.code == 0) {
 								uni.hideLoading();
 								uni.navigateBack();
@@ -216,14 +240,27 @@
 						}
 					});
 				}
-
+			},
+			_changeTypeCd: function(e){
+				this.typeCdIndex = e.detail.value;
+				this.ownerTypeCd = this.typeCds[this.typeCdIndex].value;
+			},
+			idCardChange: function(){
+				let idCard = this.idCard;
+				if(!isIDCard(idCard)){
+					uni.showToast({
+						title: '身份证号有误',
+						icon: 'none',
+					});
+					return;
+				}
+				this.sex = idCardInfoExt(idCard, 2);
+				this.age = idCardInfoExt(idCard, 3);
 			},
 			sexChange: function(e) {
-				console.log("onConfirm", e);
 				this.sex = e.detail.value;
 			},
 			sendMsgCode: function() {
-				console.log('获取验证码');
 				var _that = this;
 
 				let obj = {
@@ -253,7 +290,6 @@
 					method: "POST",
 					data: obj, //动态数据
 					success: function(res) {
-						console.log(res);
 						//成功情况下跳转
 						if (res.statusCode == 200) {
 							wx.showToast({
@@ -305,7 +341,6 @@
 				})
 			},
 			deleteImage: function(e) {
-				console.log(e);
 				let imageArr = this.$data.imgList;
 				imageArr.splice(e, 1);
 			},
@@ -316,12 +351,10 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album','camera'], //从相册选择
 					success: (res) => {
-						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						let _base64Photo = '';
 						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
 							_base64Photo = _res;
-							console.log('base64', _base64Photo);
 							that.photos.push(_base64Photo);
 						});
 					}

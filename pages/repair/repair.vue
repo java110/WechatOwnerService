@@ -290,7 +290,6 @@
 					"repairObjType": this.repairObjType,
 					"repairChannel": 'Z'
 				}
-				console.log(obj);
 
 				if (this.repairObjType == '001') {
 					obj.repairObjId = this.communityId;
@@ -391,10 +390,8 @@
 				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
 					_that.photos.push(_baseInfo);
 				});
-				console.log("data信息：", this);
 			},
 			deleteImage: function(e) {
-				console.log(e);
 				let imageArr = this.$data.imgList;
 				imageArr.splice(e, 1);
 				this.photos.splice(e, 1);
@@ -406,7 +403,6 @@
 					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album','camera'], //从相册选择
 					success: (res) => {
-						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
 
@@ -429,7 +425,6 @@
 				this.roomName = this.roomCloums[e.detail.value];
 			},
 			repairScopeChange: function(e) {
-				console.log('改变费用完成')
 				this.repairScopeIndex = e.target.value //取其下标
 				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
 				this.repairObjType = selected.id //选中的id
@@ -445,7 +440,6 @@
 				if(selected == undefined){
 					return;
 				}
-				console.log('selected',selected);
 				this.repairType = selected.repairType //选中的id
 				let _payFeeFlag = selected.payFeeFlag;
 
@@ -458,12 +452,16 @@
 			},
 			dateChange: function(e) {
 				this.bindDate = e.detail.value;
+				if(this.bindDate == formatDate(new Date()).replaceAll('/', '-')){
+					this.todayDateTime = formatHourAndMin(new Date());
+				}else{
+					this.todayDateTime = '8:30';
+				}
 			},
 			timeChange: function(e) {
 				this.bindTime = e.detail.value;
 			},
 			chooseFloor: function(e) {
-				console.log('点击调用了', e);
 				context.navigateTo({
 					url: '/pages/selectFloor/selectFloor'
 				});

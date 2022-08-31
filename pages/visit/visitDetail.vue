@@ -1,12 +1,13 @@
 <template>
 	<view>
-		<!-- <view class="block__title">
+		<view class="block__title">
 			<text>访客二维码</text>
 			<button class="cu-btn bg-blue" @click="_toTempFilePath()">保存</button>
 		</view>
-		<view class="u-qrcode">
-			<uQrcode ref="uQRCode" :text="qrcodeValue" />
-		</view> -->
+		<view class="u-qrcode" style="text-align: center;">
+			<canvas style="width: 200px; height: 200px; margin: 0 auto;" canvas-id="myQrcode" v-show="!needLongTapSaveImg"></canvas>
+			<image :src="tempFilePath" style="width: 200px; height: 200px; margin: 0 auto;" v-show="needLongTapSaveImg"></image>
+		</view>
 		
 		<view class="block__title">
 			<text>来访信息</text>
@@ -79,7 +80,7 @@
 <script>
 	import context from '../../lib/java110/Java110Context.js';
 	import {listOwnerVisit}  from '../../api/visit/visit.js'
-	import uQrcode from '@/components/uni-qrcode/uqrcode.vue'
+	import drawQrcode from '@/components/weapp-qrcode/weapp.qrcode.esm.js'
 	const constant = context.constant;
 	const util = context.util;
 	export default {
@@ -88,10 +89,11 @@
 				visitInfo: {},
 				ownerInfo: {},
 				qrcodeValue: '',
+				tempFilePath: '',
+				needLongTapSaveImg: false,
 			}
 		},
 		components: {
-			uQrcode
 		},
 
 		/**
@@ -100,7 +102,33 @@
 		onLoad: function(options) {
 			context.onLoad(options);
 			let _that = this;
-			_that.qrcodeValue = options.vId;
+			this.$nextTick(() => {
+				drawQrcode({
+				  width: 200,
+				  height: 200,
+				  canvasId: 'myQrcode',
+				  // ctx: wx.createCanvasContext('myQrcode'),
+				  text: options.vId,
+				  callback: function(e){
+					uni.canvasToTempFilePath({
+						x: 0,
+						y: 0,
+						width: 400,
+						height: 400,
+						destWidth: 400,
+						destHeight: 400,
+						canvasId: 'myQrcode',
+						success: function(res) {
+							// 在H5平台下，tempFilePath 为 base64
+							_that.tempFilePath = res.tempFilePath
+							//#ifdef H5
+							_that.needLongTapSaveImg = true;
+							//#endif
+						} 
+					})
+				  }
+				})
+			});
 			context.getOwner(function(_owner) {
 				_that.ownerInfo = _owner;
 				_that._loadVisitInfo(options.vId);
@@ -109,11 +137,29 @@
 		onReachBottom : function(){},
 		methods: {
 			_toTempFilePath: function() {
-				this.$refs.uQRCode.save({
-					success: res => {
-						console.log(res)
+				if(this.tempFilePath == ''){
+					uni.showToast({
+						title: '图片未生成',
+						icon: 'none'
+					})
+					return;
+				}
+				//#ifndef H5
+				uni.saveImageToPhotosAlbum({
+					filePath: this.tempFilePath,
+					success: function() {
+						uni.showToast({
+							title: '已保存至相册',
+							icon: 'none'
+						})
 					}
+				});
+				//#endif
+				//#ifdef H5
+				uni.showToast({
+					title: '请长按图片-保存至相册'
 				})
+				//#endif
 			},
 			
 			_loadVisitInfo: function(vId){

@@ -158,6 +158,9 @@
 				selectUserAccount: [], // 选中的账户
 				accountAmount: 0.0, // 账户金额
 				deductionAmount: 0.0, // 抵扣金额
+				payerObjId: '',
+				payerObjType: '',
+				userId: '',
 			};
 		},
 
@@ -175,6 +178,7 @@
 			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
 			// #endif
 			let _fee = JSON.parse(options.fee);
+			console.log(_fee);
 			let _receivableAmount = _fee.paymentCycle * _fee.feePrice;
 
 			let _communityInfo = context.getCurrentCommunity();
@@ -189,6 +193,9 @@
 			this.carNum = _fee.carNum;
 			this.feeId = _fee.feeId;
 			this.feePrice = _fee.feePrice;
+			this.payerObjId = _fee.payerObjId;
+			this.payerObjType = _fee.payerObjType;
+			this.userId = _fee.userId;
 
 			this.ordEndTime = _fee.endTime;
 			this.formatEndTime = date2String(_fee.endTime);
@@ -276,7 +283,10 @@
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					appId: this.appId,
-					endTime: this.formatEndTime
+					endTime: this.formatEndTime,
+					selectUserAccount: this.selectUserAccount, // 选中的账户
+					accountAmount: this.accountAmount, // 账户金额
+					deductionAmount: this.deductionAmount, // 抵扣金额
 				};
 				context.request({
 					url: constant.url.preOrder,
@@ -352,6 +362,9 @@
 					selectUserAccount: this.selectUserAccount, // 选中的账户
 					accountAmount: this.accountAmount, // 账户金额
 					deductionAmount: this.deductionAmount, // 抵扣金额
+					payerObjId: this.payerObjId,
+					payerObjType: this.payerObjType,
+					userId: this.userId,
 				}
 
 				context.request({

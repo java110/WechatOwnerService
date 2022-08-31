@@ -34,6 +34,7 @@
 	const constant = context.constant; //获取app实例
 	//获取app实例
 	const app = getApp().globalData;
+	import {getProperty}  from '../../api/property/propertyApi.js'
 	import {queryQuestionAnswer} from '../../api/question/questionApi.js'
 
 	export default {
@@ -43,47 +44,56 @@
 				questions: [],
 				currPageIndex: 0,
 				pageSize: 10,
-				userId:''
+				userId:'',
+				storeId: '',
 			};
 		},
 		onLoad: function(options) {
-			let that = this;
 			context.onLoad(options);
 		},
 		onShow: function() {
 			let that = this;
-			that.communityId = context.getUserInfo().communityId;
+			that.communityId = context.getCurrentCommunity().communityId;
 			that.userId = context.getUserInfo().userId;
-			
-			queryQuestionAnswer({
-				page:1,
-				row:50,
-				qaTypes:'1001,3003',
-				objType:'3306',
-				communityId:that.communityId
-			})
-			.then(_data=>{
-				_data.data.forEach(function(item, index) {
-					item.endTime = item.endTime.replaceAll("-","/");
-					let _endTime = new Date(item.endTime);
-					let _startTime = new Date(item.startTime.replaceAll("-","/"));
-					if(_startTime.getTime() > new Date().getTime()){
-						item.state = '-1';
-					} else if(_endTime.getTime() > new Date().getTime()){
-						item.state = '1';
-					}else{
-						item.state = '0';
-					}
-					if(item.userId == that.userId){
-						item.state = '2';
-					}
-					item.startTime = item.startTime.replace(/:\d{1,2}$/, ' ');
-					item.endTime = item.endTime.replace(/:\d{1,2}$/, ' ');
-				});
-				that.questions = _data.data;
+			getProperty()
+			.then(function(_property) {
+				that.storeId = _property.storeId;
+				that._queryQuestionAnswer();
 			})
 		},
 		methods: {
+			_queryQuestionAnswer: function(){
+				let that = this;
+				queryQuestionAnswer({
+					page:1,
+					row:50,
+					qaTypes:'1001,3003',
+					objType:'3306',
+					communityId: that.communityId,
+					userId: that.userId,
+					storeId: that.storeId
+				})
+				.then(_data=>{
+					_data.data.forEach(function(item, index) {
+						item.endTime = item.endTime.replaceAll("-","/");
+						let _endTime = new Date(item.endTime);
+						let _startTime = new Date(item.startTime.replaceAll("-","/"));
+						if(_startTime.getTime() > new Date().getTime()){
+							item.state = '-1';
+						} else if(_endTime.getTime() > new Date().getTime()){
+							item.state = '1';
+						}else{
+							item.state = '0';
+						}
+						if(item.userId == that.userId){
+							item.state = '2';
+						}
+						item.startTime = item.startTime.replace(/:\d{1,2}$/, ' ');
+						item.endTime = item.endTime.replace(/:\d{1,2}$/, ' ');
+					});
+					that.questions = _data.data;
+				})
+			},
 			gotoDetail: function(_question) {
 				if(_question.state == '-1'){
 					uni.showToast({

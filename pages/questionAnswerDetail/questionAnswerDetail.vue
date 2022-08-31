@@ -1,5 +1,17 @@
 <template>
 	<view>
+		<view v-show="qaInfo.fileUrls.length > 0" class="img-bg">
+			<image :src="qaInfo.fileUrls[0]" class="qa-img" mode="widthFix"></image>
+		</view>
+		<view class="qa-title text-center text-bold text-lg margin-top-lg">
+			{{qaInfo.qaName}}
+		</view>
+		<view class="qa-endtime text-center text-sm text-grey">
+			结束时间：{{qaInfo.endTime}}
+		</view>
+		<view v-show="qaInfo.remark" class="qa-remark text-center margin-top-lg">
+			{{qaInfo.remark}}
+		</view>
 		<view class="" v-for="(item,index) in titles" :key="index">
 			<view class="block__title">{{item.qaTitle}}</view>
 			<radio-group class="block" @change="radioChange($event,item)" v-if="item.titleType == '1001'">
@@ -13,7 +25,7 @@
 			</radio-group>
 			<checkbox-group class="block" @change="checkboxChange($event,item)" v-else-if="item.titleType == '2002'">
 				<view class="cu-form-group " v-for="(valueItem,valueIndex) in item.questionAnswerTitleValues">
-					<view class="title">{{valueItem.qaValue}}</view>
+					<view class="title">{{valueIndex + 1}}{{valueItem.qaValue}}</view>
 					<checkbox :class="item.radio[valueIndex].selected == '1'?'checked':''"
 						:checked="item.radio[valueIndex].selected == '1'?true:false" :value="valueItem.valueId">
 					</checkbox>
@@ -43,6 +55,7 @@
 	const factory = context.factory;
 
 	import {
+		queryQuestionAnswer,
 		queryQuestionAnswerTitle,
 		saveUserQuestionAnswerValue
 	} from '../../api/question/questionApi.js'
@@ -50,6 +63,7 @@
 	export default {
 		data() {
 			return {
+				qaInfo: {},
 				titles: [],
 				qaId: '',
 				objType: ''
@@ -64,6 +78,7 @@
 			context.onLoad(options);
 			this.qaId = options.qaId;
 			this.objType = options.objType
+			this._queryQuestionAnswer();
 
 			queryQuestionAnswerTitle({
 					objType: this.objType,
@@ -99,6 +114,19 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			_queryQuestionAnswer: function(){
+				let that = this;
+				queryQuestionAnswer({
+					page:1,
+					row:1,
+					qaTypes:'1001,3003',
+					objType:'3306',
+					qaId: that.qaId,
+				})
+				.then(_data=>{
+					that.qaInfo = _data.data[0];
+				})
+			},
 			radioChange: function(e, item) {
 				console.log(e, item)
 				item.radio = e.detail.value;
@@ -154,7 +182,7 @@
 				let obj = {
 					"qaId": this.qaId,
 					"objType": this.objType,
-					"objId": context.getUserInfo().communityId,
+					"objId": context.getCurrentCommunity().communityId,
 					"answerType": '1002',
 					questionAnswerTitles: _questionAnswerTitles
 				}
@@ -194,5 +222,12 @@
 
 	.button_up_blank {
 		height: 40rpx;
+	}
+	
+	.img-bg{
+		
+	}
+	.qa-img{
+		width: 100%;
 	}
 </style>
