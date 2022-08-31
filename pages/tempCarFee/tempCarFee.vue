@@ -173,9 +173,9 @@
 			},
 			onPayFee: function() {
 				if(isWxOrAli == 'ALIPAY'){
-					onAliPayPayFee();
+					this.onAliPayPayFee();
 				}else{
-					onWxPayFee();
+					this.onWxPayFee();
 				}
 			},
 			onAliPayPayFee:function(){
