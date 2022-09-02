@@ -212,7 +212,7 @@ export function toPayTempCarFee(_objData){
 export function toAliPayTempCarFee(_objData){
 	return new Promise((resolve, reject) => {
 	requestNoAuth({
-		url: url.payTempCarFee,
+		url: url.alipayPayTempCarFee,
 		method: "POST",
 		data: JSON.stringify(_objData), //动态数据
 		success: function(res) {

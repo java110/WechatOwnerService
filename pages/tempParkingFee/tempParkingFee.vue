@@ -233,6 +233,10 @@
 					appId: this.aliAppId,
 					scopes: ['auth_base'],
 				}, function(res) {
+					uni.showToast({
+						title:JSON.stringify(res),
+						icon:'none'
+					})
 					ap.alert(JSON.stringify(res));
 					getOpenIdFromAliPay({
 						authCode:res.authCode,
