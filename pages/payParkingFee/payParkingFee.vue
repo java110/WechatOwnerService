@@ -326,6 +326,18 @@
 							wx.hideLoading();
 							return;
 						}
+						if (res.statusCode == 200 && res.data.code == '100') {
+							let data = res.data; //成功情况下跳转
+							uni.showToast({
+								title: "支付成功",
+								duration: 2000
+							});
+							setTimeout(function(){
+								uni.navigateBack({});
+							},2000)
+							
+							return;
+						}
 
 						wx.hideLoading();
 						wx.showToast({
@@ -404,6 +416,18 @@
 							});
 							// #endif
 							wx.hideLoading();
+							return;
+						}
+						if (res.statusCode == 200 && res.data.code == '100') {
+							let data = res.data; //成功情况下跳转
+							uni.showToast({
+								title: "支付成功",
+								duration: 2000
+							});
+							setTimeout(function(){
+								uni.navigateBack({});
+							},2000)
+							
 							return;
 						}
 						uni.hideLoading();
