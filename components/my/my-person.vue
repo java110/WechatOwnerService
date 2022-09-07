@@ -50,7 +50,8 @@
 	import context from '@/lib/java110/Java110Context.js';
 	const factory = context.factory; //获取app实例
 	const constant = context.constant;
-	import conf from '@/conf/config.js'
+	import conf from '@/conf/config.js';
+	import {queryOwnerAccount} from '@/api/user/userApi.js'
 	export default {
 		name: "my-person",
 		data() {
@@ -88,6 +89,7 @@
 				_that.loadOwenrInfo();
 				_that.userInfo = context.getUserInfo();
 				this.loadOwnerHeaderImg();
+				this.loadOwnerAccount();
 			},
 			ckeckUserInfo: function() {
 				return context.checkLoginStatus();
@@ -134,15 +136,28 @@
 						}).then((data) => {
 							if (!data) {
 								_that.accounts = [];
-								return;
 								_that.blance = 0
+								return;
 							}
 							_that.accounts = data;
-							let sum = 0
+							let blanceSum = 0;
+							let interSum = 0;
+							let kaSum = 0;
 							_that.accounts.forEach((v, k) => {
-								sum += v.amount
+								if(v.acctType == '2005'){
+									kaSum += parseFloat(v.amount);
+								}
+								if(v.acctType == '2004'){
+									interSum += parseFloat(v.amount);
+								}
+								if(v.acctType == '2003'){
+									blanceSum += parseFloat(v.amount);
+								}
 							})
-							this.blance = sum
+							_that.blance = blanceSum.toFixed(2);
+							_that.inter = interSum.toFixed(2);
+							_that.ka = kaSum.toFixed(2);
+							
 						})
 					}
 				});
