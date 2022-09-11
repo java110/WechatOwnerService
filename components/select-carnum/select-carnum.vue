@@ -240,6 +240,8 @@
 						title: '9'
 					}, {
 						title: '挂'
+					}, {
+						title: '学'
 					}
 				], // 车牌开头字母的列表
 				// gualist:[], // 挂车号
@@ -321,7 +323,7 @@
 						return
 					}
 					if (i == 2) {
-						if (this.inplist[2].title.length == 5) {
+						if (this.inplist[2].title.length >= 5) {
 							this.chehao = this.inplist[0].title + this.inplist[1].title + this.inplist[2].title
 							this.$emit('confirm', this.chehao);
 							this.close();
@@ -364,10 +366,10 @@
 						// 	// 阻止“挂”按键点击
 						// 	return
 						// }
-						if (this.inplist[2].title.length < 5) {
+						if (this.inplist[2].title.length < 6) {
 							this.ary.push(title)
 						}
-						if (this.inplist[2].title.length == 5) {
+						if (this.inplist[2].title.length == 6) {
 							this.pandaun()
 						}
 					}
@@ -642,10 +644,10 @@
 		position: relative;
  
 		.keyboard_title {
-			width: 16%;
+			width: 13%;
 			height: 80rpx;
 			background-color: #FFFFFF;
-			margin: 0.33%;
+			margin: 0.6%;
 			box-shadow: 2rpx 2rpx 5rpx 2rpx #888888;
 			border-radius: 8rpx;
 		}

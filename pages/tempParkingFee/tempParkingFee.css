@@ -93,6 +93,10 @@
 		border-radius: 4rpx;
 	}
 	
+	.green-border{
+		border: 2rpx solid #39b54a;
+	}
+	
 	.plate-num-text {
 		flex: 1;
 		line-height: 100rpx;

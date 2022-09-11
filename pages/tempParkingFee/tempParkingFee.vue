@@ -43,6 +43,10 @@
 						:class="inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'">
 						<text class="plate-num-text">{{inputPlates.index6}}</text>
 					</view>
+					<view bindtap="inputClick" data-id="7" class="green-border"
+						:class="inputOnFocusIndex=='7'?'plate-nums-foc':'plate-nums-first'">
+						<text class="plate-num-text">{{inputPlates.index7}}</text>
+					</view>
 				</view>
 			</view>
 
@@ -147,7 +151,7 @@
 				if (isWxOrAli() == 'ALIPAY') {
 					this._refreshAliPayOpenId();
 				} else {
-					this._refreshWechatOpenId();
+					//this._refreshWechatOpenId();
 				}
 				return;
 			}
