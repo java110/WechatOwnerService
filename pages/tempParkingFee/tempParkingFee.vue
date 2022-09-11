@@ -151,7 +151,7 @@
 				if (isWxOrAli() == 'ALIPAY') {
 					this._refreshAliPayOpenId();
 				} else {
-					//this._refreshWechatOpenId();
+					this._refreshWechatOpenId();
 				}
 				return;
 			}
