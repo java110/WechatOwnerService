@@ -32,7 +32,14 @@
 				ad: [],
 				adHeight: {
 					height: this.height + "upx"
-				}
+				},
+				banner: [{
+						url: this.imgUrl+'/h5/images/serve/banner1.jpg'
+					},
+					{
+						url: this.imgUrl+'/h5/images/serve/banner2.jpg'
+					}
+				],
 			};
 		},
 		mounted() {
@@ -51,6 +58,9 @@
 				loadAdverts(_objData)
 					.then(function(_aPhotos) {
 						_that.ad = _aPhotos;
+						if(!_aPhotos || _aPhotos.length <1){
+							_that.ad = _that.banner;
+						}
 					});
 			}
 		}
