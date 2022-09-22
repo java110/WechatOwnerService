@@ -46,28 +46,8 @@
 		</view>
 		
 		<view class="block__title">相关图片</view>
-		
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/1
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
+			
 		
 		<view class="cu-form-group margin-top">
 			<textarea v-model="remark" placeholder="请输入备注"></textarea>
@@ -83,6 +63,7 @@
 	// pages/enterCommunity/enterCommunity.js
 	import context from '../../lib/java110/Java110Context.js';
 	import {isIDCard,checkPhoneNumber,idCardInfoExt} from '../../lib/java110/utils/StringUtil.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -122,9 +103,17 @@
 				"btnValue": "验证码",
 				"msgCode":'',
 				"address": "",
-				imgList: [],
-				photos:[]
+				photos:[],
+				uploadImage: {
+					maxPhotoNum: 1,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
+		},
+		
+		components: {
+			uploadImageAsync
 		},
 
 		/**
@@ -164,6 +153,9 @@
 		 */
 		onPullDownRefresh: function() {},
 		methods: {
+			sendImagesData: function(e){
+				this.photos = e[0].fileId
+			},
 			submitOwnerMember: function(e) {
 				let obj = {
 					"sex": this.sex,
@@ -179,10 +171,9 @@
 					"idCard": this.idCard,
 					"msgCode":this.msgCode,
 					"address": this.address,
+					"ownerPhoto": this.photos
 				}
-				if(this.photos.length> 0){
-					obj.ownerPhoto = this.photos[0];
-				}
+				
 				let msg = "";
 				if (obj.ownerId == "") {
 					msg = "请填写业主";
@@ -339,26 +330,6 @@
 				promise.then((setTimer) => {
 					clearInterval(setTimer)
 				})
-			},
-			deleteImage: function(e) {
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album','camera'], //从相册选择
-					success: (res) => {
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						let _base64Photo = '';
-						factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							_base64Photo = _res;
-							that.photos.push(_base64Photo);
-						});
-					}
-				});
 			},
 		}
 	};

@@ -31,7 +31,7 @@
 			<view class="title">当前进度</view>
 			{{applyDetail.stateName}}
 		</view>
-		<uploadImage v-if="applyDetail.urls.length > 0" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImage>
+		<uploadImageAsync v-if="applyDetail.urls.length > 0" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImageAsync>
 	
 		<view class="button_up_blank"></view>
 	
@@ -41,7 +41,7 @@
 <script>
 	import context from '../../lib/java110/Java110Context.js';
 	import {queryApplyRoomDiscount} from '../../api/applyRoom/applyRoomApi.js'	
-	import uploadImage from "../../components/vc-upload/vc-upload.vue";	
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";	
 	const factory = context.factory;
 	export default {
 		data() {
@@ -55,7 +55,7 @@
 		},
 
 		components: {
-			uploadImage
+			uploadImageAsync
 		},
 		props: {},
 

@@ -22,13 +22,13 @@
 			<view v-if="imgRecordList.length > 0">
 				<view class="block__title">图片</view>
 				<view class="record-img-item" v-for="(item,index) in imgRecordList" :key="index">
-					<image :src="commonBaseUrl + item.url" :data-url="commonBaseUrl + item.url" :data-index="index" @tap="preview" mode="widthFix"></image>
+					<image :src="item.url" :data-url="item.url" :data-index="index" @tap="preview" mode="widthFix"></image>
 				</view>
 			</view>
 			<view v-if="videoRecordList.length > 0">
 				<view class="block__title">视频</view>
 				<view v-for="(item,index) in videoRecordList" :key="index">
-					<video class="record-video" object-fit="contain" :src="commonBaseUrl + item.url" controls></video>
+					<video class="record-video" object-fit="contain" :src="item.url" controls></video>
 				</view>
 			</view>
 		</view>
@@ -103,7 +103,7 @@
 				let index = e.target.dataset.index;
 				let urls = [];
 				this.imgRecordList.forEach((item) => {
-					urls.push(this.commonBaseUrl + item.url);
+					urls.push(item.url);
 				})
 				uni.previewImage({
 					current: index,
