@@ -95,27 +95,8 @@
 			<input type="text" v-model="createRemark">
 		</view>
 		<view class="block__title">图片材料</view>
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
+		
 		<view class="btn-box">
 			<button type="default" class="btn-sub" @click="subApply()">提交申请</button>
 		</view>
@@ -132,6 +113,7 @@
 	const factory = context.factory;
 	import {compareDate,addDay,date2String} from '../../lib/java110/utils/DateUtil.js'
 	import {queryApplyRoomDiscountType,saveApplyRoomDiscount,listRoomFee} from '../../api/applyRoom/applyRoomApi.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	export default {
 		data() {
 			return {
@@ -149,12 +131,19 @@
 				feeTypeCds: [],
 				feeId: '',
 				feeTypeCd: '',
-				imgList: [],
 				photos: [],
+				communityId: '',
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
 		},
 
-		components: {},
+		components: {
+			uploadImageAsync
+		},
 		props: {},
 
 		/**
@@ -164,6 +153,7 @@
 			let _that = this;
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
+			_that.communityId = _that.roomDetail.communityId;
 			_that.loadApplyRoomDiscountType();
 			_that.loadOwenrInfo();
 			_that.loadRoomFee();
@@ -204,6 +194,14 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
+			},
 			loadRoomFee: function(){
 				let _that = this;
 				let params = {
@@ -282,44 +280,6 @@
 			 */
 			dateEndChange: function(e) {
 				this.bindEndDate = e.detail.value;
-			},
-			
-			/**
-			 * 删除图片
-			 * @param {Object} e
-			 */
-			deleteImage: function(e) {
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			/**
-			 * 选择图片
-			 * @param {Object} e
-			 */
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album','camera'], //从相册选择
-					success: (res) => {
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-			
-						//#ifdef H5
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-						//#endif
-			
-						//#ifdef MP-WEIXIN
-						factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
-							that.photos.push(_res);
-						});
-						//#endif
-					}
-				});
 			},
 			
 			/**

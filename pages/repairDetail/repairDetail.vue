@@ -22,7 +22,7 @@
 				</view>
 				<view class="bg-cyan content" v-if="item.photoVos.length > 0 && item.state==10005">
 					<view class="repair-img-item" v-for="(pic, index2) in item.photoVos" :key="key2">
-						<image :src="imgUrlPre + pic.url" :data-url="imgUrlPre + pic.url" @tap="preview" mode="widthFix"></image>
+						<image :src="pic.url" @tap="preview(index, index2)" mode="widthFix"></image>
 					</view>
 				</view>
 			</view>
@@ -36,7 +36,6 @@
 	const constant = context.constant;
 	const factory = context.factory;
 	import conf from '../../conf/config.js'
-	import viewImage from '@/components/view-image/view-image.vue'
 	export default {
 		data() {
 			return {
@@ -46,10 +45,10 @@
 				repairId:'',
 				communityId:'',
 				imgUrlPre: '',
+				photoUrl: conf.commonBaseUrl + '/callComponent/download/getFile/file',
 			}
 		},
 		components: {
-			viewImage
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -80,10 +79,17 @@
 					method: "GET",
 					data: dataObj,
 					//动态数据
-					success: function(res) {
+					success: (res) => {
 						let _json = res.data;
 						if (_json.code == 0) {
 							_that.staffs = _json.data;
+							_that.staffs.forEach((item) => {
+								if(item.photoVos.length > 0 && item.state==10005){
+									item.photoVos.forEach((img) => {
+										img.url = this.photoUrl + "?fileId=" + img.url + "&communityId=-1&time=" + new Date();
+									})
+								}
+							})
 						}
 					},
 					fail: function(e) {
@@ -95,9 +101,15 @@
 					}
 				});
 			},
-			preview: function(e) {
-				let _url = e.target.dataset.url;
-				this.$refs.viewImageRef.showThis(_url);
+			preview: function(recordIndex, imgIndex) {
+				let urls = [];
+				this.staffs[recordIndex].photoVos.forEach((item) => {
+					urls.push(item.url);
+				})
+				uni.previewImage({
+					current: imgIndex,
+					urls: urls
+				})
 			}
 		}
 	}

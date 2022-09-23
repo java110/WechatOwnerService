@@ -172,7 +172,6 @@
 		height: 100upx;
 	}
 
-	/*  #ifdef  APP-PLUS || MP-WEIXIN  */
 	.header_fixed {
 		position: fixed;
 		top: 0upx;
@@ -180,16 +179,4 @@
 		width: 100%;
 		z-index: 2;
 	}
-
-	/*  #endif  */
-	/*  #ifdef  H5  */
-	.header_fixed {
-		position: fixed;
-		top: 80upx;
-		left: 0;
-		width: 100%;
-		z-index: 2;
-	}
-
-	/*  #endif  */
 </style>

@@ -73,29 +73,10 @@
 		<view class="cu-form-group margin-top">
 			<textarea v-model="context" placeholder="请输入报修内容"></textarea>
 		</view>
-		<view class="block__title">相关图片</view>
 
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<view class="block__title">相关图片</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
+		
 
 		<view class="button_up_blank"></view>
 
@@ -108,12 +89,12 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
-	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {checkPhoneNumber,checkStrLength} from '../../lib/java110/utils/StringUtil.js'
 	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	const factory = context.factory;
 	import {formatDate,formatHourAndMin} from '@/lib/java110/utils/DateUtil.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 
 	export default {
 		data() {
@@ -171,8 +152,17 @@
 				unitId: '',
 				priceScope: '',
 				todayDate:'',
-				todayDateTime:''
+				todayDateTime:'',
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
+		},
+
+		components: {
+			uploadImageAsync
 		},
 
 		/**
@@ -259,6 +249,14 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
+			},
 			formatter(type, value) {
 				if (type === 'year') {
 					return `${value}年`;
@@ -280,7 +278,7 @@
 					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
 					"tel": this.bindTel,
 					"roomId": this.roomId,
-					"photos": [],
+					"photos": this.photos,
 					"context": this.context,
 					"userId": this.userId,
 					"userName": this.userName,
@@ -305,12 +303,12 @@
 					obj.repairObjName = this.roomName;
 				}
 
-				let _photos = this.photos;
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
+				// let _photos = this.photos;
+				// _photos.forEach(function(_item) {
+				// 	obj.photos.push({
+				// 		"photo": _item
+				// 	});
+				// });
 				// 预约时间校验
 				let oppoTime = Date.parse(new Date(obj.appointmentTime.replace(/-/g, '/'))),
 				now = Date.parse(new Date());
@@ -389,35 +387,6 @@
 
 				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
 					_that.photos.push(_baseInfo);
-				});
-			},
-			deleteImage: function(e) {
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album','camera'], //从相册选择
-					success: (res) => {
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-
-						//#ifdef H5
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-						//#endif
-
-						//#ifdef MP-WEIXIN
-						factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
-							that.photos.push(_res);
-						});
-						//#endif
-					}
 				});
 			},
 			roomChange: function(e) {

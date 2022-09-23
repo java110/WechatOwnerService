@@ -58,27 +58,8 @@
 		</view>
 		
 		<view class="block__title">照片信息</view>
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				照片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/1
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
+		
 
 		<view class="button_up_blank"></view>
 		<view class="noti">
@@ -103,6 +84,7 @@
 	import {formatTimeNow} from '../../lib/java110/utils/DateUtil.js'
 	import {checkPhoneNumber,checkStrLength} from '../../lib/java110/utils/StringUtil.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 
 	export default {
 		data() {
@@ -143,15 +125,20 @@
 				communityId: '',
 				roomId: '',
 				roomName: '',
-				imgList: [],
 				photos: [],
-				freeInfo: {}
+				freeInfo: {},
+				uploadImage: {
+					maxPhotoNum: 1,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
 		},
 
 		components: {
 			uniDatetimePicker,
-			CarNumber
+			CarNumber,
+			uploadImageAsync
 		},
 		props: {},
 
@@ -187,6 +174,9 @@
 		},
 		
 		methods: {
+			sendImagesData: function(e){
+				this.photos = e[0].fileId;
+			},
 			_queryFreeInfo: function(){
 				let _that = this;
 				let _objData = {
@@ -212,35 +202,6 @@
 				this.roomId = this.roomIdArr[e.detail.value];
 				this.roomName = this.roomCloums[e.detail.value];
 			},
-			// 上传图片
-			deleteImage: function(e) {
-				this.imgList.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 1, //默认9
-					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album','camera'], //从相册选择
-					success: (res) => {
-						that.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-			
-						//#ifdef H5
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-						//#endif
-			
-						//#ifdef MP-WEIXIN
-						factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
-							that.photos.push(_res);
-						});
-						//#endif
-					}
-				});
-			},
 			// 提交
 			submitVisit: function(){
 				let obj = {
@@ -255,15 +216,12 @@
 					departureTime: this.departureTime,
 					reasonType: this.reasonType,
 					visitCase: this.visitCase,
-					photo: '',
+					photo: this.photos,
 					videoPlaying: false,
 					ownerId: this.ownerId,
 					userId: this.userId,
 					communityId: this.communityId
 				};
-				if(this.photos.length > 0){
-					obj.photo = this.photos[0];
-				}
 				
 				let msg = "";
 				if (obj.roomId == "") {

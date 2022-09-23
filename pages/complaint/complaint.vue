@@ -30,27 +30,9 @@
 			<textarea id="context" :value="context" @input="bindInput" placeholder="请输入投诉内容"></textarea>
 		</view>
 
-		<view class="cu-bar bg-white margin-top">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key="index" bindtap="ViewImage" :data-url="imgList[imageIndex]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="imageIndex">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<view class="block__title">照片信息</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
+		
 		<view class="button_up_blank"></view>
 		<view class="flex flex-direction">
 			<button class="cu-btn bg-green margin-tb-sm lg" @click="bindOwner()">提交</button>
@@ -64,6 +46,7 @@
 	
 	import {checkPhoneNumber} from '../../lib/java110/utils/StringUtil.js'
 	import context from '../../lib/java110/Java110Context.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -91,8 +74,17 @@
 				userId: '',
 				storeId: '',
 				photos: [],
-				communityId: ""
+				communityId: "",
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
+		},
+		
+		components: {
+			uploadImageAsync
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -152,42 +144,13 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-						count: 4, //默认9
-						sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-						sourceType: ['album'], //从相册选择
-						success: (res) => {
-							console.log(res);
-							that.$data.imgList.push(res.tempFilePaths[0]);
-							// let _base64Photo = '';
-							// factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							// 	_base64Photo = _res;
-							// 	console.log('base64', _base64Photo);
-							// 	that.photos.push(_base64Photo);
-							// });
-							var tempFilePaths = res.tempFilePaths[0]
-							
-							//#ifdef H5
-							TanslateImage.translate(tempFilePaths, (url) => {
-								that.photos.push(url);
-							})
-							//#endif
-							
-							//#ifdef MP-WEIXIN
-							factory.base64.urlTobase64(tempFilePaths).then(function(_res) {
-								that.photos.push(_res);
-							});
-							//#endif
-						}
-				});
-			},
-			deleteImage: function(e) {
-				let imageArr = this.$data.imgList;
-				let photoArr = this.$data.photos;
-				imageArr.splice(e, 1);
-				photoArr.splice(e, 1);
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
 			},
 			_changeComplaint:function(e){
 				this.typeName = this.columns[e.detail.value];
@@ -219,18 +182,11 @@
 					"complaintName": this.complaintName,
 					"tel": this.tel,
 					"roomId": this.roomId,
-					"photos": [],
+					"photos": this.photos,
 					"context": this.context,
 					"userId": this.userId,
 					"communityId": this.communityId
 				};
-				let _photos = this.photos;
-
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
 				let msg = "";
 
 				if (obj.typeCd == "") {
@@ -311,41 +267,6 @@
 			chooseRoom: function(e) {
 				this.roomShow = true;
 			},
-			afterRead: function(event) {
-				const {
-					file
-				} = event.detail;
-
-				let _that = this;
-
-				const {
-					photoList = []
-				} = this;
-				photoList.push(file);
-				this.photoList = photoList; // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-
-				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
-					_that.photos.push(_baseInfo);
-				});
-				console.log("data信息：", this);
-			},
-			removePhoto: function(e) {
-				console.log(e.detail.index);
-				let _photoList = [];
-				this.photoList.forEach(function(item, index) {
-					if (index != e.detail.index) {
-						_photoList.push(item);
-					}
-				});
-				let _photos = [];
-				this.photos.forEach(function(item, index) {
-					if (index != e.detail.index) {
-						_photos.push(item);
-					}
-				});
-				this.photos = _photos;
-				this.photoList = _photoList;
-			}
 		}
 	};
 </script>

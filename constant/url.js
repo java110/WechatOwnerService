@@ -150,6 +150,8 @@ export default {
 		listSystemInfo:baseUrl+"app/system.listSystemInfo",
 		queryWaitPayFeeTempCar:baseUrl+"app/car.queryWaitPayFeeTempCar",
 		getOpenIdFromAliPay:baseUrl+"app/alipay.getOpenIdFromAliPay",
+	uploadImageFormData: baseUrl + "callComponent/upload/uploadFile/uploadImage",
+	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
 		
 
 	NEED_NOT_LOGIN_PAGE: [

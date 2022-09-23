@@ -70,7 +70,7 @@
 			<view class="cu-item" v-if="complaint.photos.length > 0">
 				<view class="margin-top grid text-center col-3 grid-square" >
 					<view class="" v-for="(_item,index) in complaint.photos" :key="index">
-						<image mode="scaleToFill" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+						<image mode="scaleToFill" :data-url="_item.url" :src="_item.url" @tap="preview(index)"></image>
 					</view>
 				</view>
 			</view>
@@ -91,18 +91,6 @@
 				</view>
 			</view>
 		</view>
-		
-		<view class="cu-modal" :class="viewImage?'show':''">
-			<view class="cu-dialog">
-				<view class="bg-img" :style="'background-image: url('+ viewImageSrc +');height:800rpx;'">
-					<view class="cu-bar justify-end text-white">
-						<view class="action" @tap="closeViewImage()">
-							<text class="cuIcon-close "></text>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -117,15 +105,11 @@
 				communityId:'',
 				complaint:{},
 				audits:[],
-				srcPath:'',
-				viewImage: false,
-				viewImageSrc: '',
+				photoUrl: config.commonBaseUrl + '/callComponent/download/getFile/file',
 			}
 		},
 		onLoad(options) {
 			let _complaintId = options.complaintId;
-			this.srcPath=config.commonBaseUrl;
-			console.log('options',options);
 			this.complaintId = _complaintId;
 			this.communityId = options.communityId;
 			this._loadCompaint();
@@ -150,12 +134,13 @@
 					data: _paramIn,
 					success: function(res) {
 						if (res.statusCode == 200) {
-							let _ownerComplaints = res.data.complaints;
-					
-							console.log('_ownerComplaints', _ownerComplaints);
-						
+							let _ownerComplaints = res.data.complaints;						
 							that.complaint = _ownerComplaints[0];
-				
+							if(that.complaint.photos.length > 0){
+								that.complaint.photos.forEach((item) => {
+									item.url = that.photoUrl + "?fileId=" + item.url + "&communityId=-1&time=" + new Date();
+								})
+							}
 							return;
 						}
 			
@@ -211,14 +196,15 @@
 					}
 				})
 			},
-			preview: function(e) {
-				console.log('图片地址', e);
-				let _url = e.target.dataset.url;
-				this.viewImageSrc = _url;
-				this.viewImage = true;
-			},
-			closeViewImage: function() {
-				this.viewImage = false;
+			preview: function(index) {
+				let urls = [];
+				this.complaint.photos.forEach((item) => {
+					urls.push(item.url);
+				})
+				uni.previewImage({
+					current: index,
+					urls: urls
+				})
 			},
 		}
 	}
