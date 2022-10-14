@@ -11,7 +11,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- #ifdef H5 || WUYE -->
+		<!-- #ifdef H5 && WUYE -->
 		<view class="order_box">
 			<view class="order_title">我的订单</view>
 			<view class="order_list">

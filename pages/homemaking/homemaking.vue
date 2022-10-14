@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<service-property></service-property>
-		<!-- #ifdef H5 || WUYE -->
+		<!-- #ifdef H5 && WUYE -->
 		<service-homemaking></service-homemaking>
 		<!-- #endif -->
 	</view>
