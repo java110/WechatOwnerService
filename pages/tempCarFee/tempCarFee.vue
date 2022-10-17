@@ -54,8 +54,10 @@
 					</view>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 20upx;">
-					<button @click="onPayFee" :disabled="amount == 0"
+					<button @click="onPayFee" v-if="amount > 0"
 						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
+					<button @click="onPayFee" v-else="amount == 0"
+							class="cu-btn bg-green shadow-blur round lg">确认开门</button>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 20upx;">
 					<button @click="onReQuery()"
