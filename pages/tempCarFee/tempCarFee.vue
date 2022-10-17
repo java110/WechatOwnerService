@@ -47,7 +47,7 @@
 					<view class="cu-item arrow">
 						<view class="content padding-tb-sm">
 							<view>
-								<view class="text-cut" style="width:220px">使用优惠卷抵扣</view>
+								<view class="text-cut" style="width:220px">使用停车劵抵扣</view>
 							</view>
 						</view>
 						<view>{{couponCount+ '张' }}</view>
