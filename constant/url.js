@@ -152,6 +152,9 @@ export default {
 		getOpenIdFromAliPay:baseUrl+"app/alipay.getOpenIdFromAliPay",
 	uploadImageFormData: baseUrl + "callComponent/upload/uploadFile/uploadImage",
 	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
+	saveParkingCouponCar:baseUrl+"app/parkingCoupon.saveParkingCouponCar",
+	
+	
 		
 
 	NEED_NOT_LOGIN_PAGE: [

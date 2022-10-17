@@ -573,7 +573,16 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/coupon/getParkingCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "领取优惠券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",
