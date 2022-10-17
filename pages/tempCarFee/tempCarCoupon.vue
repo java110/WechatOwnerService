@@ -1,32 +1,35 @@
 <template>
 	<view>
-		<view class="block__title" v-if="couponList.length > 0">可使用优惠卷</view>
+		<view class="block__title">我的停车劵</view>
 		<!-- 费用项 -->
 		<uni-collapse @change="change" class="margin-top fee-content">
 			<uni-tr v-show="false">
 				<uni-th align="center" :with="50"> </uni-th>
 			</uni-tr>
-			<!-- 多个复选框，带全选 -->
+			<!-- 多个复选框，带全选-->
 			<view class="tl-section">
-				<checkbox-group class="block" @change="checkboxChange">
-					<view class="cu-form-group" v-for="(coupon,index) in couponList">
-						<view class="title">{{coupon.couponName}} 面值：{{coupon.actualPrice}}元
-							有效期：{{coupon.actualPrice}}
+				<checkbox-group class="block"  @change="checkboxChange">
+					<view class="cu-form-group" v-for="(coupon,index) in coupons">
+						<view class="title">
+							<text class="ellip">{{coupon.couponName}}-</text>
+							<text v-if="coupon.typeCd == '1001'">{{coupon.value}}分钟</text>
+							<text v-if="coupon.typeCd == '2002'">{{coupon.value}}元</text>
+							<text v-if="coupon.typeCd == '3003'">{{coupon.value}}折</text>
+							<text v-if="coupon.typeCd == '4004'">全免</text>
 						</view>
-						<checkbox class='round' :class="couponList[index].checked?'checked':''"
-							:checked="couponList[index].checked?true:false" :value="coupon.couponId"></checkbox>
+						<checkbox class='round'  :class="coupons[index].checked?'checked':''"
+							:checked="coupons[index].checked?true:false" :value="coupon.pccId"></checkbox>
 					</view>
 				</checkbox-group>
 			</view>
 		</uni-collapse>
 
 		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
-
 			<view class="action text-orange margin-right line-height">
-				合计：{{couponAmount}}元
+				共：{{selectCoupons.length}}张
 			</view>
 			<view class="btn-group">
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_navigateBack()">确定</button>
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_selectCouponBack()">确定</button>
 			</view>
 		</view>
 	</view>
@@ -37,22 +40,6 @@
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
-	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
-	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
-
-	// import mapping from '../../constant/MappingConstant.js'
-	// #ifdef H5
-
-	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-
-	// #endif
-
-	// #ifdef APP-PLUS
-	import {
-		getPayInfo
-	} from '../../factory/WexinAppPayFactory.js'
-	// #endif
-
 	import {
 		addMonth,
 		formatDate,
@@ -60,82 +47,62 @@
 		dateSubOneDay
 	} from '../../lib/java110/utils/DateUtil.js'
 	import {
-		getCouponUsers
+		getParkingCarCoupon
 	} from '../../api/fee/feeApi.js'
 
 	export default {
 		data() {
 			return {
-				couponList: [],
-				tmpCouponList: [],
-				userLink: '',
-				couponAmount: 0.0
+				coupons: [],
+				selectCoupons: [],
+				couponAmount: 0.0,
+				carNum: '',
+				paId: ''
 			}
 		},
 		onLoad: function(options) {
-			this.openId = options.openId;
 			this.carNum = options.carNum;
-			this.appId = options.appId;
-			
-			this._loadCouponUsers(options);
+			this.paId = options.paId;
+			this._loadCarCoupons(options);
 		},
 		methods: {
 			checkboxChange(e) {
-				this.couponAmount = '0'
-				var items = this.couponList
-				var values = e.detail.value;
-				for (var i = 0, lenI = items.length; i < lenI; ++i) {
+				let items = this.coupons
+				let values = e.detail.value;
+				for (let i = 0, lenI = items.length; i < lenI; ++i) {
 					items[i].checked = false;
-					for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-						if (items[i].couponId == values[j]) {
+					for (let j = 0, lenJ = values.length; j < lenJ; ++j) {
+						if (items[i].pccId == values[j]) {
 							items[i].checked = true;
 							break
 						}
 					}
-					if (items[i].checked == true) {
-						this.couponAmount = (parseFloat(this.couponAmount) + parseFloat(items[i].actualPrice)).toFixed(2);
-					}
 				}
-				console.log(this.couponList);
+				this.selectCoupons = values;
 			},
-			_loadCouponUsers: function(_options) {
+			_loadCarCoupons: function() {
 				let _that = this;
 				let _objData = {
 					page: 1,
 					row: 30,
-					userName: _options.carNum,
-					state: '1001'
+					carNum: this.carNum,
+					paId: this.paId,
+					state:'1001'
 				}
-				_that.couponList = [];
-				let _couponUsers = [];
-				getCouponUsers(_objData, _couponUsers)
-					.then((_couponList) => {
-						_couponList.data.forEach(items => {
-							items['checked'] = false;
-							if (items.isExpire == 'Y') {
-								_that.couponList.push(items);
-							}
+				_that.coupons = [];
+				getParkingCarCoupon(_objData)
+					.then((_data) => {
+						_that.coupons = _data;
+					}, (_err) => {
+						uni.showToast({
+							icon: 'none',
+							title: _err
 						})
-						//_that.noData = false;
-					}, () => {
-						//_that.noData = true;
 					})
-
 			},
-			_navigateBack: function() {
+			_selectCouponBack: function() {
 				let _that = this;
-				let newCouponList = [];
-				_that.couponList.forEach(items => {
-					if (items.checked == true) {
-						newCouponList.push(items);
-					}
-				})
-
-				let outCouponList = {
-					couponList: newCouponList,
-					couponAmount: _that.couponAmount
-				};
-				uni.setStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY, outCouponList);
+				uni.setStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY, this.selectCoupons);
 				uni.navigateBack();
 			}
 		}
@@ -143,8 +110,15 @@
 </script>
 
 <style>
-/* 	@import "./roomFee.css";
+	/* 	@import "./roomFee.css";
  */
+.block__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(69,90,100,.6);
+  padding: 40rpx 30rpx 20rpx;
+}
 	.fee-last {
 		margin-bottom: 200upx;
 	}

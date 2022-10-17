@@ -80,9 +80,6 @@
 		isNotNull
 	} from '../../lib/java110/utils/StringUtil.js'
 	
-	import {
-		queryWaitPayFeeTempCar
-	} from '@/api/car/carApi.js';
 	export default {
 		data() {
 			return {

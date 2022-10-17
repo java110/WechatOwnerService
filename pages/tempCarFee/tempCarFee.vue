@@ -43,14 +43,14 @@
 						<text class="text-grey text-sm">{{amount + '元' }}</text>
 					</view>
 				</view>
-				<view class="cu-list menu margin-top" @click="coupons">
+				<view class="cu-list menu margin-top" @click="_selectCoupons">
 					<view class="cu-item arrow">
 						<view class="content padding-tb-sm">
 							<view>
 								<view class="text-cut" style="width:220px">使用优惠卷抵扣</view>
 							</view>
 						</view>
-						<view>{{couponAmount+ '元' }}</view>
+						<view>{{couponCount+ '张' }}</view>
 					</view>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 20upx;">
@@ -105,7 +105,7 @@
 				openId: '',
 				inoutId:'',
 				receivableAmount: 0.0, // 抵扣金额
-				couponAmount: 0.0,
+				couponCount: 0,
 				couponList: []
 			};
 		},
@@ -121,13 +121,15 @@
 			this._loadTempCarFee();
 		},
 		onShow: function(options) {
-			this._dealUserCoupons();
+			this._dealCarCoupons();
 		},
 		methods: {
 			_loadTempCarFee: function() {
 				let _that = this;
+				
 				getTempCarFeeOrder({
 					paId: this.paId,
+					pccIds:this.couponList.join(","),
 					carNum: this.carNum
 				}).then(_data => {
 					if (_data.code != 0) {
@@ -145,30 +147,22 @@
 					_that.inoutId = data.orderId;
 				})
 			},
-			_dealUserCoupons: function() {
-				let couponUser = uni.getStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY);
-				if(!couponUser){
+			_dealCarCoupons: function() {
+				let carCoupons = uni.getStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY);
+				if(!carCoupons){
 					return ;
 				}
 				uni.removeStorageSync(constant.mapping.COUPON_USER_TEMP_CAR_KEY);
-				console.log(couponUser);
-				console.log(couponUser.couponAmount);
-				this.couponAmount = couponUser.couponAmount;
-				this.couponList = couponUser.couponList;
-				// this.receivableAmount = this.amount;
-				// if (this.couponAmount) {
-				// 	this.receivableAmount = (parseFloat(this.receivableAmount) - parseFloat(this.couponAmount))
-				// 		.toFixed(2);
-				// 	if (this.receivableAmount <= 0) {
-				// 		this.receivableAmount = 0.0;
-				// 	}
-				// }
+				this.couponList = carCoupons;
+				this.couponCount = carCoupons.length;
+				//重新计算 金额
+				this._loadTempCarFee();
 				
 			},
-			coupons: function(_item) {
+			_selectCoupons: function(_item) {
 				let _that = this;
-				wx.navigateTo({
-					url: '/pages/tempCarFee/tempCarCoupon?carNum='+_that.carNum+ "&appId=" + _that.appId + "&openId=" + _that.openId
+				uni.navigateTo({
+					url: '/pages/tempCarFee/tempCarCoupon?carNum='+_that.carNum+ "&paId=" + this.paId 
 				})
 			},
 			onPayFee: function() {

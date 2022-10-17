@@ -533,7 +533,7 @@
 		{
 			"path": "pages/tempCarFee/tempCarCoupon",
 			"style": {
-				"navigationBarTitleText": "我的优惠券详情",
+				"navigationBarTitleText": "停车劵",
 				"enablePullDownRefresh": false
 			}
 		},

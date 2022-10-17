@@ -153,6 +153,8 @@ export default {
 	uploadImageFormData: baseUrl + "callComponent/upload/uploadFile/uploadImage",
 	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
 	saveParkingCouponCar:baseUrl+"app/parkingCoupon.saveParkingCouponCar",
+	listParkingCouponCar:baseUrl+"app/parkingCoupon.listParkingCouponCar",
+	
 	
 	
 		

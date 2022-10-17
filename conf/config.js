@@ -15,7 +15,7 @@ const baseUrl = '/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://demo.homecommunity.cn/';
+const baseUrl = 'http://192.168.100.108:8088/';
 // #endif
 
 let commonBaseUrl = 'http://demo.homecommunity.cn/';

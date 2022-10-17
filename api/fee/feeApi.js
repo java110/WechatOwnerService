@@ -1,5 +1,6 @@
 import {
-	request,requestNoAuth
+	request,
+	requestNoAuth
 } from '../../lib/java110/java110Request.js'
 import
 url
@@ -9,7 +10,10 @@ import
 mapping
 from '../../constant/MappingConstant.js'
 
-import {formatDate,dateTimeStringToDateString} from '../../lib/java110/utils/DateUtil.js'
+import {
+	formatDate,
+	dateTimeStringToDateString
+} from '../../lib/java110/utils/DateUtil.js'
 
 
 
@@ -23,7 +27,7 @@ import {formatDate,dateTimeStringToDateString} from '../../lib/java110/utils/Dat
 	 state:'2008001'
  }
  */
-export function getRoomFees(_objData,_tmpRoom) {
+export function getRoomFees(_objData, _tmpRoom) {
 	return new Promise((resolve, reject) => {
 		let moreRooms = [];
 		request({
@@ -76,7 +80,7 @@ export function getRoomFees(_objData,_tmpRoom) {
 	})
 }
 //查询用户优惠卷
-export function getCouponUsers(_objData,_couponUsers) {
+export function getCouponUsers(_objData, _couponUsers) {
 	return new Promise((resolve, reject) => {
 		requestNoAuth({
 			url: url.queryCouponUser,
@@ -94,6 +98,29 @@ export function getCouponUsers(_objData,_couponUsers) {
 					return;
 				}
 				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+// 查询停车劵
+export function getParkingCarCoupon(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listParkingCouponCar,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				let _json = res.data;
+				if (_json.code == 0) {
+					//成功情况下跳转
+					resolve(_json.data);
+					return;
+				}
+				reject(_json.msg);
 			},
 			fail: function(e) {
 				reject();
@@ -120,10 +147,11 @@ export function getRoomOweFees(_objData) {
 						//_that.noData = true;
 						reject();
 					}
-					 _roomFees.forEach(function(_roomFee) {
-					 	_roomFee.endTime = dateTimeStringToDateString(_roomFee.endTime);		 	
-						_roomFee.deadlineTime = dateTimeStringToDateString(_roomFee.deadlineTime);
-					 });
+					_roomFees.forEach(function(_roomFee) {
+						_roomFee.endTime = dateTimeStringToDateString(_roomFee.endTime);
+						_roomFee.deadlineTime = dateTimeStringToDateString(_roomFee
+							.deadlineTime);
+					});
 					resolve(_roomFees);
 					return;
 				}
@@ -187,67 +215,67 @@ export function getTempCarFeeOrder(_objData) {
 	})
 }
 
-export function toPayTempCarFee(_objData){
+export function toPayTempCarFee(_objData) {
 	return new Promise((resolve, reject) => {
-	requestNoAuth({
-		url: url.toPayTempCarFee,
-		method: "POST",
-		data: JSON.stringify(_objData), //动态数据
-		success: function(res) {
-			if (res.statusCode == 200) {
-				//成功情况下跳转
-				resolve(res.data);
-				return;
+		requestNoAuth({
+			url: url.toPayTempCarFee,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
 			}
-			reject();
-		},
-		fail: function(e) {
-			reject();
-		}
-	});
+		});
 	})
 }
 
-export function receiveParkingCoupon(_objData){
+export function receiveParkingCoupon(_objData) {
 	return new Promise((resolve, reject) => {
-	requestNoAuth({
-		url: url.saveParkingCouponCar,
-		method: "POST",
-		data: JSON.stringify(_objData), //动态数据
-		success: function(res) {
-			if (res.statusCode == 200) {
-				//成功情况下跳转
-				resolve(res.data);
-				return;
+		requestNoAuth({
+			url: url.saveParkingCouponCar,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
 			}
-			reject();
-		},
-		fail: function(e) {
-			reject();
-		}
-	});
+		});
 	})
 }
 
 
 
-export function toAliPayTempCarFee(_objData){
+export function toAliPayTempCarFee(_objData) {
 	return new Promise((resolve, reject) => {
-	requestNoAuth({
-		url: url.alipayPayTempCarFee,
-		method: "POST",
-		data: JSON.stringify(_objData), //动态数据
-		success: function(res) {
-			if (res.statusCode == 200) {
-				//成功情况下跳转
-				resolve(res.data);
-				return;
+		requestNoAuth({
+			url: url.alipayPayTempCarFee,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
 			}
-			reject();
-		},
-		fail: function(e) {
-			reject();
-		}
-	});
+		});
 	})
 }
