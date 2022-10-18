@@ -237,6 +237,7 @@
 				};
 				toPayTempCarFee(_objData)
 				.then(_data=>{
+					wx.hideLoading();
 					if (_data.code == '0') {
 						// #ifdef H5	
 						WexinPayFactory.wexinPay(_data, function() {
@@ -249,10 +250,18 @@
 							});
 						});
 						// #endif
-						wx.hideLoading();
 						return;
 					}
-					wx.hideLoading();
+					if(_data.code == '100'){
+						uni.showToast({
+							title: "支付成功",
+							duration: 2000
+						});
+						uni.navigateBack({
+							delta:1
+						});
+						return ;
+					}
 					wx.showToast({
 						title: "缴费失败",
 						icon: 'none',
