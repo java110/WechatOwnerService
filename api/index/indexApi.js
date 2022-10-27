@@ -196,3 +196,54 @@ export function loadAdverts(dataObj) {
 			});
 		})
 }
+
+/**
+ * 查询小区广告
+ */
+export function listMarketPicByCommunity(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.listMarketPicByCommunity,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						resolve(res.data);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+
+/**
+ * 查询小区广告
+ */
+export function listCommunityMarketGoods(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.listCommunityMarketGoods,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						resolve(res.data);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+

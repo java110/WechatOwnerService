@@ -154,9 +154,11 @@ export default {
 	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
 	saveParkingCouponCar:baseUrl+"app/parkingCoupon.saveParkingCouponCar",
 	listParkingCouponCar:baseUrl+"app/parkingCoupon.listParkingCouponCar",
+	listMarketPicByCommunity:baseUrl+"app/marketPic.listCommunityMarketPic",
+	listCommunityMarketGoods:baseUrl+"app/marketGoods.listCommunityMarketGoods",
 	
 	
-	
+
 		
 
 	NEED_NOT_LOGIN_PAGE: [

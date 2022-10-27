@@ -4,7 +4,6 @@
 			"style": {
 				"navigationBarTitleText": "业主版",
 				"backgroundColor": "#ffffff"
-				
 			}
 		},
 		{
@@ -578,6 +577,14 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "领取优惠券",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/successPage/successPage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "处理成功",
                 "enablePullDownRefresh": false
             }
             
