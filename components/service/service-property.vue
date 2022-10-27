@@ -56,11 +56,13 @@
 						name: '生活缴费',
 						src: this.imgUrl+'/h5/images/serve/1.png',
 						href: '/pages/oweFee/oweFee'
-					},{
-						name: '临时车费',
-						src: this.imgUrl+'/h5/images/serve/1.png',
-						href: '/pages/tempParkingFee/tempParkingFee?paId=102022101773780027&communityId=2022081539020475&appId=123&aliAppId=12345'
-					}, {
+					},
+					// {
+					// 	name: '临时车费',
+					// 	src: this.imgUrl+'/h5/images/serve/1.png',
+					// 	href: '/pages/tempParkingFee/tempParkingFee?paId=102022101773780027&communityId=2022081539020475&appId=123&aliAppId=12345'
+					// },
+					{
 						name: '房屋费',
 						src: this.imgUrl+'/h5/images/serve/5.png',
 						href: '/pages/roomFeeListNew/roomFeeListNew'
