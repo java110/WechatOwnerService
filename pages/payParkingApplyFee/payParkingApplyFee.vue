@@ -283,11 +283,14 @@
 								provider: 'wxpay',
 								orderInfo: orderInfo, //微信、支付宝订单数据
 								success: function(res) {
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
+									// uni.showToast({
+									// 	title: "支付成功",
+									// 	duration: 2000
+									// });
+									// uni.navigateBack({});
+									uni.navigateTo({
+										url:"/pages/successPage/successPage?msg=支付成功&objType=3003"
+									})
 								},
 								fail: function(err) {
 									console.log('fail:' + JSON.stringify(err));

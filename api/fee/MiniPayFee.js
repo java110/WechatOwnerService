@@ -36,11 +36,14 @@ export function payOweFee(_that) {
 					'signType': data.signType,
 					'paySign': data.sign,
 					'success': function(res) {
-						uni.showToast({
-							title: "支付成功",
-							duration: 2000
-						});
-						uni.navigateBack({});
+						// uni.showToast({
+						// 	title: "支付成功",
+						// 	duration: 2000
+						// });
+						// uni.navigateBack({});
+						uni.navigateTo({
+							url:"/pages/successPage/successPage?msg=支付成功&objType=3003"
+						})
 					},
 					'fail': function(res) {
 						console.log('fail:' + JSON.stringify(res));

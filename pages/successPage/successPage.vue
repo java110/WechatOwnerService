@@ -7,11 +7,10 @@
 						<view class="text-xsl">
 							<text class="cuIcon-roundcheckfill text-green"></text>
 						</view>
-						<view class=" text-msg">{{msg}}</view>
+						<view class=" text-msg">{{msg || '处理成功'}}</view>
 					</view>
 				</view>
 			</view>
-
 
 			<view class="padding flex flex-direction margin-top">
 				<button class="cu-btn bg-green lg" @click="_indexPage()">返回首页</button>
@@ -21,9 +20,7 @@
 		<view class="home_wrap">
 			<success-ads :objType="objType"></success-ads>
 		</view>
-		<view class="home_wrap">
 			<success-goods :objType="objType"></success-goods>
-		</view>
 
 
 	</view>
@@ -35,7 +32,7 @@
 	export default {
 		data() {
 			return {
-				msg: '处理成功',
+				msg: '',
 				objType:'3003',
 				imgs: [],
 				goods: []
