@@ -9,57 +9,75 @@
 
 			<view class="tips_block">
 			</view>
-
-			<view class='tips'>
-				<text>点击方框输入车牌号</text>
+			<view class="cu-bar btn-group " style="margin-top: 30px;">
+				<button @click="_changeFlag('phone')" style="margin-right: 0px;" class="cu-btn  shadow-blur lg"
+					:class="{'bg-blue':showFlag == 'phone','line-blue':showFlag != 'phone'}">手机号</button>
+				<button @click="_changeFlag('car')" style="margin-left: 0px;" class="cu-btn shadow-blur  lg"
+					:class="{'bg-blue':showFlag == 'car','line-blue':showFlag != 'car'}">车牌号</button>
 			</view>
-			<view class="plate-input-body">
-				<view class="plate-input-content" @click="showCarNumberKeyboard">
-					<view bindtap="showCarNumberKeyboard" data-id="0"
-						:class="inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index0}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="1"
-						:class="inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index1}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="2"
-						:class="inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index2}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="3"
-						:class="inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index3}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="4"
-						:class="inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index4}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="5"
-						:class="inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index5}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="6"
-						:class="inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index6}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="7" class="green-border"
-						:class="inputOnFocusIndex=='7'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index7}}</text>
+			<view v-if="showFlag == 'phone'">
+				<view class='tips'>
+					<text>请输入手机号</text>
+				</view>
+				<view class="plate-input-body">
+					<view class="plate-input-content">
+						<input type="number" maxlength="11" class="input-ui" v-model="carNum"
+							placeholder="手机号作为车牌号入场" />
 					</view>
 				</view>
 			</view>
-
-			<view class=" temp-history">
-				<view class="padding"><text>往期记录</text></view>
-				<view class="flex justify-start">
-					<view class="padding-left" v-for="(item,index) in carNums" :key="index"
-						@tap="_loadTempFee(item.carNum)">{{item.carNum}}
+			<view v-if="showFlag == 'car'">
+				<view class='tips'>
+					<text>点击方框输入车牌号</text>
+				</view>
+				<view class="plate-input-body">
+					<view class="plate-input-content" @click="showCarNumberKeyboard">
+						<view bindtap="showCarNumberKeyboard" data-id="0"
+							:class="inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index0}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="1"
+							:class="inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index1}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="2"
+							:class="inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index2}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="3"
+							:class="inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index3}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="4"
+							:class="inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index4}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="5"
+							:class="inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index5}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="6"
+							:class="inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index6}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="7" class="green-border"
+							:class="inputOnFocusIndex=='7'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index7}}</text>
+						</view>
 					</view>
 				</view>
-			</view>
-			<view class='plate-input-flag' bindtap='changeplate'>
-				<text>{{carNumBtn}}</text>
+
+				<view class=" temp-history">
+					<view class="padding"><text>往期记录</text></view>
+					<view class="flex justify-start">
+						<view class="padding-left" v-for="(item,index) in carNums" :key="index"
+							@tap="_loadTempFee(item.carNum)">{{item.carNum}}
+						</view>
+					</view>
+				</view>
+				<view class='plate-input-flag' bindtap='changeplate'>
+					<text>{{carNumBtn}}</text>
+				</view>
 			</view>
 
 			<view class="plat-btn-black"></view>
@@ -122,8 +140,9 @@
 				aliAppId: '',
 				openId: '',
 				machineId: '',
-				communityId:'',
-				carNums: []
+				communityId: '',
+				carNums: [],
+				showFlag: 'car',
 			}
 		},
 		components: {
@@ -146,20 +165,23 @@
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
 			uni.setStorageSync(mapping.W_APP_ID, this.appId)
-			if (!isNotNull(this.openId)) {
-				//刷新 openId
-				if (isWxOrAli() == 'ALIPAY') {
-					this._refreshAliPayOpenId();
-				} else {
-					this._refreshWechatOpenId();
-				}
-				return;
-			}
+			// if (!isNotNull(this.openId)) {
+			// 	//刷新 openId
+			// 	if (isWxOrAli() == 'ALIPAY') {
+			// 		this._refreshAliPayOpenId();
+			// 	} else {
+			// 		this._refreshWechatOpenId();
+			// 	}
+			// 	return;
+			// }
 			this._loadExistsCarNum();
 		},
 		methods: {
 			showCarNumberKeyboard() {
 				this.$refs.popupCarNumber.open()
+			},
+			_changeFlag:function(_flag){
+					this.showFlag = _flag;
 			},
 			// 车牌号选择键盘
 			confirmCarNumber(value) {
@@ -238,14 +260,14 @@
 					scopes: ['auth_base'],
 				}, function(res) {
 					uni.showToast({
-						title:JSON.stringify(res),
-						icon:'none'
+						title: JSON.stringify(res),
+						icon: 'none'
 					})
 					ap.alert(JSON.stringify(res));
 					getOpenIdFromAliPay({
-						authCode:res.authCode,
-						communityId:_that.communityId
-					}).then(_data=>{
+						authCode: res.authCode,
+						communityId: _that.communityId
+					}).then(_data => {
 						_that.openId = _data.data;
 						_that._loadExistsCarNum();
 					})
@@ -270,13 +292,13 @@
 			_loadExistsCarNum: function() {
 				let _that = this;
 				let _openType = "WECHAT";
-				if(isWxOrAli == 'ALIPAY'){
+				if (isWxOrAli == 'ALIPAY') {
 					_openType = 'ALIPAY'
 				}
 				queryWaitPayFeeTempCar({
 					openId: this.openId,
 					machineId: this.machineId,
-					openType:_openType
+					openType: _openType
 				}).then(_json => {
 					_that.carNums = _json.data;
 					if (_json.data && _json.data.length == 1) {
@@ -320,4 +342,12 @@
 
 <style>
 	@import "./tempParkingFee.css";
+	.input-ui{
+				border: 1px solid #ccc;
+				padding: 12upx 18upx;
+				border-radius: 8upx;
+				color: rgb(48, 49, 51);
+				width: 100%;
+				height: 100%;
+			}
 </style>
