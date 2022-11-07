@@ -106,7 +106,11 @@
 						src: this.imgUrl+'/h5/images/serve/my10.png',
 						href: '/pages/myRenovation/myRoomList'
 					},
-					
+					{
+						name: '订场记录',
+						src: this.imgUrl+'/h5/images/serve/my8.png',
+						href: '/pages/myBooking/myBoomList'
+					},	
 				]
 			};
 		},

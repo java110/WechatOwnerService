@@ -571,25 +571,46 @@
 				"navigationBarTitleText": "预约详情",
 				"enablePullDownRefresh": false
 			}
+		}, {
+			"path": "pages/coupon/getParkingCoupon",
+			"style": {
+				"navigationBarTitleText": "领取优惠券",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/successPage/successPage",
+			"style": {
+				"navigationBarTitleText": "处理成功",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/appointment/appointment",
+			"style": {
+				"navigationBarTitleText": "场馆预定"
+			}
+		},
+		{
+			"path": "pages/appointmentPay/appointmentPay",
+			"style": {
+				"navigationBarTitleText": "支付订单"
+			}
+		},
+		{
+			"path": "pages/myBooking/myBoomList",
+			"style": {
+				"navigationBarTitleText": "订场记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/myBooking/myBooksRenovationDetail",
+			"style": {
+				"navigationBarTitleText": "订场详情",
+				"enablePullDownRefresh": false
+			}
 		}
-	    ,{
-            "path" : "pages/coupon/getParkingCoupon",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "领取优惠券",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/successPage/successPage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "处理成功",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",
