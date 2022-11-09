@@ -610,7 +610,16 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/machine/machine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备说明",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",

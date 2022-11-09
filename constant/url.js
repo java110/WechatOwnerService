@@ -166,6 +166,7 @@ export default {
 
 	// 修改预约订单
 	saveCommunitySpacePersonTime: baseUrl + "app/communitySpace.saveCommunitySpacePersonTime",
+	listEquipmentAccount:baseUrl +"app/equipmentAccount.listEquipmentAccount",
 
 
 

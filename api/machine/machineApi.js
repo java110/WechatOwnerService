@@ -6,7 +6,7 @@
 
 
 import {
-	request
+	request, requestNoAuth
 } from '../../lib/java110/java110Request.js'
 import
 url
@@ -37,6 +37,23 @@ export function getMachineTranslates(_objData) {
 				} else {
 					reject("查询失败");
 				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
+
+export function getMachines(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listEquipmentAccount,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
 			},
 			fail: function(res) {
 				reject(res);
