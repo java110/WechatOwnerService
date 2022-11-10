@@ -619,6 +619,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/machineMaintainance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备保养",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machine/machineInspection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备巡检",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

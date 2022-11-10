@@ -138,9 +138,24 @@
 				</view>
 			</view>
 		</view>
-		<view class="block__title">保养记录</view>
-		<view class="block__title">巡检记录</view>
-		
+		<view class="cu-list menu" @click="_toMaintainance()">
+			<view class="cu-item arrow">
+				<view class="content padding-tb-sm">
+					<view>
+						<view class="text-cut" style="width:220px">保养记录</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="cu-list menu" @click="_toInspection()">
+			<view class="cu-item arrow">
+				<view class="content padding-tb-sm">
+					<view>
+						<view class="text-cut" style="width:220px">巡检记录</view>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -155,6 +170,7 @@
 		data() {
 			return {
 				machineId:'',
+				communityId:'',
 				equipmentAccountDetail: {}
 			};
 		},
@@ -163,7 +179,7 @@
 		 */
 		onLoad: function(options) {
 			this.machineId = options.machineId;
-			context.onLoad(options);
+			this.communityId = options.communityId;
 			this._loadMachine();
 		},
 		/**
@@ -184,6 +200,16 @@
 					_that.equipmentAccountDetail = _data.data[0];
 				})
 			},
+			_toMaintainance:function(){
+				uni.navigateTo({
+					url:'/pages/machine/machineMaintainance?machineId='+this.machineId+"&communityId="+this.communityId
+				})
+			},
+			_toInspection:function(){
+				uni.navigateTo({
+					url:'/pages/machine/machineInspection?machineId='+this.machineId+"&communityId="+this.communityId
+				})
+			}
 		}
 	};
 </script>

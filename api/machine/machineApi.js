@@ -62,4 +62,45 @@ export function getMachines(_objData) {
 	});
 };
 
+/**
+ *  查询设备保养记录
+ * @param {} _objData 
+ */
+export function getMachineMaintainances(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listMaintainanceTaskDetail,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
+
+/**
+ *  查询设备保养记录
+ * @param {} _objData 
+ */
+export function getMachineInspections(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listInspectionTaskDetails,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
 
