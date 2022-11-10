@@ -92,7 +92,7 @@
 					<text class="text-grey text-sm">{{equipmentAccountDetail.usefulLife}}</text>
 				</view>
 			</view>
-			<view class="cu-item">
+			<!-- <view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-info text-green"></text>
 					<text class="text-grey">采购价格</text>
@@ -109,7 +109,7 @@
 				<view class="action">
 					<text class="text-grey text-sm">{{equipmentAccountDetail.netWorth}}</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-info text-green"></text>
@@ -192,7 +192,8 @@
 				getMachines({
 					page:1,
 					row:1,
-					machineId:this.machineId
+					machineId:this.machineId,
+					communityId:this.communityId
 				}).then(_data=>{
 					if(_data.data.length < 1){
 						return ;

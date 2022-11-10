@@ -88,7 +88,7 @@
 					communityId: this.communityId,
 					state:'20200407'
 				}).then(_data=>{
-					_that.details = _data.inspectionTaskDetails;
+					_that.details = _data.data;
 				})
 			}
 		}
