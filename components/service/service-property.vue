@@ -140,11 +140,11 @@
 						src: this.imgUrl + '/h5/images/serve/order4.png',
 						href: '/pages/appointment/appointment'
 					},
-					{
-						name: '设备',
-						src: this.imgUrl + '/h5/images/serve/order4.png',
-						href: '/pages/machine/machine?machineId=102022110791780032&communityId=2022110264250009'
-					},
+					// {
+					// 	name: '设备',
+					// 	src: this.imgUrl + '/h5/images/serve/order4.png',
+					// 	href: '/pages/machine/machine?machineId=102022110791780032&communityId=2022110264250009'
+					// },
 				];
 			}
 		}
