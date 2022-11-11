@@ -166,7 +166,7 @@
 		dateSubOneDay
 	} from '../../lib/java110/utils/DateUtil.js';
 	
-	import {payFeeApp} from '@/api/fee/feeApi.js';
+	import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
 
 	export default {
 		components: {
