@@ -272,7 +272,6 @@
 			onPayFee: function() {
 				// debugger
 				let _that = this;
-				console.log('onPayFee');
 				if (this.canPay == "t") {
 					let totalMoney = this.totalMoney;
 					wx.showLoading({
@@ -322,7 +321,7 @@
 					//{"spaceId":"102022093043260007","personName":"wuxw","personTel":"18909711443","appointmentTime":"01:00","receivableAmount":"10","receivedAmount":"10","payWay":"2","state":"S","remark":"123","appointmentDate":"2022-09-01","communityId":"2022081539020475"}
 					console.log('_objData');
 					context.request({
-						url: url.bookingUnifiedPayment,
+						url: url.unifiedPayment,
 						header: context.getHeaders(),
 						method: "POST",
 						data: _objData,

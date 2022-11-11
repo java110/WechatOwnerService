@@ -162,7 +162,7 @@ export default {
 	queryChangGuan: baseUrl + "app/communityVenue.listCommunityVenue",
 	// 查询已订场地信息
 	querySpacePerson: baseUrl + "app/communitySpace.listCommunitySpacePerson",
-	bookingUnifiedPayment: baseUrl + "app/payment.unifiedPayment",
+	unifiedPayment: baseUrl + "app/payment.unifiedPayment",
 
 	// 修改预约订单
 	saveCommunitySpacePersonTime: baseUrl + "app/communitySpace.saveCommunitySpacePersonTime",

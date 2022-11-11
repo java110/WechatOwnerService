@@ -156,28 +156,17 @@
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
-	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
-	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
-
-
-	// #ifdef H5
-
-	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-
-	// #endif
-
-	// #ifdef APP-PLUS
-	import {
-		getPayInfo
-	} from '../../factory/WexinAppPayFactory.js'
-	// #endif
+	import vcDiscount from '@/components/vc-discount/vc-discount.vue';
+	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue';
 
 	import {
 		addMonth,
 		formatDate,
 		date2String,
 		dateSubOneDay
-	} from '../../lib/java110/utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js';
+	
+	import {payFeeApp} from '@/api/fee/feeApi.js';
 
 	export default {
 		components: {
@@ -401,12 +390,8 @@
 
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
-				wx.showLoading({
-					title: '支付中'
-				});
-
 				let _tradeType = 'APP';
-				let _objData = {
+				payFeeApp(this,{
 					cycles: this.feeMonth,
 					communityId: this.communityId,
 					feeId: this.feeId,
@@ -416,94 +401,14 @@
 					appId: this.appId,
 					endTime: this.formatEndTime,
 					couponList: this.couponList
-				};
-				context.request({
-					url: constant.url.preOrder,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-						if (res.statusCode == 200 && res.data.code == '0') {
-							let data = res.data; //成功情况下跳转
-
-							let obj = {};
-							let orderInfo = {};
-							// #ifdef MP-WEIXIN
-							obj = {
-								appid: data.appId,
-								noncestr: data.nonceStr,
-								package: 'Sign=WXPay', // 固定值，以微信支付文档为主
-								partnerid: data.partnerid,
-								prepayid: data.prepayid,
-								timestamp: data.timeStamp,
-								sign: data.sign // 根据签名算法生成签名
-							}
-							// #endif
-							// #ifdef APP-PLUS
-							obj = getPayInfo(data);
-							// #endif
-
-							// 第二种写法，传对象字符串
-							orderInfo = JSON.stringify(obj)
-							uni.requestPayment({
-								provider: 'wxpay',
-								orderInfo: orderInfo, //微信、支付宝订单数据
-								success: function(res) {
-									// uni.showToast({
-									// 	title: "支付成功",
-									// 	duration: 2000
-									// });
-									//uni.navigateBack({});
-									uni.navigateTo({
-										url:"/pages/successPage/successPage?msg=支付成功&objType=3003"
-									})
-								},
-								fail: function(err) {
-									console.log('fail:' + JSON.stringify(err));
-								}
-							});
-							wx.hideLoading();
-							return;
-						}
-						if (res.statusCode == 200 && res.data.code == '100') {
-							let data = res.data; //成功情况下跳转
-							uni.showToast({
-								title: "支付成功",
-								duration: 2000
-							});
-							setTimeout(function(){
-								uni.navigateBack({});
-							},2000)
-							
-							return;
-						}
-
-						wx.hideLoading();
-						wx.showToast({
-							title: "缴费失败",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
 				});
+				
 			},
-
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
-				wx.showLoading({
-					title: '支付中'
-				});
 				let _tradeType = 'JSAPI';
-				let _objData = {
+				payFeeWechat(this,{
+					business: "payFee",
 					cycles: this.feeMonth,
 					communityId: this.communityId,
 					feeId: this.feeId,
@@ -518,79 +423,7 @@
 					accountAmount: this.accountAmount, // 账户金额
 					deductionAmount: this.deductionAmount, // 抵扣金额
 					couponList: this.couponList
-				};
-				context.request({
-					url: constant.url.preOrder,
-					header: context.getHeaders(),
-					method: "POST",
-					data: _objData,
-					//动态数据
-					success: function(res) {
-
-						if (res.statusCode == 200 && res.data.code == '0') {
-							let data = res.data; //成功情况下跳转
-							// #ifdef MP-WEIXIN
-							uni.requestPayment({
-								'timeStamp': data.timeStamp,
-								'nonceStr': data.nonceStr,
-								'package': data.package,
-								'signType': data.signType,
-								'paySign': data.sign,
-								'success': function(res) {
-									uni.showToast({
-										title: "支付成功",
-										duration: 2000
-									});
-									uni.navigateBack({});
-								},
-								'fail': function(res) {
-									console.log('fail:' + JSON.stringify(res));
-								}
-							});
-							// #endif
-							// #ifdef H5
-							WexinPayFactory.wexinPay(data, function() {
-								// uni.showToast({
-								// 	title: "支付成功",
-								// 	duration: 2000
-								// });
-								// uni.navigateBack({});
-								uni.navigateTo({
-									url:"/pages/successPage/successPage?msg=支付成功&objType=3003"
-								})
-							});
-							// #endif
-							wx.hideLoading();
-							return;
-						}
-						if (res.statusCode == 200 && res.data.code == '100') {
-							let data = res.data; //成功情况下跳转
-							uni.showToast({
-								title: "支付成功",
-								duration: 2000
-							});
-							setTimeout(function(){
-								uni.navigateBack({});
-							},2000)
-							
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: "缴费失败",
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				});
+				})
 			}
 		}
 	};
