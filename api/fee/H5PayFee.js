@@ -11,6 +11,7 @@ export function payOweFee(_that) {
 	});
 	let _tradeType = 'JSAPI';
 	let _objData = {
+		business: "oweFee",
 		cycles: _that.feeMonth,
 		communityId: _that.communityId,
 		ownerId: _that.ownerId,
@@ -21,7 +22,7 @@ export function payOweFee(_that) {
 		storeId: _that.storeId
 	};
 	context.request({
-		url: url.toOweFeePay,
+		url: url.unifiedPayment,
 		header: context.getHeaders(),
 		method: "POST",
 		data: _objData,
