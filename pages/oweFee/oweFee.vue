@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view scroll-y style="padding-bottom: 200rpx;">
 			<view class="block__title" v-if="fees.length > 0">应缴费用</view>
-			<view class="cu-list menu"  v-for="(item,index) in fees" :key="index" :data-item="item">
+			<view class="cu-list menu"  v-for="(item,index) in fees" :key="index" :data-item="item" v-if="item.payOnline == 'Y'">
 				<view class="cu-item " >
 					<view class="content padding-tb-sm">
 						<view>
@@ -120,8 +120,9 @@
 					})
 					.then(function(_fees){
 						_fees.forEach(function(_item){
-							_that.receivableAmount += _item.feePrice;
-							
+							if(_item.payOnline == 'Y'){
+								_that.receivableAmount += _item.feePrice;
+							}
 						})
 						_that.receivableAmount = _that.receivableAmount.toFixed(2);
 					})

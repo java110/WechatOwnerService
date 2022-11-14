@@ -78,6 +78,7 @@ export function getRoomFees(_objData, _tmpRoom) {
 						_tmpRoom.deadlineTime = _roomFee.deadlineTime;
 						_tmpRoom.amountOwed = _roomFee.amountOwed;
 						_tmpRoom.startTime = _roomFee.startTime;
+						_tmpRoom.payOnline = _roomFee.payOnline;
 						moreRooms.push(_tmpRoom);
 					});
 					resolve(moreRooms);

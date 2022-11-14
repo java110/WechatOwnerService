@@ -218,7 +218,8 @@
 				deductionAmount: 0.0, // 抵扣金额
 				couponAmount: 0.0,
 				amountCount: 0.0,
-				couponList: []
+				couponList: [],
+				payOnline:'Y'
 			};
 		},
 
@@ -272,6 +273,7 @@
 			this.deadlineTime = _fee.deadlineTime;
 			this.amountOwed = _fee.amountOwed;
 			this.amountCount = this.receivableAmount;
+			this.payOnline = _fee.payOnline;
 
 			if (this.feeFlag != '2006012') {
 				this.paymentCycle = _fee.paymentCycle;
@@ -391,6 +393,13 @@
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
 				let _tradeType = 'APP';
+				if(this.payOnline == 'N'){
+					uni.showToast({
+						icon:'none',
+						title:'暂不支持线上缴费，请到前台缴费'
+					})
+					return;
+				}
 				payFeeApp(this,{
 					cycles: this.feeMonth,
 					communityId: this.communityId,
@@ -407,6 +416,13 @@
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
 				let _tradeType = 'JSAPI';
+				if(this.payOnline == 'N'){
+					uni.showToast({
+						icon:'none',
+						title:'暂不支持线上缴费，请到前台缴费'
+					})
+					return;
+				}
 				payFeeWechat(this,{
 					business: "payFee",
 					cycles: this.feeMonth,

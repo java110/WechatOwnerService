@@ -163,6 +163,7 @@
 				payerObjId: '',
 				payerObjType: '',
 				userId: '',
+				payOnline:'Y'
 			};
 		},
 
@@ -220,7 +221,8 @@
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
-			})
+			});
+			this.payOnline = _fee.payOnline;
 		},
 
 		/**
@@ -273,7 +275,15 @@
 			},
 			_payWxApp: function(_data) {
 				let _receivedAmount = this.receivableAmount;
+				if(this.payOnline == 'N'){
+					uni.showToast({
+						icon:'none',
+						title:'暂不支持线上缴费，请到前台缴费'
+					})
+					return;
+				}
 				let _tradeType = 'APP';
+				
 				payFeeApp(this,{
 					cycles: this.feeMonth,
 					communityId: this.communityId,
@@ -290,6 +300,13 @@
 			},
 			onPayFee: function() {
 				let _receivedAmount = this.receivableAmount;
+				if(this.payOnline == 'N'){
+					uni.showToast({
+						icon:'none',
+						title:'暂不支持线上缴费，请到前台缴费'
+					})
+					return;
+				}
 				let _tradeType = 'JSAPI';
 		
 				payFeeWechat(this,{
