@@ -10,10 +10,11 @@
 			<view class="tips_block">
 			</view>
 			<view class="cu-bar btn-group " style="margin-top: 30px;">
-				<button @click="_changeFlag('phone')" style="margin-right: 0px;" class="cu-btn  shadow-blur lg"
-					:class="{'bg-blue':showFlag == 'phone','line-blue':showFlag != 'phone'}">手机号</button>
 				<button @click="_changeFlag('car')" style="margin-left: 0px;" class="cu-btn shadow-blur  lg"
 					:class="{'bg-blue':showFlag == 'car','line-blue':showFlag != 'car'}">车牌号</button>
+				<button @click="_changeFlag('phone')" style="margin-right: 0px;" class="cu-btn  shadow-blur lg"
+					:class="{'bg-blue':showFlag == 'phone','line-blue':showFlag != 'phone'}">手机号</button>
+				
 			</view>
 			<view v-if="showFlag == 'phone'">
 				<view class='tips'>
@@ -22,7 +23,7 @@
 				<view class="plate-input-body">
 					<view class="plate-input-content">
 						<input type="number" maxlength="11" class="input-ui" v-model="carNum"
-							placeholder="手机号作为车牌号入场" />
+							placeholder="以手机号入场无牌车，请填手机号出场" />
 					</view>
 				</view>
 			</view>
@@ -165,15 +166,15 @@
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
 			uni.setStorageSync(mapping.W_APP_ID, this.appId)
-			// if (!isNotNull(this.openId)) {
-			// 	//刷新 openId
-			// 	if (isWxOrAli() == 'ALIPAY') {
-			// 		this._refreshAliPayOpenId();
-			// 	} else {
-			// 		this._refreshWechatOpenId();
-			// 	}
-			// 	return;
-			// }
+			if (!isNotNull(this.openId)) {
+				//刷新 openId
+				if (isWxOrAli() == 'ALIPAY') {
+					this._refreshAliPayOpenId();
+				} else {
+					this._refreshWechatOpenId();
+				}
+				return;
+			}
 			this._loadExistsCarNum();
 		},
 		methods: {

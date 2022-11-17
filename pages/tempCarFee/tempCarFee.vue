@@ -50,13 +50,15 @@
 								<view class="text-cut" style="width:220px">使用停车劵抵扣</view>
 							</view>
 						</view>
-						<view>{{couponCount+ '张' }}</view>
+						<view v-if="couponCount == 0">请选择</view>
+						<view v-else>{{couponCount+ '张' }}</view>
 					</view>
 				</view>
+				<!-- ="amount == 0" -->
 				<view class="cu-bar btn-group" style="margin-top: 20upx;">
 					<button @click="onPayFee" v-if="amount > 0"
 						class="cu-btn bg-green shadow-blur round lg">确认缴费</button>
-					<button @click="onPayFee" v-else="amount == 0"
+					<button @click="onPayFee" v-else
 							class="cu-btn bg-green shadow-blur round lg">确认开门</button>
 				</view>
 				<view class="cu-bar btn-group" style="margin-top: 20upx;">
