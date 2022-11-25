@@ -216,7 +216,7 @@
 											duration: 2000
 										});
 										uni.reLaunch({
-											url: '../../pages/myBooking/myBoomList',
+											url: '../../pages/appointment/myBoomList',
 											fail (error) {
 													console.log(error)
 											}
@@ -237,7 +237,7 @@
 								});
 								setTimeout(function() {
 									uni.reLaunch({
-										url: '../../pages/myBooking/myBoomList',
+										url: '../../pages/appointment/myBoomList',
 										fail (error) {
 												console.log(error)
 										}
@@ -345,7 +345,7 @@
 											duration: 2000
 										});
 										uni.reLaunch({
-											url: '../../pages/myBooking/myBoomList',
+											url: '../../pages/appointment/myBoomList',
 											fail (error) {
 													console.log(error)
 											}
@@ -363,7 +363,7 @@
 										duration: 2000
 									});
 									uni.reLaunch({
-										url: '../../pages/myBooking/myBoomList',
+										url: '../../pages/appointment/myBoomList',
 										fail (error) {
 												console.log(error)
 										}
@@ -381,7 +381,7 @@
 								});
 								setTimeout(function() {
 									uni.reLaunch({
-										url: '../../pages/myBooking/myBoomList',
+										url: '../../pages/appointment/myBoomList',
 										fail (error) {
 												console.log(error)
 										}

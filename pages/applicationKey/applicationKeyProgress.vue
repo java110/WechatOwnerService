@@ -103,7 +103,7 @@
 			gotoDetail: function(_item) {
 				let _applicationKey = _item;
 				wx.navigateTo({
-					url: '/pages/viewApplicationKeyUser/viewApplicationKeyUser?applicationKeyId=' + _applicationKey.applicationKeyId +
+					url: '/pages/applicationKey/viewApplicationKeyUser?applicationKeyId=' + _applicationKey.applicationKeyId +
 						"&communityId=" + this.communityId
 				});
 			}

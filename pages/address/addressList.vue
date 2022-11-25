@@ -9,11 +9,11 @@
 					<text class="tag" v-if="address.isDefault === 'T'">默认</text>
 				</view>
 				<view class="detail">{{ address.address }}</view>
-				<button class="cu-btn set-btn" @tap.stop="jump('/pages/addressEdit/addressEdit',address)">编辑</button>
+				<button class="cu-btn set-btn" @tap.stop="jump('/pages/address/addressEdit',address)">编辑</button>
 			</view>
 		</view>
 		<view class="foot_box flex justify-around">
-			<button class="cu-btn add-btn" @tap="jump('/pages/addressEdit/addressEdit',{addressId:'-1'})">添加收货地址</button>
+			<button class="cu-btn add-btn" @tap="jump('/pages/address/addressEdit',{addressId:'-1'})">添加收货地址</button>
 		</view>
 	</view>
 </template>

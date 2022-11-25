@@ -124,7 +124,7 @@
 					ardId: this.applyDetail.ardId,
 				}
 				uni.navigateTo({
-					url: '/pages/myApplyRoom/myApplyRoomRecord?apply=' + JSON.stringify(apply)
+					url: '/pages/applyRoom/myApplyRoomRecord?apply=' + JSON.stringify(apply)
 				});
 			},
 		}

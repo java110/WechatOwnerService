@@ -142,12 +142,12 @@
 			},
 			applyRoomDetail: function(){
 				this.vc.navigateTo({
-					url: '/pages/myApplyRoom/myRoomList',
+					url: '/pages/applyRoom/myRoomList',
 				});
 			},
 			myParking: function() {
 				this.vc.navigateTo({
-					url: '/pages/parkingInfo/parkingInfo',
+					url: '/pages/applyparking/parkingInfo',
 				});
 			},
 			_machineTranslate: function() {

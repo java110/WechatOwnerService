@@ -98,7 +98,7 @@
 			_showDetail: function(_item){
 				_item.communityId = this.applyRoomInfo.communityId;
 				uni.navigateTo({
-					url: '/pages/myApplyRoom/myApplyRoomRecordDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/applyRoom/myApplyRoomRecordDetail?apply=' + JSON.stringify(_item)
 				});
 			}
 		}

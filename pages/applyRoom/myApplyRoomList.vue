@@ -100,7 +100,7 @@
 			
 			toApplyRoomDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myApplyRoom/myApplyRoomDetail?ardId=' + _item.ardId + '&communityId=' + _item.communityId
+					url: '/pages/applyRoom/myApplyRoomDetail?ardId=' + _item.ardId + '&communityId=' + _item.communityId
 				});
 			},
 		}

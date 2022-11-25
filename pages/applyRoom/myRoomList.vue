@@ -77,7 +77,7 @@
 		methods: {
 			toApplyDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myApplyRoom/myApplyRoomList?room=' + JSON.stringify(_item)
+					url: '/pages/applyRoom/myApplyRoomList?room=' + JSON.stringify(_item)
 				});
 			},
 		}

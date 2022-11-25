@@ -27,7 +27,7 @@
 </template>
 
 <script>
-	// pages/myAccount/myAccount.js
+	// pages/account/myAccount.js
 	import context from '../../lib/java110/Java110Context.js';
 	import {queryOwnerAccount} from '../../api/user/userApi.js'
 
@@ -91,7 +91,7 @@
 			},
 			myAccountDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myAccount/myAccountDetail?acctId=' + _item.acctId
+					url: '/pages/account/myAccountDetail?acctId=' + _item.acctId
 				});
 			},
 			/**

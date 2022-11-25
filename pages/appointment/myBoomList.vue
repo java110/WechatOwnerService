@@ -233,7 +233,7 @@
 			},
 			toApplyDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myBooking/myBooksRenovationDetail?books=' + JSON.stringify(_item)
+					url: '/pages/appointment/myBooksRenovationDetail?books=' + JSON.stringify(_item)
 				});
 			},
 			/// 申请退款

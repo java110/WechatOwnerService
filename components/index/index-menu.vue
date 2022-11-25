@@ -146,7 +146,7 @@
 				let _that = this;
 				if (!hasLogin()) {
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}

@@ -66,7 +66,7 @@
 			mySettings: function() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
-						url: '/pages/showlogin/showlogin'
+						url: '/pages/login/showlogin'
 					}, () => {
 						this.refreshPageLoginInfo();
 					});

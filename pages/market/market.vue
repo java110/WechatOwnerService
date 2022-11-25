@@ -208,7 +208,7 @@
 				let login = context.checkLoginStatus();
 				if(!login){
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}
@@ -233,7 +233,7 @@
 				let login = context.checkLoginStatus();
 				if(!login){
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}

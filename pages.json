@@ -20,7 +20,7 @@
 			}
 		},
 		{
-			"path": "pages/viewCommunitys/viewCommunitys",
+			"path": "pages/my/viewCommunitys",
 			"style": {
 				"navigationBarTitleText": "选择小区"
 			}
@@ -89,7 +89,7 @@
 			}
 		},
 		{
-			"path": "pages/reportInfoDetail/reportInfoDetail",
+			"path": "pages/reportInfoBack/reportInfoDetail",
 			"style": {
 				"navigationBarTitleText": "疫情问卷上报",
 				"enablePullDownRefresh": false
@@ -202,7 +202,7 @@
 				"navigationBarTitleText": "我的物业"
 			}
 		}, {
-			"path": "pages/viewAdmin/viewAdmin",
+			"path": "pages/my/viewAdmin",
 			"style": {
 				"navigationBarTitleText": "技术支持"
 			}
@@ -223,7 +223,7 @@
 			}
 		},
 		{
-			"path": "pages/showlogin/showlogin",
+			"path": "pages/login/showlogin",
 			"style": {
 				"navigationBarTitleText": "温馨提示"
 			}
@@ -268,12 +268,12 @@
 				"navigationBarTitleText": "业主绑定"
 			}
 		}, {
-			"path": "pages/login/changePassword",
+			"path": "pages/settings/changePassword",
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
 		}, {
-			"path": "pages/changeOwnerPhone/changeOwnerPhone",
+			"path": "pages/settings/changeOwnerPhone",
 			"style": {
 				"navigationBarTitleText": "修改手机"
 			}
@@ -313,7 +313,7 @@
 			}
 		},
 		{
-			"path": "pages/parkingInfo/parkingInfo",
+			"path": "pages/applyparking/parkingInfo",
 			"style": {
 				"navigationBarTitleText": "车位申请进度"
 			}
@@ -447,19 +447,19 @@
 				"navigationBarTitleText": "服务"
 			}
 		}, {
-			"path": "pages/myApplyRoom/myRoomList",
+			"path": "pages/applyRoom/myRoomList",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomList",
+			"path": "pages/applyRoom/myApplyRoomList",
 			"style": {
 				"navigationBarTitleText": "空置房申请记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomDetail",
+			"path": "pages/applyRoom/myApplyRoomDetail",
 			"style": {
 				"navigationBarTitleText": "空置房申请详情",
 				"enablePullDownRefresh": false
@@ -478,26 +478,26 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomRecord",
+			"path": "pages/applyRoom/myApplyRoomRecord",
 			"style": {
 				"navigationBarTitleText": "跟踪记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomRecordDetail",
+			"path": "pages/applyRoom/myApplyRoomRecordDetail",
 			"style": {
 				"navigationBarTitleText": "跟踪记录详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myAccount/myAccount",
+			"path": "pages/account/myAccount",
 			"style": {
 				"navigationBarTitleText": "我的账户",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/myAccount/myAccountDetail",
+			"path": "pages/account/myAccountDetail",
 			"style": {
 				"navigationBarTitleText": "账户明细",
 				"enablePullDownRefresh": false
@@ -510,7 +510,7 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/changeOwnerCommunity/changeOwnerCommunity",
+			"path": "pages/my/changeOwnerCommunity",
 			"style": {
 				"navigationBarTitleText": "切换小区",
 				"enablePullDownRefresh": false
@@ -598,13 +598,13 @@
 			}
 		},
 		{
-			"path": "pages/myBooking/myBoomList",
+			"path": "pages/appointment/myBoomList",
 			"style": {
 				"navigationBarTitleText": "订场记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myBooking/myBooksRenovationDetail",
+			"path": "pages/appointment/myBooksRenovationDetail",
 			"style": {
 				"navigationBarTitleText": "订场详情",
 				"enablePullDownRefresh": false

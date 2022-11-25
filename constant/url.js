@@ -180,7 +180,7 @@ export default {
 		'pages/my/my',
 		'pages/index/index',
 		'pages/market/market',
-		'pages/showlogin/showlogin',
+		'pages/login/showlogin',
 		'pages/homemaking/homemaking',
 		'pages/mall/mall',
 		'pages/appointment/appointment',

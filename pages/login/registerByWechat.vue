@@ -254,7 +254,7 @@
 					return;
 				}
 				wx.navigateTo({
-					url: '/pages/viewCommunitys/viewCommunitys?areaCode=' + this.areaCode,
+					url: '/pages/my/viewCommunitys?areaCode=' + this.areaCode,
 				})
 			},
 			wxLogin: function(_code) {

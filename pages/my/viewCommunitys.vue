@@ -143,5 +143,11 @@
 	};
 </script>
 <style>
-	@import "./viewCommunitys.css";
+	.vc_community_search{
+	 
+	}
+	
+	.vc_communitys{
+	  margin-top: 20rpx;
+	}
 </style>

@@ -84,7 +84,7 @@
 					{
 						name: '我的车位',
 						src: this.imgUrl+'/h5/images/serve/my6.png',
-						href: '/pages/parkingInfo/parkingInfo'
+						href: '/pages/applyparking/parkingInfo'
 					},
 					{
 						name: '我的投诉',
@@ -99,7 +99,7 @@
 					{
 						name: '空置房记录',
 						src: this.imgUrl+'/h5/images/serve/my8.png',
-						href: '/pages/myApplyRoom/myRoomList'
+						href: '/pages/applyRoom/myRoomList'
 					},
 					{
 						name: '装修记录',
@@ -109,7 +109,7 @@
 					{
 						name: '订场记录',
 						src: this.imgUrl+'/h5/images/serve/my8.png',
-						href: '/pages/myBooking/myBoomList'
+						href: '/pages/appointment/myBoomList'
 					},	
 				]
 			};
@@ -130,7 +130,7 @@
 			toMallOrders() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					}, () => {
 						this.refreshPageLoginInfo();
 					});

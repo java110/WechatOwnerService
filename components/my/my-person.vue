@@ -77,7 +77,7 @@
 			//切换小区
 			_changeCommunity: function() {
 				uni.navigateTo({
-					url: "/pages/changeOwnerCommunity/changeOwnerCommunity"
+					url: "/pages/my/changeOwnerCommunity"
 				});
 			},
 			refreshPageLoginInfo: function() {
@@ -174,14 +174,14 @@
 			myAccount: function() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					}, () => {
 						this.refreshPageLoginInfo();
 					});
 					return;
 				}
 				this.vc.navigateTo({
-					url: '/pages/myAccount/myAccount',
+					url: '/pages/account/myAccount',
 				});
 			},
 			//优惠券

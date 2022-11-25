@@ -177,7 +177,7 @@ const NEED_NOT_LOGIN_PAGE = [
 	'/pages/my/my',
 	'/pages/index/index',
 	'/pages/market/market',
-	'/pages/showlogin/showlogin',
+	'/pages/login/showlogin',
 	'/pages/rentHouse/rentHouse'
 ];
 
