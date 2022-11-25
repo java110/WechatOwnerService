@@ -64,7 +64,7 @@
 					{
 						name: '我的物业',
 						src: this.imgUrl+'/h5/images/serve/my2.png',
-						href: '/pages/myProperty/myProperty'
+						href: '/pages/my/myProperty'
 					},
 					{
 						name: '我的房屋',
@@ -74,7 +74,7 @@
 					{
 						name: '我的报修',
 						src: this.imgUrl+'/h5/images/serve/my4.png',
-						href: '/pages/myRepair/myRepair'
+						href: '/pages/repair/myRepair'
 					},
 					{
 						name: '缴费记录',
@@ -94,7 +94,7 @@
 					{
 						name: '门禁日志',
 						src: this.imgUrl+'/h5/images/serve/my9.png',
-						href: '/pages/machineTranslateLog/machineTranslateLog'
+						href: '/pages/machine/machineTranslateLog'
 					},
 					{
 						name: '空置房记录',

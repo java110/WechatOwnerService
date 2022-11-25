@@ -111,7 +111,7 @@
 			},
 			myProperty: function() {
 				this.vc.navigateTo({
-					url: '../myProperty/myProperty'
+					url: '../my/myProperty'
 				});
 			},
 
@@ -132,7 +132,7 @@
 			},
 			myRepair: function() {
 				this.vc.navigateTo({
-					url: '/pages/myRepair/myRepair',
+					url: '/pages/repair/myRepair',
 				});
 			},
 			feeDetail: function() {
@@ -152,7 +152,7 @@
 			},
 			_machineTranslate: function() {
 				this.vc.navigateTo({
-					url: '/pages/machineTranslateLog/machineTranslateLog',
+					url: '/pages/machine/machineTranslateLog',
 				});
 			},
 			mallOrder:function(){

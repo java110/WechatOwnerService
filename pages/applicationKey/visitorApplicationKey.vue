@@ -103,7 +103,7 @@
 		onShareAppMessage: function() {
 			return {
 				title: this.owner.appUserName + '分享的访客钥匙',
-				path: '/pages/visitorApplicationKey/visitorApplicationKey?idCard=' + this.owner.idCard + '&communityId=' + this.owner
+				path: '/pages/applicationKey/visitorApplicationKey?idCard=' + this.owner.idCard + '&communityId=' + this.owner
 					.communityId,
 				success: function(res) {
 					console.log('成功', res);
@@ -220,5 +220,38 @@
 	};
 </script>
 <style>
-	@import "./visitorApplicationKey.css";
+	.my_ak{
+	  margin-top: 20rpx;
+	  background-color: #fff;
+	  padding: 40rpx 40rpx 40rpx 40rpx;
+	}
+	
+	.my_ak .my_ak_text_01{
+	  text-align: center;
+	}
+	
+	.my_ak .my_ak_text_02{
+	  text-align: center;
+	  color: #00AA00;
+	  font-size: 56rpx;
+	  margin: 40rpx 0 40rpx 0;
+	  letter-spacing:40rpx;
+	}
+	
+	.my_ak .my_ak_text_03{
+	  text-align: center;
+	  color: #8a8a8a;
+	  font-size: 24rpx;
+	}
+	
+	.my_ak .my_ak_text_01 text{
+	  font-size: 24rpx;
+	  color: #8a8a8a
+	}
+	
+	.my_ak .my_ak_text_explain{
+	  color: #8a8a8a;
+	  font-size: 24rpx;
+	  margin-bottom: 20rpx;
+	}
 </style>

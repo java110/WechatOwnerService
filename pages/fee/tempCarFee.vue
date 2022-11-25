@@ -166,7 +166,7 @@
 			_selectCoupons: function(_item) {
 				let _that = this;
 				uni.navigateTo({
-					url: '/pages/tempCarFee/tempCarCoupon?carNum='+_that.carNum+ "&paId=" + this.paId 
+					url: '/pages/coupon/tempCarCoupon?carNum='+_that.carNum+ "&paId=" + this.paId 
 				})
 			},
 			onPayFee: function() {
@@ -273,7 +273,7 @@
 			},
 			onReQuery:function(){
 				// uni.navigateTo({
-				// 	url: '/pages/tempParkingFee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
+				// 	url: '/pages/fee/tempParkingFee?paId=' + _that.paId + "&appId=" + _that.appId + "&openId=" + _that.openId+"&machineId="+this.machineId
 				// })
 				
 				uni.navigateBack({

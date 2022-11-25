@@ -86,7 +86,7 @@
 		methods: {
 			coupons: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myAccount/myCoupons',
+					url: '/pages/coupon/myCoupons',
 				})
 			},
 			myAccountDetail: function(_item) {

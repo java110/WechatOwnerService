@@ -305,7 +305,7 @@
 			},
 			repairDetail: function(_repair) {
 				context.navigateTo({
-					url: '/pages/repairDetail/repairDetail?repairId=' + _repair.repairId
+					url: '/pages/repair/repairDetail?repairId=' + _repair.repairId
 				});
 			},
 			deleteRepair: function(_repair) {
@@ -452,7 +452,7 @@
 			},
 			_appraiseRepair: function(_repair) {
 				context.navigateTo({
-					url: '/pages/appraiseRepair/appraiseRepair?repairId=' + _repair.repairId
+					url: '/pages/repair/appraiseRepair?repairId=' + _repair.repairId
 				});
 			},
 			_toPay:function(_item){

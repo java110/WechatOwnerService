@@ -421,7 +421,7 @@
 				applyApplicationKey(_objData)
 				.then((res)=>{
 					wx.redirectTo({
-						url: "/pages/applicationKeyProgress/applicationKeyProgress"
+						url: "/pages/applicationKey/applicationKeyProgress"
 					});
 					return;
 				})
@@ -436,5 +436,26 @@
 	};
 </script>
 <style>
-	@import "./applicationKeyUser.css";
+	.block__title {
+	  margin: 0;
+	  font-weight: 400;
+	  font-size: 14px;
+	  color: rgba(69,90,100,.6);
+	  padding: 60rpx 30rpx 20rpx;
+	}
+	
+	.button_up_blank{
+	  height: 40rpx;
+	}
+	
+	.aku_photo_view{
+	  background-color: #FFF;
+	  height: 250rpx;
+	  padding: 40rpx 0 40rpx 40rpx;
+	}
+	
+	.aku_photo_view text{
+	  font-size: 30rpx;
+	  color: #8a8a8a
+	}
 </style>

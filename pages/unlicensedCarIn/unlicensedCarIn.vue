@@ -227,7 +227,7 @@
 </script>
 
 <style>
-	@import "../tempParkingFee/tempParkingFee.css";
+	@import "../fee/tempParkingFee.css";
 	.input-ui{
 				border: 1px solid #ccc;
 				padding: 12upx 18upx;

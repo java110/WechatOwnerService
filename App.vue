@@ -25,7 +25,7 @@
 			 
 			 uni.onTabBarMidButtonTap(()=>{
 			     uni.navigateTo({
-			      url:"/pages/openDoorByQrCode/openDoorByQrCode",
+			      url:"/pages/machine/openDoorByQrCode",
 			      animationType:'slide-in-bottom'
 			     })
 			    })   

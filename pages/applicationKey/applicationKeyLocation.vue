@@ -36,7 +36,7 @@
 </template>
 
 <script>
-	// pages/applicationKeyLocation/applicationKeyLocation.js
+	// pages/applicationKey/applicationKeyLocation.js
 
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
 	import {listOwnerMachines} from '../../api/applicationKey/applicationKeyApi.js'
@@ -109,7 +109,7 @@
 				}
 
 				wx.navigateTo({
-					url: "/pages/applicationKeyUser/applicationKeyUser?locations=" + JSON.stringify(this.locations) +
+					url: "/pages/applicationKey/applicationKeyUser?locations=" + JSON.stringify(this.locations) +
 						"&communityId=" + this.communityId
 				});
 			}
@@ -117,5 +117,16 @@
 	};
 </script>
 <style>
-	@import "./applicationKeyLocation.css";
+	.akl_community{
+	  padding: 10rpx 0;
+	}
+	.akl_wirte_btn{
+	  padding-top: 60rpx;
+	  padding-bottom: 60rpx;
+	  background-color: #fff;
+	}
+	.akl_wirte_btn .akl_wirte_btn_small{
+	  width: 80%;
+	   margin:0 auto;
+	}
 </style>

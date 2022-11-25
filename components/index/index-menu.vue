@@ -103,7 +103,7 @@
 						{
 							name: '家庭成员',
 							src: this.imgUrl + '/h5/images/serve/2.png',
-							href: '/pages/familyList/familyList'
+							href: '/pages/family/familyList'
 						},
 						{
 							name: '访客通行',
@@ -129,7 +129,7 @@
 						{
 							name: '一键开门',
 							src: this.imgUrl + '/h5/images/serve/8.png',
-							href: '/pages/openDoor/openDoor'
+							href: '/pages/machine/openDoor'
 						},
 					]
 			},

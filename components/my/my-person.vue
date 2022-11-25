@@ -187,7 +187,7 @@
 			//优惠券
 			coupons: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myAccount/myCoupons',
+					url: '/pages/coupon/myCoupons',
 				})
 			},
 

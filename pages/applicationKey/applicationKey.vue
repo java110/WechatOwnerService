@@ -64,7 +64,7 @@ export default {
      */
     applyApplicationKey: function () {
       this.vc.navigateTo({
-        url: '/pages/applicationKeyLocation/applicationKeyLocation'
+        url: '/pages/applicationKey/applicationKeyLocation'
       });
     }
   }

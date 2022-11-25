@@ -128,7 +128,10 @@
 	};
 </script>
 <style>
-	@import "./openDoor.css";
+	.heard-location-icon{
+	  width: 100%;
+	  height: 300rpx;
+	}
 	text {
 		text-align: center;
 	}

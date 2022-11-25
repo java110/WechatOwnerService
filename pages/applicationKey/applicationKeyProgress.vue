@@ -114,4 +114,16 @@
 	.cu-list+.cu-list {
 		margin-top: 10px;
 	}
+	.block__title {
+	  margin: 0;
+	  font-weight: 400;
+	  font-size: 14px;
+	  color: rgba(69,90,100,.6);
+	  padding: 60rpx 30rpx 20rpx;
+	}
+	
+	
+	.button_up_blank{
+	  height: 40rpx;
+	}
 </style>

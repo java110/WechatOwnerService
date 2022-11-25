@@ -79,7 +79,7 @@
 			},
 			gotoDetail: function(e) {
 				wx.navigateTo({
-					url: "/pages/repairList/detail/detail?item=" + JSON.stringify(e.currentTarget.dataset.item)
+					url: "/pages/repair/detail/detail?item=" + JSON.stringify(e.currentTarget.dataset.item)
 				});
 			},
 			//封装请求
@@ -102,5 +102,40 @@
 	};
 </script>
 <style>
-	@import "./repairList.css";
+	.user-container {
+	    padding: 25rpx 10rpx;
+	    background-color: #F0F0F0;
+		/*border: 1px solid black;*/
+	}
+	
+	.notice {
+	    margin: 10rpx 7rpx;
+	    padding: 25rpx;
+	    background-color: #ffffff;
+	    border-radius: 7rpx;
+	    /* display: flex;
+	    justify-content: space-between;
+	    align-items: flex-end; */
+	}
+	.title {
+	    border-bottom: 1rpx solid #dedede;
+	    font-weight: 700;
+	    font-size: 34rpx;
+	    color: #5f5e5e;
+	    display: flex;
+	    justify-content: space-between;
+	}
+	.text{
+	  padding: 4rpx 0;
+	  font-size: 30rpx;
+	}
+	.main{
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: flex-end;
+	}
+	.button{
+	  /* width: 160rpx; */
+	  /* font-size: 30rpx; */
+	}
 </style>

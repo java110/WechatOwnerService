@@ -246,7 +246,7 @@
 						return;
 					}
 					uni.navigateTo({
-						url: '/pages/tempCarFee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
+						url: '/pages/fee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
 							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId +
 							"&machineId=" + this.machineId
 					})

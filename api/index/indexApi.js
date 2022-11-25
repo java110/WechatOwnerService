@@ -76,7 +76,7 @@ export function getCategoryList() {
 		}, {
 			name: "开门",
 			src: "/static/images/index_openDoor.png",
-			href: "/pages/openDoor/openDoor"
+			href: "/pages/machine/openDoor"
 		// }, {
 		// 	name: "二维码开门",
 		// 	src: "/static/images/index_openDoor.png",
@@ -89,7 +89,7 @@ export function getCategoryList() {
 		pagetwo: [{
 				name: "家庭成员",
 				src: "/static/images/index_member.png",
-				href: "/pages/familyList/familyList"
+				href: "/pages/family/familyList"
 			}, {
 				name: "车位申请",
 				src: "/static/images/index_parking.png",
@@ -108,7 +108,7 @@ export function getCategoryList() {
 			// {
 			// 	name: "临时车收费",
 			// 	src: "/static/images/index_carCharges.png",
-			// 	href: "/pages/tempParkingFee/tempParkingFee"
+			// 	href: "/pages/fee/tempParkingFee"
 			// },
 			{
 				name: "合同费用",

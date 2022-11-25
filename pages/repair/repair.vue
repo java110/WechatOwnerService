@@ -351,7 +351,7 @@
 							let _json = res.data;
 							if (_json.code == 0) {
 								// wx.redirectTo({
-								// 	url: '/pages/myRepair/myRepair',
+								// 	url: '/pages/repair/myRepair',
 								// });
 								uni.navigateTo({
 									url:"/pages/successPage/successPage?msg=提交成功&objType=4004"

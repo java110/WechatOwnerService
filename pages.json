@@ -26,7 +26,7 @@
 			}
 		},
 		{
-			"path": "pages/applicationKeyLocation/applicationKeyLocation",
+			"path": "pages/applicationKey/applicationKeyLocation",
 			"style": {
 				"navigationBarTitleText": "相关门禁"
 			}
@@ -39,7 +39,7 @@
 			}
 		},
 		{
-			"path": "pages/openDoor/openDoor",
+			"path": "pages/machine/openDoor",
 			"style": {
 				"navigationBarTitleText": "开门"
 			}
@@ -63,7 +63,7 @@
 			}
 		},
 		{
-			"path": "pages/repairList/repairList",
+			"path": "pages/repair/repairList",
 			"style": {
 				"enablePullDownRefresh": true
 			}
@@ -97,7 +97,7 @@
 		},
 
 		{
-			"path": "pages/repairList/detail/detail",
+			"path": "pages/repair/detail/detail",
 			"style": {}
 		},
 		{
@@ -107,7 +107,7 @@
 			}
 		},
 		{
-			"path": "pages/familyList/familyList",
+			"path": "pages/family/familyList",
 			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "家庭成员"
@@ -127,7 +127,7 @@
 			}
 		},
 		{
-			"path": "pages/viewComplaint/viewComplaint",
+			"path": "pages/complaint/viewComplaint",
 			"style": {}
 		},
 		{
@@ -177,7 +177,7 @@
 				"navigationBarTitleText": "请登录"
 			}
 		}, {
-			"path": "pages/myRepair/myRepair",
+			"path": "pages/repair/myRepair",
 			"style": {
 				"navigationBarTitleText": "我的报修单"
 			}
@@ -197,7 +197,7 @@
 				"navigationBarTitleText": "缴费历史"
 			}
 		}, {
-			"path": "pages/myProperty/myProperty",
+			"path": "pages/my/myProperty",
 			"style": {
 				"navigationBarTitleText": "我的物业"
 			}
@@ -238,12 +238,12 @@
 				"navigationBarTitleText": "选择单元"
 			}
 		}, {
-			"path": "pages/repairDetail/repairDetail",
+			"path": "pages/repair/repairDetail",
 			"style": {
 				"navigationBarTitleText": "工单详情"
 			}
 		}, {
-			"path": "pages/appraiseRepair/appraiseRepair",
+			"path": "pages/repair/appraiseRepair",
 			"style": {
 				"navigationBarTitleText": "工单评价"
 			}
@@ -386,7 +386,7 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/tempParkingFee/tempParkingFee",
+			"path": "pages/fee/tempParkingFee",
 			"style": {
 				"navigationBarTitleText": "临时车缴费",
 				"enablePullDownRefresh": false
@@ -416,13 +416,13 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/questionAnswerDetail/questionAnswerDetail",
+			"path": "pages/questionAnswer/questionAnswerDetail",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/machineTranslateLog/machineTranslateLog",
+			"path": "pages/machine/machineTranslateLog",
 			"style": {
 				"navigationBarTitleText": "门禁同步日志",
 				"enablePullDownRefresh": false
@@ -465,14 +465,14 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/openDoorByQrCode/openDoorByQrCode",
+			"path": "pages/machine/openDoorByQrCode",
 			"style": {
 				"navigationBarTitleText": "二维码开门",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
 			}
 		}, {
-			"path": "pages/tempCarFee/tempCarFee",
+			"path": "pages/fee/tempCarFee",
 			"style": {
 				"navigationBarTitleText": "停车费",
 				"enablePullDownRefresh": false
@@ -523,14 +523,14 @@
 			}
 		},
 		{
-			"path": "pages/myAccount/myCoupons",
+			"path": "pages/coupon/myCoupons",
 			"style": {
 				"navigationBarTitleText": "我的优惠券",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/tempCarFee/tempCarCoupon",
+			"path": "pages/coupon/tempCarCoupon",
 			"style": {
 				"navigationBarTitleText": "停车劵",
 				"enablePullDownRefresh": false
