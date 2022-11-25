@@ -446,7 +446,7 @@
 				} else {
 					uni.setStorageSync(SysParams.CART_TYPE.BOOKING, JSON.stringify(param));
 					wx.navigateTo({
-						url: '/pages/appointmentPay/appointmentPay?fee=' + JSON.stringify(param),
+						url: '/pages/appointment/appointmentPay?fee=' + JSON.stringify(param),
 					})
 
 					this.$emit('confCd', param);

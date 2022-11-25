@@ -112,8 +112,8 @@
 					});
 			},
 			_doRegister: function() {
-				//let _url = '/pages/registerByWechat/registerByWechat';
-				let _url = '/pages/register/register';
+				//let _url = '/pages/login/registerByWechat';
+				let _url = '/pages/login/register';
 				// #ifdef H5
 				_url += ('?code=' + this.code);
 				// #endif

@@ -184,7 +184,7 @@
 			_apppintment: function() {
 				let _that = this;
 				this.vc.navigateTo({
-					url: '/pages/rentingAppointment/rentingAppointment?roomId=' + _that.renting.roomId
+					url: '/pages/rentHouse/rentingAppointment?roomId=' + _that.renting.roomId
 				})
 			}
 

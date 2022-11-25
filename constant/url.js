@@ -176,7 +176,7 @@ export default {
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
-		'pages/register/register',
+		'pages/login/register',
 		'pages/my/my',
 		'pages/index/index',
 		'pages/market/market',
@@ -184,7 +184,7 @@ export default {
 		'pages/homemaking/homemaking',
 		'pages/mall/mall',
 		'pages/appointment/appointment',
-		'pages/appointmentPay/appointmentPay',
+		'pages/appointment/appointmentPay',
 	],
 	NEED_NOT_LOGIN_URL: [
 		baseUrl + "app/payment/toPayTempCarFee"

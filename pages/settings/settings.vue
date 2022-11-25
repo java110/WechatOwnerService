@@ -20,7 +20,7 @@
 
 					</view>
 				</view>
-				<view class="cu-item arrow" @click="_toPage('/pages/changePassword/changePassword')">
+				<view class="cu-item arrow" @click="_toPage('/pages/login/changePassword')">
 					<view class="content">
 						<text class="cuIcon-warnfill text-cyan"></text>
 						<text class="text-grey">密码</text>

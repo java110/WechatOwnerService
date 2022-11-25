@@ -129,7 +129,7 @@
 			 */
 			showRenovationRecord: function(){
 				uni.navigateTo({
-					url: '/pages/myRoomRenovationRecord/myRoomRenovationRecord?apply=' + JSON.stringify(this.renovationDetail)
+					url: '/pages/renovation/myRoomRenovationRecord?apply=' + JSON.stringify(this.renovationDetail)
 				});
 			},
 		}

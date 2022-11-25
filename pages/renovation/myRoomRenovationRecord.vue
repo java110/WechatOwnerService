@@ -97,7 +97,7 @@
 			_showDetail: function(_item){
 				_item.communityId = this.renovationInfo.communityId;
 				uni.navigateTo({
-					url: '/pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/renovation/myRoomRenovationRecordDetail?apply=' + JSON.stringify(_item)
 				});
 			}
 		}

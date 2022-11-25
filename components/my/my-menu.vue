@@ -104,7 +104,7 @@
 					{
 						name: '装修记录',
 						src: this.imgUrl+'/h5/images/serve/my10.png',
-						href: '/pages/myRenovation/myRoomList'
+						href: '/pages/renovation/myRoomList'
 					},
 					{
 						name: '订场记录',

@@ -109,7 +109,7 @@
 			
 			toRenovationDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/myRenovation/myRoomRenovationDetail?room=' + JSON.stringify(_item)
+					url: '/pages/renovation/myRoomRenovationDetail?room=' + JSON.stringify(_item)
 				});
 			},
 		}

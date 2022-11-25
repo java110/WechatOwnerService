@@ -108,7 +108,7 @@
 					{
 						name: '装修报备',
 						src: this.imgUrl + '/h5/images/serve/10.png',
-						href: '/pages/roomRenovation/roomRenovation'
+						href: '/pages/renovation/roomRenovation'
 					},
 					{
 						name: '业主信息',

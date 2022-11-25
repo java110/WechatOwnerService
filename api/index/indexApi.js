@@ -103,7 +103,7 @@ export function getCategoryList() {
 			{
 				name: "房屋装修",
 				src: "/static/images/index_fitment.png",
-				href: "/pages/roomRenovation/roomRenovation"
+				href: "/pages/renovation/roomRenovation"
 			},
 			// {
 			// 	name: "临时车收费",

@@ -122,7 +122,7 @@
 			},
 			myRenovation: function() {
 				this.vc.navigateTo({
-					url: '../myRenovation/myRoomList'
+					url: '../renovation/myRoomList'
 				});
 			},
 			myHouse: function() {

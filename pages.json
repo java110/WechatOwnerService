@@ -187,7 +187,7 @@
 				"navigationBarTitleText": "设置"
 			}
 		}, {
-			"path": "pages/register/register",
+			"path": "pages/login/register",
 			"style": {
 				"navigationBarTitleText": "注册"
 			}
@@ -212,12 +212,12 @@
 				"navigationBarTitleText": "跳蚤市场"
 			}
 		}, {
-			"path": "pages/newJunk/newJunk",
+			"path": "pages/market/newJunk",
 			"style": {
 				"navigationBarTitleText": "发布信息"
 			}
 		}, {
-			"path": "pages/myJunk/myJunk",
+			"path": "pages/market/myJunk",
 			"style": {
 				"navigationBarTitleText": "我的发布"
 			}
@@ -263,12 +263,12 @@
 				"navigationBarTitleText": "投诉待办"
 			}
 		}, {
-			"path": "pages/registerByWechat/registerByWechat",
+			"path": "pages/login/registerByWechat",
 			"style": {
 				"navigationBarTitleText": "业主绑定"
 			}
 		}, {
-			"path": "pages/changePassword/changePassword",
+			"path": "pages/login/changePassword",
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
@@ -290,7 +290,7 @@
 				"navigationBarTitleText": "房源"
 			}
 		}, {
-			"path": "pages/rentingDetail/rentingDetail",
+			"path": "pages/rentHouse/rentingDetail",
 			"style": {
 				"navigationBarTitleText": ""
 			}
@@ -320,7 +320,7 @@
 		}
 
 		, {
-			"path": "pages/rentingAppointment/rentingAppointment",
+			"path": "pages/rentHouse/rentingAppointment",
 			"style": {
 				"navigationBarTitleText": "租房预约"
 			}
@@ -338,49 +338,49 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/applyRoomDetail/applyRoomDetail",
+			"path": "pages/applyRoom/applyRoomDetail",
 			"style": {
 				"navigationBarTitleText": "空置房申请",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomRenovation/roomRenovation",
+			"path": "pages/renovation/roomRenovation",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomRenovationDetail/roomRenovationDetail",
+			"path": "pages/renovation/roomRenovationDetail",
 			"style": {
 				"navigationBarTitleText": "装修申请",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomList",
+			"path": "pages/renovation/myRoomList",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomRenovationList",
+			"path": "pages/renovation/myRoomRenovationList",
 			"style": {
 				"navigationBarTitleText": "装修记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomRenovationDetail",
+			"path": "pages/renovation/myRoomRenovationDetail",
 			"style": {
 				"navigationBarTitleText": "装修详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRoomRenovationRecord/myRoomRenovationRecord",
+			"path": "pages/renovation/myRoomRenovationRecord",
 			"style": {
 				"navigationBarTitleText": "跟踪记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
+			"path": "pages/renovation/myRoomRenovationRecordDetail",
 			"style": {
 				"navigationBarTitleText": "跟踪记录详情",
 				"enablePullDownRefresh": false
@@ -592,7 +592,7 @@
 			}
 		},
 		{
-			"path": "pages/appointmentPay/appointmentPay",
+			"path": "pages/appointment/appointmentPay",
 			"style": {
 				"navigationBarTitleText": "支付订单"
 			}
