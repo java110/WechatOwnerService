@@ -37,7 +37,6 @@
 </template>
 
 <script>
-	// pages/payParkingFeeList/payParkingFeeList.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
@@ -102,7 +101,7 @@
 		methods: {
 			payFee: function(_item) {
 				wx.navigateTo({
-					url: '/pages/roomFee/roomFee?fee=' + JSON.stringify(_item),
+					url: '/pages/fee/roomFee?fee=' + JSON.stringify(_item),
 				})
 			},
 			_loadRoomFee: function() {
@@ -127,7 +126,7 @@
 			},
 			payFeeDetail: function(_item) {
 				wx.navigateTo({
-					url: '/pages/payFeeDetail/payFeeDetail?fee=' + JSON.stringify(_item),
+					url: '/pages/fee/payFeeDetail?fee=' + JSON.stringify(_item),
 				});
 			},
 			switchRoom: function(_room) {
@@ -139,7 +138,39 @@
 	};
 </script>
 <style>
-	@import "./roomFeeListNew.css";
+	.ppfl_footer{
+	  text-align: right;
+	}
+	.ppfl_footer .ppfl_footer_his{
+	  margin-right: 20rpx;
+	}
+	
+	.ppfl_c{
+	  padding: 0rpx 20rpx 20rpx 20rpx;
+	}
+	
+	.block__title {
+	  margin: 0;
+	  font-weight: 400;
+	  font-size: 14px;
+	  color: rgba(69,90,100,.6);
+	  padding: 40rpx 30rpx 20rpx;
+	}
+	
+	.ppfl_context{
+	  padding: 20rpx 40rpx 40rpx 40rpx;
+	  font-size: 28rpx;
+	  color: #8a8a8a;
+	}
+	
+	.ppfl_context .ppfl_context_row{
+	  margin-top: 30rpx;
+	}
+	
+	
+	.button_up_blank{
+	  height: 40rpx;
+	}
 
 	.solid-bottom::after {
 		border-bottom: 2upx solid rgba(0, 0, 0, 0.1);

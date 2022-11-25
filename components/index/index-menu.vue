@@ -114,17 +114,17 @@
 					this.serve_list = [{
 							name: '生活缴费',
 							src: this.imgUrl + '/h5/images/serve/1.png',
-							href: '/pages/oweFee/oweFee'
+							href: '/pages/fee/oweFee'
 						},
 						{
 							name: '房屋费',
 							src: this.imgUrl + '/h5/images/serve/5.png',
-							href: '/pages/roomFeeListNew/roomFeeListNew'
+							href: '/pages/fee/roomFeeListNew'
 						},
 						{
 							name: '停车费',
 							src: this.imgUrl + '/h5/images/serve/9.png',
-							href: '/pages/payParkingFeeList/payParkingFeeList'
+							href: '/pages/fee/payParkingFeeList'
 						},
 						{
 							name: '一键开门',

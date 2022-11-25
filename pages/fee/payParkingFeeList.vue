@@ -51,7 +51,6 @@
 </template>
 
 <script>
-	// pages/payParkingFeeList/payParkingFeeList.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	//const util = context.util;
@@ -98,7 +97,7 @@
 			payFee: function(_item) {
 				_item["carNum"]=this.curParkingSpace.carNum;
 				this.vc.navigateTo({
-					url: '/pages/payParkingFee/payParkingFee?fee=' + JSON.stringify(_item),
+					url: '/pages/fee/payParkingFee?fee=' + JSON.stringify(_item),
 				})
 			},
 			_loadParkingSpace: function(_owner) {
@@ -189,7 +188,7 @@
 			},
 			payFeeDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/payFeeDetail/payFeeDetail?fee=' + JSON.stringify(_item),
+					url: '/pages/fee/payFeeDetail?fee=' + JSON.stringify(_item),
 				});
 			},
 			switchParkingSpace: function(_parkingSpace) {
@@ -201,7 +200,39 @@
 	};
 </script>
 <style>
-	@import "./payParkingFeeList.css";
+	.ppfl_footer{
+	  text-align: right;
+	}
+	.ppfl_footer .ppfl_footer_his{
+	  margin-right: 20rpx;
+	}
+	
+	.ppfl_c{
+	  padding: 0rpx 20rpx 20rpx 20rpx;
+	}
+	
+	.block__title {
+	  margin: 0;
+	  font-weight: 400;
+	  font-size: 14px;
+	  color: rgba(69,90,100,.6);
+	  padding: 40rpx 30rpx 20rpx;
+	}
+	
+	.ppfl_context{
+	  padding: 20rpx 40rpx 40rpx 40rpx;
+	  font-size: 28rpx;
+	  color: #8a8a8a;
+	}
+	
+	.ppfl_context .ppfl_context_row{
+	  margin-top: 30rpx;
+	}
+	
+	
+	.button_up_blank{
+	  height: 40rpx;
+	}
 
 	.solid-bottom::after {
 		border-bottom: 2upx solid rgba(0, 0, 0, 0.1);

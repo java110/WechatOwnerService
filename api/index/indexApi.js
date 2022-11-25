@@ -50,17 +50,17 @@ export function getCategoryList() {
 		pageone: [{
 			name: "综合缴费",
 			src: "/static/images/index_payFee.png",
-			href: "/pages/oweFee/oweFee"
-			//href: "/pages/oweFeeGarden/oweFeeGarden"
+			href: "/pages/fee/oweFee"
+			//href: "/pages/fee/oweFeeGarden"
 			
 		}, {
 			name: "房屋费",
 			src: "/static/images/index_property.png",
-			href: "/pages/roomFeeListNew/roomFeeListNew"
+			href: "/pages/fee/roomFeeListNew"
 		}, {
 			name: "停车费",
 			src: "/static/images/index_park.png",
-			href: "/pages/payParkingFeeList/payParkingFeeList"
+			href: "/pages/fee/payParkingFeeList"
 		}, {
 			name: "投诉咨询",
 			src: "/static/images/index_complaint.png",
@@ -113,7 +113,7 @@ export function getCategoryList() {
 			{
 				name: "合同费用",
 				src: "/static/images/index_contractCost.png",
-				href: "/pages/contractFeeList/contractFeeList"
+				href: "/pages/fee/contractFeeList"
 			},
 			{
 				name: "投票问卷",

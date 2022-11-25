@@ -117,7 +117,7 @@
 
 			myComplaint: function() {
 				this.vc.navigateTo({
-					url: '../complaintList/complaintList'
+					url: '/pages/complaint/complaintList'
 				});
 			},
 			myRenovation: function() {
@@ -137,7 +137,7 @@
 			},
 			feeDetail: function() {
 				this.vc.navigateTo({
-					url: '/pages/payFeeDetail/payFeeDetail',
+					url: '/pages/fee/payFeeDetail',
 				});
 			},
 			applyRoomDetail: function(){

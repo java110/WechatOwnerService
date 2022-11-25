@@ -74,7 +74,7 @@
 			},
 			defChar:{
 				type:String,
-				default:'T'
+				default:'Z'
 			},
 			gua: {
 				type: Boolean,

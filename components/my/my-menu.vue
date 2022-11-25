@@ -79,7 +79,7 @@
 					{
 						name: '缴费记录',
 						src: this.imgUrl+'/h5/images/serve/my5.png',
-						href: '/pages/payFeeDetail/payFeeDetail'
+						href: '/pages/fee/payFeeDetail'
 					},
 					{
 						name: '我的车位',
@@ -89,7 +89,7 @@
 					{
 						name: '我的投诉',
 						src: this.imgUrl+'/h5/images/serve/11.png',
-						href: '/pages/complaintList/complaintList'
+						href: '/pages/complaint/complaintList'
 					},
 					{
 						name: '门禁日志',

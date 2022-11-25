@@ -112,7 +112,7 @@
 			},
 			_toDetail: function(_item) {
 				this.vc.navigateTo({
-					url: '/pages/activitesDetail/activitesDetail?activitiesId=' + _item.activitiesId +
+					url: '/pages/activites/activitesDetail?activitiesId=' + _item.activitiesId +
 						'&title=' + _item.title +
 						'&communityId=' + _item.communityId
 				});

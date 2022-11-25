@@ -110,7 +110,7 @@
 </template>
 
 <script>
-	// pages/payParkingFee/payParkingFee.js
+
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
@@ -331,7 +331,22 @@
 	};
 </script>
 <style>
-	@import "./payParkingFee.css";
+	
+.ppf_item{
+  padding: 0rpx 0rpx 0rpx 0rpx;
+}
+
+.block__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(69,90,100,.6);
+  padding: 40rpx 30rpx 20rpx;
+}
+
+.button_up_blank{
+  height: 40rpx;
+}
 
 	.fee-last {
 		margin-bottom: 200upx;

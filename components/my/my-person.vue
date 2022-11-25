@@ -8,7 +8,8 @@
 					<view class="userinfo-nickname margin-top">
 						<text class="username">{{ userName }}</text>
 						<text class="userphone">{{ userPhone }}</text>
-						<text class="userarea" @tap="_changeCommunity()">{{ communityName }}</text>
+						<text class="userarea" @tap="_changeCommunity()">{{ communityName }} <text class="cuIcon-settings text-white margin-left-sm"></text></text>
+						
 					</view>
 				</view>
 				<view class="wait" v-else @tap="showLongModel">

@@ -82,7 +82,7 @@
 			}
 		},
 		{
-			"path": "pages/payParkingApplyFee/payParkingApplyFee",
+			"path": "pages/fee/payParkingApplyFee",
 			"style": {
 				"navigationBarTitleText": "车位申请缴费",
 				"enablePullDownRefresh": false
@@ -114,7 +114,7 @@
 			}
 		},
 		{
-			"path": "pages/complaintList/complaintList",
+			"path": "pages/complaint/complaintList",
 			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "投诉建议"
@@ -131,13 +131,13 @@
 			"style": {}
 		},
 		{
-			"path": "pages/payParkingFeeList/payParkingFeeList",
+			"path": "pages/fee/payParkingFeeList",
 			"style": {
 				"navigationBarTitleText": "停车费"
 			}
 		},
 		{
-			"path": "pages/payParkingFee/payParkingFee",
+			"path": "pages/fee/payParkingFee",
 			"style": {
 				"navigationBarTitleText": "缴停车费"
 			}
@@ -155,19 +155,19 @@
 			}
 		},
 		{
-			"path": "pages/activitesDetail/activitesDetail",
+			"path": "pages/activites/activitesDetail",
 			"style": {
 				"navigationBarTitleText": "详情"
 			}
 		},
 		{
-			"path": "pages/roomFeeListNew/roomFeeListNew",
+			"path": "pages/fee/roomFeeListNew",
 			"style": {
 				"navigationBarTitleText": "房屋费"
 			}
 		},
 		{
-			"path": "pages/roomFee/roomFee",
+			"path": "pages/fee/roomFee",
 			"style": {
 				"navigationBarTitleText": "缴物业费"
 			}
@@ -192,7 +192,7 @@
 				"navigationBarTitleText": "注册"
 			}
 		}, {
-			"path": "pages/payFeeDetail/payFeeDetail",
+			"path": "pages/fee/payFeeDetail",
 			"style": {
 				"navigationBarTitleText": "缴费历史"
 			}
@@ -248,17 +248,17 @@
 				"navigationBarTitleText": "工单评价"
 			}
 		}, {
-			"path": "pages/repairPay/repairPay",
+			"path": "pages/fee/repairPay",
 			"style": {
 				"navigationBarTitleText": "报修支付"
 			}
 		}, {
-			"path": "pages/complaintDetail/complaintDetail",
+			"path": "pages/complaint/complaintDetail",
 			"style": {
 				"navigationBarTitleText": "投诉详情"
 			}
 		}, {
-			"path": "pages/complaintHandle/complaintHandle",
+			"path": "pages/complaint/complaintHandle",
 			"style": {
 				"navigationBarTitleText": "投诉待办"
 			}
@@ -301,13 +301,13 @@
 				"navigationBarTitleText": "车位申请"
 			}
 		}, {
-			"path": "pages/oweFee/oweFee",
+			"path": "pages/fee/oweFee",
 			"style": {
 				"navigationBarTitleText": "综合缴费"
 			}
 		},
 		{
-			"path": "pages/oweFeeGarden/oweFeeGarden",
+			"path": "pages/fee/oweFeeGarden",
 			"style": {
 				"navigationBarTitleText": "综合缴费"
 			}
@@ -392,19 +392,19 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractFee/contractFee",
+			"path": "pages/fee/contractFee",
 			"style": {
 				"navigationBarTitleText": "合同缴费",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractFeeList/contractFeeList",
+			"path": "pages/fee/contractFeeList",
 			"style": {
 				"navigationBarTitleText": "合同费用",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractOweFee/contractOweFee",
+			"path": "pages/fee/contractOweFee",
 			"style": {
 				"navigationBarTitleText": "欠费缴费",
 				"enablePullDownRefresh": false
@@ -516,7 +516,7 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomFee/ownerCoupon",
+			"path": "pages/coupon/ownerCoupon",
 			"style": {
 				"navigationBarTitleText": "优惠卷",
 				"enablePullDownRefresh": false
@@ -633,6 +633,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "设备巡检",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/coupon/goodsCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品核销",
                 "enablePullDownRefresh": false
             }
             

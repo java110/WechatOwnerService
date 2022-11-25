@@ -32,7 +32,7 @@ export default {
 	queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
 	queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
 	queryFeeByOwner: baseUrl + "app/fee.listFee", //预下单
-	queryCouponUser: baseUrl + "app/couponUser.listCouponUser", //查询用户优惠卷
+	queryCouponUser: baseUrl + "app/couponProperty.listCouponPropertyUser", //查询用户优惠卷
 	preOrder: baseUrl + "app/payment/toPay", //查询小区
 	//临时车缴费
 	preOrderTempCarInout: baseUrl + "/app/payment/toPayTempCarInout",
@@ -169,15 +169,10 @@ export default {
 	listEquipmentAccount:baseUrl +"app/equipmentAccount.listEquipmentAccount",
 	listMaintainanceTaskDetail:baseUrl +"app/maintainanceTask.listMaintainanceTaskDetail",
 	listInspectionTaskDetails:baseUrl +"app/inspectionTaskDetail.listInspectionTaskDetails",
+	// 优惠券核销二维码生成
+	generatorCouponQrcode:baseUrl +"app/couponProperty.generatorCouponQrcode",
 	
 	
-	
-	
-	
-
-
-
-
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

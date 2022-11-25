@@ -157,7 +157,9 @@
 		},
 		onShow: function() {
 			let that = this;
-			that._loadCompaint(that.active);
+			if(that.communityId){
+				that._loadCompaint(that.active);
+			}
 		},
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
@@ -173,11 +175,7 @@
 			 */
 			_loadCompaint: function(_active) {
 				let that = this;
-				
-				if(!that.communityId || !that.roomId){
-					return;
-				}
-				
+
 				let _state = '';
 				if (_active == 0) {
 					_state = '10001';
@@ -238,14 +236,14 @@
 			},
 			_toComplaintDetail:function(_item){
 				context.navigateTo({
-					url:'/pages/complaintDetail/complaintDetail?complaintId='
+					url:'/pages/complaint/complaintDetail?complaintId='
 					+_item.complaintId
 					+"&communityId="+_item.communityId
 				})
 			},
 			_dealComplaint:function(_item){
 				context.navigateTo({
-					url:'/pages/complaintHandle/complaintHandle?complaintId='
+					url:'/pages/complaint/complaintHandle?complaintId='
 					+_item.complaintId
 					+"&communityId="+_item.communityId
 					+"&taskId="+_item.taskId
@@ -255,5 +253,47 @@
 	};
 </script>
 <style>
-	@import "./complaintList.css";
+	.user-container {
+	    padding: 25rpx 10rpx;
+	    background-color: #F0F0F0;
+	
+		/*border: 1px solid black;*/
+	}
+	.add_button{
+	}
+	.notice {
+	    margin: 10rpx 7rpx;
+	    padding: 25rpx;
+	    background-color: #ffffff;
+	    border-radius: 7rpx;
+	    /* display: flex;
+	    justify-content: space-between;
+	    align-items: flex-end; */
+	}
+	.title {
+	    border-bottom: 1rpx solid #dedede;
+	    font-weight: 700;
+	    font-size: 34rpx;
+	    color: #5f5e5e;
+	    display: flex;
+	    justify-content: space-between;
+	}
+	.text{
+	  padding: 4rpx 0;
+	  font-size: 30rpx;
+	}
+	.main{
+	  /* display: flex;
+	  justify-content: space-between;
+	  align-items: flex-end; */
+	  position: relative;
+	}
+	.main_right{
+	  position: absolute;
+	  right: 0px;
+	  bottom: 0px;
+	}
+	.button{
+	  margin-right: 10px;
+	}
 </style>

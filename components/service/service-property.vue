@@ -55,7 +55,7 @@
 				this.real_list = [{
 						name: '生活缴费',
 						src: this.imgUrl + '/h5/images/serve/1.png',
-						href: '/pages/oweFee/oweFee'
+						href: '/pages/fee/oweFee'
 					},
 					// {
 					// 	name: '临时车费',
@@ -65,15 +65,15 @@
 					{
 						name: '房屋费',
 						src: this.imgUrl + '/h5/images/serve/5.png',
-						href: '/pages/roomFeeListNew/roomFeeListNew'
+						href: '/pages/fee/roomFeeListNew'
 					}, {
 						name: '停车费',
 						src: this.imgUrl + '/h5/images/serve/9.png',
-						href: '/pages/payParkingFeeList/payParkingFeeList'
+						href: '/pages/fee/payParkingFeeList'
 					}, {
 						name: '合同费',
 						src: this.imgUrl + '/h5/images/serve/12.png',
-						href: '/pages/contractFeeList/contractFeeList'
+						href: '/pages/fee/contractFeeList'
 					},
 					{
 						name: '家庭成员',

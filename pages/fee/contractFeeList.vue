@@ -42,7 +42,6 @@
 </template>
 
 <script>
-	// pages/payParkingFeeList/payParkingFeeList.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
@@ -106,7 +105,7 @@
 		methods: {
 			payFee: function(_item) {
 				wx.navigateTo({
-					url: '/pages/contractFee/contractFee?fee=' + JSON.stringify(_item),
+					url: '/pages/fee/contractFee?fee=' + JSON.stringify(_item),
 				})
 			},
 			_loadContractFee: function() {
@@ -143,7 +142,7 @@
 					return;
 				}
 				this.vc.navigateTo({
-					url:'/pages/contractOweFee/contractOweFee?contractId='+this.curContract.contractId
+					url:'/pages/fee/contractOweFee?contractId='+this.curContract.contractId
 				});
 			}
 		}

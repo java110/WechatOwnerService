@@ -152,7 +152,7 @@
 </template>
 
 <script>
-	// pages/payParkingFee/payParkingFee.js
+	// pages/fee/payParkingFee.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
@@ -316,7 +316,7 @@
 			},
 			coupons: function(_item) {
 				wx.navigateTo({
-					url: '/pages/roomFee/ownerCoupon',
+					url: '/pages/coupon/ownerCoupon',
 				})
 			},
 			// （单价×面积+附加费）  × 周期
@@ -445,7 +445,26 @@
 	};
 </script>
 <style>
-	@import "./roomFee.css";
+	
+.ppf_item{
+  padding: 0rpx 0rpx 0rpx 0rpx;
+}
+
+.block__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(69,90,100,.6);
+  padding: 40rpx 30rpx 20rpx;
+}
+
+.button_up_blank{
+  height: 40rpx;
+}
+
+.block__bottom{
+  height: 180rpx;
+}
 
 	.fee-last {
 		margin-bottom: 200upx;

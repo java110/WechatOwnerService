@@ -12,20 +12,16 @@
 				<!-- 未使用 -->
 				<view >
 					<view class="list"  v-if="active==0">
-						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
-							<image src="/static/images/coupon.png" class="coupon"></image>
+						<view class="listItem"  v-for="(item, index) in couponList" :key="index" @click="_toQrCode(item)">
+							<image :src="couponImg" class="coupon"></image>
 							<view class="box">
-								<view class="price">
-									<view class="icon">¥</view>
-									<view class="volum">{{ item.actualPrice }}</view>
-								</view>
 								<view class="descripe">
 									<view class="shop-name">{{ item.couponName }}</view>
-									<view class="text">无门槛</view>
+									<view class="text">{{ item.value }}</view>
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+' 前' }}</view>
 								</view>
 								<view class="usestate">
-									您可以在缴物业费、停车费等地方直接抵扣。
+									{{item.toTypeName}}
 								</view>
 							</view>
 						</view>
@@ -33,18 +29,14 @@
 				</view>
 
 				<!-- 已使用 -->
-				<view v-for="(itemsData, i) in list">
+				<view v-for="(itemsData, i) in list" :key="i">
 					<view class="list expired" v-if="active==1">
 						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
-							<image src="/static/images/coupon.png" class="coupon"></image>
+							<image :src="couponImg" class="coupon"></image>
 							<view class="box">
-								<view class="price">
-									<view class="icon">¥</view>
-									<view class="volum">{{ item.actualPrice }}</view>
-								</view>
 								<view class="descripe">
 									<view class="shop-name">{{ item.couponName }}</view>
-									<view class="text">无门槛</view>
+									<view class="text">{{ item.value }}</view>
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
 								</view>
 								<view class="usestate" >
@@ -58,15 +50,11 @@
 				<view class="list expired" v-if="active==2">
 					<view >
 						<view class="listItem"  v-for="(item, index) in tmpCouponList" :key="index">
-							<image src="/static/images/coupon.png" class="coupon"></image>
+							<image :src="couponImg" class="coupon"></image>
 							<view class="box">
-								<view class="price">
-									<view class="icon">¥</view>
-									<view class="volum">{{ item.actualPrice }}</view>
-								</view>
 								<view class="descripe">
 									<view class="shop-name">{{ item.couponName }}</view>
-									<view class="text">无门槛</view>
+									<view class="text">{{ item.value }}</view>
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
 								</view>
 								<view class="usestate">
@@ -82,7 +70,7 @@
 	</view>
 </template>
 <script>
-	// pages/payParkingFee/payParkingFee.js
+	
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 
@@ -126,7 +114,8 @@
 				tab: ['未使用', '已使用', '已过期'],
 				active: 0, //当前选中项
 				isHas: true,
-				pageShow: false
+				pageShow: false,
+				couponImg:this.imgUrl+'/h5/images/coupon.png',
 			}
 		},
 		onLoad: function(options) {
@@ -191,6 +180,21 @@
 					}, () => {
 						//_that.noData = true;
 					});
+			},
+			_toQrCode:function(_coupon){
+				if(_coupon.toType == '2002'){
+					uni.showToast({
+						icon:'none',
+						title:'请到缴费抵消'
+					})
+					return;
+				}
+				
+				if(_coupon.toType == '1001' || _coupon.toType == '1011'){
+					uni.navigateTo({
+						url:'/pages/coupon/goodsCoupon?couponId='+_coupon.couponId
+					})
+				}
 			}
 		}
 	}

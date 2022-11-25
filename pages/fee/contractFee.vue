@@ -105,7 +105,7 @@
 </template>
 
 <script>
-	// pages/payParkingFee/payParkingFee.js
+	// pages/fee/payParkingFee.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	

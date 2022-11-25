@@ -458,7 +458,7 @@
 			_toPay:function(_item){
 				console.log(_item);
 				context.navigateTo({
-					url:'/pages/repairPay/repairPay?repairId='+_item.repairId+
+					url:'/pages/fee/repairPay?repairId='+_item.repairId+
 					"&communityId="+_item.communityId+
 					"&userId="+this.userId+
 					"&repairObjId="+_item.repairObjId+

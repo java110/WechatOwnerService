@@ -151,7 +151,7 @@
 			},
 			toPayFee: function() {
 				this.vc.navigateTo({
-					url: '/pages/payParkingFeeList/payParkingFeeList',
+					url: '/pages/fee/payParkingFeeList',
 				})
 			},
 		}
