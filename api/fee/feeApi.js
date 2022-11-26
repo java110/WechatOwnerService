@@ -271,6 +271,28 @@ export function generatorCouponQrcode(_objData) {
 	})
 }
 
+export function computePayFeeCoupon(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computePayFeeCoupon,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
 
 export function receiveParkingCoupon(_objData) {
 	return new Promise((resolve, reject) => {

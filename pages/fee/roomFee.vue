@@ -125,6 +125,7 @@
 						<view>{{couponAmount}}</view>
 					</view>
 				</view>
+				<gift-coupon ref="giftCoupon" ></gift-coupon>
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333"
 					:payerObjId="roomId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth"
 					:communityId="communityId"></vcDiscount>
@@ -157,6 +158,7 @@
 	const constant = context.constant;
 
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue';
+	import giftCoupon from '@/components/coupon/gift-coupon.vue'
 	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue';
 
 	import {
@@ -171,7 +173,8 @@
 	export default {
 		components: {
 			vcDiscount,
-			vcUserAccount
+			vcUserAccount,
+			giftCoupon
 		},
 		data() {
 			return {
@@ -290,6 +293,7 @@
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			})
 		},
 		onShow() {
@@ -369,6 +373,7 @@
 				this.endTime = formatDate(_newDate);
 				this.receivableAmount = this.getReceivableAmount();
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			},
 
 			onFeeMonthChange: function(e) {

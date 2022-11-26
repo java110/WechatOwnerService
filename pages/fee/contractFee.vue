@@ -82,6 +82,7 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
+				<gift-coupon ref="giftCoupon" ></gift-coupon>
 				<vcDiscount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" payerObjType="3333" :payerObjId="contractId" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth" :communityId="communityId"></vcDiscount>
 			</view>
 			
@@ -108,6 +109,7 @@
 	// pages/fee/payParkingFee.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
+	import giftCoupon from '@/components/coupon/gift-coupon.vue'
 	
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
 
@@ -127,7 +129,8 @@
 	import {getCurContract} from '../../api/contract/contractApi.js'
 	export default {
 		components:{
-			vcDiscount
+			vcDiscount,
+			giftCoupon
 		},
 		data() {
 			return {
@@ -216,6 +219,7 @@
 			
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			})
 		},
 		methods: {
@@ -237,6 +241,7 @@
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId,this.communityId,this.feeMonth);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			},
 			onFeeMonthChange: function(e) {
 				console.log(e);

@@ -171,8 +171,7 @@ export default {
 	listInspectionTaskDetails:baseUrl +"app/inspectionTaskDetail.listInspectionTaskDetails",
 	// 优惠券核销二维码生成
 	generatorCouponQrcode:baseUrl +"app/couponProperty.generatorCouponQrcode",
-	
-	
+	computePayFeeCoupon:baseUrl +"app/coupon.computePayFeeCoupon",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

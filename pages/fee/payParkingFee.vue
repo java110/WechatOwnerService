@@ -83,6 +83,7 @@
 						<text class="text-grey text-sm">{{endTime }}</text>
 					</view>
 				</view>
+				<gift-coupon ref="giftCoupon" ></gift-coupon>
 				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount"></vcUserAccount>
 				<vc-discount ref="vcDiscountRef" @computeFeeDiscount="computeFeeDiscount" :endTime="formatEndTime" :feeId="feeId" :cycles="feeMonth"
 				 :communityId="communityId"></vc-discount>
@@ -113,7 +114,8 @@
 
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
-	import vcDiscount from '@/components/vc-discount/vc-discount.vue'
+	import vcDiscount from '@/components/vc-discount/vc-discount.vue';
+	import giftCoupon from '@/components/coupon/gift-coupon.vue'
 	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
 	import {
 		addMonth,
@@ -133,7 +135,8 @@
 	export default {
 		components: {
 			vcDiscount,
-			vcUserAccount
+			vcUserAccount,
+			giftCoupon
 		},
 		data() {
 			return {
@@ -221,6 +224,7 @@
 			this.$nextTick(() => {
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			});
 			this.payOnline = _fee.payOnline;
 		},
@@ -269,6 +273,7 @@
 				this.endTime = formatDate(_newDate);
 				this.receivableAmount = _feeMonth * this.feePrice;
 				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
+				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			},
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
