@@ -646,6 +646,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/coupon/giftParkingCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "送停车券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

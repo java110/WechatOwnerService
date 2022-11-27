@@ -40,7 +40,7 @@
 				<view class="line"></view>
 				<view class="money_item" @click="coupons()">
 					<view class="num">{{ka}}</view>
-					<view class="name">卡卷</view>
+					<view class="name">卡劵</view>
 				</view>
 			</view>
 		</view>
@@ -52,7 +52,10 @@
 	const factory = context.factory; //获取app实例
 	const constant = context.constant;
 	import conf from '@/conf/config.js';
-	import {queryOwnerAccount} from '@/api/user/userApi.js'
+	import {queryOwnerAccount} from '@/api/user/userApi.js';
+	import {
+		getCouponUsers
+	} from '../../api/fee/feeApi.js';
 	export default {
 		name: "my-person",
 		data() {
@@ -91,6 +94,7 @@
 				_that.userInfo = context.getUserInfo();
 				this.loadOwnerHeaderImg();
 				this.loadOwnerAccount();
+				this.loadOwnerCoupon();
 			},
 			ckeckUserInfo: function() {
 				return context.checkLoginStatus();
@@ -143,11 +147,11 @@
 							_that.accounts = data;
 							let blanceSum = 0;
 							let interSum = 0;
-							let kaSum = 0;
+							//let kaSum = 0;
 							_that.accounts.forEach((v, k) => {
-								if(v.acctType == '2005'){
-									kaSum += parseFloat(v.amount);
-								}
+								// if(v.acctType == '2005'){
+								// 	kaSum += parseFloat(v.amount);
+								// }
 								if(v.acctType == '2004'){
 									interSum += parseFloat(v.amount);
 								}
@@ -157,9 +161,33 @@
 							})
 							_that.blance = blanceSum.toFixed(2);
 							_that.inter = interSum.toFixed(2);
-							_that.ka = kaSum.toFixed(2);
+							//_that.ka = kaSum.toFixed(2);
 							
 						})
+					}
+				});
+			},
+			loadOwnerCoupon: function() {
+				let _that = this;
+				let _count = 0;
+				_that.ka = 0;
+				context.getOwner(function(_ownerInfo) {
+					if (_ownerInfo) {
+						getCouponUsers({
+							page: 1,
+							row: 100,
+							tel: _ownerInfo.link,
+							communityId: _ownerInfo.communityId,
+							state: '1001'
+						}, null)
+							.then((_couponList) => {
+								_couponList.data.forEach(items => {
+									if (items.isExpire == 'Y') {
+										_count += parseInt(items.stock)
+									}
+								})
+								_that.ka = _count;
+							})
 					}
 				});
 			},

@@ -172,6 +172,10 @@ export default {
 	// 优惠券核销二维码生成
 	generatorCouponQrcode:baseUrl +"app/couponProperty.generatorCouponQrcode",
 	computePayFeeCoupon:baseUrl +"app/coupon.computePayFeeCoupon",
+	//查询停车场
+	listParkingAreas:baseUrl+"app/parkingArea.listParkingAreas",
+	couponPropertyUserGiftCar:baseUrl+"app/couponProperty.couponPropertyUserGiftCar",
+	
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

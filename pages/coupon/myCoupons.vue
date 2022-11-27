@@ -16,7 +16,7 @@
 							<image :src="couponImg" class="coupon"></image>
 							<view class="box">
 								<view class="descripe">
-									<view class="shop-name">{{ item.couponName }}</view>
+									<view class="shop-name">{{ item.couponName }}({{item.stock}}张)</view>
 									<view class="text">{{ item.value }}</view>
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+' 前' }}</view>
 								</view>
@@ -29,9 +29,8 @@
 				</view>
 
 				<!-- 已使用 -->
-				<view v-for="(itemsData, i) in list" :key="i">
 					<view class="list expired" v-if="active==1">
-						<view class="listItem"  v-for="(item, index) in couponList" :key="index">
+						<view class="listItem"  v-for="(item, index) in useCouponList" :key="index">
 							<image :src="couponImg" class="coupon"></image>
 							<view class="box">
 								<view class="descripe">
@@ -40,12 +39,11 @@
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
 								</view>
 								<view class="usestate" >
-									您已使用过此优惠券。
+									已使用
 								</view>
 							</view>
 						</view>
 					</view>
-				</view>
 				<!-- 已过期 -->
 				<view class="list expired" v-if="active==2">
 					<view >
@@ -58,7 +56,7 @@
 									<view class="expire">{{ item.createTime }}-{{ item.endTime+'00：00' }}</view>
 								</view>
 								<view class="usestate">
-									已过期，无法使用。
+									已过期
 								</view>
 							</view>
 						</view>
@@ -130,7 +128,8 @@
 					row: 30,
 					tel: context.getUserInfo().link,
 					communityId:getCommunityId(),
-					state: '1001'
+					state: '1001',
+					isStart:'Y'
 				}
 				_that.couponList = [];
 				_that.tmpCouponList = [];
@@ -182,17 +181,20 @@
 					});
 			},
 			_toQrCode:function(_coupon){
+				
 				if(_coupon.toType == '2002'){
 					uni.showToast({
 						icon:'none',
 						title:'请到缴费抵消'
 					})
 					return;
-				}
-				
-				if(_coupon.toType == '1001' || _coupon.toType == '1011'){
+				}else if(_coupon.toType == '1001' || _coupon.toType == '1011'){
 					uni.navigateTo({
 						url:'/pages/coupon/goodsCoupon?couponId='+_coupon.couponId
+					})
+				}else if(_coupon.toType == '4004'){
+					uni.navigateTo({
+						url:'/pages/coupon/giftParkingCoupon?couponId='+_coupon.couponId+"&couponName="+_coupon.couponName
 					})
 				}
 			}

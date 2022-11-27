@@ -182,3 +182,29 @@ export function getOwnerCommunitys(dataObj) {
 		})
 		
 }
+
+/**
+ * 查询停车场
+ * @param {Object} dataObj 对象
+ */
+export function listParkingAreas(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.listParkingAreas,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						let _parkingAreas = res.data.parkingAreas;
+						resolve(_parkingAreas);
+					}
+				},
+				fail: function(e) {
+					reject(e);
+				}
+			});
+		})
+		
+}
