@@ -142,7 +142,11 @@ export default {
 	queryShopType: baseUrl + 'app/shopType/queryShopType', //查询店铺类型
 	// 家政服务类型（菜单）
 	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
-	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
+	queryMainCategoryAllGoods: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
+	queryPhoneMainCategoryProduct: baseUrl + "app/product.queryPhoneMainCategoryProduct",
+	
+	queryMainCategory: baseUrl + "app/productCategory/queryMainCategory",
+	
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	saveAddVisit: baseUrl + "app/visit.saveVisit",
 	queryReportInfoAnswerByOpenId: baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",

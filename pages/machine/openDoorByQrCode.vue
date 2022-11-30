@@ -75,7 +75,7 @@
 					}
 					_that.qrCode = data.data
 					new qrCode('openDoorQrcode', {
-						text: _that.qrCode,
+						text: _that.qrCode?_that.qrCode:'当前没有绑定门禁设备，暂时无法使用',
 						width: 250,
 						height: 250,
 						colorDark: "#333333",

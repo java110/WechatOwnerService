@@ -1,17 +1,23 @@
 <template>
-	<view class="margin-top" v-if="products && products.length > 0">
-
-		<view v-for="(item,indexs) in products" :key="indexs">
+	<view class="margin-top">
+		<view>
 			<view class="text-left ">
-				<text class="recommend-title">{{item.categoryName}}</text>
+				<scroll-view scroll-x class="nav" scroll-with-animation>
+					<view class="cu-item" :class="item.mainCategoryId==curCategoryId?'text-catagory-select ':'text-catagory'"
+						v-for="(item,index) in mainCatagorys" :key="index" @tap="_doSelect(item)" :data-id="index">
+						{{item.categoryName}}
+					</view>
+				</scroll-view>
 			</view>
-
 			<view class="grid margin-bottom text-center col-2">
-				<view class="margin-top-xs margin-bottom-sm"
-					v-for="(product,i) in item.mainCategoryProducts" :key="i">
-					<view class="padding-sm  bg-white goods " :class="i%2 == 0 ? 'margin-right-xs' : 'margin-left-xs'" @tap="_toGoodsDetail(product)">
-						<view>
+				<view class="margin-top-xs margin-bottom-sm" v-for="(product,i) in products" :key="i">
+					<view class="padding-sm  bg-white goods " :class="i%2 == 0 ? 'margin-right-xs' : 'margin-left-xs'"
+						@tap="_toGoodsDetail(product)">
+						<view v-if="product.coverPhoto">
 							<image class="goods-image c-radius" :src="product.coverPhoto"></image>
+						</view>
+						<view v-else>
+							<image class="goods-image c-radius" :src="noPic"></image>
 						</view>
 						<view class="margin-top-sm text-left">
 							<text>{{product.prodName}}</text>
@@ -33,38 +39,71 @@
 
 <script>
 	import {
-		getRecommendProduct
+		getRecommendProduct,
+		queryMainCategory,
+		queryPhoneMainCategoryProduct
 	} from '../../api/goods/goodsApi.js'
 	import conf from '../../conf/config.js'
-	import {getMallCommunityId} from '../../api/community/communityApi.js';
+	import {
+		getMallCommunityId
+	} from '../../api/community/communityApi.js';
 	export default {
 		data() {
 			return {
+				curCategoryId:'-1',
+				mainCatagorys: [{
+					categoryName: "为你推荐",
+					mainCategoryId: "-1"
+				}],
 				products: [],
-				communityId: ""
+				communityId: "",
+				noPic:''
 			}
 		},
 		mounted() {
-			this._loadRecommendProdcut();
+			this._loadMainCatagory();
+			this.noPic = this.imgUrl+'/h5/images/noPic.png'
 		},
 		methods: {
-			_loadRecommendProdcut: function() {
+			_loadMainCatagory: function() {
 				let _that = this;
-					_that.communityId = getMallCommunityId();
 				let _data = {
 					page: 1,
-					row: 6,
-					communityId:_that.communityId
+					row: 10
 				}
-				getRecommendProduct(_data)
+				queryMainCategory(_data)
+					.then((products) => {
+						if(!products || products.length <1){
+							return ;
+						}
+						_that.mainCatagorys = products;
+						_that.curCategoryId = products[0].mainCategoryId;
+					}).then(()=>{
+						_that._loadRecommendProdcut();
+					})
+			},
+			_loadRecommendProdcut: function() {
+				let _that = this;
+				_that.communityId = getMallCommunityId();
+				let _data = {
+					page: 1,
+					row: 10,
+					communityId: _that.communityId,
+					mainCategoryId: _that.curCategoryId
+				}
+				queryPhoneMainCategoryProduct(_data)
 					.then((products) => {
 						_that.products = products;
 					})
 			},
 			_toGoodsDetail: function(_product) {
 				this.vc.navigateToMall({
-					url: '/pages/goods/goods?productId=' + _product.productId+"&shopId="+_product.shopId 
-				},true);
+					url: '/pages/goods/goods?productId=' + _product.productId + "&shopId=" + _product.shopId
+				}, true);
+			},
+			_doSelect:function(item){
+				this.curCategoryId = item.mainCategoryId;
+				this._loadRecommendProdcut();
 			}
 		}
 	}
@@ -82,5 +121,14 @@
 
 	.goods-image {
 		height: 180upx;
+	}
+	.text-catagory{
+		color: #656565;
+		font-size: 28upx;
+		
+	}
+	.text-catagory-select{
+		color: #000000;
+		font-size: 40upx;
 	}
 </style>
