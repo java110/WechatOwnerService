@@ -32,8 +32,13 @@
 		},
 		methods: {
 			_urlJump: function(_menu){
+				let _url = _menu.url
+				//跳转至普通商品页面
+				if(_menu.skipType == '3'){
+					_url = "/pages/goods/goodsList?hktId="+_menu.hktId
+				}
 				this.vc.navigateToMall({
-					url: _menu.url
+					url: _url
 				})
 			},
 			callUndefined:function(){
