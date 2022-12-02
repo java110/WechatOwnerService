@@ -3,7 +3,8 @@
 		<view>
 			<view class="text-left ">
 				<scroll-view scroll-x class="nav" scroll-with-animation>
-					<view class="cu-item" :class="item.mainCategoryId==curCategoryId?'text-catagory-select ':'text-catagory'"
+					<view class="cu-item"
+						:class="item.mainCategoryId==curCategoryId?'text-catagory-select ':'text-catagory'"
 						v-for="(item,index) in mainCatagorys" :key="index" @tap="_doSelect(item)" :data-id="index">
 						{{item.categoryName}}
 					</view>
@@ -50,19 +51,21 @@
 	export default {
 		data() {
 			return {
-				curCategoryId:'-1',
+				curCategoryId: '-1',
 				mainCatagorys: [{
 					categoryName: "为你推荐",
 					mainCategoryId: "-1"
 				}],
 				products: [],
 				communityId: "",
-				noPic:''
+				noPic: '',
+				pagesize: 10,
+				pagefrom: 1,
 			}
 		},
 		mounted() {
 			this._loadMainCatagory();
-			this.noPic = this.imgUrl+'/h5/images/noPic.png'
+			this.noPic = this.imgUrl + '/h5/images/noPic.png'
 		},
 		methods: {
 			_loadMainCatagory: function() {
@@ -71,14 +74,18 @@
 					page: 1,
 					row: 10
 				}
+				
+				this.products=[];
+				this.pagefrom =1;
+				
 				queryMainCategory(_data)
 					.then((products) => {
-						if(!products || products.length <1){
-							return ;
+						if (!products || products.length < 1) {
+							return;
 						}
 						_that.mainCatagorys = products;
 						_that.curCategoryId = products[0].mainCategoryId;
-					}).then(()=>{
+					}).then(() => {
 						_that._loadRecommendProdcut();
 					})
 			},
@@ -86,14 +93,19 @@
 				let _that = this;
 				_that.communityId = getMallCommunityId();
 				let _data = {
-					page: 1,
-					row: 10,
+					page: this.pagefrom,
+					row: this.pagesize,
 					communityId: _that.communityId,
 					mainCategoryId: _that.curCategoryId
 				}
 				queryPhoneMainCategoryProduct(_data)
-					.then((products) => {
-						_that.products = products;
+					.then((_data) => {
+						_that.products = _that.products.concat(_data.data);
+						if (_that.pagefrom <= _data.records) {
+							_that.pagefrom = _that.pagefrom + 1;
+						} else {
+							_that.loadingText = "已经到底了";
+						}
 					})
 			},
 			_toGoodsDetail: function(_product) {
@@ -101,8 +113,10 @@
 					url: '/pages/goods/goods?productId=' + _product.productId + "&shopId=" + _product.shopId
 				}, true);
 			},
-			_doSelect:function(item){
+			_doSelect: function(item) {
 				this.curCategoryId = item.mainCategoryId;
+				this.pagefrom =1;
+				this.products=[];
 				this._loadRecommendProdcut();
 			}
 		}
@@ -122,12 +136,14 @@
 	.goods-image {
 		height: 180upx;
 	}
-	.text-catagory{
+
+	.text-catagory {
 		color: #656565;
 		font-size: 28upx;
-		
+
 	}
-	.text-catagory-select{
+
+	.text-catagory-select {
 		color: #000000;
 		font-size: 40upx;
 	}

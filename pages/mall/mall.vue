@@ -97,6 +97,9 @@
 			}
 			this.shopTypeId = 0
 		},
+		onReachBottom() {
+			this.$refs.vcRecommendRef._loadRecommendProdcut();
+		},
 		methods: {
 			selectType(index) {
 				let shopTypeId = this.navList[index].shopTypeId;

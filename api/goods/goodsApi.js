@@ -56,8 +56,7 @@ export function queryPhoneMainCategoryProduct(dataObj) {
 				//动态数据
 				success: function(res) {
 					if (res.statusCode == 200) {
-						let _products = res.data.data;
-						resolve(_products);
+						resolve(res.data);
 						return;
 					}
 					reject();
