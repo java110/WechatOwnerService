@@ -655,6 +655,14 @@
             }
             
         }
+        ,{
+            "path" : "pages/reserve/reserveDining",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预约就餐",
+                "enablePullDownRefresh": false
+            } 
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

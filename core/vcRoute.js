@@ -55,7 +55,7 @@ export function navigateMP(_url) {
 	} else {
 		_url = _url + "?hcCommunityId=" + getMallCommunityId();
 	}
-	_url = _url + "&mallFrom=HC_APP"
+	_url = _url + "&mallFrom=HC_MINI"
 
 	uni.navigateToMiniProgram({
 		appId: conf.mallMinAppId,
