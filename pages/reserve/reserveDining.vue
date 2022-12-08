@@ -32,7 +32,8 @@
 								<view class="text-red text-sm">￥{{item.price}}</view>
 							</view>
 							<view class="action">
-								<view class="text-red text-sm">x 5</view>
+								<!-- x 5 -->
+								<view class="text-red text-sm"></view>
 								<view>
 									<button class="cu-btn round line-red sm" @click="_reserveDining(item)">预约</button>
 								</view>
@@ -45,26 +46,29 @@
 			</scroll-view>
 		</view>
 		<view class=" bg-white  border flex justify-between" style="position: fixed;width: 100%;bottom: 0;">
-			<view class="action text-red  line-height margin-left">
-				{{selectGoods.length}} 件商品
+			<view class="action text-red  line-height margin-left" @click="_showSelectdGoods">
+				预约 {{selectGoods.length}} 件商品
 			</view>
 			<view class="flex justify-end">
 				<view class="action text-orange margin-right line-height">
 					合计：{{receivableAmount}}元
 				</view>
 				<view class="btn-group">
-					<button class="cu-btn bg-red shadow-blur lgplus sharp" :disabled="receivableAmount == 0" @click="onPayFee()">支付</button>
+					<button class="cu-btn bg-red shadow-blur lgplus sharp" :disabled="receivableAmount == 0" @click="_toReserveOrder()">支付</button>
 				</view>
 			</view>
 		</view>
-		<reserve-goods ref="reserveGoodsRef"></reserve-goods>
+		<reserve-goods ref="reserveGoodsRef" @selectGoods="_selectGoods"></reserve-goods>
+		<selectd-goods ref="selectdGoodsRef" @deleteGoods="_deleteGoods"></selectd-goods>
 	</view>
 </template>
 
 <script>
 	import {getCatalogs,getCatalogGoodss} from '@/api/community/reserveApi.js';
 	import {getCommunityId} from '@/api/community/communityApi.js';
-	import reserveGoods from '@/components/reserve/reserve-goods.vue'
+	import reserveGoods from '@/components/reserve/reserve-goods.vue';
+	
+	import selectdGoods from '@/components/reserve/selected-goods.vue'
 	export default {
 		data() {
 			return {
@@ -88,6 +92,7 @@
 		},
 		components:{
 			reserveGoods,
+			selectdGoods
 		},
 		onLoad() {
 			this.loadCatalog();
@@ -126,6 +131,46 @@
 			_reserveDining:function(_dining){
 				console.log(this.$refs.reserveGoodsRef)
 				this.$refs.reserveGoodsRef.reserveGoods(_dining);
+			},
+			_selectGoods:function(_goods){
+				this.selectGoods.push(_goods);
+				this.computeGoodsPrice();
+			},
+			computeGoodsPrice:function(){
+				this.receivableAmount = 0;
+				if(this.selectGoods.length < 1){
+					return;
+				}
+				this.selectGoods.forEach(_goods =>{
+					let _quantity = _goods.hours.length * parseFloat(_goods.quantity);
+					this.receivableAmount = (this.receivableAmount+ _quantity * parseFloat(_goods.price))//.toFixed(2);
+				})
+			},
+			_showSelectdGoods:function(){
+				this.$refs.selectdGoodsRef.viewSelectModal(this.selectGoods);
+			},
+			_deleteGoods:function(_goods){
+				let _tmpGoods = [];
+				this.selectGoods.forEach(_item=>{
+					if(_item.goodsId != _goods.goodsId){
+						_tmpGoods.push(_item);
+					}
+				})
+				this.selectGoods = _tmpGoods;
+				this.computeGoodsPrice();
+			},
+			_toReserveOrder:function(){
+				if(!this.selectGoods || this.selectGoods.length< 1){
+					uni.showToast({
+						icon:'none',
+						title:'未预约商品'
+					});
+					return ;
+				}
+				uni.setStorageSync('/pages/reserve/reserveOrder',this.selectGoods);
+				uni.navigateTo({
+					url:'/pages/reserve/reserveOrder'
+				})
 			}
 		},
 	}

@@ -663,6 +663,15 @@
                 "enablePullDownRefresh": false
             } 
         }
+        ,{
+            "path" : "pages/reserve/reserveOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "确认订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

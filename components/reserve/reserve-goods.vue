@@ -4,7 +4,7 @@
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">{{goods.goodsName}}</view>
-					<view class="action" @tap="_cancleLogout()">
+					<view class="action" @tap="_cancle()">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
@@ -33,7 +33,13 @@
 							</checkbox-group>
 							<!--  -->
 						</view>
-
+					</view>
+					<view class="flex justify-between margin-top">
+						<view>金额</view>
+						<view >
+							<text class="text-red margin-right">￥{{money}}</text>
+							<!--  -->
+						</view>
 					</view>
 				</view>
 				<view class="cu-bar bg-white justify-end">
@@ -64,11 +70,19 @@
 					quantity: "1"
 				},
 				openTimes: [],
+				money:0,
 			};
 		},
 		methods: {
 			reserveGoods: function(_goods) {
 				this.isShow = true;
+				this.goods = {
+					hours: [],
+					quantity: "1"
+				},
+				this.money = 0;
+				this.openTimes = [];
+				
 				this._loadGoods(_goods.goodsId);
 			},
 			_cancle: function() {
@@ -83,8 +97,9 @@
 					goodsId: _goodsId
 				}).then(_data => {
 					_that.goods = _data[0];
-					_that.goods.hours = [],
-						_that.goods.quantity = "1"
+					_that.goods.hours = [];
+					_that.goods.quantity = "1"
+					
 					_that._loadGoodsParams();
 				})
 			},
@@ -97,13 +112,21 @@
 					paramsId: this.goods.paramsId
 				}).then(_data => {
 					_that.openTimes = _data[0].openTimes;
+					_that.$forceUpdate();
 				})
 			},
 			_changeReserveTime: function(e) {
 				this.goods.hours = e.detail.value;
+				this._computeMoney();
 			},
 			_changeReserveQuantity: function(e, guid, item) {
+				this._computeMoney();
 				this.goods.quantity = e.detail.value;
+			},
+			_computeMoney:function(){
+				let _quantity = this.goods.hours.length * parseFloat(this.goods.quantity);
+				this.money = (_quantity * parseFloat(this.goods.price)).toFixed(2);
+				this.goods.money = this.money;
 			},
 			_doSummit: function() {
 				if (!this.goods.quantity) {
@@ -120,7 +143,8 @@
 					});
 					return;
 				}
-				console.log(this.goods);
+				this.isShow = false;
+				this.$emit('selectGoods',this.goods);
 			}
 		}
 	}

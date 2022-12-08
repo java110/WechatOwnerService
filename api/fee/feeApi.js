@@ -442,7 +442,10 @@ export function payFeeApp(_that, _data) {
  * @param {*} _that 
  * @param {*} _data 
  */
-export function payFeeWechat(_that, _data) {
+export function payFeeWechat(_that, _data,_successUrl) {
+	if(!_successUrl ){
+		_successUrl = "/pages/successPage/successPage?msg=支付成功&objType=3003";
+	}
 	wx.showLoading({
 		title: '支付中'
 	});
@@ -464,7 +467,7 @@ export function payFeeWechat(_that, _data) {
 					'paySign': data.sign,
 					'success': function(res) {
 						uni.navigateTo({
-							url: "/pages/successPage/successPage?msg=支付成功&objType=3003"
+							url: _successUrl
 						})
 					},
 					'fail': function(res) {
@@ -475,7 +478,7 @@ export function payFeeWechat(_that, _data) {
 				// #ifdef H5
 				WexinPayFactory.wexinPay(data, function() {
 					uni.navigateTo({
-						url: "/pages/successPage/successPage?msg=支付成功&objType=3003"
+						url: _successUrl
 					})
 				});
 				// #endif

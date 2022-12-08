@@ -30,11 +30,7 @@
 						</view>
 					</view>
 				</view>
-				<!-- <view class="block__title">支付方式</view>
-				<view class="cu-form-group fee-last">
-					<view class="title">微信支付</view>
-					<switch @change="SwitchA" :class="switchA?'checked':''" :checked="switchA?true:false"></switch>
-				</view> -->
+				
 			</form>
 		</scroll-view>
 		<view class=" bg-white  border flex cu-form-group" style="position: fixed;width: 100%;bottom: 0;">
