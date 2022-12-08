@@ -19,11 +19,55 @@ import {
 import mapping from '../constant/MappingConstant.js'
 
 import {
-	getStorageSync,getWAppId
+	getStorageSync,
+	getWAppId
 } from '../lib/java110/utils/StorageUtil.js';
 
 
-import {getHcCode} from '../api/webView/webViewApi.js'
+import {
+	getHcCode
+} from '../api/webView/webViewApi.js';
+
+import conf from '../conf/config.js';
+
+import {
+	getMallCommunityId
+} from '@/api/community/communityApi.js';
+
+
+
+export function navigateH5(_url) {
+	
+	if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
+		_url = conf.mallUrl + '#' + _url;
+	}
+	if (_url.indexOf("?") > 0) {
+		_url = _url + "&hcCommunityId=" + getMallCommunityId();
+	} else {
+		_url = _url + "?hcCommunityId=" + getMallCommunityId();
+	}
+	_url = _url + "&mallFrom=HC_H5";
+	window.location.href = _url;
+};
+export function navigateMP(_url) {
+	if (_url.indexOf("?") > 0) {
+		_url = _url + "&hcCommunityId=" + getMallCommunityId();
+	} else {
+		_url = _url + "?hcCommunityId=" + getMallCommunityId();
+	}
+	_url = _url + "&mallFrom=HC_MINI"
+
+	uni.navigateToMiniProgram({
+		appId: conf.mallMinAppId,
+		path: _url, // 不填默认首页
+		extraData: {
+			'data1': 'test'
+		},
+		success(res) {
+			// 打开成功
+		}
+	})
+};
 
 /*
  * 跳转功能封装
@@ -43,8 +87,8 @@ export function navigateTo(_param, callback = () => {}) {
 		_newUrl = _url + ('?wAppId=' + getWAppId());
 		_tempUrl = _url;
 	}
-	
-	if(_tempUrl.startsWith("/")){
+
+	if (_tempUrl.startsWith("/")) {
 		_tempUrl = _tempUrl.substring(1)
 	}
 
@@ -66,7 +110,7 @@ export function navigateTo(_param, callback = () => {}) {
 	}
 	debug('vcRoute', 'navigateTo', _param);
 	//校验是否登录，如果没有登录跳转至温馨提示页面
-	checkSession(_param.url,function() {
+	checkSession(_param.url, function() {
 		//有回话 跳转至相应页面
 		uni.navigateTo(_param);
 	})
@@ -78,33 +122,51 @@ export function navigateTo(_param, callback = () => {}) {
  */
 export function navigateToMall(_param) {
 	//参数中刷入wAppId 
-	
+
 	let _url = _param.url;
-	uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
-	
+	uni.setStorageSync(mapping.HC_MALL_CUR_URL, _url);
+
 	//判断有没有登录
-	if(!hasLogin()){ //没有登录直接跳转
+	if (!hasLogin()) { //没有登录直接跳转
+		// #ifdef H5
+		navigateH5(_url)
+		// #endif
+
+		// #ifdef MP-WEIXIN
+		navigateMP(_url)
+		// #endif
+		// #ifdef APP-PLUS
 		uni.navigateTo({
 			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
 		});
+		// #endif
 		return;
 	}
-	
-	getHcCode().then(_data=>{
-		if(_url.indexOf("?")>0){
-			_url = _url +"&hcCode="+_data.hcCode;
-		}else{
-			_url = _url +"?hcCode="+_data.hcCode;
+
+	getHcCode().then(_data => {
+		if (_url.indexOf("?") > 0) {
+			_url = _url + "&hcCode=" + _data.hcCode;
+		} else {
+			_url = _url + "?hcCode=" + _data.hcCode;
 		}
-		uni.setStorageSync(mapping.HC_MALL_CUR_URL,_url);
+		uni.setStorageSync(mapping.HC_MALL_CUR_URL, _url);
+		// #ifdef H5
+		navigateH5(_url)
+		// #endif
+		
+		// #ifdef MP-WEIXIN
+		navigateMP(_url)
+		// #endif
+		// #ifdef APP-PLUS
 		uni.navigateTo({
 			url: '/pages/hcWebView/hcWebView?wAppId=' + getWAppId()
 		});
+		// #endif
 	})
-	
-	
-	
+
 };
+
+
 
 /**
  * 返回上层页面

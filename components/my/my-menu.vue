@@ -11,7 +11,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- #ifdef H5 || WUYE -->
+		<!-- #ifdef H5 && WUYE -->
 		<view class="order_box">
 			<view class="order_title">我的订单</view>
 			<view class="order_list">
@@ -64,7 +64,7 @@
 					{
 						name: '我的物业',
 						src: this.imgUrl+'/h5/images/serve/my2.png',
-						href: '/pages/myProperty/myProperty'
+						href: '/pages/my/myProperty'
 					},
 					{
 						name: '我的房屋',
@@ -74,39 +74,43 @@
 					{
 						name: '我的报修',
 						src: this.imgUrl+'/h5/images/serve/my4.png',
-						href: '/pages/myRepair/myRepair'
+						href: '/pages/repair/myRepair'
 					},
 					{
 						name: '缴费记录',
 						src: this.imgUrl+'/h5/images/serve/my5.png',
-						href: '/pages/payFeeDetail/payFeeDetail'
+						href: '/pages/fee/payFeeDetail'
 					},
 					{
 						name: '我的车位',
 						src: this.imgUrl+'/h5/images/serve/my6.png',
-						href: '/pages/parkingInfo/parkingInfo'
+						href: '/pages/applyparking/parkingInfo'
 					},
 					{
 						name: '我的投诉',
 						src: this.imgUrl+'/h5/images/serve/11.png',
-						href: '/pages/complaintList/complaintList'
+						href: '/pages/complaint/complaintList'
 					},
 					{
 						name: '门禁日志',
 						src: this.imgUrl+'/h5/images/serve/my9.png',
-						href: '/pages/machineTranslateLog/machineTranslateLog'
+						href: '/pages/machine/machineTranslateLog'
 					},
 					{
 						name: '空置房记录',
 						src: this.imgUrl+'/h5/images/serve/my8.png',
-						href: '/pages/myApplyRoom/myRoomList'
+						href: '/pages/applyRoom/myRoomList'
 					},
 					{
 						name: '装修记录',
 						src: this.imgUrl+'/h5/images/serve/my10.png',
-						href: '/pages/myRenovation/myRoomList'
+						href: '/pages/renovation/myRoomList'
 					},
-					
+					{
+						name: '订场记录',
+						src: this.imgUrl+'/h5/images/serve/my8.png',
+						href: '/pages/appointment/myBoomList'
+					},	
 				]
 			};
 		},
@@ -126,7 +130,7 @@
 			toMallOrders() {
 				if (!this.ckeckUserInfo()) {
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					}, () => {
 						this.refreshPageLoginInfo();
 					});

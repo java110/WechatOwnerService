@@ -1,6 +1,6 @@
 <template>
 	<!--  @scrolltolower="lower" -->
-	<scroll-view class="scroll-restaurants-list " scroll-y="true" style="height:300upx">
+	<scroll-view class="scroll-restaurants-list " scroll-x="true" style="height:300upx">
 		<swiper class=" padding-top-xs margin-top-sm bg-white c-radius" style="height: 280upx;" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
 		 indicator-active-color="#FECA49">
 			<block v-for="(item, index) in categoryList" :key="index">
@@ -32,8 +32,13 @@
 		},
 		methods: {
 			_urlJump: function(_menu){
+				let _url = _menu.url
+				//跳转至普通商品页面
+				if(_menu.skipType == '3'){
+					_url = "/pages/goods/goodsList?hktId="+_menu.hktId
+				}
 				this.vc.navigateToMall({
-					url: _menu.url
+					url: _url
 				})
 			},
 			callUndefined:function(){

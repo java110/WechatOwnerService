@@ -18,13 +18,63 @@ import {
 // #endif
 
 /**
+ * 查询 专区目录
+ * @param {Object} dataObj
+ */
+export function queryMainCategory(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.queryMainCategory,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						let _products = res.data.data;
+						resolve(_products);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+
+
+
+export function queryPhoneMainCategoryProduct(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.queryPhoneMainCategoryProduct,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.statusCode == 200) {
+						resolve(res.data);
+						return;
+					}
+					reject();
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+/**
  * 查询活动列表
  */
 export function getRecommendProduct(dataObj) {
 	return new Promise(
 		(resolve, reject) => {
 			requestNoAuth({
-				url: url.queryMainCategory,
+				url: url.queryMainCategoryAllGoods,
 				method: "GET",
 				data: dataObj,
 				//动态数据

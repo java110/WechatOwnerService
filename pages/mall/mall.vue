@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!-- 搜索框 -->
 		<view class="cu-bar search bg-white nav-list">
 			<view class="search-form round" @tap="toSearch()">
 				<text class="cuIcon-search"></text>
@@ -10,8 +11,8 @@
 				{{selectCommunityName}}<text class="cuIcon-refresharrow"></text>
 			</view>
 		</view>
+		<!-- 店铺类型 -->
 		<view class="">
-			<!--:scroll-left="scrollLeft"-->
 			<scroll-view scroll-x class="nav nav-scroll  padding-bottom-xs" scroll-with-animation >
 				<view class="cu-item text-white" :class="item.shopTypeId==shopTypeId?'nav-cur':''"
 					v-for="(item,index) in navList" :key="index" @tap="selectType(index)" :data-id="index">
@@ -20,10 +21,13 @@
 			</scroll-view>
 		</view>
 		<view class="padding-lr-sm">
+			<!-- 广告 -->
 			<vc-ads></vc-ads>
+			<!-- 商圈菜单-->
 			<vc-category :category-list="categoryList"></vc-category>
+			<!-- 商圈商品 -->
 			<vc-recommend ref="vcRecommendRef"></vc-recommend>
-			<vc-shop ref="vcShopRef"></vc-shop>
+			<!-- <vc-shop ref="vcShopRef"></vc-shop> -->
 		</view>
 		<vc-bottom-black></vc-bottom-black>
 	</view>
@@ -92,6 +96,9 @@
 				this.$refs.vcRecommendRef._loadRecommendProdcut();
 			}
 			this.shopTypeId = 0
+		},
+		onReachBottom() {
+			this.$refs.vcRecommendRef._loadRecommendProdcut();
 		},
 		methods: {
 			selectType(index) {

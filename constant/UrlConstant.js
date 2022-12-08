@@ -173,11 +173,11 @@ const listOwnerVisit = baseUrl + "callComponent/visitManage/list";
  */
 const NEED_NOT_LOGIN_PAGE = [
 	'/pages/login/login',
-	'/pages/register/register',
+	'/pages/login/register',
 	'/pages/my/my',
 	'/pages/index/index',
 	'/pages/market/market',
-	'/pages/showlogin/showlogin',
+	'/pages/login/showlogin',
 	'/pages/rentHouse/rentHouse'
 ];
 

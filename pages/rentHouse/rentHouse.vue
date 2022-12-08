@@ -156,7 +156,7 @@
 			toDetail: function(rentingId) {
 				console.log(rentingId)
 				this.vc.navigateTo({
-					url: '/pages/rentingDetail/rentingDetail?rentingId=' + rentingId
+					url: '/pages/rentHouse/rentingDetail?rentingId=' + rentingId
 				});
 			}
 		}

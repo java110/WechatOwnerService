@@ -15,13 +15,16 @@ const baseUrl = '/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://demo.homecommunity.cn/';
+const baseUrl = 'http://192.168.100.108:8008/';
 // #endif
 
 let commonBaseUrl = 'http://demo.homecommunity.cn/';
 
 //商城的url
 let mallUrl = 'http://mallapp.homecommunity.cn/';
+
+//商城小程序ID
+let mallMinAppId = "xxx";
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
 
@@ -64,5 +67,6 @@ export default {
 	logLevel: logLevel,
 	appPayKey: appPayKey,
 	imgUrl:commonBaseUrl,
-	systemName:systemName
+	systemName:systemName,
+	mallMinAppId:mallMinAppId
 }

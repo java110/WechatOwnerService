@@ -64,10 +64,14 @@
             "urlCheck" : false,
             "es6" : false
         },
+        "navigateToMiniProgramAppIDList" : [ "xxxx" ], //商城小程序AppId
         "permission" : {
             "scope.userLocation" : {
                 "desc" : "你的位置信息将用于小程序位置接口的效果展示"
             }
+        },
+        "optimization" : {
+            "subPackages" : true
         }
     },
     "h5" : {
@@ -76,12 +80,12 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/app" : {
-                    "target" : "http://demo.homecommunity.cn/", //目标接口域名
+                    "target" : "http://192.168.100.108:8088/", //目标接口域名
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
                 },
                 "/callComponent" : {
-                    "target" : "http://demo.homecommunity.cn/", //目标接口域名
+                    "target" : "http://192.168.100.108:8088/", //目标接口域名
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
                 }

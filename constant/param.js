@@ -28,6 +28,7 @@ export default {
     CART_TYPE: {
         HOMEMAKING: "3307", // 家政服务
         SHOP: "3306", // 商城
+		BOOKING: "3308" // 预约
     },
 	// 默认头像
 	headImg: '/static/images/missing-face.png',

@@ -191,7 +191,7 @@ export function reciveMessage(event, that) {
 	} else if (_data.action == ACTION_REFRESH_TOKEN) {
 		//跳转登录
 		uni.navigateTo({
-			url:'/pages/showlogin/showlogin?wAppId='+getWAppId()
+			url:'/pages/login/showlogin?wAppId='+getWAppId()
 		})
 	} else if (_data.action == ACTION_NAVIGATE_TO_PAGE) {
 		//_data.url = encodeUrl(_data.url);

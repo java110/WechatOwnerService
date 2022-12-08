@@ -32,7 +32,7 @@ export default {
 	queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
 	queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
 	queryFeeByOwner: baseUrl + "app/fee.listFee", //预下单
-	queryCouponUser: baseUrl + "app/couponUser.listCouponUser", //查询用户优惠卷
+	queryCouponUser: baseUrl + "app/couponProperty.listCouponPropertyUser", //查询用户优惠卷
 	preOrder: baseUrl + "app/payment/toPay", //查询小区
 	//临时车缴费
 	preOrderTempCarInout: baseUrl + "/app/payment/toPayTempCarInout",
@@ -112,7 +112,7 @@ export default {
 	openDoor: baseUrl + "app/machine/openDoor",
 	getQrCode: baseUrl + "app/machine/getQRcode",
 	queryOwnerCars: baseUrl + "app/parkingSpaceApply.listParkingSpaceApply",
-	customCarInOut: baseUrl + "app/machine.customCarInOutCmd",//手工保存车牌号
+	customCarInOut: baseUrl + "app/machine.customCarInOutCmd", //手工保存车牌号
 	saveRoomRenovation: baseUrl + "app/roomRenovation/saveRoomRenovation",
 	queryRoomRenovation: baseUrl + "app/roomRenovation/queryRoomRenovation",
 	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
@@ -139,30 +139,59 @@ export default {
 	queryOwnerAccount: baseUrl + "app/account/queryOwnerAccount",
 	queryOwnerAccountDetail: baseUrl + "app/account/queryOwnerAccountDetail",
 	ownerCommunity: baseUrl + "app/owner.ownerCommunity",
-	queryShopType: baseUrl + 'app/shopType/queryShopType',//查询店铺类型
+	queryShopType: baseUrl + 'app/shopType/queryShopType', //查询店铺类型
 	// 家政服务类型（菜单）
 	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
-	queryMainCategory: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
+	queryMainCategoryAllGoods: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
+	queryPhoneMainCategoryProduct: baseUrl + "app/product.queryPhoneMainCategoryProduct",
+	
+	queryMainCategory: baseUrl + "app/productCategory/queryMainCategory",
+	
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	saveAddVisit: baseUrl + "app/visit.saveVisit",
-	queryReportInfoAnswerByOpenId : baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
+	queryReportInfoAnswerByOpenId: baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
 	listOwnerVisit: baseUrl + "app/visit.listVisits",
-		listSystemInfo:baseUrl+"app/system.listSystemInfo",
-		queryWaitPayFeeTempCar:baseUrl+"app/car.queryWaitPayFeeTempCar",
-		getOpenIdFromAliPay:baseUrl+"app/alipay.getOpenIdFromAliPay",
+	listSystemInfo: baseUrl + "app/system.listSystemInfo",
+	queryWaitPayFeeTempCar: baseUrl + "app/car.queryWaitPayFeeTempCar",
+	getOpenIdFromAliPay: baseUrl + "app/alipay.getOpenIdFromAliPay",
 	uploadImageFormData: baseUrl + "callComponent/upload/uploadFile/uploadImage",
 	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
-		
+	saveParkingCouponCar: baseUrl + "app/parkingCoupon.saveParkingCouponCar",
+	listParkingCouponCar: baseUrl + "app/parkingCoupon.listParkingCouponCar",
+	listMarketPicByCommunity: baseUrl + "app/marketPic.listCommunityMarketPic",
+	listCommunityMarketGoods: baseUrl + "app/marketGoods.listCommunityMarketGoods",
+	// 查询场地API app/communitySpace.listCommunitySpace?spaceId=&name=&state=&venueId=102022100702940003&communityId=2022091498680001&page=1&row=10
+	queryChangDi: baseUrl + "app/communitySpace.listCommunitySpace",
+	// 查询场馆 app/communityVenue.listCommunityVenue?page=1&row=100&communityId=2022091498680001
+	queryChangGuan: baseUrl + "app/communityVenue.listCommunityVenue",
+	// 查询已订场地信息
+	querySpacePerson: baseUrl + "app/communitySpace.listCommunitySpacePerson",
+	unifiedPayment: baseUrl + "app/payment.unifiedPayment",
+
+	// 修改预约订单
+	saveCommunitySpacePersonTime: baseUrl + "app/communitySpace.saveCommunitySpacePersonTime",
+	listEquipmentAccount:baseUrl +"app/equipmentAccount.listEquipmentAccount",
+	listMaintainanceTaskDetail:baseUrl +"app/maintainanceTask.listMaintainanceTaskDetail",
+	listInspectionTaskDetails:baseUrl +"app/inspectionTaskDetail.listInspectionTaskDetails",
+	// 优惠券核销二维码生成
+	generatorCouponQrcode:baseUrl +"app/couponProperty.generatorCouponQrcode",
+	computePayFeeCoupon:baseUrl +"app/coupon.computePayFeeCoupon",
+	//查询停车场
+	listParkingAreas:baseUrl+"app/parkingArea.listParkingAreas",
+	couponPropertyUserGiftCar:baseUrl+"app/couponProperty.couponPropertyUserGiftCar",
+	
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
-		'pages/register/register',
+		'pages/login/register',
 		'pages/my/my',
 		'pages/index/index',
 		'pages/market/market',
-		'pages/showlogin/showlogin',
+		'pages/login/showlogin',
 		'pages/homemaking/homemaking',
 		'pages/mall/mall',
+		'pages/appointment/appointment',
+		'pages/appointment/appointmentPay',
 	],
 	NEED_NOT_LOGIN_URL: [
 		baseUrl + "app/payment/toPayTempCarFee"

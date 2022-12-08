@@ -2,7 +2,7 @@
 	<!--pages/activites/activites.wxml-->
 	<view class="act">
 		<block v-for="(item, index) in activities" :key="index">
-			<navigator :url="'/pages/activitesDetail/activitesDetail?activitiesId=' + item.activitiesId + '&title=' + item.title + '&communityId=' + item.communityId+'&wAppId='+wAppId">
+			<navigator :url="'/pages/activites/activitesDetail?activitiesId=' + item.activitiesId + '&title=' + item.title + '&communityId=' + item.communityId+'&wAppId='+wAppId">
 				<view class="act_item">
 					<view class="act_img">
 						<image class="headImg" :src="item.src"></image>

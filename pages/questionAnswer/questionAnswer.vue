@@ -118,7 +118,7 @@
 				}
 				let that = this;
 				this.vc.navigateTo({
-					url: "/pages/questionAnswerDetail/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType
+					url: "/pages/questionAnswer/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType
 				});
 			},
 		}

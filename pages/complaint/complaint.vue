@@ -218,9 +218,12 @@
 						success: function(res) {
 							let _json = res.data;
 							if (_json.code == 0) {
-								wx.redirectTo({
-									url: '/pages/complaintList/complaintList',
-								});
+								// wx.redirectTo({
+								// 	url: '/pages/complaint/complaintList',
+								// });
+								uni.navigateTo({
+									url:"/pages/successPage/successPage?msg=提交成功&objType=4004"
+								})
 								return;
 							}
 							wx.showToast({

@@ -208,21 +208,21 @@
 				let login = context.checkLoginStatus();
 				if(!login){
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}
 				let _that = this;
 				if(index == 0){
 					this.vc.navigateTo({
-						url:'/pages/myJunk/myJunk'
+						url:'/pages/market/myJunk'
 					});
 					return ;	
 				}
 				if(index == 1){
 					
 					this.vc.navigateTo({
-						url:"/pages/newJunk/newJunk?active=" + this.active
+						url:"/pages/market/newJunk?active=" + this.active
 					});
 					return ;
 				}
@@ -233,7 +233,7 @@
 				let login = context.checkLoginStatus();
 				if(!login){
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}

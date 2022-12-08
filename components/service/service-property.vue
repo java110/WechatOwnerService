@@ -33,17 +33,17 @@
 						url: v.href
 					})
 				} else if (v.href != '') {
-					if(v.needLogin == 'N'){
+					if (v.needLogin == 'N') {
 						this.vc.navigateTo({
 							url: v.href
 						});
-						return ;
+						return;
 					}
 					hasOwner();
 					this.vc.navigateTo({
 						url: v.href
 					});
-					
+
 				} else {
 					uni.showToast({
 						icon: 'none',
@@ -54,81 +54,102 @@
 			_loadMenu: function() {
 				this.real_list = [{
 						name: '生活缴费',
-						src: this.imgUrl+'/h5/images/serve/1.png',
-						href: '/pages/oweFee/oweFee'
-					}, {
+						src: this.imgUrl + '/h5/images/serve/1.png',
+						href: '/pages/fee/oweFee'
+					},
+					// {
+					// 	name: '临时车费',
+					// 	src: this.imgUrl+'/h5/images/serve/1.png',
+					// 	href: '/pages/fee/tempParkingFee?paId=102022101773780027&communityId=2022081539020475&appId=123&aliAppId=12345'
+					// },
+					{
 						name: '房屋费',
-						src: this.imgUrl+'/h5/images/serve/5.png',
-						href: '/pages/roomFeeListNew/roomFeeListNew'
+						src: this.imgUrl + '/h5/images/serve/5.png',
+						href: '/pages/fee/roomFeeListNew'
 					}, {
 						name: '停车费',
-						src: this.imgUrl+'/h5/images/serve/9.png',
-						href: '/pages/payParkingFeeList/payParkingFeeList'
+						src: this.imgUrl + '/h5/images/serve/9.png',
+						href: '/pages/fee/payParkingFeeList'
 					}, {
 						name: '合同费',
-						src: this.imgUrl+'/h5/images/serve/12.png',
-						href: '/pages/contractFeeList/contractFeeList'
+						src: this.imgUrl + '/h5/images/serve/12.png',
+						href: '/pages/fee/contractFeeList'
 					},
 					{
 						name: '家庭成员',
-						src: this.imgUrl+'/h5/images/serve/2.png',
-						href: '/pages/familyList/familyList'
+						src: this.imgUrl + '/h5/images/serve/2.png',
+						href: '/pages/family/familyList'
 					},
 					{
 						name: '访客通行',
-						src: this.imgUrl+'/h5/images/serve/3.png',
+						src: this.imgUrl + '/h5/images/serve/3.png',
 						href: '/pages/visit/visitList'
 					},
 					{
 						name: '投诉咨询',
-						src: this.imgUrl+'/h5/images/serve/4.png',
+						src: this.imgUrl + '/h5/images/serve/4.png',
 						href: '/pages/complaint/complaint'
 					},
 					{
 						name: '报事维修',
-						src: this.imgUrl+'/h5/images/serve/6.png',
+						src: this.imgUrl + '/h5/images/serve/6.png',
 						href: '/pages/repair/repair'
 					},
 					{
 						name: '社区公告',
-						src: this.imgUrl+'/h5/images/serve/7.png',
+						src: this.imgUrl + '/h5/images/serve/7.png',
 						href: '/pages/notice/index'
 					},
 					{
 						name: '一键开门',
-						src: this.imgUrl+'/h5/images/serve/8.png',
-						href: '/pages/openDoor/openDoor'
+						src: this.imgUrl + '/h5/images/serve/8.png',
+						href: '/pages/machine/openDoor'
 					},
 					{
 						name: '装修报备',
-						src: this.imgUrl+'/h5/images/serve/10.png',
-						href: '/pages/roomRenovation/roomRenovation'
+						src: this.imgUrl + '/h5/images/serve/10.png',
+						href: '/pages/renovation/roomRenovation'
 					},
 					{
 						name: '业主信息',
-						src: this.imgUrl+'/h5/images/serve/my1.png',
+						src: this.imgUrl + '/h5/images/serve/my1.png',
 						href: '/pages/viewBindOwner/viewBindOwner'
 					},
 					{
 						name: "车位申请",
-						src: this.imgUrl+"/h5/images/serve/my6.png",
+						src: this.imgUrl + "/h5/images/serve/my6.png",
 						href: "/pages/applyparking/applyparking"
 					},
 					{
 						name: "投票问卷",
-						src: this.imgUrl+"/h5/images/serve/my2.png",
+						src: this.imgUrl + "/h5/images/serve/my2.png",
 						href: "/pages/questionAnswer/questionAnswer"
 					}, {
 						name: "返省上报",
-						src: this.imgUrl+"/h5/images/serve/my3.png",
+						src: this.imgUrl + "/h5/images/serve/my3.png",
 						href: "/pages/reportInfoBack/reportInfoBack",
 						needLogin: 'N'
 					},
 					{
 						name: '空置房申请',
-						src: this.imgUrl+'/h5/images/serve/my9.png',
+						src: this.imgUrl + '/h5/images/serve/my9.png',
 						href: '/pages/applyRoom/applyRoom'
-					}
+					},
+					{
+						name: '球场预约',
+						src: this.imgUrl + '/h5/images/serve/order4.png',
+						href: '/pages/appointment/appointment'
+					},
+					{
+						name: '就餐',
+						src: this.imgUrl + '/h5/images/serve/order4.png',
+						href: '/pages/reserve/reserveDining'
+					},
+					// {
+					// 	name: '设备',
+					// 	src: this.imgUrl + '/h5/images/serve/order4.png',
+					// 	href: '/pages/machine/machine?machineId=102022110791780032&communityId=2022110264250009'
+					// },
 				];
 			}
 		}

@@ -199,7 +199,7 @@
 						let _json = res.data;
 						if (_json.code == 0) {
 							wx.redirectTo({
-								url: '/pages/parkingInfo/parkingInfo',
+								url: '/pages/applyparking/parkingInfo',
 							});
 							return;
 						}

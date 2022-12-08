@@ -111,18 +111,18 @@
 			},
 			myProperty: function() {
 				this.vc.navigateTo({
-					url: '../myProperty/myProperty'
+					url: '../my/myProperty'
 				});
 			},
 
 			myComplaint: function() {
 				this.vc.navigateTo({
-					url: '../complaintList/complaintList'
+					url: '/pages/complaint/complaintList'
 				});
 			},
 			myRenovation: function() {
 				this.vc.navigateTo({
-					url: '../myRenovation/myRoomList'
+					url: '../renovation/myRoomList'
 				});
 			},
 			myHouse: function() {
@@ -132,27 +132,27 @@
 			},
 			myRepair: function() {
 				this.vc.navigateTo({
-					url: '/pages/myRepair/myRepair',
+					url: '/pages/repair/myRepair',
 				});
 			},
 			feeDetail: function() {
 				this.vc.navigateTo({
-					url: '/pages/payFeeDetail/payFeeDetail',
+					url: '/pages/fee/payFeeDetail',
 				});
 			},
 			applyRoomDetail: function(){
 				this.vc.navigateTo({
-					url: '/pages/myApplyRoom/myRoomList',
+					url: '/pages/applyRoom/myRoomList',
 				});
 			},
 			myParking: function() {
 				this.vc.navigateTo({
-					url: '/pages/parkingInfo/parkingInfo',
+					url: '/pages/applyparking/parkingInfo',
 				});
 			},
 			_machineTranslate: function() {
 				this.vc.navigateTo({
-					url: '/pages/machineTranslateLog/machineTranslateLog',
+					url: '/pages/machine/machineTranslateLog',
 				});
 			},
 			mallOrder:function(){

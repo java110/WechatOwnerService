@@ -4,7 +4,6 @@
 			"style": {
 				"navigationBarTitleText": "业主版",
 				"backgroundColor": "#ffffff"
-				
 			}
 		},
 		{
@@ -21,13 +20,13 @@
 			}
 		},
 		{
-			"path": "pages/viewCommunitys/viewCommunitys",
+			"path": "pages/my/viewCommunitys",
 			"style": {
 				"navigationBarTitleText": "选择小区"
 			}
 		},
 		{
-			"path": "pages/applicationKeyLocation/applicationKeyLocation",
+			"path": "pages/applicationKey/applicationKeyLocation",
 			"style": {
 				"navigationBarTitleText": "相关门禁"
 			}
@@ -40,7 +39,7 @@
 			}
 		},
 		{
-			"path": "pages/openDoor/openDoor",
+			"path": "pages/machine/openDoor",
 			"style": {
 				"navigationBarTitleText": "开门"
 			}
@@ -64,7 +63,7 @@
 			}
 		},
 		{
-			"path": "pages/repairList/repairList",
+			"path": "pages/repair/repairList",
 			"style": {
 				"enablePullDownRefresh": true
 			}
@@ -83,14 +82,14 @@
 			}
 		},
 		{
-			"path": "pages/payParkingApplyFee/payParkingApplyFee",
+			"path": "pages/fee/payParkingApplyFee",
 			"style": {
 				"navigationBarTitleText": "车位申请缴费",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/reportInfoDetail/reportInfoDetail",
+			"path": "pages/reportInfoBack/reportInfoDetail",
 			"style": {
 				"navigationBarTitleText": "疫情问卷上报",
 				"enablePullDownRefresh": false
@@ -98,7 +97,7 @@
 		},
 
 		{
-			"path": "pages/repairList/detail/detail",
+			"path": "pages/repair/detail/detail",
 			"style": {}
 		},
 		{
@@ -108,14 +107,14 @@
 			}
 		},
 		{
-			"path": "pages/familyList/familyList",
+			"path": "pages/family/familyList",
 			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "家庭成员"
 			}
 		},
 		{
-			"path": "pages/complaintList/complaintList",
+			"path": "pages/complaint/complaintList",
 			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "投诉建议"
@@ -128,17 +127,17 @@
 			}
 		},
 		{
-			"path": "pages/viewComplaint/viewComplaint",
+			"path": "pages/complaint/viewComplaint",
 			"style": {}
 		},
 		{
-			"path": "pages/payParkingFeeList/payParkingFeeList",
+			"path": "pages/fee/payParkingFeeList",
 			"style": {
 				"navigationBarTitleText": "停车费"
 			}
 		},
 		{
-			"path": "pages/payParkingFee/payParkingFee",
+			"path": "pages/fee/payParkingFee",
 			"style": {
 				"navigationBarTitleText": "缴停车费"
 			}
@@ -156,19 +155,19 @@
 			}
 		},
 		{
-			"path": "pages/activitesDetail/activitesDetail",
+			"path": "pages/activites/activitesDetail",
 			"style": {
 				"navigationBarTitleText": "详情"
 			}
 		},
 		{
-			"path": "pages/roomFeeListNew/roomFeeListNew",
+			"path": "pages/fee/roomFeeListNew",
 			"style": {
 				"navigationBarTitleText": "房屋费"
 			}
 		},
 		{
-			"path": "pages/roomFee/roomFee",
+			"path": "pages/fee/roomFee",
 			"style": {
 				"navigationBarTitleText": "缴物业费"
 			}
@@ -178,7 +177,7 @@
 				"navigationBarTitleText": "请登录"
 			}
 		}, {
-			"path": "pages/myRepair/myRepair",
+			"path": "pages/repair/myRepair",
 			"style": {
 				"navigationBarTitleText": "我的报修单"
 			}
@@ -188,22 +187,22 @@
 				"navigationBarTitleText": "设置"
 			}
 		}, {
-			"path": "pages/register/register",
+			"path": "pages/login/register",
 			"style": {
 				"navigationBarTitleText": "注册"
 			}
 		}, {
-			"path": "pages/payFeeDetail/payFeeDetail",
+			"path": "pages/fee/payFeeDetail",
 			"style": {
 				"navigationBarTitleText": "缴费历史"
 			}
 		}, {
-			"path": "pages/myProperty/myProperty",
+			"path": "pages/my/myProperty",
 			"style": {
 				"navigationBarTitleText": "我的物业"
 			}
 		}, {
-			"path": "pages/viewAdmin/viewAdmin",
+			"path": "pages/my/viewAdmin",
 			"style": {
 				"navigationBarTitleText": "技术支持"
 			}
@@ -213,18 +212,18 @@
 				"navigationBarTitleText": "跳蚤市场"
 			}
 		}, {
-			"path": "pages/newJunk/newJunk",
+			"path": "pages/market/newJunk",
 			"style": {
 				"navigationBarTitleText": "发布信息"
 			}
 		}, {
-			"path": "pages/myJunk/myJunk",
+			"path": "pages/market/myJunk",
 			"style": {
 				"navigationBarTitleText": "我的发布"
 			}
 		},
 		{
-			"path": "pages/showlogin/showlogin",
+			"path": "pages/login/showlogin",
 			"style": {
 				"navigationBarTitleText": "温馨提示"
 			}
@@ -239,42 +238,42 @@
 				"navigationBarTitleText": "选择单元"
 			}
 		}, {
-			"path": "pages/repairDetail/repairDetail",
+			"path": "pages/repair/repairDetail",
 			"style": {
 				"navigationBarTitleText": "工单详情"
 			}
 		}, {
-			"path": "pages/appraiseRepair/appraiseRepair",
+			"path": "pages/repair/appraiseRepair",
 			"style": {
 				"navigationBarTitleText": "工单评价"
 			}
 		}, {
-			"path": "pages/repairPay/repairPay",
+			"path": "pages/fee/repairPay",
 			"style": {
 				"navigationBarTitleText": "报修支付"
 			}
 		}, {
-			"path": "pages/complaintDetail/complaintDetail",
+			"path": "pages/complaint/complaintDetail",
 			"style": {
 				"navigationBarTitleText": "投诉详情"
 			}
 		}, {
-			"path": "pages/complaintHandle/complaintHandle",
+			"path": "pages/complaint/complaintHandle",
 			"style": {
 				"navigationBarTitleText": "投诉待办"
 			}
 		}, {
-			"path": "pages/registerByWechat/registerByWechat",
+			"path": "pages/login/registerByWechat",
 			"style": {
 				"navigationBarTitleText": "业主绑定"
 			}
 		}, {
-			"path": "pages/changePassword/changePassword",
+			"path": "pages/settings/changePassword",
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
 		}, {
-			"path": "pages/changeOwnerPhone/changeOwnerPhone",
+			"path": "pages/settings/changeOwnerPhone",
 			"style": {
 				"navigationBarTitleText": "修改手机"
 			}
@@ -291,7 +290,7 @@
 				"navigationBarTitleText": "房源"
 			}
 		}, {
-			"path": "pages/rentingDetail/rentingDetail",
+			"path": "pages/rentHouse/rentingDetail",
 			"style": {
 				"navigationBarTitleText": ""
 			}
@@ -302,26 +301,26 @@
 				"navigationBarTitleText": "车位申请"
 			}
 		}, {
-			"path": "pages/oweFee/oweFee",
+			"path": "pages/fee/oweFee",
 			"style": {
 				"navigationBarTitleText": "综合缴费"
 			}
 		},
 		{
-			"path": "pages/oweFeeGarden/oweFeeGarden",
+			"path": "pages/fee/oweFeeGarden",
 			"style": {
 				"navigationBarTitleText": "综合缴费"
 			}
 		},
 		{
-			"path": "pages/parkingInfo/parkingInfo",
+			"path": "pages/applyparking/parkingInfo",
 			"style": {
 				"navigationBarTitleText": "车位申请进度"
 			}
 		}
 
 		, {
-			"path": "pages/rentingAppointment/rentingAppointment",
+			"path": "pages/rentHouse/rentingAppointment",
 			"style": {
 				"navigationBarTitleText": "租房预约"
 			}
@@ -339,73 +338,73 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/applyRoomDetail/applyRoomDetail",
+			"path": "pages/applyRoom/applyRoomDetail",
 			"style": {
 				"navigationBarTitleText": "空置房申请",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomRenovation/roomRenovation",
+			"path": "pages/renovation/roomRenovation",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomRenovationDetail/roomRenovationDetail",
+			"path": "pages/renovation/roomRenovationDetail",
 			"style": {
 				"navigationBarTitleText": "装修申请",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomList",
+			"path": "pages/renovation/myRoomList",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomRenovationList",
+			"path": "pages/renovation/myRoomRenovationList",
 			"style": {
 				"navigationBarTitleText": "装修记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRenovation/myRoomRenovationDetail",
+			"path": "pages/renovation/myRoomRenovationDetail",
 			"style": {
 				"navigationBarTitleText": "装修详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRoomRenovationRecord/myRoomRenovationRecord",
+			"path": "pages/renovation/myRoomRenovationRecord",
 			"style": {
 				"navigationBarTitleText": "跟踪记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myRoomRenovationRecordDetail/myRoomRenovationRecordDetail",
+			"path": "pages/renovation/myRoomRenovationRecordDetail",
 			"style": {
 				"navigationBarTitleText": "跟踪记录详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/tempParkingFee/tempParkingFee",
+			"path": "pages/fee/tempParkingFee",
 			"style": {
 				"navigationBarTitleText": "临时车缴费",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractFee/contractFee",
+			"path": "pages/fee/contractFee",
 			"style": {
 				"navigationBarTitleText": "合同缴费",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractFeeList/contractFeeList",
+			"path": "pages/fee/contractFeeList",
 			"style": {
 				"navigationBarTitleText": "合同费用",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/contractOweFee/contractOweFee",
+			"path": "pages/fee/contractOweFee",
 			"style": {
 				"navigationBarTitleText": "欠费缴费",
 				"enablePullDownRefresh": false
@@ -417,13 +416,13 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/questionAnswerDetail/questionAnswerDetail",
+			"path": "pages/questionAnswer/questionAnswerDetail",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/machineTranslateLog/machineTranslateLog",
+			"path": "pages/machine/machineTranslateLog",
 			"style": {
 				"navigationBarTitleText": "门禁同步日志",
 				"enablePullDownRefresh": false
@@ -448,57 +447,57 @@
 				"navigationBarTitleText": "服务"
 			}
 		}, {
-			"path": "pages/myApplyRoom/myRoomList",
+			"path": "pages/applyRoom/myRoomList",
 			"style": {
 				"navigationBarTitleText": "选择房屋",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomList",
+			"path": "pages/applyRoom/myApplyRoomList",
 			"style": {
 				"navigationBarTitleText": "空置房申请记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomDetail",
+			"path": "pages/applyRoom/myApplyRoomDetail",
 			"style": {
 				"navigationBarTitleText": "空置房申请详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/openDoorByQrCode/openDoorByQrCode",
+			"path": "pages/machine/openDoorByQrCode",
 			"style": {
 				"navigationBarTitleText": "二维码开门",
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
 			}
 		}, {
-			"path": "pages/tempCarFee/tempCarFee",
+			"path": "pages/fee/tempCarFee",
 			"style": {
 				"navigationBarTitleText": "停车费",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomRecord",
+			"path": "pages/applyRoom/myApplyRoomRecord",
 			"style": {
 				"navigationBarTitleText": "跟踪记录",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myApplyRoom/myApplyRoomRecordDetail",
+			"path": "pages/applyRoom/myApplyRoomRecordDetail",
 			"style": {
 				"navigationBarTitleText": "跟踪记录详情",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/myAccount/myAccount",
+			"path": "pages/account/myAccount",
 			"style": {
 				"navigationBarTitleText": "我的账户",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/myAccount/myAccountDetail",
+			"path": "pages/account/myAccountDetail",
 			"style": {
 				"navigationBarTitleText": "账户明细",
 				"enablePullDownRefresh": false
@@ -511,29 +510,29 @@
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/changeOwnerCommunity/changeOwnerCommunity",
+			"path": "pages/my/changeOwnerCommunity",
 			"style": {
 				"navigationBarTitleText": "切换小区",
 				"enablePullDownRefresh": false
 			}
 		}, {
-			"path": "pages/roomFee/ownerCoupon",
+			"path": "pages/coupon/ownerCoupon",
 			"style": {
 				"navigationBarTitleText": "优惠卷",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/myAccount/myCoupons",
+			"path": "pages/coupon/myCoupons",
 			"style": {
 				"navigationBarTitleText": "我的优惠券",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path": "pages/tempCarFee/tempCarCoupon",
+			"path": "pages/coupon/tempCarCoupon",
 			"style": {
-				"navigationBarTitleText": "我的优惠券详情",
+				"navigationBarTitleText": "停车劵",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -572,8 +571,99 @@
 				"navigationBarTitleText": "预约详情",
 				"enablePullDownRefresh": false
 			}
+		}, {
+			"path": "pages/coupon/getParkingCoupon",
+			"style": {
+				"navigationBarTitleText": "领取优惠券",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/successPage/successPage",
+			"style": {
+				"navigationBarTitleText": "处理成功",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/appointment/appointment",
+			"style": {
+				"navigationBarTitleText": "场馆预定"
+			}
+		},
+		{
+			"path": "pages/appointment/appointmentPay",
+			"style": {
+				"navigationBarTitleText": "支付订单"
+			}
+		},
+		{
+			"path": "pages/appointment/myBoomList",
+			"style": {
+				"navigationBarTitleText": "订场记录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/appointment/myBooksRenovationDetail",
+			"style": {
+				"navigationBarTitleText": "订场详情",
+				"enablePullDownRefresh": false
+			}
 		}
-	],
+	    ,{
+            "path" : "pages/machine/machine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备说明",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machine/machineMaintainance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备保养",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machine/machineInspection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备巡检",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/coupon/goodsCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品核销",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/coupon/giftParkingCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "送停车券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/reserve/reserveDining",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预约就餐",
+                "enablePullDownRefresh": false
+            } 
+        }
+    ],
 	"tabBar": {
 		"color": "#272636",
 		"selectedColor": "#00AA00",
@@ -600,7 +690,7 @@
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
-			// #ifdef H5 || WUYE
+			// #ifdef H5 && WUYE
 			{
 				"pagePath": "pages/mall/mall",
 				"text": "商圈",

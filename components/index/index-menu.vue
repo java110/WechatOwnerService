@@ -34,7 +34,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="cu-modal" :class="callPropertyModal==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -62,11 +62,11 @@
 	import {
 		hasLogin
 	} from '../../lib/java110/page/Page.js';
-	
+
 	import {
 		getProperty
 	} from '../../api/property/propertyApi.js';
-	
+
 	export default {
 		name: "indexMenu",
 		data() {
@@ -76,16 +76,16 @@
 				callPropertyModal: false,
 				property: {},
 				new_list: [{
-						src: this.imgUrl+'/h5/images/serve/new1.png',
-						name: '新手指引',
-						desc: '新手指引',
-						href:''
+						src: this.imgUrl + '/h5/images/serve/new1.png',
+						name: '报事报修',
+						desc: '一键维修',
+						href: '/pages/repair/repair'
 					},
 					{
-						src: this.imgUrl+'/h5/images/serve/new2.png',
+						src: this.imgUrl + '/h5/images/serve/new2.png',
 						name: '联系物业',
 						desc: '一键搞定',
-						href:'_callPropertyTel'
+						href: '_callPropertyTel'
 					},
 				],
 			};
@@ -93,47 +93,47 @@
 		created() {
 			this._loadFunc();
 		},
-		methods:{
-			_loadFunc:function(){
+		methods: {
+			_loadFunc: function() {
 				this.home_list = [{
-							name: '生活缴费',
-							src: this.imgUrl+'/h5/images/serve/1.png',
-							href: '/pages/oweFee/oweFee'
+							name: '社区公告',
+							src: this.imgUrl + '/h5/images/serve/7.png',
+							href: '/pages/notice/index'
 						},
 						{
 							name: '家庭成员',
-							src: this.imgUrl+'/h5/images/serve/2.png',
-							href: '/pages/familyList/familyList'
+							src: this.imgUrl + '/h5/images/serve/2.png',
+							href: '/pages/family/familyList'
 						},
 						{
-							name: '报事维修',
-							src: this.imgUrl+'/h5/images/serve/6.png',
-							href: '/pages/repair/repair'
+							name: '访客通行',
+							src: this.imgUrl + '/h5/images/serve/3.png',
+							href: '/pages/visit/visitList'
 						},
 					],
-				this.serve_list = [{
-						name: '一键开门',
-						src: this.imgUrl+'/h5/images/serve/8.png',
-						href: '/pages/openDoor/openDoor'
-					},
-					{
-						name: '装修报备',
-						src: this.imgUrl+'/h5/images/serve/10.png',
-						href: '/pages/roomRenovation/roomRenovation'
-					},
-					{
-						name: '访客通行',
-						src: this.imgUrl+'/h5/images/serve/3.png',
-						href: '/pages/visit/visitList'
-					},
-					{
-						name: '社区公告',
-						src: this.imgUrl+'/h5/images/serve/7.png',
-						href: '/pages/notice/index'
-					},
-				]
+					this.serve_list = [{
+							name: '生活缴费',
+							src: this.imgUrl + '/h5/images/serve/1.png',
+							href: '/pages/fee/oweFee'
+						},
+						{
+							name: '房屋费',
+							src: this.imgUrl + '/h5/images/serve/5.png',
+							href: '/pages/fee/roomFeeListNew'
+						},
+						{
+							name: '停车费',
+							src: this.imgUrl + '/h5/images/serve/9.png',
+							href: '/pages/fee/payParkingFeeList'
+						},
+						{
+							name: '一键开门',
+							src: this.imgUrl + '/h5/images/serve/8.png',
+							href: '/pages/machine/openDoor'
+						},
+					]
 			},
-			to:function(v) {
+			to: function(v) {
 				if (v.href == '_callPropertyTel') {
 					this.callPropertyTel();
 				} else {
@@ -146,7 +146,7 @@
 				let _that = this;
 				if (!hasLogin()) {
 					this.vc.navigateTo({
-						url: '../showlogin/showlogin'
+						url: '../login/showlogin'
 					});
 					return;
 				}
@@ -160,7 +160,7 @@
 				});
 			},
 			_doCall: function() {
-			
+
 				let _that = this;
 				uni.makePhoneCall({
 					// 手机号
@@ -178,7 +178,7 @@
 			_cancleCall: function() {
 				this.callPropertyModal = false;
 			},
-			more:function() {
+			more: function() {
 				uni.switchTab({
 					url: '/pages/homemaking/homemaking'
 				})
@@ -261,19 +261,20 @@
 		.home_item:last-child {
 			margin-right: 0;
 		}
-		
+
 	}
+
 	.new_box {
 		background: #fff;
 		padding: 20upx;
 		margin-bottom: 20upx;
-	
+
 		.new_wrap {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
-	
+
 		.new_item {
 			position: relative;
 			display: inline-block;
@@ -282,33 +283,32 @@
 			width: calc((100% - 40upx) / 2);
 			background: #f5f5f5;
 			border-radius: 5upx;
-	
+
 			.new_font {
 				z-index: 2;
 			}
-	
+
 			.name {
 				font-size: 28upx;
 				font-weight: 600;
 				color: #333;
 				text-align: left;
 			}
-	
+
 			.text {
 				font-size: 24upx;
 				font-weight: 400;
 				color: #999;
 			}
-	
+
 			image {
 				width: 160upx;
 				height: 120upx;
 			}
 		}
-	
+
 		.new_item:last-child {
 			margin-right: 0;
 		}
 	}
-	
 </style>

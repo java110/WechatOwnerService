@@ -11,6 +11,7 @@ export function payOweFee(_that) {
 	});
 	let _tradeType = 'JSAPI';
 	let _objData = {
+		business: "oweFee",
 		cycles: _that.feeMonth,
 		communityId: _that.communityId,
 		ownerId: _that.ownerId,
@@ -21,7 +22,7 @@ export function payOweFee(_that) {
 		storeId: _that.storeId
 	};
 	context.request({
-		url: url.toOweFeePay,
+		url: url.unifiedPayment,
 		header: context.getHeaders(),
 		method: "POST",
 		data: _objData,
@@ -30,11 +31,14 @@ export function payOweFee(_that) {
 			if (res.statusCode == 200 && res.data.code == '0') {
 				let data = res.data; //成功情况下跳转
 				WexinPayFactory.wexinPay(data, function() {
-					uni.showToast({
-						title: "支付成功",
-						duration: 2000
-					});
-					uni.navigateBack({});
+					// uni.showToast({
+					// 	title: "支付成功",
+					// 	duration: 2000
+					// });
+					// uni.navigateBack({});
+					uni.navigateTo({
+						url:"/pages/successPage/successPage?msg=支付成功&objType=3003"
+					})
 				});
 				wx.hideLoading();
 				return;

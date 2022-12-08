@@ -70,11 +70,11 @@
 			},
 			defProv:{
 				type:String,
-				default:'渝'
+				default:'粤'
 			},
 			defChar:{
 				type:String,
-				default:'H'
+				default:'Z'
 			},
 			gua: {
 				type: Boolean,

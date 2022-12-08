@@ -9,39 +9,56 @@
 
 			<view class="tips_block">
 			</view>
-
-			<view class='tips'>
-				<text>点击方框输入车牌号</text>
+			<view class="cu-bar btn-group " style="margin-top: 30px;">
+				<button @click="_changeFlag('phone')" style="margin-right: 0px;"
+					class="cu-btn  shadow-blur lg" :class="{'bg-blue':showFlag == 'phone','line-blue':showFlag != 'phone'}">手机号</button>
+				<button @click="_changeFlag('car')" style="margin-left: 0px;"
+					class="cu-btn shadow-blur  lg" :class="{'bg-blue':showFlag == 'car','line-blue':showFlag != 'car'}">车牌号</button>
 			</view>
-			<view class="plate-input-body">
-				<view class="plate-input-content" @click="showCarNumberKeyboard">
-					<view bindtap="showCarNumberKeyboard" data-id="0"
-						:class="inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index0}}</text>
+			<view v-if="showFlag == 'phone'">
+				<view class='tips'>
+					<text>请输入手机号</text>
+				</view>
+				<view class="plate-input-body">
+					<view class="plate-input-content" >
+						<input type="number" maxlength="11" class="input-ui" v-model="carNum" placeholder="手机号作为车牌号入场"/>
 					</view>
-					<view bindtap="inputClick" data-id="1"
-						:class="inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index1}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="2"
-						:class="inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index2}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="3"
-						:class="inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index3}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="4"
-						:class="inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index4}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="5"
-						:class="inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index5}}</text>
-					</view>
-					<view bindtap="inputClick" data-id="6"
-						:class="inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'">
-						<text class="plate-num-text">{{inputPlates.index6}}</text>
+				</view>
+			</view>
+			<view v-if="showFlag == 'car'">
+				<view class='tips'>
+					<text>点击方框输入车牌号</text>
+				</view>
+				<view class="plate-input-body">
+					<view class="plate-input-content" @click="showCarNumberKeyboard">
+						<view bindtap="showCarNumberKeyboard" data-id="0"
+							:class="inputOnFocusIndex=='0'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index0}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="1"
+							:class="inputOnFocusIndex=='1'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index1}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="2"
+							:class="inputOnFocusIndex=='2'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index2}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="3"
+							:class="inputOnFocusIndex=='3'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index3}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="4"
+							:class="inputOnFocusIndex=='4'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index4}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="5"
+							:class="inputOnFocusIndex=='5'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index5}}</text>
+						</view>
+						<view bindtap="inputClick" data-id="6"
+							:class="inputOnFocusIndex=='6'?'plate-nums-foc':'plate-nums-first'">
+							<text class="plate-num-text">{{inputPlates.index6}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -55,7 +72,7 @@
 					class="cu-btn bg-green shadow-blur round lg">立即入场</button>
 			</view>
 		</view>
-		
+
 		<view class="cu-modal" :class="showToastFlag==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -111,7 +128,8 @@
 				communityId: '',
 				appId: '',
 				machineId: '',
-				showToastFlag:false,
+				showToastFlag: false,
+				showFlag: 'phone',
 			}
 		},
 		components: {
@@ -127,6 +145,12 @@
 		methods: {
 			showCarNumberKeyboard() {
 				this.$refs.popupCarNumber.open()
+			},
+			_changeFlag:function(_flag){
+				
+					this.showFlag = _flag;
+				
+				
 			},
 			// 车牌号选择键盘
 			confirmCarNumber(value) {
@@ -181,7 +205,8 @@
 					communityId: _that.communityId,
 					carNum: _that.carNum,
 					machineId: _that.machineId,
-					type: '1101'
+					type: '1101',
+					unlicense:'T'
 				}).then(_data => {
 					if (_data.data.code != 0) {
 						uni.showToast({
@@ -194,7 +219,7 @@
 					return;
 				})
 			},
-			_closeToastModal:function(){
+			_closeToastModal: function() {
 				window.location.reload();
 			}
 		}
@@ -202,5 +227,13 @@
 </script>
 
 <style>
-	@import "../tempParkingFee/tempParkingFee.css";
+	@import "../fee/tempParkingFee.css";
+	.input-ui{
+				border: 1px solid #ccc;
+				padding: 12upx 18upx;
+				border-radius: 8upx;
+				color: rgb(48, 49, 51);
+				width: 100%;
+				height: 100%;
+			}
 </style>
