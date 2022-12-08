@@ -179,6 +179,15 @@ export default {
 	//查询停车场
 	listParkingAreas:baseUrl+"app/parkingArea.listParkingAreas",
 	couponPropertyUserGiftCar:baseUrl+"app/couponProperty.couponPropertyUserGiftCar",
+	listReserveCatalog:baseUrl+"app/reserve.listReserveCatalog", // 查询预约目录
+	listReserveGoods:baseUrl+"app/reserve.listReserveGoods", // 查询预约商品
+	listReserveParams:baseUrl+"app/reserve.listReserveParams", // 查询预约商品
+	
+	
+	
+	
+	
+	
 	
 
 	NEED_NOT_LOGIN_PAGE: [
