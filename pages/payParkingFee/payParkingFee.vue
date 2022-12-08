@@ -417,6 +417,15 @@
 							// #endif
 							wx.hideLoading();
 							return;
+						}else if(res.statusCode == 200 && res.data.code == '100'){
+							wx.hideLoading();
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none',
+								duration: 2000
+							})
+							uni.navigateBack({});
+							return;
 						}
 						if (res.statusCode == 200 && res.data.code == '100') {
 							let data = res.data; //成功情况下跳转
