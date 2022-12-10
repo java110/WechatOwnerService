@@ -145,6 +145,12 @@
 						src: this.imgUrl + '/h5/images/serve/order4.png',
 						href: '/pages/reserve/reserveDining'
 					},
+					{
+						name: '预约服务',
+						src: this.imgUrl + '/h5/images/serve/order4.png',
+						href: '/pages/reserve/reserveService'
+					},
+					
 					// {
 					// 	name: '设备',
 					// 	src: this.imgUrl + '/h5/images/serve/order4.png',

@@ -96,6 +96,7 @@
 					communityId: getCommunityId(),
 					goodsId: _goodsId
 				}).then(_data => {
+					_data[0].hoursMaxQuantity = parseInt(_data[0].hoursMaxQuantity);
 					_that.goods = _data[0];
 					_that.goods.hours = [];
 					_that.goods.quantity = "1"

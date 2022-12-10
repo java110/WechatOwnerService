@@ -670,7 +670,20 @@
                 "navigationBarTitleText": "确认订单",
                 "enablePullDownRefresh": false
             }
-            
+        },{
+            "path" : "pages/reserve/reserveService",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预约服务",
+                "enablePullDownRefresh": false
+            } 
+        },{
+            "path" : "pages/reserve/reserveServiceGoods",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预约服务",
+                "enablePullDownRefresh": false
+            } 
         }
     ],
 	"tabBar": {

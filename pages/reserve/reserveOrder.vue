@@ -22,7 +22,8 @@
 					</view>
 				</view>
 
-				<view class="block__title">预约商品</view>
+				<view class="block__title" v-if="from == 'service'">预约服务</view>
+				<view class="block__title" v-else>预约商品</view>
 				<view class="cu-list menu" v-for="(items,index) in selectdGoods" :key="index">
 					<view class="cu-item">
 						<view class="">
@@ -82,7 +83,9 @@
 		dateSubOneDay
 	} from '../../lib/java110/utils/DateUtil.js';
 	
-	import {getCurOwner} from '@/api/owner/ownerApi.js'
+	import {getCurOwner} from '@/api/owner/ownerApi.js';
+	
+	import {payFeeWechat} from '../../api/fee/feeApi.js'
 
 	export default {
 		data() {
@@ -94,7 +97,8 @@
 				personTel: '', // 
 				communityId: "", // 注册者电话
 				type: "1001", // 注册者名称
-				todayDate:''
+				todayDate:'',
+				from:'dining'
 			};
 		},
 
@@ -103,6 +107,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			this.from = options.from;
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
 			this.appId = accountInfo.miniProgram.appId;
