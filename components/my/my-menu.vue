@@ -111,6 +111,11 @@
 						src: this.imgUrl+'/h5/images/serve/my8.png',
 						href: '/pages/appointment/myBoomList'
 					},	
+					{
+						name: '预约记录',
+						src: this.imgUrl+'/h5/images/serve/my8.png',
+						href: '/pages/reserve/reserveMyOrder'
+					},
 				]
 			};
 		},

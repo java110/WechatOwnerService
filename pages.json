@@ -685,6 +685,24 @@
                 "enablePullDownRefresh": false
             } 
         }
+        ,{
+            "path" : "pages/reserve/reserveMyOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的预约订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/reserve/reserveQrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预约核销",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

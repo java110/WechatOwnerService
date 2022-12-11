@@ -72,5 +72,28 @@ import
  			});
  		})
  }
+ export function getReserveGoodsOrderTime(dataObj) {
+ 	return new Promise(
+ 		(resolve, reject) => {
+ 			requestNoAuth({
+ 				url: url.listReserveGoodsOrderTime,
+ 				method: "GET",
+ 				data: dataObj,
+ 				//动态数据
+ 				success: function(res) {
+ 					if (res.data.code == 0) {
+ 						let _communtiys = res.data.data;
+ 						resolve(_communtiys);
+ 						return ;
+ 					}
+ 					reject('未包含数据');
+ 				},
+ 				fail: function(e) {
+ 					reject(e);
+ 				}
+ 			});
+ 		})
+ }
+ 
  
  

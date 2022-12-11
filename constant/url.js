@@ -182,6 +182,8 @@ export default {
 	listReserveCatalog:baseUrl+"app/reserve.listReserveCatalog", // 查询预约目录
 	listReserveGoods:baseUrl+"app/reserve.listReserveGoods", // 查询预约商品
 	listReserveParams:baseUrl+"app/reserve.listReserveParams", // 查询预约商品
+	listReserveGoodsOrderTime:baseUrl+"app/reserveOrder.listMyReserveGoodsOrderTime", // 查询预约订单
+    deleteReserveGoodsPerson:baseUrl+"app/reserveOrder.deleteReserveGoodsPerson", // 查询预约订单
 	
 	
 	
