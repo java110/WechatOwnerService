@@ -19,7 +19,7 @@
 					<view style="font-size: 14px;">单号<span style="margin-left: 10px;"
 							class="text-gray">{{item.timeId}}</span></view>
 				</view>
-				<view class="flex padding-left padding-right padding-bottom-sm justify-between">
+				<view class="flex padding-left padding-right margin-top padding-bottom-sm justify-between">
 					<view class="text-gray">商品/服务</view>
 					<view class="text-gray">{{item.goodsName}}</view>
 				</view>
