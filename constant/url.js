@@ -15,7 +15,7 @@ export default {
 	saveOwner: baseUrl + 'app/owner.saveOwner', //家庭成员列表
 	queryOwnerMembers: baseUrl + 'app/owner.queryOwnerMembers', //投诉建议列表
 	listComplaints: baseUrl + 'app/complaint.listComplaints', //添加投诉建议
-	saveComplaint: baseUrl + 'app/complaint', //查询业主房间
+	saveComplaint: baseUrl + 'app/complaint.saveComplaint', //查询业主房间
 	queryRoomsByOwner: baseUrl + 'app/room.queryRoomsByOwner', //绑定业主
 	appUserBindingOwner: baseUrl + 'app/owner.appUserBindingOwner', //查询绑定业主
 	ownerRegiter: baseUrl + 'app/owner.ownerRegister', //业主注册
