@@ -21,11 +21,16 @@
 		},
 		onLoad(options) {
 			this.qrCode = options.timeId;
-			this._initQrCode();
+			let _that = this;
+			setTimeout(function(){
+				_that._initQrCode();
+			},1500);
+			
 		},
 		methods: {
 
 			_initQrCode:function(){
+				console.log('this.qrCode',this.qrCode)
 				new qrCode('goodsQrcode', {
 					text: this.qrCode,
 					width: 220,

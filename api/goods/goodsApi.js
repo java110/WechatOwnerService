@@ -276,3 +276,50 @@ export function toPay(data) {
 		// #endif
 	})
 }
+
+
+export function queryGroupGoods(_dataObj){
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.listProductGroup,
+				method: "GET",
+				data: _dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.data.code == 0) {
+						let _appraisets = res.data.data;
+						resolve(_appraisets);
+						return;
+					}
+					reject(res.data.msg);
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}
+
+export function queryProductSeckill(_dataObj){
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.listProductSeckill,
+				method: "GET",
+				data: _dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.data.code == 0) {
+						let _appraisets = res.data.data;
+						resolve(_appraisets);
+						return;
+					}
+					reject(res.data.msg);
+				},
+				fail: function(e) {
+					reject();
+				}
+			});
+		})
+}

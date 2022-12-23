@@ -13,10 +13,18 @@
 						<view>预约数量</view>
 						<view style="width: 60%;">
 							<radio-group class="flex justify-end" @change="_changeReserveQuantity">
-								<view v-for="item in goods.hoursMaxQuantity" :key="item">
-									<radio class="" v-model="goods.quantity" :value="item"></radio>
+								<!-- #ifdef MP-WEIXIN -->
+								<view class="margin-right-sm"  v-for="item in goods.hoursMaxQuantity" :key="item">
+									<radio class=""  :value="item+1"></radio>
+									<view>{{item+1}}个</view>
+								</view>
+								<!-- #endif -->
+								<!-- #ifndef MP-WEIXIN -->
+								<view class="margin-right-sm"  v-for="item in goods.hoursMaxQuantity" :key="item">
+									<radio class=""  :value="item"></radio>
 									<view>{{item}}个</view>
 								</view>
+								<!-- #endif -->
 							</radio-group>
 							<!-- <checkbox class='round checked' checked="true" value="B"></checkbox> -->
 						</view>
@@ -24,8 +32,8 @@
 					<view class="flex justify-between margin-top">
 						<view>预约时间</view>
 						<view style="width: 60%;">
-							<checkbox-group class="flex justify-end" @change="_changeReserveTime">
-								<view class="margin-right-sm" v-if="item.isOpen == 'Y'"
+							<checkbox-group class="text-right" @change="_changeReserveTime">
+								<view class="margin-right-sm" style="display: inline-block;" v-if="item.isOpen == 'Y'"
 									v-for="(item,index) in openTimes" :key="index">
 									<checkbox class=' ' :value="item.hours"></checkbox>
 									<view>{{item.hours}}时</view>

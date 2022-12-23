@@ -184,12 +184,8 @@ export default {
 	listReserveParams:baseUrl+"app/reserve.listReserveParams", // 查询预约商品
 	listReserveGoodsOrderTime:baseUrl+"app/reserveOrder.listMyReserveGoodsOrderTime", // 查询预约订单
     deleteReserveGoodsPerson:baseUrl+"app/reserveOrder.deleteReserveGoodsPerson", // 查询预约订单
-	
-	
-	
-	
-	
-	
+	listProductSeckill: baseUrl + "app/productSeckill.listProductSeckill",
+	listProductGroup: baseUrl + "app/productGroup.listProductGroup",
 	
 
 	NEED_NOT_LOGIN_PAGE: [

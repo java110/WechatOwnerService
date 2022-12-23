@@ -25,6 +25,8 @@
 			<vc-ads></vc-ads>
 			<!-- 商圈菜单-->
 			<vc-category :category-list="categoryList"></vc-category>
+			<seckill-view></seckill-view>
+			<group-view></group-view>
 			<!-- 商圈商品 -->
 			<vc-recommend ref="vcRecommendRef"></vc-recommend>
 			<!-- <vc-shop ref="vcShopRef"></vc-shop> -->
@@ -36,19 +38,22 @@
 <script>
 	import fixedSearch from '../../components/fixed-search/fixed-search.vue';
 
-	import vcCategory from '@/components/vc-category/vc-category.vue'
+	import vcCategory from '@/components/vc-category/vc-category.vue';
 
-	import vcShop from '@/components/vc-shop/vc-shop.vue'
+	import vcShop from '@/components/vc-shop/vc-shop.vue';
 
-	import vcRecommend from '@/components/vc-recommend/vc-recommend.vue'
+	import vcRecommend from '@/components/vc-recommend/vc-recommend.vue';
 
-	import vcAds from '@/components/vc-ads/vc-ads.vue'
+	import vcAds from '@/components/vc-ads/vc-ads.vue';
 
 	import vcBottomBlack from '@/components/vc-bottom-black/vc-bottom-black.vue';
 
-	import param from '../../constant/MappingConstant.js'
+	import param from '../../constant/MappingConstant.js';
 
 	import flixedadd from "../../components/flixedadd/flixedadd.vue";
+	
+	import groupView from '@/components/index/group-view.vue';
+	import seckillView from '@/components/index/seckill-view.vue';
 
 	import {
 		getMallIndexCategoryList,
@@ -80,7 +85,9 @@
 			vcRecommend,
 			vcAds,
 			vcShop,
-			vcBottomBlack
+			vcBottomBlack,
+			groupView,
+			seckillView
 		},
 		onLoad(options) {
 			let that = this;
