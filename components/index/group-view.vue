@@ -86,7 +86,7 @@
 			color:#FA2E1B;
 		}
 		.view-title-more{
-			font-size: 18upx;
+			font-size: 24upx;
 			color: #777;
 			line-height: 48upx;
 		}
@@ -102,11 +102,11 @@
 				}
 			}
 			.group-price{
-				font-size: 24upx;
+				font-size: 32upx;
 				color: #FA2E1B;
 			}
 			.normal-price{
-				font-size: 16upx;
+				font-size: 24upx;
 				color: #777;
 				text-decoration:line-through;
 			}
