@@ -38,13 +38,16 @@
 		<view class="cu-modal" :class="callPropertyModal==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
-					<view class="content">拨打电话</view>
+					<view class="content">拨打电话
+					<text v-if="property.communityQrCode">/ 加微信好友</text>
+					</view>
 					<view class="action" @tap="_cancleCall()">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>
 				<view class="padding-xl">
-					您确认拨打,{{property.communityName}}物业客服电话<br />{{property.sCommunityTel}}
+					<view v-if="property.communityQrCode"><image class="call-qrcode" :src="property.communityQrCode"></image></view>
+					<view>您确认拨打,{{property.communityName}}物业客服电话<br />{{property.sCommunityTel}}</view>
 				</view>
 				<view class="cu-bar bg-white justify-end">
 					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleCall()">取消</view>
@@ -310,5 +313,10 @@
 		.new_item:last-child {
 			margin-right: 0;
 		}
+	}
+	
+	.call-qrcode{
+		width: 480upx;
+		height: 480upx;
 	}
 </style>
