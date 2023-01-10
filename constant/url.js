@@ -186,6 +186,7 @@ export default {
     deleteReserveGoodsPerson:baseUrl+"app/reserveOrder.deleteReserveGoodsPerson", // 查询预约订单
 	listProductSeckill: baseUrl + "app/productSeckill.listProductSeckill",
 	listProductGroup: baseUrl + "app/productGroup.listProductGroup",
+	listRegisterProtocol: baseUrl + "app/system.listRegisterProtocol",
 	
 
 	NEED_NOT_LOGIN_PAGE: [

@@ -703,6 +703,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/login/registerProtocol",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

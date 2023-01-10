@@ -100,3 +100,32 @@ export function uploadImageAsync(_objData,_that) {
 		});
 	})
 }
+
+/**
+ * 刷新用户
+ * @param {Object} _objData
+ */
+export function getRegisterProtocol(){
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listRegisterProtocol,
+			method: "GET",
+			data: {
+				page:1,
+				row:1
+			}, //动态数据
+			success: function(res) {
+				if (res.data.code == 0) {
+					resolve(res.data.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+

@@ -18,9 +18,15 @@
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
 		</view>
-		<!-- <view >
-			<view >{{codeMsg}}</view>
-		</view> -->
+		<view class="padding flex justify-start">
+			<checkbox-group @change="_changeReadme">
+				<checkbox style="transform: scale(0.7)" value="readme"></checkbox>
+			</checkbox-group>
+			<view class="read-me">
+				<text class="margin-left-xs">我已阅读</text>
+				<text class="user-read" @click="_readMe">《用户须知》</text>
+			</view>
+		</view>
 		<view class="padding flex flex-direction margin-top">
 			<button class="cu-btn bg-green   lg" @click="_doRegister()">绑定</button>
 		</view>
@@ -30,7 +36,7 @@
 <script>
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
-	import conf from '../../conf/config'
+	import conf from '../../conf/config';
 
 	export default {
 		data() {
@@ -44,7 +50,7 @@
 				btnDisabled: false,
 				password: '',
 				rePassword: '',
-
+				readme:false,
 			};
 		},
 		/**
@@ -113,6 +119,13 @@
 					}
 				});
 			},
+			_changeReadme:function(e){
+				if(e.detail.value && e.detail.value.length>0){
+					this.readme = true;
+				}else{
+					this.readme =false;
+				}
+			},
 			_doRegister: function(e) {
 				let obj = {
 					"link": this.link,
@@ -120,6 +133,14 @@
 					"password": this.password,
 					"openId": uni.getStorageSync(constant.mapping.CURRENT_OPEN_ID),
 					"defaultCommunityId": conf.DEFAULT_COMMUNITY_ID
+				}
+				if(!this.readme){
+					wx.showToast({
+						title: '未选择我已阅读《用户须知》',
+						icon: 'none',
+						duration: 2000
+					})
+					return;
 				}
 				let msg = "";
 				if (this.password == '' || this.password != this.rePassword) {
@@ -137,7 +158,6 @@
 					})
 					return;
 				}
-				console.log("提交数据", obj);
 				uni.showLoading({
 					title: '加载中',
 					mask: true
@@ -202,6 +222,11 @@
 				promise.then((setTimer) => {
 					clearInterval(setTimer)
 				})
+			},
+			_readMe:function(){
+				uni.navigateTo({
+					url:'/pages/login/registerProtocol'
+				})
 			}
 		}
 	};
@@ -218,5 +243,14 @@
 	.button_up_blank {
 		height: 40rpx;
 		text-align: center;
+	}
+	
+	.read-me{
+		line-height: 64upx;
+	}
+	
+	.user-read{
+		margin-left: 10upx;
+		color: darkgreen;
 	}
 </style>
