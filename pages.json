@@ -712,6 +712,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/faceRecognition",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

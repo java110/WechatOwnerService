@@ -187,7 +187,7 @@ export default {
 	listProductSeckill: baseUrl + "app/productSeckill.listProductSeckill",
 	listProductGroup: baseUrl + "app/productGroup.listProductGroup",
 	listRegisterProtocol: baseUrl + "app/system.listRegisterProtocol",
-	
+	queryCurrentOwner: baseUrl + "app/owner.queryCurrentOwner",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

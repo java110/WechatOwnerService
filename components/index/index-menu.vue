@@ -134,6 +134,11 @@
 							src: this.imgUrl + '/h5/images/serve/8.png',
 							href: '/pages/machine/openDoor'
 						},
+						// {
+						// 	name: '人脸识别',
+						// 	src: this.imgUrl + '/h5/images/serve/8.png',
+						// 	href: '/pages/machine/faceRecognition'
+						// },
 					]
 			},
 			to: function(v) {

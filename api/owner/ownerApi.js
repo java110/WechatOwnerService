@@ -133,6 +133,8 @@ export function getUserAddress(_data) {
 	})
 }
 
+
+
 /**
  * add by wuxw
  * @param {Object} _data 保存 用户地址
@@ -279,4 +281,26 @@ export function hasOwner() {
 		})
 		throw new Error('业主不存在');
 	}
+}
+
+export function loadLoginOwner(_data) {
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.queryCurrentOwner,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data.data);
+					return;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
 }
