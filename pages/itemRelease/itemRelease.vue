@@ -2,28 +2,36 @@
 	<view>
 		<view class="block__title">基础信息</view>
 		<view class="cu-form-group">
-			<view class="title">报修类型</view>
-			<picker id="complaintType" bindchange="PickerChange" :value="repairTypeIndex" :range-key="'repairTypeName'"
-				:range="repairTypes" v-if="repairTypes.length>0" @change="repairTypeChange">
+			<view class="title">放行类型</view>
+			<picker id="complaintType" bindchange="PickerChange" :value="typeId" :range-key="'typeName'"
+				:range="itemReleaseTypes" v-if="itemReleaseTypes.length>0" @change="repairTypeChange">
 				<view class="picker">
-					{{repairTypes.length==0 ? "请选择" : repairTypes[repairTypeIndex].repairTypeName}}
+					{{itemReleaseTypes.length==0 ? "请选择" : itemReleaseTypes[typeId].typeName}}
 				</view>
 			</picker>
 		</view>
-		<view class="cu-form-group" v-if="priceScope !=''">
-			<view class="title">收费标准</view>
-			<input disabled="disable" v-model="priceScope" class="text-right"></input>
+		<view class="cu-form-group">
+			<view class="title">申请单位</view>
+			<input v-model="applyCompany" placeholder="请输入申请单位" class="text-right"></input>
 		</view>
 		<view class="cu-form-group">
-			<view class="title">报修人</view>
-			<input v-model="bindRepairName" placeholder="请输入报修人" class="text-right"></input>
+			<view class="title">申请人</view>
+			<input v-model="applyPerson" placeholder="请输入申请人" class="text-right"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="bindTel" placeholder="请输入手机号" class="text-right"></input>
+			<input v-model="applyTel" placeholder="请输入手机号" class="text-right"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">身份证</view>
+			<input v-model="idCard" placeholder="请输入身份证" class="text-right"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title">车牌号</view>
+			<input v-model="carNum" placeholder="请输入车牌号" class="text-right"></input>
 		</view>
 		<view class="cu-form-group arrow">
-			<view class="title">预约日期</view>
+			<view class="title">通行日期</view>
 			<picker mode="date" :value="bindDate" :start="todayDate" end="2050-09-01" @change="dateChange">
 				<view class="picker">
 					{{bindDate}}
@@ -31,23 +39,20 @@
 			</picker>
 		</view>
 		<view class="cu-form-group arrow">
-			<view class="title">预约时间</view>
+			<view class="title">通行时间</view>
 			<picker mode="time" :value="bindTime" :start="todayDateTime" end="22:00" @change="timeChange">
 				<view class="picker">
 					{{bindTime}}
 				</view>
 			</picker>
 		</view>
-		<view class="cu-form-group margin-top">
-			<textarea v-model="context" placeholder="请输入报修内容"></textarea>
+		<view class="cu-form-group margin-top arrow" @tap="_addRes">
+			<view class="title">放行物品</view>
+			<view class=" arrow">请添加</view>
 		</view>
-
-		<view class="block__title">相关图片</view>
-		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum"
-			:canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData">
-		</uploadImageAsync>
-
-
+		<view class="cu-form-group margin-top">
+			<textarea v-model="remark" placeholder="选填,请填写备注"></textarea>
+		</view>
 		<view class="button_up_blank"></view>
 
 		<view class="flex flex-direction">
@@ -62,7 +67,10 @@
 	import {
 		checkPhoneNumber,
 		checkStrLength
-	} from '../../lib/java110/utils/StringUtil.js'
+	} from '../../lib/java110/utils/StringUtil.js';
+	
+	import {getItemReleaseType} from '../../api/itemRelease/itemReleaseApi.js';
+	import {getCurOwner} from '../../api/owner/ownerApi.js';
 	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	const factory = context.factory;
@@ -74,6 +82,8 @@
 	export default {
 		data() {
 			return {
+				bindDate: '请选择',
+				bindTime: '请选择',
 				typeId: '',
 				applyCompany: '',
 				applyPerson: '',
@@ -85,6 +95,7 @@
 				carNum: '',
 				remark: '',
 				itemReleaseTypes: [],
+				typeIndex:0,
 				communityId:'',
 				todayDate:'',
 				todayDateTime:'',
@@ -106,56 +117,20 @@
 		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
-			context.getRooms().then(res => {
-				that.userId = res.data.owner.userId;
-				that.applyCompany = res.data.owner.appUserName;
-				that.applyPerson = that.userName;
-				that.applyTel = res.data.owner.link;
-				that.communityId = res.data.owner.communityId;
+			getCurOwner().then(_data=>{
+				that.userId = _data.userId;
+				that.applyCompany = _data.appUserName;
+				that.applyPerson = _data.appUserName;
+				that.applyTel = _data.link;
+				that.communityId = _data.communityId;
+			}).then(()=>{
+				//加载报修类型
+				that._loadTypes();
 			});
 
-			//加载报修类型
-			this._loadRepairTypes();
+			
 			this.todayDate = formatDate(new Date());
 			this.todayDateTime = formatHourAndMin(new Date())
-		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {
-			let _floor = uni.getStorageSync("_selectFloor");
-
-			if (_floor != null && _floor != undefined && _floor != '') {
-				this.floorNum = _floor.floorNum + "栋";
-				this.floorId = _floor.floorId;
-			}
-
-			let _unit = uni.getStorageSync("_selectUnit");
-			if (_unit != null && _unit != undefined && _unit != '') {
-				this.unitNum = _unit.unitNum + "单元";
-				this.unitId = _unit.unitId;
-			}
-		},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {
-			//清理楼栋和单元
-			uni.removeStorageSync('_selectFloor');
-			uni.removeStorageSync('_unitFloor');
-
 		},
 
 		/**
@@ -173,14 +148,6 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			sendImagesData: function(e) {
-				this.photos = [];
-				if (e.length > 0) {
-					e.forEach((img) => {
-						this.photos.push(img.fileId);
-					})
-				}
-			},
 			formatter(type, value) {
 				if (type === 'year') {
 					return `${value}年`;
@@ -191,11 +158,7 @@
 				}
 				return value;
 			},
-
-
 			submitRepair: function(e) {
-
-
 				let obj = {
 					"repairName": this.bindRepairName,
 					"repairType": this.repairType,
@@ -226,13 +189,6 @@
 					obj.repairObjId = this.roomId;
 					obj.repairObjName = this.roomName;
 				}
-
-				// let _photos = this.photos;
-				// _photos.forEach(function(_item) {
-				// 	obj.photos.push({
-				// 		"photo": _item
-				// 	});
-				// });
 				// 预约时间校验
 				let oppoTime = Date.parse(new Date(obj.appointmentTime.replace(/-/g, '/'))),
 					now = Date.parse(new Date());
@@ -258,7 +214,6 @@
 				} else if (obj.repairObjId == '') {
 					msg = "请选择报修位置";
 				}
-
 				if (msg != "") {
 					wx.showToast({
 						title: msg,
@@ -300,51 +255,17 @@
 
 				}
 			},
-			afterRead: function(event) {
-				const {
-					file
-				} = event.detail;
-
-				let _that = this;
-
-				const {
-					photoList = []
-				} = this;
-				photoList.push(file);
-				this.photoList = photoList;
-
-				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
-					_that.photos.push(_baseInfo);
-				});
-			},
-			roomChange: function(e) {
-				this.roomId = this.roomIdArr[e.detail.value];
-				this.roomName = this.roomCloums[e.detail.value];
-			},
-			repairScopeChange: function(e) {
-				this.repairScopeIndex = e.target.value //取其下标
-				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组
-				this.repairObjType = selected.id //选中的id
-				this._loadRepairTypes();
-			},
 			repairChange: function(e) {
 				this.typeName = this.columns[e.detail.value];
 				this.typeId = this.repairIdAttr[e.detail.value];
 			},
 			repairTypeChange: function(e) {
-				this.repairTypeIndex = e.target.value //取其下标
-				let selected = this.repairTypes[this.repairTypeIndex] //获取选中的数组
+				this.typeIndex = e.target.value //取其下标
+				let selected = this.itemReleaseTypes[this.typeIndex] //获取选中的数组
 				if (selected == undefined) {
 					return;
 				}
-				this.repairType = selected.repairType //选中的id
-				let _payFeeFlag = selected.payFeeFlag;
-
-				if (_payFeeFlag == 'T') {
-					this.priceScope = selected.priceScope;
-				} else {
-					this.priceScope = '';
-				}
+				this.typeId = selected.typeId //选中的id
 
 			},
 			dateChange: function(e) {
@@ -358,69 +279,19 @@
 			timeChange: function(e) {
 				this.bindTime = e.detail.value;
 			},
-			chooseFloor: function(e) {
-				context.navigateTo({
-					url: '/pages/selectFloor/selectFloor'
-				});
-			},
-			chooseUnit: function(e) {
-				if (this.floorId == null || this.floorId == '') {
-					uni.showToast({
-						title: "请先选择楼栋"
-					});
-					return;
-				}
-				context.navigateTo({
-					url: '/pages/selectUnit/selectUnit?floorId=' + this.floorId
-				});
-			},
-			_loadRepairTypes: function() {
-				let _communityInfo = context.getCurrentCommunity();
+			_loadTypes: function() {
 				let _that = this;
-				// 公共区域标识
-				let publicArea = _that.repairObjType == '004' ? 'F' : 'T';
-				// 默认选择第一个
-				_that.repairTypeIndex = 0;
-				let dataObj = {
-					page: 1,
-					row: 50,
-					communityId: _communityInfo.communityId,
-					publicArea: publicArea
-				};
-				uni.request({
-					url: constant.url.listRepairSettings,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: function(res) {
-						let _json = res.data;
-						if (_json.code == 0 && _json.data.length > 0) {
-							_that.repairTypes = _json.data;
-
-							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
-							_that.repairType = selected.repairType //选中的id
-							let _payFeeFlag = selected.payFeeFlag;
-
-							if (_payFeeFlag == 'T') {
-								_that.priceScope = selected.priceScope;
-							} else {
-								_that.priceScope = '';
-							}
-						} else {
-							uni.showToast({
-								icon: "none",
-								title: "未配置报修设置"
-							})
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
+				getItemReleaseType({
+					page:1,
+					row:100,
+					communityId:this.communityId
+				}).then(_data=>{
+					_that.itemReleaseTypes = _data;
+				})
+			},
+			_addRes:function(){
+				uni.navigateTo({
+					url:'/pages/itemRelease/addItemReleaseResource'
 				});
 			}
 

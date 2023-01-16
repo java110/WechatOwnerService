@@ -730,6 +730,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/itemRelease/addItemReleaseResource",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

@@ -188,6 +188,7 @@ export default {
 	listProductGroup: baseUrl + "app/productGroup.listProductGroup",
 	listRegisterProtocol: baseUrl + "app/system.listRegisterProtocol",
 	queryCurrentOwner: baseUrl + "app/owner.queryCurrentOwner",
+	listItemReleaseType: baseUrl+"app/itemRelease.listItemReleaseType",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
