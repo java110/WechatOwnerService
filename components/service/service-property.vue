@@ -150,6 +150,11 @@
 						src: this.imgUrl + '/h5/images/serve/order4.png',
 						href: '/pages/reserve/reserveService'
 					},
+					{
+						name: '物品放行',
+						src: this.imgUrl + '/h5/images/serve/order4.png',
+						href: '/pages/itemRelease/itemRelease'
+					},
 					
 					// {
 					// 	name: '设备',
