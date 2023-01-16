@@ -116,6 +116,11 @@
 						src: this.imgUrl+'/h5/images/serve/my8.png',
 						href: '/pages/reserve/reserveMyOrder'
 					},
+					{
+						name: '放行记录',
+						src: this.imgUrl+'/h5/images/serve/my8.png',
+						href: '/pages/itemRelease/myItemReleaseList'
+					},
 				]
 			};
 		},

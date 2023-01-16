@@ -4,9 +4,9 @@
 		<view class="cu-form-group">
 			<view class="title">放行类型</view>
 			<picker id="complaintType" bindchange="PickerChange" :value="typeId" :range-key="'typeName'"
-				:range="itemReleaseTypes" v-if="itemReleaseTypes.length>0" @change="repairTypeChange">
+				:range="itemReleaseTypes" v-if="itemReleaseTypes.length>0" @change="itemReleaseTypeChange">
 				<view class="picker">
-					{{itemReleaseTypes.length==0 ? "请选择" : itemReleaseTypes[typeId].typeName}}
+					{{typeIndex==-1 ? "请选择" : itemReleaseTypes[typeIndex].typeName}}
 				</view>
 			</picker>
 		</view>
@@ -48,15 +48,17 @@
 		</view>
 		<view class="cu-form-group margin-top arrow" @tap="_addRes">
 			<view class="title">放行物品</view>
-			<view class=" arrow">请添加</view>
+			<view class="arrow" v-if="!resNames || resNames.length< 1">请添加</view>
+			<view class="arrow" v-else>{{_computeResAmount()}}</view>
 		</view>
+		
 		<view class="cu-form-group margin-top">
 			<textarea v-model="remark" placeholder="选填,请填写备注"></textarea>
 		</view>
 		<view class="button_up_blank"></view>
 
 		<view class="flex flex-direction">
-			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitRepair()">提交</button>
+			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitItemRelease()">提交</button>
 		</view>
 
 	</view>
@@ -69,7 +71,7 @@
 		checkStrLength
 	} from '../../lib/java110/utils/StringUtil.js';
 	
-	import {getItemReleaseType} from '../../api/itemRelease/itemReleaseApi.js';
+	import {getItemReleaseType,getFirstAuditStaff,saveItemRelease} from '../../api/itemRelease/itemReleaseApi.js';
 	import {getCurOwner} from '../../api/owner/ownerApi.js';
 	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
@@ -95,7 +97,7 @@
 				carNum: '',
 				remark: '',
 				itemReleaseTypes: [],
-				typeIndex:0,
+				typeIndex:-1,
 				communityId:'',
 				todayDate:'',
 				todayDateTime:'',
@@ -107,10 +109,6 @@
 				},
 			};
 		},
-		components: {
-
-		},
-
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
@@ -127,26 +125,15 @@
 				//加载报修类型
 				that._loadTypes();
 			});
-
-			
 			this.todayDate = formatDate(new Date());
 			this.todayDateTime = formatHourAndMin(new Date())
 		},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
+		onShow() {
+			let _res = uni.getStorageSync("_tempItemReleaseResource");
+			if(_res){
+				this.resNames = _res;
+			}
+		},
 		methods: {
 			formatter(type, value) {
 				if (type === 'year') {
@@ -158,115 +145,63 @@
 				}
 				return value;
 			},
-			submitRepair: function(e) {
-				let obj = {
-					"repairName": this.bindRepairName,
-					"repairType": this.repairType,
-					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
-					"tel": this.bindTel,
-					"roomId": this.roomId,
-					"photos": this.photos,
-					"context": this.context,
-					"userId": this.userId,
-					"userName": this.userName,
-					"communityId": this.communityId,
-					"bindDate": this.bindDate,
-					"bindTime": this.bindTime,
-					"repairObjType": this.repairObjType,
-					"repairChannel": 'Z'
-				}
-
-				if (this.repairObjType == '001') {
-					obj.repairObjId = this.communityId;
-					obj.repairObjName = this.communityName;
-				} else if (this.repairObjType == '002') {
-					obj.repairObjId = this.floorId;
-					obj.repairObjName = this.floorNum;
-				} else if (this.repairObjType == '003') {
-					obj.repairObjId = this.unitId;
-					obj.repairObjName = this.floorNum + this.unitNum;
-				} else {
-					obj.repairObjId = this.roomId;
-					obj.repairObjName = this.roomName;
-				}
-				// 预约时间校验
-				let oppoTime = Date.parse(new Date(obj.appointmentTime.replace(/-/g, '/'))),
-					now = Date.parse(new Date());
-				let msg = "";
-				if (obj.repairType == "") {
-					msg = "请选择报修类型";
-				} else if (obj.repairName == "") {
-					msg = "请填写报修人";
-				} else if (checkStrLength(obj.repairName) > 10) {
-					msg = "报修人长度不能超过5位";
-				} else if (obj.tel == "") {
-					msg = "请填写手机号";
-				} else if (!checkPhoneNumber(obj.tel)) {
-					msg = "手机号有误";
-				} else if (obj.bindDate == "请选择") {
-					msg = "请选择预约日期";
-				} else if (obj.bindTime == "请选择") {
-					msg = "请选择预约时间";
-				} else if (now - oppoTime > 1800 * 1000) {
-					msg = "预约时间有误";
-				} else if (obj.context == "") {
-					msg = "请填写报修内容";
-				} else if (obj.repairObjId == '') {
-					msg = "请选择报修位置";
-				}
-				if (msg != "") {
-					wx.showToast({
-						title: msg,
-						icon: 'none',
-						duration: 2000
-					});
-				} else {
-					context.request({
-						url: constant.url
-						.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-						header: context.getHeaders(),
-						method: "POST",
-						data: obj, //动态数据
-						success: function(res) {
-							let _json = res.data;
-							if (_json.code == 0) {
-								// wx.redirectTo({
-								// 	url: '/pages/repair/myRepair',
-								// });
-								uni.navigateTo({
-									url: "/pages/successPage/successPage?msg=提交成功&objType=4004"
-								})
-								return;
-							}
-							wx.showToast({
-								title: _json.msg,
-								icon: 'none',
-								duration: 2000
-							})
-						},
-						fail: function(e) {
-							wx.showToast({
-								title: "服务器异常了",
-								icon: 'none',
-								duration: 2000
-							})
-						}
-					});
-
-				}
+			_computeResAmount:function(){
+				let _amount = 0;
+				this.resNames.forEach(item=>{
+					_amount += parseInt(item.amount)
+				})
+				return _amount;
 			},
-			repairChange: function(e) {
-				this.typeName = this.columns[e.detail.value];
-				this.typeId = this.repairIdAttr[e.detail.value];
+			submitItemRelease: function(e) {
+				if(this.audit.assignee == '-2'){
+					uni.showToast({
+						icon:'none',
+						title:'审批流程设置错误，手机端提交，第一个审核人必须指定相应的员工'
+					});
+					return ;
+				}
+				
+				saveItemRelease({
+					typeId: this.typeId,
+					applyCompany: this.applyCompany,
+					applyPerson: this.applyPerson,
+					idCard: this.idCard,
+					applyTel: this.applyTel,
+					resNames: this.resNames,
+					carNum: this.carNum,
+					remark: this.remark,
+					communityId:this.communityId,
+					passTime:this.todayDate+" "+this.todayDateTime+":00",
+					audit: {
+						staffId: this.audit.assignee,
+					},
+				}).then(()=>{
+					uni.removeStorageSync('_tempItemReleaseResource');
+					uni.navigateTo({
+						url:'/pages/my/my'
+					})
+				},_err=>{
+					uni.showToast({
+						icon:'none',
+						title:_err
+					});
+				})	
 			},
-			repairTypeChange: function(e) {
+			itemReleaseTypeChange: function(e) {
+				let _that = this;
 				this.typeIndex = e.target.value //取其下标
 				let selected = this.itemReleaseTypes[this.typeIndex] //获取选中的数组
 				if (selected == undefined) {
 					return;
 				}
 				this.typeId = selected.typeId //选中的id
-
+				getFirstAuditStaff({
+					communityId:this.communityId,
+					flowId:selected.flowId
+				}).then(_data=>{
+					_that.audit.assignee = _data[0].assignee;
+				})
+				
 			},
 			dateChange: function(e) {
 				this.bindDate = e.detail.value;

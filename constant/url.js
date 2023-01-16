@@ -189,6 +189,13 @@ export default {
 	listRegisterProtocol: baseUrl + "app/system.listRegisterProtocol",
 	queryCurrentOwner: baseUrl + "app/owner.queryCurrentOwner",
 	listItemReleaseType: baseUrl+"app/itemRelease.listItemReleaseType",
+	queryFirstAuditStaff: baseUrl+"app/oaWorkflow.queryFirstAuditStaff",
+	saveItemRelease: baseUrl+"app/itemRelease.saveItemRelease",
+	listMyItemRelease: baseUrl+"app/itemRelease.listMyItemRelease",
+	listItemReleaseRes: baseUrl+"app/itemRelease.listItemReleaseRes",
+	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
+	
+	
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
