@@ -79,12 +79,11 @@
 			this.irId = options.irId;
 			this._loadDetail();
 			this._loadDetailResNames();
-
 		},
 		methods: {
 			_loadDetail: function() {
 				let _that = this;
-				getMyItemRelease({
+				getMyItemRelease(this,{
 					page: 1,
 					row: 1,
 					irId: this.irId,
@@ -96,7 +95,7 @@
 			},
 			_loadDetailResNames: function() {
 				let _that = this;
-				getItemReleaseRes({
+				getItemReleaseRes(this,{
 					page: 1,
 					row: 100,
 					irId: this.irId,
@@ -107,7 +106,7 @@
 			},
 			_loadComment: function() {
 				let _that = this;
-				queryOaWorkflowUser({
+				queryOaWorkflowUser(this,{
 					page: 1,
 					row: 100,
 					id: this.irId,
