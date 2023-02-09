@@ -74,7 +74,7 @@
 			},
 			defChar:{
 				type:String,
-				default:'Z'
+				default:'T'
 			},
 			gua: {
 				type: Boolean,
@@ -242,6 +242,10 @@
 						title: '挂'
 					}, {
 						title: '学'
+					},{
+						title: '港'
+					}, {
+						title: '澳'
 					}
 				], // 车牌开头字母的列表
 				// gualist:[], // 挂车号
