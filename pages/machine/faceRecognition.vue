@@ -78,6 +78,7 @@
 		padding:10upx;
 		image{
 			height: 380upx;
+			width: 100%;
 		}
 		.face-desc{
 			font-size: 32upx;

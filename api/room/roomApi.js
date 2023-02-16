@@ -25,11 +25,12 @@ import {
  */
 export function getRooms() {
 	return new Promise((resolve, reject) => {
-		if(!_owner.ownerId){
-			reject('未包含业主信息');
-		}
+		
 		getCurOwner()
 			.then(function(_owner) {
+				if(!_owner.ownerId){
+					reject('未包含业主信息');
+				}
 				request({
 					url: url.queryRoomsByOwner,
 					method: "GET",

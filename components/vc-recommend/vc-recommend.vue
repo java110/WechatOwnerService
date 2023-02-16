@@ -76,7 +76,7 @@
 				}
 				
 				this.products=[];
-				this.pagefrom =1;
+				this.pagefrom =0;
 				
 				queryMainCategory(_data)
 					.then((products) => {
@@ -93,7 +93,7 @@
 				let _that = this;
 				_that.communityId = getMallCommunityId();
 				let _data = {
-					page: this.pagefrom,
+					page: this.pagefrom+1,
 					row: this.pagesize,
 					communityId: _that.communityId,
 					mainCategoryId: _that.curCategoryId
