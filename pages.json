@@ -757,6 +757,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/chargeMachines",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "智能充电",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

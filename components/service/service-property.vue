@@ -124,12 +124,7 @@
 						name: "投票问卷",
 						src: this.imgUrl + "/h5/images/serve/my2.png",
 						href: "/pages/questionAnswer/questionAnswer"
-					}, {
-						name: "返省上报",
-						src: this.imgUrl + "/h5/images/serve/my3.png",
-						href: "/pages/reportInfoBack/reportInfoBack",
-						needLogin: 'N'
-					},
+					}, 
 					{
 						name: '空置房申请',
 						src: this.imgUrl + '/h5/images/serve/my9.png',
@@ -155,6 +150,18 @@
 						src: this.imgUrl + '/h5/images/serve/order4.png',
 						href: '/pages/itemRelease/itemRelease'
 					},
+					{
+						name: '智能充电',
+						src: this.imgUrl + '/h5/images/serve/my3.png',
+						href: '/pages/machine/chargeMachines'
+					},
+					
+					// {
+					// 	name: "返省上报",
+					// 	src: this.imgUrl + "/h5/images/serve/my3.png",
+					// 	href: "/pages/reportInfoBack/reportInfoBack",
+					// 	needLogin: 'N'
+					// },
 					
 					// {
 					// 	name: '设备',
