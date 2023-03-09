@@ -194,7 +194,8 @@ export default {
 	listMyItemRelease: baseUrl+"app/itemRelease.listMyItemRelease",
 	listItemReleaseRes: baseUrl+"app/itemRelease.listItemReleaseRes",
 	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
-	
+	listChargeMachine:baseUrl+"app/chargeMachine.listChargeMachine",
+	listChargeMachinePort:baseUrl+"app/chargeMachine.listChargeMachinePort",
 	
 
 	NEED_NOT_LOGIN_PAGE: [

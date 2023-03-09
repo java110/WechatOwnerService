@@ -104,3 +104,36 @@ export function getMachineInspections(_objData) {
 	});
 };
 
+export function getChargeMachines(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listChargeMachine,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
+export function getChargeMachinePort(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.listChargeMachinePort,
+			method: "GET",
+			data:_objData,
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};
+

@@ -766,6 +766,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/machineToCharge",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machine/chargeSuccess",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
