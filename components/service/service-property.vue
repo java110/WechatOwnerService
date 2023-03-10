@@ -155,6 +155,11 @@
 						src: this.imgUrl + '/h5/images/serve/my3.png',
 						href: '/pages/machine/chargeMachines'
 					},
+					{
+						name: '物业打分',
+						src: this.imgUrl + '/h5/images/serve/my9.png',
+						href: '/pages/complaint/examineStaff'
+					},
 					
 					// {
 					// 	name: "返省上报",

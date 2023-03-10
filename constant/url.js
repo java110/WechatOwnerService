@@ -196,6 +196,8 @@ export default {
 	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
 	listChargeMachine:baseUrl+"app/chargeMachine.listChargeMachine",
 	listChargeMachinePort:baseUrl+"app/chargeMachine.listChargeMachinePort",
+	listExamineStaff:baseUrl+"app/examine.listExamineStaff", // 查询打分员工
+
 	
 
 	NEED_NOT_LOGIN_PAGE: [

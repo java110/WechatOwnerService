@@ -83,7 +83,7 @@
 		methods: {
 			_loadDetail: function() {
 				let _that = this;
-				getMyItemRelease(this,{
+				getMyItemRelease({
 					page: 1,
 					row: 1,
 					irId: this.irId,
@@ -95,7 +95,7 @@
 			},
 			_loadDetailResNames: function() {
 				let _that = this;
-				getItemReleaseRes(this,{
+				getItemReleaseRes({
 					page: 1,
 					row: 100,
 					irId: this.irId,
@@ -106,7 +106,7 @@
 			},
 			_loadComment: function() {
 				let _that = this;
-				queryOaWorkflowUser(this,{
+				queryOaWorkflowUser({
 					page: 1,
 					row: 100,
 					id: this.irId,
