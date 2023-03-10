@@ -111,8 +111,12 @@
 			_toCharge:function(){
 				
 				uni.navigateTo({
-					url:'/pages/machine/chargeSuccess?machineId='+this.machineId+"&communityId="+this.communityId
-				})
+					url:'/pages/machine/chargeConfirm?machineId='+this.machineId+
+					"&communityId="+this.communityId
+					+"&portId="+this.curPort.portId
+					+"&duration="+this.curHours.duration
+				});
+				
 			},
 			
 			_switchPort:function(_port){

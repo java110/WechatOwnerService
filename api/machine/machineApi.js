@@ -6,7 +6,8 @@
 
 
 import {
-	request, requestNoAuth
+	request,
+	requestNoAuth
 } from '../../lib/java110/java110Request.js'
 import
 url
@@ -24,7 +25,7 @@ export function getMachineTranslates(_objData) {
 		request({
 			url: url.listMachineTranslates,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				if (res.statusCode == 200) {
 					//将业主信息和房屋信息一起返回
@@ -50,7 +51,7 @@ export function getMachines(_objData) {
 		requestNoAuth({
 			url: url.listEquipmentAccount,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				let _data = res.data;
 				resolve(_data);
@@ -71,7 +72,7 @@ export function getMachineMaintainances(_objData) {
 		requestNoAuth({
 			url: url.listMaintainanceTaskDetail,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				let _data = res.data;
 				resolve(_data);
@@ -92,7 +93,7 @@ export function getMachineInspections(_objData) {
 		requestNoAuth({
 			url: url.listInspectionTaskDetails,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				let _data = res.data;
 				resolve(_data);
@@ -109,7 +110,7 @@ export function getChargeMachines(_objData) {
 		requestNoAuth({
 			url: url.listChargeMachine,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				let _data = res.data;
 				resolve(_data);
@@ -125,7 +126,7 @@ export function getChargeMachinePort(_objData) {
 		requestNoAuth({
 			url: url.listChargeMachinePort,
 			method: "GET",
-			data:_objData,
+			data: _objData,
 			success: function(res) {
 				let _data = res.data;
 				resolve(_data);
@@ -137,3 +138,68 @@ export function getChargeMachinePort(_objData) {
 	});
 };
 
+export function startCharge(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.startCharge,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+export function stopCharge(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.stopCharge,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
+/**
+ * 查询充电订单
+ */
+export function getChargeMachineOrder(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.listChargeMachineOrder,
+			method: "GET",
+			data: _objData,
+			success: function(res) {
+				if (res.data.code != 0) {
+					reject(res.data.msg);
+					return;
+				}
+				resolve(res.data.data);
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	});
+};

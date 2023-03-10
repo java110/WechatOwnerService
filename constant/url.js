@@ -197,7 +197,9 @@ export default {
 	listChargeMachine:baseUrl+"app/chargeMachine.listChargeMachine",
 	listChargeMachinePort:baseUrl+"app/chargeMachine.listChargeMachinePort",
 	listExamineStaff:baseUrl+"app/examine.listExamineStaff", // 查询打分员工
-
+	startCharge:baseUrl+"app/chargeMachine.startCharge", // 开始充电
+	stopCharge:baseUrl+"app/chargeMachine.stopCharge", // 结束充电
+	listChargeMachineOrder:baseUrl+"app/chargeMachine.listChargeMachineOrder", // 查询充电订单
 	
 
 	NEED_NOT_LOGIN_PAGE: [

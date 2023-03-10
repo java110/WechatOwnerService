@@ -776,10 +776,10 @@
             
         }
         ,{
-            "path" : "pages/machine/chargeSuccess",
+            "path" : "pages/machine/chargeConfirm",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "充电确认",
                 "enablePullDownRefresh": false
             }
             
@@ -789,6 +789,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "物业人员打分",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/machine/chargeMachineOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充电订单详情",
                 "enablePullDownRefresh": false
             }
             

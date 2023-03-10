@@ -19,7 +19,7 @@
 		
 		<view class="plat-btn-black"></view>
 		<view class="cu-bar btn-group" style="margin-top: 30px;">
-			<button @click="_toIndex"
+			<button @click="_toChargeConfirm"
 				class="cu-btn bg-orange shadow-blur round lg">我知道了</button>
 		</view>
 	</view>
@@ -27,12 +27,18 @@
 
 <script>
 	import {
-		getChargeMachines
+		getChargeMachines,
+		startCharge
 	} from '../../api/machine/machineApi.js';
+	import {
+		getCommunityId
+	} from '../../api/community/communityApi.js'
 	export default {
 		data() {
 			return {
 				machineId: '',
+				portId:'',
+				duration:'',
 				communityId: '',
 				machineCode: '',
 				machineName: '',
@@ -43,6 +49,8 @@
 		onLoad(options) {
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
+			this.portId = options.portId;
+			this.duration = options.duration;
 			this._loadChargeMachines();
 		},
 		methods: {
@@ -60,9 +68,29 @@
 					_that.durationPrice = _data.data[0].durationPrice;
 				})
 			},
-			_toIndex:function(){
-				uni.switchTab({
-					url:'/pages/index/index'
+			_toChargeConfirm:function(){
+				
+				// startCharge({
+				// 	communityId:getCommunityId(),
+				// 	machineId:this.machineId,
+				// 	portId:this.portId,
+				// 	duration:this.duration
+				// }).then(_data=>{
+				// 	if(_data.code != 0){
+				// 		uni.showToast({
+				// 			icon:'none',
+				// 			title:_data.msg
+				// 		});
+				// 		return ;
+				// 	}
+					
+				// 	uni.navigateTo({
+				// 		url:'/pages/machine/chargeMachineOrder?orderId='+_data.data
+				// 	})
+				// })
+				
+				uni.navigateTo({
+					url:'/pages/machine/chargeMachineOrder?orderId=112023031176130002'
 				})
 			}
 		}
