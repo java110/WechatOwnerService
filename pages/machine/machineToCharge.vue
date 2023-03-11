@@ -42,6 +42,7 @@
 		getChargeMachines,
 		getChargeMachinePort
 	} from '../../api/machine/machineApi.js';
+	import context from '../../lib/java110/Java110Context.js';
 	export default {
 		data() {
 			return {
@@ -76,6 +77,7 @@
 			}
 		},
 		onLoad(options) {
+			context.onLoad(options);
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
 			this._loadChargeMachines();
