@@ -802,6 +802,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/account/preStoreAccount",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "账户充值",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

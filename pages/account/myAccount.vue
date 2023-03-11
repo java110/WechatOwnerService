@@ -1,35 +1,51 @@
 <template>
-	<view class="tab-container bg-white">
-		<view class="cu-list menu">
-			<view class="cu-item arrow" v-if="accounts.length > 0" v-for="(item, key) in accounts" :key="key" :data-item="item" @click="myAccountDetail(item)">
-				<view class="content padding-tb-sm">
-					<view>
-						<text class="cuIcon-rechargefill text-green margin-right-xs"></text> {{item.acctTypeName}}</view>
-					<view class="text-gray text-sm">
-						<text class="cuIcon-right margin-right-xs"></text>余额: {{item.amount}}</view>
-				</view>
-				<view class="action">
-				</view>
-			</view>
-			<view class="cu-item arrow" @click="coupons(item)">
-				<view class="content padding-tb-sm">
-					<view>
-						<text class="cuIcon-ticket text-green margin-right-xs"></text>我的优惠券</view>
-					<view class="text-gray text-sm">
+	<view >
+		<view class="tab-container bg-white">
+			<view class="cu-list menu">
+				<view class="cu-item arrow" v-if="accounts.length > 0" v-for="(item, key) in accounts" :key="key"
+					:data-item="item" @click="myAccountDetail(item)">
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="cuIcon-rechargefill text-green margin-right-xs"></text> {{item.acctTypeName}}
+						</view>
+						<view class="text-gray text-sm">
+							<text class="cuIcon-right margin-right-xs"></text>余额: {{item.amount}}
+						</view>
+					</view>
+					<view class="action">
 					</view>
 				</view>
-				<view class="action">
-			
+				<view class="cu-item arrow" @click="coupons(item)">
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="cuIcon-ticket text-green margin-right-xs"></text>我的优惠券
+						</view>
+						<view class="text-gray text-sm">
+						</view>
+					</view>
+					<view class="action">
+
+					</view>
 				</view>
 			</view>
+
+			
+		</view>
+		<view class="plat-btn-black"></view>
+		<view class="cu-bar btn-group" style="margin-top: 30px;" >
+			<button @click="_toPrestoreAccount" class="cu-btn bg-orange shadow-blur round lg">账户充值</button>
 		</view>
 	</view>
+
+
 </template>
 
 <script>
 	// pages/account/myAccount.js
 	import context from '../../lib/java110/Java110Context.js';
-	import {queryOwnerAccount} from '../../api/user/userApi.js'
+	import {
+		queryOwnerAccount
+	} from '../../api/user/userApi.js'
 
 	export default {
 		data() {
@@ -49,35 +65,11 @@
 			this.loadOwnerAccount();
 		},
 
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
 
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
 		 */
 		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
 
 		/**
 		 * 用户点击右上角分享
@@ -108,14 +100,19 @@
 							link: _ownerInfo.link,
 							communityId: _ownerInfo.communityId
 						}).then((data) => {
-							if(!data){
-								_that.accounts=[];
-								return ;
+							if (!data) {
+								_that.accounts = [];
+								return;
 							}
 							_that.accounts = data;
 						})
 					}
 				});
+			},
+			_toPrestoreAccount:function(){
+				uni.navigateTo({
+					url:'/pages/account/preStoreAccount'
+				})
 			}
 		}
 	};

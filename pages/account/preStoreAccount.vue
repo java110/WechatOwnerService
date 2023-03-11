@@ -1,0 +1,139 @@
+<template>
+	<view>
+		<view class="block__title">账户充值</view>
+		<view class="cu-list menu">
+			<view class="cu-item">
+				<view class="content">
+					<text class="text-grey">账户名称</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{account.acctName}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="text-grey">账户余额</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{account.amount}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="text-grey">充值金额</text>
+				</view>
+				<view class="action">
+					<input v-model="amount" placeholder="请输入充值金额" type="number" class="text-right"></input>
+				</view>
+			</view>
+		</view>
+		
+		<view class=" bg-white  border flex justify-end" style="position: fixed;width: 100%;bottom: 0;">
+		
+			<view class="action text-orange margin-right line-height">
+				合计：{{amount}}元
+			</view>
+			<view class="btn-group">
+				<!-- #ifdef H5 || MP-WEIXIN -->
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
+				<!-- #endif -->
+				<!-- #ifdef APP-PLUS -->
+				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
+				<!-- #endif -->
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	// pages/account/myAccount.js
+	import context from '../../lib/java110/Java110Context.js';
+	import {
+		queryOwnerAccount
+	} from '../../api/user/userApi.js';
+	import {getCommunityId} from '@/api/community/communityApi.js';
+	
+	import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
+	export default {
+		data() {
+			return {
+				account:{},
+				amount:'',
+				appId:''
+			}
+		},
+		onLoad(options) {
+			this.loadOwnerAccount();
+			// #ifdef MP-WEIXIN
+			let accountInfo = uni.getAccountInfoSync();
+			this.appId = accountInfo.miniProgram.appId;
+			// #endif
+			// #ifdef H5
+			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			// #endif
+		},
+		methods: {
+			loadOwnerAccount: function() {
+				let _that = this;
+				context.getOwner(function(_ownerInfo) {
+					if (_ownerInfo) {
+						queryOwnerAccount({
+							page: 1,
+							row: 20,
+							idCard: _ownerInfo.idCard,
+							link: _ownerInfo.link,
+							communityId: _ownerInfo.communityId
+						}).then((data) => {
+							if (!data) {
+								_that.account = {};
+								return;
+							}
+							_that.account = data[0];
+						})
+					}
+				});
+			},
+			_payWxApp: function(_data) {
+				let _receivedAmount = this.amount;
+				let _tradeType = 'APP';
+				payFeeApp(this,{
+					communityId: this.communityId,
+					acctId: this.account.acctId,
+					feeName: '账户充值',
+					receivedAmount: _receivedAmount,
+					tradeType: _tradeType,
+					appId: this.appId,
+				});
+				
+			},
+			onPayFee: function() {
+				let _receivedAmount = this.amount;
+				let _tradeType = 'JSAPI';
+				
+				payFeeWechat(this,{
+					business: "preStoreOnline",
+					communityId: getCommunityId(),
+					acctId: this.account.acctId,
+					feeName: '账户充值',
+					receivedAmount: _receivedAmount,
+					tradeType: _tradeType,
+					appId: this.appId,
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.block__title {
+		margin: 0;
+		font-weight: 400;
+		font-size: 14px;
+		color: rgba(69, 90, 100, .6);
+		padding: 40rpx 30rpx 20rpx;
+	}
+	
+	.button_up_blank {
+		height: 40rpx;
+	}
+</style>
