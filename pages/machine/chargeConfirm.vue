@@ -43,6 +43,7 @@
 				machineCode: '',
 				machineName: '',
 				durationPrice: '',
+				couponIds:'',
 			}
 		},
 		
@@ -51,6 +52,7 @@
 			this.communityId = options.communityId;
 			this.portId = options.portId;
 			this.duration = options.duration;
+			this.couponIds = options.couponIds;
 			this._loadChargeMachines();
 		},
 		methods: {
@@ -70,28 +72,29 @@
 			},
 			_toChargeConfirm:function(){
 				
-				// startCharge({
-				// 	communityId:getCommunityId(),
-				// 	machineId:this.machineId,
-				// 	portId:this.portId,
-				// 	duration:this.duration
-				// }).then(_data=>{
-				// 	if(_data.code != 0){
-				// 		uni.showToast({
-				// 			icon:'none',
-				// 			title:_data.msg
-				// 		});
-				// 		return ;
-				// 	}
+				startCharge({
+					communityId:getCommunityId(),
+					machineId:this.machineId,
+					portId:this.portId,
+					duration:this.duration,
+					couponIds:this.couponIds
+				}).then(_data=>{
+					if(_data.code != 0){
+						uni.showToast({
+							icon:'none',
+							title:_data.msg
+						});
+						return ;
+					}
 					
-				// 	uni.navigateTo({
-				// 		url:'/pages/machine/chargeMachineOrder?orderId='+_data.data
-				// 	})
-				// })
-				
-				uni.navigateTo({
-					url:'/pages/machine/chargeMachineOrder?orderId=112023031176130002'
+					uni.navigateTo({
+						url:'/pages/machine/chargeMachineOrder?orderId='+_data.data 
+					})
 				})
+				
+				// uni.navigateTo({
+				// 	url:'/pages/machine/chargeMachineOrder?orderId=112023031176130002'
+				// })
 			}
 		}
 	}

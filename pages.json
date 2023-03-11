@@ -811,6 +811,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/coupon/chargeCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

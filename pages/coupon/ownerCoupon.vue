@@ -62,7 +62,8 @@
 	} from '../../lib/java110/utils/DateUtil.js'
 	import {
 		getCouponUsers
-	} from '../../api/fee/feeApi.js'
+	} from '../../api/fee/feeApi.js';
+	import {getCommunityId} from '@/api/community/communityApi.js';
 
 	export default {
 		data() {
@@ -102,7 +103,9 @@
 					page: 1,
 					row: 30,
 					tel: context.getUserInfo().link,
-					state: '1001'
+					communityId:getCommunityId(),
+					state: '1001',
+					toType:'2002'
 				}
 				_that.couponList = [];
 				let _couponUsers = [];
@@ -112,6 +115,9 @@
 						_couponList.data.forEach(items => {
 							items['checked'] = false;
 							if (items.isExpire == 'Y') {
+								// for(let stockIndex = 0; stockIndex < items.stock;stockIndex++){
+								// 	_that.couponList.push(items);
+								// }
 								_that.couponList.push(items);
 							}
 						})

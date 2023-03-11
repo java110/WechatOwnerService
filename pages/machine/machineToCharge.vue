@@ -28,6 +28,18 @@
 			</view>
 		</view>
 		
+		<view class="cu-list menu margin-top" @click="_selectCoupons" v-if="curHours.duration && curPort.portId">
+			<view class="cu-item arrow">
+				<view class="content padding-tb-sm">
+					<view>
+						<view class="text-cut" style="width:220px">使用充电劵抵扣</view>
+					</view>
+				</view>
+				<view v-if="couponCount == 0">请选择</view>
+				<view v-else>{{couponCount+ '张' }}</view>
+			</view>
+		</view>
+		
 		<view class="plat-btn-black"></view>
 		<view class="cu-bar btn-group" style="margin-top: 30px;">
 			<button @click="_toCharge" :disabled="!curHours.duration || !curPort.portId"
@@ -55,6 +67,8 @@
 				ports: [],
 				curPort:{},
 				curHours:{},
+				couponList:[],
+				couponCount:0,
 				hours:[{
 					name:'充满自停',
 					duration:999,
@@ -82,6 +96,9 @@
 			this.communityId = options.communityId;
 			this._loadChargeMachines();
 			this._loadChargeMachinePorts();
+		},
+		onShow: function(options) {
+			this._dealChargeCoupons();
 		},
 		methods: {
 			_loadChargeMachines: function() {
@@ -117,6 +134,7 @@
 					"&communityId="+this.communityId
 					+"&portId="+this.curPort.portId
 					+"&duration="+this.curHours.duration
+					+"&couponIds="+this.couponList.join(",")
 				});
 				
 			},
@@ -129,7 +147,23 @@
 			},
 			_switchHours:function(_hours){
 				this.curHours = _hours;
-			}
+			},
+			_selectCoupons: function(_item) {
+				let _that = this;
+				uni.navigateTo({
+					url: '/pages/coupon/chargeCoupon'
+				})
+			},
+			
+			_dealChargeCoupons: function() {
+				let chargeCoupons = uni.getStorageSync('COUPON_USER_CHARGE');
+				if(!chargeCoupons){
+					return ;
+				}
+				uni.removeStorageSync('COUPON_USER_CHARGE');
+				this.couponList = chargeCoupons;
+				this.couponCount = chargeCoupons.length;	
+			},
 		}
 	}
 </script>
