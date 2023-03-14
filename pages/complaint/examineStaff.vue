@@ -6,9 +6,9 @@
 		</view>
 		
 		<view class="flex justify-start e-2">
-			<view v-for="(item,index) in staffs" class="e-2-item" :key="index">
+			<view v-for="(item,index) in staffs" class="e-2-item" :key="index" @click="_toScore(item)">
 				<view>
-					<image :src="item.url"></image>
+					<image :src="item.headerImg"></image>
 				</view>
 				<view>
 					<text class="e-2-st">{{item.staffName}}</text>
@@ -77,6 +77,11 @@
 				}
 				
 				return _staffId.substring(_staffId.length - 6);
+			},
+			_toScore:function(_staff){
+				uni.navigateTo({
+					url:'/pages/complaint/examineStaffScore?esId='+_staff.esId
+				});
 			}
 			
 			

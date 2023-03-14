@@ -815,7 +815,16 @@
             "path" : "pages/coupon/chargeCoupon",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "充电优惠券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/complaint/examineStaffScore",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "评分",
                 "enablePullDownRefresh": false
             }
             

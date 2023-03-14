@@ -28,6 +28,32 @@ export function getExamineStaffs(dataObj) {
 					reject(e);
 				}
 			});
-		})
-		
+		})		
+}
+
+/**
+ * 物业人员考评
+ * @param {Object} dataObj 
+ */
+export function saveExamineStaffValue(dataObj){
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.saveExamineStaffValue,
+			method: "POST",
+			data: dataObj,
+			success: function(res) {
+				let data = res.data;
+				if (data.code == 0) {
+					resolve();
+				} else {
+					uni.showToast({
+						title: data.msg
+					})
+				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
+	})
 }
