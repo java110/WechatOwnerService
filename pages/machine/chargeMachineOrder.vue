@@ -10,12 +10,28 @@
 						{{startTime || 0}}
 					</view>
 				</view>
+				<view class="cu-item " v-if="state == '2002'">
+					<view class="content">
+						<text class="text-grey">结束时间</text>
+					</view>
+					<view class="action">
+						{{endTime || 0}}
+					</view>
+				</view>
 				<view class="cu-item ">
 					<view class="content">
 						<text class="text-grey">充电时间</text>
 					</view>
 					<view class="action">
 						{{chargeHours  || 0}}
+					</view>
+				</view>
+				<view class="cu-item ">
+					<view class="content">
+						<text class="text-grey">充电桩</text>
+					</view>
+					<view class="action">
+						{{machineName || 0}}
 					</view>
 				</view>
 				<view class="cu-item ">
@@ -68,7 +84,9 @@
 				machineId:'',
 				portId:'',
 				startTime: '',
+				endTime:'',
 				chargeHours: '',
+				machineName:'',
 				portName: '',
 				durationPrice: '',
 				state: '',
@@ -91,12 +109,15 @@
 					_that.machineId = _data[0].machineId;
 					_that.portId= _data[0].portId;
 					_that.startTime= _data[0].startTime;
+					_that.endTime= _data[0].endTime;
 					if(parseInt(_data[0].chargeHours) == 999){
 						_that.chargeHours = '充满自停';
 					}else{
 						_that.chargeHours = parseInt(_data[0].chargeHours)+"小时";
 					}
 					_that.portName= _data[0].portName;
+					_that.machineName= _data[0].machineName;
+					
 					_that.durationPrice= _data[0].durationPrice;
 					_that.state= _data[0].state;
 					_that.stateName= _data[0].stateName;

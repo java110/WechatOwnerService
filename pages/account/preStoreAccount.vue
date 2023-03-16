@@ -94,6 +94,13 @@
 				});
 			},
 			_payWxApp: function(_data) {
+				if(!this.amount){
+					uni.showToast({
+						icon:'none',
+						title:'未填写金额'
+					});
+					return ;
+				}
 				let _receivedAmount = this.amount;
 				let _tradeType = 'APP';
 				payFeeApp(this,{
@@ -107,6 +114,13 @@
 				
 			},
 			onPayFee: function() {
+				if(!this.amount){
+					uni.showToast({
+						icon:'none',
+						title:'未填写金额'
+					});
+					return ;
+				}
 				let _receivedAmount = this.amount;
 				let _tradeType = 'JSAPI';
 				
@@ -135,5 +149,20 @@
 	
 	.button_up_blank {
 		height: 40rpx;
+	}
+	
+	.cu-btn.lgplus {
+		padding: 0 20px;
+		font-size: 18px;
+		height: 100upx;
+	
+	}
+	
+	.cu-btn.sharp {
+		border-radius: 0upx;
+	}
+	
+	.line-height {
+		line-height: 100upx;
 	}
 </style>

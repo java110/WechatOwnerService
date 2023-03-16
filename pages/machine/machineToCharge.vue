@@ -28,7 +28,7 @@
 			</view>
 		</view>
 		
-		<view class="cu-list menu margin-top" @click="_selectCoupons" v-if="curHours.duration && curPort.portId">
+		<view class="cu-list menu margin-sm" @click="_selectCoupons" v-if="curHours.duration && curPort.portId">
 			<view class="cu-item arrow">
 				<view class="content padding-tb-sm">
 					<view>
@@ -38,6 +38,9 @@
 				<view v-if="couponCount == 0">请选择</view>
 				<view v-else>{{couponCount+ '张' }}</view>
 			</view>
+		</view>
+		<view class="margin-sm">
+			<account ref="accRef"></account>
 		</view>
 		
 		<view class="plat-btn-black"></view>
@@ -55,6 +58,7 @@
 		getChargeMachinePort
 	} from '../../api/machine/machineApi.js';
 	import context from '../../lib/java110/Java110Context.js';
+	import account from '@/components/account/account.vue';
 	export default {
 		data() {
 			return {
@@ -90,6 +94,9 @@
 				}]
 			}
 		},
+		components:{
+			account,
+		},
 		onLoad(options) {
 			context.onLoad(options);
 			this.machineId = options.machineId;
@@ -99,6 +106,7 @@
 		},
 		onShow: function(options) {
 			this._dealChargeCoupons();
+			this.$refs.accRef.loadOwnerAccount();
 		},
 		methods: {
 			_loadChargeMachines: function() {

@@ -120,6 +120,10 @@
 						name: '放行记录',
 						src: this.imgUrl+'/h5/images/serve/my8.png',
 						href: '/pages/itemRelease/myItemReleaseList'
+					},{
+						name: '充电订单',
+						src: this.imgUrl+'/h5/images/serve/11.png',
+						href: '/pages/machine/chargeMachineOrders'
 					},
 				]
 			};

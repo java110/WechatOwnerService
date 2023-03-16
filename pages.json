@@ -829,6 +829,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/chargeMachineOrders",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充电订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
