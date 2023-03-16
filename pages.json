@@ -770,7 +770,7 @@
             "path" : "pages/machine/machineToCharge",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "智能充电",
                 "enablePullDownRefresh": false
             }
             
