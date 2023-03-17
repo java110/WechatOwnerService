@@ -201,6 +201,8 @@ export default {
 	stopCharge:baseUrl+"app/chargeMachine.stopCharge", // 结束充电
 	listChargeMachineOrder:baseUrl+"app/chargeMachine.listChargeMachineOrder", // 查询充电订单
 	saveExamineStaffValue:baseUrl+"app/examine.saveExamineStaffValue", // 查询充电订单
+	listExamineStaffValue:baseUrl+"app/examine.listExamineStaffValue", // 查询充电订单
+
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

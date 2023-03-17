@@ -14,6 +14,14 @@ from '../../constant/url.js'
 
 import mapping from '../../constant/MappingConstant.js'
 
+export function getOwnerId() {
+	let _ownerInfo = wx.getStorageSync(mapping.OWNER_INFO);
+	if (_ownerInfo) {
+		return _ownerInfo.ownerId;
+	}
+	return "-1"
+}
+
 /**
  * 查询当前业主信息
  */
@@ -51,7 +59,7 @@ export function getCurOwner() {
 									communityName: _ownerInfo.communityName
 								};
 								wx.setStorageSync(mapping.CURRENT_COMMUNITY_INFO,
-								_currentCommunityInfo);
+									_currentCommunityInfo);
 							}
 							resolve(_json.data[0]);
 						}
@@ -83,7 +91,7 @@ export function refreshOwner() {
 				},
 				success: function(res) {
 					let _json = res.data;
-					if (_json.code == 0 && _json.data && _json.data.length >0) {
+					if (_json.code == 0 && _json.data && _json.data.length > 0) {
 						let _ownerInfo = _json.data[0];
 						if (_ownerInfo == null || _ownerInfo == undefined) {
 							//没有业主信息

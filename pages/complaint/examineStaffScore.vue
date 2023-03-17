@@ -42,8 +42,10 @@
 
 <script>
 	import uSlider from '@/components/u-slider/u-slider.vue';
-	import {getExamineStaffs,saveExamineStaffValue} from '../../api/examine/examineApi.js';
+	import {getExamineStaffs,saveExamineStaffValue,getExamineStaffValue} from '../../api/examine/examineApi.js';
 	import {getCommunityId} from '../../api/community/communityApi.js';
+	import {getOwnerId} from '../../api/owner/ownerApi.js' 
+	
 	export default {
 		data() {
 			return {
@@ -72,6 +74,7 @@
 					communityId:getCommunityId()
 				}).then(_data=>{
 					_that.staff = _data[0];
+					_that._loadOwnerScoreStaff()
 				})
 			},
 			_showStaffId:function(_staffId){
@@ -88,6 +91,30 @@
 					projects:this.staff.projects
 				}).then(_data=>{
 					uni.navigateBack();
+				})
+			},
+			_loadOwnerScoreStaff:function(){
+				let _that = this;
+				let date = new Date();
+				let year = date.getFullYear();
+				getExamineStaffValue({
+					page:1,
+					row:50,
+					staffId:this.staff.staffId,
+					esYear:year,
+					ownerId:getOwnerId(),
+					communityId:getCommunityId()
+				}).then(_data =>{
+					if(!_data || _data.length < 1){
+						return ;
+					}
+					_that.staff.projects.forEach((item)=>{
+						_data.forEach(_project=>{
+							if(item.projectId = _project.projectId){
+								item.value = _project.examineValue;
+							}
+						})
+					})
 				})
 			}
 		}

@@ -57,3 +57,31 @@ export function saveExamineStaffValue(dataObj){
 		});
 	})
 }
+
+
+/**
+ * 查询用工考核
+ * @param {Object} dataObj 对象
+ */
+export function getExamineStaffValue(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.listExamineStaffValue,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.data.code == 0) {
+						let _data = res.data.data;
+						resolve(_data);
+						return;
+					}
+					reject(res.data.msg);
+				},
+				fail: function(e) {
+					reject(e);
+				}
+			});
+		})		
+}

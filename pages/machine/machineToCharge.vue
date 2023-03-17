@@ -148,7 +148,7 @@
 			},
 			
 			_switchPort:function(_port){
-				if(!_port.state == 'FREE'){
+				if(_port.state != 'FREE'){
 					return;
 				}
 				this.curPort = _port;
