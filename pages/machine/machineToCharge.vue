@@ -106,7 +106,7 @@
 		},
 		onShow: function(options) {
 			this._dealChargeCoupons();
-			this.$refs.accRef.loadOwnerAccount();
+			this.$refs.accRef.loadOwnerAccount(this.communityId);
 		},
 		methods: {
 			_loadChargeMachines: function() {

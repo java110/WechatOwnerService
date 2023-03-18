@@ -29,22 +29,27 @@
 		data() {
 			return {
 				account:{},
+				communityId:''
 			};
 		},
 		created() {
 			this.loadOwnerAccount();
 		},
 		methods: {
-			loadOwnerAccount: function() {
+			loadOwnerAccount: function(_communityId) {
+				this.communityId = _communityId;
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
 					if (_ownerInfo) {
+						if(!_that.communityId){
+							_that.communityId = _ownerInfo.communityId
+						}
 						queryOwnerAccount({
 							page: 1,
 							row: 20,
 							idCard: _ownerInfo.idCard,
 							link: _ownerInfo.link,
-							communityId: _ownerInfo.communityId,
+							communityId: _communityId,
 							acctType:'2003'
 						}).then((data) => {
 							if (!data) {
@@ -58,7 +63,7 @@
 			},
 			_toPrestoreAccount:function(){
 				uni.navigateTo({
-					url:'/pages/account/preStoreAccount'
+					url:'/pages/account/preStoreAccount?communityId='+this.communityId
 				})
 			}
 		}

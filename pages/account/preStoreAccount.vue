@@ -59,10 +59,12 @@
 			return {
 				account:{},
 				amount:'',
-				appId:''
+				appId:'',
+				communityId:'',
 			}
 		},
 		onLoad(options) {
+			this.communityId = options.communityId;
 			this.loadOwnerAccount();
 			// #ifdef MP-WEIXIN
 			let accountInfo = uni.getAccountInfoSync();
@@ -77,12 +79,15 @@
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
 					if (_ownerInfo) {
+						if(!_that.communityId){
+							_that.communityId = _ownerInfo.communityId;
+						}
 						queryOwnerAccount({
 							page: 1,
 							row: 20,
 							idCard: _ownerInfo.idCard,
 							link: _ownerInfo.link,
-							communityId: _ownerInfo.communityId
+							communityId: _that.communityId
 						}).then((data) => {
 							if (!data) {
 								_that.account = {};

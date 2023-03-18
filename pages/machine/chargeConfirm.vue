@@ -10,11 +10,14 @@
 		</view>
 		
 		<view class="suc-b">
-			<view class="suc-b-1">收费规则: 按时间收费(最小1小时)</view>
-			<view class="suc-b-1">充电价格: {{durationPrice}}元/小时, 1小时起</view>
-			<view class="suc-b-1">规则说明:</view>
-			<view class="suc-b-2">1、充电时间不满1小时按1小时结算</view>
-			<view class="suc-b-2">2、充电自满最长充电时间为10小时</view>
+			<view class="suc-b-1">收费规则: 按时间收费(最小1小时);</view>
+			<view class="suc-b-1">充电价格: </view>
+			<view class="suc-b-2" v-for="(item,index) in fees" :key="index">
+				{{index+1}}、{{item.minEnergyPrice}}~{{item.maxEnergyPrice}}功率,{{item.durationPrice}}元/小时;
+			</view>
+			<view class="suc-b-1 margin-top">规则说明:</view>
+			<view class="suc-b-2">1、充电时间不满1小时按1小时结算;</view>
+			<view class="suc-b-2">2、充电自满最长充电时间为10小时;</view>
 		</view>
 		
 		<view class="plat-btn-black"></view>
@@ -44,6 +47,7 @@
 				machineName: '',
 				durationPrice: '',
 				couponIds:'',
+				fees:[]
 			}
 		},
 		
@@ -68,12 +72,13 @@
 					_that.machineCode = _data.data[0].machineCode;
 					_that.machineName = _data.data[0].machineName;
 					_that.durationPrice = _data.data[0].durationPrice;
+					_that.fees = _data.data[0].fees;
 				})
 			},
 			_toChargeConfirm:function(){
 				
 				startCharge({
-					communityId:getCommunityId(),
+					communityId:this.communityId,
 					machineId:this.machineId,
 					portId:this.portId,
 					duration:this.duration,
