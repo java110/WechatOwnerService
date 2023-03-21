@@ -76,6 +76,11 @@
 						href: '/pages/fee/contractFeeList'
 					},
 					{
+						name: '水电充值',
+						src: this.imgUrl + '/h5/images/serve/5.png',
+						href: '/pages/meter/meter'
+					},
+					{
 						name: '家庭成员',
 						src: this.imgUrl + '/h5/images/serve/2.png',
 						href: '/pages/family/familyList'

@@ -202,6 +202,7 @@ export default {
 	listChargeMachineOrder:baseUrl+"app/chargeMachine.listChargeMachineOrder", // 查询充电订单
 	saveExamineStaffValue:baseUrl+"app/examine.saveExamineStaffValue", // 查询充电订单
 	listExamineStaffValue:baseUrl+"app/examine.listExamineStaffValue", // 查询充电订单
+	listMeterMachine:baseUrl+"app/meterMachine.listMeterMachine",
 
 
 	NEED_NOT_LOGIN_PAGE: [

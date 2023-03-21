@@ -838,6 +838,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/meter/meter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "水电充值",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/meter/preStoreMeter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "预存费用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
