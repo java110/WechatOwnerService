@@ -52,6 +52,7 @@
 		queryOwnerAccount
 	} from '../../api/user/userApi.js';
 	import {getCommunityId} from '@/api/community/communityApi.js';
+	import {getWAppId} from '../../lib/java110/utils/StorageUtil.js'
 	
 	import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
 	export default {
@@ -71,7 +72,7 @@
 			this.appId = accountInfo.miniProgram.appId;
 			// #endif
 			// #ifdef H5
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
+			this.appId = getWAppId();
 			// #endif
 		},
 		methods: {
@@ -79,9 +80,6 @@
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
 					if (_ownerInfo) {
-						if(!_that.communityId){
-							_that.communityId = _ownerInfo.communityId;
-						}
 						queryOwnerAccount({
 							page: 1,
 							row: 20,
@@ -131,7 +129,7 @@
 				
 				payFeeWechat(this,{
 					business: "preStoreOnline",
-					communityId: getCommunityId(),
+					communityId: this.communityId,
 					acctId: this.account.acctId,
 					feeName: '账户充值',
 					receivedAmount: _receivedAmount,

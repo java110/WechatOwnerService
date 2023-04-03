@@ -7,7 +7,7 @@
 		</view>
 		<view class="flex justify-start mtc-machine-port">
 			<view v-for="(item,index) in  ports" :key="index" class="port-item">
-				<view class="item-1" :class="{'item-1-active':curPort.portId == item.portId}" @click="_switchPort(item)">
+				<view class="item-1" :class="{'item-1-active':curPort.portId == item.portId || item.state=='WORK'}" @click="_switchPort(item)">
 					<view class="port-name">
 						{{item.portName}}
 					</view>
@@ -103,10 +103,18 @@
 			this.communityId = options.communityId;
 			this._loadChargeMachines();
 			this._loadChargeMachinePorts();
+			let _that = this;
+			setTimeout(function(){
+				_that.$refs.accRef.loadOwnerAccount(_that.communityId);
+			},1000);
 		},
 		onShow: function(options) {
 			this._dealChargeCoupons();
-			this.$refs.accRef.loadOwnerAccount(this.communityId);
+		
+			if(this.$refs.accRef){
+				this.$refs.accRef.loadOwnerAccount(this.communityId);
+			}
+			
 		},
 		methods: {
 			_loadChargeMachines: function() {

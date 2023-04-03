@@ -33,7 +33,7 @@
 			};
 		},
 		created() {
-			this.loadOwnerAccount();
+			//this.loadOwnerAccount();
 		},
 		methods: {
 			loadOwnerAccount: function(_communityId) {
