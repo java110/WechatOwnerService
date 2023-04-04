@@ -7,7 +7,7 @@
 		</view>
 		<view class="flex justify-start mtc-machine-port">
 			<view v-for="(item,index) in  ports" :key="index" class="port-item">
-				<view class="item-1" :class="{'item-1-active':curPort.portId == item.portId || item.state=='WORK'}" @click="_switchPort(item)">
+				<view class="item-1" :class="{'item-1-active':curPort.portId == item.portId || item.state=='WORKING'}" @click="_switchPort(item)">
 					<view class="port-name">
 						{{item.portName}}
 					</view>
