@@ -158,7 +158,8 @@
 					{
 						name: '智能充电',
 						src: this.imgUrl + '/h5/images/serve/my3.png',
-						href: '/pages/machine/chargeMachines'
+						href: '/pages/machine/chargeMachines',
+						needLogin: 'N'
 					},
 					{
 						name: '物业打分',

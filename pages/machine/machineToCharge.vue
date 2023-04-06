@@ -39,14 +39,18 @@
 				<view v-else>{{couponCount+ '张' }}</view>
 			</view>
 		</view>
-		<view class="margin-sm">
+		<view class="margin-sm" v-if="login">
 			<account ref="accRef"></account>
 		</view>
 		
 		<view class="plat-btn-black"></view>
-		<view class="cu-bar btn-group" style="margin-top: 30px;">
+		<view class="cu-bar btn-group" style="margin-top: 30px;" v-if="login">
 			<button @click="_toCharge" :disabled="!curHours.duration || !curPort.portId"
 				class="cu-btn bg-green shadow-blur round lg">去充电</button>
+		</view>
+		<view class="cu-bar btn-group" style="margin-top: 30px;" v-else>
+			<button @click="_toLogin" 
+				class="cu-btn bg-green shadow-blur round lg">请先登录</button>
 		</view>
 
 	</view>
@@ -73,6 +77,7 @@
 				curHours:{},
 				couponList:[],
 				couponCount:0,
+				login:false,
 				hours:[{
 					name:'充满自停',
 					duration:999,
@@ -101,6 +106,7 @@
 			context.onLoad(options);
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
+			this.login= context.checkLoginStatus();
 			this._loadChargeMachines();
 			this._loadChargeMachinePorts();
 			let _that = this;
@@ -180,6 +186,11 @@
 				this.couponList = chargeCoupons;
 				this.couponCount = chargeCoupons.length;	
 			},
+			_toLogin:function(){
+				uni.navigateTo({
+					url: '/pages/login/login'
+				})
+			}
 		}
 	}
 </script>

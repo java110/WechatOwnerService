@@ -12,7 +12,7 @@
 							<text class="margin-right-xs">{{item.endTime}}至{{item.deadlineTime}}</text></view>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">应缴:￥{{item.feePrice}}</text>
+						<text class="text-grey text-sm">应缴:￥{{item.feeTotalPrice}}</text>
 					</view>
 				</view>
 			</view>
@@ -121,7 +121,7 @@
 					.then(function(_fees){
 						_fees.forEach(function(_item){
 							if(_item.payOnline == 'Y'){
-								_that.receivableAmount += _item.feePrice;
+								_that.receivableAmount += _item.feeTotalPrice;
 							}
 						})
 						_that.receivableAmount = _that.receivableAmount.toFixed(2);
