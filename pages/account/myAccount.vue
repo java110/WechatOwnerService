@@ -45,7 +45,8 @@
 	import context from '../../lib/java110/Java110Context.js';
 	import {
 		queryOwnerAccount
-	} from '../../api/user/userApi.js'
+	} from '../../api/user/userApi.js';
+	import {getCommunityId} from '../../api/community/communityApi.js'
 
 	export default {
 		data() {
@@ -111,7 +112,7 @@
 			},
 			_toPrestoreAccount:function(){
 				uni.navigateTo({
-					url:'/pages/account/preStoreAccount'
+					url:'/pages/account/preStoreAccount?communityId='+getCommunityId()
 				})
 			}
 		}

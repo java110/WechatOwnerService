@@ -856,6 +856,30 @@
             }
             
         }
+        ,{
+            "path" : "pages/common/communityPublicity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "小区公示",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/common/communityPublicityList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path" : "pages/common/communityPublicityDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

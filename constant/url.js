@@ -203,6 +203,8 @@ export default {
 	saveExamineStaffValue:baseUrl+"app/examine.saveExamineStaffValue", // 查询充电订单
 	listExamineStaffValue:baseUrl+"app/examine.listExamineStaffValue", // 查询充电订单
 	listMeterMachine:baseUrl+"app/meterMachine.listMeterMachine",
+	queryDict:baseUrl+"callComponent/core/list",
+	listCommunityPublicity:baseUrl+"app/publicity.listCommunityPublicity",
 
 
 	NEED_NOT_LOGIN_PAGE: [

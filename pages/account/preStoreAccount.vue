@@ -85,7 +85,8 @@
 							row: 20,
 							idCard: _ownerInfo.idCard,
 							link: _ownerInfo.link,
-							communityId: _that.communityId
+							communityId: _that.communityId,
+							acctType:'2003'
 						}).then((data) => {
 							if (!data) {
 								_that.account = {};

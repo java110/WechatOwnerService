@@ -193,5 +193,29 @@ export function getOpenIdFromAliPay(_objData){
 		});
 	})
 }
+/**
+ * 刷新用户
+ * @param {Object} _objData
+ */
+export function queryDict(_objData){
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.queryDict,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
 
 

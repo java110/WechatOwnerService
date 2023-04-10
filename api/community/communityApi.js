@@ -208,3 +208,30 @@ export function listParkingAreas(dataObj) {
 		})
 		
 }
+
+/**
+ * 查询小区公示
+ * @param {Object} dataObj 对象
+ */
+export function getCommunityPublicity(dataObj) {
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.listCommunityPublicity,
+				method: "GET",
+				data: dataObj,
+				//动态数据
+				success: function(res) {
+					if (res.data.code == 0) {
+						let _data = res.data.data;
+						resolve(_data);
+						return;
+					}
+				},
+				fail: function(e) {
+					reject(e);
+				}
+			});
+		})
+		
+}

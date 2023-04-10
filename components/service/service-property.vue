@@ -166,7 +166,11 @@
 						src: this.imgUrl + '/h5/images/serve/my9.png',
 						href: '/pages/complaint/examineStaff'
 					},
-					
+					{
+						name: '小区公示',
+						src: this.imgUrl + '/h5/images/serve/my1.png',
+						href: '/pages/common/communityPublicity'
+					},
 					// {
 					// 	name: "返省上报",
 					// 	src: this.imgUrl + "/h5/images/serve/my3.png",
