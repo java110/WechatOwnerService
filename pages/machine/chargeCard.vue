@@ -2,7 +2,7 @@
 	<view >
 		<view class="tab-container bg-white">
 			<view class="cu-list menu">
-				<view class="cu-item " v-for="(item, key) in accounts" :key="key">
+				<view class="cu-item " v-for="(item, key) in chargeOrders" :key="key">
 					<view class="content padding-tb-sm">
 						<view>
 							<text class="cuIcon-rechargefill text-green margin-right-xs"></text> {{item.acctTypeName}}
@@ -26,12 +26,18 @@
 </template>
 
 <script>
-
-	import {getCommunityId} from '../../api/community/communityApi.js'
+	import context from '../../lib/java110/Java110Context.js';
+	
+    import {
+		getChargeMonthOrder
+	} from '@/api/machine/machineApi.js';
+	import {formatDate} from '../../lib/java110/utils/DateUtil.js'
 	export default {
 		data() {
 			return {
-				accounts: []
+				chargeOrders: [],
+				communityId:'',
+				personTel:''
 			};
 		},
 		/**
@@ -39,7 +45,8 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
-			this.loadOwnerAccount();
+			this.communityId = options.communityId;
+			this.loadChargeMonthOrder();
 		},
 		methods: {
 			coupons: function(_item) {
@@ -55,29 +62,30 @@
 			/**
 			 * 加载业主房屋信息
 			 */
-			loadOwnerAccount: function() {
+			loadChargeMonthOrder: function() {
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
 					if (_ownerInfo) {
-						queryOwnerAccount({
+						_that.personTel = _ownerInfo.link;
+						getChargeMonthOrder({
 							page: 1,
 							row: 20,
-							idCard: _ownerInfo.idCard,
-							link: _ownerInfo.link,
-							communityId: _ownerInfo.communityId
+							personTel: _ownerInfo.link,
+							communityId: _that.communityId,
+							queryTime:formatDate(new Date())
 						}).then((data) => {
 							if (!data) {
-								_that.accounts = [];
+								_that.chargeOrders = [];
 								return;
 							}
-							_that.accounts = data;
+							_that.chargeOrders = data;
 						})
 					}
 				});
 			},
 			_toPrestoreAccount:function(){
 				uni.navigateTo({
-					url:'/pages/account/preStoreAccount?communityId='+getCommunityId()
+					url:'/pages/machine/prestoreChargeCard?communityId='+ this.communityId+'&personTel='+this.personTel
 				})
 			}
 		}

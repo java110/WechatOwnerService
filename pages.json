@@ -889,6 +889,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/machine/prestoreChargeCard",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

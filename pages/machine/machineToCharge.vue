@@ -42,6 +42,9 @@
 		<view class="margin-sm" v-if="login">
 			<account ref="accRef"></account>
 		</view>
+		<view class="margin-sm" v-if="login">
+			<charge ref="chargeRef"></charge>
+		</view>
 		
 		<view class="plat-btn-black"></view>
 		<view class="cu-bar btn-group" style="margin-top: 30px;" v-if="login">
@@ -63,6 +66,8 @@
 	} from '../../api/machine/machineApi.js';
 	import context from '../../lib/java110/Java110Context.js';
 	import account from '@/components/account/account.vue';
+	import charge from '@/components/charge/charge.vue';
+	
 	export default {
 		data() {
 			return {
@@ -100,6 +105,7 @@
 			}
 		},
 		components:{
+			charge,
 			account,
 		},
 		onLoad(options) {
@@ -112,6 +118,7 @@
 			let _that = this;
 			setTimeout(function(){
 				_that.$refs.accRef.loadOwnerAccount(_that.communityId);
+				_that.$refs.chargeRef.loadChargeMonthOrder(_that.communityId);
 			},1000);
 		},
 		onShow: function(options) {
@@ -119,6 +126,9 @@
 		
 			if(this.$refs.accRef){
 				this.$refs.accRef.loadOwnerAccount(this.communityId);
+			}
+			if(this.$refs.chargeRef){
+				this.$refs.chargeRef.loadChargeMonthOrder(this.communityId);
 			}
 			
 		},

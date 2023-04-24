@@ -205,6 +205,8 @@ export default {
 	listMeterMachine:baseUrl+"app/meterMachine.listMeterMachine",
 	queryDict:baseUrl+"callComponent/core/list",
 	listCommunityPublicity:baseUrl+"app/publicity.listCommunityPublicity",
+	listChargeMonthOrder:baseUrl+"app/chargeCard.listChargeMonthOrder",
+	listChargeMonthCard:baseUrl+"app/chargeCard.listChargeMonthCard",
 
 
 	NEED_NOT_LOGIN_PAGE: [
