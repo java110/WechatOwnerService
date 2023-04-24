@@ -880,6 +880,15 @@
                 "enablePullDownRefresh": false
             }
         }
+        ,{
+            "path" : "pages/machine/chargeCard",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
