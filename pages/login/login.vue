@@ -60,8 +60,8 @@
 		data() {
 			return {
 				logoUrl: '',
-				username: '',
-				password: '',
+				username: '17797171234',
+				password: '123456',
 				appId: "",
 				code: "",
 				loginByPhone: false,

@@ -898,6 +898,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/my/userQrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "用户二维码",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

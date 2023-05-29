@@ -217,5 +217,31 @@ export function queryDict(_objData){
 	})
 }
 
+/**
+ * 查询活动列表
+ */
+export function generatorUserQrCode( _that) {
+	let obj = {
+		tel: '123'
+	};
+	return new Promise(
+		(resolve, reject) => {
+			request({
+				url: url.generatorUserQrCode,
+				method: "POST",
+				data: obj,
+				//动态数据
+				success: function(res) {
+					uni.hideLoading();
+					resolve(res.data);
+				},
+				fail: function(e) {
+					uni.hideLoading();
+					reject();
+				}
+			});
+		})
+}
+
 
 

@@ -144,9 +144,9 @@ export default {
 	queryHousekeepingType: baseUrl + 'app/housekeepingType/queryHousekeepingType',
 	queryMainCategoryAllGoods: baseUrl + "app/productCategory/queryMainCategoryAllGoods",
 	queryPhoneMainCategoryProduct: baseUrl + "app/product.queryPhoneMainCategoryProduct",
-	
+
 	queryMainCategory: baseUrl + "app/productCategory/queryMainCategory",
-	
+
 	queryShopCommunity: baseUrl + "app/shop/queryShopCommunity",
 	saveAddVisit: baseUrl + "app/visit.saveVisit",
 	queryReportInfoAnswerByOpenId: baseUrl + "app/reportInfoAnswer/queryReportInfoAnswerByOpenId",
@@ -170,44 +170,44 @@ export default {
 
 	// 修改预约订单
 	saveCommunitySpacePersonTime: baseUrl + "app/communitySpace.saveCommunitySpacePersonTime",
-	listEquipmentAccount:baseUrl +"app/equipmentAccount.listEquipmentAccount",
-	listMaintainanceTaskDetail:baseUrl +"app/maintainanceTask.listMaintainanceTaskDetail",
-	listInspectionTaskDetails:baseUrl +"app/inspectionTaskDetail.listInspectionTaskDetails",
+	listEquipmentAccount: baseUrl + "app/equipmentAccount.listEquipmentAccount",
+	listMaintainanceTaskDetail: baseUrl + "app/maintainanceTask.listMaintainanceTaskDetail",
+	listInspectionTaskDetails: baseUrl + "app/inspectionTaskDetail.listInspectionTaskDetails",
 	// 优惠券核销二维码生成
-	generatorCouponQrcode:baseUrl +"app/couponProperty.generatorCouponQrcode",
-	computePayFeeCoupon:baseUrl +"app/coupon.computePayFeeCoupon",
+	generatorCouponQrcode: baseUrl + "app/couponProperty.generatorCouponQrcode",
+	computePayFeeCoupon: baseUrl + "app/coupon.computePayFeeCoupon",
 	//查询停车场
-	listParkingAreas:baseUrl+"app/parkingArea.listParkingAreas",
-	couponPropertyUserGiftCar:baseUrl+"app/couponProperty.couponPropertyUserGiftCar",
-	listReserveCatalog:baseUrl+"app/reserve.listReserveCatalog", // 查询预约目录
-	listReserveGoods:baseUrl+"app/reserve.listReserveGoods", // 查询预约商品
-	listReserveParams:baseUrl+"app/reserve.listReserveParams", // 查询预约商品
-	listReserveGoodsOrderTime:baseUrl+"app/reserveOrder.listMyReserveGoodsOrderTime", // 查询预约订单
-    deleteReserveGoodsPerson:baseUrl+"app/reserveOrder.deleteReserveGoodsPerson", // 查询预约订单
+	listParkingAreas: baseUrl + "app/parkingArea.listParkingAreas",
+	couponPropertyUserGiftCar: baseUrl + "app/couponProperty.couponPropertyUserGiftCar",
+	listReserveCatalog: baseUrl + "app/reserve.listReserveCatalog", // 查询预约目录
+	listReserveGoods: baseUrl + "app/reserve.listReserveGoods", // 查询预约商品
+	listReserveParams: baseUrl + "app/reserve.listReserveParams", // 查询预约商品
+	listReserveGoodsOrderTime: baseUrl + "app/reserveOrder.listMyReserveGoodsOrderTime", // 查询预约订单
+	deleteReserveGoodsPerson: baseUrl + "app/reserveOrder.deleteReserveGoodsPerson", // 查询预约订单
 	listProductSeckill: baseUrl + "app/productSeckill.listProductSeckill",
 	listProductGroup: baseUrl + "app/productGroup.listProductGroup",
 	listRegisterProtocol: baseUrl + "app/system.listRegisterProtocol",
 	queryCurrentOwner: baseUrl + "app/owner.queryCurrentOwner",
-	listItemReleaseType: baseUrl+"app/itemRelease.listItemReleaseType",
-	queryFirstAuditStaff: baseUrl+"app/oaWorkflow.queryFirstAuditStaff",
-	saveItemRelease: baseUrl+"app/itemRelease.saveItemRelease",
-	listMyItemRelease: baseUrl+"app/itemRelease.listMyItemRelease",
-	listItemReleaseRes: baseUrl+"app/itemRelease.listItemReleaseRes",
-	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
-	listChargeMachine:baseUrl+"app/chargeMachine.listChargeMachine",
-	listChargeMachinePort:baseUrl+"app/chargeMachine.listChargeMachinePort",
-	listExamineStaff:baseUrl+"app/examine.listExamineStaff", // 查询打分员工
-	startCharge:baseUrl+"app/chargeMachine.startCharge", // 开始充电
-	stopCharge:baseUrl+"app/chargeMachine.stopCharge", // 结束充电
-	listChargeMachineOrder:baseUrl+"app/chargeMachine.listChargeMachineOrder", // 查询充电订单
-	saveExamineStaffValue:baseUrl+"app/examine.saveExamineStaffValue", // 查询充电订单
-	listExamineStaffValue:baseUrl+"app/examine.listExamineStaffValue", // 查询充电订单
-	listMeterMachine:baseUrl+"app/meterMachine.listMeterMachine",
-	queryDict:baseUrl+"callComponent/core/list",
-	listCommunityPublicity:baseUrl+"app/publicity.listCommunityPublicity",
-	listChargeMonthOrder:baseUrl+"app/chargeCard.listChargeMonthOrder",
-	listChargeMonthCard:baseUrl+"app/chargeCard.listChargeMonthCard",
-
+	listItemReleaseType: baseUrl + "app/itemRelease.listItemReleaseType",
+	queryFirstAuditStaff: baseUrl + "app/oaWorkflow.queryFirstAuditStaff",
+	saveItemRelease: baseUrl + "app/itemRelease.saveItemRelease",
+	listMyItemRelease: baseUrl + "app/itemRelease.listMyItemRelease",
+	listItemReleaseRes: baseUrl + "app/itemRelease.listItemReleaseRes",
+	queryOaWorkflowUser: baseUrl + "app/oaWorkflow/queryOaWorkflowUser",
+	listChargeMachine: baseUrl + "app/chargeMachine.listChargeMachine",
+	listChargeMachinePort: baseUrl + "app/chargeMachine.listChargeMachinePort",
+	listExamineStaff: baseUrl + "app/examine.listExamineStaff", // 查询打分员工
+	startCharge: baseUrl + "app/chargeMachine.startCharge", // 开始充电
+	stopCharge: baseUrl + "app/chargeMachine.stopCharge", // 结束充电
+	listChargeMachineOrder: baseUrl + "app/chargeMachine.listChargeMachineOrder", // 查询充电订单
+	saveExamineStaffValue: baseUrl + "app/examine.saveExamineStaffValue", // 查询充电订单
+	listExamineStaffValue: baseUrl + "app/examine.listExamineStaffValue", // 查询充电订单
+	listMeterMachine: baseUrl + "app/meterMachine.listMeterMachine",
+	queryDict: baseUrl + "callComponent/core/list",
+	listCommunityPublicity: baseUrl + "app/publicity.listCommunityPublicity",
+	listChargeMonthOrder: baseUrl + "app/chargeCard.listChargeMonthOrder",
+	listChargeMonthCard: baseUrl + "app/chargeCard.listChargeMonthCard",
+	generatorUserQrCode: baseUrl + "app/user.generatorUserQrCode",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
