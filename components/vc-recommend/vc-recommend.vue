@@ -115,7 +115,7 @@
 			},
 			_doSelect: function(item) {
 				this.curCategoryId = item.mainCategoryId;
-				this.pagefrom =1;
+				this.pagefrom =0;
 				this.products=[];
 				this._loadRecommendProdcut();
 			}
