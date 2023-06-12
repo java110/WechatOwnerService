@@ -24,6 +24,7 @@
 </template>
 
 <script>
+	import context from '../../lib/java110/Java110Context.js';
 	import {
 		queryOwnerAccount
 	} from '../../api/user/userApi.js'
@@ -87,19 +88,42 @@
 			},
 			
 			_listOwnerAccount: function(_feeId, _communityId) {
+				// 2023.6.12
 				let _that = this;
-				queryOwnerAccount({
-					page: 1,
-					row: 30,
-					feeId: _feeId,
-					communityId: _communityId
-				}).then((data) => {
-					if(!data){
-						_that.accounts = [];
-						return;
+				context.getOwner(function(_ownerInfo) {
+					if (_ownerInfo) {
+						if(!_that.communityId){
+							_that.communityId = _ownerInfo.communityId
+						}
+						queryOwnerAccount({
+							page: 1,
+							row: 20,
+							idCard: _ownerInfo.idCard,
+							link: _ownerInfo.link,
+							communityId: _communityId,
+							acctType:'2003'
+						}).then((data) => {
+							if (!data) {
+								_that.accounts = [];
+								return;
+							}
+							_that.accounts = data;
+						})
 					}
-					_that.accounts = data;
-				})
+				});
+				// let _that = this;
+				// queryOwnerAccount({
+				// 	page: 1,
+				// 	row: 30,
+				// 	feeId: _feeId,
+				// 	communityId: _communityId
+				// }).then((data) => {
+				// 	if(!data){
+				// 		_that.accounts = [];
+				// 		return;
+				// 	}
+				// 	_that.accounts = data;
+				// })
 			},
 			_viewAccountDetail: function(_account) {
 
