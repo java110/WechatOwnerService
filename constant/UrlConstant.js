@@ -20,7 +20,7 @@ const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //报修
 
 const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //查询报修
 
-const saveOwner = baseUrl + 'app/owner.saveOwner'; //家庭成员列表
+const saveOwner = baseUrl + 'app/owner.saveOwnerMember'; //家庭成员列表
 
 const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers'; //投诉建议列表
 

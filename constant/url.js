@@ -12,7 +12,7 @@ export default {
 	GetNoticeListUrl: baseUrl + 'app/notice.listNotices', //公告接口
 	saveOwnerRepair: baseUrl + 'app/ownerRepair.saveOwnerRepair', //报修
 	listOwnerRepairs: baseUrl + 'app/ownerRepair.listOwnerRepairs', //查询报修
-	saveOwner: baseUrl + 'app/owner.saveOwner', //家庭成员列表
+	saveOwner: baseUrl + 'app/owner.saveOwnerMember', //家庭成员列表
 	queryOwnerMembers: baseUrl + 'app/owner.queryOwnerMembers', //投诉建议列表
 	listComplaints: baseUrl + 'app/complaint.listComplaints', //添加投诉建议
 	saveComplaint: baseUrl + 'app/complaint.saveComplaint', //查询业主房间
