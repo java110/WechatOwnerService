@@ -262,11 +262,11 @@
 			"style": {
 				"navigationBarTitleText": "投诉待办"
 			}
-		}, {
-			"path": "pages/login/registerByWechat",
-			"style": {
-				"navigationBarTitleText": "业主绑定"
-			}
+		// }, {
+		// 	"path": "pages/login/registerByWechat",
+		// 	"style": {
+		// 		"navigationBarTitleText": "业主绑定"
+		// 	}
 		}, {
 			"path": "pages/settings/changePassword",
 			"style": {
