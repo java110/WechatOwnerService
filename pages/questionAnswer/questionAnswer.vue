@@ -55,11 +55,7 @@
 			let that = this;
 			that.communityId = context.getCurrentCommunity().communityId;
 			that.userId = context.getUserInfo().userId;
-			getProperty()
-			.then(function(_property) {
-				that.storeId = _property.storeId;
-				that._queryQuestionAnswer();
-			})
+			this._queryQuestionAnswer();
 		},
 		methods: {
 			_queryQuestionAnswer: function(){
@@ -67,11 +63,8 @@
 				queryQuestionAnswer({
 					page:1,
 					row:50,
-					qaTypes:'1001,3003',
-					objType:'3306',
+					qaType:'3003',
 					communityId: that.communityId,
-					userId: that.userId,
-					storeId: that.storeId
 				})
 				.then(_data=>{
 					_data.data.forEach(function(item, index) {

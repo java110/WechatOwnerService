@@ -119,7 +119,7 @@ export default {
 	queryRoomRenovationRecord: baseUrl + "app/roomRenovation/queryRoomRenovationRecord",
 	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
 	queryContract: baseUrl + "app/contract/queryContract",
-	queryQuestionAnswer: baseUrl + "app/questionAnswer/queryQuestionAnswer",
+	queryQuestionAnswer: baseUrl + "app/question.queryOwnerQuestionAnswer",
 	queryQuestionAnswerTitle: baseUrl + "app/questionAnswer/queryQuestionAnswerTitle",
 	saveUserQuestionAnswerValue: baseUrl + "app/userQuestionAnswer/saveUserQuestionAnswerValue",
 	listMachineTranslates: baseUrl + "app/machineTranslate.listMachineTranslates",
