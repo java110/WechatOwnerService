@@ -1,21 +1,27 @@
 <template>
 	<view>
-		<view v-show="qaInfo.fileUrls.length > 0" class="img-bg">
-			<image :src="qaInfo.fileUrls[0]" class="qa-img" mode="widthFix"></image>
-		</view>
 		<view class="qa-title text-center text-bold text-lg margin-top-lg">
 			{{qaInfo.qaName}}
 		</view>
-		<view class="qa-endtime text-center text-sm text-grey">
-			结束时间：{{qaInfo.endTime}}
+		<view class="flex justify-between padding-lr-sm margin-top-xs">
+			<view>投票人姓名（业主）</view>
+			<view>{{qaInfo.ownerName}}</view>
 		</view>
-		<view v-show="qaInfo.remark" class="qa-remark text-center margin-top-lg">
-			{{qaInfo.remark}}
+		<view class="flex justify-between padding-lr-sm margin-top-xs">
+			<view>联系电话</view>
+			<view>{{qaInfo.link}}</view>
+		</view>
+		<view class="flex justify-between padding-lr-sm margin-top-xs">
+			<view>房产</view>
+			<view>{{qaInfo.roomName}}</view>
+		</view>
+		<view class="qa-remark margin">
+			<view v-html="qaInfo.content"></view>
 		</view>
 		<view class="" v-for="(item,index) in titles" :key="index">
 			<view class="block__title">{{item.qaTitle}}</view>
 			<radio-group class="block" @change="radioChange($event,item)" v-if="item.titleType == '1001'">
-				<view class="cu-form-group" v-for="(valueItem,valueIndex) in item.questionAnswerTitleValues"
+				<view class="cu-form-group" v-for="(valueItem,valueIndex) in item.titleValues"
 					:key="valueIndex">
 					<view class="title">{{valueItem.qaValue}}</view>
 					<radio :class="item.radio==valueItem.valueId?'checked':''"
@@ -24,7 +30,7 @@
 				</view>
 			</radio-group>
 			<checkbox-group class="block" @change="checkboxChange($event,item)" v-else-if="item.titleType == '2002'">
-				<view class="cu-form-group " v-for="(valueItem,valueIndex) in item.questionAnswerTitleValues">
+				<view class="cu-form-group " v-for="(valueItem,valueIndex) in item.titleValues">
 					<view class="title">{{valueIndex + 1}}{{valueItem.qaValue}}</view>
 					<checkbox :class="item.radio[valueIndex].selected == '1'?'checked':''"
 						:checked="item.radio[valueIndex].selected == '1'?true:false" :value="valueItem.valueId">
@@ -38,14 +44,10 @@
 				</view>
 			</view>
 		</view>
-
-
 		<view class="button_up_blank"></view>
-
 		<view class="flex flex-direction">
 			<button class="cu-btn bg-green margin-tb-sm lg" @click="submitQuestionAnswer()">提交</button>
 		</view>
-
 	</view>
 </template>
 
@@ -63,10 +65,16 @@
 	export default {
 		data() {
 			return {
-				qaInfo: {},
+				qaInfo: {
+					qaName:'',
+					ownerName:'',
+					link:'',
+					roomName:'',
+					userQaId:''
+				},
 				titles: [],
 				qaId: '',
-				objType: ''
+				communityId: ''
 			};
 		},
 
@@ -76,16 +84,15 @@
 		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
+			this.communityId = context.getCurrentCommunity().communityId;
 			this.qaId = options.qaId;
-			this.objType = options.objType
 			this._queryQuestionAnswer();
 
 			queryQuestionAnswerTitle({
-					objType: this.objType,
 					qaId: this.qaId,
 					page: 1,
 					row: 100,
-                    objId:''
+					communityId: this.communityId
 				})
 				.then(_data => {
 					_data.data.forEach(item => {
@@ -94,7 +101,7 @@
 						} else if (item.titleType == '2002') {
 							// checked: false
 							item.radio = [];
-							item.questionAnswerTitleValues.forEach(value => {
+							item.titleValues.forEach(value => {
 								item.radio.push({
 									checked: false,
 									valueId: value.valueId,
@@ -114,18 +121,17 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
-			_queryQuestionAnswer: function(){
+			_queryQuestionAnswer: function() {
 				let that = this;
 				queryQuestionAnswer({
-					page:1,
-					row:1,
-					qaTypes:'1001,3003',
-					objType:'3306',
-					qaId: that.qaId,
-				})
-				.then(_data=>{
-					that.qaInfo = _data.data[0];
-				})
+						page: 1,
+						row: 1,
+						qaType: '3003',
+						communityId: that.communityId,
+					})
+					.then(_data => {
+						that.qaInfo = _data.data[0];
+					})
 			},
 			radioChange: function(e, item) {
 				console.log(e, item)
@@ -138,7 +144,7 @@
 				})
 
 				item.radio.forEach(value => {
-					e.detail.value.forEach(_dValue =>{
+					e.detail.value.forEach(_dValue => {
 						if (value.valueId == _dValue) {
 							if (value.selected == '0') {
 								value.selected = '1';
@@ -158,7 +164,6 @@
 				let _titles = this.titles;
 				let _valueId = '';
 				_titles.forEach(item => {
-
 					if (item.titleType == '2002') {
 						item.radio.forEach(_radio => {
 							if (_radio.selected == '1') {
@@ -181,9 +186,9 @@
 
 				let obj = {
 					"qaId": this.qaId,
-					"objType": this.objType,
-					"objId": context.getCurrentCommunity().communityId,
+					"communityId": this.communityId,
 					"answerType": '1002',
+					"userQaId":this.qaInfo.userQaId,
 					questionAnswerTitles: _questionAnswerTitles
 				}
 
@@ -217,17 +222,16 @@
 		font-weight: 400;
 		font-size: 14px;
 		color: rgba(69, 90, 100, .6);
-		padding: 40rpx 30rpx 0rpx;
+		padding: 10rpx 20rpx 15upx;
 	}
 
 	.button_up_blank {
 		height: 40rpx;
 	}
-	
-	.img-bg{
-		
-	}
-	.qa-img{
+
+	.img-bg {}
+
+	.qa-img {
 		width: 100%;
 	}
 </style>
