@@ -64,6 +64,7 @@
 					page:1,
 					row:50,
 					qaType:'3003',
+					state:'1201',
 					communityId: that.communityId,
 				})
 				.then(_data=>{
