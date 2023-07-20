@@ -498,7 +498,7 @@ export function payFeeWechat(_that, _data,_successUrl) {
 				return;
 			}
 			wx.showToast({
-				title: "缴费失败",
+				title: "缴费失败"+res.data.msg,
 				icon: 'none',
 				duration: 2000
 			});
