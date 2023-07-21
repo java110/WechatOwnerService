@@ -907,6 +907,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/questionAnswer/ownerVote",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "投票",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
