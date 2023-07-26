@@ -943,7 +943,6 @@
 				"iconPath": "static/images/rent.png",
 				"selectedIconPath": "static/images/rent-selected.png"
 			},
-			
 			// #ifdef H5 && WUYE
 			{
 				"pagePath": "pages/mall/mall",

@@ -208,6 +208,9 @@ export default {
 	listChargeMonthOrder: baseUrl + "app/chargeCard.listChargeMonthOrder",
 	listChargeMonthCard: baseUrl + "app/chargeCard.listChargeMonthCard",
 	generatorUserQrCode: baseUrl + "app/user.generatorUserQrCode",
+	getOpenIdByCode: baseUrl + "app/wechat.getOpenIdByCode",
+	
+	
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',
