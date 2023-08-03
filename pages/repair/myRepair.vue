@@ -361,7 +361,7 @@
 					communityId: _communityInfo.communityId,
 					repairId: _repair.repairId,
 					staffId: this.userId,
-					state: '10001'
+					//state: '10001'
 				};
 				uni.request({
 					url: constant.url.listRepairStaffs,
@@ -409,7 +409,7 @@
 				}
 				let _communityInfo = context.getCurrentCommunity();
 				let _data = {
-					staffId: this.preStaffId,
+					staffId: this.userId,
 					staffName: this.preStaffName,
 					context: this.context,
 					action: 'BACK',
