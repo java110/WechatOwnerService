@@ -56,13 +56,14 @@ export function navigateMP(_url) {
 		_url = _url + "?hcCommunityId=" + getMallCommunityId();
 	}
 	_url = _url + "&mallFrom=HC_MINI"
-
+	let params = _url.split("?")[1].split("&")
+	let obj = {};
+	params.map(v => obj[v.split("=")[0]] = v.split("=")[1])
+	
 	uni.navigateToMiniProgram({
 		appId: conf.mallMinAppId,
 		path: _url, // 不填默认首页
-		extraData: {
-			'data1': 'test'
-		},
+		extraData: obj,
 		success(res) {
 			// 打开成功
 		}
