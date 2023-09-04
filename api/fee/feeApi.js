@@ -292,6 +292,38 @@ export function computePayFeeCoupon(_objData) {
 	})
 }
 
+/**
+ * 计算算费
+ * @param {Object} _objData {
+	 communityId:"",
+	 feeId:"",
+	 cycle:'',
+	 page:1,
+	 row:1
+ }
+ */
+export function computeObjFee(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computeObjFee,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
 
 
 export function receiveParkingCoupon(_objData) {

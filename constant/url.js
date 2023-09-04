@@ -208,6 +208,7 @@ export default {
 	listChargeMonthOrder: baseUrl + "app/chargeCard.listChargeMonthOrder",
 	listChargeMonthCard: baseUrl + "app/chargeCard.listChargeMonthCard",
 	generatorUserQrCode: baseUrl + "app/user.generatorUserQrCode",
+	computeObjFee: baseUrl + "app/feeApi/listFeeObj",
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

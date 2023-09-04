@@ -168,7 +168,7 @@
 		dateSubOneDay
 	} from '../../lib/java110/utils/DateUtil.js';
 	
-	import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
+	import {payFeeApp,payFeeWechat,computeObjFee} from '@/api/fee/feeApi.js';
 
 	export default {
 		components: {
@@ -244,9 +244,6 @@
 			let _receivableAmount = _amount;
 			if (_fee.feeFlag == "2006012") { // 一次性费用
 				_receivableAmount = _amount;
-			} else { // 周期性费用
-				//_receivableAmount = ((_fee.builtUpArea * _fee.squarePrice + parseFloat(_fee.additionalAmount)) * _fee.paymentCycle).toFixed(2);
-				_receivableAmount = (_fee.amount * _fee.paymentCycle).toFixed(2);
 			}
 
 			let _communityInfo = context.getCurrentCommunity();
@@ -288,12 +285,14 @@
 				let _endTime = addMonth(_lastDate, parseInt(this.feeMonth));
 				this.endTime = formatDate(_endTime);
 			}
-
-
+			
+			if(_fee.feeFlag != "2006012") { // 周期性费用
+				//todo 计算 应收
+				this.computeReceivableAmount();
+			}
+			
 			this.$nextTick(() => {
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
 				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
-				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
 			})
 		},
 		onShow() {
@@ -324,10 +323,23 @@
 				})
 			},
 			// （单价×面积+附加费）  × 周期
-			getReceivableAmount: function() {
+			computeReceivableAmount: function() {
 				// return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth)
 				// 	.toFixed(2);
-				return (this.amount * this.feeMonth).toFixed(2);
+				let _that = this;
+				computeObjFee({
+					communityId:this.communityId,
+					feeId:this.feeId,
+					cycle:this.feeMonth,
+					page:1,
+					row:1
+				}).then(_data=>{
+					_that.receivableAmount = _data.data.feeTotalPrice;
+					_that.$refs.vcDiscountRef._loadFeeDiscount(_that.feeId, _that.communityId, _that.feeMonth);
+					_that.$refs.giftCoupon.listGiftCoupon(_that.feeId, _that.communityId, _that.feeMonth);
+				})
+				
+				//return (this.amount * this.feeMonth).toFixed(2);
 			},
 
 			// 折扣金额
@@ -371,9 +383,8 @@
 				this.feeMonthName = _feeMonth + '个月';
 				this.feeMonth = _feeMonth;
 				this.endTime = formatDate(_newDate);
-				this.receivableAmount = this.getReceivableAmount();
-				this.$refs.vcDiscountRef._loadFeeDiscount(this.feeId, this.communityId, this.feeMonth);
-				this.$refs.giftCoupon.listGiftCoupon(this.feeId, this.communityId, this.feeMonth);
+				this.computeReceivableAmount();
+				
 			},
 
 			onFeeMonthChange: function(e) {
