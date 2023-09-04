@@ -9,7 +9,7 @@
 							<view class="text-cut" style="width:150px">{{item.feeName}}({{item.payerObjName}})</view>
 						</view>
 						<view class="text-gray text-sm">
-							<text class="margin-right-xs">{{item.endTime}}至{{item.deadlineTime}}</text></view>
+							<text class="margin-right-xs">{{item.endTime}}至{{_getDeadlineTime(item)}}</text></view>
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">应缴:￥{{item.feeTotalPrice}}</text>
@@ -47,7 +47,8 @@
 
 	import {
 		addMonth,
-		formatDate
+		formatDate,
+		dateSubOneDay
 	} from '../../lib/java110/utils/DateUtil.js'
 
 	import {
@@ -95,8 +96,6 @@
 			})
 		},
 		methods: {
-			
-			
 			_loadOweFee: function() {
 				let _that =this;
 				let _objData = {
@@ -108,6 +107,8 @@
 				getRoomOweFees(_objData)
 					.then(function(_fees) {
 						_that.fees = _fees;
+				
+						
 						if(_fees && _fees.length > 0){
 							_that.storeId = _fees[0].incomeObjId;
 						}
@@ -129,6 +130,10 @@
 			},
 			onPayFee:function(){
 				payOweFee(this);
+			},
+			_getDeadlineTime:function(_fee){
+						//todo 处理周期性费用和间接费用的结束时间
+				return	dateSubOneDay(_fee.startTime, _fee.deadlineTime, _fee.feeFlag);	
 			}
 		}
 	};
