@@ -907,6 +907,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/fee/payQrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "二维码支付",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",
