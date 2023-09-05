@@ -916,6 +916,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/fee/payQrCodeFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "二维码交费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

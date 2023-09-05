@@ -50,6 +50,7 @@ export default {
 	queryFeeDetail: baseUrl + "app/fee.queryFeeDetail",
 	//发送验证码
 	userSendSms: baseUrl + "app/user.userSendSms",
+	ownerSendSms: baseUrl + "app/user.ownerSendSms",
 	userLogout: baseUrl + 'app/user.service.logout', //绑定业主
 	listStore: baseUrl + 'app/store.listStoresByCommunity', // 查询小区商户
 	//发布需求信息
@@ -209,6 +210,13 @@ export default {
 	listChargeMonthCard: baseUrl + "app/chargeCard.listChargeMonthCard",
 	generatorUserQrCode: baseUrl + "app/user.generatorUserQrCode",
 	computeObjFee: baseUrl + "app/feeApi/listFeeObj",
+	getQrcodeConfig: baseUrl + "app/payFeeQrcode.getQrcodeConfig",
+	getQrcodeOwner: baseUrl + "app/owner.getQrcodeOwner",
+	getQrcodeOweFees: baseUrl + "app/payFeeQrcode.getQrcodeOweFees",
+	
+	
+	
+	
 
 	NEED_NOT_LOGIN_PAGE: [
 		'pages/login/login',

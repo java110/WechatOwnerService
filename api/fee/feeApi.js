@@ -545,3 +545,4 @@ export function payFeeWechat(_that, _data,_successUrl) {
 		}
 	});
 }
+

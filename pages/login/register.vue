@@ -77,7 +77,6 @@
 					});
 					return;
 				}
-				console.log(obj);
 				uni.showLoading({
 					title: '加载中',
 					mask: true
