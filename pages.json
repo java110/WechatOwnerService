@@ -925,6 +925,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/fee/cashier",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "收款",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

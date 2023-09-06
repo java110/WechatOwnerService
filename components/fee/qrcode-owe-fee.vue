@@ -112,6 +112,27 @@
 
 			},
 			onPayFee: function() {
+				if(!this.feeIds || this.feeIds.length < 1){
+					uni.showToast({
+						icon:'none',
+						title:'未选择费用'
+					})
+					return;
+				}
+				let _objData = {
+					business: "oweFee",
+					communityId: this.communityId,
+					ownerId: this.ownerId,
+					feeName: '物业费',
+					receivedAmount: this.receivableAmount,
+					storeId: this.storeId,
+					feeIds:this.feeIds
+				};
+				
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+this.receivableAmount+"&business=oweFee"
+				})
 
 			},
 			computeAmount:function(){
