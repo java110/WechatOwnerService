@@ -41,10 +41,6 @@
 				groupPrice:'1.50',
 				price:'2.50'
 			}
-			this.goods.push(_goods);
-			this.goods.push(_goods);
-			this.goods.push(_goods);
-			this.goods.push(_goods);
 			this._loadGoods();
 		},
 		methods:{

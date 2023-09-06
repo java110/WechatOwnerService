@@ -4,7 +4,7 @@
 			{{qaInfo.qaName}}
 		</view>
 		<view class="flex justify-between padding-lr-sm margin-top-xs">
-			<view>问卷人姓名（业主）</view>
+			<view>投票人姓名（业主）</view>
 			<view>{{qaInfo.ownerName}}</view>
 		</view>
 		<view class="flex justify-between padding-lr-sm margin-top-xs">
@@ -196,7 +196,7 @@
 					.then(_data => {
 						uni.showToast({
 							icon: 'none',
-							title: '提交成功'
+							title: '投票成功'
 						});
 						uni.navigateBack({
 							delta: 1

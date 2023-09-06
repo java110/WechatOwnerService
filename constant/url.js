@@ -120,9 +120,9 @@ export default {
 	queryRoomRenovationRecord: baseUrl + "app/roomRenovation/queryRoomRenovationRecord",
 	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
 	queryContract: baseUrl + "app/contract/queryContract",
-	queryQuestionAnswer: baseUrl + "app/questionAnswer/queryQuestionAnswer",
-	queryQuestionAnswerTitle: baseUrl + "app/questionAnswer/queryQuestionAnswerTitle",
-	saveUserQuestionAnswerValue: baseUrl + "app/userQuestionAnswer/saveUserQuestionAnswerValue",
+	queryQuestionAnswer: baseUrl + "app/question.queryOwnerQuestionAnswer",
+	queryQuestionAnswerTitle: baseUrl + "app/question.listQuestionTitle",
+	saveUserQuestionAnswerValue: baseUrl + "app/question.saveOwnerQuestionAnswer",
 	listMachineTranslates: baseUrl + "app/machineTranslate.listMachineTranslates",
 	generatorHcCode: baseUrl + "app/userLogin/generatorHcCode",
 	queryApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscount",
@@ -213,7 +213,7 @@ export default {
 	getQrcodeConfig: baseUrl + "app/payFeeQrcode.getQrcodeConfig",
 	getQrcodeOwner: baseUrl + "app/owner.getQrcodeOwner",
 	getQrcodeOweFees: baseUrl + "app/payFeeQrcode.getQrcodeOweFees",
-	
+	getOpenIdByCode: baseUrl + "app/wechat.getOpenIdByCode",
 	
 	
 	

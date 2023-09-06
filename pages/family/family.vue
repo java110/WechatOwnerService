@@ -37,13 +37,13 @@
 		<view class="block__title">联系信息</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="link" placeholder="请输入手机号"></input>
+			<input v-model="link" placeholder="请输入手机号(没有手机号随便写一个)"></input>
 		</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="title">验证码</view>
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
 			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
-		</view>
+		</view> -->
 		
 		<view class="block__title">相关图片</view>
 		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
@@ -123,31 +123,10 @@
 			let _that = this;
 			 context.onLoad(options);
 			context.getOwner(function(_owner) {
-				_that.ownerId = _owner.memberId;
+				_that.ownerId = _owner.ownerId;
 				_that.communityId = _owner.communityId;
 			});
 		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
 		 */
@@ -169,7 +148,7 @@
 					"memberId": this.memberId,
 					"communityId": this.communityId,
 					"idCard": this.idCard,
-					"msgCode":this.msgCode,
+					//"msgCode":this.msgCode,
 					"address": this.address,
 					"ownerPhoto": this.photos
 				}
@@ -188,10 +167,12 @@
 				}else if (obj.link == "") {
 					msg = "请填写手机号";
 				} else if (!checkPhoneNumber(obj.link)){
-					msg = "手机号有误";
-				}else if (obj.msgCode == "") {
-					msg = "请填写验证码";
-				}
+				 	msg = "手机号有误";
+				 }
+				 // todo 这里手机号关闭 因为 小朋友没有手机号
+				 //else if (obj.msgCode == "") {
+				// 	msg = "请填写验证码";
+				// }
 				if (msg != "") {
 					uni.showToast({
 						title: msg,

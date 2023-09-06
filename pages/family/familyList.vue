@@ -117,7 +117,7 @@
 				that.owners = [];
 				context.getOwner(function(_owner) {
 					that.communityId = _owner.communityId;
-					that.ownerId = _owner.memberId;
+					that.ownerId = _owner.ownerId;
 					that.ownerTypeCd = _owner.ownerTypeCd;
 					that.getTable(1);
 				});

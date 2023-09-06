@@ -142,6 +142,7 @@ export function getParkingCarCoupon(_objData) {
 	})
 }
 
+
 /**
  * 查询欠费信息
  * @param {Object} _objData 欠费对象
@@ -176,178 +177,6 @@ export function getRoomOweFees(_objData) {
 		});
 	})
 }
-
-/**
- * 查询优惠信息
- * @param {Object} _objData 费用
- */
-export function getFeeDiscounts(_objData) {
-	return new Promise((resolve, reject) => {
-		request({
-			url: url.computeFeeDiscount,
-			method: "GET",
-			data: _objData, //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					let _feeDiscounts = res.data.data;
-					resolve(_feeDiscounts);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-/**
- * 查询停车费
- * @param {Object} _objData 费用
- */
-export function getTempCarFeeOrder(_objData) {
-	return new Promise((resolve, reject) => {
-		requestNoAuth({
-			url: url.getTempCarFeeOrder,
-			method: "GET",
-			data: _objData, //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-export function toPayTempCarFee(_objData) {
-	return new Promise((resolve, reject) => {
-		requestNoAuth({
-			url: url.toPayTempCarFee,
-			method: "POST",
-			data: JSON.stringify(_objData), //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-
-export function generatorCouponQrcode(_objData) {
-	return new Promise((resolve, reject) => {
-		request({
-			url: url.generatorCouponQrcode,
-			method: "POST",
-			data: JSON.stringify(_objData), //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-export function computePayFeeCoupon(_objData) {
-	return new Promise((resolve, reject) => {
-		request({
-			url: url.computePayFeeCoupon,
-			method: "GET",
-			data: _objData, //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-/**
- * 计算算费
- * @param {Object} _objData {
-	 communityId:"",
-	 feeId:"",
-	 cycle:'',
-	 page:1,
-	 row:1
- }
- */
-export function computeObjFee(_objData) {
-	return new Promise((resolve, reject) => {
-		request({
-			url: url.computeObjFee,
-			method: "GET",
-			data: _objData, //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-
-
-
-export function receiveParkingCoupon(_objData) {
-	return new Promise((resolve, reject) => {
-		requestNoAuth({
-			url: url.saveParkingCouponCar,
-			method: "POST",
-			data: JSON.stringify(_objData), //动态数据
-			success: function(res) {
-				if (res.statusCode == 200) {
-					//成功情况下跳转
-					resolve(res.data);
-					return;
-				}
-				reject();
-			},
-			fail: function(e) {
-				reject();
-			}
-		});
-	})
-}
-
-
 export function couponPropertyUserGiftCar(_objData) {
 	return new Promise((resolve, reject) => {
 		requestNoAuth({
@@ -530,7 +359,7 @@ export function payFeeWechat(_that, _data,_successUrl) {
 				return;
 			}
 			wx.showToast({
-				title: "缴费失败",
+				title: "缴费失败"+res.data.msg,
 				icon: 'none',
 				duration: 2000
 			});
@@ -544,5 +373,185 @@ export function payFeeWechat(_that, _data,_successUrl) {
 			});
 		}
 	});
+
 }
+
+/**
+ * 查询优惠信息
+ * @param {Object} _objData 费用
+ */
+export function getFeeDiscounts(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computeFeeDiscount,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _feeDiscounts = res.data.data;
+					resolve(_feeDiscounts);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 查询停车费
+ * @param {Object} _objData 费用
+ */
+export function getTempCarFeeOrder(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.getTempCarFeeOrder,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+export function toPayTempCarFee(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.toPayTempCarFee,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
+export function generatorCouponQrcode(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.generatorCouponQrcode,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+export function computePayFeeCoupon(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computePayFeeCoupon,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+/**
+ * 计算算费
+ * @param {Object} _objData {
+	 communityId:"",
+	 feeId:"",
+	 cycle:'',
+	 page:1,
+	 row:1
+ }
+ */
+export function computeObjFee(_objData) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.computeObjFee,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
+
+
+export function receiveParkingCoupon(_objData) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.saveParkingCouponCar,
+			method: "POST",
+			data: JSON.stringify(_objData), //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
+
+
+
+
+
+
+
+
+
 

@@ -5,7 +5,7 @@
 			<view class="cu-item arrow">
 				<view class="content padding-tb-sm">
 					<view>
-						<text class="cuIcon-notification text-cut text-green margin-right-xs"></text>
+						<text class="text-green margin-right-xs">{{question.qaType == '3003'?'投票':'问卷'}}</text>
 						<view class="text-cut" style="width:220px">{{question.qaName}}</view>
 					</view>
 					<view class="text-gray text-sm">
@@ -55,23 +55,17 @@
 			let that = this;
 			that.communityId = context.getCurrentCommunity().communityId;
 			that.userId = context.getUserInfo().userId;
-			getProperty()
-			.then(function(_property) {
-				that.storeId = _property.storeId;
-				that._queryQuestionAnswer();
-			})
+			this._queryQuestionAnswer();
 		},
 		methods: {
 			_queryQuestionAnswer: function(){
 				let that = this;
+				//qaType:'3003',
 				queryQuestionAnswer({
 					page:1,
 					row:50,
-					qaTypes:'1001,3003',
-					objType:'3306',
+					state:'1201',
 					communityId: that.communityId,
-					userId: that.userId,
-					storeId: that.storeId
 				})
 				.then(_data=>{
 					_data.data.forEach(function(item, index) {
@@ -95,31 +89,41 @@
 				})
 			},
 			gotoDetail: function(_question) {
+				let _msg = "问卷";
+				if(_question.qaType == '3003'){
+					_msg = "投票";
+				}
 				if(_question.state == '-1'){
 					uni.showToast({
 						icon:'none',
-						title:'此投票问卷尚未开始'
+						title:_msg+'尚未开始'
 					})
 					return ;
 				}
 				if(_question.state == '0'){
 					uni.showToast({
 						icon:'none',
-						title:'此投票问卷已结束'
+						title:_msg+'已结束'
 					})
 					return ;
 				}
 				if(_question.state == '2'){
 					uni.showToast({
 						icon:'none',
-						title:'此投票问卷已投票'
+						title:_msg+'已投票'
 					})
 					return ;
 				}
 				let that = this;
-				this.vc.navigateTo({
-					url: "/pages/questionAnswer/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType
-				});
+				if(_question.qaType == '3003'){
+					this.vc.navigateTo({
+						url: "/pages/questionAnswer/ownerVote?qaId=" + _question.qaId+"&objType="+_question.objType
+					});
+				}else{
+					this.vc.navigateTo({
+						url: "/pages/questionAnswer/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType
+					});
+				}
 			},
 		}
 	};
