@@ -104,7 +104,6 @@
 						if (_item.payOnline == 'Y') {
 							_item.selected = "1";
 							_that.feeIds.push(_item.feeId);
-							
 						}
 					})
 					_that.computeAmount();
@@ -131,7 +130,7 @@
 				
 				uni.setStorageSync('doing_cashier',_objData);
 				uni.navigateTo({
-					url:'/pages/fee/cashier?money='+this.receivableAmount+"&business=oweFee"
+					url:'/pages/fee/cashier?money='+this.receivableAmount+"&business=oweFee&communityId="+this.communityId
 				})
 
 			},
