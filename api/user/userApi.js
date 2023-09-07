@@ -170,6 +170,27 @@ export function refreshUserOpenId(_objData){
 	})
 }
 
+
+
+export function getWechatMiniOpenId(_objData){
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.getWechatMiniOpenId,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}
 /**
  * 刷新用户
  * @param {Object} _objData
@@ -243,5 +264,22 @@ export function generatorUserQrCode( _that) {
 		})
 }
 
-
-
+export function getCommunityWechatAppId(_objData){
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.getCommunityWechatAppId,
+			method: "GET",
+			data: _objData, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					resolve(res.data);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}

@@ -80,6 +80,7 @@
 				storeId: '',
 				receivableAmount: 0,
 				customFee: 'OFF',
+				createStaffId:'',
 				feeIds: []
 			};
 		},
@@ -88,6 +89,7 @@
 				this.ownerId = _param.ownerId;
 				this.communityId = _param.communityId;
 				this.customFee = _param.customFee;
+				this.createStaffId = _param.createStaffId;
 				let _that = this;
 				_that.feeIds = [];
 				getQrcodeOweFees(this, {
@@ -130,7 +132,7 @@
 				
 				uni.setStorageSync('doing_cashier',_objData);
 				uni.navigateTo({
-					url:'/pages/fee/cashier?money='+this.receivableAmount+"&business=oweFee&communityId="+this.communityId
+					url:'/pages/fee/cashier?money='+this.receivableAmount+"&business=oweFee&communityId="+this.communityId+"&cashierUserId="+this.createStaffId
 				})
 
 			},

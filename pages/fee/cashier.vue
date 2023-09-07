@@ -20,11 +20,17 @@
 	} from '../../lib/java110/utils/StringUtil.js';
 	import {
 		refreshUserOpenId,
-		getOpenIdFromAliPay
+		getOpenIdFromAliPay,
+		getWechatMiniOpenId,
+		getCommunityWechatAppId
 	} from '../../api/user/userApi.js';
 	import {
 		isWxOrAli
 	} from '../../lib/java110/utils/EnvUtil.js';
+	
+	import {
+		cashierPayFee
+	} from '../../api/fee/feeApi.js';
 
 	export default {
 		data() {
@@ -33,7 +39,10 @@
 				money: 0.0,
 				business: '',
 				openId: '',
-				data: {}
+				appId:'',
+				data: {},
+				appId:'',
+				cashierUserId:'',
 			}
 		},
 		mounted() {
@@ -49,6 +58,7 @@
 		onLoad(options) {
 			this.openId = options.openId;
 			this.communityId = options.communityId;
+			this.cashierUserId = options.cashierUserId;
 
 			if (!isNotNull(this.openId)) {
 				//刷新 openId
@@ -63,15 +73,30 @@
 				// #endif
 
 				// #ifdef MP-WEIXIN
-				this.openId = this._refreshWechatMiniOpenId();
+				this._refreshWechatMiniOpenId();
 				// #endif
 			}
 
 			this.money = options.money;
 			this.business = options.business;
 			this.data = uni.getStorageSync('doing_cashier');
+			this._loadAppId();
 		},
 		methods: {
+			_loadAppId:function(){
+				let _objType = "1100"; // todo public
+				// #ifdef MP-WEIXIN
+				_objType = "1000";
+				// #endif
+				
+				let _that = this;
+				getCommunityWechatAppId({
+					communityId:this.communityId,
+					objType:_objType
+				}).then(_data =>{
+					_that.appId = _data.data;
+				})
+			},
 			_refreshWechatOpenId: function() {
 				let _redirectUrl = window.location.href;
 				refreshUserOpenId({
@@ -86,11 +111,53 @@
 				});
 			},
 			_refreshWechatMiniOpenId:function(){
-				
+				let _that =this;
+				wx.login({
+					success: function(loginRes) {
+						if (!loginRes.code) {
+							return;
+						}
+						let accountInfo = uni.getAccountInfoSync();
+						let appId = accountInfo.miniProgram.appId;
+							getWechatMiniOpenId({
+								code:loginRes.code,
+								appId:appId,
+							}).then(_data =>{
+								if(_data.code != 0){
+									uni.showToast({
+										icon:'none',
+										title:_data.msg
+									})
+									return;
+								}
+								_that.openId = _data.data;
+							})
+						
+					},
+					fail: function(error) {
+						// 调用 wx.login 接口失败
+						console.log('调用wx.login获取code失败');
+						console.log(error);
+					}
+				});
 			},
 			_submit: function() {
-
-			}
+				if(!this.appId){
+					uni.showToast({
+						icon:'none',
+						title:'小区未配置支付信息'
+					});
+					return;
+				}
+				let _data = this.data;
+				_data.business = this.business;
+				_data.tradeType = 'JSAPI';
+				_data.appId = this.appId;
+				_data.cashierUserId = this.cashierUserId;
+				_data.openId = this.openId;
+				cashierPayFee(this,_data)
+			},
+			
 
 		}
 	}

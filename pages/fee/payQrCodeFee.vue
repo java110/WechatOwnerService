@@ -11,8 +11,8 @@
 			</view>
 		</scroll-view>
 		
-		<view v-if="active == 0" class="margin-top">
-			<qr-code-owe-fee ref="qrCodeOweFeeRef"></qr-code-owe-fee>
+		<view v-show="active == 0" class="margin-top">
+			<qr-code-owe-fee ref="qrCodeOweFeeRef" ></qr-code-owe-fee>
 		</view>
 		
 	</view>
@@ -51,7 +51,6 @@
 			this.pfqId = options.pfqId;
 			this.communityId = options.communityId;
 			this._loadConfig();
-			
 		},
 		methods: {
 			_loadConfig:function(){
@@ -70,7 +69,8 @@
 					this.$refs.qrCodeOweFeeRef._loadFees({
 						ownerId:this.ownerId,
 						communityId:this.communityId,
-						customFee:this.config.customFee
+						customFee:this.config.customFee,
+						createStaffId:this.config.createStaffId
 					});
 					return;
 				}

@@ -214,6 +214,11 @@ export default {
 	getQrcodeOwner: baseUrl + "app/owner.getQrcodeOwner",
 	getQrcodeOweFees: baseUrl + "app/payFeeQrcode.getQrcodeOweFees",
 	getOpenIdByCode: baseUrl + "app/wechat.getOpenIdByCode",
+	getWechatMiniOpenId: baseUrl + "app/wechat.getWechatMiniOpenId",
+	getCommunityWechatAppId: baseUrl + "app/wechat.getCommunityWechatAppId",
+	cashier: baseUrl + "app/payment.cashier",
+	
+	
 	
 	
 	

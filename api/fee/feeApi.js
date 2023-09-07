@@ -546,12 +546,84 @@ export function receiveParkingCoupon(_objData) {
 	})
 }
 
+/**
+ * 收银台 支付
+ * @param {Object} _that
+ * @param {Object} _data
+ * @param {Object} _successUrl
+ */
+export function cashierPayFee(_that, _data,_successUrl) {
+	if(!_successUrl ){
+		_successUrl = "/pages/successPage/successPage?msg=支付成功&objType=3003";
+	}
+	wx.showLoading({
+		title: '支付中'
+	});
+	requestNoAuth({
+		url: url.cashier,
+		method: "POST",
+		data: _data,
+		//动态数据
+		success: function(res) {
+			wx.hideLoading();
+			if (res.data.code == '0') {
+				let data = res.data; //成功情况下跳转
+				// #ifdef MP-WEIXIN
+				uni.requestPayment({
+					'timeStamp': data.timeStamp,
+					'nonceStr': data.nonceStr,
+					'package': data.package,
+					'signType': data.signType,
+					'paySign': data.sign,
+					'success': function(res) {
+						uni.navigateTo({
+							url: _successUrl
+						})
+					},
+					'fail': function(res) {
+						console.log('fail:' + JSON.stringify(res));
+					}
+				});
+				// #endif
+				// #ifdef H5
+				WexinPayFactory.wexinPay(data, function() {
+					uni.navigateTo({
+						url: _successUrl
+					})
+				});
+				// #endif
 
+				return;
+			}
+			if (res.statusCode == 200 && res.data.code == '100') {
+				let data = res.data; //成功情况下跳转
+				uni.showToast({
+					title: "支付成功",
+					duration: 2000
+				});
+				setTimeout(function() {
+					uni.navigateBack({});
+				}, 2000)
 
+				return;
+			}
+			wx.showToast({
+				title: "缴费失败"+res.data.msg,
+				icon: 'none',
+				duration: 2000
+			});
+		},
+		fail: function(e) {
+			wx.hideLoading();
+			wx.showToast({
+				title: "服务器异常了",
+				icon: 'none',
+				duration: 2000
+			});
+		}
+	});
 
-
-
-
+}
 
 
 
