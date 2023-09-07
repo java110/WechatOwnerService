@@ -7,7 +7,10 @@
 			<view class="money-value">{{money}}</view>
 		</view>
 
-		<view class="cu-bar btn-group" style="margin-top: 30px;">
+		<view class="cu-bar btn-group" style="margin-top: 30px;" v-if="!appId">
+			<button disabled="disabled" class="cu-btn bg-blue shadow-blur round lg">确认支付</button>
+		</view>
+		<view class="cu-bar btn-group" style="margin-top: 30px;" v-else>
 			<button @click="_submit" class="cu-btn bg-blue shadow-blur round lg">确认支付</button>
 		</view>
 
@@ -59,31 +62,34 @@
 			this.openId = options.openId;
 			this.communityId = options.communityId;
 			this.cashierUserId = options.cashierUserId;
-
-			if (!isNotNull(this.openId)) {
-				//刷新 openId
-				// #ifdef H5
-				if (isWxOrAli() == 'ALIPAY') {
-					this._refreshAliPayOpenId();
+			let _that =this;
+			this._loadAppId(function(){
+				if (!isNotNull(_that.openId)) {
+					//刷新 openId
+					// #ifdef H5
+					if (isWxOrAli() == 'ALIPAY') {
+						_that._refreshAliPayOpenId();
+						return;
+					}
+					//todo h5 情况
+					_that._refreshWechatOpenId();
 					return;
+					// #endif
+				
+					// #ifdef MP-WEIXIN
+					_that._refreshWechatMiniOpenId();
+					// #endif
 				}
-				//todo h5 情况
-				this._refreshWechatOpenId();
-				return;
-				// #endif
-
-				// #ifdef MP-WEIXIN
-				this._refreshWechatMiniOpenId();
-				// #endif
-			}
+			});
+			
 
 			this.money = options.money;
 			this.business = options.business;
 			this.data = uni.getStorageSync('doing_cashier');
-			this._loadAppId();
+		
 		},
 		methods: {
-			_loadAppId:function(){
+			_loadAppId:function(_call){
 				let _objType = "1100"; // todo public
 				// #ifdef MP-WEIXIN
 				_objType = "1000";
@@ -95,13 +101,14 @@
 					objType:_objType
 				}).then(_data =>{
 					_that.appId = _data.data;
+					_call();
 				})
 			},
 			_refreshWechatOpenId: function() {
 				let _redirectUrl = window.location.href;
 				refreshUserOpenId({
 					redirectUrl: _redirectUrl,
-					communityId: this.communityId,
+					wAppId: this.appId,
 				}).then(_data => {
 					console.log(_data, 123)
 					if (_data.code == 0) {

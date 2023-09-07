@@ -152,7 +152,16 @@
 			},
 			
 			checkboxChange: function(e) {
+				let _that =this;
 				this.feeIds = e.detail.value;
+				_that.fees.forEach(function(_item) {
+					_item.selected = "0";
+					_that.feeIds.forEach(_feeId =>{
+						if(_item.feeId == _feeId){
+							_item.selected = "1";
+						}
+					});
+				})
 				this.computeAmount();
 			},
 			_getDeadlineTime: function(_fee) {
@@ -202,5 +211,9 @@
 
 	.line-height {
 		line-height: 100upx;
+	}
+	
+	.uni-checkbox-input{
+		
 	}
 </style>

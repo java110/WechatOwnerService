@@ -164,7 +164,7 @@
 
 	.tips {
 		text-align: center;
-		margin: 80rpx 0;
+		margin: 40rpx 0;
 		font-size: 12pt;
 		margin-bottom: 20upx;
 		color: #888888;
