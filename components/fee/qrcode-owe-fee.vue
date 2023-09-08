@@ -29,7 +29,6 @@
 			</checkbox-group>
 		</scroll-view>
 		<scroll-view scroll-y style="padding-bottom: 200rpx;" v-else>
-
 			<view class="cu-list menu" v-for="(item,index) in fees" :key="index" :data-item="item"
 				v-if="item.payOnline == 'Y'">
 				<view class="cu-item ">
@@ -60,6 +59,10 @@
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">缴费</button>
 			</view>
 		</view>
+		
+		<view v-if="!fees || fees.length < 1">
+			<no-data-page></no-data-page>
+		</view>
 	</view>
 </template>
 
@@ -69,7 +72,8 @@
 	} from '@/api/fee/qrCodePayFee.js';
 	import {
 		dateSubOneDay
-	} from '../../lib/java110/utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js';
+	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	export default {
 		name: "qrcodeOweFee",
 		data() {
