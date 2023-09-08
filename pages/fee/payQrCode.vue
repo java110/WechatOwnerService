@@ -80,7 +80,8 @@
 					preFee: "",
 					qrcodeName: "支付二维码",
 					queryWay: "1001",
-					smsValidate: "ON"
+					smsValidate: "ON",
+					state:''
 				}
 			}
 		},
@@ -95,6 +96,13 @@
 				this.queryWay = _flag;
 			},
 			_queryOwnerInfo:function(){
+				if(this.config.state != 'ON'){
+					uni.showToast({
+						icon:'none',
+						title:'二维码已停用'
+					});
+					return;
+				}
 				let _that = this;
 				getQrcodeOwner(this,{
 					pfqId:this.pfqId,
