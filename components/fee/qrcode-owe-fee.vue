@@ -11,7 +11,7 @@
 									:checked="item.selected == '1'?true:false" :value="item.feeId">
 								</checkbox>
 							</view>
-							<view class="margin-left-sm">
+							<view class="margin-left-sm"  @click="_showDetailFee(item)">
 								<view class="flex justify-start">
 									<view class="text-cut" style="width:150px">{{item.feeName}}({{item.payerObjName}})
 									</view>
@@ -21,9 +21,29 @@
 								</view>
 							</view>
 						</view>
-						<view class="action">
+						<view class="action"  @click="_showDetailFee(item)">
 							<text class="text-grey text-sm">应缴:￥{{item.feeTotalPrice}}</text>
 						</view>
+					</view>
+					<view class="sub-info flex justify-start flex-wrap" v-if="item.showDetail">
+							<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+								<text class="margin-right-xs">上期读数:{{item.preDegrees}}</text>
+							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+								<text class="margin-right-xs">上期读表时间:{{_getReadTime(item.preReadingTime)}}</text>
+							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
+								<text class="margin-right-xs">本期读数:{{item.curDegrees}}</text>
+							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+								<text class="margin-right-xs">本期读表时间:{{_getReadTime(item.curReadingTime)}}</text>
+							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
+								<text class="margin-right-xs">使用量:{{item.curDegrees-item.preDegrees}}</text>
+							</view>
+							<view class="sub-info-item text-gray text-sm">
+								<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
+							</view>
 					</view>
 				</view>
 			</checkbox-group>
@@ -31,9 +51,8 @@
 		<scroll-view scroll-y style="padding-bottom: 200rpx;" v-else>
 			<view class="cu-list menu" v-for="(item,index) in fees" :key="index" :data-item="item"
 				v-if="item.payOnline == 'Y'">
-				<view class="cu-item ">
+				<view class="cu-item " @click="_showDetailFee(item)">
 					<view class="content padding-tb-sm ">
-
 						<view class="flex justify-start">
 							<view class="text-cut" style="width:150px">{{item.feeName}}({{item.payerObjName}})
 							</view>
@@ -41,17 +60,35 @@
 						<view class="text-gray text-sm">
 							<text class="margin-right-xs">{{item.endTime}}至{{_getDeadlineTime(item)}}</text>
 						</view>
-
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">应缴:￥{{item.feeTotalPrice}}</text>
 					</view>
 				</view>
+				<view class="sub-info flex justify-start flex-wrap" v-if="item.showDetail">
+						<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+							<text class="margin-right-xs">上期读数:{{item.preDegrees}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+							<text class="margin-right-xs">上期读表时间:{{_getReadTime(item.preReadingTime)}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
+							<text class="margin-right-xs">本期读数:{{item.curDegrees}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm" v-if="item.preDegrees">
+							<text class="margin-right-xs">本期读表时间:{{_getReadTime(item.curReadingTime)}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
+							<text class="margin-right-xs">使用量:{{item.curDegrees-item.preDegrees}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm">
+							<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
+						</view>
+				</view>
 			</view>
 		</scroll-view>
 		<view v-if="fees.length > 0" class="bg-white  border flex justify-end"
 			style="position: fixed;width: 100%;bottom: 0;">
-
 			<view class="action text-orange margin-right line-height">
 				合计：{{receivableAmount}}元
 			</view>
@@ -71,7 +108,9 @@
 		getQrcodeOweFees
 	} from '@/api/fee/qrCodePayFee.js';
 	import {
-		dateSubOneDay
+		dateSubOneDay,
+		getDate,
+		formatDate
 	} from '../../lib/java110/utils/DateUtil.js';
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	export default {
@@ -186,6 +225,22 @@
 			_getDeadlineTime: function(_fee) {
 				//todo 处理周期性费用和间接费用的结束时间
 				return dateSubOneDay(_fee.startTime, _fee.deadlineTime, _fee.feeFlag);
+			},
+			_getReadTime:function(_value){
+				let _date = getDate(_value);
+				return formatDate(_date);
+			},
+			_showDetailFee:function(_fee){
+				
+				let _fees = this.fees;
+				
+				_fees.forEach(item=>{
+					//item.showDetail = false;
+					if(_fee.feeId == item.feeId){
+						item.showDetail = !item.showDetail;
+					}
+				});
+				this.$forceUpdate();
 			}
 
 		}
@@ -234,5 +289,14 @@
 	
 	.uni-checkbox-input{
 		
+	}
+	.sub-info{
+		background-color: #fff;
+		//margin-top: 0.5upx;
+		padding:15upx;
+		.sub-info-item {
+			width: 45%;
+			margin:10upx 15upx 0upx 15upx;
+		}
 	}
 </style>
