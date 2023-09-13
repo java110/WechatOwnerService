@@ -27,6 +27,7 @@
 		data() {
 			return {
 				ownerId:'',
+				roomId:'',
 				communityId:'',
 				pfqId:'',
 				active:0,
@@ -48,6 +49,7 @@
 		},
 		onLoad(options) {
 			this.ownerId = options.ownerId;
+			this.roomId = options.roomId;
 			this.pfqId = options.pfqId;
 			this.communityId = options.communityId;
 			this._loadConfig();
@@ -68,9 +70,11 @@
 				if(this.active == 0){
 					this.$refs.qrCodeOweFeeRef._loadFees({
 						ownerId:this.ownerId,
+						roomId:this.roomId,
 						communityId:this.communityId,
 						customFee:this.config.customFee,
-						createStaffId:this.config.createStaffId
+						createStaffId:this.config.createStaffId,
+						feeType:this.config.feeType
 					});
 					return;
 				}

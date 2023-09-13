@@ -119,8 +119,9 @@
 						});
 						return;
 					}
+					
 					uni.navigateTo({
-						url:'/pages/fee/payQrCodeFee?communityId='+_that.communityId+"&ownerId="+_data.data+"&pfqId="+_that.pfqId
+						url:'/pages/fee/payQrCodeFee?communityId='+_that.communityId+"&ownerId="+_data.data.ownerId+"&roomId="+_data.data.roomId+"&pfqId="+_that.pfqId
 					})
 				})
 			},

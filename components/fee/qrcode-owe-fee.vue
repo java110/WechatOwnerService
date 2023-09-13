@@ -80,11 +80,13 @@
 			return {
 				fees: [],
 				ownerId: '',
+				roomId:'',
 				communityId: '',
 				storeId: '',
 				receivableAmount: 0,
 				customFee: 'OFF',
 				createStaffId:'',
+				feeType:'OWNER',
 				feeIds: []
 			};
 		},
@@ -94,13 +96,25 @@
 				this.communityId = _param.communityId;
 				this.customFee = _param.customFee;
 				this.createStaffId = _param.createStaffId;
-				let _that = this;
+				this.roomId = _param.roomId;
+				this.feeType = _param.feeType;
 				_that.feeIds = [];
 				getQrcodeOweFees(this, {
 					ownerId: this.ownerId,
 					communityId: this.communityId
 				}).then(_data => {
-					_that.fees = _data.data;
+					
+					let _fees = [];
+					if(_that.feeType == 'ROOM' && _that.roomId){
+						_data.data.forEach(item=>{
+							if(item.payerObjId == _that.roomId){
+								_fees.push(item);
+							}
+						})
+					}else{
+						_fees = _data.data;
+					}
+					_that.fees = _fees;
 					if (_data.data && _data.data.length > 0) {
 						_that.storeId = _data.data[0].incomeObjId;
 					}
