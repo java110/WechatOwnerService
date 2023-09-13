@@ -154,3 +154,49 @@ export function getQrcodeOweFees(_that, _data) {
 		});
 	})
 }
+
+/**
+ * 查询 二维码支付配置
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+export function getPayFeeDetailQrcode(_that, _data) {
+	return new Promise((resolve, reject) => {
+		requestNoAuth({
+			url: url.queryFeeDetail,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					//成功情况下跳转
+					let _feeDetails = res.data.feeDetails;
+					if (!_feeDetails) {
+						_feeDetails = [];
+					} else {
+						_feeDetails.forEach(function(_feeDetail) {
+							let _tmpCreateTime = _feeDetail.createTime.replace(/\-/g, "/")
+							let _createTime = new Date(_tmpCreateTime);
+							_feeDetail.createTime = formatDate(_createTime);
+							if(_feeDetail.hasOwnProperty("startTime")){
+								let _tmpStartTime = _feeDetail.startTime.replace(/\-/g, "/")
+								let _startTime = new Date(_tmpStartTime);
+								_feeDetail.startTime = formatDate(_startTime);
+							}
+							if(_feeDetail.hasOwnProperty("endTime")){
+								let _tmpEndTime = _feeDetail.endTime.replace(/\-/g, "/")
+								let _endTime = new Date(_tmpEndTime);
+								_feeDetail.endTime = formatDate(_endTime);
+							}
+						});
+					}
+					resolve(_feeDetails);
+					return;
+				}
+				reject();
+			},
+			fail: function(e) {
+				reject();
+			}
+		});
+	})
+}

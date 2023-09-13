@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<scroll-view scroll-x class="bg-white nav" v-if="config.preFee == 'ON'">
+		<scroll-view scroll-x class="bg-white nav">
 			<view class="flex text-center">
 				<view class="cu-item flex-sub" :class="active==0?'text-green cur':''" @tap="tabSelect(0)">
 					综合缴费
 				</view>
 				<view class="cu-item flex-sub" :class="active==1?'text-green cur':''" @tap="tabSelect(1)">
-					房屋缴费
+					缴费记录
 				</view>
 			</view>
 		</scroll-view>
@@ -14,6 +14,10 @@
 		<view v-show="active == 0" class="margin-top">
 			<qr-code-owe-fee ref="qrCodeOweFeeRef" ></qr-code-owe-fee>
 		</view>
+		<view v-show="active == 1" class="margin-top">
+			<qr-code-fee-detail ref="qrCodeFeeDetailRef"></qr-code-fee-detail>
+		</view>
+		
 		
 	</view>
 </template>
@@ -23,6 +27,8 @@
 		getPayFeeQrcode,
 	} from '@/api/fee/qrCodePayFee.js';
 	import qrCodeOweFee from '@/components/fee/qrcode-owe-fee.vue';
+	import qrCodeFeeDetail from '@/components/fee/qrcode-fee-detail.vue';
+	
 	export default {
 		data() {
 			return {
@@ -45,7 +51,8 @@
 			}
 		},
 		components:{
-			qrCodeOweFee
+			qrCodeOweFee,
+			qrCodeFeeDetail
 		},
 		onLoad(options) {
 			this.ownerId = options.ownerId;
@@ -69,6 +76,17 @@
 				this.active = _active;
 				if(this.active == 0){
 					this.$refs.qrCodeOweFeeRef._loadFees({
+						ownerId:this.ownerId,
+						roomId:this.roomId,
+						communityId:this.communityId,
+						customFee:this.config.customFee,
+						createStaffId:this.config.createStaffId,
+						feeType:this.config.feeType
+					});
+					return;
+				}
+				if(this.active == 1){
+					this.$refs.qrCodeFeeDetailRef._loadFeeDetails({
 						ownerId:this.ownerId,
 						roomId:this.roomId,
 						communityId:this.communityId,

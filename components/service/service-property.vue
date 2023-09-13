@@ -57,11 +57,11 @@
 						src: this.imgUrl + '/h5/images/serve/1.png',
 						href: '/pages/fee/oweFee'
 					},
-					// {
-					// 	name: '二维码交费',
-					// 	src: this.imgUrl+'/h5/images/serve/1.png',
-					// 	href: '/pages/fee/payQrCode?communityId=2023052267100146&pfqId=102023090599200004'
-					// },
+					{
+						name: '二维码交费',
+						src: this.imgUrl+'/h5/images/serve/1.png',
+						href: '/pages/fee/payQrCode?communityId=2023052267100146&pfqId=102023091363230004'
+					},
 					{
 						name: '房屋费',
 						src: this.imgUrl + '/h5/images/serve/5.png',

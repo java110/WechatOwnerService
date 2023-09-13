@@ -98,6 +98,7 @@
 				this.createStaffId = _param.createStaffId;
 				this.roomId = _param.roomId;
 				this.feeType = _param.feeType;
+				let _that =this;
 				_that.feeIds = [];
 				getQrcodeOweFees(this, {
 					ownerId: this.ownerId,
