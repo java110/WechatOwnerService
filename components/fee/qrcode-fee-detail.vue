@@ -10,6 +10,10 @@
 				<view class="text-gray">费用名称</view>
 				<view class="text-gray">{{item.feeName}}</view>
 			</view>
+			<view class="flex margin-top justify-between">
+				<view class="text-gray">收费对象</view>
+				<view class="text-gray">{{item.objName}}</view>
+			</view>
 			<view class="flex margin-top-xs justify-between">
 				<view class="text-gray">缴费编码</view>
 				<view class="text-gray">{{item.detailId}}</view>
