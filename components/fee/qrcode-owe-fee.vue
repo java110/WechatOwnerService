@@ -13,7 +13,7 @@
 							</view>
 							<view class="margin-left-sm"  @click="_showDetailFee(item)">
 								<view class="flex justify-start">
-									<view class="text-cut" style="width:150px">{{item.feeName}}({{item.payerObjName}})
+									<view class="text-cut" style="width:150px">{{item.feeName}}<text v-if="item.payerObjName">({{item.payerObjName}})</text>
 									</view>
 								</view>
 								<view class="text-gray text-sm">
@@ -54,7 +54,7 @@
 				<view class="cu-item " @click="_showDetailFee(item)">
 					<view class="content padding-tb-sm ">
 						<view class="flex justify-start">
-							<view class="text-cut" style="width:150px">{{item.feeName}}({{item.payerObjName}})
+							<view class="text-cut" style="width:150px">{{item.feeName}}<text v-if="item.payerObjName">({{item.payerObjName}})</text>
 							</view>
 						</view>
 						<view class="text-gray text-sm">
