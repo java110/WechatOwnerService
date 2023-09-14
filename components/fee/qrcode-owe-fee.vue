@@ -44,6 +44,9 @@
 							<view class="sub-info-item text-gray text-sm">
 								<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
 							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.payerObjName">
+								<text class="margin-right-xs">房号:{{item.payerObjName}}</text>
+							</view>
 					</view>
 				</view>
 			</checkbox-group>
@@ -80,6 +83,9 @@
 						</view>
 						<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
 							<text class="margin-right-xs">使用量:{{item.curDegrees-item.preDegrees}}</text>
+						</view>
+						<view class="sub-info-item text-gray text-sm" v-if="item.payerObjName">
+							<text class="margin-right-xs">房号:{{item.payerObjName}}</text>
 						</view>
 						<view class="sub-info-item text-gray text-sm">
 							<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
