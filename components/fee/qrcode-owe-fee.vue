@@ -164,7 +164,7 @@
 					if (_data.data && _data.data.length > 0) {
 						_that.storeId = _data.data[0].incomeObjId;
 					}
-					return _data.data;
+					return _fees;
 				}).then(function(_fees) {
 					_fees.forEach(function(_item) {
 						if (_item.payOnline == 'Y') {
