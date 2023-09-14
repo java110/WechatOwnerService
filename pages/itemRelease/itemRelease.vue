@@ -153,7 +153,7 @@
 				return _amount;
 			},
 			submitItemRelease: function(e) {
-				if(this.audit.assignee || this.audit.assignee == '-2'){
+				if(!this.audit.assignee || this.audit.assignee == '-2'){
 					uni.showToast({
 						icon:'none',
 						title:'审批流程设置错误，手机端提交，第一个审核人必须指定相应的员工'
