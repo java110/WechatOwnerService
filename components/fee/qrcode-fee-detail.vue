@@ -3,12 +3,8 @@
 		<view v-for="(item,index) in feeDetails" :key="index"
 			class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding">
 			<view class="flex padding-bottom-xs solid-bottom justify-between">
-				<view>缴费金额</view>
-				<view class="text-gray">{{item.receivedAmount}}元</view>
-			</view>
-			<view class="flex margin-top justify-between">
-				<view class="text-gray">费用名称</view>
-				<view class="text-gray">{{item.feeName}}</view>
+				<view>{{item.feeName}}</view>
+				<view class="text-gray">{{item.createTime}}</view>
 			</view>
 			<view class="flex margin-top justify-between">
 				<view class="text-gray">收费对象</view>
@@ -31,8 +27,8 @@
 				<view class="text-gray">{{item.endTime}}</view>
 			</view>
 			<view class="flex margin-top-xs justify-between">
-				<view class="text-gray">缴费时间</view>
-				<view class="text-gray">{{item.createTime}}</view>
+				<view class="text-gray">缴费金额</view>
+				<view class="text-gray">{{item.receivedAmount}}元</view>
 			</view>
 			<view class="flex margin-top-xs justify-between" v-if="item.preDegrees">
 				<view class="text-gray">上期度数</view>
