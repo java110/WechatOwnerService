@@ -72,10 +72,10 @@
 				</view>
 
 				<view class="solid-top flex justify-end margin-top padding-top-sm ">
-					<button v-if="item.state == 'W'" class="cu-btn bg-red margin-left"
+					<!-- <button v-if="item.state == 'W'" class="cu-btn bg-red margin-left"
 						@click="personTimeRefund(item,'T')">申请退款</button>
 					<button v-if="item.state == 'T'" class="cu-btn line-grey margin-left"
-						@click="personTimeRefund(item,'W')">取消退款</button>
+						@click="personTimeRefund(item,'W')">取消退款</button> -->
 					<button class="cu-btn bg-gradual-blue margin-left" @click="toApplyDetail(item)">详情</button>
 				</view>
 
@@ -104,7 +104,8 @@
 	const constant = context.constant;
 	import {
 		getBooks
-	} from '../../api/booking/bookingApi.js'
+	} from '../../api/booking/bookingApi.js';
+	import url from '@/constant/url.js'
 
 	export default {
 		data() {
@@ -124,12 +125,6 @@
 				}, {
 					"name": '已核销',
 					"code": 2002
-				}, {
-					"name": '申请退款',
-					"code": 3003
-				}, {
-					"name": '已退款',
-					"code": 4004
 				}],
 				code: '1001',
 			};
@@ -198,11 +193,9 @@
 							// debugger
 							if (book.state === 'C' && Number(_that.code) === Number('2002')) {
 								_that.bookingList.push(book);
-							} else if (book.state === 'T' && Number(_that.code) === Number('3003')) {
+							} else if (book.state === 'CL' && Number(_that.code) === Number('3003')) {
 								_that.bookingList.push(book);
 							} else if (book.state === 'W' && Number(_that.code) === Number('1001')) {
-								_that.bookingList.push(book);
-							} else if (book.state === 'Y' && Number(_that.code) === Number('4004')) {
 								_that.bookingList.push(book);
 							} else if (Number(_that.code) === Number('1000')) {
 								_that.bookingList.push(book);
@@ -237,69 +230,69 @@
 				});
 			},
 			/// 申请退款
-			personTimeRefund(item, str) {
-				// debugger
-				let title_w = "申请退款";
-				let content_w = "是否要退" + this.HoursStr(item.hours) + "的场次?";
+			// personTimeRefund(item, str) {
+			// 	// debugger
+			// 	let title_w = "申请退款";
+			// 	let content_w = "是否要退" + this.HoursStr(item.hours) + "的场次?";
 
-				if (str == "W") {
-					title_w = "取消退款";
-					content_w = "是否恢复" + this.HoursStr(item.hours) + "场次的使用?";
-				}
-				let _that = this;
-				let cid = _that.owner.communityId;
-				// debugger
-				uni.showModal({
-					title: title_w,
-					content: content_w,
-					success: function(res) {
-						if (res.confirm) {
-							let _objData = {
-								"timeId": item.timeId,
-								"state": str,
-								"communityId": cid,
-							};
-							// debugger
-							context.request({
-								url: constant.url.saveCommunitySpacePersonTime,
-								header: context.getHeaders(),
-								method: "POST",
-								data: _objData,
-								//动态数据
-								success: function(res) {
-									// debugger
-									if (res.statusCode == 200 && res.data.code == '0') {
-										wx.showToast({
-											title: "提示:" + res.data.msg,
-											icon: 'none',
-											duration: 2000
-										});
-										console.log(_that.parkingType[4],_that.parkingType)
-										_that.switchParkingSpace(_that.parkingType[4])
-									} else if (res.statusCode == 200 && res.data.code == '404') {
-										wx.showToast({
-											title: "异常:" + res.data.msg,
-											icon: 'none',
-											duration: 3000
-										});
-									}
-								},
-								fail: function(e) {
-									// debugger
-									wx.hideLoading();
-									wx.showToast({
-										title: "服务器异常了",
-										icon: 'none',
-										duration: 2000
-									});
-								}
-							});
-						} else if (res.cancel) {}
-					}
-				});
+			// 	if (str == "W") {
+			// 		title_w = "取消退款";
+			// 		content_w = "是否恢复" + this.HoursStr(item.hours) + "场次的使用?";
+			// 	}
+			// 	let _that = this;
+			// 	let cid = _that.owner.communityId;
+			// 	// debugger
+			// 	uni.showModal({
+			// 		title: title_w,
+			// 		content: content_w,
+			// 		success: function(res) {
+			// 			if (res.confirm) {
+			// 				let _objData = {
+			// 					"timeId": item.timeId,
+			// 					"state": str,
+			// 					"communityId": cid,
+			// 				};
+			// 				// debugger
+			// 				context.request({
+			// 					url: url.saveCommunitySpacePersonTime,
+			// 					header: context.getHeaders(),
+			// 					method: "POST",
+			// 					data: _objData,
+			// 					//动态数据
+			// 					success: function(res) {
+			// 						// debugger
+			// 						if (res.statusCode == 200 && res.data.code == '0') {
+			// 							wx.showToast({
+			// 								title: "提示:" + res.data.msg,
+			// 								icon: 'none',
+			// 								duration: 2000
+			// 							});
+			// 							console.log(_that.parkingType[4],_that.parkingType)
+			// 							_that.switchParkingSpace(_that.parkingType[4])
+			// 						} else if (res.statusCode == 200 && res.data.code == '404') {
+			// 							wx.showToast({
+			// 								title: "异常:" + res.data.msg,
+			// 								icon: 'none',
+			// 								duration: 3000
+			// 							});
+			// 						}
+			// 					},
+			// 					fail: function(e) {
+			// 						// debugger
+			// 						wx.hideLoading();
+			// 						wx.showToast({
+			// 							title: "服务器异常了",
+			// 							icon: 'none',
+			// 							duration: 2000
+			// 						});
+			// 					}
+			// 				});
+			// 			} else if (res.cancel) {}
+			// 		}
+			// 	});
 
 
-			}
+			// }
 		}
 	};
 </script>
