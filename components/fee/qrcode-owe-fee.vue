@@ -41,6 +41,9 @@
 							<view class="sub-info-item text-gray text-sm" v-if="item.curDegrees">
 								<text class="margin-right-xs">使用量:{{item.curDegrees-item.preDegrees}}</text>
 							</view>
+							<view class="sub-info-item text-gray text-sm" v-if="item.ownerName">
+								<text class="margin-right-xs">业主:{{item.ownerName}}</text>
+							</view>
 							<view class="sub-info-item text-gray text-sm">
 								<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
 							</view>
