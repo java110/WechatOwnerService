@@ -117,11 +117,11 @@
 				let that = this;
 				if(_question.qaType == '3003'){
 					this.vc.navigateTo({
-						url: "/pages/questionAnswer/ownerVote?qaId=" + _question.qaId+"&objType="+_question.objType
+						url: "/pages/questionAnswer/ownerVote?qaId=" + _question.qaId+"&objType="+_question.objType+"&userQaId="+_question.userQaId
 					});
 				}else{
 					this.vc.navigateTo({
-						url: "/pages/questionAnswer/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType
+						url: "/pages/questionAnswer/questionAnswerDetail?qaId=" + _question.qaId+"&objType="+_question.objType+"&userQaId="+_question.userQaId
 					});
 				}
 			},
