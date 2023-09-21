@@ -74,7 +74,8 @@
 				},
 				titles: [],
 				qaId: '',
-				communityId: ''
+				communityId: '',
+				userQaId:''
 			};
 		},
 
@@ -86,6 +87,7 @@
 			context.onLoad(options);
 			this.communityId = context.getCurrentCommunity().communityId;
 			this.qaId = options.qaId;
+				this.userQaId = options.userQaId;
 			this._queryQuestionAnswer();
 
 			queryQuestionAnswerTitle({
@@ -127,6 +129,7 @@
 						page: 1,
 						row: 1,
 						qaId:this.qaId,
+						userQaId:this.userQaId,
 						communityId: that.communityId,
 					})
 					.then(_data => {
