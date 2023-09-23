@@ -34,12 +34,7 @@
 				合计：{{amount}}元
 			</view>
 			<view class="btn-group">
-				<!-- #ifdef H5 || MP-WEIXIN -->
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
-				<!-- #endif -->
-				<!-- #ifdef APP-PLUS -->
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
-				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -49,7 +44,8 @@
 	// pages/account/myAccount.js
 	import context from '../../lib/java110/Java110Context.js';
 	import {
-		queryOwnerAccount
+		queryOwnerAccount,
+		getUserId
 	} from '../../api/user/userApi.js';
 	import {getCommunityId} from '@/api/community/communityApi.js';
 	import {getWAppId} from '../../lib/java110/utils/StorageUtil.js'
@@ -67,13 +63,6 @@
 		onLoad(options) {
 			this.communityId = options.communityId;
 			this.loadOwnerAccount();
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
-			// #ifdef H5
-			this.appId = getWAppId();
-			// #endif
 		},
 		methods: {
 			loadOwnerAccount: function() {
@@ -97,26 +86,6 @@
 					}
 				});
 			},
-			_payWxApp: function(_data) {
-				if(!this.amount){
-					uni.showToast({
-						icon:'none',
-						title:'未填写金额'
-					});
-					return ;
-				}
-				let _receivedAmount = this.amount;
-				let _tradeType = 'APP';
-				payFeeApp(this,{
-					communityId: this.communityId,
-					acctId: this.account.acctId,
-					feeName: '账户充值',
-					receivedAmount: _receivedAmount,
-					tradeType: _tradeType,
-					appId: this.appId,
-				});
-				
-			},
 			onPayFee: function() {
 				if(!this.amount){
 					uni.showToast({
@@ -128,14 +97,18 @@
 				let _receivedAmount = this.amount;
 				let _tradeType = 'JSAPI';
 				
-				payFeeWechat(this,{
+				let _objData = {
 					business: "preStoreOnline",
 					communityId: this.communityId,
 					acctId: this.account.acctId,
 					feeName: '账户充值',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId,
+				};
+				
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=preStoreOnline&communityId="+this.communityId+"&cashierUserId="+getUserId()
 				})
 			}
 		}

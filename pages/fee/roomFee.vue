@@ -139,12 +139,7 @@
 				合计：{{receivableAmount}}元
 			</view>
 			<view class="btn-group">
-				<!-- #ifdef H5 || MP-WEIXIN -->
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
-				<!-- #endif -->
-				<!-- #ifdef APP-PLUS -->
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
-				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -160,6 +155,7 @@
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue';
 	import giftCoupon from '@/components/coupon/gift-coupon.vue'
 	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue';
+	import {getUserId} from '../../api/user/userApi.js';
 
 	import {
 		addMonth,
@@ -231,21 +227,12 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
-			// #ifdef H5
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
-			// #endif
 			let _fee = JSON.parse(options.fee);
-			console.log('fee info : ', _fee);
 			let _amount = _fee.amount;
 			let _receivableAmount = _amount;
 			if (_fee.feeFlag == "2006012") { // 一次性费用
 				_receivableAmount = _amount;
 			}
-
 			let _communityInfo = context.getCurrentCommunity();
 			let _lastDate = new Date(_fee.endTime);
 			this.receivableAmount = _receivableAmount;
@@ -274,7 +261,6 @@
 			this.amountOwed = _fee.amountOwed;
 			this.amountCount = this.receivableAmount;
 			this.payOnline = _fee.payOnline;
-
 			if (this.feeFlag != '2006012') {
 				this.paymentCycle = _fee.paymentCycle;
 				for (let _index = 1; _index < 7; _index++) {
@@ -315,7 +301,6 @@
 						this.receivableAmount = 0.0;
 					}
 				}
-				
 			},
 			coupons: function(_item) {
 				wx.navigateTo({
@@ -324,8 +309,6 @@
 			},
 			// （单价×面积+附加费）  × 周期
 			computeReceivableAmount: function() {
-				// return ((this.builtUpArea * this.squarePrice + parseFloat(this.additionalAmount)) * this.feeMonth)
-				// 	.toFixed(2);
 				let _that = this;
 				computeObjFee({
 					communityId:this.communityId,
@@ -338,8 +321,6 @@
 					_that.$refs.vcDiscountRef._loadFeeDiscount(_that.feeId, _that.communityId, _that.feeMonth);
 					_that.$refs.giftCoupon.listGiftCoupon(_that.feeId, _that.communityId, _that.feeMonth);
 				})
-				
-				//return (this.amount * this.feeMonth).toFixed(2);
 			},
 
 			// 折扣金额
@@ -430,8 +411,6 @@
 				
 			},
 			onPayFee: function() {
-				let _receivedAmount = this.receivableAmount;
-				let _tradeType = 'JSAPI';
 				if(this.payOnline == 'N'){
 					uni.showToast({
 						icon:'none',
@@ -439,7 +418,9 @@
 					})
 					return;
 				}
-				payFeeWechat(this,{
+				let _receivedAmount = this.receivableAmount;
+				let _tradeType = 'JSAPI';
+				let _objData = {
 					business: "payFee",
 					cycles: this.feeMonth,
 					communityId: this.communityId,
@@ -447,7 +428,6 @@
 					feeName: '物业费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId,
 					payerObjId: this.roomId,
 					payerObjType: 3333,
 					endTime: this.formatEndTime,
@@ -455,6 +435,10 @@
 					accountAmount: this.accountAmount, // 账户金额
 					deductionAmount: this.deductionAmount, // 抵扣金额
 					couponList: this.couponList
+				};
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=payFee&communityId="+this.communityId+"&cashierUserId="+getUserId()
 				})
 			}
 		}

@@ -283,3 +283,14 @@ export function getCommunityWechatAppId(_objData){
 		});
 	})
 }
+
+export function getUserId(){
+	let _userInfo = uni.getStorageSync("userInfo");
+	console.log('_userInfo',_userInfo)
+	
+	if(!_userInfo){
+		return null;
+	}
+	
+	return JSON.parse(_userInfo).userId;
+}

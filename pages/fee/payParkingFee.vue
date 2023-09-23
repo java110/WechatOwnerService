@@ -97,12 +97,7 @@
 				合计：{{receivableAmount}}元
 			</view>
 			<view class="btn-group">
-				<!-- #ifdef H5 || MP-WEIXIN -->
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
-				<!-- #endif -->
-				<!-- #ifdef APP-PLUS -->
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
-				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -116,21 +111,13 @@
 	const constant = context.constant;
 	import vcDiscount from '@/components/vc-discount/vc-discount.vue';
 	import giftCoupon from '@/components/coupon/gift-coupon.vue'
-	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue'
+	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue';
+	import {getUserId} from '../../api/user/userApi.js';
 	import {
 		addMonth,
 		formatDate,
 		date2String
 	} from '../../lib/java110/utils/DateUtil.js'
-
-
-	// #ifdef H5
-
-	const WexinPayFactory = require('../../factory/WexinPayFactory.js');
-
-	// #endif
-	
-		import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
 
 	export default {
 		components: {
@@ -175,16 +162,8 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
-
-			// #ifdef H5
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
-			// #endif
 			let _fee = JSON.parse(options.fee);
-			console.log(_fee);
+
 			let _receivableAmount = _fee.paymentCycle * _fee.feePrice;
 
 			let _communityInfo = context.getCurrentCommunity();
@@ -278,33 +257,8 @@
 			onFeeMonthCancel: function(e) {
 				this.showFeeMonth = false;
 			},
-			_payWxApp: function(_data) {
-				let _receivedAmount = this.receivableAmount;
-				if(this.payOnline == 'N'){
-					uni.showToast({
-						icon:'none',
-						title:'暂不支持线上缴费，请到前台缴费'
-					})
-					return;
-				}
-				let _tradeType = 'APP';
-				
-				payFeeApp(this,{
-					cycles: this.feeMonth,
-					communityId: this.communityId,
-					feeId: this.feeId,
-					feeName: '停车费',
-					receivedAmount: _receivedAmount,
-					tradeType: _tradeType,
-					appId: this.appId,
-					endTime: this.formatEndTime,
-					selectUserAccount: this.selectUserAccount, // 选中的账户
-					accountAmount: this.accountAmount, // 账户金额
-					deductionAmount: this.deductionAmount, // 抵扣金额
-				});
-			},
+			
 			onPayFee: function() {
-				let _receivedAmount = this.receivableAmount;
 				if(this.payOnline == 'N'){
 					uni.showToast({
 						icon:'none',
@@ -313,8 +267,9 @@
 					return;
 				}
 				let _tradeType = 'JSAPI';
-		
-				payFeeWechat(this,{
+				let _receivedAmount = this.receivableAmount;
+				
+				let _objData = {
 					business: "payFee",
 					cycles: this.feeMonth,
 					communityId: this.communityId,
@@ -322,7 +277,6 @@
 					feeName: '停车费',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId,
 					endTime: this.formatEndTime,
 					selectUserAccount: this.selectUserAccount, // 选中的账户
 					accountAmount: this.accountAmount, // 账户金额
@@ -330,6 +284,10 @@
 					payerObjId: this.payerObjId,
 					payerObjType: this.payerObjType,
 					userId: this.userId,
+				};
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=payFee&communityId="+this.communityId+"&cashierUserId="+getUserId()
 				})
 			}
 		}
