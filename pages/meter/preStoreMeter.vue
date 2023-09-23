@@ -34,12 +34,7 @@
 				合计：{{amount}}元
 			</view>
 			<view class="btn-group">
-				<!-- #ifdef H5 || MP-WEIXIN -->
 				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="onPayFee()">提交订单</button>
-				<!-- #endif -->
-				<!-- #ifdef APP-PLUS -->
-				<button class="cu-btn bg-red shadow-blur lgplus sharp" @click="_payWxApp()">提交订单</button>
-				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -50,6 +45,7 @@
 	import context from '../../lib/java110/Java110Context.js';
 	import {getMeterMachine} from '../../api/machine/machineApi.js';
 	import {getCommunityId} from '@/api/community/communityApi.js';
+	import {getUserId} from '../../api/user/userApi.js';
 	
 	import {payFeeApp,payFeeWechat} from '@/api/fee/feeApi.js';
 	export default {
@@ -69,13 +65,6 @@
 			this.machineId = options.machineId;
 			this.roomId = options.roomId;
 			this.loadMeterMachine();
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
-			// #ifdef H5
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
-			// #endif
 		},
 		methods: {
 			loadMeterMachine: function() {
@@ -93,27 +82,7 @@
 					_that.amount=_data[0].amount;
 				})
 			},
-			_payWxApp: function(_data) {
-				if(!this.amount){
-					uni.showToast({
-						icon:'none',
-						title:'未填写金额'
-					});
-					return ;
-				}
-				let _receivedAmount = this.amount;
-				let _tradeType = 'APP';
-				payFeeApp(this,{
-					communityId:getCommunityId(),
-					roomId: this.roomId,
-					machineId: this.machineId,
-					feeName: this.feeConfigName+'充值',
-					receivedAmount: _receivedAmount,
-					tradeType: _tradeType,
-					appId: this.appId,
-				});
-				
-			},
+			
 			onPayFee: function() {
 				if(!this.amount){
 					uni.showToast({
@@ -124,8 +93,7 @@
 				}
 				let _receivedAmount = this.amount;
 				let _tradeType = 'JSAPI';
-				
-				payFeeWechat(this,{
+				let _objData = {
 					business: "preStoreMeter",
 					communityId:getCommunityId(),
 					roomId: this.roomId,
@@ -133,7 +101,10 @@
 					feeName: this.feeConfigName+'充值',
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
-					appId: this.appId,
+				};
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=preStoreMeter&communityId="+getCommunityId()+"&cashierUserId="+getUserId()
 				})
 			}
 		}
