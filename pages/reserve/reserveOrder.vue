@@ -85,7 +85,8 @@
 	
 	import {getCurOwner} from '@/api/owner/ownerApi.js';
 	
-	import {payFeeWechat} from '../../api/fee/feeApi.js'
+	import {payFeeWechat} from '../../api/fee/feeApi.js';
+	import {getUserId} from '../../api/user/userApi.js';
 
 	export default {
 		data() {
@@ -108,13 +109,7 @@
 		onLoad: function(options) {
 			context.onLoad(options);
 			this.from = options.from;
-			// #ifdef MP-WEIXIN
-			let accountInfo = uni.getAccountInfoSync();
-			this.appId = accountInfo.miniProgram.appId;
-			// #endif
-			// #ifdef H5
-			this.appId = uni.getStorageSync(constant.mapping.W_APP_ID)
-			// #endif
+			
 			let _selectdGoods = uni.getStorageSync('/pages/reserve/reserveOrder');
 			this.selectdGoods = _selectdGoods;
 			let _that = this;
@@ -140,9 +135,10 @@
 			onPayFee: function() {
 				// debugger
 				let _that = this;
-				let _receivedAmount = this.receivableAmount;
+				
+				let _receivedAmount = this.totalMoney;
 				let _tradeType = 'JSAPI';
-				payFeeWechat(this,{
+				let _objData = {
 					business: "reserveGoods",
 					appointmentTime: this.appointmentTime,
 					communityId: this.communityId,
@@ -154,6 +150,10 @@
 					appId: this.appId,
 					type: this.type,
 					goodss: this.selectdGoods
+				};
+				uni.setStorageSync('doing_cashier',_objData);
+				uni.navigateTo({
+					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=reserveGoods&communityId="+this.communityId+"&cashierUserId="+getUserId()
 				})
 			}
 		}
