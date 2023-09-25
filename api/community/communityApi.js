@@ -98,40 +98,14 @@ export function getCommunityName(){
  */
 export function getCurCommunity() {
 	return new Promise((resolve, reject) => {
-		if (hasLogin()) { // 判断是否已经登录
-			//已经登录 去后台查询
-			getCurOwner()
-				.then(function(_ownerInfo) {
-					let _currentCommunityInfo = {
-						communityId: _ownerInfo.communityId,
-						communityName: _ownerInfo.communityName,
-						tel:_ownerInfo.sCommunityTel
-					};
-					resolve(_currentCommunityInfo);
-				},function() {
-					let _currentCommunityInfo = {
-						communityId: mapping.HC_TEST_COMMUNITY_ID,
-						communityName: mapping.HC_TEST_COMMUNITY_NAME,
-						tel:''
-					};
-					resolve(_currentCommunityInfo);
-				})
-		} else {
-			//没有登录直接写演示小区信息
-			getCommunitys({
-				communityId:mapping.HC_TEST_COMMUNITY_ID,
-				page:1,
-				row:1
-			}).then(function(_communitys){
-				let _currentCommunityInfo = {
-					communityId: _communitys[0].communityId,
-					communityName: _communitys[0].name,
-					tel:_communitys[0].tel
-				};
-				resolve(_currentCommunityInfo);
-			})
-			
+		let _currentCommunityInfo = uni.getStorageSync("currentCommunityInfo");
+		if(!_currentCommunityInfo){
+			_currentCommunityInfo = {
+				communityId:conf.DEFAULT_COMMUNITY_ID,
+				communityName: conf.DEFAULT_COMMUNITY_NAME
+			}
 		}
+		resolve(_currentCommunityInfo);
 	})
 }
 

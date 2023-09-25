@@ -47,8 +47,8 @@
 
 	import {
 		getRoomFees
-	} from '../../api/fee/feeApi.js'
-	
+	} from '../../api/fee/feeApi.js';
+	import {autoLogin} from '../../api/user/sessionApi.js';
 
 	export default {
 		data() {
@@ -70,6 +70,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			autoLogin(options);
 		},
 		/**
 		 * 生命周期函数--监听页面显示

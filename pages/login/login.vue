@@ -43,14 +43,24 @@
 	import wInput from '../../components/watch-input.vue' //input
 	import wButton from '../../components/watch-button.vue' //button
 	import {
-		sendSmsCode
+		sendSmsCode,
+		ownerLogin,
 	} from '../../api/user/userApi.js'
 	import context from '../../lib/java110/Java110Context.js';
 
 	import {
-		userLogin,
+		
 		getLoginCode
-	} from '../../lib/java110/page/Page.js'
+	} from '../../lib/java110/page/Page.js';
+	
+	import {
+		saveOwnerStorage,
+		saveUserLoginInfo,
+		removeUserLoginInfo,
+		getWAppId,
+		saveWAppId,
+		getLoginFlag
+	} from '@/lib/java110/utils/StorageUtil.js'
 
 	const constant = context.constant;
 	const factory = context.factory;
@@ -60,9 +70,8 @@
 		data() {
 			return {
 				logoUrl: '',
-				username: '',
-				password: '',
-				appId: "",
+				username: '18909752222',
+				password: '381309',
 				code: "",
 				loginByPhone: false,
 				msgCode: '',
@@ -74,11 +83,12 @@
 		},
 		onLoad(option) {
 			let that = this;
-			getLoginCode(option)
-				.then((_code) => {
-					that.code = _code
-				});
 			this.logoUrl = constant.url.baseUrl + 'logo.png';
+			//todo 清除缓存内容，以防 业主后退，然后还显示他的东西
+			uni.removeStorageSync("JAVA110_USER_INFO");
+			uni.removeStorageSync("currentCommunityInfo");
+			uni.removeStorageSync("ownerInfo");
+			removeUserLoginInfo();
 		},
 		methods: {
 			_doLogin: function() {
@@ -104,19 +114,23 @@
 					appId: this.vc.getWAppId(),
 					loginByPhone: this.loginByPhone
 				};
-				userLogin(_obj)
-					.then(() => {
-						wx.switchTab({
-							url: "/pages/index/index?wAppId=" + _that.vc.getWAppId()
-						});
+				ownerLogin(this,_obj)
+					.then((_user) => {
+						//todo 保存登录信息
+						saveUserLoginInfo(_user.userId, _user.token, _user.key);
+						uni.navigateTo({
+							url:'/pages/login/loginInitWechat?communityId='+_user.communityId+"&appUserId="+_user.appUserId
+						})
+					},err=>{
+						uni.showToast({
+							icon:'none',
+							title:err
+						})
 					});
 			},
 			_doRegister: function() {
 				//let _url = '/pages/login/registerByWechat';
 				let _url = '/pages/login/register';
-				// #ifdef H5
-				_url += ('?code=' + this.code);
-				// #endif
 				this.vc.navigateTo({
 					url: _url
 				})

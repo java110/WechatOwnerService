@@ -58,6 +58,10 @@
 	import {
 		getCouponUsers
 	} from '../../api/fee/feeApi.js';
+	
+	import {getCommunityId,getCommunityName}  from '../../api/community/communityApi.js';
+	
+	import {loadLoginOwner,getMemberId} from '../../api/owner/ownerApi.js';
 	export default {
 		name: "my-person",
 		data() {
@@ -91,6 +95,7 @@
 					_that.login = false;
 					return;
 				}
+				_that.communityName = getCommunityName();
 				_that.login = true;
 				_that.loadOwenrInfo();
 				_that.userInfo = context.getUserInfo();
@@ -104,7 +109,6 @@
 			loadOwenrInfo: function() {
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
-					console.log('_ownerInfo', _ownerInfo);
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
 					} else {
@@ -117,17 +121,20 @@
 			 */
 			loadOwnerHeaderImg: function() {
 				let _that = this;
-				context.getOwner(function(_owner) {
-					if(_owner.headImgUrl){
-						_that.headerImg = _owner.headImgUrl;
+				
+				loadLoginOwner({
+					memberId:getMemberId(),
+					communityId:getCommunityId()
+				}).then(_data=>{
+					//console.log(_data);
+					if(_data.url){
+						_that.headerImg = _data.url;
 					}else{
 						_that.headerImg =conf.imgUrl+'/h5/images/serve/head.png';
 					}
-					_that.userName = _owner.appUserName;
-					_that.userPhone = _owner.link;
-					_that.communityName = _owner.communityName;
-
-				});
+					_that.userName = _data.name;
+					_that.userPhone = _data.link;
+				})
 			},
 			// 余额
 			loadOwnerAccount: function() {

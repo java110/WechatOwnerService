@@ -41,7 +41,8 @@
 		hasOwner
 	} from '../../api/owner/ownerApi.js';
 	
-	import conf from '@/conf/config.js'
+	import conf from '@/conf/config.js';
+	import {autoLogin} from '../../api/user/sessionApi.js';
 	export default {
 		data() {
 			return {
@@ -74,13 +75,10 @@
 				title:conf.systemName
 			})
 			this.vc.onLoad(options);
+			autoLogin(options);
 			//查询目录
 		},
 
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
 		onShareAppMessage: function() {
 			return {
 				title: '首页',

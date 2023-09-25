@@ -284,13 +284,83 @@ export function getCommunityWechatAppId(_objData){
 	})
 }
 
+export function ownerLogin(_that, _data) {
+	uni.showLoading({
+		title: '加载中',
+		mask: true
+	});
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.ownerUserLogin,
+				method: "POST",
+				data: _data,
+				//动态数据
+				success: function(res) {
+					uni.hideLoading();
+					let _json = res.data;
+					if (_json.code != 0) {
+						reject(_json.msg);
+						return;
+					}
+					//todo 保存业主信息
+					uni.setStorageSync("userInfo",_json.data);
+					uni.setStorageSync("currentCommunityInfo",{
+						communityId:_json.data.communityId,
+						communityName:_json.data.communityName,
+					});
+					uni.setStorageSync("ownerInfo",{
+						memberId:_json.data.memberId,
+						ownerName:_json.data.ownerName,
+						ownerId:_json.data.ownerId,
+						ownerTel:_json.data.ownerTel,
+						communityId:_json.data.communityId,
+						link:_json.data.ownerTel
+					})
+					resolve(_json.data);
+				},
+				fail: function(e) {
+					uni.hideLoading();
+					reject(e);
+				}
+			});
+		})
+}
+
+export function refreshAppUserBindingOwnerOpenId(_that, _data) {
+	uni.showLoading({
+		title: '加载中',
+		mask: true
+	});
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.refreshAppUserBindingOwnerOpenId,
+				method: "POST",
+				data: _data,
+				//动态数据
+				success: function(res) {
+					uni.hideLoading();
+					let _json = res.data;
+					if (_json.code != 0) {
+						reject(_json.msg);
+						return;
+					}
+					resolve(_json);
+				},
+				fail: function(e) {
+					uni.hideLoading();
+					reject(e);
+				}
+			});
+		})
+}
+
 export function getUserId(){
 	let _userInfo = uni.getStorageSync("userInfo");
-	console.log('_userInfo',_userInfo)
-	
 	if(!_userInfo){
 		return null;
 	}
 	
-	return JSON.parse(_userInfo).userId;
+	return _userInfo.userId;
 }

@@ -56,7 +56,8 @@
 	//const util = context.util;
 	
 	import {formatDate} from '../../lib/java110/utils/DateUtil.js'
-	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import noDataPage from '@/components/no-data-page/no-data-page.vue';
+	import {autoLogin} from '../../api/user/sessionApi.js';
 
 	export default {
 		data() {
@@ -78,6 +79,7 @@
 		 */
 		onLoad: function(options) {
 			context.onLoad(options);
+			autoLogin(options);
 			this.appId = options.wAppId;
 		},
 		/**

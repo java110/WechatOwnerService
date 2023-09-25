@@ -217,6 +217,10 @@ export default {
 	getWechatMiniOpenId: baseUrl + "app/wechat.getWechatMiniOpenId",
 	getCommunityWechatAppId: baseUrl + "app/wechat.getCommunityWechatAppId",
 	cashier: baseUrl + "app/payment.cashier",
+	ownerUserLogin: baseUrl+"app/user.ownerUserLogin",
+	refreshAppUserBindingOwnerOpenId: baseUrl+"app/owner.refreshAppUserBindingOwnerOpenId",
+	ownerUserLoginByOpenId: baseUrl+"app/user.ownerUserLoginByOpenId",
+	
 	
 	
 	

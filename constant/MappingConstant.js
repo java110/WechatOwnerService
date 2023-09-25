@@ -20,8 +20,6 @@ class MappingConstant {
   
 
   static OWNER_INFO = "ownerInfo"; // 当前业主信息
-
-  static CURRENT_COMMUNITY_INFO = "currentCommunityInfo"; //业主当前小区信息
   
   static CURRENT_OPEN_ID = "openId";
   

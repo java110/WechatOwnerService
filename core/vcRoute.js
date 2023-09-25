@@ -37,7 +37,6 @@ import {
 
 
 export function navigateH5(_url) {
-	
 	if (_url.indexOf("http") < 0 && _url.indexOf("https") < 0) {
 		_url = conf.mallUrl + '#' + _url;
 	}
@@ -111,11 +110,12 @@ export function navigateTo(_param, callback = () => {}) {
 		return;
 	}
 	debug('vcRoute', 'navigateTo', _param);
+	uni.navigateTo(_param);
 	//校验是否登录，如果没有登录跳转至温馨提示页面
-	checkSession(_param.url, function() {
-		//有回话 跳转至相应页面
-		uni.navigateTo(_param);
-	})
+	// checkSession(_param.url, function() {
+	// 	//有回话 跳转至相应页面
+	// 	uni.navigateTo(_param);
+	// })
 };
 
 /*

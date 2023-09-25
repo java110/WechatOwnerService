@@ -92,7 +92,8 @@
 
 	import {
 		getRoomFees
-	} from '../../api/fee/feeApi.js'
+	} from '../../api/fee/feeApi.js';
+	import {autoLogin} from '../../api/user/sessionApi.js';
 
 
 	export default {
@@ -118,6 +119,7 @@
 		onLoad: function(options) {
 			
 			context.onLoad(options);
+			autoLogin(options);
 		},
 		onShow() {
 			let _that = this;

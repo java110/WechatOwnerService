@@ -943,6 +943,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/login/loginInitWechat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "微信登录中",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

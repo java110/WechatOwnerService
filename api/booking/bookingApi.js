@@ -17,48 +17,43 @@ mapping
 from '../../constant/MappingConstant.js'
 
 import {
-	getCurOwner
-} from '../owner/ownerApi.js'
+	getOwnerTel
+} from '../owner/ownerApi.js';
+
+import {getCommunityId} from '../community/communityApi.js'
 
 /**
  * 查询订场记录
  */
 export function getBooks(_objData) {
 	return new Promise((resolve, reject) => {
-		getCurOwner()
-			.then(function(_owner) {
-				let d = {
-					page: "1",
-					row: "1000",
-					communityId: _owner.communityId,	
-					
-				}
-				
-				if (_objData ==0){				
-					// debugger
-					d['personTel']=_owner.link;
-				}
+		let d = {
+			page: "1",
+			row: "1000",
+			communityId: getCommunityId(),
+		}
+		if (_objData == 0) {
+			d['personTel'] = getOwnerTel();
+		}
+		request({
+			url: url.querySpacePerson,
+			method: "GET",
+			data: d,
+			success: function(res) {
 				// debugger
-				request({
-					url: url.querySpacePerson,
-					method: "GET",
-					data: d,
-					success: function(res) {
-						// debugger
-						if (res.statusCode == 200) {
-							//将业主信息和房屋信息一起返回
-							res.data['owner'] = _owner;							
-							resolve(res.data);
-							return;
-						} else {
-							reject("查询订场信息失败");
-						}
-					},
-					fail: function(res) {
-						reject(res);
-					}
-				});
-			});
+				if (res.statusCode == 200) {
+					//将业主信息和房屋信息一起返回
+					//res.data['owner'] = _owner;
+					resolve(res.data);
+					return;
+				} else {
+					reject("查询订场信息失败");
+				}
+			},
+			fail: function(res) {
+				reject(res);
+			}
+		});
 	});
 };
 
