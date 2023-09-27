@@ -129,7 +129,7 @@
 						page: 1,
 						row: 1,
 						qaId:this.qaId,
-						userQaId:this.userQaId
+						userQaId:this.userQaId,
 						communityId: that.communityId,
 					})
 					.then(_data => {
