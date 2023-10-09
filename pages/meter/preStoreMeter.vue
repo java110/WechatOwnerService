@@ -12,10 +12,10 @@
 			</view>
 			<view class="cu-item">
 				<view class="content">
-					<text class="text-grey">剩余读数</text>
+					<text class="text-grey">剩余余额</text>
 				</view>
 				<view class="action">
-					<text class="text-grey text-sm">{{degree}}</text>
+					<text class="text-grey text-sm">{{prestoreDegrees}}</text>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -54,7 +54,7 @@
 				machineId:'',
 				machineName:'',
 				feeConfigName:'',
-				degree:'0',
+				prestoreDegrees:'0',
 				amount:'0',
 				appId:'',
 				communityId:'',
@@ -78,7 +78,7 @@
 				}).then(_data=>{
 					_that.machineName=_data[0].machineName;
 					_that.feeConfigName=_data[0].feeConfigName;
-					_that.degree=_data[0].degree;
+					_that.prestoreDegrees=_data[0].prestoreDegrees;
 					_that.amount=_data[0].amount;
 				})
 			},
