@@ -419,7 +419,7 @@
 					return;
 				}
 				let _receivedAmount = this.receivableAmount;
-				if(_receivedAmount <= 0){
+				if(_receivedAmount < 0){
 					uni.showToast({
 						icon:'none',
 						title:'金额为负数，可能用于减免，请到柜台缴费'
