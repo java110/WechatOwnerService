@@ -602,7 +602,9 @@ export function cashierPayFee(_that, _data,_successUrl) {
 					duration: 2000
 				});
 				setTimeout(function() {
-					uni.navigateBack({});
+					uni.navigateTo({
+						url: _successUrl
+					})
 				}, 2000)
 
 				return;
