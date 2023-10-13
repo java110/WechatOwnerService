@@ -183,6 +183,7 @@
 				});
 				let _tradeType = 'JSAPI';
 				let _objData = {
+					business: "tempCarFee",
 					carNum: this.carNum,
 					openId: this.openId,
 					paId: this.paId,
@@ -191,7 +192,7 @@
 					appId: this.appId,
 					inoutId: this.inoutId,
 					couponList: this.couponList,
-					machineId:this.machineId
+					machineId:this.machineId,
 				};
 				toAliPayTempCarFee(_objData)
 				.then(_data=>{

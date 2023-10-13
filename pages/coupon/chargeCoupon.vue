@@ -79,7 +79,7 @@
 				let _objData = {
 					page: 1,
 					row: 30,
-					tel: context.getUserInfo().link,
+					tel: context.getUserInfo().ownerTel,
 					state: '1001',
 					communityId:getCommunityId(),
 					toType:'5005'
