@@ -430,7 +430,7 @@ export function getTempCarFeeOrder(_objData) {
 export function toPayTempCarFee(_objData) {
 	return new Promise((resolve, reject) => {
 		requestNoAuth({
-			url: url.unifiedPayment,
+			url: url.cashier,
 			method: "POST",
 			data: JSON.stringify(_objData), //动态数据
 			success: function(res) {

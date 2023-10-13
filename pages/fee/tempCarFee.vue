@@ -192,6 +192,7 @@
 					appId: this.appId,
 					inoutId: this.inoutId,
 					couponList: this.couponList,
+					cashierUserId:'-1',
 					machineId:this.machineId,
 				};
 				toAliPayTempCarFee(_objData)
@@ -228,6 +229,7 @@
 				});
 				let _tradeType = 'JSAPI';
 				let _objData = {
+					business: "tempCarFee",
 					carNum: this.carNum,
 					openId: this.openId,
 					paId: this.paId,
@@ -236,6 +238,7 @@
 					appId: this.appId,
 					inoutId: this.inoutId,
 					couponList: this.couponList,
+					cashierUserId:'-1',
 					machineId:this.machineId
 				};
 				toPayTempCarFee(_objData)
