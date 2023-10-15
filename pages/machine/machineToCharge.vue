@@ -197,6 +197,9 @@
 				this.couponCount = chargeCoupons.length;	
 			},
 			_toLogin:function(){
+				if(this.communityId){
+					uni.setStorageSync("DEFAULT_COMMUNITY_ID",this.communityId);
+				}
 				uni.navigateTo({
 					url: '/pages/login/login'
 				})

@@ -126,12 +126,16 @@
 				}
 			},
 			_doRegister: function(e) {
+				let _communityId = un.getStorageSync("DEFAULT_COMMUNITY_ID")
+				if(!_communityId){
+					_communityId = conf.DEFAULT_COMMUNITY_ID;
+				}
 				let obj = {
 					"link": this.link,
 					"msgCode": this.msgCode,
 					"password": this.password,
 					"openId": uni.getStorageSync(constant.mapping.CURRENT_OPEN_ID),
-					"defaultCommunityId": conf.DEFAULT_COMMUNITY_ID
+					"defaultCommunityId": _communityId
 				}
 				if(!this.readme){
 					wx.showToast({
