@@ -126,7 +126,7 @@
 				}
 			},
 			_doRegister: function(e) {
-				let _communityId = un.getStorageSync("DEFAULT_COMMUNITY_ID")
+				let _communityId = uni.getStorageSync("DEFAULT_COMMUNITY_ID")
 				if(!_communityId){
 					_communityId = conf.DEFAULT_COMMUNITY_ID;
 				}
