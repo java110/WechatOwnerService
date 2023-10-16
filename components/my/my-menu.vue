@@ -125,6 +125,11 @@
 						src: this.imgUrl+'/h5/images/serve/11.png',
 						href: '/pages/machine/chargeMachineOrders'
 					},
+					{
+						name: '发票',
+						src: this.imgUrl+'/h5/images/serve/my5.png',
+						href: '/pages/invoice/invoice'
+					},
 				]
 			};
 		},

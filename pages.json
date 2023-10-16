@@ -952,6 +952,42 @@
             }
             
         }
+        ,{
+            "path" : "pages/invoice/invoice",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发票",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoice/setting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发票设置",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoice/invoiceApply",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发票记录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoice/invoiceDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#272636",

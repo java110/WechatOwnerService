@@ -221,8 +221,12 @@ export default {
 	refreshAppUserBindingOwnerOpenId: baseUrl+"app/owner.refreshAppUserBindingOwnerOpenId",
 	ownerUserLoginByOpenId: baseUrl+"app/user.ownerUserLoginByOpenId",
 	
-	
-	
+	listOwnerInvoice: baseUrl+"app/invoice.listOwnerInvoice",
+	saveOwnerInvoice: baseUrl+"app/invoice.saveOwnerInvoice",
+	updateOwnerInvoice: baseUrl+"app/invoice.updateOwnerInvoice",
+	listInvoiceApply: baseUrl+"app/invoice.listInvoiceApply",
+	deleteInvoiceApply: baseUrl+"app/invoice.deleteInvoiceApply",
+	listInvoiceEvent: baseUrl+"app/invoice.listInvoiceEvent",
 	
 	
 	
