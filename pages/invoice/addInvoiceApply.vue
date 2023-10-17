@@ -59,6 +59,9 @@
 				</view>
 			</view>
 		</view>
+		<view v-else class="flex flex-direction padding">
+			<button class="cu-btn bg-blue margin-tb-sm lg" @click="_toSettings()">设置发票抬头</button>
+		</view>
 	</view>
 </template>
 
@@ -156,10 +159,10 @@
 			},
 			_submitInvoice: function() {
 				let _that = this;
-				if(!_that.detailIds || _that.detailIds.length < 1){
+				if (!_that.detailIds || _that.detailIds.length < 1) {
 					uni.showToast({
-						icon:'none',
-						title:'未选择缴费记录'
+						icon: 'none',
+						title: '未选择缴费记录'
 					});
 					return;
 				}
@@ -174,16 +177,21 @@
 					oiId: _that.oiId,
 					detailIds: _that.detailIds,
 					communityId: getCommunityId(),
-				}).then(_data =>{
+				}).then(_data => {
 					uni.showToast({
-						icon:'none',
-						title:_data.msg
+						icon: 'none',
+						title: _data.msg
 					})
 					if (_data.code == 0) {
 						uni.navigateTo({
-							url:'/pages/invoice/invoiceApply'
+							url: '/pages/invoice/invoiceApply'
 						})
 					}
+				})
+			},
+			_toSettings:function(){
+				uni.navigateTo({
+					url:'/pages/invoice/invoice'
 				})
 			}
 		}
