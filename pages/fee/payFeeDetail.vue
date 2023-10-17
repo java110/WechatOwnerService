@@ -47,6 +47,10 @@
 					<view class="text-gray">备注</view>
 					<view class="text-gray">{{item.remark}}</view>
 				</view>
+				<view class="flex margin-top-xs justify-between">
+					<view class="text-gray"></view>
+					<view class="text-gray"><button class="cu-btn sm line-blue" @click="_applyInvoice(item)">申请开票</button></view>
+				</view>
 			</view>
 			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
@@ -64,7 +68,6 @@
 	const constant = context.constant;
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-
 
 	const util = context.util;
 	export default {
@@ -168,6 +171,11 @@
 						})
 					}
 				});
+			},
+			_applyInvoice:function(_feeDetail){
+				uni.navigateTo({
+					url:'/pages/invoice/addInvoiceApply?detailId='+_feeDetail.detailId+'&feeId='+_feeDetail.feeId
+				})
 			}
 		}
 	}

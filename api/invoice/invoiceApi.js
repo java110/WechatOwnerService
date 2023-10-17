@@ -129,3 +129,21 @@ export function getInvoiceEvent(_objData) {
 		});
 	})
 }
+
+
+export function saveInvoiceApply(_data) {
+	return new Promise((resolve, reject) => {
+		request({
+			url: url.saveInvoiceApply,
+			method: "POST",
+			data: _data,
+			//动态数据
+			success: function(res) {
+				resolve(res.data);
+			},
+			fail: function(e) {
+				reject("服务器异常了");
+			}
+		});
+	})
+}

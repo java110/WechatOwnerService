@@ -983,7 +983,16 @@
             "path" : "pages/invoice/invoiceDetail",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "发票详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoice/addInvoiceApply",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "申请开票",
                 "enablePullDownRefresh": false
             }
             
