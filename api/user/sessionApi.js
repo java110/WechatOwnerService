@@ -75,6 +75,14 @@ export function autoLoginWechat(options) {
 		return;
 	}
 	
+	//todo 如果参数中带了wAppId
+	let _wAppId = options.wAppId;
+	
+	if(_wAppId){
+		_generatorOpenId(options, _wAppId);
+		return;
+	}
+	
 	let _objType = "1100"; // todo public
 	// #ifdef MP-WEIXIN
 	_objType = "1000";
