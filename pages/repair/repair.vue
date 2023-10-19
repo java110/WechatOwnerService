@@ -93,7 +93,11 @@
 	import context from '../../lib/java110/Java110Context.js'
 	const constant = context.constant;
 	const factory = context.factory;
-	import {formatDate,formatHourAndMin} from '@/lib/java110/utils/DateUtil.js'
+	import {formatDate,formatHourAndMin} from '@/lib/java110/utils/DateUtil.js';
+	
+	import {getCommunityId,getCommunityName} from '@/api/community/communityApi.js';
+	
+	import {getOwnerId,getOwnerName,getOwnerTel} from '@/api/owner/ownerApi.js'
 	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 
 	export default {
@@ -171,9 +175,13 @@
 		onLoad: function(options) {
 			let that = this;
 			context.onLoad(options);
+			this.communityId = getCommunityId();
+			this.communityName = getCommunityName();
+			this.userName = getOwnerName();
+			this.bindTel = getOwnerTel();
+			this.bindRepairName = this.userName;
 			context.getRooms().then(res => {
 				let arr = res.data.rooms;
-
 				let roomCloums = [];
 				let roomIdArr = [];
 				arr.map(item => {
@@ -183,11 +191,6 @@
 				that.roomCloums = roomCloums;
 				that.roomIdArr = roomIdArr;
 				that.userId = res.data.owner.userId;
-				that.userName = res.data.owner.appUserName;
-				that.bindRepairName = that.userName;
-				that.bindTel = res.data.owner.link;
-				that.communityId = res.data.owner.communityId;
-				that.communityName = res.data.owner.communityName;
 			});
 
 			//加载报修类型
@@ -234,20 +237,7 @@
 
 		},
 
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
 
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
-
-		/**
-		 * 用户点击右上角分享
-		 */
-		onShareAppMessage: function() {},
 		methods: {
 			sendImagesData: function(e){
 				this.photos = [];
