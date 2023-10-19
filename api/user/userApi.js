@@ -315,7 +315,8 @@ export function ownerLogin(_that, _data) {
 						ownerId:_json.data.ownerId,
 						ownerTel:_json.data.ownerTel,
 						communityId:_json.data.communityId,
-						link:_json.data.ownerTel
+						link:_json.data.ownerTel,
+						ownerTypeCd:_json.data.ownerTypeCd
 					})
 					resolve(_json.data);
 				},
