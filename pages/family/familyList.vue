@@ -48,7 +48,7 @@
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
 					<view class="content">温馨提示</view>
-					<view class="action" @tap="_cancleCall()">
+					<view class="action" @tap="_cancleDeleteOwnerMember()">
 						<text class="cuIcon-close text-red"></text>
 					</view>
 				</view>

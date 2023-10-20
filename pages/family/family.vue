@@ -7,7 +7,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证</view>
-			<input v-model="idCard" placeholder="请输入身份证" @blur="idCardChange"></input>
+			<input v-model="idCard" placeholder="请输入身份证" ></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">性别</view>
@@ -160,11 +160,7 @@
 					msg = "请填写姓名";
 				}else if (obj.age == "") {
 					msg = "请填写年龄";
-				} else if (obj.idCard == "") {
-					msg = "请填写身份证";
-				} else if (!isIDCard(obj.idCard)){
-					msg = "身份证号有误";
-				}else if (obj.link == "") {
+				} else if (obj.link == "") {
 					msg = "请填写手机号";
 				} else if (!checkPhoneNumber(obj.link)){
 				 	msg = "手机号有误";

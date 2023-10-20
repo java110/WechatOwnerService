@@ -104,7 +104,7 @@ export default {
 	saveUserAddress: baseUrl + 'app/userAddress/saveUserAddress',
 	deleteUserAddress: baseUrl + 'app/userAddress/deleteUserAddress',
 	goodsUnifieldOrder: baseUrl + 'goods/unifieldOrder',
-	deleteOwner: baseUrl + "app/owner.deleteOwner",
+	deleteOwner: baseUrl + "app/owner.deleteOwnerMember",
 	computeFeeDiscount: baseUrl + "app/feeDiscount/computeFeeDiscount",
 	queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
 	// 查询申请类型（空置房）
