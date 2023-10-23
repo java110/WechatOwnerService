@@ -67,7 +67,7 @@
 	import context from '../../lib/java110/Java110Context.js';
 	import account from '@/components/account/account.vue';
 	import charge from '@/components/charge/charge.vue';
-	
+	import {autoLogin} from '@/api/user/sessionApi.js';
 	export default {
 		data() {
 			return {
@@ -110,6 +110,7 @@
 		},
 		onLoad(options) {
 			context.onLoad(options);
+			autoLogin(options);
 			this.machineId = options.machineId;
 			this.communityId = options.communityId;
 			this.login= context.checkLoginStatus();
