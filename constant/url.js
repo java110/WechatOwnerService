@@ -228,7 +228,7 @@ export default {
 	deleteInvoiceApply: baseUrl+"app/invoice.deleteInvoiceApply",
 	listInvoiceEvent: baseUrl+"app/invoice.listInvoiceEvent",
 	saveInvoiceApply: baseUrl+"app/invoice.saveInvoiceApply",
-	
+	getNativeQrcodePayment: baseUrl+"app/payment.getNativeQrcodePayment",
 	
 	
 	
