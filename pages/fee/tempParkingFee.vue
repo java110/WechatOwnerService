@@ -248,7 +248,7 @@
 					uni.navigateTo({
 						url: '/pages/fee/tempCarFee?paId=' + _that.paId + '&carNum=' + _that
 							.carNum + "&appId=" + _that.appId + "&openId=" + _that.openId +
-							"&machineId=" + this.machineId
+							"&machineId=" + this.machineId+"&communityId="+_that.communityId
 					})
 				})
 			},

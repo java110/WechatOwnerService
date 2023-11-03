@@ -110,6 +110,7 @@
 				inoutId:'',
 				receivableAmount: 0.0, // 抵扣金额
 				couponCount: 0,
+				communityId:'',
 				couponList: []
 			};
 		},
@@ -122,6 +123,7 @@
 			this.carNum = options.carNum;
 			this.appId = options.appId;
 			this.machineId = options.machineId;
+			this.communityId = options.communityId;
 			this._loadTempCarFee();
 		},
 		onShow: function(options) {
@@ -194,6 +196,7 @@
 					couponList: this.couponList,
 					cashierUserId:'-1',
 					machineId:this.machineId,
+					communityId:this.communityId,
 				};
 				toAliPayTempCarFee(_objData)
 				.then(_data=>{
@@ -239,7 +242,8 @@
 					inoutId: this.inoutId,
 					couponList: this.couponList,
 					cashierUserId:'-1',
-					machineId:this.machineId
+					machineId:this.machineId,
+					communityId:this.communityId,
 				};
 				toPayTempCarFee(_objData)
 				.then(_data=>{
