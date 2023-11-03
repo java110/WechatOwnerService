@@ -19,6 +19,7 @@
 				this.msg='二维码错误';
 				return;
 			}
+			this._loadQrcodeData();
 			
 		},
 		methods: {
