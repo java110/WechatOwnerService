@@ -32,7 +32,8 @@
 
 <script>
 	import {
-		getOwnerId
+		getOwnerId,
+		getOwnerName
 	} from '@/api/owner/ownerApi.js';
 	import {
 		getOwnerInvoice,
@@ -114,6 +115,7 @@
 					invoiceNum:this.invoiceNum,
 					invoiceAddress:this.invoiceAddress,
 					ownerId:this.ownerId,
+					ownerName:getOwnerName(),
 					communityId: getCommunityId(),
 				}).then(_data =>{
 					uni.showToast({
