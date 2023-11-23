@@ -47,7 +47,7 @@
 					<view class="text-gray">备注</view>
 					<view class="text-gray">{{item.remark}}</view>
 				</view>
-				<view class="flex margin-top-xs justify-between">
+				<view class="flex margin-top-xs justify-between" v-if="item.openInvoice == 'D'">
 					<view class="text-gray"></view>
 					<view class="text-gray"><button class="cu-btn sm line-blue" @click="_applyInvoice(item)">申请开票</button></view>
 				</view>
