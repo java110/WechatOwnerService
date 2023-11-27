@@ -4,13 +4,12 @@
 			<image :src="topImg" class="heard-location-icon"></image>
 		</view>
 		<view class="cu-list grid" :class="'col-2'">
-			<view class="cu-item" @click="showOpenDoor(item);"
-			v-for="(item,index) in machines" :key="index">
+			<view class="cu-item" @click="showOpenDoor(item);" v-for="(item,index) in machines" :key="index">
 				<view :class="['cuIcon-command','text-red']"></view>
 				<text>{{item.machineName}}</text>
 			</view>
 		</view>
-		
+
 		<view class="cu-modal" :class="openDoorFlag==true?'show':''">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -33,18 +32,26 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
-	import {listOwnerMachines,openDoor} from '../../api/applicationKey/applicationKeyApi.js'
-	import {getCurOwner} from '../../api/owner/ownerApi.js'
+	import {
+		listOwnerMachines,
+		openDoor
+	} from '../../api/applicationKey/applicationKeyApi.js'
+	import {
+		getCurOwner
+	} from '../../api/owner/ownerApi.js';
+	import {
+		autoLogin
+	} from '../../api/user/sessionApi.js';
 	export default {
 		data() {
 			return {
 				machines: [],
 				communityName: '',
 				communityId: '',
-				openDoorFlag:false,
-				curMachine:{},
-				memberId:'',
-				topImg:this.imgUrl+'/h5/images/openDoorTop.png'
+				openDoorFlag: false,
+				curMachine: {},
+				memberId: '',
+				topImg: this.imgUrl + '/h5/images/openDoorTop.png'
 			};
 		},
 		components: {
@@ -55,6 +62,7 @@
 		 */
 		onLoad: function(options) {
 			this.vc.onLoad(options);
+			autoLogin(options);
 			this.loadOwnerMachines();
 		},
 
@@ -65,47 +73,47 @@
 		methods: {
 			loadOwnerMachines: function() {
 				let _that = this;
-			
+
 				getCurOwner()
-				.then((_owner)=>{
-					let _data = {
-						memberId: _owner.memberId,
-						communityId: _owner.communityId
-					};
-					_that.communityName = _owner.communityName;
-					_that.communityId = _owner.communityId;
-					_that.memberId = _owner.memberId;
-					listOwnerMachines(_data)
-					.then((_machines)=>{
-						_that.machines = _machines;
-					})	
-				})
+					.then((_owner) => {
+						let _data = {
+							memberId: _owner.memberId,
+							communityId: _owner.communityId
+						};
+						_that.communityName = _owner.communityName;
+						_that.communityId = _owner.communityId;
+						_that.memberId = _owner.memberId;
+						listOwnerMachines(_data)
+							.then((_machines) => {
+								_that.machines = _machines;
+							})
+					})
 			},
-			showOpenDoor:function(_machine){
+			showOpenDoor: function(_machine) {
 				this.openDoorFlag = true;
 				this.curMachine = _machine;
 			},
-			_cancleOpenDoor:function(){
+			_cancleOpenDoor: function() {
 				this.openDoorFlag = false;
 				this.curMachine = {};
 			},
-			_doOpenDoor:function(){
+			_doOpenDoor: function() {
 				let _that = this;
 				wx.showLoading({
 					title: '请求中'
 				});
 				openDoor({
-					communityId:this.communityId,
-					userRole:'owner',
-					machineCode:_that.curMachine.machineCode,
-					userId:this.memberId
-				}).then((res)=>{
+					communityId: this.communityId,
+					userRole: 'owner',
+					machineCode: _that.curMachine.machineCode,
+					userId: this.memberId
+				}).then((res) => {
 					wx.hideLoading();
 					let data = res.data;
 					let msg = '';
-					if(data.code == 0){
+					if (data.code == 0) {
 						msg = '请求发送至门禁'
-					}else{
+					} else {
 						msg = data.msg;
 					}
 					wx.showToast({
@@ -114,7 +122,7 @@
 						duration: 2000
 					});
 					_that._cancleOpenDoor();
-				},(err)=>{
+				}, (err) => {
 					wx.hideLoading();
 					wx.showToast({
 						title: '开门失败',
@@ -128,10 +136,11 @@
 	};
 </script>
 <style>
-	.heard-location-icon{
-	  width: 100%;
-	  height: 300rpx;
+	.heard-location-icon {
+		width: 100%;
+		height: 300rpx;
 	}
+
 	text {
 		text-align: center;
 	}
