@@ -1,5 +1,13 @@
 <template>
 	<view>
+		<view class="cu-form-group arrow margin-top" v-if="payerObjs &&payerObjs.length >1">
+			<view class="title" style="width: 200upx;">按房屋缴费</view>
+			<picker bindchange="PickerChange" :value="payerObjIndex" :range="payerObjs" :range-key="'payerObjName'" @change="_payerObjectChange">
+				<view class="picker">
+					{{payerObjName?payerObjName:'请选择'}}
+				</view>
+			</picker>
+		</view>
 		<scroll-view scroll-y style="padding-bottom: 200rpx;">
 			<view class="block__title" v-if="fees.length > 0">应缴费用</view>
 			<view v-if="fees && fees.length >0">
@@ -77,7 +85,7 @@
 	import {
 		getCurCommunity
 	} from '../../api/community/communityApi.js';
-	
+
 	import {
 		getUserId
 	} from '../../api/user/userApi.js';
@@ -93,7 +101,9 @@
 	import {
 		getRoomFees
 	} from '../../api/fee/feeApi.js';
-	import {autoLogin} from '../../api/user/sessionApi.js';
+	import {
+		autoLogin
+	} from '../../api/user/sessionApi.js';
 
 
 	export default {
@@ -107,17 +117,21 @@
 				appId: '',
 				fees: [],
 				roomId: '',
-				storeId: ''
+				storeId: '',
+				payerObjs: [],
+				payerObjId: '',
+				payerObjName: '',
+				payerObjIndex:0,
+				feeIds:[]
 			};
 		},
-		components:{
+		components: {
 			noDataPage
 		},
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			
 			context.onLoad(options);
 			autoLogin(options);
 		},
@@ -128,7 +142,7 @@
 				_that.communityName = _owner.communityName;
 				_that.ownerId = _owner.ownerId;
 				_that._loadOweFee();
-			})
+			});
 		},
 		methods: {
 			_loadOweFee: function() {
@@ -137,37 +151,44 @@
 					ownerId: this.ownerId,
 					page: 1,
 					row: 50,
-					communityId: this.communityId
+					communityId: this.communityId,
+					payObjId:this.payerObjId
 				}
 				_that.receivableAmount = 0;
+				_that.feeIds = [];
 				getRoomOweFees(_objData)
 					.then(function(_fees) {
-						_that.fees = _fees;
-
-
 						if (_fees && _fees.length > 0) {
 							_that.storeId = _fees[0].incomeObjId;
 						}
+						_that.fees = _fees;
+						_fees.forEach(function(_item) {
+							if (_item.payOnline == 'Y') {
+								_that.receivableAmount += _item.feeTotalPrice;
+								_that.feeIds.push(_item.feeId);
+							}
+						});
+						_that.receivableAmount = _that.receivableAmount.toFixed(2);
+						_that.computeFeeObj(_fees);
 						return _fees;
 					}, function(error) {
 						uni.showToast({
 							icon: 'none',
 							title: '没有应缴费用'
 						})
-					})
-					.then(function(_fees) {
-						_fees.forEach(function(_item) {
-							if (_item.payOnline == 'Y') {
-								_that.receivableAmount += _item.feeTotalPrice;
-							}
-						})
-						_that.receivableAmount = _that.receivableAmount.toFixed(2);
-					})
+					});
 			},
 			onPayFee: function() {
 				//payOweFee(this);
 				let _receivedAmount = this.receivableAmount;
 				let _tradeType = 'JSAPI';
+				if(!this.feeIds || this.feeIds.length < 1){
+					uni.showToast({
+						icon:'none',
+						title:'未选择费用'
+					});
+					return ;
+				}
 				let _objData = {
 					business: "oweFee",
 					cycles: this.feeMonth,
@@ -177,11 +198,13 @@
 					receivedAmount: _receivedAmount,
 					tradeType: _tradeType,
 					//appId: uni.getStorageSync(mapping.W_APP_ID),
-					storeId: this.storeId
+					storeId: this.storeId,
+					feeIds:this.feeIds,
 				};
-				uni.setStorageSync('doing_cashier',_objData);
+				uni.setStorageSync('doing_cashier', _objData);
 				uni.navigateTo({
-					url:'/pages/fee/cashier?money='+_receivedAmount+"&business=oweFee&communityId="+this.communityId+"&cashierUserId="+getUserId()
+					url: '/pages/fee/cashier?money=' + _receivedAmount + "&business=oweFee&communityId=" + this
+						.communityId + "&cashierUserId=" + getUserId()
 				})
 			},
 			_getDeadlineTime: function(_fee) {
@@ -193,9 +216,7 @@
 				return formatDate(_date);
 			},
 			_showDetailFee: function(_fee) {
-
 				let _fees = this.fees;
-
 				_fees.forEach(item => {
 					//item.showDetail = false;
 					if (_fee.feeId == item.feeId) {
@@ -203,6 +224,37 @@
 					}
 				});
 				this.$forceUpdate();
+			},
+			computeFeeObj: function(_fees) {
+				let _that = this;
+				if (this.payerObjId) {
+					return;
+				}
+				_that.payerObjs = [];
+				let _allBatchFees = this.fees;
+				_allBatchFees.forEach(_fee => {
+					if (!this._hasPayerObj(_fee)) {
+						_that.payerObjs.push({
+							payerObjId: _fee.payerObjId,
+							payerObjName: _fee.payerObjName
+						})
+					}
+				});
+			},
+			_hasPayerObj: function(_fee) {
+				let _hasIn = false;
+				this.payerObjs.forEach(_obj => {
+					if (_fee.payerObjId == _obj.payerObjId) {
+						_hasIn = true;
+					}
+				})
+				return _hasIn;
+			},
+			_payerObjectChange: function(e) {
+				let _curPayerObj = this.payerObjs[e.detail.value];
+				this.payerObjId = _curPayerObj.payerObjId;
+				this.payerObjName = _curPayerObj.payerObjName;
+				this._loadOweFee();
 			}
 		}
 	};
