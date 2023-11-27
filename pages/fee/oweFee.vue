@@ -5,7 +5,7 @@
 			<picker bindchange="PickerChange" :value="payerObjIndex" :range="payerObjs" :range-key="'payerObjName'"
 				@change="_payerObjectChange">
 				<view class="picker">
-					{{payerObjName?payerObjName:'请选择'}}
+					{{payerObjs[payerObjIndex].payerObjName}}
 				</view>
 			</picker>
 		</view>
@@ -114,7 +114,6 @@
 				scrollLeft: 0,
 				amount: 0,
 				receivableAmount: 0.00,
-				orgReceivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
 				appId: '',
@@ -123,7 +122,6 @@
 				storeId: '',
 				payerObjs: [],
 				payerObjId: '',
-				payerObjName: '',
 				payerObjIndex: 0,
 				feeIds: [],
 				selectUserAccount: [], // 选中的账户
@@ -142,7 +140,7 @@
 			autoLogin(options);
 			let _that = this;
 			setTimeout(function() {
-				_that.$refs.vcUserAccountRef._listOwnerAccount('', _that.communityId);
+				_that.$refs.vcUserAccountRef._listOwnerAccount(_that.communityId);
 			}, 1500)
 		},
 		onShow() {
@@ -164,7 +162,6 @@
 					communityId: this.communityId,
 					payObjId: this.payerObjId
 				}
-				_that.orgReceivableAmount = 0;
 				_that.feeIds = [];
 				getRoomOweFees(_objData)
 					.then(function(_fees) {
@@ -174,11 +171,9 @@
 						_that.fees = _fees;
 						_fees.forEach(function(_item) {
 							if (_item.payOnline == 'Y') {
-								_that.orgReceivableAmount += _item.feeTotalPrice;
 								_that.feeIds.push(_item.feeId);
 							}
 						});
-						_that.orgReceivableAmount = _that.orgReceivableAmount.toFixed(2);
 						_that.computeFeeObj(_fees);
 						_that.computeReceivableAmount();
 						return _fees;
@@ -201,7 +196,7 @@
 					return;
 				}
 				let _acctId = '';
-				if(this.selectUserAccount && this.selectUserAccount.length>0){
+				if (this.selectUserAccount && this.selectUserAccount.length > 0) {
 					_acctId = this.selectUserAccount[0].acctId;
 				}
 				let _objData = {
@@ -215,7 +210,7 @@
 					//appId: uni.getStorageSync(mapping.W_APP_ID),
 					storeId: this.storeId,
 					feeIds: this.feeIds,
-					acctId:_acctId,
+					acctId: _acctId,
 				};
 				uni.setStorageSync('doing_cashier', _objData);
 				uni.navigateTo({
@@ -246,7 +241,10 @@
 				if (this.payerObjId) {
 					return;
 				}
-				_that.payerObjs = [];
+				_that.payerObjs = [{
+					payerObjId:'',
+					payerObjName:'全部'
+				}];
 				let _allBatchFees = this.fees;
 				_allBatchFees.forEach(_fee => {
 					if (!this._hasPayerObj(_fee)) {
@@ -267,9 +265,9 @@
 				return _hasIn;
 			},
 			_payerObjectChange: function(e) {
+				this.payerObjIndex =e.detail.value; 
 				let _curPayerObj = this.payerObjs[e.detail.value];
 				this.payerObjId = _curPayerObj.payerObjId;
-				this.payerObjName = _curPayerObj.payerObjName;
 				this._loadOweFee();
 			},
 			getUserAmount: function(_accInfo) {
@@ -280,14 +278,18 @@
 				this.computeReceivableAmount();
 			},
 			computeReceivableAmount() {
-				let orgReceivableAmount = this.orgReceivableAmount;
-				let _receivableAmount = parseFloat(orgReceivableAmount);
-				if (this.accountAmount) {
-					_receivableAmount = _receivableAmount - parseFloat(this.accountAmount);
-				}
-				
+				let _that = this;
+				let _feeIds = this.feeIds;
+				let _receivableAmount = 0.0;
+				this.fees.forEach(_item => {
+					_feeIds.forEach(_feeId => {
+						if (_item.feeId == _feeId) {
+							_receivableAmount += parseFloat(_item.feeTotalPrice);
+						}
+					})
+				});
 				_receivableAmount = _receivableAmount.toFixed(2);
-				_receivableAmount = _receivableAmount  < 0 ? 0.00:_receivableAmount;
+				_receivableAmount = _receivableAmount < 0 ? 0.00 : _receivableAmount;
 				this.receivableAmount = _receivableAmount;
 			}
 		}
