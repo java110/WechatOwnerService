@@ -5,11 +5,11 @@
 			<checkbox-group @change="checkboxChange">
 				<view class="cu-list menu" v-for="(account, idx) in accounts" :key="idx" :data-item="account"
 				 @click="_viewAccountDetail(account)">
-					<view class="cu-item arrow">
+					<view class="cu-item ">
 						<view class="content padding-tb-sm">
 							<view>
 								<view class="text-cut" style="width:220px">
-									<checkbox :value="account.acctId" :checked="account.checked" />{{account.acctTypeName}}
+									<checkbox :value="account.acctId"  :checked="account.checked" /> {{account.acctTypeName}}
 								</view>
 							</view>
 						</view>
@@ -87,7 +87,7 @@
 				});
 			},
 			
-			_listOwnerAccount: function(_feeId, _communityId) {
+			_listOwnerAccount: function(_communityId) {
 				// 2023.6.12
 				let _that = this;
 				context.getOwner(function(_ownerInfo) {
@@ -97,7 +97,7 @@
 						}
 						queryOwnerAccount({
 							page: 1,
-							row: 20,
+							row: 1,
 							idCard: _ownerInfo.idCard,
 							link: _ownerInfo.link,
 							communityId: _communityId,

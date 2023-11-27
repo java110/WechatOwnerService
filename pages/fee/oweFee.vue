@@ -2,7 +2,8 @@
 	<view>
 		<view class="cu-form-group arrow margin-top" v-if="payerObjs &&payerObjs.length >1">
 			<view class="title" style="width: 200upx;">按房屋缴费</view>
-			<picker bindchange="PickerChange" :value="payerObjIndex" :range="payerObjs" :range-key="'payerObjName'" @change="_payerObjectChange">
+			<picker bindchange="PickerChange" :value="payerObjIndex" :range="payerObjs" :range-key="'payerObjName'"
+				@change="_payerObjectChange">
 				<view class="picker">
 					{{payerObjName?payerObjName:'请选择'}}
 				</view>
@@ -49,6 +50,9 @@
 						</view>
 					</view>
 				</view>
+
+				<vcUserAccount ref="vcUserAccountRef" @getUserAmount="getUserAmount"></vcUserAccount>
+
 			</view>
 			<view v-else>
 				<no-data-page></no-data-page>
@@ -64,15 +68,13 @@
 			</view>
 		</view>
 	</view>
-
-	</view>
 </template>
 
 <script>
 	// pages/fee/payParkingFee.js
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
-
+	import vcUserAccount from '@/components/vc-user-account/vc-user-account.vue';
 	import noDataPage from '../../components/no-data-page/no-data-page.vue'
 
 	import {
@@ -112,6 +114,7 @@
 				scrollLeft: 0,
 				amount: 0,
 				receivableAmount: 0.00,
+				orgReceivableAmount: 0.00,
 				communityId: '',
 				communityName: '',
 				appId: '',
@@ -121,12 +124,15 @@
 				payerObjs: [],
 				payerObjId: '',
 				payerObjName: '',
-				payerObjIndex:0,
-				feeIds:[]
+				payerObjIndex: 0,
+				feeIds: [],
+				selectUserAccount: [], // 选中的账户
+				accountAmount: 0.0, // 账户金额
 			};
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			vcUserAccount,
 		},
 		/**
 		 * 生命周期函数--监听页面加载
@@ -134,6 +140,10 @@
 		onLoad: function(options) {
 			context.onLoad(options);
 			autoLogin(options);
+			let _that = this;
+			setTimeout(function() {
+				_that.$refs.vcUserAccountRef._listOwnerAccount('', _that.communityId);
+			}, 1500)
 		},
 		onShow() {
 			let _that = this;
@@ -152,9 +162,9 @@
 					page: 1,
 					row: 50,
 					communityId: this.communityId,
-					payObjId:this.payerObjId
+					payObjId: this.payerObjId
 				}
-				_that.receivableAmount = 0;
+				_that.orgReceivableAmount = 0;
 				_that.feeIds = [];
 				getRoomOweFees(_objData)
 					.then(function(_fees) {
@@ -164,12 +174,13 @@
 						_that.fees = _fees;
 						_fees.forEach(function(_item) {
 							if (_item.payOnline == 'Y') {
-								_that.receivableAmount += _item.feeTotalPrice;
+								_that.orgReceivableAmount += _item.feeTotalPrice;
 								_that.feeIds.push(_item.feeId);
 							}
 						});
-						_that.receivableAmount = _that.receivableAmount.toFixed(2);
+						_that.orgReceivableAmount = _that.orgReceivableAmount.toFixed(2);
 						_that.computeFeeObj(_fees);
+						_that.computeReceivableAmount();
 						return _fees;
 					}, function(error) {
 						uni.showToast({
@@ -182,12 +193,16 @@
 				//payOweFee(this);
 				let _receivedAmount = this.receivableAmount;
 				let _tradeType = 'JSAPI';
-				if(!this.feeIds || this.feeIds.length < 1){
+				if (!this.feeIds || this.feeIds.length < 1) {
 					uni.showToast({
-						icon:'none',
-						title:'未选择费用'
+						icon: 'none',
+						title: '未选择费用'
 					});
-					return ;
+					return;
+				}
+				let _acctId = '';
+				if(this.selectUserAccount && this.selectUserAccount.length>0){
+					_acctId = this.selectUserAccount[0].acctId;
 				}
 				let _objData = {
 					business: "oweFee",
@@ -199,7 +214,8 @@
 					tradeType: _tradeType,
 					//appId: uni.getStorageSync(mapping.W_APP_ID),
 					storeId: this.storeId,
-					feeIds:this.feeIds,
+					feeIds: this.feeIds,
+					acctId:_acctId,
 				};
 				uni.setStorageSync('doing_cashier', _objData);
 				uni.navigateTo({
@@ -255,6 +271,24 @@
 				this.payerObjId = _curPayerObj.payerObjId;
 				this.payerObjName = _curPayerObj.payerObjName;
 				this._loadOweFee();
+			},
+			getUserAmount: function(_accInfo) {
+				// 选中的账户列表
+				this.selectUserAccount = _accInfo.selectedAccounts;
+				// 账户金额
+				this.accountAmount = _accInfo.totalUserAmount;
+				this.computeReceivableAmount();
+			},
+			computeReceivableAmount() {
+				let orgReceivableAmount = this.orgReceivableAmount;
+				let _receivableAmount = parseFloat(orgReceivableAmount);
+				if (this.accountAmount) {
+					_receivableAmount = _receivableAmount - parseFloat(this.accountAmount);
+				}
+				
+				_receivableAmount = _receivableAmount.toFixed(2);
+				_receivableAmount = _receivableAmount  < 0 ? 0.00:_receivableAmount;
+				this.receivableAmount = _receivableAmount;
 			}
 		}
 	};

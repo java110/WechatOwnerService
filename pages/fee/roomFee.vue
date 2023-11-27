@@ -278,7 +278,7 @@
 			}
 			
 			this.$nextTick(() => {
-				this.$refs.vcUserAccountRef._listOwnerAccount(this.feeId, this.communityId);
+				this.$refs.vcUserAccountRef._listOwnerAccount( this.communityId);
 			})
 		},
 		onShow() {
