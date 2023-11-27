@@ -288,9 +288,9 @@
 						}
 					})
 				});
-				_receivableAmount = _receivableAmount.toFixed(2);
+				_receivableAmount = _receivableAmount - parseFloat(this.accountAmount);
 				_receivableAmount = _receivableAmount < 0 ? 0.00 : _receivableAmount;
-				this.receivableAmount = _receivableAmount;
+				this.receivableAmount = _receivableAmount.toFixed(2);
 			}
 		}
 	};
