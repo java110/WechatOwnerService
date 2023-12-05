@@ -120,8 +120,7 @@
 					uni.navigateBack({
 						delta: 1
 					});
-				})
-				.then((error)=>{
+				},(error)=>{
 					wx.showToast({
 						title: error,
 						icon: 'none',
