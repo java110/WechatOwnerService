@@ -37,7 +37,8 @@
 	import SxRate from '@/components/sx-rate'
 	
 	import {appraiseRepair} from '../../api/repair/repairApi.js'
-	import {getCurOwner} from '../../api/owner/ownerApi.js'
+	import {getCurOwner} from '../../api/owner/ownerApi.js';
+	import {getUserId,getUserName} from '../../api/user/userApi.js'
 	export default {
 		data() {
 			return {
@@ -62,11 +63,13 @@
 			let _that = this;
 			let _repairId = options.repairId;
 			this.repairId = _repairId;
-			getCurOwner()
-			.then(function(_owner) {
-				_that.userId = _owner.userId;
-				_that.userName = _owner.userName;
-			});
+			this.userId = getUserId();
+			this.userName = getUserName();
+			// getCurOwner()
+			// .then(function(_owner) {
+			// 	_that.userId = _owner.userId;
+			// 	_that.userName = _owner.userName;
+			// });
 		},
 		methods: {
 			appraiseScoreChange(e) {

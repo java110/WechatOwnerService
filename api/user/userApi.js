@@ -365,3 +365,13 @@ export function getUserId(){
 	
 	return _userInfo.userId;
 }
+
+export function getUserName(){
+	let _userInfo = uni.getStorageSync("userInfo");
+	if(!_userInfo){
+		return null;
+	}
+	
+	return _userInfo.userName;
+}
+
