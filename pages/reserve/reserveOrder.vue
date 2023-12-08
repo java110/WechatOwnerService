@@ -86,7 +86,7 @@
 	import {getCurOwner} from '@/api/owner/ownerApi.js';
 	
 	import {payFeeWechat} from '../../api/fee/feeApi.js';
-	import {getUserId,getUserName} from '../../api/user/userApi.js';
+	import {getUserId,getUserName,getUserTel} from '../../api/user/userApi.js';
 
 	export default {
 		data() {
@@ -114,10 +114,11 @@
 			this.selectdGoods = _selectdGoods;
 			let _that = this;
 			_that.personName = getUserName();
+			_that.personTel = getUserTel();
 			getCurOwner()
 			.then(_ownerInfo=>{
 				//_that.personName = _ownerInfo.appUserName;
-				_that.personTel = _ownerInfo.link;
+				// _that.personTel = _ownerInfo.link;
 				_that.communityId = _ownerInfo.communityId;
 			});
 			this.todayDate = formatDate(new Date());
