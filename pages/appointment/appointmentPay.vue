@@ -82,7 +82,8 @@
 		formatDate,
 		date2String,
 		dateSubOneDay
-	} from '../../lib/java110/utils/DateUtil.js'
+	} from '../../lib/java110/utils/DateUtil.js';
+	import {getUserName,getUserTel} from '../../api/user/userApi.js'
 
 	export default {
 		components: {
@@ -307,8 +308,8 @@
 						"tradeType": _tradeType,
 						"communityId": this.ownerInfo.communityId,
 						"spaces": JSON.stringify(spacesList),
-						"personName": this.ownerInfo.appUserName,
-						"personTel": this.ownerInfo.link,
+						"personName": getUserName(),
+						"personTel": getUserTel(),
 						"payWay": "2",
 						"state": "S",
 						"remark": "",

@@ -375,3 +375,13 @@ export function getUserName(){
 	return _userInfo.userName;
 }
 
+export function getUserTel(){
+	let _userInfo = uni.getStorageSync("userInfo");
+	if(!_userInfo){
+		return null;
+	}
+	
+	return _userInfo.ownerTel;
+}
+
+

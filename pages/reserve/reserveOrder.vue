@@ -86,7 +86,7 @@
 	import {getCurOwner} from '@/api/owner/ownerApi.js';
 	
 	import {payFeeWechat} from '../../api/fee/feeApi.js';
-	import {getUserId} from '../../api/user/userApi.js';
+	import {getUserId,getUserName} from '../../api/user/userApi.js';
 
 	export default {
 		data() {
@@ -113,9 +113,10 @@
 			let _selectdGoods = uni.getStorageSync('/pages/reserve/reserveOrder');
 			this.selectdGoods = _selectdGoods;
 			let _that = this;
+			_that.personName = getUserName();
 			getCurOwner()
 			.then(_ownerInfo=>{
-				_that.personName = _ownerInfo.appUserName;
+				//_that.personName = _ownerInfo.appUserName;
 				_that.personTel = _ownerInfo.link;
 				_that.communityId = _ownerInfo.communityId;
 			});
