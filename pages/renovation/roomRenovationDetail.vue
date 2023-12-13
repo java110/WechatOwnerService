@@ -3,15 +3,11 @@
 		<view class="block__title">业主信息</view>
 		<view class="cu-form-group">
 			<view class="title">名称</view>
-			{{ownerInfo.appUserName}}
-		</view>
-		<view class="cu-form-group">
-			<view class="title">身份证</view>
-			{{ownerInfo.idCard}}
+			{{userName}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">联系方式</view>
-			{{ownerInfo.link}}
+			{{userTel}}
 		</view>
 	
 		<view class="block__title">房屋信息</view>
@@ -88,7 +84,9 @@
 	// const factory = context.factory;
 	import {compareDate} from '../../lib/java110/utils/DateUtil.js'
 	import {checkPhoneNumber} from '../../lib/java110/utils/StringUtil.js'
-	import {saveRoomRenovation} from '../../api/roomRenovation/roomRenovationApi.js'
+	import {saveRoomRenovation} from '../../api/roomRenovation/roomRenovationApi.js';
+	import {getUserId,getUserName,getUserTel} from '../../api/user/userApi.js';
+	import {getCommunityId} from '../../api/community/communityApi.js'
 	export default {
 		data() {
 			return {
@@ -104,11 +102,11 @@
 				personMainTel: '',
 				// admin: {},
 				property: {},
+				userName:'',
+				userTel:''
 			};
 		},
 
-		components: {},
-		props: {},
 
 		/**
 		 * 生命周期函数--监听页面加载
@@ -118,37 +116,10 @@
 			context.onLoad(options);
 			_that.roomDetail = JSON.parse(options.room);
 			_that.loadOwenrInfo();
+			this.userName = getUserName();
+			this.userTel = getUserTel()
 		},
 
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
 
 		/**
 		 * 用户点击右上角分享
@@ -157,53 +128,17 @@
 		methods: {
 			loadOwenrInfo: function() {
 				let _that = this;
-
+				
 				context.getOwner(function(_ownerInfo) {
 					if (_ownerInfo) {
 						_that.ownerFlag = true;
-						_that.ownerInfo = _ownerInfo;
+						//_that.ownerInfo = _ownerInfo;
 						_that._loadProperty();
-						// _that._loadAdmin();
 					} else {
 						_that.ownerFlag = false;
 					}
 				});
 			},
-			// _loadAdmin:function(){
-			// 	let _that = this;
-			// 	let _objData = {
-			// 		page: 1,
-			// 		row: 1,
-			// 		communityId: this.ownerInfo.communityId,
-			// 		memberTypeCd: '390001200000'
-			// 	};
-			// 	context.request({
-			// 		url: constant.url.listStore,
-			// 		header: context.getHeaders(),
-			// 		method: "GET",
-			// 		data: _objData,
-			// 		//动态数据
-			// 		success: function(res) {
-			// 			if (res.statusCode == 200) {
-			// 				_that.admin = res.data.stores[0];
-			// 				return;
-			// 			}
-			// 			uni.showToast({
-			// 				title: "服务器异常了",
-			// 				icon: 'none',
-			// 				duration: 2000
-			// 			});
-			// 		},
-			// 		fail: function(e) {
-			// 			wx.showToast({
-			// 				title: "服务器异常了",
-			// 				icon: 'none',
-			// 				duration: 2000
-			// 			});
-			// 		}
-			// 	});
-			// },
-			
 			_loadProperty: function() {
 				let _that = this;
 				context.getProperty()
@@ -252,9 +187,9 @@
 					endTime: this.endTime,
 					roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
 					roomId: this.roomDetail.roomId,
-					communityId: this.ownerInfo.communityId,
-					personName: this.ownerInfo.appUserName,
-					personTel: this.ownerInfo.link,
+					communityId: getCommunityId(),
+					personName: this.userName,
+					personTel: this.userTel,
 					remark: this.remark,
 					rId: '',
 					userId: '',

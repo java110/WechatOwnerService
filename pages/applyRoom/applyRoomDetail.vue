@@ -7,15 +7,15 @@
 		</view> -->
 		<view class="cu-form-group">
 			<view class="title">名称</view>
-			{{ownerInfo.appUserName}}
+			{{userName}}
 		</view>
-		<view class="cu-form-group">
+		<!-- <view class="cu-form-group">
 			<view class="title">身份证</view>
 			{{ownerInfo.idCard}}
-		</view>
+		</view> -->
 		<view class="cu-form-group">
 			<view class="title">联系方式</view>
-			{{ownerInfo.link}}
+			{{userTel}}
 		</view>
 	
 		<view class="block__title">房屋信息</view>
@@ -114,6 +114,8 @@
 	import {compareDate,addDay,date2String} from '../../lib/java110/utils/DateUtil.js'
 	import {queryApplyRoomDiscountType,saveApplyRoomDiscount,listRoomFee} from '../../api/applyRoom/applyRoomApi.js'
 	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
+	import {getUserId,getUserName,getUserTel} from '../../api/user/userApi.js';
+	import {getCommunityId} from '@/api/community/communityApi.js'
 	export default {
 		data() {
 			return {
@@ -133,6 +135,8 @@
 				feeTypeCd: '',
 				photos: [],
 				communityId: '',
+				userName:'',
+				userTel:'',
 				uploadImage: {
 					maxPhotoNum: 4,
 					imgTitle: '图片上传',
@@ -157,37 +161,9 @@
 			_that.loadApplyRoomDiscountType();
 			_that.loadOwenrInfo();
 			_that.loadRoomFee();
+			this.userName = getUserName();
+			this.userTel = getUserTel();
 		},
-
-		/**
-		 * 生命周期函数--监听页面初次渲染完成
-		 */
-		onReady: function() {},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
-		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
-		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {},
-
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
-		onReachBottom: function() {},
 
 		/**
 		 * 用户点击右上角分享
@@ -314,9 +290,9 @@
 					endTime: this.bindEndDate,
 					roomName: this.roomDetail.floorNum + '-' + this.roomDetail.unitNum + '-' + this.roomDetail.roomNum,
 					roomId: this.roomDetail.roomId,
-					communityId: this.ownerInfo.communityId,
-					createUserName: this.ownerInfo.appUserName,
-					createUserTel: this.ownerInfo.link,
+					communityId: getCommunityId(),
+					createUserName: this.userName,
+					createUserTel: this.userTel,
 					createRemark: this.createRemark,
 					ardId: '',
 					applyType: this.applyType,
