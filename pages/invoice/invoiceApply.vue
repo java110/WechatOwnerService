@@ -97,7 +97,7 @@
 				_that.invoiceApplys = [];
 				getInvoiceApply({
 					page: 1,
-					row: 1,
+					row: 30,
 					communityId: getCommunityId(),
 					ownerTel: this.ownerTel,
 					state:this.state

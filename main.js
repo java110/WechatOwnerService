@@ -4,8 +4,8 @@ import conf from './conf/config.js';
 
 import vc from './core/vcFramework.js'
 // 小程序全局分享设置
-import share from './common/mixin/shareMixin.js'
-Vue.mixin(share)
+// import share from './common/mixin/shareMixin.js'
+// Vue.mixin(share)
 
 Vue.config.productionTip = false;
 
