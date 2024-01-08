@@ -73,7 +73,7 @@ export function sendSmsCode(_link, _that) {
 					let _json = res.data;
 					if (_json.code == 0) {
 						wx.showToast({
-							title:res.data,
+							title:_json.data,
 							icon: 'none',
 							duration: 2000
 						});
