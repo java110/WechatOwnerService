@@ -26,6 +26,7 @@
 
 <script>
 	import context from '../../lib/java110/Java110Context.js';
+	import {getCommunitys} from '../../api/community/communityApi.js';
 	const constant = context.constant;
 	export default {
 		data() {
@@ -115,28 +116,8 @@
 					state: '1100',
 					name: this.searchValue
 				};
-				uni.request({
-					url: constant.url.listCommunitys,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: function(res) {
-						console.log(res); //成功情况下跳转
-
-						if (res.statusCode == 200) {
-							let _communtiys = res.data.communitys;
-
-							_that.communitys = _communtiys;
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
+				getCommunitys(dataObj).then(_communtiys=>{
+					_that.communitys = _communtiys;
 				});
 			}
 		}

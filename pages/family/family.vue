@@ -42,7 +42,7 @@
 		<!-- <view class="cu-form-group">
 			<view class="title">验证码</view>
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
-			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
+			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="_sendMsgCode()">{{btnValue}}</button>
 		</view> -->
 		
 		<view class="block__title">相关图片</view>
@@ -62,8 +62,9 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import context from '../../lib/java110/Java110Context.js';
-	import {isIDCard,checkPhoneNumber,idCardInfoExt} from '../../lib/java110/utils/StringUtil.js'
+	import {isIDCard,checkPhoneNumber,idCardInfoExt} from '../../lib/java110/utils/StringUtil.js';
 	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
+	import {sendMsgCode} from '../../api/user/userApi.js';
 	const constant = context.constant;
 	const factory = context.factory;
 
@@ -228,86 +229,10 @@
 			sexChange: function(e) {
 				this.sex = e.detail.value;
 			},
-			sendMsgCode: function() {
-				var _that = this;
-
-				let obj = {
-					tel: this.link
-				};
-
-				if (obj.tel == '') {
-					wx.showToast({
-						title: '请输入手机号',
-						icon: 'none',
-						duration: 2000
-					});
-					return;
-				}
-				if(!checkPhoneNumber(obj.tel)){
-					wx.showToast({
-						title: '手机号有误',
-						icon: 'none',
-						duration: 2000
-					});
-					return;
-				}
-
-				uni.request({
-					url: constant.url.userSendSms,
-					header: context.getHeaders(),
-					method: "POST",
-					data: obj, //动态数据
-					success: function(res) {
-						//成功情况下跳转
-						if (res.statusCode == 200) {
-							wx.showToast({
-								title: '验证码下发成功',
-								icon: 'none',
-								duration: 2000
-							});
-							wx.hideLoading();
-							_that.timer();
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: res.data,
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
-
-
+			_sendMsgCode: function() {
+				sendMsgCode(this.link,this);
 			},
-			timer: function() {
-				let promise = new Promise((resolve, reject) => {
-					let setTimer = setInterval(
-						() => {
-							var second = this.second - 1;
-							this.second = second;
-							this.btnValue = second + '秒';
-							this.btnDisabled = true;
-							if (this.second <= 0) {
-								this.second = 60;
-								this.btnValue = '获取验证码';
-								this.btnDisabled = false;
-								resolve(setTimer)
-							}
-						}, 1000)
-				})
-				promise.then((setTimer) => {
-					clearInterval(setTimer)
-				})
-			},
+			
 		}
 	};
 </script>

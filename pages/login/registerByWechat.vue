@@ -45,7 +45,8 @@
 <script>
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
-	import pickerAddress from '../../components/pickerAddress/pickerAddress.vue'
+	import pickerAddress from '../../components/pickerAddress/pickerAddress.vue';
+	import {ownerRegiter} from '../../api/user/userApi.js';
 
 	export default {
 		components: {
@@ -193,40 +194,13 @@
 						duration: 2000
 					})
 				} else {
-					uni.showLoading({
-						title: '加载中',
-						mask: true
-					});
-					uni.request({
-						url: constant.url.ownerRegisterWxPhoto,
-						header: context.getHeaders(),
-						method: "POST",
-						data: obj, //动态数据
-						success: function(res) {
-							console.log(res);
-							let _data = res.data;
-							//成功情况下跳转
+					ownerRegiter(obj).then(_data=>{
+						if (_data.code == 0) {
 							wx.hideLoading();
-							if (_data.code == 0) {
-								wx.hideLoading();
-								wx.redirectTo({
-									url: "/pages/login/login"
-								});
-								return;
-							}
-							wx.showToast({
-								title: _data.msg,
-								icon: 'none',
-								duration: 2000
+							wx.redirectTo({
+								url: "/pages/login/login"
 							});
-						},
-						fail: function(e) {
-							wx.hideLoading();
-							wx.showToast({
-								title: "服务器异常了",
-								icon: 'none',
-								duration: 2000
-							})
+							return;
 						}
 					});
 				}

@@ -16,7 +16,7 @@
 		<view class="cu-form-group">
 			<view class="title">验证码</view>
 			<input v-model="msgCode" placeholder="请输入短信验证码" name="input"></input>
-			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="sendMsgCode()">{{btnValue}}</button>
+			<button class='cu-btn bg-green shadow' :disabled="btnDisabled" @click="_sendMsgCode()">{{btnValue}}</button>
 		</view>
 		<view class="padding flex justify-start">
 			<checkbox-group @change="_changeReadme">
@@ -37,6 +37,7 @@
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	import conf from '../../conf/config';
+	import {sendSmsCode,ownerRegiter} from '../../api/user/userApi.js';
 
 	export default {
 		data() {
@@ -60,63 +61,8 @@
 			let _that = this;
 		},
 		methods: {
-			sendMsgCode: function() {
-				let _that = this;
-				let obj = {
-					tel: this.link
-				};
-				let msg = "";
-				if (obj.tel == '') {
-					msg = '请输入手机号';
-				}
-				if (msg != "") {
-					wx.showToast({
-						title: msg,
-						icon: 'none',
-						duration: 2000
-					});
-					return;
-				}
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				});
-				uni.request({
-					url: constant.url.userSendSms,
-					header: context.getHeaders(),
-					method: "POST",
-					data: obj, //动态数据
-					success: function(res) {
-						console.log(res);
-						uni.hideLoading();
-						//成功情况下跳转
-						if (res.statusCode == 200) {
-							wx.showToast({
-								title: res.data,
-								icon: 'none',
-								duration: 3000
-							});
-							_that.codeMsg = res.data;
-							wx.hideLoading();
-							_that.timer();
-							return;
-						}
-						wx.hideLoading();
-						wx.showToast({
-							title: res.data,
-							icon: 'none',
-							duration: 2000
-						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
-				});
+			_sendMsgCode: function() {
+				sendSmsCode(this.link,this)
 			},
 			_changeReadme:function(e){
 				if(e.detail.value && e.detail.value.length>0){
@@ -161,39 +107,13 @@
 					})
 					return;
 				}
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				});
-				uni.request({
-					url: constant.url.ownerRegiter,
-					header: context.getHeaders(),
-					method: "POST",
-					data: obj, //动态数据
-					success: function(res) {
-						let _data = res.data;
-						//成功情况下跳转
+				ownerRegiter(obj).then(_data=>{
+					if (_data.code == 0) {
 						wx.hideLoading();
-						if (_data.code == 0) {
-							wx.hideLoading();
-							wx.redirectTo({
-								url: "/pages/login/login"
-							});
-							return;
-						}
-						wx.showToast({
-							title: _data.msg,
-							icon: 'none',
-							duration: 2000
+						wx.redirectTo({
+							url: "/pages/login/login"
 						});
-					},
-					fail: function(e) {
-						wx.hideLoading();
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
+						return;
 					}
 				});
 			},
@@ -206,26 +126,7 @@
 				_that.areaCode = data.data[2].code;
 				console.log(data);
 			},
-			timer: function() {
-				let promise = new Promise((resolve, reject) => {
-					let setTimer = setInterval(
-						() => {
-							var second = this.second - 1;
-							this.second = second;
-							this.btnValue = second + '秒';
-							this.btnDisabled = true;
-							if (this.second <= 0) {
-								this.second = 60;
-								this.btnValue = '获取验证码';
-								this.btnDisabled = false;
-								resolve(setTimer)
-							}
-						}, 1000)
-				})
-				promise.then((setTimer) => {
-					clearInterval(setTimer)
-				})
-			},
+			
 			_readMe:function(){
 				uni.navigateTo({
 					url:'/pages/login/registerProtocol'

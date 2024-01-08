@@ -70,9 +70,10 @@ export function sendSmsCode(_link, _that) {
 				//动态数据
 				success: function(res) {
 					uni.hideLoading();
-					if (res.statusCode == 200) {
+					let _json = res.data;
+					if (_json.code == 0) {
 						wx.showToast({
-							title: '验证码下发成功',
+							title:res.data,
 							icon: 'none',
 							duration: 2000
 						});
@@ -82,7 +83,7 @@ export function sendSmsCode(_link, _that) {
 						return;
 					}
 					wx.showToast({
-						title: res.data,
+						title: _json.msg,
 						icon: 'none',
 						duration: 2000
 					});
@@ -382,6 +383,34 @@ export function getUserTel(){
 	}
 	
 	return _userInfo.ownerTel;
+}
+
+export function ownerRegiter(_data){
+	return new Promise(
+		(resolve, reject) => {
+			requestNoAuth({
+				url: url.ownerRegiter,
+				method: "POST",
+				data: _data,
+				//动态数据
+				success: function(res) {
+					let _data = res.data;
+					if (_data.code == 0) {
+						resolve(_data)
+						return;
+					}
+					wx.showToast({
+						title: _data.msg,
+						icon: 'none',
+						duration: 2000
+					});
+				},
+				fail: function(e) {
+					uni.hideLoading();
+					reject(e);
+				}
+			});
+		})
 }
 
 

@@ -73,7 +73,7 @@
 					communityId: _communityInfo.communityId,
 					name: this.searchValue
 				};
-				uni.request({
+				context.request({
 					url: constant.url.queryFloor,
 					header: context.getHeaders(),
 					method: "GET",

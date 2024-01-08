@@ -28,7 +28,7 @@ let mallMinAppId = "xxx";
 
 //默认的小区ID和名称，用户还没有登录时显示的小区信息
 
-let DEFAULT_COMMUNITY_ID = "2021081177860471"; //HC测试小区id  用于没有登录时展示相关信息
+let DEFAULT_COMMUNITY_ID = "2023052267100146"; //HC测试小区id  用于没有登录时展示相关信息
 let DEFAULT_COMMUNITY_NAME = "HC演示小区";
 
 // APP 或者 公众号  appId

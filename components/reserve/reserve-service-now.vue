@@ -27,7 +27,7 @@
 							<!-- <checkbox class='round checked' checked="true" value="B"></checkbox> -->
 						</view>
 					</view>
-					<view class="flex justify-between margin-top">
+					<view class="flex justify-between  margin-top">
 						<view>预约时间</view>
 						<view style="width: 60%;">
 							<checkbox-group class="text-right" @change="_changeReserveTime">

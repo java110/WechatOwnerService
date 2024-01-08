@@ -35,7 +35,9 @@
 	import context from '../../lib/java110/Java110Context.js';
 	const constant = context.constant;
 	const factory = context.factory;
-	import conf from '../../conf/config.js'
+	import conf from '../../conf/config.js';
+	import {listRepairStaffs} from '@/api/repair/repairApi.js';
+	
 	export default {
 		data() {
 			return {
@@ -73,31 +75,17 @@
 					communityId: _communityInfo.communityId,
 					repairId: this.repairId
 				};
-				uni.request({
-					url: constant.url.listRepairStaffs,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: (res) => {
-						let _json = res.data;
-						if (_json.code == 0) {
-							_that.staffs = _json.data;
-							_that.staffs.forEach((item) => {
-								if(item.photoVos.length > 0 && item.state==10005){
-									item.photoVos.forEach((img) => {
-										img.url = this.photoUrl + "?fileId=" + img.url + "&communityId=-1&time=" + new Date();
-									})
-								}
-							})
-						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+				
+				listRepairStaffs(dataObj).then(_json=>{
+					if (_json.code == 0) {
+						_that.staffs = _json.data;
+						_that.staffs.forEach((item) => {
+							if(item.photoVos.length > 0 && item.state==10005){
+								item.photoVos.forEach((img) => {
+									img.url = this.photoUrl + "?fileId=" + img.url + "&communityId=-1&time=" + new Date();
+								})
+							}
+						})
 					}
 				});
 			},

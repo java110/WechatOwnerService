@@ -151,6 +151,11 @@ export function loadActivites(dataObj) {
 					if (res.statusCode == 200) {
 						let _activites = res.data.activitiess;
 						let _acts = [];
+						if(!_activites || _activites.length<1){
+							resolve(_acts);
+							return;
+						}
+						
 						_activites.forEach(function(_item) {
 							_item.src = url.filePath + "?fileId=" + _item.headerImg +
 								"&communityId=" + dataObj.communityId +

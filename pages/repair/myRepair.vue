@@ -185,6 +185,7 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import context from '../../lib/java110/Java110Context.js';
+	import {listRepairStaffs} from '@/api/repair/repairApi.js';
 	const factory = context.factory;;
 	const constant = context.constant;
 	export default {
@@ -363,35 +364,20 @@
 					staffId: this.userId,
 					//state: '10001'
 				};
-				uni.request({
-					url: constant.url.listRepairStaffs,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: function(res) {
-						let _json = res.data;
-						if (_json.code == 0) {
-							let _data = _json.data;
-
-							if (_data.length < 1) {
-								uni.showToast({
-									title: '当前不能退单'
-								});
-								return;
-							}
-							_that.preStaffId = _data[0].preStaffId;
-							_that.preStaffName = _data[0].preStaffName;
-							_that.curRepair = _repair;
-							_that.backRepairModal = true;
+				listRepairStaffs(_paramIn).then(_json=>{
+					if (_json.code == 0) {
+						let _data = _json.data;
+					
+						if (_data.length < 1) {
+							uni.showToast({
+								title: '当前不能退单'
+							});
+							return;
 						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+						_that.preStaffId = _data[0].preStaffId;
+						_that.preStaffName = _data[0].preStaffName;
+						_that.curRepair = _repair;
+						_that.backRepairModal = true;
 					}
 				});
 			},

@@ -97,8 +97,10 @@
 	
 	import {getCommunityId,getCommunityName} from '@/api/community/communityApi.js';
 	
-	import {getOwnerId,getOwnerName,getOwnerTel} from '@/api/owner/ownerApi.js'
+	import {getOwnerId,getOwnerName,getOwnerTel} from '@/api/owner/ownerApi.js';
 	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
+	
+	import {listRepairSettings} from '../../api/repair/repairApi.js'
 
 	export default {
 		data() {
@@ -234,9 +236,7 @@
 			//清理楼栋和单元
 			uni.removeStorageSync('_selectFloor');
 			uni.removeStorageSync('_unitFloor');
-
 		},
-
 
 		methods: {
 			sendImagesData: function(e){
@@ -258,10 +258,7 @@
 				return value;
 			},
 
-
 			submitRepair: function(e) {
-
-
 				let obj = {
 					"repairName": this.bindRepairName,
 					"repairType": this.repairType,
@@ -452,41 +449,26 @@
 					communityId: _communityInfo.communityId,
 					publicArea: publicArea
 				};
-				uni.request({
-					url: constant.url.listRepairSettings,
-					header: context.getHeaders(),
-					method: "GET",
-					data: dataObj,
-					//动态数据
-					success: function(res) {
-						let _json = res.data;
-						if (_json.code == 0 && _json.data.length > 0) {
-							_that.repairTypes = _json.data;
-
-							let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
-							_that.repairType = selected.repairType //选中的id
-							let _payFeeFlag = selected.payFeeFlag;
-
-							if (_payFeeFlag == 'T') {
-								_that.priceScope = selected.priceScope;
-							}else{
-								_that.priceScope = '';
-							}
+				listRepairSettings(dataObj).then(_json=>{
+					if (_json.code == 0 && _json.data.length > 0) {
+						_that.repairTypes = _json.data;
+					
+						let selected = _that.repairTypes[_that.repairTypeIndex] //获取选中的数组
+						_that.repairType = selected.repairType //选中的id
+						let _payFeeFlag = selected.payFeeFlag;
+					
+						if (_payFeeFlag == 'T') {
+							_that.priceScope = selected.priceScope;
 						}else{
-							uni.showToast({
-								icon:"none",
-								title:"未配置报修设置"
-							})
+							_that.priceScope = '';
 						}
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
+					}else{
+						uni.showToast({
+							icon:"none",
+							title:"未配置报修设置"
+						})
 					}
-				});
+				})
 			}
 
 		}

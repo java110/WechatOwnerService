@@ -75,7 +75,7 @@
 					name: this.searchValue,
 					floorId: this.floorId
 				};
-				uni.request({
+				context.request({
 					url: constant.url.queryUnit,
 					header: context.getHeaders(),
 					method: "GET",

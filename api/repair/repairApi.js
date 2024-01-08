@@ -24,9 +24,45 @@ export function appraiseRepair(_data) {
 				let _data = res.data;
 				if (_data.code == 0) {
 					resolve(_data);
-					return ;
+					return;
 				}
 				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
+
+export function listRepairSettings(_data) {
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.listRepairSettings,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
+
+export function listRepairStaffs(_data) {
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		request({
+			url: url.listRepairStaffs,
+			method: "GET",
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				resolve(_data);
 			},
 			fail: function(e) {
 				reject(e);
